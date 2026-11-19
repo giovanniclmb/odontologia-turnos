@@ -24,7 +24,7 @@ La columna de consulta identifica a quién le correspondería resolver cada preg
 | PA-10 | Alta | ¿Quiénes conforman el equipo de cuatro, cómo se distribuyen el trabajo y la defensa, y cómo se documentará la excepción docente si la cátedra lo requiere? | Coordinación de la entrega | Integrantes y cátedra |
 | PA-11 | Alta | ¿Qué integrantes revisarán personalmente al menos cinco fuentes y dónde quedarán registrados sus hallazgos? | Evidencia exigida por la consigna | Integrantes |
 | PA-12 | Media | ¿Qué fuentes o demos permitirán comprobar ARCA operativa, WhatsApp Business API efectiva, disponibilidad conjunta bajo concurrencia y alcance de la exportación clínica, además de precios y condiciones? | Contraste competitivo posterior | Integrantes |
-| PA-13 | Alta | ¿Qué único change se elegirá después del roadmap para especificar, probar y archivar en la entrega académica? | Alcance de la entrega del 25/11/2026 | Usuario y equipo |
+| PA-13 | Resuelta | Giovanni eligió C-01 y aprobó su propuesta y Apply el 19/11/2026. La implementación y Verify no sustituyen Archive ni la evidencia humana. | Alcance de la entrega del 25/11/2026 | Decisión expresa del usuario |
 | PA-14 | Media | ¿Qué prestaciones se necesitan para comenzar y cómo se registrará y mantendrá su duración de referencia? | Configuración y alta de turnos | Usuario y equipo |
 
 ### Pendientes de la ampliación aprobada
@@ -48,3 +48,7 @@ La revisión personal de al menos cinco fuentes sigue pendiente. El informe regi
 Para PA-12, «No evidenciado» describe el alcance de las fuentes revisadas para cada proveedor. La integración fiscal local, el uso efectivo de WhatsApp Business API, la concurrencia y la exportación clínica completa requieren evidencia específica. Hay condiciones documentadas que cubren partes del problema, como el Excel estándar y las condiciones de cierre de Dentidesk. La selección para contraste posterior comprende Dentalink, DentApp, Dentify, Dentidesk y AgendaPro. [Informe de Discovery](../docs/discovery/informe-discovery.md) · [Fichas de competidores](../docs/discovery/competidores.json)
 
 Fuentes de las preguntas. [Discovery, secciones 2 y 7 a 11](../docs/discovery/discovery.md) · [Decisiones aprobadas](../docs/discovery/decisiones-aprobadas.json) · [Estado de Discovery](../.active-orchestrator-state.json)
+
+## Resolución acotada para C-01 (19/11/2026)
+
+PA-01/PA-04: separación mínima inclusiva antes y después, para profesional y sillón; intervalo positivo explícito por invocación, sin valor inicial de producción. PA-02: el dominio recibe solo reservas ocupantes; no define estados ni su selección. PA-07: referencias opacas ficticias, sin modelo físico. PA-09: Java 25, Maven y JUnit en backend/; Spring Boot, PostgreSQL y frontend siguen pendientes. Estas precisiones no cierran las preguntas globales.

@@ -16,7 +16,7 @@
 
 El producto conserva HTML/CSS/TypeScript vanilla, Java Spring Boot y PostgreSQL. La fecha académica es 25/11/2026, con presupuesto externo cero y cuatro integrantes según autorización docente informada por el usuario. El plan usa tres carriles técnicos y un cuarto integrante posible para integración, revisión y evidencia; los nombres y la distribución real se acordarán en PA-10.
 
-El backlog completo no es un compromiso de implementar las 25 fichas para esa fecha. La consigna exige un único change con reglas verificables y ciclo OPSX completo. C-01 es un candidato recomendado para esa elección, todavía pendiente de PA-13 y del usuario. Los demás items describen cómo extender el MVP después.
+El backlog completo no es un compromiso de implementar las 25 fichas para esa fecha. La consigna exige un único change con reglas verificables y ciclo OPSX completo. Giovanni eligió C-01 y aprobó su propuesta y aplicación; su dominio está implementado y verificado en la rama de trabajo, pendiente de archivo e integración. Los demás items describen cómo extender el MVP después.
 
 Se reutilizan OpenSpec, Git, Discovery y KB ya preparados; no se agregan fichas para reinstalarlos. C-01 incluye únicamente el build y las pruebas mínimos que faltan para ejecutar su módulo de dominio. La persistencia y el acceso protegido se incorporan después, sin presentar el módulo aislado como aplicación desplegada.
 
@@ -42,7 +42,7 @@ Los niveles CRITICO y ALTO requieren respetar la gobernanza del proyecto y las a
 
 ## Árbol de dependencias
 
-Dependencias completas en la tabla y en cada ficha. Todos los items siguen pendientes. Se conservan C-01 a C-14 y se añaden C-15 a C-25; el orden numérico no sustituye las dependencias.
+Dependencias completas en la tabla y en cada ficha. C-01 está implementado y verificado, pendiente de archivo e integración; los demás items siguen pendientes. Se conservan C-01 a C-14 y se añaden C-15 a C-25; el orden numérico no sustituye las dependencias.
 
 ```text
 C-01
@@ -162,9 +162,9 @@ Distribución orientativa con prioridades por dependencias; no se afirma un ópt
 ## FASE 0 — Dominio aislado y persistencia base
 
 ### [C-01] `crear-turno-sin-solapamientos-dominio`
-- **Estado**: `[ ]` pendiente
-- **Scope**: Unidad de lógica de creación de un turno, candidata al único change académico.
-  - Acordar PA-01, PA-02, PA-04 y PA-09 en el alcance mínimo necesario; identificar en PA-07 los conceptos y datos ficticios indispensables. PA-13 queda a elección del usuario.
+- **Estado**: `[ ]` implementado y verificado en rama; pendiente de archivo e integración. Responsable: Giovanni. Evidencia: [Verify](openspec/changes/crear-turno-sin-solapamientos-dominio/evidence/verify.md).
+- **Scope**: Unidad de lógica de creación de un turno, elegida como único change académico por Giovanni.
+  - Acordar PA-01, PA-02, PA-04 y PA-09 en el alcance mínimo necesario; identificar en PA-07 los conceptos y datos ficticios indispensables. PA-13 está resuelta por la elección de C-01; las demás preguntas se acotan al dominio según su propuesta aprobada.
   - Crear el build y el comando de pruebas Java mínimos, con versiones, herramienta y ubicación aprobadas en Propose. Definir primero las representaciones de paciente de referencia, profesional, sillón, prestación, duración y reservas relevantes para esta regla, sin persistencia física.
   - Implementar la validación de ambos recursos, duración efectiva ajustable e intervalo recibido como configuración explícita; trabajar con reservas/fixtures controlados, sin inventar valor inicial de producción ni estados.
   - Cubrir parcialmente US-004, únicamente su lógica de disponibilidad/duración, y la aplicación del intervalo de US-005; verificar RN-AG-02 a RN-AG-05 y RN-TR-01. RN-AG-01 delimita el contexto de una sede y equipo interno, pero la identidad del operador se verifica posteriormente en C-06/C-10. No implementar administración completa de pacientes, recursos o configuración.

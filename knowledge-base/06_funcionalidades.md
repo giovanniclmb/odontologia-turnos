@@ -1,6 +1,6 @@
 # Funcionalidades
 
-Las historias describen el MVP aprobado para el roadmap. Tras el roadmap se elegirá el único change para la entrega académica (PA-13).
+Las historias describen el MVP aprobado para el roadmap. Giovanni eligió C-01 para la entrega académica (PA-13 resuelta); su dominio cubre parcialmente US-004 y la regla de intervalo de US-005, sin completar todos los recorridos de estas historias.
 
 ## Épica 1 · Pacientes y ficha clínica
 
