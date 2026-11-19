@@ -2,7 +2,7 @@
 
 Proyecto integrador de Desarrollo de Software de UTN: sistema de gestión de turnos para un consultorio de una sede con varios odontólogos.
 
-**Estado:** fundación documental completada. La aplicación todavía no está implementada y el primer change académico sigue pendiente de elección. El roadmap describe trabajo futuro, no funcionalidades ya disponibles.
+**Estado:** C-01 elegido por Giovanni, aprobado e implementado como dominio Java aislado. Sus 55 pruebas y `clean verify` pasaron. Está archivado e integrado en main; el resto del roadmap describe trabajo futuro, no una aplicación ya disponible.
 
 ## Alcance aprobado
 
@@ -20,7 +20,7 @@ La autorreserva general, WhatsApp automático, odontograma, pagos y facturación
 | Capa | Tecnología elegida | Estado |
 | --- | --- | --- |
 | Frontend | HTML, CSS y TypeScript vanilla | Versión y herramientas de build pendientes |
-| Backend | Java con Spring Boot | Versiones, build y contratos pendientes |
+| Backend | Java 25; Spring Boot previsto para C-02 | Maven y JUnit en C-01; versión Spring Boot pendiente |
 | Base de datos | PostgreSQL | Versión, esquema y ejecución pendientes |
 
 Las herramientas de fundación ya verificadas se documentan en [preparación del entorno](docs/preparacion-entorno.md). Sus versiones observadas no constituyen versiones mínimas del producto.
@@ -48,7 +48,7 @@ cd odontologia-turnos
 | [Ampliación aprobada](docs/discovery/ampliacion-paciente.md) | Paciente, emails, lista de espera y bloqueos |
 | [Informe de investigación](docs/discovery/informe-discovery.md) / [PDF](docs/discovery/informe-discovery.pdf) | Comparación de 15 sistemas y 38 fuentes |
 | [Knowledge base](knowledge-base/README.md) | Diez documentos canónicos del dominio y la arquitectura pendiente |
-| [Roadmap](CHANGES.md) | 25 items pendientes con dependencias y alcance |
+| [Roadmap](CHANGES.md) | C-01 completado y 24 items pendientes con dependencias y alcance |
 | [Plan de colaboración](docs/plan-colaboracion.md) | Equipo de cuatro, preparación paralela y reparto propuesto |
 | [Preguntas abiertas](knowledge-base/10_preguntas_abiertas.md) | Decisiones que necesitan resolverse antes del change afectado |
 | [Bitácora](docs/bitacora.md) | Decisiones y verificaciones de cada etapa |
@@ -56,9 +56,9 @@ cd odontologia-turnos
 
 ## Ejecución y pruebas
 
-Todavía no hay `pom.xml`, `build.gradle`, `package.json`, servidor ni suite del producto. No hay comandos de arranque o tests de aplicación que puedan ejecutarse desde este repositorio. El change elegido incorporará los archivos y comandos mínimos que se aprueben; esta documentación se actualizará junto con ellos.
+C-01 incorpora [el módulo de dominio](backend/README.md), con JDK 25 y Maven como requisitos. Desde la raíz: `mvn -f backend/pom.xml test` o `mvn -f backend/pom.xml clean verify`. Todavía no hay servidor, API, interfaz ni PostgreSQL. La primera ejecución descarga las dependencias de pruebas. La [evidencia Verify](openspec/changes/archive/2026-11-19-crear-turno-sin-solapamientos-dominio/evidence/verify.md) conserva resultados y límites.
 
-OpenSpec ya tiene su configuración documental en [openspec/config.yaml](openspec/config.yaml) y seis skills de proyecto en `.agents/skills/`. No hay changes activos creados. El CLI OpenSpec debe estar disponible en el entorno para trabajar con ese flujo; su instalación no se realiza al clonar.
+OpenSpec ya tiene su configuración documental en [openspec/config.yaml](openspec/config.yaml) y seis skills de proyecto en `.agents/skills/`. No hay changes activos. C-01 (`crear-turno-sin-solapamientos-dominio`) está implementado, verificado y archivado; su spec vigente está en `openspec/specs/disponibilidad-de-turnos/spec.md`. El CLI OpenSpec debe estar disponible en el entorno para trabajar con ese flujo; su instalación no se realiza al clonar.
 
 Los scripts de Discovery son utilidades documentales, no pruebas del producto. [compilar_investigacion.py](docs/discovery/compilar_investigacion.py) usa Python y el helper global `web-scraper/scripts/slugify.py` de `~/.agents/skills/`. [generar_pdf.py](docs/discovery/generar_pdf.py) usa ReportLab; el PDF requiere además renderizado e inspección visual después de regenerarlo. Si faltan esas dependencias, los documentos ya generados pueden consultarse sin ejecutar los scripts.
 

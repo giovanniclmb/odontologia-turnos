@@ -29,7 +29,7 @@ knowledge-base/       diez documentos canónicos e índice
 openspec/             estructura creada por el CLI
 ```
 
-La ubicación del frontend, backend, tests y migraciones todavía no se eligió. No se crean carpetas de aplicación para simular una decisión. Se acordarán antes del primer change que requiera código.
+Para C-01 se aprobó `backend/` con estructura Maven, Java 25 y JUnit. El dominio puro no incluye Spring Boot ni persistencia. La ubicación del frontend y migraciones, y la versión Spring Boot, siguen pendientes para los changes correspondientes.
 
 ## Consistencia de turnos
 

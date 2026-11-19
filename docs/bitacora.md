@@ -133,3 +133,15 @@ Se normalizaron 33 espacios finales de CHANGES.md sin modificar contenido o depe
 Fecha: 19 de noviembre de 2026. Giovanni pidió incorporar al planning las recomendaciones del profesor para otro equipo. Se documentaron el equipo nominal, su responsabilidad sobre la base y lógica central de agenda, la preparación de contratos y las medidas propuestas de revisión, archivos compartidos y entornos reproducibles en docs/plan-colaboracion.md. El usuario eligió en el menú: propuestas y contratos en paralelo; implementación después de integrar dependencias.
 
 El reparto nominal y las once ondas son propuestas pendientes de aprobación y de conocer perfiles y disponibilidad. CHANGES.md conserva sus 25 fichas y dependencias sin cambios; el plan de tres carriles no se sustituye todavía. No se trasladaron IDs, fechas, personas, estado de implementación ni reglas de adjudicación del ejemplo. No se eligieron build, migrador, proveedor de email o CI, ni se realizaron acciones remotas. La entrega académica sigue diferenciada del backlog completo.
+
+## Aplicación y Verify de C-01
+
+Fecha: 19/11/2026. Giovanni aprobó la propuesta y el worktree aislado. Se implementó el dominio Java 25 con Maven/JUnit en backend/, sin API, Spring Boot, PostgreSQL ni UI. Se observaron 55 fallos de comportamiento sobre el esqueleto, luego GREEN por etapas y 55 pruebas sin fallos ni omisiones en clean verify. Un error inicial de inferencia de tipos de las assertions se corrigió antes del RED y se conserva como incidencia de preparación, no como prueba de TDD.
+
+La evidencia está en openspec/changes/crear-turno-sin-solapamientos-dominio/evidence/. Se revisaron intervalo simétrico inclusivo, contención, colecciones no ordenadas, inmutabilidad y entradas malformadas. Revisión realizada en la misma sesión, sin afirmar revisión independiente ni uso del modelo Luna. Se conciliaron selección de C-01 y decisiones acotadas en KB, README y roadmap; no se cambiaron dependencias. Pendientes: Archive, integración a main y evidencia humana académica. Sin push.
+
+## Archivo e integración de C-01 en main
+
+Fecha: 19/11/2026. El usuario pidió archivar e integrar. El CLI archivó C-01 bajo openspec/changes/archive/2026-11-19-crear-turno-sin-solapamientos-dominio y promovió siete requisitos al spec principal disponibilidad-de-turnos, validado sin errores. Las 13 tareas estaban completas.
+
+Se guardaron los documentos previos de colaboración en un commit separado. Se preservó una copia de los cambios y de la propuesta inicial en docs/evidencias/antes-integracion-c01-2026-11-19/, ignorada por Git. La integración conservó ambas entradas de bitácora al resolver un conflicto de añadidos al final. README, roadmap, plan y AGENTS/CLAUDE se conciliaron con las decisiones ya aprobadas, sin cambiar reglas duras ni dependencias. La evidencia final de integración registra las verificaciones ejecutadas sobre main. No se realizó push.

@@ -1,0 +1,65 @@
+{
+  "checked_at": "2026-11-19T04:30:57.606062-03:00",
+  "change": "C-01",
+  "owner": "Giovanni",
+  "branch": "codex/c-01-dominio",
+  "worktree": "/Users/giovita/.codex/worktrees/c-01-dominio/Integrador odonto",
+  "status": "implemented_verified_pending_archive_and_integration",
+  "test_results": {
+    "tests": 55,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "apply_progress": {
+    "total": 13,
+    "complete": 13,
+    "remaining": 0
+  },
+  "commands": [
+    {
+      "command": "mvn -f backend/pom.xml clean verify",
+      "exit_code": 0,
+      "log": "07-clean-verify.log"
+    },
+    {
+      "command": "openspec validate crear-turno-sin-solapamientos-dominio --strict",
+      "exit_code": 0,
+      "log": "08-openspec-validate.log"
+    }
+  ],
+  "local_links_checked": 225,
+  "dependencies_preserved": true,
+  "files": {
+    "backend/pom.xml": "67bd3a8b4f13e687eace1f391265fab4678302b88e7b4caa0a0fcde826556414",
+    "backend/README.md": "2606518219d5362d3a7677eb80a444ecd29d2a9cad8015cced64e1125b447e20",
+    "backend/src/main/java/ar/edu/utn/odontologia/agenda/Agenda.java": "9a5a7b28fd33d1e4dac175dae3049fcac10266bf167f5f2ccf2625972188a736",
+    "backend/src/test/java/ar/edu/utn/odontologia/agenda/AgendaTest.java": "4d7b047137437244a5261595db4196dce98397e45163adbd8a6b5e6114f60271",
+    "CHANGES.md": "876004a61a604157295dab7b4e1a39cfce9349000fca515e8778f72090b97bbf",
+    "README.md": "731d75ce41b7153a5e22114c4e85d8c817a8f1075e58c8bac0e65d6831c1eb55",
+    "knowledge-base/09_decisiones_y_supuestos.md": "16a2f981ae4e042cb83f0faffbf51af0ea371f48a49483fc27effb2a8f6aca18",
+    "knowledge-base/06_funcionalidades.md": "1c241cefcb82f27e7218ef7f01bab2e14a26b9823f0ee1110d21ef1058af8f6f",
+    "knowledge-base/04_modelo_de_datos.md": "d753d26068692b9a0ea16b1922d0d809e2d5eea78ab6e7584bcb40a9883f06e2",
+    "knowledge-base/03_actores_y_roles.md": "a97b616656fed1c682273fe593a0273edb29842111c75ac24bbc125b6d2166ba",
+    "knowledge-base/10_preguntas_abiertas.md": "a94335807e224bd2bd0c3f11bf7697541143177541a8518a079b9f1c1e5e0599",
+    "knowledge-base/08_arquitectura_propuesta.md": "f6f63069cba4d63ef8e0d5ef3770175bc0339fc51e9baf09e1f138feb0b72c4c",
+    "knowledge-base/07_flujos_principales.md": "97eda80b4f728dceb605a66474384d89be5b050ce9cc9188ca24bec637560d8e",
+    "knowledge-base/05_reglas_de_negocio.md": "6e24eabead72b1c03cf97348aaa0f21676a125c2388b67bd315923209e5703c1",
+    "knowledge-base/README.md": "75f82c2fcdeb1c017aa2eb92f6066e19c7197993a63fb1f37604fe8573e18de9",
+    "knowledge-base/02_descripcion_general.md": "f6764faf214345b9d9d4ce89532f94bb53dacb64145ab187cfe60cb2d30feb98",
+    "knowledge-base/01_vision_y_objetivos.md": "b564cc741c45505bd707cd8589687a5ef683fe566e0b3dc6bfc75b20d6b27117",
+    "openspec/changes/crear-turno-sin-solapamientos-dominio/tasks.md": "90d25ba649a8edd5b66f0cd6cb2f989db906f1d48951f2eea337aa61b25565b7",
+    "openspec/changes/crear-turno-sin-solapamientos-dominio/design.md": "7eb746e863f53da303d043fd68d8f3214fb399011301c54e10f2ed8b591648d4",
+    "openspec/changes/crear-turno-sin-solapamientos-dominio/proposal.md": "2de437fed9e80f56167f1780834b5e74cb69c9f41022f6366ea4ed42e5486b97",
+    "openspec/changes/crear-turno-sin-solapamientos-dominio/evidence/verify.md": "f3b0dcaebb0631c64f648d2d43f65a448ca2c3788aaa26ba32e2b557cec8bf50",
+    "openspec/changes/crear-turno-sin-solapamientos-dominio/evidence/trazabilidad.md": "933539155c3abb2902bf4ac01276ffa55083eb5c935f8c07ef48289c4033a8dd",
+    "openspec/changes/crear-turno-sin-solapamientos-dominio/specs/disponibilidad-de-turnos/spec.md": "e8ef0bbc712c33b5b521d6c6047f5003366cabec5878f6b08646fa260f86a3ae"
+  },
+  "review": "Same-session review; no independent reviewer model claimed",
+  "limits": [
+    "No API, UI, PostgreSQL or concurrent persistence guarantee",
+    "No archive, merge or push",
+    "Academic human evidence remains pending",
+    "Original collaboration edits preserved in source checkout"
+  ]
+}

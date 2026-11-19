@@ -8,10 +8,10 @@ Cliente de trabajo: Codex. `AGENTS.md` es la fuente principal de mantenimiento; 
 | Capa | Tecnología aprobada | Versión mínima |
 | --- | --- | --- |
 | Frontend | HTML, CSS y TypeScript vanilla | Pendiente; no se incorpora un framework de UI |
-| Backend | Java con Spring Boot | Pendiente |
+| Backend | Java 25; Spring Boot previsto | Java 25 para C-01; versión Spring Boot pendiente |
 | Base de datos | PostgreSQL | Pendiente |
 
-Las versiones, build, ORM, contratos, autenticación, proveedor de email y despliegue siguen pendientes hasta acordarlos en el change correspondiente. El frontend es vanilla; no incorporar React, Next.js o shadcn por disponer de sus skills. Presupuesto externo cero.
+C-01 usa Java 25, Maven y JUnit en backend/. Las demás versiones, ORM, contratos de integración, autenticación, proveedor de email y despliegue siguen pendientes hasta acordarlos en el change correspondiente. El frontend es vanilla; no incorporar React, Next.js o shadcn por disponer de sus skills. Presupuesto externo cero.
 
 ## Base de Conocimiento
 
@@ -63,7 +63,7 @@ Cadena de precedencia representativa de once items, usando unidades equivalentes
 
 `C-01 → C-02 → C-03 → C-05 → C-15 → C-06 → C-08 → C-18 → C-19 → C-20 → C-14`
 
-C-01 (`crear-turno-sin-solapamientos-dominio`) sigue siendo un candidato al único change académico, no una selección aprobada (PA-13). Su módulo aislado no prueba integridad concurrente de PostgreSQL. Antes de iniciar cualquier item, comprobar dependencias y lecturas de su ficha; no interpretar el backlog completo como compromiso de implementación para la entrega.
+C-01 (`crear-turno-sin-solapamientos-dominio`) fue elegido por Giovanni, implementado, verificado y archivado; PA-13 está resuelta. Consultar su estado de integración en CHANGES.md. Su módulo aislado no prueba integridad concurrente de PostgreSQL. Antes de iniciar cualquier item, comprobar dependencias y lecturas de su ficha; no interpretar el backlog completo como compromiso de implementación para la entrega.
 
 ## Reglas Duras (específicas del proyecto)
 

@@ -74,6 +74,12 @@ Las decisiones DD provienen de respuestas explícitas del usuario, consolidadas 
 
 **Justificación documentada**: elecciones explícitas por menú y aprobación final «Apruebo el resumen y actualizar los documentos». **Pendientes**: PA-19 a PA-21; se preservan límites y compatibilidad sin decisiones inferidas. [Ampliación y resumen aprobados](../docs/discovery/ampliacion-paciente.md).
 
+### DD-12 C-01 académico y base de dominio
+
+**Decisión posterior expresa (19/11/2026)**: Giovanni eligió C-01 a su cargo y aprobó la propuesta y su implementación. Java 25, Maven y JUnit en `backend/`, objetos inmutables e instantes/duraciones explícitos. Intervalo positivo recibido y reservas ocupantes como entrada, sin definir estados ni minutos iniciales. Se admite exactamente el intervalo mínimo antes y después para ambos recursos.
+
+**Alternativas del menú**: Java 21 objetivo con JDK instalado o Java 25; se eligió Java 25. Se aprobó un worktree aislado para C-01. **Límite**: no elige Spring Boot, proveedor ni esquema de PostgreSQL. Las descripciones previas que presentan PA-13 como elección pendiente son antecedentes superados por esta decisión; las instrucciones de agentes conservan sus reglas técnicas confirmadas. Implementación y Verify permanecen separados de Archive y la integración a main.
+
 ## Supuestos inferidos y límites
 
 ### SU-01 Clasificación como aplicación web

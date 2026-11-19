@@ -1,0 +1,75 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ---------------< ar.edu.utn.odontologia:agenda-dominio >----------------
+[INFO] Building agenda-dominio 0.1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.4.0:resources (default-resources) @ agenda-dominio ---
+[INFO] skip non existing resourceDirectory /Users/giovita/.codex/worktrees/c-01-dominio/Integrador odonto/backend/src/main/resources
+[INFO] 
+[INFO] --- compiler:3.16.0:compile (default-compile) @ agenda-dominio ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.4.0:testResources (default-testResources) @ agenda-dominio ---
+[INFO] skip non existing resourceDirectory /Users/giovita/.codex/worktrees/c-01-dominio/Integrador odonto/backend/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.16.0:testCompile (default-testCompile) @ agenda-dominio ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- surefire:3.6.1:test (default-test) @ agenda-dominio ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running ar.edu.utn.odontologia.agenda.AgendaTest
+[ERROR] Tests run: 8, Failures: 4, Errors: 0, Skipped: 0, Time elapsed: 0.070 s <<< FAILURE! -- in ar.edu.utn.odontologia.agenda.AgendaTest
+[ERROR] ar.edu.utn.odontologia.agenda.AgendaTest.respetaIntervaloInclusivoAntesYDespues(String, String, String, boolean)[2] -- Time elapsed: 0.004 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: Unexpected type, expected: <ar.edu.utn.odontologia.agenda.Agenda.NoDisponible> but was: <ar.edu.utn.odontologia.agenda.Agenda.Exito>
+	at org.junit.jupiter.api.Assertions.assertInstanceOf(Assertions.java:3699)
+	at ar.edu.utn.odontologia.agenda.AgendaTest.respetaIntervaloInclusivoAntesYDespues(AgendaTest.java:137)
+
+[ERROR] ar.edu.utn.odontologia.agenda.AgendaTest.respetaIntervaloInclusivoAntesYDespues(String, String, String, boolean)[4] -- Time elapsed: 0.001 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: Unexpected type, expected: <ar.edu.utn.odontologia.agenda.Agenda.NoDisponible> but was: <ar.edu.utn.odontologia.agenda.Agenda.Exito>
+	at org.junit.jupiter.api.Assertions.assertInstanceOf(Assertions.java:3699)
+	at ar.edu.utn.odontologia.agenda.AgendaTest.respetaIntervaloInclusivoAntesYDespues(AgendaTest.java:137)
+
+[ERROR] ar.edu.utn.odontologia.agenda.AgendaTest.respetaIntervaloInclusivoAntesYDespues(String, String, String, boolean)[6] -- Time elapsed: 0.001 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: Unexpected type, expected: <ar.edu.utn.odontologia.agenda.Agenda.NoDisponible> but was: <ar.edu.utn.odontologia.agenda.Agenda.Exito>
+	at org.junit.jupiter.api.Assertions.assertInstanceOf(Assertions.java:3699)
+	at ar.edu.utn.odontologia.agenda.AgendaTest.respetaIntervaloInclusivoAntesYDespues(AgendaTest.java:137)
+
+[ERROR] ar.edu.utn.odontologia.agenda.AgendaTest.respetaIntervaloInclusivoAntesYDespues(String, String, String, boolean)[8] -- Time elapsed: 0.003 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: Unexpected type, expected: <ar.edu.utn.odontologia.agenda.Agenda.NoDisponible> but was: <ar.edu.utn.odontologia.agenda.Agenda.Exito>
+	at org.junit.jupiter.api.Assertions.assertInstanceOf(Assertions.java:3699)
+	at ar.edu.utn.odontologia.agenda.AgendaTest.respetaIntervaloInclusivoAntesYDespues(AgendaTest.java:137)
+
+[INFO] 
+[INFO] Results:
+[INFO] 
+[ERROR] Failures: 
+[ERROR]   AgendaTest.respetaIntervaloInclusivoAntesYDespues:137 Unexpected type, expected: <ar.edu.utn.odontologia.agenda.Agenda.NoDisponible> but was: <ar.edu.utn.odontologia.agenda.Agenda.Exito>
+[ERROR]   AgendaTest.respetaIntervaloInclusivoAntesYDespues:137 Unexpected type, expected: <ar.edu.utn.odontologia.agenda.Agenda.NoDisponible> but was: <ar.edu.utn.odontologia.agenda.Agenda.Exito>
+[ERROR]   AgendaTest.respetaIntervaloInclusivoAntesYDespues:137 Unexpected type, expected: <ar.edu.utn.odontologia.agenda.Agenda.NoDisponible> but was: <ar.edu.utn.odontologia.agenda.Agenda.Exito>
+[ERROR]   AgendaTest.respetaIntervaloInclusivoAntesYDespues:137 Unexpected type, expected: <ar.edu.utn.odontologia.agenda.Agenda.NoDisponible> but was: <ar.edu.utn.odontologia.agenda.Agenda.Exito>
+[INFO] 
+[ERROR] Tests run: 8, Failures: 4, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  0.733 s
+[INFO] Finished at: 2026-11-19T04:26:37-03:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.6.1:test (default-test) on project agenda-dominio: There are test failures.
+[ERROR] 
+[ERROR] See /Users/giovita/.codex/worktrees/c-01-dominio/Integrador odonto/backend/target/surefire-reports for the individual test results.
+[ERROR] See dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

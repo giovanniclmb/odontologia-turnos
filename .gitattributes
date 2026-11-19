@@ -4,3 +4,5 @@
 # Preservar el formato exacto de salidas históricas y parches de evidencia.
 docs/evidencias/*.log -whitespace
 docs/evidencias/*.patch -whitespace
+
+openspec/changes/**/evidence/*.log -whitespace

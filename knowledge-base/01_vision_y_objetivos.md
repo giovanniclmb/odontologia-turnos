@@ -32,7 +32,7 @@ El usuario eligió ambos problemas como prioritarios, sin ordenarlos entre sí. 
 
 Autorreserva general del paciente, adjudicación automática de huecos, WhatsApp automático, odontograma, pagos, facturación, sistema multiempresa y expansión multisede quedan fuera del MVP. El email es obligatorio, con servicio gratuito por definir y envíos reales a las direcciones de prueba indicadas por el equipo.
 
-El MVP describe el backlog del producto. La entrega académica requiere un único change completado por OPSX, no implementar el MVP entero a la vez. El primer change se elegirá tras el roadmap.
+El MVP describe el backlog del producto. La entrega académica requiere un único change completado por OPSX, no implementar el MVP entero a la vez. Giovanni eligió C-01 como primer change y aprobó su propuesta y aplicación el 19/11/2026.
 
 ## Métricas de éxito
 

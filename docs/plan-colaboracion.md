@@ -7,7 +7,7 @@ Fecha: 19/11/2026. Complemento de [CHANGES.md](../CHANGES.md). Recoge la recomen
 - Equipo: Giovanni (líder y propietario del repositorio), Sofia, Luciano y Fabi.
 - Giovanni prefiere backend, participará también en frontend e implementará la base y la lógica central de agenda. Los demás changes prioritarios se elegirán con él. Criticidad técnica y prioridad de entrega son conceptos distintos.
 - Política elegida por Giovanni el 19/11: **propuestas y contratos en paralelo; implementación después de integrar las dependencias**. No se habilitan ramas encadenadas para adelantar implementación.
-- El repositorio ya está creado y publicado. C-01 todavía no está implementado. El primer change académico sigue pendiente de elección.
+- El repositorio ya está creado y publicado. C-01 fue elegido por Giovanni, implementado, verificado y archivado; queda integrado en main con este cierre.
 - La entrega del 25/11 exige completar un change con su evidencia y ciclo OpenSpec, no los 25 changes del MVP. No se promete un calendario diario sin conocer disponibilidad y estimaciones.
 - Los agentes pueden compilar, probar y crear commits atómicos dentro del trabajo autorizado. Cada push requiere un pedido explícito.
 
@@ -111,7 +111,7 @@ Pendientes para cerrar el planning:
 
 1. Recoger perfiles y disponibilidad de Sofia, Luciano y Fabi; aprobar o ajustar el reparto nominal y los otros changes prioritarios de Giovanni.
 2. Acordar revisión, integración, responsables compartidos y seguimiento remoto antes de configurarlos.
-3. Elegir el change académico (PA-13) y resolver sus preguntas bloqueantes antes de implementar.
+3. PA-13 resuelta: C-01 elegido y completado. Resolver las preguntas bloqueantes del siguiente change antes de implementar.
 4. Completar PA-10 sobre reparto, defensa y respaldo de la excepción docente si lo requiere la cátedra. La verificación personal de fuentes y la reflexión siguen a cargo de los integrantes.
 
 Se mantienen las reglas del producto: recepción adjudica huecos; un aviso no reserva. No se incorpora la regla de “gana el primero” del ejemplo de otro equipo ni se recortan cuenta del paciente o lista de espera sin decisión del usuario.
