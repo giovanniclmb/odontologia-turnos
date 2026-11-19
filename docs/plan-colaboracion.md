@@ -91,17 +91,15 @@ El primer change que incorpore un entorno ejecutable deberá documentar versione
 
 Antes de introducir migraciones, acordar herramienta, propietario y asignación de versiones para evitar colisiones entre ramas. Verificar el orden de aplicación tanto desde una base vacía como al actualizar una existente. No se adopta Flyway ni su opción `out-of-order`, tampoco Gradle o Maven, por la recomendación docente. La CI dependerá de los comandos de build y pruebas que realmente se incorporen y verifiquen.
 
-## GitHub: lista de preparación pendiente
+## GitHub: configuración del equipo
 
-El repositorio personal de Giovanni ya existe. Quedan por definir y autorizar las acciones remotas que correspondan:
+Los usuarios ya están confirmados y las invitaciones de escritura fueron enviadas el 19/11/2026: Fabi @FabianoRamos05, Luciano @Dreamboy2006 y Sofia @jowy0. Cada integrante debe aceptar su invitación; Giovanni mantiene la administración.
 
-- Usuarios de GitHub de Sofia, Luciano y Fabi e invitaciones con permisos acordados.
-- Política de PR, aprobaciones, protección de main y permisos de integración, comprobando las capacidades disponibles para este repositorio.
-- CODEOWNERS cuando haya responsables, usuarios y rutas confirmados.
-- CI una vez elegido y ejecutable el build; no copiar `./gradlew build` antes de elegir Gradle.
-- Issues por change y GitHub Projects si el equipo quiere ese seguimiento, manteniendo CHANGES como fuente de alcance y dependencias.
+Política aprobada: PR hacia main, aprobación de Giovanni mediante CODEOWNERS y CI backend-verify correcto, con rama actualizada. La excepción administrativa de los PRs propios requiere autorización explícita para cada integración y CI correcto, según [CONTRIBUTING.md](../CONTRIBUTING.md). Las Actions se fijan por SHA y se ejecutan con permisos de lectura.
 
-Esta actualización documental no invita colaboradores, cambia permisos, publica Issues ni realiza push.
+Se prepara la publicación de esta configuración y C-01, seguida de la comprobación del primer CI remoto y la activación de protección. La evidencia de preparación distingue política aprobada de estado remoto observado; GitHub conserva la configuración efectiva. El permiso de push otorgado es solo para esta publicación inicial, no permanente.
+
+Issues por change y GitHub Projects quedan pendientes de elección; las asignaciones nominales no se publican automáticamente. CHANGES conserva alcance y dependencias.
 
 ## Seguimiento del plazo y siguientes decisiones
 
@@ -110,8 +108,21 @@ Revisar al integrar cada change: dependencias desbloqueadas, bloqueos de contrat
 Pendientes para cerrar el planning:
 
 1. Recoger perfiles y disponibilidad de Sofia, Luciano y Fabi; aprobar o ajustar el reparto nominal y los otros changes prioritarios de Giovanni.
-2. Acordar revisión, integración, responsables compartidos y seguimiento remoto antes de configurarlos.
+2. Revisión e integración acordadas: aprobación de Giovanni y CI, con excepción propia explícita. Quedan pendientes reparto por áreas y elección de Issues/Projects.
 3. PA-13 resuelta: C-01 elegido y completado. Resolver las preguntas bloqueantes del siguiente change antes de implementar.
 4. Completar PA-10 sobre reparto, defensa y respaldo de la excepción docente si lo requiere la cátedra. La verificación personal de fuentes y la reflexión siguen a cargo de los integrantes.
 
 Se mantienen las reglas del producto: recepción adjudica huecos; un aviso no reserva. No se incorpora la regla de “gana el primero” del ejemplo de otro equipo ni se recortan cuenta del paciente o lista de espera sin decisión del usuario.
+
+## Configuración colaborativa aprobada el 19/11/2026
+
+| Integrante | GitHub |
+| --- | --- |
+| Giovanni | @giovanniclmb |
+| Fabi | @FabianoRamos05 |
+| Luciano | @Dreamboy2006 |
+| Sofia | @jowy0 |
+
+El usuario aprobó invitar a los tres como colaboradores con escritura, exigir PR con aprobación de Giovanni y CI correcto, y publicar main con C-01 y esta configuración tras verificarla. Para PRs propios de Giovanni se acordó una excepción explícita al integrar: no puede autoaprobarse. La capacidad administrativa de bypass se conserva y su uso debe documentarse para el PR concreto, con CI correcto; no es autorización permanente para omitir controles.
+
+[CONTRIBUTING.md](../CONTRIBUTING.md) contiene el procedimiento vigente. CODEOWNERS requiere la revisión de Giovanni para todo el repositorio, sin asignar implementación por áreas. CI usa el build Maven/Java 25 ya incorporado en C-01. Estas decisiones sustituyen los pendientes de usuarios, revisión y CI de las secciones anteriores; perfiles, disponibilidad, reparto de changes e Issues/Projects continúan pendientes. La evidencia de configuración distingue invitaciones pendientes de colaboradores activos y configuración preparada de configuración aplicada.

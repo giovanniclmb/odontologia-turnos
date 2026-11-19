@@ -1,0 +1,55 @@
+{
+  "date": "2026-11-19",
+  "repository": "giovanniclmb/odontologia-turnos",
+  "stage": "prepared_before_initial_publication",
+  "members": [
+    {
+      "member": "Fabi",
+      "login": "FabianoRamos05",
+      "invitation_id": 344970366,
+      "permission": "write",
+      "state": "invited"
+    },
+    {
+      "member": "Luciano",
+      "login": "Dreamboy2006",
+      "invitation_id": 344970369,
+      "permission": "write",
+      "state": "invited"
+    },
+    {
+      "member": "Sofia",
+      "login": "jowy0",
+      "invitation_id": 344970372,
+      "permission": "write",
+      "state": "invited"
+    }
+  ],
+  "policy_approved": {
+    "pull_request_required": true,
+    "giovanni_codeowner_approval_required": true,
+    "required_approvals": 1,
+    "required_ci": "backend-verify",
+    "up_to_date_required": true,
+    "admins_exempt_to_allow_explicit_owner_exception": true,
+    "force_push": false,
+    "delete_main": false
+  },
+  "publish_authorized": true,
+  "local_tests": {
+    "tests": 55,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "links_checked": 29,
+  "files": {
+    "README.md": "74061a17061da60b358918753701b82c92f57032b74eba2055ab24fcce3eaa62",
+    "CONTRIBUTING.md": "51225905a00ed8be42fcaff11ea1d52c42b22b0c07495bd31a1c211f52965747",
+    "docs/plan-colaboracion.md": "397183f1cb223972504ab9cf884671836138745b66d9367163454f1bb64879ca",
+    ".github/CODEOWNERS": "42939b4c2f8a3a23fb771a61c1755d7f7f2847400ca9ccf31ff228400bd60359",
+    ".github/pull_request_template.md": "5708b2bbf238e9507ce077528d0df0ea43046e6357b5ce9b46ff9b49ebea308c",
+    ".github/workflows/ci.yml": "eeb0fd28fb3023b3ddf48c2cceb0ae2b9b823bd8157bb5b7bc83748b89036740"
+  },
+  "remote_followup": "After push, verify the actual CI check, then activate and read back main protection. This snapshot does not claim remote activation."
+}

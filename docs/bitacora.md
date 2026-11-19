@@ -145,3 +145,9 @@ La evidencia está en openspec/changes/crear-turno-sin-solapamientos-dominio/evi
 Fecha: 19/11/2026. El usuario pidió archivar e integrar. El CLI archivó C-01 bajo openspec/changes/archive/2026-11-19-crear-turno-sin-solapamientos-dominio y promovió siete requisitos al spec principal disponibilidad-de-turnos, validado sin errores. Las 13 tareas estaban completas.
 
 Se guardaron los documentos previos de colaboración en un commit separado. Se preservó una copia de los cambios y de la propuesta inicial en docs/evidencias/antes-integracion-c01-2026-11-19/, ignorada por Git. La integración conservó ambas entradas de bitácora al resolver un conflicto de añadidos al final. README, roadmap, plan y AGENTS/CLAUDE se conciliaron con las decisiones ya aprobadas, sin cambiar reglas duras ni dependencias. La evidencia final de integración registra las verificaciones ejecutadas sobre main. No se realizó push.
+
+## Preparación de la colaboración en GitHub
+
+Fecha: 19/11/2026. Giovanni aportó los usuarios y aprobó colaboradores con escritura, PR con su aprobación obligatoria y CI correcto, excepción explícita para integrar PRs propios, y push verificado de main con C-01 y configuración. Se verificaron los usuarios y se enviaron invitaciones a FabianoRamos05, Dreamboy2006 y jowy0, pendientes de aceptación al preparar esta evidencia.
+
+Se crearon CONTRIBUTING.md, CODEOWNERS con Giovanni como revisor, plantilla de PR y CI con Temurin 25/Maven, Actions fijadas por SHA y token de lectura. Build local: 55 pruebas sin fallos, errores u omisiones. La publicación precederá a la comprobación del CI remoto y a la protección de main, para dejar registrado el check real. El bypass administrativo se conserva para excepciones expresas del propietario; no es una autorización automática para saltar CI o revisiones. No se aprobaron asignaciones nominales ni se crearon Issues/Projects.
