@@ -50,11 +50,11 @@ Cambiar `.env` no cambia credenciales de un volumen ya inicializado. Ante un err
 
 ## Modelo y migraciones
 
-El esquema odontologia contiene paciente, profesional, sillon y prestacion. Cada tabla tiene id uuid y codigo text obligatorio, no vacío ni formado solo por espacios comunes y único por tabla. La comparación es exacta, sin normalización. El mismo código puede existir en tipos distintos. Hibernate genera el UUID en la aplicación; PostgreSQL no tiene default de generación.
+El esquema odontologia contiene paciente, profesional, sillon, prestacion, usuario y token_acceso. usuario tiene id uuid, nombre_usuario text obligatorio no vacío y único, hash_credencial text, rol CHECK (recepcion/odontologo), activo, profesional_ref uuid opaco y creado_en. token_acceso tiene id uuid, usuario_id FK, hash_token, creado_en, expira_en y revocado. Hibernate genera el UUID en la aplicación; PostgreSQL no tiene default de generación. odonto_app tiene SELECT/INSERT/UPDATE sobre usuario y token_acceso, sin DELETE.
 
 No hay columnas clínicas, cuentas, duración de prestación, intervalo ni tabla de turnos. Esas ampliaciones pertenecen a los changes siguientes. Las entidades y repositorios JPA están separados del paquete agenda y no se exponen como contratos HTTP.
 
-V1__referencias_base.sql crea las tablas y permisos. Flyway es el único gestor de estructura; Hibernate usa validate y la inicialización SQL alternativa está desactivada. Flyway valida checksum y rechaza también migraciones futuras ausentes del binario; no hay baseline automático, clean ni out-of-order.
+V1__referencias_base.sql crea las referencias y permisos. V2__acceso_y_permisos.sql crea usuario y token_acceso con sus constraints y permisos. Flyway es el único gestor de estructura; Hibernate usa validate y la inicialización SQL alternativa está desactivada. Flyway valida checksum y rechaza también migraciones futuras ausentes del binario; no hay baseline automático, clean ni out-of-order.
 
 Versiones globales consecutivas: Giovanni coordina el próximo número según el orden real de integración. Una migración aplicada a una base de trabajo compartida no se renumera ni edita; se corrige con otra versión. Los tests de desarrollo usan contenedores nuevos al iterar V1 y nunca reparan el historial de una base persistente.
 
