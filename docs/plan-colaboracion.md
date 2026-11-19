@@ -39,18 +39,18 @@ Registrar, para cada frontera que realmente necesite el change:
 
 Guardar cada acuerdo junto a los artefactos del change correspondiente y enlazarlo desde sus tareas. El contrato no introduce endpoints, tablas, ORM, proveedor de email o políticas de seguridad por inferencia. Si cambia una interfaz, avisar a sus consumidores y revisar los artefactos afectados antes de continuar.
 
-## Distribución nominal propuesta, todavía no aprobada
+## Distribución nominal aprobada
 
-Esta tabla conserva la propuesta conversada; no adjudica definitivamente trabajo a los integrantes. Faltan experiencia, disponibilidad y preferencias de Sofia, Luciano y Fabi. Se propone continuidad por áreas, con participación frontend/backend según las necesidades.
+Giovanni aprobó expresamente este reparto el 19/11/2026: «El reparto de changes queda aprobado». Las asignaciones quedan confirmadas. Experiencia, disponibilidad y preferencias detalladas aún no relevadas pueden motivar una revisión posterior, pero no condicionan la aprobación actual. La aprobación de responsables no autoriza automáticamente implementar código CRITICO ni saltear dependencias.
 
-| Integrante | Enfoque propuesto | Changes propuestos |
+| Integrante | Enfoque | Changes asignados |
 | --- | --- | --- |
 | Giovanni | Base, núcleo de agenda e integración | C-01, C-02, C-06, C-07, C-08, C-14, C-25 |
 | Sofia | Pacientes, cuenta y lista de espera | C-04, C-09, C-16, C-21, C-22, C-24 |
 | Luciano | Recursos, bloqueos e interfaces de agenda | C-05, C-10, C-12, C-13, C-15, C-23 |
 | Fabi | Acceso interno, email e interfaz de pacientes | C-03, C-11, C-17, C-18, C-19, C-20 |
 
-Hay cruces de áreas que deben revisarse con el equipo. C-03, C-04, C-16 y C-18 requieren especial atención por su criticidad; su responsable no queda aprobado por aparecer en esta propuesta. Giovanni conserva la elección conjunta de otros changes prioritarios.
+Los cruces entre áreas se coordinan mediante contratos. C-03, C-04, C-16 y C-18 conservan su gobernanza CRITICO y el responsable indicado en esta tabla. Giovanni mantiene la base y la lógica central de agenda; cualquier cambio de reparto o prioridad se acuerda expresamente.
 
 ### Ondas orientativas para evaluar el reparto
 
@@ -70,7 +70,7 @@ Cada fila supone que los changes de las filas anteriores ya se integraron. Son u
 | 10 | C-25 | — | C-23 | C-20 |
 | 11 | C-14 | — | — | — |
 
-La propuesta cubre los 25 changes una vez y respeta sus precedencias. No sustituye el esquema técnico de tres carriles existente en CHANGES hasta aprobar el reparto nominal y la revisión puntual del roadmap.
+El reparto aprobado cubre los 25 changes una vez y respeta sus precedencias. CHANGES.md se concilia con los cuatro responsables y estas once ondas orientativas; no son una estimación en días. C-01 ya está completado.
 
 ## Coordinación y revisión propuestas
 
@@ -107,8 +107,8 @@ Revisar al integrar cada change: dependencias desbloqueadas, bloqueos de contrat
 
 Pendientes para cerrar el planning:
 
-1. Recoger perfiles y disponibilidad de Sofia, Luciano y Fabi; aprobar o ajustar el reparto nominal y los otros changes prioritarios de Giovanni.
-2. Revisión e integración acordadas: aprobación de Giovanni y CI, con excepción propia explícita. Quedan pendientes reparto por áreas y elección de Issues/Projects.
+1. Recoger perfiles y disponibilidad para estimar fechas reales; el reparto nominal ya está aprobado. Cualquier ajuste posterior requiere un nuevo acuerdo.
+2. Revisión e integración acordadas: aprobación de Giovanni y CI, con excepción propia explícita. El reparto ya está aprobado; queda pendiente elegir Issues/Projects.
 3. PA-13 resuelta: C-01 elegido y completado. Resolver las preguntas bloqueantes del siguiente change antes de implementar.
 4. Completar PA-10 sobre reparto, defensa y respaldo de la excepción docente si lo requiere la cátedra. La verificación personal de fuentes y la reflexión siguen a cargo de los integrantes.
 
@@ -125,4 +125,4 @@ Se mantienen las reglas del producto: recepción adjudica huecos; un aviso no re
 
 El usuario aprobó invitar a los tres como colaboradores con escritura, exigir PR con aprobación de Giovanni y CI correcto, y publicar main con C-01 y esta configuración tras verificarla. Para PRs propios de Giovanni se acordó una excepción explícita al integrar: no puede autoaprobarse. La capacidad administrativa de bypass se conserva y su uso debe documentarse para el PR concreto, con CI correcto; no es autorización permanente para omitir controles.
 
-[CONTRIBUTING.md](../CONTRIBUTING.md) contiene el procedimiento vigente. CODEOWNERS requiere la revisión de Giovanni para todo el repositorio, sin asignar implementación por áreas. CI usa el build Maven/Java 25 ya incorporado en C-01. Estas decisiones sustituyen los pendientes de usuarios, revisión y CI de las secciones anteriores; perfiles, disponibilidad, reparto de changes e Issues/Projects continúan pendientes. La evidencia de configuración distingue invitaciones pendientes de colaboradores activos y configuración preparada de configuración aplicada.
+[CONTRIBUTING.md](../CONTRIBUTING.md) contiene el procedimiento vigente. CODEOWNERS requiere la revisión de Giovanni para todo el repositorio, sin asignar implementación por áreas. CI usa el build Maven/Java 25 ya incorporado en C-01. Estas decisiones sustituyen los pendientes de usuarios, revisión y CI de las secciones anteriores; perfiles, disponibilidad e Issues/Projects continúan pendientes. El reparto de changes fue aprobado posteriormente en esta misma fecha. La evidencia de configuración distingue invitaciones pendientes de colaboradores activos y configuración preparada de configuración aplicada.

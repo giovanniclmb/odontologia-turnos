@@ -49,7 +49,7 @@ cd odontologia-turnos
 | [Informe de investigación](docs/discovery/informe-discovery.md) / [PDF](docs/discovery/informe-discovery.pdf) | Comparación de 15 sistemas y 38 fuentes |
 | [Knowledge base](knowledge-base/README.md) | Diez documentos canónicos del dominio y la arquitectura pendiente |
 | [Roadmap](CHANGES.md) | C-01 completado y 24 items pendientes con dependencias y alcance |
-| [Plan de colaboración](docs/plan-colaboracion.md) | Equipo de cuatro, preparación paralela y reparto propuesto |
+| [Plan de colaboración](docs/plan-colaboracion.md) | Equipo de cuatro, preparación paralela y reparto aprobado |
 | [Preguntas abiertas](knowledge-base/10_preguntas_abiertas.md) | Decisiones que necesitan resolverse antes del change afectado |
 | [Bitácora](docs/bitacora.md) | Decisiones y verificaciones de cada etapa |
 | [Evidencias](docs/evidencias/README.md) | Alcance y conservación de registros técnicos |
@@ -66,7 +66,7 @@ Los scripts de Discovery son utilidades documentales, no pruebas del producto. [
 
 Guía: [CONTRIBUTING.md](CONTRIBUTING.md). GitHub: Giovanni `@giovanniclmb`, Fabi `@FabianoRamos05`, Luciano `@Dreamboy2006` y Sofia `@jowy0`. Política aprobada: colaboradores con escritura; PR con aprobación de Giovanni y CI correcto; para sus propios PRs, excepción explícita documentada al integrar.
 
-El equipo está integrado por Giovanni (líder y propietario del repositorio), Sofia, Luciano y Fabi, con autorización docente informada para trabajar de a cuatro. Giovanni implementará la base y la lógica central de agenda; el reparto restante está pendiente. El [plan de colaboración](docs/plan-colaboracion.md) registra la política aprobada de propuestas y contratos en paralelo, con implementación tras integrar las dependencias, y las recomendaciones docentes adaptadas. La entrega está prevista para el 25/11/2026. Completar el backlog entero no es un requisito del único change académico.
+El equipo está integrado por Giovanni (líder y propietario del repositorio), Sofia, Luciano y Fabi, con autorización docente informada para trabajar de a cuatro. Giovanni implementará la base y la lógica central de agenda; el reparto de los 25 changes está aprobado y figura en el plan de colaboración. El [plan de colaboración](docs/plan-colaboracion.md) registra la política aprobada de propuestas y contratos en paralelo, con implementación tras integrar las dependencias, y las recomendaciones docentes adaptadas. La entrega está prevista para el 25/11/2026. Completar el backlog entero no es un requisito del único change académico.
 
 Se permiten compilación, pruebas y commits autónomos dentro del alcance autorizado. Cada commit debe cubrir una tarea específica y tener un mensaje detallado que explique el cambio y su propósito. **El push requiere un pedido explícito del usuario.** Las reglas completas y los permisos por dominio están en las instrucciones aplicables; esta política no aprueba automáticamente cambios críticos.
 

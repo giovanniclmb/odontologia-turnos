@@ -5,9 +5,9 @@
 | Integrante | GitHub | Responsabilidad confirmada |
 | --- | --- | --- |
 | Giovanni | [@giovanniclmb](https://github.com/giovanniclmb) | Propietario, coordinación, base y lógica central de agenda |
-| Fabi | [@FabianoRamos05](https://github.com/FabianoRamos05) | Colaborador con escritura; reparto de changes pendiente |
-| Luciano | [@Dreamboy2006](https://github.com/Dreamboy2006) | Colaborador con escritura; reparto de changes pendiente |
-| Sofia | [@jowy0](https://github.com/jowy0) | Colaboradora con escritura; reparto de changes pendiente |
+| Fabi | [@FabianoRamos05](https://github.com/FabianoRamos05) | Colaborador con escritura; changes asignados en el plan aprobado |
+| Luciano | [@Dreamboy2006](https://github.com/Dreamboy2006) | Colaborador con escritura; changes asignados en el plan aprobado |
+| Sofia | [@jowy0](https://github.com/jowy0) | Colaboradora con escritura; changes asignados en el plan aprobado |
 
 Los colaboradores deben aceptar la invitación antes de poder escribir. Una invitación pendiente no equivale a acceso activo. Giovanni conserva la administración del repositorio personal; no se otorga administración a los demás.
 
@@ -44,7 +44,7 @@ Limitación técnica: el bypass administrativo puede omitir más controles que l
 
 El workflow CI ejecuta `mvn --batch-mode --no-transfer-progress -f backend/pom.xml clean verify` con Temurin 25 en pushes a main y PRs hacia main, incluidos los que solo modifican documentación, para que el check requerido siempre tenga resultado. Las Actions están fijadas por SHA y el token del workflow solo tiene lectura de contenidos.
 
-CODEOWNERS asigna a Giovanni la revisión de todos los archivos, según la política elegida. No adjudica a Giovanni la implementación de todo el backlog ni confirma las asignaciones nominales propuestas. Coordinar cambios en build, contratos, instrucciones, configuración y futuras migraciones para evitar ediciones simultáneas incompatibles.
+CODEOWNERS asigna a Giovanni la revisión de todos los archivos, según la política elegida. No adjudica a Giovanni la implementación de todo el backlog ni modifica las asignaciones nominales aprobadas. Coordinar cambios en build, contratos, instrucciones, configuración y futuras migraciones para evitar ediciones simultáneas incompatibles.
 
 ## Datos, permisos y evidencia
 
@@ -52,6 +52,6 @@ Usar pacientes y datos clínicos ficticios. No publicar secretos ni credenciales
 
 Los agentes pueden compilar, probar y crear commits dentro del trabajo autorizado; cada nuevo push requiere un pedido explícito del usuario. La autorización para publicar esta configuración inicial no constituye un permiso permanente.
 
-El reparto de changes y el uso de Issues/Projects siguen pendientes de acuerdo; no crear asignaciones a partir de la tabla propuesta del planning.
+El reparto nominal de los 25 changes está aprobado y registrado en CHANGES.md y el plan de colaboración. La elección y creación de Issues/Projects continúa pendiente; esta aprobación no publica tareas remotas.
 
 Fuentes: [protección de ramas](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches) y [CODEOWNERS](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners).

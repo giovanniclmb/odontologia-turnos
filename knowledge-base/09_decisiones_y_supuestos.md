@@ -46,7 +46,7 @@ Las decisiones DD provienen de respuestas explícitas del usuario, consolidadas 
 
 **Decisión informada**: cuatro integrantes, cantidad que puede variar. El usuario declaró autorización docente para superar el máximo de tres de la consigna.
 
-**Contexto**: diferencia detectada entre documento y organización del equipo. **Justificación**: respuesta explícita del usuario; no se atribuye comprobación independiente. **Pendiente**: nombres, reparto y participación demostrable.
+**Contexto**: diferencia detectada entre documento y organización del equipo. **Justificación**: respuesta explícita del usuario; no se atribuye comprobación independiente. **Actualización 19/11/2026**: Giovanni, Sofia, Luciano y Fabi confirmados; reparto de 25 changes aprobado expresamente y registrado en CHANGES.md y docs/plan-colaboracion.md. **Pendiente**: participación demostrable y organización de la defensa.
 
 ### DD-08 Exclusiones e integraciones
 
