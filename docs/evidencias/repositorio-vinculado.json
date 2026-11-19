@@ -1,0 +1,19 @@
+{
+  "checked_at": "2026-11-19T02:51:31.780973-03:00",
+  "repository": "giovanniclmb/odontologia-turnos",
+  "repository_id": "1463721552",
+  "url": "https://github.com/giovanniclmb/odontologia-turnos",
+  "visibility": "public",
+  "github_default_branch": "main",
+  "metadata_source": "GitHub connector get_repo",
+  "origin": "https://github.com/giovanniclmb/odontologia-turnos.git",
+  "local_branch": "main",
+  "local_has_commits": false,
+  "push_performed": false,
+  "checks": [
+    "Metadata remoto verificado con conector",
+    "origin coincide con el repositorio del usuario",
+    "Rama local main coincide con rama predeterminada remota",
+    "Sin commits ni push en esta tarea"
+  ]
+}

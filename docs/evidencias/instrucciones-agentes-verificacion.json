@@ -1,0 +1,69 @@
+{
+  "checked_at": "2026-11-19T02:41:53.529441-03:00",
+  "files": [
+    {
+      "path": "AGENTS.md",
+      "sha256": "96c0ecbe7f860589c5a251ec8cb2ee25e273f32b346ef040a3b4e84f533c498c",
+      "bytes": 8342,
+      "local_links": 15
+    },
+    {
+      "path": "CLAUDE.md",
+      "sha256": "96c0ecbe7f860589c5a251ec8cb2ee25e273f32b346ef040a3b4e84f533c498c",
+      "bytes": 8342,
+      "local_links": 15
+    }
+  ],
+  "identical_content": true,
+  "required_sections": [
+    "Stack Tecnológico",
+    "Base de Conocimiento",
+    "Skills Disponibles",
+    "Roadmap de Changes",
+    "Reglas Duras (específicas del proyecto)",
+    "Flujo de Trabajo"
+  ],
+  "confirmed_rules": [
+    "RA-01",
+    "RA-02",
+    "RA-03",
+    "RA-04"
+  ],
+  "skills_mapped": [
+    "active-delivery",
+    "active-orchestrator",
+    "api-and-interface-design",
+    "design-system",
+    "diagnosing-bugs",
+    "frontend-design",
+    "impeccable",
+    "java-springboot",
+    "openspec-apply-change",
+    "openspec-archive-change",
+    "openspec-explore",
+    "openspec-propose",
+    "openspec-sync-specs",
+    "openspec-update-change",
+    "security-audit",
+    "supabase-postgres-best-practices",
+    "systematic-debugging",
+    "test-driven-development",
+    "verification-before-completion",
+    "web-design-guidelines",
+    "writing-plans"
+  ],
+  "rule_04": "El agente puede compilar, ejecutar pruebas y crear commits por su cuenta dentro del alcance autorizado. Cada commit debe ser atómico, cubrir una tarea específica y tener un mensaje específico y detallado que explique el cambio y su propósito. Hacer push requiere un pedido explícito del usuario.",
+  "global_instructions_unchanged": true,
+  "kb_unchanged": true,
+  "roadmap_unchanged": true,
+  "new_openspec_changes": 0,
+  "checks": [
+    "Dos destinos de raíz con contenido idéntico y marcadores únicos",
+    "Seis secciones requeridas presentes y stack copiado de KB02",
+    "Cuatro reglas confirmadas incorporadas; commits autónomos atómicos y push por pedido explícito",
+    "Enlaces locales válidos y todas las skills mapeadas existen en registro",
+    "No se implementó código ni se eligió primer change",
+    "Registro local actualizado con instrucciones y referencias",
+    "Fases previas conservadas; pendientes académicos y de producto preservados"
+  ]
+}

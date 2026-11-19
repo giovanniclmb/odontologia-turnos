@@ -1,0 +1,104 @@
+{
+  "checked_at": "2026-11-17T18:13:36.771129-03:00",
+  "method": "Clientes MCP independientes: initialize y tools/list. No demuestra carga en el chat de la app.",
+  "results": [
+    {
+      "name": "engram",
+      "enabled": true,
+      "status": "OK",
+      "server": {
+        "name": "engram",
+        "version": "3.7.2"
+      },
+      "tool_count": 27,
+      "tools": [
+        "mem_capture_passive",
+        "mem_compare",
+        "mem_consolidate",
+        "mem_context",
+        "mem_current_project",
+        "mem_delete",
+        "mem_doctor",
+        "mem_get_observation",
+        "mem_judge",
+        "mem_judge_many",
+        "mem_list_projects",
+        "mem_merge_projects",
+        "mem_pin",
+        "mem_review",
+        "mem_save",
+        "mem_save_prompt",
+        "mem_search",
+        "mem_search_prompts",
+        "mem_session_end",
+        "mem_session_finalize",
+        "mem_session_start",
+        "mem_session_summary",
+        "mem_stats",
+        "mem_suggest_topic_key",
+        "mem_timeline",
+        "mem_unpin",
+        "mem_update"
+      ]
+    },
+    {
+      "name": "context7",
+      "enabled": true,
+      "status": "OK",
+      "server": {
+        "name": "Context7",
+        "version": "2.2.5",
+        "websiteUrl": "https://context7.com",
+        "description": "Context7 provides up-to-date documentation and code examples for libraries and frameworks.",
+        "icons": [
+          {
+            "src": "https://context7.com/context7-icon-green.png",
+            "mimeType": "image/png"
+          }
+        ]
+      },
+      "tool_count": 2,
+      "tools": [
+        "resolve-library-id",
+        "query-docs"
+      ]
+    },
+    {
+      "name": "playwright",
+      "enabled": true,
+      "status": "OK",
+      "server": {
+        "name": "Playwright",
+        "version": "1.64.0-alpha-1790635538000"
+      },
+      "tool_count": 25,
+      "tools": [
+        "browser_close",
+        "browser_resize",
+        "browser_console_messages",
+        "browser_handle_dialog",
+        "browser_emulate_media",
+        "browser_evaluate",
+        "browser_file_upload",
+        "browser_drop",
+        "browser_find",
+        "browser_fill_form",
+        "browser_press_key",
+        "browser_type",
+        "browser_navigate",
+        "browser_navigate_back",
+        "browser_network_requests",
+        "browser_network_request",
+        "browser_run_code_unsafe",
+        "browser_take_screenshot",
+        "browser_snapshot",
+        "browser_click",
+        "browser_drag",
+        "browser_hover",
+        "browser_select_option",
+        "browser_tabs",
+        "browser_wait_for"
+      ]
+    }
+  ]
+}

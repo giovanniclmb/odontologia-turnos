@@ -1,0 +1,29 @@
+package headless_test
+
+import (
+ "bytes"
+ "os"
+ "path/filepath"
+ "testing"
+
+ "github.com/Group-Active-IA/active-stack/cmd/active-stack/headless"
+ "github.com/Group-Active-IA/active-stack/internal/install"
+)
+
+func TestLocalHeadlessUserNPMPrefix(t *testing.T) {
+ home := t.TempDir()
+ bin := t.TempDir()
+ if err := os.WriteFile(filepath.Join(bin, "npm"), []byte("#!/bin/sh\nprintf '%s\\n' \"$TEST_NPM_PREFIX\"\n"), 0755); err != nil { t.Fatal(err) }
+ t.Setenv("PATH", bin)
+ t.Setenv("TEST_NPM_PREFIX", filepath.Join(home, ".nvm"))
+ checked := false
+ params := headless.ParsedFlags{HomeDir: home, DryRun: true}
+ params.BuildPlanFn = func(_ install.Catalog, _ install.Intent, opts install.Options) (install.Plan, error) {
+  checked = true
+  if !opts.Profile.NpmWritable { t.Error("user-owned npm prefix must not request sudo") }
+  return install.Plan{}, nil
+ }
+ var out bytes.Buffer
+ if code := headless.RunHeadless(params, nil, nil, &out); code != 0 { t.Fatalf("exit %d: %s", code, out.String()) }
+ if !checked { t.Fatal("plan not checked") }
+}

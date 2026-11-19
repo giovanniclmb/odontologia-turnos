@@ -1,0 +1,16 @@
+{
+  "checked_at": "2026-11-19T02:14:05.664590-03:00",
+  "configuration": ".active-stack/roadmap.json",
+  "mode": "local",
+  "roadmap": "CHANGES.md",
+  "changes": 25,
+  "roadmap_sha256": "a5b0348834655e56900535b8284ab4be632c28f46c1a411c4444b2725ae84f71",
+  "roadmap_unchanged": true,
+  "remote_actions": [],
+  "checks": [
+    "Configuración JSON válida con mode=local",
+    "Roadmap coincide con evidencia de revisión2 y sus25IDs",
+    "No se alteraron estados ni alcance del roadmap",
+    "Estado de fundación avanza a find-skill y conserva fases restantes pendientes"
+  ]
+}

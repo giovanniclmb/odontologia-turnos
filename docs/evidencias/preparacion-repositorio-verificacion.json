@@ -1,0 +1,26 @@
+{
+  "checked_at": "2026-11-19T02:58:04.248742-03:00",
+  "scope": "Verificación previa a commits locales de la fundación",
+  "branch": "main",
+  "origin": "https://github.com/giovanniclmb/odontologia-turnos.git",
+  "readme": "README.md",
+  "json_files_parsed": 17,
+  "python_files_parsed": 3,
+  "documentation_links_verified": 247,
+  "identical_agent_files": true,
+  "roadmap_changes": 25,
+  "roadmap_semantics_unchanged": true,
+  "kb_unchanged": true,
+  "backup_files_preserved": true,
+  "local_registry_ignored": true,
+  "planned_commits": 3,
+  "application_tests": "No existe aplicación ni suite de producto todavía; no se ejecutaron ni se atribuyen resultados de tests de aplicación.",
+  "credential_review": "Búsquedas acotadas de patrones de credenciales en texto y logs sin coincidencias; no equivale a una auditoría completa.",
+  "push_performed": false,
+  "binary_attributes": [
+    "*.pdf binary",
+    "*.docx binary"
+  ],
+  "binary_attribute_reason": "Git detectó el PDF como texto durante diff --check; se declaran formatos binarios sin modificar documentos.",
+  "historical_evidence_whitespace": "Logs y parches bajo docs/evidencias conservados exactamente; control whitespace deshabilitado solo para esos formatos históricos mediante atributos Git."
+}

@@ -1,0 +1,171 @@
+go: downloading github.com/charmbracelet/x/exp/teatest v0.0.0-20260527151214-009e6338d40d
+go: downloading github.com/charmbracelet/x/exp/golden v0.0.0-20260527151214-009e6338d40d
+go: downloading github.com/aymanbagabas/go-udiff v0.4.1
+ok  	github.com/Group-Active-IA/active-stack/assets	0.199s
+flag provided but not defined: -totally-bogus-flag
+Usage of uninstall:
+  -agent string
+    	comma-separated list of agents (e.g. claude,opencode)
+  -custom string
+    	comma-separated harness IDs (only with --mode custom)
+  -dry-run
+    	print plan steps; do not execute
+  -home string
+    	override home directory (default: os.UserHomeDir())
+  -lang string
+    	output language: en|es (default: en)
+  -mode string
+    	uninstall mode: lite|full|custom
+  -overwrite-edited
+    	with --strategy restore, restore CLAUDE.md and skill files even if they were edited after the migration (their current content is saved first; --yes does not imply this)
+  -restore-manifest string
+    	path to install-time backup manifest (required with --strategy restore)
+  -strategy string
+    	reversal strategy: targeted|restore (default: targeted) (default "targeted")
+  -y	alias for --yes
+  -yes
+    	confirm without prompt
+flag provided but not defined: -unknown
+Usage of uninstall:
+  -agent string
+    	comma-separated list of agents (e.g. claude,opencode)
+  -custom string
+    	comma-separated harness IDs (only with --mode custom)
+  -dry-run
+    	print plan steps; do not execute
+  -home string
+    	override home directory (default: os.UserHomeDir())
+  -lang string
+    	output language: en|es (default: en)
+  -mode string
+    	uninstall mode: lite|full|custom
+  -overwrite-edited
+    	with --strategy restore, restore CLAUDE.md and skill files even if they were edited after the migration (their current content is saved first; --yes does not imply this)
+  -restore-manifest string
+    	path to install-time backup manifest (required with --strategy restore)
+  -strategy string
+    	reversal strategy: targeted|restore (default: targeted) (default "targeted")
+  -y	alias for --yes
+  -yes
+    	confirm without prompt
+flag provided but not defined: -bogus
+Usage of uninstall:
+  -agent string
+    	comma-separated list of agents (e.g. claude,opencode)
+  -custom string
+    	comma-separated harness IDs (only with --mode custom)
+  -dry-run
+    	print plan steps; do not execute
+  -home string
+    	override home directory (default: os.UserHomeDir())
+  -lang string
+    	output language: en|es (default: en)
+  -mode string
+    	uninstall mode: lite|full|custom
+  -overwrite-edited
+    	with --strategy restore, restore CLAUDE.md and skill files even if they were edited after the migration (their current content is saved first; --yes does not imply this)
+  -restore-manifest string
+    	path to install-time backup manifest (required with --strategy restore)
+  -strategy string
+    	reversal strategy: targeted|restore (default: targeted) (default "targeted")
+  -y	alias for --yes
+  -yes
+    	confirm without prompt
+flag provided but not defined: -project
+Usage of uninstall:
+  -agent string
+    	comma-separated list of agents (e.g. claude,opencode)
+  -custom string
+    	comma-separated harness IDs (only with --mode custom)
+  -dry-run
+    	print plan steps; do not execute
+  -home string
+    	override home directory (default: os.UserHomeDir())
+  -lang string
+    	output language: en|es (default: en)
+  -mode string
+    	uninstall mode: lite|full|custom
+  -overwrite-edited
+    	with --strategy restore, restore CLAUDE.md and skill files even if they were edited after the migration (their current content is saved first; --yes does not imply this)
+  -restore-manifest string
+    	path to install-time backup manifest (required with --strategy restore)
+  -strategy string
+    	reversal strategy: targeted|restore (default: targeted) (default "targeted")
+  -y	alias for --yes
+  -yes
+    	confirm without prompt
+--- FAIL: TestWindowsBundleThemeContainsMinimalInstallerPages (0.00s)
+    windows_bundle_ui_theme_test.go:9: read ..\..\installer\windows\theme\ActiveStackTheme.xml: open ..\..\installer\windows\theme\ActiveStackTheme.xml: no such file or directory
+FAIL
+FAIL	github.com/Group-Active-IA/active-stack/cmd/active-stack	2.530s
+ok  	github.com/Group-Active-IA/active-stack/cmd/active-stack/headless	(cached)
+ok  	github.com/Group-Active-IA/active-stack/e2e/starter	4.172s
+ok  	github.com/Group-Active-IA/active-stack/eval/baseline/capture	0.204s
+--- FAIL: TestCheckout_RepetitionsStartIdenticalAndRestore (0.00s)
+    --- FAIL: TestCheckout_RepetitionsStartIdenticalAndRestore/revision (0.38s)
+        checkout_test.go:35: checkout materializado 8251f96233fb4390bf4b4c1b0d8ebcfc8040ac4994d17bc9924d433cc639ed1f no coincide con la huella congelada 42152bc69b1c23ae8b54a5e5393f99e8f5766fa25955d92592d1347f188648f4
+--- FAIL: TestEvaluate_ReviewDispositionsAndMechanism (1.22s)
+    evaluate_test.go:249: checkout materializado 8251f96233fb4390bf4b4c1b0d8ebcfc8040ac4994d17bc9924d433cc639ed1f no coincide con la huella congelada 42152bc69b1c23ae8b54a5e5393f99e8f5766fa25955d92592d1347f188648f4
+--- FAIL: TestEvaluate_ReferenceAcceptedDefectiveRejected (8.66s)
+    --- FAIL: TestEvaluate_ReferenceAcceptedDefectiveRejected/revision (0.18s)
+        evaluate_test.go:83: checkout materializado 8251f96233fb4390bf4b4c1b0d8ebcfc8040ac4994d17bc9924d433cc639ed1f no coincide con la huella congelada 42152bc69b1c23ae8b54a5e5393f99e8f5766fa25955d92592d1347f188648f4
+FAIL
+FAIL	github.com/Group-Active-IA/active-stack/eval/baseline/fixture	10.319s
+ok  	github.com/Group-Active-IA/active-stack/eval/baseline/manifest	0.201s
+ok  	github.com/Group-Active-IA/active-stack/eval/baseline/profile	0.189s
+ok  	github.com/Group-Active-IA/active-stack/eval/baseline/record	0.197s
+ok  	github.com/Group-Active-IA/active-stack/eval/baseline/review	0.193s
+ok  	github.com/Group-Active-IA/active-stack/eval/baseline/run	0.289s
+ok  	github.com/Group-Active-IA/active-stack/eval/baseline/summary	0.215s
+ok  	github.com/Group-Active-IA/active-stack/eval/baseline/timing	0.208s
+ok  	github.com/Group-Active-IA/active-stack/eval/baseline/trace	0.198s
+ok  	github.com/Group-Active-IA/active-stack/eval/baseline/usage	0.183s
+ok  	github.com/Group-Active-IA/active-stack/eval/delegation	0.347s
+ok  	github.com/Group-Active-IA/active-stack/eval/evidence	2.784s
+ok  	github.com/Group-Active-IA/active-stack/eval/modelcache	0.292s
+ok  	github.com/Group-Active-IA/active-stack/eval/modelcache/cmd/modelcache	0.313s
+ok  	github.com/Group-Active-IA/active-stack/eval/taskcontext/capture	1.418s
+ok  	github.com/Group-Active-IA/active-stack/eval/taskcontext/clientsrc	0.187s
+ok  	github.com/Group-Active-IA/active-stack/eval/taskcontext/fixtures	0.243s
+--- FAIL: TestDoc_InventoryReproducesGolden (0.01s)
+    inventory_test.go:206: docs/inventario-contexto.md no coincide con la generación (regeneralo con -update)
+    inventory_test.go:216: el documento no reproduce la cifra "20.065 B · 448 L"
+    inventory_test.go:216: el documento no reproduce la cifra "18.010 B · 403 L"
+    inventory_test.go:216: el documento no reproduce la cifra "7.116 B · 188 L"
+    inventory_test.go:216: el documento no reproduce la cifra "5.543 B · 147 L"
+FAIL
+FAIL	github.com/Group-Active-IA/active-stack/eval/taskcontext/inventory	0.209s
+ok  	github.com/Group-Active-IA/active-stack/eval/taskcontext/outputs	0.195s
+ok  	github.com/Group-Active-IA/active-stack/eval/taskcontext/readfix	0.192s
+ok  	github.com/Group-Active-IA/active-stack/eval/taskcontext/recipes	0.198s
+ok  	github.com/Group-Active-IA/active-stack/eval/taskcontext/redact	0.191s
+ok  	github.com/Group-Active-IA/active-stack/eval/taskcontext/replyfix	0.180s
+ok  	github.com/Group-Active-IA/active-stack/eval/taskcontext/summary	9.472s
+ok  	github.com/Group-Active-IA/active-stack/eval/taskcontext/toolfix	0.199s
+ok  	github.com/Group-Active-IA/active-stack/internal/agents	0.200s
+ok  	github.com/Group-Active-IA/active-stack/internal/agents/antigravity	0.212s
+ok  	github.com/Group-Active-IA/active-stack/internal/agents/claude	0.208s
+ok  	github.com/Group-Active-IA/active-stack/internal/agents/codex	0.205s
+ok  	github.com/Group-Active-IA/active-stack/internal/agents/opencode	0.203s
+ok  	github.com/Group-Active-IA/active-stack/internal/backup	0.587s
+ok  	github.com/Group-Active-IA/active-stack/internal/catalog	0.901s
+ok  	github.com/Group-Active-IA/active-stack/internal/filemerge	0.196s
+ok  	github.com/Group-Active-IA/active-stack/internal/harness/command	0.198s
+ok  	github.com/Group-Active-IA/active-stack/internal/harness/config	2.241s
+ok  	github.com/Group-Active-IA/active-stack/internal/harness/config/permissions	0.372s
+--- FAIL: TestDownloadBinary_APIError (0.00s)
+    homebrew_test.go:421: expected error for API 404, got nil
+FAIL
+FAIL	github.com/Group-Active-IA/active-stack/internal/harness/external	0.505s
+ok  	github.com/Group-Active-IA/active-stack/internal/harness/skill	0.364s
+ok  	github.com/Group-Active-IA/active-stack/internal/i18n	0.221s
+ok  	github.com/Group-Active-IA/active-stack/internal/install	1.681s
+ok  	github.com/Group-Active-IA/active-stack/internal/model	0.208s
+ok  	github.com/Group-Active-IA/active-stack/internal/pipeline	0.205s
+ok  	github.com/Group-Active-IA/active-stack/internal/planner	0.184s
+ok  	github.com/Group-Active-IA/active-stack/internal/system	(cached)
+ok  	github.com/Group-Active-IA/active-stack/internal/tui	0.268s
+ok  	github.com/Group-Active-IA/active-stack/internal/uninstall	0.896s
+ok  	github.com/Group-Active-IA/active-stack/internal/update	0.447s
+ok  	github.com/Group-Active-IA/active-stack/internal/verify	0.724s
+FAIL

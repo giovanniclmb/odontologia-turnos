@@ -1,0 +1,20 @@
+Note: OpenSpec collects anonymous usage stats. Opt out: OPENSPEC_TELEMETRY=0 or openspec config set telemetry.enabled false
+- Creating OpenSpec structure...
+▌ OpenSpec structure created
+- Setting up Codex...
+✖ Failed for Codex
+
+OpenSpec Setup Incomplete
+
+Failed: Codex (the shared skills in .agents/skills could not be written: Failed to clone https://github.com/Fission-AI/OpenSpec.git: Cloning into '/var/folders/yz/spf8sx8j64zd_3b0hc23tsk00000gn/T/skills-s0Xrkh'...
+fatal: unable to access 'https://github.com/Fission-AI/OpenSpec.git/': Could not resolve host: github.com
+)
+Config: openspec/config.yaml (schema: spec-driven)
+
+Getting started:
+  Start your first change: /openspec-propose "your idea"
+
+Learn more: https://github.com/Fission-AI/OpenSpec
+Feedback:   https://github.com/Fission-AI/OpenSpec/issues
+
+✖ Error: OpenSpec setup failed for: Codex

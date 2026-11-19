@@ -1,0 +1,29 @@
+diff --git a/cmd/active-stack/headless/executor.go b/cmd/active-stack/headless/executor.go
+index fd2b327..fc4e8d0 100644
+--- a/cmd/active-stack/headless/executor.go
++++ b/cmd/active-stack/headless/executor.go
+@@ -69,7 +69,7 @@ func RunHeadless(params ParsedFlags, cat install.Catalog, reg install.Registry,
+ 		ProjectRoot:           params.ProjectRoot,
+ 		Starter:               params.Starter,
+ 		Registry:              reg,
+-		Profile:               system.PlatformProfile{OS: runtime.GOOS},
++		Profile:               system.PlatformProfile{OS: runtime.GOOS, NpmWritable: runtime.GOOS == "windows" || system.NpmPrefixUserOwned(params.HomeDir)},
+ 		NoSelfInstall:         params.NoSelfInstall,
+ 		SelfInstallBinaryPath: params.BinaryPath,
+ 		OnProgress:            progressFn,
+diff --git a/internal/system/detect.go b/internal/system/detect.go
+index f2c1b30..e95080a 100644
+--- a/internal/system/detect.go
++++ b/internal/system/detect.go
+@@ -68,6 +68,11 @@ func Detect(ctx context.Context) (DetectionResult, error) {
+ // detectNpmWritable checks if npm's global prefix is under the user's home
+ // directory (nvm, fnm, volta, etc.), meaning sudo is not needed for global installs.
+ func detectNpmWritable(homeDir string) bool {
++ return NpmPrefixUserOwned(homeDir)
++}
++
++// NpmPrefixUserOwned reports whether global npm installs use the user's home.
++func NpmPrefixUserOwned(homeDir string) bool {
+ 	out, err := exec.Command("npm", "config", "get", "prefix").Output()
+ 	if err != nil {
+ 		return false

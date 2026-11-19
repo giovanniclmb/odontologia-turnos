@@ -1,0 +1,1172 @@
+{
+  "checked_at": "2026-11-19T02:30:18.716437-03:00",
+  "skills": 67,
+  "project_skills": 6,
+  "user_or_system_skills": 48,
+  "plugin_skills": 13,
+  "compact_rules": 335,
+  "skills_inventory": [
+    {
+      "name": "openspec-apply-change",
+      "path": "/Users/giovita/Desktop/UTN/DSOFT/Integrador odonto/.agents/skills/openspec-apply-change/SKILL.md",
+      "scope": "project",
+      "lines": 205,
+      "chars": 11224,
+      "trigger": "Implementar tareas de un change",
+      "rules": [
+        "Resolver raíz, store y change mediante CLI y aclarar selección ambigua.",
+        "Obtener instrucciones apply y leer contextFiles reportados antes de implementar.",
+        "Respetar estados blocked, ready y all_done sin inferirlos.",
+        "Mantener cambios mínimos y consultar alcance adicional o ambigüedades materiales.",
+        "Marcar cada tarea en sourcePath/line solo tras cumplirla y verificarla; no usar contexto como evidencia."
+      ],
+      "sha256": "a8933b263ab01b4ce0a04ac805bd5321cadab78c84b6717b8617fea7eb2dc7dc"
+    },
+    {
+      "name": "openspec-archive-change",
+      "path": "/Users/giovita/Desktop/UTN/DSOFT/Integrador odonto/.agents/skills/openspec-archive-change/SKILL.md",
+      "scope": "project",
+      "lines": 221,
+      "chars": 17264,
+      "trigger": "Archivar un change completado",
+      "rules": [
+        "Resolver change, raíz y store con CLI.",
+        "Comprobar grafo y tareas con status y evaluar deltas antes de confirmar archivo.",
+        "Si se solicita sync, ejecutarlo inline y verificarlo antes de mover el change.",
+        "No archivar mientras sync esté pendiente o fallido y preservar metadatos.",
+        "Consultar salvaguardas de retiro de capacidades, mostrar advertencias y resultado real, sin inferir aprobación."
+      ],
+      "sha256": "a681ea8e78154ea16c66b555c9ae8c90171f27eba6d284c6be2f9164239404f3"
+    },
+    {
+      "name": "openspec-explore",
+      "path": "/Users/giovita/Desktop/UTN/DSOFT/Integrador odonto/.agents/skills/openspec-explore/SKILL.md",
+      "scope": "project",
+      "lines": 355,
+      "chars": 23400,
+      "trigger": "Explorar un proyecto OpenSpec",
+      "rules": [
+        "Explorar código y evidencia sin implementar ni editar configuración de workflow.",
+        "Aclarar supuestos y no fingir comprensión.",
+        "No capturar automáticamente: confirmar artefactos y alcance antes de la primera escritura propuesta.",
+        "Crear cambios nuevos solo mediante CLI, nunca carpetas a mano.",
+        "Ofrecer handoff a propuesta cuando el usuario quiera construir, sin empezar Apply desde exploración."
+      ],
+      "sha256": "8eb7074d34277cf09e630ebd189a127154b8007d48445824b2c4c676806d501a"
+    },
+    {
+      "name": "openspec-propose",
+      "path": "/Users/giovita/Desktop/UTN/DSOFT/Integrador odonto/.agents/skills/openspec-propose/SKILL.md",
+      "scope": "project",
+      "lines": 174,
+      "chars": 16629,
+      "trigger": "Crear propuesta OpenSpec",
+      "rules": [
+        "Resolver raíz, contexto, store y esquema con CLI.",
+        "Aclarar ambigüedades materiales y confirmar selección cuando corresponda.",
+        "Crear change mediante CLI y seguir status e instructions para orden y rutas.",
+        "Escribir solo artefactos de planificación, con dependencias leídas desde disco y paths validados.",
+        "Completar el cierre transitivo de artefactos necesarios y detenerse tras presentar el plan, sin iniciar Apply."
+      ],
+      "sha256": "e353e74472fdef44af4af2c646348085b5b87df60efe06949ca401ff00c972e6"
+    },
+    {
+      "name": "openspec-sync-specs",
+      "path": "/Users/giovita/Desktop/UTN/DSOFT/Integrador odonto/.agents/skills/openspec-sync-specs/SKILL.md",
+      "scope": "project",
+      "lines": 289,
+      "chars": 15749,
+      "trigger": "Sincronizar deltas a specs principales",
+      "rules": [
+        "Leer delta y spec principal usando existingOutputPaths del CLI.",
+        "Respetar el subconjunto solicitado sin ampliarlo.",
+        "Obtener instrucciones specs válidas antes de escribir y conservar contenido no afectado.",
+        "Integrar operaciones bajo Requirements sin copiar encabezados delta ni dejar secciones vacías.",
+        "Verificar specs y aplicar salvaguardas completas antes de retirar una capacidad; informar fallos sin declarar éxito."
+      ],
+      "sha256": "75556d2ca69892525698a0c681e0c3deead1e25f3b7b9be5449eaaf1621f026b"
+    },
+    {
+      "name": "openspec-update-change",
+      "path": "/Users/giovita/Desktop/UTN/DSOFT/Integrador odonto/.agents/skills/openspec-update-change/SKILL.md",
+      "scope": "project",
+      "lines": 108,
+      "chars": 11249,
+      "trigger": "Revisar planificación existente",
+      "rules": [
+        "Resolver change y rutas concretas existentes mediante CLI.",
+        "Leer todos los artefactos relacionados y preparar propuesta coherente.",
+        "Confirmar revisiones antes de escribir según su flujo; no editar código.",
+        "No escribir a globs ni crear artefactos vacíos o skipped por inferencia.",
+        "Consultar instrucciones y refrescar estado para archivos nuevos permitidos de glob parcialmente poblado; no expandir alcance silenciosamente."
+      ],
+      "sha256": "ca7ef061078b2260be47c2654e7df29b4c81ac1173dc73cbd565c3ea40879e87"
+    },
+    {
+      "name": "active-delivery",
+      "path": "/Users/giovita/.agents/skills/active-delivery/SKILL.md",
+      "scope": "user",
+      "lines": 104,
+      "chars": 5877,
+      "trigger": "Elegir o retomar ODD/SDD",
+      "rules": [
+        "Inspeccionar instrucciones, roadmap y handoff antes de recomendar una ruta.",
+        "Respetar la preferencia explícita y aclarar ambigüedades materiales.",
+        "Confirmar antes de inicializar OpenSpec o promover ODD a SDD.",
+        "En ODD acordar alcance, aceptación y verificación y conservar un handoff si requiere continuidad.",
+        "Reconciliar el roadmap al retomar, entregar y cerrar; consultar el contrato completo."
+      ],
+      "sha256": "8495e176adeeb649850b46bf51d463a22789cdd6abd5ad0364f2a3dc4293d7ae"
+    },
+    {
+      "name": "active-orchestrator",
+      "path": "/Users/giovita/.agents/skills/active-orchestrator/SKILL.md",
+      "scope": "user",
+      "lines": 227,
+      "chars": 14098,
+      "trigger": "Iniciar o retomar fundación",
+      "rules": [
+        "Inspeccionar el proyecto y respetar la ruta y variantes aprobadas.",
+        "Presentar efectos y obtener aprobación del plan antes de escrituras, instalaciones o conexiones nuevas.",
+        "Ejecutar fases según dependencias y respetar decisiones específicas de cada fase.",
+        "Respaldar el estado y escribir atómicamente, preservando secciones ajenas.",
+        "Validar artefactos antes de marcar done; ante estado inválido detenerse y consultar el contrato completo."
+      ],
+      "sha256": "036811b11f6ef425185aad6b51bfb6f7c0d1b318e71a17c0d8e856b9d7880945"
+    },
+    {
+      "name": "active-roadmap",
+      "path": "/Users/giovita/.agents/skills/active-roadmap/SKILL.md",
+      "scope": "user",
+      "lines": 52,
+      "chars": 8398,
+      "trigger": "Publicar o reconciliar CHANGES con ClickUp",
+      "rules": [
+        "Leer configuración y conservar modo local cuando así esté registrado.",
+        "Verificar identidad de lista, paginación y cuentas antes de operaciones remotas.",
+        "Extraer fichas fielmente y previsualizar cambios sin inventar IDs o responsables.",
+        "Confirmar escrituras concretas y registrar intención y resultado por fila.",
+        "Recuperar resultados inciertos antes de reintentar; consultar helpers y contrato completos."
+      ],
+      "sha256": "042c2b0b34f407d677612a442f49eca19dfa51d81866ec9f662e96b33826281e"
+    },
+    {
+      "name": "agent-instruction",
+      "path": "/Users/giovita/.agents/skills/agent-instruction/SKILL.md",
+      "scope": "user",
+      "lines": 150,
+      "chars": 10893,
+      "trigger": "Generar o actualizar AGENTS/CLAUDE",
+      "rules": [
+        "Comprobar KB y roadmap y respetar variante generate, reuse o update.",
+        "Preservar archivos existentes y mostrar diferencias antes de actualizarlos.",
+        "Modificar solo el bloque administrado y detenerse ante marcadores conflictivos.",
+        "Derivar reglas del stack, contrastarlas con instrucciones globales y confirmar las candidatas con el usuario.",
+        "Verificar enlaces y usar el registro existente; actualizar solo la sección de estado propia."
+      ],
+      "sha256": "18e9283942d3a35d4c39167260e4e9e1466cb0f5c98a88686f789a6fa1071018"
+    },
+    {
+      "name": "api-and-interface-design",
+      "path": "/Users/giovita/.agents/skills/api-and-interface-design/SKILL.md",
+      "scope": "user",
+      "lines": 367,
+      "chars": 14806,
+      "trigger": "Diseñar API y límites de módulos",
+      "rules": [
+        "Definir el contrato antes de implementar.",
+        "Mantener errores estructurados y coherentes.",
+        "Validar datos externos en los límites.",
+        "No exponer detalles internos y planificar deprecaciones cuando corresponda.",
+        "Para operaciones reintentables, diseñar idempotencia atómica y rechazar reutilizaciones con contenido diferente."
+      ],
+      "sha256": "5dafd0c44a3aabf11cae5bcb34f6fcc24dfa5c01ba6e0d3176bce997f4d68bc8"
+    },
+    {
+      "name": "better-ui",
+      "path": "/Users/giovita/.agents/skills/better-ui/SKILL.md",
+      "scope": "user",
+      "lines": 112,
+      "chars": 7152,
+      "trigger": "Pulir interfaces existentes",
+      "rules": [
+        "Respetar componentes, tokens y densidad del proyecto.",
+        "Ajustar ópticamente iconos y elementos asimétricos.",
+        "Mantener radios concéntricos en superficies anidadas.",
+        "Usar transiciones interrumpibles con propiedades explícitas.",
+        "Dar feedback estático además de animación y verificar estados; informar lo no inspeccionado."
+      ],
+      "sha256": "2482b7b89d851a3128d36edf5367f3223e113a4ef421b7358c7e6de3f2c83faf"
+    },
+    {
+      "name": "brainstorming",
+      "path": "/Users/giovita/.agents/skills/brainstorming/SKILL.md",
+      "scope": "user",
+      "lines": 285,
+      "chars": 17458,
+      "trigger": "Diseñar antes de cambios creativos o de comportamiento",
+      "rules": [
+        "Identificar propósito, restricciones y aceptación distinguiendo hechos de supuestos.",
+        "Clasificar el trabajo como investigación, cambio acotado o arquitectónico.",
+        "Para cambios acotados presentar diseño y esperar aprobación antes de implementar.",
+        "En trabajo arquitectónico comparar enfoques, revisar especificación y pedir aprobación.",
+        "Elevar la vía si crece la complejidad y pasar a writing-plans cuando corresponda; consultar gates completos."
+      ],
+      "sha256": "a32d2255354775aa124855aa7100cf276bea096fff4ebb3a0edf57be216e6c72"
+    },
+    {
+      "name": "design-system",
+      "path": "/Users/giovita/.agents/skills/design-system/SKILL.md",
+      "scope": "user",
+      "lines": 141,
+      "chars": 6946,
+      "trigger": "Definir política y fundación visual",
+      "rules": [
+        "Leer y respetar la política visual registrada.",
+        "Preguntar una vez por la política cuando esté pendiente y sea necesaria.",
+        "Detenerse ante discrepancias entre los registros de política.",
+        "Auditar la identidad existente y mantener tokens y recursos reemplazables.",
+        "Obtener aprobación de la fundación cuando corresponda; consultar flujo y gates completos."
+      ],
+      "sha256": "404cda04d693b1ef2579df33297219fec87dc4260ec1e253b9ebad4b4771f253"
+    },
+    {
+      "name": "design-taste-frontend",
+      "path": "/Users/giovita/.agents/skills/design-taste-frontend/SKILL.md",
+      "scope": "user",
+      "lines": 1206,
+      "chars": 87126,
+      "trigger": "Diseño de landing, portfolio o rediseño",
+      "rules": [
+        "Interpretar audiencia, contenido y restricciones antes de diseñar.",
+        "Aplicar sus reglas según contexto, sin imponer tecnologías.",
+        "Auditar y preservar identidad y arquitectura en rediseños.",
+        "Verificar dependencias antes de importarlas.",
+        "Revisar accesibilidad, movimiento reducido y rendimiento y evitar patrones genéricos sin relación con el producto."
+      ],
+      "sha256": "aa194351b246b8b4799099d4ed7b033d29eab6e6e3d58d8d2172978be7b3ec89"
+    },
+    {
+      "name": "design-taste-frontend-v1",
+      "path": "/Users/giovita/.agents/skills/design-taste-frontend-v1/SKILL.md",
+      "scope": "user",
+      "lines": 226,
+      "chars": 21190,
+      "trigger": "Compatibilidad explícita con taste v1",
+      "rules": [
+        "Usar v1 cuando el proyecto requiera esa compatibilidad.",
+        "Adaptar parámetros visuales a instrucciones del usuario.",
+        "Verificar dependencias y versión de Tailwind solo si el proyecto usa esa tecnología.",
+        "Aplicar recomendaciones de componentes cliente solo en proyectos React.",
+        "Mantener composición responsive, iconos y estados consistentes sin cambiar el stack autorizado."
+      ],
+      "sha256": "033d45af1ed23832730642f95f40ab49db7fb5222848489a6c5656144bfc6dae"
+    },
+    {
+      "name": "diagnosing-bugs",
+      "path": "/Users/giovita/.agents/skills/diagnosing-bugs/SKILL.md",
+      "scope": "user",
+      "lines": 138,
+      "chars": 8526,
+      "trigger": "Diagnosticar errores difíciles",
+      "rules": [
+        "Construir reproducción que detecte el síntoma exacto.",
+        "Reproducir y minimizar antes de formular hipótesis.",
+        "Ordenar hipótesis falsables y cambiar una variable por vez.",
+        "Medir rendimiento antes de modificarlo y retirar instrumentación temporal.",
+        "Crear prueba de regresión que reproduzca el patrón real o documentar que no existe tal punto."
+      ],
+      "sha256": "77f3cf31bc99b2f49af943222526531fcc9fc41d047626d3640e875e85af3e84"
+    },
+    {
+      "name": "discovery-research",
+      "path": "/Users/giovita/.agents/skills/discovery-research/SKILL.md",
+      "scope": "user",
+      "lines": 109,
+      "chars": 6043,
+      "trigger": "Investigar producto antes de KB",
+      "rules": [
+        "Reutilizar fuentes y notas para evitar preguntas repetidas.",
+        "Procesar URLs mediante web-scraper cuando esté disponible, sin inventar resultados.",
+        "Cubrir los once puntos del checklist en rondas manejables.",
+        "Distinguir hechos, supuestos, riesgos y preguntas abiertas.",
+        "Presentar resumen y obtener confirmación antes de consolidar documentos y estado según contrato."
+      ],
+      "sha256": "2c9e327750174b7c7631ca9b9a7fb348c4cca669cb370046eb2443afc206af3e"
+    },
+    {
+      "name": "docker-agent-config",
+      "path": "/Users/giovita/.agents/skills/docker-agent-config/SKILL.md",
+      "scope": "user",
+      "lines": 197,
+      "chars": 9909,
+      "trigger": "Editar configuración de Docker Agent",
+      "rules": [
+        "Definir al menos un agente con el modelo e instrucciones adecuados.",
+        "Usar modelos nombrados cuando necesiten parámetros reutilizables.",
+        "Separar instrucciones extensas mediante instruction_file relativo.",
+        "Mantener credenciales fuera del archivo y los prompts.",
+        "Restringir revisores con readonly y limitar iteraciones autónomas; consultar esquema antes de escribir."
+      ],
+      "sha256": "10ae4116f690fda75a0f36e7d0f8ce6df7bdcc93e67416af63a09334e5a2917c"
+    },
+    {
+      "name": "docker-agent-deploy",
+      "path": "/Users/giovita/.agents/skills/docker-agent-deploy/SKILL.md",
+      "scope": "user",
+      "lines": 133,
+      "chars": 7738,
+      "trigger": "Servir, compartir o evaluar Docker Agent",
+      "rules": [
+        "Mantener listeners en loopback salvo autenticación adecuada.",
+        "Autenticar servicios accesibles por red y evitar autonomía indiscriminada.",
+        "Fijar referencias OCI por digest para reproducibilidad.",
+        "Preferir aserciones deterministas suficientes en evaluaciones.",
+        "Comparar contra baseline y repetir con el modo de seguridad del despliegue."
+      ],
+      "sha256": "f52287752b3edb2898afd508417bbbd7bbfe563ce82d5b6c23452ded5c6ea99c"
+    },
+    {
+      "name": "docker-agent-run",
+      "path": "/Users/giovita/.agents/skills/docker-agent-run/SKILL.md",
+      "scope": "user",
+      "lines": 154,
+      "chars": 8589,
+      "trigger": "Ejecutar Docker Agent",
+      "rules": [
+        "Elegir el modo menos permisivo compatible con la tarea.",
+        "Usar restricted para ejecución desatendida y reservar autonomous para contextos confiables o aislados.",
+        "Recordar que MCP stdio local se ejecuta en el host fuera de la microVM.",
+        "Autorizar destinos de red necesarios explícitamente.",
+        "No suponer VM limpia: los sandboxes pueden reutilizar estado."
+      ],
+      "sha256": "3df420806fe795d98309cb5c260ad76c306e5f7ea05a2d223e43138634bebd80"
+    },
+    {
+      "name": "docker-build-strategies",
+      "path": "/Users/giovita/.agents/skills/docker-build-strategies/SKILL.md",
+      "scope": "user",
+      "lines": 164,
+      "chars": 9568,
+      "trigger": "Crear o optimizar Dockerfiles",
+      "rules": [
+        "Separar compilación y ejecución con etapas múltiples.",
+        "Ordenar capas para caché y excluir archivos mediante dockerignore.",
+        "Pasar secretos mediante BuildKit, nunca ARG o ENV.",
+        "Ejecutar como usuario no root cuando sea posible.",
+        "Declarar sintaxis, WORKDIR y ENTRYPOINT en forma exec según el caso."
+      ],
+      "sha256": "53b1643e4f6df6200aef9bf2a5344acc69ec844658486b68b7b23bc7e699b078"
+    },
+    {
+      "name": "docker-compose-patterns",
+      "path": "/Users/giovita/.agents/skills/docker-compose-patterns/SKILL.md",
+      "scope": "user",
+      "lines": 171,
+      "chars": 9151,
+      "trigger": "Crear o corregir Compose",
+      "rules": [
+        "Fijar versiones concretas de imágenes.",
+        "Usar healthchecks y dependencias service_healthy cuando sea necesario.",
+        "Usar volúmenes para datos persistentes y montajes de código en desarrollo.",
+        "Mantener secretos fuera del archivo y limitar exposición de servicios.",
+        "Explicar pérdida y confirmar antes de borrar volúmenes; consultar las excepciones exactas en la fuente."
+      ],
+      "sha256": "754dbbc66f29c1c9f8b5bb6d06b28af6e82c9b7d251e34a542260c9bfaae8f57"
+    },
+    {
+      "name": "docker-destructive-guardrails",
+      "path": "/Users/giovita/.agents/skills/docker-destructive-guardrails/SKILL.md",
+      "scope": "user",
+      "lines": 76,
+      "chars": 10225,
+      "trigger": "Eliminar o resetear recursos Docker",
+      "rules": [
+        "Identificar qué se pierde y confirmar antes de operaciones destructivas salvo excepción Tier 1 exacta.",
+        "Limitar Tier 1 a contenedor específico detenido o propio de pruebas de esta sesión según condiciones de la fuente.",
+        "Confirmar kill, prune, barridos y rm -f fuera de Tier 1.",
+        "Para docker stop distinguir contenedor propio de pruebas de otros cuya interrupción requiere confirmación.",
+        "Consultar la fuente y la skill específica de Compose o sandbox antes de borrar estado; no extrapolar excepciones."
+      ],
+      "sha256": "d64c2b7a497aff8b48e4e70432e274267cc201be67c3be8e2852f506d02f68de"
+    },
+    {
+      "name": "docker-project-foundations",
+      "path": "/Users/giovita/.agents/skills/docker-project-foundations/SKILL.md",
+      "scope": "user",
+      "lines": 121,
+      "chars": 6889,
+      "trigger": "Dockerizar un proyecto autorizado",
+      "rules": [
+        "Preparar Dockerfile, compose.yaml y dockerignore cuando corresponda.",
+        "Representar dependencias locales como servicios solo dentro del alcance autorizado.",
+        "Mantener almacenes sin autenticación en red interna y publicar en loopback si hace falta.",
+        "Permitir sustituir credenciales de desarrollo mediante configuración sin versionar secretos.",
+        "Documentar compilación y arranque simples y distinguir desarrollo de producción cuando sea necesario."
+      ],
+      "sha256": "68e19cc50687085fd0ce255867182425fa43e2bec07fa44ed47612d1cd564245"
+    },
+    {
+      "name": "docker-sandboxes-env",
+      "path": "/Users/giovita/.agents/skills/docker-sandboxes-env/SKILL.md",
+      "scope": "user",
+      "lines": 279,
+      "chars": 16101,
+      "trigger": "Configurar sbxenv.yaml",
+      "rules": [
+        "Usar nombre y campos del esquema vigente.",
+        "Revisar lifecycle porque sus comandos corren en el host.",
+        "Hacer initialize idempotente para reconexiones.",
+        "Revisar planes de aprobación de comandos y kits no confiables.",
+        "No versionar secretos y habilitar writableEnvFiles solo si se necesita; consultar contrato completo."
+      ],
+      "sha256": "82fd5f04eabe66cd7215c646801727b3e00d42191870741d20789b53d44fcc58"
+    },
+    {
+      "name": "docker-sandboxes-kits",
+      "path": "/Users/giovita/.agents/skills/docker-sandboxes-kits/SKILL.md",
+      "scope": "user",
+      "lines": 280,
+      "chars": 16615,
+      "trigger": "Crear o componer kits sbx",
+      "rules": [
+        "Elegir kind sandbox o mixin según función.",
+        "Declarar red necesaria y revisar permisos resultantes de la composición.",
+        "Declarar necesidades de credenciales sin guardar valores.",
+        "Distinguir instalación, arranque y archivos de setup.",
+        "Definir tamaño de volúmenes y fijar referencias externas para reproducibilidad según el esquema."
+      ],
+      "sha256": "a213f91829ba95acd521c72d73429efbbbcc6f80b681820a7f3b93e199d6b3a1"
+    },
+    {
+      "name": "docker-sandboxes-lifecycle",
+      "path": "/Users/giovita/.agents/skills/docker-sandboxes-lifecycle/SKILL.md",
+      "scope": "user",
+      "lines": 234,
+      "chars": 12660,
+      "trigger": "Gestionar sandboxes sbx",
+      "rules": [
+        "Distinguir montaje compartido de lectura/escritura de aislamiento con clone.",
+        "Verificar requisitos de clone antes de crear.",
+        "Usar name para reconectar y recordar que stop conserva estado.",
+        "Revisar pérdida irreversible de estado y commits antes de rm y confirmar conforme a la fuente.",
+        "Previsualizar prune con dry-run y revisar advertencias antes de eliminar."
+      ],
+      "sha256": "60a40b304b18dacba901e0013cca9ae5ad3c00b226373e813abedb5efbd5c492"
+    },
+    {
+      "name": "docker-sandboxes-network-credentials",
+      "path": "/Users/giovita/.agents/skills/docker-sandboxes-network-credentials/SKILL.md",
+      "scope": "user",
+      "lines": 227,
+      "chars": 12409,
+      "trigger": "Configurar red y secretos sbx",
+      "rules": [
+        "Inicializar la política global cuando corresponda.",
+        "Aplicar precedencia de deny sobre allow.",
+        "Delimitar reglas por sandbox si no deben ser globales.",
+        "Comprobar decisiones con policy check antes de ampliar permisos.",
+        "No pasar secretos en env o argumentos y revisar alcance de inyección de credenciales."
+      ],
+      "sha256": "84018e1d691a9c634b06fc485527d3542d09efe4e8455d859094db73e6a1be76"
+    },
+    {
+      "name": "emil-design-eng",
+      "path": "/Users/giovita/.agents/skills/emil-design-eng/SKILL.md",
+      "scope": "user",
+      "lines": 674,
+      "chars": 27029,
+      "trigger": "Pulir interacción y animación",
+      "rules": [
+        "Animar solo cuando la transición tenga propósito.",
+        "Mantener interacciones rápidas e interrumpibles.",
+        "Preferir transiciones CSS para cambios interactivos cuando sean suficientes.",
+        "Ajustar origen de popovers y contemplar movimiento reducido y dispositivos táctiles.",
+        "Inspeccionar animaciones lentamente y en dispositivos reales cuando sea posible."
+      ],
+      "sha256": "ffbe68e6007fb42cb8149f089b400a1ca007d59ba23e8948e2be4476f3175939"
+    },
+    {
+      "name": "find-skills",
+      "path": "/Users/giovita/.agents/skills/find-skill/SKILL.md",
+      "scope": "user",
+      "lines": 141,
+      "chars": 5456,
+      "trigger": "Buscar o recomendar skills",
+      "rules": [
+        "Precisar dominio y tarea.",
+        "Consultar primero el catálogo y luego buscar términos específicos si hace falta.",
+        "Contrastar contenido, fuente, instalaciones y reputación antes de recomendar.",
+        "Presentar función, fuente, métricas, enlace y comando.",
+        "Instalar solo ante autorización; recomendar no significa seleccionar o instalar."
+      ],
+      "sha256": "c00eeea0e13e74fe4a9d84ba0a8542205a1b736d65f13134fe1a6647eb14976f"
+    },
+    {
+      "name": "frontend-design",
+      "path": "/Users/giovita/.agents/skills/frontend-design/SKILL.md",
+      "scope": "user",
+      "lines": 55,
+      "chars": 8250,
+      "trigger": "Crear dirección visual intencional",
+      "rules": [
+        "Identificar audiencia, tema y tarea principal.",
+        "Derivar decisiones visuales del contenido y contexto.",
+        "Elegir tipografía, color y composición deliberadamente.",
+        "Usar estructura para comunicar información real.",
+        "Añadir movimiento con propósito y verificar el resultado contra la dirección elegida."
+      ],
+      "sha256": "1608ea77fbb6fc30d13a97d12cfa8ebf31358d40f0dd97beed24829d6b3f45dd"
+    },
+    {
+      "name": "impeccable",
+      "path": "/Users/giovita/.agents/skills/impeccable/SKILL.md",
+      "scope": "user",
+      "lines": 84,
+      "chars": 11648,
+      "trigger": "Diseñar o mejorar interfaces",
+      "rules": [
+        "Evaluar jerarquía, claridad y carga cognitiva.",
+        "Contemplar estados vacíos, errores y casos límite.",
+        "Revisar accesibilidad y comportamiento adaptable.",
+        "Respetar sistema visual y convenciones existentes.",
+        "Ajustar la solución a necesidades y contexto, consultando las referencias de la operación elegida."
+      ],
+      "sha256": "38c2e839e130008b6da814ab9c16f3fcbbedfdf721a9638eebd31a9e65341a7a"
+    },
+    {
+      "name": "java-springboot",
+      "path": "/Users/giovita/.agents/skills/java-springboot/SKILL.md",
+      "scope": "user",
+      "lines": 65,
+      "chars": 4133,
+      "trigger": "Desarrollar Spring Boot",
+      "rules": [
+        "Usar inyección por constructor y agrupar por dominio de acuerdo con convenciones existentes.",
+        "Validar DTOs de entrada y no exponer entidades de persistencia como contrato API.",
+        "Mantener transacciones acotadas en la capa de servicio.",
+        "Externalizar configuración y secretos y usar logging parametrizado.",
+        "Ejecutar pruebas unitarias o de integración pertinentes; no inferir versiones ni nuevas dependencias del proyecto."
+      ],
+      "sha256": "574898202ce298557226c49d35036a6e9e66a1cb205ea15c44db298e6d74e3bd"
+    },
+    {
+      "name": "kb-creator",
+      "path": "/Users/giovita/.agents/skills/kb-creator/SKILL.md",
+      "scope": "user",
+      "lines": 187,
+      "chars": 10719,
+      "trigger": "Crear KB canónica desde fuentes o entrevista",
+      "rules": [
+        "Respetar variante import, interview o reuse.",
+        "Preservar documentos existentes y acordar cómo completar una KB parcial.",
+        "Mantener diez canónicos e índice en knowledge-base; extras no los reemplazan.",
+        "En importación registrar incertidumbres sin inventar; en entrevista validar progresivamente.",
+        "Actualizar solo state.kb cuando corresponda y consultar plantillas y contrato completos."
+      ],
+      "sha256": "8e6104b0532320e656f7ffc8f2abb7f79964cf2926e55b695c850711d1ee88c7"
+    },
+    {
+      "name": "roadmap-generator",
+      "path": "/Users/giovita/.agents/skills/roadmap-generator/SKILL.md",
+      "scope": "user",
+      "lines": 281,
+      "chars": 13497,
+      "trigger": "Crear o actualizar CHANGES",
+      "rules": [
+        "Verificar diez canónicos y respetar variantes y autorización de revisión existente.",
+        "Leer datos, funcionalidades, flujos, arquitectura y preguntas relevantes.",
+        "Dividir en capacidades verificables y preservar IDs existentes al agregar trabajo.",
+        "Documentar dependencias, gobernanza, lecturas, gates y plan de paralelismo sin inventar contratos.",
+        "Escribir roadmap local y solo el índice state.roadmap; contrastar el camino con el DAG."
+      ],
+      "sha256": "7206e5a9c68ae43fd70341d7a02eb2c1e61e02e836ee327373e18d8b6e5f4e8c"
+    },
+    {
+      "name": "security-audit",
+      "path": "/Users/giovita/.agents/skills/security-audit/SKILL.md",
+      "scope": "user",
+      "lines": 192,
+      "chars": 21990,
+      "trigger": "Revisar seguridad y vulnerabilidades",
+      "rules": [
+        "Usar orientación enfocada por defecto; auditoría completa solo ante solicitud explícita.",
+        "Delimitar alcance y fronteras de confianza.",
+        "Exigir principal, recurso, impacto y evidencia concretos por hallazgo.",
+        "Separar hallazgos confirmados de hipótesis y graduar según impacto demostrado.",
+        "Recomendar corrección mínima y consultar el workflow completo antes de auditorías con artefactos."
+      ],
+      "sha256": "5e3e96a1e438d8f35fef0a1e38f02d4f00e2bdf910401b7dfe00e6779c6dac85"
+    },
+    {
+      "name": "shadcn",
+      "path": "/Users/giovita/.agents/skills/shadcn/SKILL.md",
+      "scope": "user",
+      "lines": 277,
+      "chars": 19427,
+      "trigger": "Trabajar con componentes shadcn existentes",
+      "rules": [
+        "Aplicar solo cuando el proyecto use shadcn o se haya autorizado incorporarlo.",
+        "Usar el gestor de paquetes configurado.",
+        "Buscar y componer componentes existentes antes de crear otros.",
+        "Preferir variantes y colores semánticos y consultar ejemplos del componente.",
+        "Inspeccionar actualizaciones y dejar que la CLI interprete presets; no decodificarlos manualmente."
+      ],
+      "sha256": "deba6c5152d9835892fa7dffeb1fedbb689ddac7e59e14e57ec5eaf9463309e4"
+    },
+    {
+      "name": "skill-creator",
+      "path": "/Users/giovita/.agents/skills/skill-creator/SKILL.md",
+      "scope": "user",
+      "lines": 485,
+      "chars": 32987,
+      "trigger": "Crear o evaluar skills",
+      "rules": [
+        "Capturar intención, disparadores y resultados esperados.",
+        "Incluir nombre y descripción con disparadores en frontmatter.",
+        "Mantener SKILL conciso y mover detalles a referencias enlazadas.",
+        "Preparar casos representativos de activación y no activación.",
+        "Comparar versiones y resultados, revisar comentarios e iterar sin afirmar validación no ejecutada."
+      ],
+      "sha256": "dcd4803e61e913e6fc27294184cd3a71f09f5e924ff20c8a9a20173e7b3c2bcf"
+    },
+    {
+      "name": "supabase-postgres-best-practices",
+      "path": "/Users/giovita/.agents/skills/supabase-postgres-best-practices/SKILL.md",
+      "scope": "user",
+      "lines": 64,
+      "chars": 3229,
+      "trigger": "Diseñar o modificar PostgreSQL",
+      "rules": [
+        "Leer esta skill antes de escribir esquema, migraciones, SQL o políticas de PostgreSQL.",
+        "Elegir tipos e índices según consultas y restricciones verificadas.",
+        "Revisar concurrencia, bloqueos y alcance de transacciones.",
+        "Ajustar conexiones y permisos a necesidades demostradas, aplicando RLS solo cuando corresponda.",
+        "Consultar reglas específicas; usar esta guía no exige contratar Supabase ni adoptar su hosting."
+      ],
+      "sha256": "ad65e776f45e761bafc609d3f506c77c1032225aa65e0c4c02f241b8071e5855"
+    },
+    {
+      "name": "systematic-debugging",
+      "path": "/Users/giovita/.agents/skills/systematic-debugging/SKILL.md",
+      "scope": "user",
+      "lines": 283,
+      "chars": 9441,
+      "trigger": "Investigar fallos inesperados",
+      "rules": [
+        "Investigar causa raíz antes de corregir.",
+        "Leer errores completos y reproducir consistentemente.",
+        "Rastrear datos y comparar con ejemplos funcionales.",
+        "Formular una hipótesis y probar el cambio mínimo que la refute.",
+        "Reconsiderar arquitectura tras intentos fallidos repetidos y comunicar incertidumbre."
+      ],
+      "sha256": "808fc5717aa88ad65efff312b11c186294d3e6ee301afb584e2f86599b137787"
+    },
+    {
+      "name": "test-driven-development",
+      "path": "/Users/giovita/.agents/skills/test-driven-development/SKILL.md",
+      "scope": "user",
+      "lines": 330,
+      "chars": 9556,
+      "trigger": "Implementar funcionalidades o arreglos",
+      "rules": [
+        "Escribir prueba del comportamiento esperado.",
+        "Ejecutarla y observar fallo por la razón correcta.",
+        "Implementar el cambio mínimo para pasar.",
+        "Ejecutar de nuevo y comprobar el resultado.",
+        "Refactorizar manteniendo pruebas verdes y repetir por comportamiento; respetar alcance de pruebas exigido por instrucciones superiores."
+      ],
+      "sha256": "64b03fce4aee5a97a93160cea8111f3ba13a17b7c001db4bd5836d67fd10705d"
+    },
+    {
+      "name": "using-git-worktrees",
+      "path": "/Users/giovita/.agents/skills/using-git-worktrees/SKILL.md",
+      "scope": "user",
+      "lines": 167,
+      "chars": 6803,
+      "trigger": "Aislar trabajo de implementación",
+      "rules": [
+        "Detectar si ya se está en worktree y distinguir submódulos.",
+        "Respetar preferencia del usuario y herramientas nativas disponibles.",
+        "En fallback Git comprobar que el directorio local esté ignorado.",
+        "Preparar solo dependencias necesarias en el workspace aislado.",
+        "Ejecutar comprobación de base e informar fallos previos antes de atribuirlos a cambios nuevos."
+      ],
+      "sha256": "8cfb86f121269e8f7f12361e6795c4f6738828340e28964c9229d365666c9edd"
+    },
+    {
+      "name": "using-superpowers",
+      "path": "/Users/giovita/.agents/skills/using-superpowers/SKILL.md",
+      "scope": "user",
+      "lines": 65,
+      "chars": 3180,
+      "trigger": "Identificar skills al iniciar trabajo",
+      "rules": [
+        "Identificar y cargar skills pertinentes antes de actuar.",
+        "Priorizar skills de proceso antes que las de implementación.",
+        "Anunciar las skills usadas y seguir sus listas aplicables.",
+        "Consultar la adaptación del entorno cuando corresponda.",
+        "Respetar instrucciones de mayor prioridad; la excepción para subagentes concretos está en la fuente."
+      ],
+      "sha256": "82c5c8866ad7f5dd4440ce66bd7806ba48a2f13771beae5cf112e53f08fe36ba"
+    },
+    {
+      "name": "vercel-react-best-practices",
+      "path": "/Users/giovita/.agents/skills/vercel-react-best-practices/SKILL.md",
+      "scope": "user",
+      "lines": 149,
+      "chars": 7251,
+      "trigger": "Optimizar React/Next.js",
+      "rules": [
+        "Aplicar solo a proyectos React/Next.js autorizados.",
+        "Paralelizar operaciones independientes y evitar waterfalls.",
+        "Reducir bundle y cargar módulos pesados cuando hagan falta.",
+        "Autenticar acciones de servidor y limitar datos serializados.",
+        "Evitar estado compartido entre solicitudes y renders innecesarios; consultar las reglas específicas."
+      ],
+      "sha256": "71ed7794962fa6e803ee83030517b5b93a9f70fbfeb431ec4535c5480a8d8355"
+    },
+    {
+      "name": "vercel-react-view-transitions",
+      "path": "/Users/giovita/.agents/skills/vercel-react-view-transitions/SKILL.md",
+      "scope": "user",
+      "lines": 331,
+      "chars": 14350,
+      "trigger": "Añadir transiciones en React",
+      "rules": [
+        "Aplicar solo a React/Next.js cuando corresponda.",
+        "Auditar la aplicación antes de incorporar transiciones.",
+        "Usar primitivas de transición de React y nombres compartidos únicos.",
+        "Añadir direcciones solo si representan profundidad u orden.",
+        "Incluir movimiento reducido y degradación progresiva y no cambiar la identidad aprobada."
+      ],
+      "sha256": "d596c05e53b96a3475a9ab303a7a23f13f1153cb169c1d1b3b882094f58570bc"
+    },
+    {
+      "name": "verification-before-completion",
+      "path": "/Users/giovita/.agents/skills/verification-before-completion/SKILL.md",
+      "scope": "user",
+      "lines": 120,
+      "chars": 3598,
+      "trigger": "Afirmar finalización o pruebas verdes",
+      "rules": [
+        "Identificar el comando que demuestra cada afirmación.",
+        "Ejecutar una verificación completa y reciente apropiada al cambio.",
+        "Leer salida y código de salida incluidos fallos.",
+        "Informar lo observado sin extrapolar desde checks parciales.",
+        "Verificar resultados delegados independientemente y contrastar requisitos con estado final."
+      ],
+      "sha256": "2befe7fc55bcadaa3d97dd9e8efeb633d2561c0ebe74c5a8b17c4d9e7e4520b3"
+    },
+    {
+      "name": "web-design-guidelines",
+      "path": "/Users/giovita/.agents/skills/web-design-guidelines/SKILL.md",
+      "scope": "user",
+      "lines": 39,
+      "chars": 1231,
+      "trigger": "Revisar UI y accesibilidad",
+      "rules": [
+        "Obtener pautas vigentes antes de revisar.",
+        "Identificar los archivos o patrones del alcance.",
+        "Leer los archivos seleccionados.",
+        "Aplicar las reglas pertinentes de las pautas obtenidas.",
+        "Informar hallazgos verificables con archivo y línea en el formato de la fuente."
+      ],
+      "sha256": "f4647ca866a3accf763777f83e7682954f0187cd6bea7eea0399796652414e8f"
+    },
+    {
+      "name": "web-scraper",
+      "path": "/Users/giovita/.agents/skills/web-scraper/SKILL.md",
+      "scope": "user",
+      "lines": 88,
+      "chars": 4996,
+      "trigger": "Investigar una URL de competidor",
+      "rules": [
+        "Validar cada URL y procesar páginas indicadas individualmente.",
+        "Extraer los ocho campos del esquema y mantener su orden.",
+        "Marcar información no publicada y no inferirla.",
+        "Informar bloqueos, CAPTCHA o páginas vacías sin evadirlos.",
+        "Guardar una nota normalizada y evitar crawling masivo; consultar el esquema original."
+      ],
+      "sha256": "a62e2ccddcf091a3c0d6970f4ee96ed08d1137271d6df2dd5c829d20a5e4a35d"
+    },
+    {
+      "name": "writing-plans",
+      "path": "/Users/giovita/.agents/skills/writing-plans/SKILL.md",
+      "scope": "user",
+      "lines": 192,
+      "chars": 9068,
+      "trigger": "Planificar implementación de varios pasos",
+      "rules": [
+        "Mapear archivos, responsabilidades e interfaces antes de dividir tareas.",
+        "Definir entregables verificables con pruebas y resultados esperados.",
+        "Incluir objetivo, arquitectura, stack, especificación y restricciones.",
+        "Evitar placeholders y comprobar cobertura y consistencia.",
+        "Guardar el plan y pedir revisión y método de ejecución antes de implementar según su flujo completo."
+      ],
+      "sha256": "0bc3d36590f7b2c323ed3ec18ff77e9f8ed57af42f5680a02b11a2d20de265cf"
+    },
+    {
+      "name": "imagegen",
+      "path": "/Users/giovita/.codex/skills/.system/imagegen/SKILL.md",
+      "scope": "user",
+      "lines": 315,
+      "chars": 19161,
+      "trigger": "Generar o editar raster",
+      "rules": [
+        "Usar image_gen integrado por defecto y CLI solo si el usuario lo pide o confirma.",
+        "Mantener transparencia e invariantes de las ediciones solicitadas.",
+        "No cambiar silenciosamente de modelo o modo ni sobrescribir recursos no autorizados.",
+        "Copiar recursos vinculados al proyecto a una ruta estable del workspace.",
+        "Inspeccionar resultados y entregar rutas finales; consultar referencia completa para prompts y parámetros del modo elegido."
+      ],
+      "sha256": "681ddb4ad6d06a2acc78a3535b583f8d0c1ea800ecda3d56370d3310fd2cd4ba"
+    },
+    {
+      "name": "openai-docs",
+      "path": "/Users/giovita/.codex/skills/.system/openai-docs/SKILL.md",
+      "scope": "user",
+      "lines": 20,
+      "chars": 2650,
+      "trigger": "Consultar comportamiento de Codex/Work o primera API",
+      "rules": [
+        "Identificar producto y superficie exactos.",
+        "Comprobar herramientas reales antes de afirmar capacidades.",
+        "Consultar documentación oficial vigente para comportamiento no resuelto por contexto.",
+        "Verificar cambios recientes en changelog y fuentes de la versión pertinente.",
+        "En API inicial seguir quickstart; en migración explícita verificar compatibilidad y conservar el modelo elegido."
+      ],
+      "sha256": "208bb19dcdfa7cdcae5e6766ff3fd6bf7268d235c12a426869c8151a33e5c3ab"
+    },
+    {
+      "name": "review-agent",
+      "path": "/Users/giovita/.codex/skills/.system/review-agent/SKILL.md",
+      "scope": "user",
+      "lines": 57,
+      "chars": 2659,
+      "trigger": "Revisar un diff en modo lectura",
+      "rules": [
+        "Leer instrucciones aplicables y todo el diff solicitado con contexto suficiente.",
+        "No modificar archivos, hacer commits, publicar comentarios o delegar revisión.",
+        "Usar merge-base al revisar contra una rama base según el upstream aplicable.",
+        "Reportar solo defectos introducidos demostrables y accionables.",
+        "Ordenar hallazgos P0 a P3 con archivo/línea y declarar ausencia de hallazgos sin inventarlos."
+      ],
+      "sha256": "07079efd0dc76f05fade424e5dfb048dce1de2df7626e1a4f56292a4f3f92228",
+      "availability_note": "Encontrada en disco de sistema; no figura en el catálogo visible. No asumir activación automática."
+    },
+    {
+      "name": "skill-installer",
+      "path": "/Users/giovita/.codex/skills/.system/skill-installer/SKILL.md",
+      "scope": "user",
+      "lines": 58,
+      "chars": 3367,
+      "trigger": "Instalar skills solicitadas",
+      "rules": [
+        "Usar helpers oficiales para listar o instalar fuentes solicitadas.",
+        "Distinguir catálogo curado y experimental.",
+        "No sobrescribir directorios existentes por defecto.",
+        "Respetar aprobaciones de red y no exponer credenciales.",
+        "Verificar instalación y avisar su disponibilidad en el próximo turno; no reinstalar skills de sistema sin solicitud."
+      ],
+      "sha256": "d68b77e5bbb34dedab89d134da52855f140fc4b4299b80104f534e3b9e98f8ee"
+    },
+    {
+      "name": "documents:documents",
+      "path": "/Users/giovita/.codex/plugins/cache/openai-primary-runtime/documents/26.1118.11504/skills/documents/SKILL.md",
+      "scope": "plugin",
+      "lines": 547,
+      "trigger": "Crear o editar DOCX",
+      "rules": [
+        "Usar runtimes y paquetes del cargador de dependencias.",
+        "Preservar plantilla y contenido según la solicitud.",
+        "Renderizar con render_docx.py e inspeccionar todas las páginas tras cambios relevantes.",
+        "Verificar comentarios estructuralmente además del render.",
+        "Consultar flujo completo de importación y verificar DOCX antes de crear un Google Doc."
+      ],
+      "sha256": "8351f3f7d8e53e2074563a59a15dcdd2a7ff31785a3be5fc59beb573a78d41ed"
+    },
+    {
+      "name": "pdf:pdf",
+      "path": "/Users/giovita/.codex/plugins/cache/openai-primary-runtime/pdf/26.1118.11504/skills/pdf/SKILL.md",
+      "scope": "plugin",
+      "lines": 173,
+      "trigger": "Leer o crear PDF",
+      "rules": [
+        "Renderizar páginas y volver a inspeccionar tras cambios relevantes.",
+        "Usar ReportLab para generar y extracción sin confundirla con validación visual.",
+        "Preservar interactividad de formularios salvo aplanado solicitado.",
+        "Reabrir formularios y verificar valores, widgets y apariencias.",
+        "Corregir recortes, solapes y numeración y seguir la forma de entrega de la fuente."
+      ],
+      "sha256": "cf00a6ecae684265a7694cb4f5a6c74bdf182dd11f873bdb2f8415969ee42f6a"
+    },
+    {
+      "name": "presentations:Presentations",
+      "path": "/Users/giovita/.codex/plugins/cache/openai-primary-runtime/presentations/26.1118.11504/skills/presentations/SKILL.md",
+      "scope": "plugin",
+      "lines": 276,
+      "trigger": "Crear o editar presentaciones",
+      "rules": [
+        "Elegir destino y enrutamiento de la fuente; respetar el formato pedido por el usuario.",
+        "Inspeccionar plantillas y preservar diseño existente cuando corresponda.",
+        "Mantener datos y gráficos editables cuando se requiera.",
+        "No inventar datos y citar fuentes externas en notas.",
+        "Renderizar, inspeccionar y finalizar según referencias; no afirmar revisión en PowerPoint sin abrirlo."
+      ],
+      "sha256": "72b980cf5ee15e89905aee7fe555e63893b8aee5c3e92c0e590fdd2f315ca821"
+    },
+    {
+      "name": "spreadsheets:Spreadsheets",
+      "path": "/Users/giovita/.codex/plugins/cache/openai-primary-runtime/spreadsheets/26.1118.11504/skills/spreadsheets/SKILL.md",
+      "scope": "plugin",
+      "lines": 464,
+      "trigger": "Crear o analizar hojas de cálculo",
+      "rules": [
+        "Respetar usuario, plantilla y convenciones del dominio.",
+        "Usar herramientas de artefactos y runtime del workspace según destino.",
+        "Mantener estructura y cálculos trazables.",
+        "No inventar datos ni sustituir métricas solicitadas.",
+        "Verificar cálculos, formato y funciones antes de entregar; consultar la ruta actual de authoring."
+      ],
+      "sha256": "5d3ac9e870c963422fa65585378ab6ebd5c93d00a2a83a3647ea65dd038d6581"
+    },
+    {
+      "name": "spreadsheets:excel-live-control",
+      "path": "/Users/giovita/.codex/plugins/cache/openai-primary-runtime/spreadsheets/26.1118.11504/skills/excel-live-control/SKILL.md",
+      "scope": "plugin",
+      "lines": 512,
+      "trigger": "Controlar Excel conectado",
+      "rules": [
+        "Completar comprobaciones de aplicación, libro, complemento y sesión.",
+        "Identificar inequívocamente el libro objetivo.",
+        "Usar herramientas de documento conectado para editar celdas.",
+        "Reservar control de computadora a configuración y foco.",
+        "Si falta capacidad, informar el bloqueo sin sustituir silenciosamente el trabajo en vivo por archivo local."
+      ],
+      "sha256": "1c27488fa2a59ce2cc8925a12527ee9c7aa40ccf0701f3f2719ab17858586e8b"
+    },
+    {
+      "name": "template-creator:template-creator",
+      "path": "/Users/giovita/.codex/plugins/cache/openai-primary-runtime/template-creator/26.1118.11504/skills/template-creator/SKILL.md",
+      "scope": "plugin",
+      "lines": 206,
+      "trigger": "Crear plantillas reutilizables personales",
+      "rules": [
+        "Crear plantilla nueva salvo actualización explícita de una existente.",
+        "No modificar cachés de plugins ni marketplaces.",
+        "Usar referencia compatible, generar preview e inspeccionarla.",
+        "Exportar originales Google Workspace por conector apropiado y tratarlos como lectura.",
+        "Ejecutar helper oficial y verificar manifiesto, referencia y preview antes de declarar éxito."
+      ],
+      "sha256": "f1d14fd2847a2e879611a8b8f872f5dc4676a0607958d015274d2dc61e812deb"
+    },
+    {
+      "name": "plugin-management:plugin-management",
+      "path": "/Users/giovita/.codex/plugins/cache/openai-curated-remote/plugin-management/0.1.0/skills/plugin-management/SKILL.md",
+      "scope": "plugin",
+      "lines": 58,
+      "trigger": "Gestionar plugins y conexiones",
+      "rules": [
+        "Preferir herramientas integradas y plugins ya conectados.",
+        "Buscar por proveedor o capacidad antes de declarar inaccesible un servicio.",
+        "Sugerir el conjunto mínimo con IDs exactos.",
+        "Usar herramientas tras verificar conexión y continuar trabajo independiente mientras tanto.",
+        "Cambiar permisos o desinstalar solo ante solicitud explícita."
+      ],
+      "sha256": "653841cc21205269f08b0ce135891e1518dac616a766bcfb0b57d788d3f68b10"
+    },
+    {
+      "name": "sites:sites",
+      "path": "/Users/giovita/.codex/plugins/cache/openai-curated-remote/sites/1.1.7/skills/sites/SKILL.md",
+      "scope": "plugin",
+      "lines": 171,
+      "trigger": "Trabajar con un sitio Sites solicitado",
+      "rules": [
+        "Resolver sitio existente o crear uno privado cuando la solicitud use Sites.",
+        "Preservar audiencia salvo cambio expresamente solicitado.",
+        "Mantener credenciales fuera de archivos y pasarlas por entrada estándar.",
+        "Ejecutar checks y preparar paquete y manifiesto según el flujo.",
+        "Publicar solo dentro del alcance autorizado de la tarea de Sites; respetar una solicitud local o sin despliegue."
+      ],
+      "sha256": "b3b6c890c559c422387882e8b2324487b2dc179d9881b933c63043ef1eea1ed1"
+    },
+    {
+      "name": "sites:sites-remix",
+      "path": "/Users/giovita/.codex/plugins/cache/openai-curated-remote/sites/1.1.7/skills/sites-remix/SKILL.md",
+      "scope": "plugin",
+      "lines": 51,
+      "trigger": "Remixar un Site identificado",
+      "rules": [
+        "Resolver el origen sin inventar IDs ni explorar sitios ajenos.",
+        "Aclarar tratamiento de contenido y funciones pendientes.",
+        "Preservar diseño y funciones no modificadas por la solicitud.",
+        "Recrear almacenamiento necesario sin inventar esquemas incompletos.",
+        "Pedir carga de secretos en configuración del Site y verificar presencia sin exponer valores."
+      ],
+      "sha256": "34a249750d98e38f676fa391819593ab5c14e5f46f9137832a8c49180d47022d"
+    },
+    {
+      "name": "work-pets:pets",
+      "path": "/Users/giovita/.codex/plugins/cache/openai-curated-remote/work-pets/0.1.6/skills/pets/SKILL.md",
+      "scope": "plugin",
+      "lines": 49,
+      "trigger": "Gestionar mascotas ChatGPT Work",
+      "rules": [
+        "Resolver mascota por ID estable y recorrer paginación necesaria.",
+        "Aclarar nombres repetidos o selecciones ambiguas.",
+        "Verificar ID activo tras seleccionar y usar default para apagar compañero.",
+        "Solicitar enlaces temporales de sprites solo cuando hagan falta.",
+        "Eliminar mascotas personalizadas solo ante solicitud explícita y verificar el resultado."
+      ],
+      "sha256": "1bf5d45fd6a6390aab777229293fb05cef7cf898aac882f8955e40c378e52fcd"
+    },
+    {
+      "name": "work-pets:create-pet",
+      "path": "/Users/giovita/.codex/plugins/cache/openai-curated-remote/work-pets/0.1.6/skills/create-pet/SKILL.md",
+      "scope": "plugin",
+      "lines": 171,
+      "trigger": "Crear mascota ChatGPT Work",
+      "rules": [
+        "Preservar idea y referencias y guardar artefactos en Library.",
+        "Usar imagegen para elementos visuales manteniendo identidad.",
+        "Verificar nueve estados, dieciséis direcciones y continuidad con scripts provistos.",
+        "Mostrar movimiento y validar bytes finales antes de cargar.",
+        "Crear y activar solo según alcance solicitado y verificar ID, metadatos y estado activo."
+      ],
+      "sha256": "841354fb8116f8fdfd3b643b30828f5180196c594d3fed9b669b948b88892af1"
+    },
+    {
+      "name": "work-pets:update-pet",
+      "path": "/Users/giovita/.codex/plugins/cache/openai-curated-remote/work-pets/0.1.6/skills/update-pet/SKILL.md",
+      "scope": "plugin",
+      "lines": 43,
+      "trigger": "Actualizar mascota ChatGPT Work",
+      "rules": [
+        "Resolver un ID único de mascota personalizada.",
+        "Modificar solo metadatos solicitados; null borra descripción cuando se pide.",
+        "Obtener enlace de arte inmediatamente antes de descargarlo.",
+        "Preservar identidad con imagegen y validar revisión y bytes antes de actualizar.",
+        "Conservar ID y selección activa salvo petición expresa diferente y verificar resultado."
+      ],
+      "sha256": "c63c98d67b6ad781a72a8f9837ba1fb5e2d2a8054a2562e4025890a97d8a0e67"
+    },
+    {
+      "name": "visualize:visualize",
+      "path": "/Users/giovita/.codex/plugins/cache/openai-curated-remote/visualize/1.0.103/skills/visualize/SKILL.md",
+      "scope": "plugin",
+      "lines": 318,
+      "trigger": "Visualizar o explorar interactivamente",
+      "rules": [
+        "Usar tabla o Mermaid cuando basten.",
+        "Guardar HTML en ruta durable autorizada y limitar tamaño a 1MB.",
+        "No incluir llamadas de red y limitar recursos a los permitidos.",
+        "Mantener contraste, tema y accesibilidad.",
+        "Incluir referencia de visualización en respuesta final del mismo turno según formato de la fuente."
+      ],
+      "sha256": "4a24dd004e9a255b96ef03bfc854e0f0f74a0d8d9e7166b0f880658b47d8e7bb"
+    }
+  ],
+  "convention_files": [
+    {
+      "path": "/Users/giovita/Desktop/UTN/DSOFT/Integrador odonto/CHANGES.md",
+      "sha256": "a5b0348834655e56900535b8284ab4be632c28f46c1a411c4444b2725ae84f71"
+    },
+    {
+      "path": "/Users/giovita/Desktop/UTN/DSOFT/Integrador odonto/knowledge-base/README.md",
+      "sha256": "75f82c2fcdeb1c017aa2eb92f6066e19c7197993a63fb1f37604fe8573e18de9"
+    },
+    {
+      "path": "/Users/giovita/Desktop/UTN/DSOFT/Integrador odonto/knowledge-base/01_vision_y_objetivos.md",
+      "sha256": "d6f3b93b237461dae56b6136ad62d7c436e7a0be012e7310478242487fd43c36"
+    },
+    {
+      "path": "/Users/giovita/Desktop/UTN/DSOFT/Integrador odonto/knowledge-base/02_descripcion_general.md",
+      "sha256": "f6764faf214345b9d9d4ce89532f94bb53dacb64145ab187cfe60cb2d30feb98"
+    },
+    {
+      "path": "/Users/giovita/Desktop/UTN/DSOFT/Integrador odonto/knowledge-base/03_actores_y_roles.md",
+      "sha256": "a97b616656fed1c682273fe593a0273edb29842111c75ac24bbc125b6d2166ba"
+    },
+    {
+      "path": "/Users/giovita/Desktop/UTN/DSOFT/Integrador odonto/knowledge-base/04_modelo_de_datos.md",
+      "sha256": "d753d26068692b9a0ea16b1922d0d809e2d5eea78ab6e7584bcb40a9883f06e2"
+    },
+    {
+      "path": "/Users/giovita/Desktop/UTN/DSOFT/Integrador odonto/knowledge-base/05_reglas_de_negocio.md",
+      "sha256": "6e24eabead72b1c03cf97348aaa0f21676a125c2388b67bd315923209e5703c1"
+    },
+    {
+      "path": "/Users/giovita/Desktop/UTN/DSOFT/Integrador odonto/knowledge-base/06_funcionalidades.md",
+      "sha256": "4e4981734e18bb39be62cf86c0c5bd83705ab2655d4c35f508f7925d23c1c1c1"
+    },
+    {
+      "path": "/Users/giovita/Desktop/UTN/DSOFT/Integrador odonto/knowledge-base/07_flujos_principales.md",
+      "sha256": "97eda80b4f728dceb605a66474384d89be5b050ce9cc9188ca24bec637560d8e"
+    },
+    {
+      "path": "/Users/giovita/Desktop/UTN/DSOFT/Integrador odonto/knowledge-base/08_arquitectura_propuesta.md",
+      "sha256": "8c18501e11ba7b75acd1d2faaabea154a827ed5ee70d5380f817312de2f15526"
+    },
+    {
+      "path": "/Users/giovita/Desktop/UTN/DSOFT/Integrador odonto/knowledge-base/09_decisiones_y_supuestos.md",
+      "sha256": "258297dfdacb30b3814e73d0ee1f3b60daab6bd037549577a1543280275e147f"
+    },
+    {
+      "path": "/Users/giovita/Desktop/UTN/DSOFT/Integrador odonto/knowledge-base/10_preguntas_abiertas.md",
+      "sha256": "cdac9faa4e1cc20ec8e84c4a77b3ad44f4008a2bf06253ce3082d28291418890"
+    },
+    {
+      "path": "/Users/giovita/Desktop/UTN/DSOFT/Integrador odonto/docs/discovery/decisiones-aprobadas.json",
+      "sha256": "a0867db240dd2cae2bdbefd75dcb634b66126aa53f1d5c56789083b411f14b76"
+    },
+    {
+      "path": "/Users/giovita/Desktop/UTN/DSOFT/Integrador odonto/docs/discovery/ampliacion-paciente.md",
+      "sha256": "9277854a8a0bad69ad868d7289afc227a03caf9941898c8af32d28e6ae782fd7"
+    },
+    {
+      "path": "/Users/giovita/Desktop/UTN/DSOFT/Integrador odonto/.active-stack/roadmap.json",
+      "sha256": "ef035e7293a59b140fff3bf0f8050ce37be95392fbc5ec11ad626b343f4616bd"
+    },
+    {
+      "path": "/Users/giovita/Desktop/UTN/DSOFT/Integrador odonto/openspec/config.yaml",
+      "sha256": "7585ddad3d39c37238c6974ee4ee066b04f6ece0f5b2810e9ba7a0f0a7b8f4bc"
+    },
+    {
+      "path": "/Users/giovita/Desktop/UTN/DSOFT/Integrador odonto/AGENTS.md",
+      "sha256": "96c0ecbe7f860589c5a251ec8cb2ee25e273f32b346ef040a3b4e84f533c498c"
+    },
+    {
+      "path": "/Users/giovita/Desktop/UTN/DSOFT/Integrador odonto/CLAUDE.md",
+      "sha256": "96c0ecbe7f860589c5a251ec8cb2ee25e273f32b346ef040a3b4e84f533c498c"
+    },
+    {
+      "path": "/Users/giovita/Desktop/UTN/DSOFT/Integrador odonto/.atl/skill-registry.md",
+      "sha256": "f29256e5d0f014cc90a227a916251478a69614ce4c6eb739e9fe4ddc69e07ece"
+    }
+  ],
+  "conventions_count": 20,
+  "registry_sha256": "f29256e5d0f014cc90a227a916251478a69614ce4c6eb739e9fe4ddc69e07ece",
+  "excluded_patterns": [
+    "sdd-*",
+    "_shared",
+    "skill-registry"
+  ],
+  "missing_optional_protocol": "_shared/skill-resolver.md",
+  "new_installations": 0,
+  "checks": [
+    "67 nombres únicos y rutas existentes",
+    "Cinco reglas por bloque",
+    "Preferencia de versiones proyecto y deduplicación global",
+    "Candidata webapp-testing ausente del inventario instalado",
+    "20 fuentes de convenciones existentes; AGENTS/CLAUDE generados tras confirmación"
+  ],
+  "verified_local_links": 87,
+  "engram_saved": true,
+  "engram_observation_id": 38,
+  "kb_unchanged": true,
+  "roadmap_unchanged": true,
+  "registry_ignored_by_git": true,
+  "updated_at": "2026-11-19T02:41:53.529441-03:00",
+  "engram_update_status": "saved"
+}
