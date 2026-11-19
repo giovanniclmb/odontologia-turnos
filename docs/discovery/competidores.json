@@ -1,0 +1,728 @@
+{
+  "consulted_at": "2026-11-17",
+  "status": "research_before_user_interview",
+  "products": [
+    {
+      "name": "Dentalink",
+      "provider": "Dentalink; entidad legal no evidenciada",
+      "country": "No evidenciado",
+      "segment": "Consultorios y clínicas dentales con oferta argentina",
+      "mode": "Gestión web; alojamiento contractual no evidenciado",
+      "sources": [
+        [
+          "Sitio argentino",
+          "https://web-ar.softwaredentalink.com/"
+        ],
+        [
+          "Manual de agenda online",
+          "https://ayuda.softwaredentalink.com/es/articles/9493139-configura-tu-agenda-online"
+        ]
+      ],
+      "agenda": "El manual documenta enlace de agenda, profesionales habilitados, bloques y permisos. Asignación simultánea de sillón y profesional: No evidenciado.",
+      "digital": "Reserva por enlace documentada. Declara confirmaciones por WhatsApp/email, campañas y seguimiento de citas anuladas o ausentes. Compartir enlace por WhatsApp no demuestra WhatsApp Business API.",
+      "clinical": "Declara historia, odontograma, periodontograma, imágenes, firma y planes de tratamiento.",
+      "admin": "Declara caja, gastos, liquidación a odontólogos, KPI, reportes Excel y obras sociales.",
+      "integration": "WhatsApp y obras sociales declarados; Mercado Pago, ARCA y API pública: No evidenciado.",
+      "security": "Permisos de agenda documentados. Exportación de reportes Excel declarada; no demuestra exportación integral de historias e imágenes. Cifrado, backup y auditoría: No evidenciado en las páginas examinadas.",
+      "price": "No evidenciado: importe, moneda, prueba y cargos aplicables en las páginas consultadas.",
+      "limits": "No se probó el producto. No confundir gestión de convenios con integración electrónica con una obra social.",
+      "criteria": [
+        "NDNDC",
+        "CCCCC",
+        "CNNNN",
+        "CCNCC",
+        "DCNNN",
+        "DNNNC",
+        "NNNNN"
+      ],
+      "adoption": "No evidenciado",
+      "date": "2026-11-17",
+      "scores": {
+        "T": 2.5,
+        "C": 2.5,
+        "I": 0.5,
+        "A": 2.0,
+        "P": 1.5,
+        "S": 1.5,
+        "E": 0
+      },
+      "weighted_total": 1.8
+    },
+    {
+      "name": "DentApp",
+      "provider": "Codilium S.A.S.",
+      "country": "Argentina, declarado por el proveedor",
+      "segment": "Independientes, clínicas y redes según plan",
+      "mode": "Nube en navegador",
+      "sources": [
+        [
+          "Producto y país",
+          "https://www.dentapp.ar/software-odontologico-argentina"
+        ],
+        [
+          "Funcionalidades y planes",
+          "https://www.dentapp.ar/"
+        ]
+      ],
+      "agenda": "Declara agenda por profesional con Google Calendar y estados. Vistas, sillones, duración por prestación y bloqueo de solapamientos simultáneos: No evidenciado.",
+      "digital": "Declara recordatorios por WhatsApp; reserva autónoma, lista de espera y reprogramación por paciente: No evidenciado.",
+      "clinical": "Declara historia, odontograma FDI, imágenes, recetas, consentimientos y presupuestos. Periodontograma: No evidenciado.",
+      "admin": "Declara caja, cobros, facturas, presupuestos y reportes. Integración fiscal ARCA: No evidenciado.",
+      "integration": "Declara Google Calendar, MercadoPago y RCTA. Inscripción ReNaPDiS declarada, sin contraste registral independiente.",
+      "security": "Declara roles admin/doctor/secretaría y documentos cifrados. Exportación completa, auditoría y frecuencia de backup: No evidenciado.",
+      "price": "Planes por cantidad de profesionales. Importe y condiciones de prueba: No evidenciado en el contenido corroborado.",
+      "limits": "El soporte por WhatsApp y un recordatorio automático son capacidades diferentes. No se validó habilitación normativa ni receta electrónica real.",
+      "criteria": [
+        "NCNNC",
+        "CCNCC",
+        "CCCNN",
+        "CCCNC",
+        "NNNNN",
+        "CNNCN",
+        "NNNNN"
+      ],
+      "adoption": "No evidenciado",
+      "date": "2026-11-17",
+      "scores": {
+        "T": 1.0,
+        "C": 2.0,
+        "I": 1.5,
+        "A": 2.0,
+        "P": 0,
+        "S": 1.0,
+        "E": 0
+      },
+      "weighted_total": 1.275
+    },
+    {
+      "name": "Dentify",
+      "provider": "Dentify; entidad legal no evidenciada",
+      "country": "Argentina, declarado en el sitio",
+      "segment": "Odontólogo independiente y clínica multiprofesional",
+      "mode": "SaaS en navegador",
+      "sources": [
+        [
+          "Producto, FAQ y precios",
+          "https://www.dentify.com.ar/"
+        ],
+        [
+          "Página de consultorio",
+          "https://www.dentify.com.ar/software-consultorio-odontologico"
+        ]
+      ],
+      "agenda": "Declara vistas diarias/semanales, filtro por profesional, prácticas y prevención de superposición. Sillón y control concurrente de reservas: No evidenciado.",
+      "digital": "Estados de turno declarados. Reserva online y recordatorios por WhatsApp: No evidenciado; WhatsApp publicado para soporte no equivale a recordatorios.",
+      "clinical": "Declara historias, odontograma, imágenes, recetas y evoluciones. Periodontograma: No evidenciado.",
+      "admin": "Declara ingresos, cobros, egresos, balances y obras sociales. Emisión fiscal integrada: No evidenciado.",
+      "integration": "Obras sociales declaradas; Mercado Pago, Google Calendar, ARCA y API: No evidenciado.",
+      "security": "FAQ declara nube cifrada y acceso de profesionales invitados. Exportación integral, auditoría y política de backup verificable: No evidenciado.",
+      "price": "Página abierta: Básico $30.000/mes y Clínicas $45.000/mes; prueba 14 días sin tarjeta. Código de moneda e impuestos: No evidenciado explícitamente; no inferir ARS solo por el dominio. No usar como vigente el valor anual de $25.000 mencionado en otra extracción.",
+      "limits": "Hay una demostración ilustrada en la portada, sin prueba operativa. Se corrigió la ausencia de evidencia de país y cifrado al leer la portada actual.",
+      "criteria": [
+        "CCNNN",
+        "CCNCN",
+        "NNNNN",
+        "CCNCC",
+        "NNNNN",
+        "CNNCN",
+        "DNDDN"
+      ],
+      "adoption": "No evidenciado",
+      "date": "2026-11-17",
+      "scores": {
+        "T": 1.0,
+        "C": 1.5,
+        "I": 0,
+        "A": 2.0,
+        "P": 0,
+        "S": 1.0,
+        "E": 3
+      },
+      "weighted_total": 1.1
+    },
+    {
+      "name": "OdontoApp",
+      "provider": "Sovil",
+      "country": "No evidenciado; ofrece servicio en Argentina",
+      "segment": "Odontólogos y consultorios latinoamericanos",
+      "mode": "Nube declarada en política de privacidad",
+      "sources": [
+        [
+          "Portada parcial",
+          "https://odontoapp.com.ar/"
+        ],
+        [
+          "Política de privacidad",
+          "https://odontoapp.com.ar/privacidad"
+        ]
+      ],
+      "agenda": "Declara agenda digital. Vistas, profesionales, sillones, duración y control concurrente: No evidenciado.",
+      "digital": "Declara recordatorios automáticos. Política explica WhatsApp configurable por el profesional; API oficial de Meta y reserva online: No evidenciado.",
+      "clinical": "Declara historia y odontograma; política incluye imágenes y radiografías. Periodontograma y planes detallados: No evidenciado.",
+      "admin": "Política menciona facturación; caja, medios de cobro, integración fiscal y métricas: No evidenciado.",
+      "integration": "WhatsApp declarado; Mercado Pago, Google Calendar, ARCA y API: No evidenciado.",
+      "security": "Política declara cifrado en tránsito y control de acceso. Declara adecuación a Ley 25.326; no es auditoría ni certificación de cumplimiento. Backup, auditoría y exportación: No evidenciado.",
+      "price": "No evidenciado: precios y condiciones, porque la portada recuperada es parcial.",
+      "limits": "No completar información de planes desde un fragmento indexado. No se relaciona automáticamente con marcas similares o con un pie residual de otra web.",
+      "criteria": [
+        "NNNNC",
+        "CCNCN",
+        "CNNNN",
+        "NNCNN",
+        "NNNNN",
+        "CNNCN",
+        "NNNNN"
+      ],
+      "adoption": "La portada declara más de 100 odontólogos y clínicas; cifra comercial, no usuarios activos verificados.",
+      "date": "2026-11-17",
+      "scores": {
+        "T": 0.5,
+        "C": 1.5,
+        "I": 0.5,
+        "A": 0.5,
+        "P": 0,
+        "S": 1.0,
+        "E": 0
+      },
+      "weighted_total": 0.675
+    },
+    {
+      "name": "Odontoly",
+      "provider": "Odontoly; entidad legal no evidenciada",
+      "country": "Argentina, declarado por el sitio",
+      "segment": "Consultorios odontológicos y equipos pequeños",
+      "mode": "Aplicación local-first; acceso remoto condicionado",
+      "sources": [
+        [
+          "Producto, restricciones y precios",
+          "https://odontoly.com/"
+        ]
+      ],
+      "agenda": "Declara agenda compartida y solicitudes de reserva. Vistas diarias/semanales y control simultáneo sillón/profesional: No evidenciado.",
+      "digital": "Declara solicitudes por enlace revisadas por el equipo. WhatsApp Business y SMS figuran próximos, no disponibles.",
+      "clinical": "Declara historia, evoluciones, odontograma, fotografías y presupuestos. Visor RX avanzado figura próximo; no confundir almacenamiento con visor.",
+      "admin": "Declara caja, deudas y pagos ARS/USD con cotización manual. ARCA y cobros automatizados figuran próximos.",
+      "integration": "Mercado Pago, Google Calendar y API: No evidenciado. WhatsApp Business y ARCA son anuncios futuros.",
+      "security": "Declara cuentas/permisos y copias completas cifradas. Aclara que la base de trabajo aún no está cifrada por la app. Auditoría y exportación interoperable: No evidenciado.",
+      "price": "Referencia publicada USD 149,99/mes sin permanencia; el sitio pide confirmar precio final, moneda e impuestos. No se evidenció prueba gratuita.",
+      "limits": "Mac Apple Silicon; Windows en desarrollo. Seguir durante un corte exige sesión y autorización vigentes; el acceso remoto requiere equipo principal encendido. No asumir operación offline absoluta.",
+      "criteria": [
+        "NNNCN",
+        "CCNCN",
+        "NNNNN",
+        "CCNNN",
+        "CNNNN",
+        "CNCNN",
+        "DDDNN"
+      ],
+      "adoption": "No evidenciado",
+      "date": "2026-11-17",
+      "scores": {
+        "T": 0.5,
+        "C": 1.5,
+        "I": 0,
+        "A": 1.0,
+        "P": 0.5,
+        "S": 1.0,
+        "E": 3
+      },
+      "weighted_total": 0.875
+    },
+    {
+      "name": "Dentidesk",
+      "provider": "Servicios Tecnológicos e Informáticos Dentales Dentidesk Chile SpA",
+      "country": "Chile, identidad en términos oficiales",
+      "segment": "Consultorios, clínicas y múltiples sucursales",
+      "mode": "SaaS dental",
+      "sources": [
+        [
+          "Características",
+          "https://www.dentidesk.cl/dentidesk/feature"
+        ],
+        [
+          "Términos de uso",
+          "https://app.dentidesk.com/terminos.php"
+        ],
+        [
+          "Ayuda roles y profesionales",
+          "https://dentidesk.freshdesk.com/support/solutions/articles/150000201446--c%C3%B3mo-agregar-doctores-y-personal-a-mi-cl%C3%ADnica-en-dentidesk-"
+        ]
+      ],
+      "agenda": "Agenda por doctor, sucursal y perfiles documentada en ayuda. Prevención simultánea por sillón y profesional: No evidenciado.",
+      "digital": "Declara botón web de reserva, confirmación/anulación por email y recordatorios de control. WhatsApp: No evidenciado.",
+      "clinical": "Declara historia/anamnesis, odontograma, fichas de periodoncia e imágenes; ficha periodontal no demuestra un periodontograma gráfico.",
+      "admin": "Declara presupuestos por pieza, egresos, inventario, liquidaciones y reportes. Facturación argentina y obras sociales: No evidenciado.",
+      "integration": "Integraciones argentinas, WhatsApp API, Google Calendar y API pública: No evidenciado.",
+      "security": "Ayuda documenta permisos. Términos contemplan Excel estándar sin costo con licencia activa; tras el término, solicitud hasta 30 días y posible cargo. No demuestra exportación de todos los archivos clínicos.",
+      "price": "Precio: No evidenciado. Prueba 15 días y posible cargo por odontólogo adicional en términos. Otros formatos de extracción pueden tener costo.",
+      "limits": "No confundir gratuidad de exportación con licencia activa con extracción posterior al cierre. No atribuir usuarios de la plataforma U-DESK al producto dental.",
+      "criteria": [
+        "NDNCC",
+        "CCNCC",
+        "NNNNN",
+        "CCNNC",
+        "CCCNN",
+        "DNNND",
+        "NNNDD"
+      ],
+      "adoption": "No evidenciado",
+      "date": "2026-11-17",
+      "scores": {
+        "T": 2.0,
+        "C": 2.0,
+        "I": 0,
+        "A": 1.5,
+        "P": 1.5,
+        "S": 2,
+        "E": 2
+      },
+      "weighted_total": 1.575
+    },
+    {
+      "name": "Odonto.me",
+      "provider": "No evidenciado",
+      "country": "No evidenciado",
+      "segment": "Consultorios y equipos con capacidad técnica en autohospedado",
+      "mode": "Pro online o código abierto autohospedado",
+      "sources": [
+        [
+          "Producto y planes",
+          "https://odonto.me/?locale=es"
+        ]
+      ],
+      "agenda": "Declara agendas múltiples y citas por dentista. Sillones, vistas y bloqueo de solapamientos: No evidenciado.",
+      "digital": "Declara recordatorios y solicitud de reseñas automáticos. Enlace WhatsApp dirige a comunidad, no demuestra mensajería clínica; autorreserva: No evidenciado.",
+      "clinical": "Declara odontograma, notas y expedientes. Periodontograma, imágenes y planes detallados: No evidenciado.",
+      "admin": "Declara cargos, pagos online y saldos; facturación fiscal, obras sociales y reportes financieros detallados: No evidenciado.",
+      "integration": "Mercado Pago, Google Calendar, ARCA, API y WhatsApp clínico: No evidenciado.",
+      "security": "En autohospedado, actualizaciones y respaldos quedan a cargo del usuario. Roles, auditoría, cifrado y exportación: No evidenciado.",
+      "price": "Pro: $6 mensual y prueba 30 días sin tarjeta. Moneda e impuestos: No evidenciado. Código abierto gratis en servidor propio; hosting y mantenimiento no están incluidos por esa afirmación.",
+      "limits": "No deducir USD del símbolo $. Ni la imagen de producto ni el enlace de código acreditan una instalación probada.",
+      "criteria": [
+        "NCNNC",
+        "CCNNN",
+        "NNNNN",
+        "NCNNN",
+        "NNNNN",
+        "NNNNN",
+        "DNDDN"
+      ],
+      "adoption": "No evidenciado",
+      "date": "2026-11-17",
+      "scores": {
+        "T": 1.0,
+        "C": 1.0,
+        "I": 0,
+        "A": 0.5,
+        "P": 0,
+        "S": 0,
+        "E": 3
+      },
+      "weighted_total": 0.675
+    },
+    {
+      "name": "AgendaPro",
+      "provider": "AgendaPro Inc. según pie de página",
+      "country": "No evidenciado",
+      "segment": "Agenda multisector; oferta para dentistas en Argentina",
+      "mode": "Plataforma online",
+      "sources": [
+        [
+          "Oferta dental",
+          "https://agendapro.com/es/dental/software-odontologico"
+        ],
+        [
+          "Planes Argentina",
+          "https://agendapro.com/ar/planes"
+        ],
+        [
+          "Interfaz pública de reserva",
+          "https://agendapro.com/site/ar/odontologiaor/239004"
+        ]
+      ],
+      "agenda": "Declara agendas por profesional; interfaz pública muestra servicios y duración. Sillones y bloqueo transaccional concurrente: No evidenciado.",
+      "digital": "Reserva pública documentada; declara recordatorios por email y WhatsApp. Los detalles dependen de categoría/plan; no extrapolar el agente IA de Belleza a Salud. La interfaz pública muestra condiciones de cancelación y cambios de un consultorio; no son reglas adoptadas para nuestro producto.",
+      "clinical": "Declara fichas personalizables e imágenes en su oferta dental; la cobertura de consentimientos depende de categoría y plan. Odontograma y periodontograma: No evidenciado.",
+      "admin": "Caja, comisiones, inventario y reportes según plan; facturación electrónica argentina figura próxima. Obras sociales integradas: No evidenciado.",
+      "integration": "Mercado Pago y API con cargo US$200/mes declarados. WhatsApp tiene cupos/costos Meta y condiciones de categoría. ARCA operativa: No evidenciado.",
+      "security": "Seguridad específica, auditoría y exportación integral: No evidenciado en las páginas examinadas.",
+      "price": "La página abierta muestra precios de Belleza/Barbería en ARS con IVA. Tarifa aplicable a odontología: No evidenciado; no usar $7.900 o $15.900 como precio de Salud. API US$200/mes es un adicional, no la suscripción dental.",
+      "limits": "La reserva se observó sin completarla. No confundir confirmación de una interfaz con prueba de integridad del backend. Precio indexado antiguo descartado.",
+      "criteria": [
+        "NCNDC",
+        "CNNCN",
+        "CNCNC",
+        "CCNNC",
+        "DCDCN",
+        "NNNNN",
+        "NNNCD"
+      ],
+      "adoption": "No evidenciado",
+      "date": "2026-11-17",
+      "scores": {
+        "T": 2.0,
+        "C": 1.0,
+        "I": 1.5,
+        "A": 1.5,
+        "P": 3.0,
+        "S": 0,
+        "E": 1.5
+      },
+      "weighted_total": 1.525
+    },
+    {
+      "name": "Clinic Cloud",
+      "provider": "Clinic Cloud; entidad legal no evidenciada",
+      "country": "No evidenciado",
+      "segment": "Clínicas generales con módulo odontológico",
+      "mode": "SaaS clínico",
+      "sources": [
+        [
+          "Tarifas y módulos",
+          "https://clinic-cloud.com/tarifas"
+        ],
+        [
+          "Ayuda presupuesto y odontograma",
+          "https://clinic-cloud.com/faq/agenda-y-comunicaciones/presupuestos"
+        ]
+      ],
+      "agenda": "Declara múltiples agendas según plan. La ayuda vincula citas y prestaciones del presupuesto. Recurso sillón concurrente: No evidenciado.",
+      "digital": "Declara reserva 24/7 por Doctoralia y recordatorios. WhatsApp de Doctoralia Pro tiene condiciones propias; no atribuirlo como incluido automáticamente.",
+      "clinical": "Historia clínica y odontograma en Max declarados; ayuda documenta presupuesto desde odontograma. Periodontograma: No evidenciado.",
+      "admin": "Caja, presupuestos, liquidaciones y reportes; facturación TicketBAI/VeriFactu, que no prueba facturación ARCA.",
+      "integration": "Doctoralia declarado. Mercado Pago, obras sociales argentinas, Google Calendar y API pública: No evidenciado.",
+      "security": "Permisos por niveles declarados. Exportación, auditoría, cifrado y política de backup: No evidenciado en las fuentes examinadas.",
+      "price": "Mini 29, Pro 49 y Max 79 EUR/mes + IVA; Enterprise a convenir. Odontograma en Max. Apertura actual muestra 50% de descuento durante 3 meses, no 2. Agendas adicionales +10 EUR según límite del plan.",
+      "limits": "No comparar Mini como si incluyera odontograma. Precios y promoción están sujetos a contratación; no se abrió cuenta ni aceptó términos.",
+      "criteria": [
+        "NCNCC",
+        "CDNCD",
+        "NNNNN",
+        "CCCNC",
+        "CNNNN",
+        "CNNNN",
+        "DDDCD"
+      ],
+      "adoption": "No evidenciado",
+      "date": "2026-11-17",
+      "scores": {
+        "T": 1.5,
+        "C": 3.0,
+        "I": 0,
+        "A": 2.0,
+        "P": 0.5,
+        "S": 0.5,
+        "E": 4.5
+      },
+      "weighted_total": 1.6
+    },
+    {
+      "name": "XDentalCloud",
+      "provider": "Massive Bionics LLC",
+      "country": "EE.UU., declarado en FAQ de precios; no confundir mercado servido con país",
+      "segment": "Consultorios, clínicas y múltiples sedes",
+      "mode": "SaaS dental en Microsoft Azure, según proveedor",
+      "sources": [
+        [
+          "Producto",
+          "https://xdentalcloud.com/"
+        ],
+        [
+          "Precios",
+          "https://xdentalcloud.com/precios/"
+        ],
+        [
+          "Agenda",
+          "https://xdentalcloud.com/agenda-dental/"
+        ],
+        [
+          "Seguridad",
+          "https://xdentalcloud.com/seguridad/"
+        ],
+        [
+          "Empresa",
+          "https://xdentalcloud.com/empresa/"
+        ]
+      ],
+      "agenda": "Declara agenda multi-sillón en tiempo real y citas por consulta. El bloqueo concurrente por profesional y sillón requiere demostración: No evidenciado.",
+      "digital": "Declara reserva 24h, confirmación automática y recordatorios email/SMS/push. WhatsApp operativo para Argentina: No evidenciado.",
+      "clinical": "Declara historia dental, odontograma, periodontograma, imágenes y planes de tratamiento.",
+      "admin": "Declara facturación, arqueos, presupuestos, liquidaciones y estadísticas. Integración ARCA: No evidenciado; normativa de otros países no la sustituye.",
+      "integration": "Declara Google Calendar, MercadoPago y API; disponibilidad local y condiciones a confirmar. WhatsApp API para Argentina: No evidenciado.",
+      "security": "Declara cifrado, respaldo diario, control por IP y cumplimiento RGPD/HIPAA; no es auditoría independiente ni certificación argentina. Exportación integral y auditoría: No evidenciado.",
+      "price": "Esencial publicado 42 EUR/mes equivalente anual 510 EUR; home indica USD49 para América. Los importes equivalentes no coinciden exactamente al multiplicar por 12; no recalcular ni elegir moneda final. Extras portal/CRM y otros según plan. La apertura vigente ofrece demo con datos de ejemplo; duración de prueba contractual: No evidenciado.",
+      "limits": "Se analiza XDentalCloud, no se trasladan capacidades desde DriCloud por compartir tecnología. Cotización argentina y detalle fiscal pendientes.",
+      "criteria": [
+        "NNCCC",
+        "CCCCC",
+        "NCCNC",
+        "CCCNC",
+        "CCNNN",
+        "CNCCN",
+        "DNNCC"
+      ],
+      "adoption": "No evidenciado",
+      "date": "2026-11-17",
+      "scores": {
+        "T": 1.5,
+        "C": 2.5,
+        "I": 1.5,
+        "A": 2.0,
+        "P": 1.0,
+        "S": 1.5,
+        "E": 2.0
+      },
+      "weighted_total": 1.75
+    },
+    {
+      "name": "Open Dental",
+      "provider": "Open Dental Software",
+      "country": "EE.UU., domicilio en Salem, Oregon",
+      "segment": "Consultorios y clínicas; referencia de dominio internacional",
+      "mode": "Self-hosted; cloud publicado para EE.UU.",
+      "sources": [
+        [
+          "Agenda por operatorios",
+          "https://www.opendental.com/manual/operatories.html"
+        ],
+        [
+          "Bloqueos",
+          "https://www.opendental.com/manual/blockouts.html"
+        ],
+        [
+          "Tarifas",
+          "https://opendental.com/site/fees.html"
+        ],
+        [
+          "Historia clínica",
+          "https://www.opendental.com/manual/chart.html"
+        ],
+        [
+          "Contacto",
+          "https://www.opendental.com/site/contact.html"
+        ],
+        [
+          "Agenda general",
+          "https://www.opendental.com/manual/appointments.html"
+        ]
+      ],
+      "agenda": "Manual documenta operatorios, profesionales, vistas, bloqueos y manejo de citas. Permitir superposición es configurable: no atribuir una prohibición universal.",
+      "digital": "Web Sched y recordatorios tienen servicios y cargos publicados. La reserva online puede ser adicional; WhatsApp: No evidenciado.",
+      "clinical": "Manual documenta historia gráfica, periodontograma, recetas y tratamiento. Interoperabilidad radiográfica argentina: No evidenciado.",
+      "admin": "Publica licencia/soporte y servicios. Integración fiscal argentina, obras sociales argentinas y medios de cobro locales: No evidenciado en las fuentes relevadas.",
+      "integration": "Mercado Pago, Google Calendar, ARCA, API pública y WhatsApp: No evidenciado en esta muestra de fuentes.",
+      "security": "Permiso de bloqueos documentado. No se evaluaron cifrado, exportación, auditoría ni restauración; son No evidenciado en este relevamiento.",
+      "price": "Otros países: USD89/mes por sede hasta 3 profesionales, contrato 12 meses; desde el cuarto, USD20/profesional según condiciones. Servicios web y conversión pueden costar aparte. Elegibilidad argentina final a confirmar.",
+      "limits": "La documentación permite entender restricciones concretas; no constituye una prueba de configuración aplicada ni de disponibilidad comercial argentina.",
+      "criteria": [
+        "DDDCC",
+        "DDDDD",
+        "NNNNN",
+        "NNNNN",
+        "CNNNN",
+        "DNNNN",
+        "DDDND"
+      ],
+      "adoption": "No evidenciado",
+      "date": "2026-11-17",
+      "scores": {
+        "T": 4.0,
+        "C": 5,
+        "I": 0,
+        "A": 0,
+        "P": 0.5,
+        "S": 1,
+        "E": 4
+      },
+      "weighted_total": 2.35
+    },
+    {
+      "name": "Dentrix",
+      "provider": "Henry Schein One",
+      "country": "No evidenciado en las páginas seleccionadas",
+      "segment": "Consultorios y grupos dentales; referencia internacional",
+      "mode": "PMS con Patient Engage conectado; modalidad de despliegue contractual no evidenciada",
+      "sources": [
+        [
+          "Producto",
+          "https://www.dentrix.com/"
+        ],
+        [
+          "Patient Engage",
+          "https://www.dentrix.com/dental-solutions/marketing-and-patient-experience/dentrix-patient-engage-suite/"
+        ],
+        [
+          "Flujo documentado de reserva",
+          "https://magazine.dentrix.com/online-booking-from-the-patients-perspective-2/"
+        ]
+      ],
+      "agenda": "Artículo oficial documenta selección de motivo, profesional, horario y operatorio disponible. No demuestra bloqueo simultáneo en todas las configuraciones.",
+      "digital": "Reserva 24/7, recordatorios y reactivación email/texto; formularios y firma declarados. WhatsApp API: No evidenciado.",
+      "clinical": "Declara charting e imágenes. Periodontograma y planes específicos en la muestra: No evidenciado.",
+      "admin": "Declara seguros, facturación, cobros y analítica multiubicación, orientados a su mercado; no atribuir obras sociales argentinas.",
+      "integration": "API Exchange declarado, no equivale a API pública sin contrato. ARCA, Mercado Pago y Google Calendar: No evidenciado.",
+      "security": "Declara servicios de ciberseguridad/backup; roles, auditoría, cifrado y exportación integral: No evidenciado en las fuentes seleccionadas.",
+      "price": "No evidenciado: monto total, moneda, prueba y adicionales aplicables. Solicitud comercial sin completar.",
+      "limits": "Artículo demostrativo de 2021: corrobora flujo histórico y se complementa con página vigente; no garantiza que la interfaz actual sea idéntica.",
+      "criteria": [
+        "NDDDC",
+        "CCNCN",
+        "NNNNN",
+        "NCCNC",
+        "DCNNN",
+        "NNCNN",
+        "NNNNN"
+      ],
+      "adoption": "No evidenciado",
+      "date": "2026-11-17",
+      "scores": {
+        "T": 3.5,
+        "C": 1.5,
+        "I": 0,
+        "A": 1.5,
+        "P": 1.5,
+        "S": 0.5,
+        "E": 0
+      },
+      "weighted_total": 1.6
+    },
+    {
+      "name": "Curve Dental",
+      "provider": "CD Newco, LLC",
+      "country": "EE.UU., domicilio publicado en Alpharetta, Georgia",
+      "segment": "Consultorios y clínicas multiubicación",
+      "mode": "SaaS en navegador; Mac, PC y Chromebook",
+      "sources": [
+        [
+          "Producto, FAQ, precio y domicilio",
+          "https://www.curvedental.com/"
+        ]
+      ],
+      "agenda": "Declara scheduling y operación multiubicación. Vistas y asignación simultánea sillón/profesional: No evidenciado.",
+      "digital": "Declara online booking, recordatorios, recare y comunicación. WhatsApp y lista de espera: No evidenciado.",
+      "clinical": "Declara charting, imágenes, perio y planes de tratamiento.",
+      "admin": "Declara facturación, cobros, Curve Pay, membresías y reportes. Obras sociales y ARCA: No evidenciado.",
+      "integration": "Mercado Pago, Google Calendar, API pública y WhatsApp clínico: No evidenciado.",
+      "security": "Declara infraestructura/controles HIPAA. No se revisó auditoría independiente, permisos detallados, exportación o frecuencia de backup.",
+      "price": "Cotización según tamaño y funciones. Importe, moneda, prueba y cargos: No evidenciado en la página examinada.",
+      "limits": "El sitio advierte funciones limitadas a EE.UU.; no presentar como disponible para contratar en Argentina sin confirmación.",
+      "criteria": [
+        "NNNCC",
+        "CCCCC",
+        "NNNNN",
+        "NCCNC",
+        "CNNNN",
+        "NNNCN",
+        "NNNNN"
+      ],
+      "adoption": "Declara 100.000+ usuarios activos y 6.000+ sedes en EE.UU./Canadá; cifras del proveedor, no verificadas externamente.",
+      "date": "2026-11-17",
+      "scores": {
+        "T": 1.0,
+        "C": 2.5,
+        "I": 0,
+        "A": 1.5,
+        "P": 0.5,
+        "S": 0.5,
+        "E": 0
+      },
+      "weighted_total": 1.075
+    },
+    {
+      "name": "CareStack",
+      "provider": "Good Methods Global Inc.",
+      "country": "No evidenciado en las páginas seleccionadas",
+      "segment": "Consultorios, grupos/DSO y odontología móvil",
+      "mode": "SaaS dental",
+      "sources": [
+        [
+          "Plataforma y certificaciones declaradas",
+          "https://carestack.com/"
+        ],
+        [
+          "Reserva online",
+          "https://carestack.com/dental-software/features/online-scheduling"
+        ]
+      ],
+      "agenda": "Declara agenda multiubicación y filtros de profesional/tratamiento; control concurrente de sillones: No evidenciado.",
+      "digital": "Documenta diferencia entre solicitud que confirma la clínica y reserva directa; enlaces por sitio/portal. Confirma por llamada/texto/email. Agentes de recall y relleno de cancelaciones figuran próximos.",
+      "clinical": "Declara charting general, periodontal, imágenes y planes de tratamiento.",
+      "admin": "Declara cobros, pagos, seguros, liquidación y analítica. Mercado argentino y obras sociales locales: No evidenciado.",
+      "integration": "Integraciones sanitarias declaradas; WhatsApp, Mercado Pago, ARCA, Google Calendar y API pública en la muestra: No evidenciado.",
+      "security": "Declara backups, HIPAA, SOC 2 Type 2 e ISO27001:2022; no se inspeccionaron certificados ni auditoría independiente. Exportación: No evidenciado.",
+      "price": "No evidenciado: importe, moneda, prueba o cargos en las páginas examinadas.",
+      "limits": "No convertir presencia de un agente futuro en automatización disponible. Solicitud de turno y reserva confirmada son comportamientos distintos.",
+      "criteria": [
+        "NCNDC",
+        "CCCCC",
+        "NNNNN",
+        "CCCNC",
+        "DCNNN",
+        "NNCCN",
+        "NNNNN"
+      ],
+      "adoption": "Declara 3.000+ prácticas; cifra comercial no validada como clientes argentinos.",
+      "date": "2026-11-17",
+      "scores": {
+        "T": 2.0,
+        "C": 2.5,
+        "I": 0,
+        "A": 2.0,
+        "P": 1.5,
+        "S": 1.0,
+        "E": 0
+      },
+      "weighted_total": 1.55
+    },
+    {
+      "name": "tab32",
+      "provider": "tab32; entidad legal no evidenciada",
+      "country": "EE.UU., fundación y sede en Sacramento declaradas",
+      "segment": "Alpine para práctica individual; Summit para grupos",
+      "mode": "SaaS dental en Google Cloud",
+      "sources": [
+        [
+          "Producto",
+          "https://tab32.com/"
+        ],
+        [
+          "Tarifa vigente abierta",
+          "https://tab32.com/pricing/"
+        ],
+        [
+          "Empresa y seguridad declarada",
+          "https://tab32.com/about/"
+        ]
+      ],
+      "agenda": "Declara agenda por columnas de operatorio y lista de espera. Control concurrente de profesional/sillón: No evidenciado.",
+      "digital": "Declara reserva online, recordatorios, confirmaciones y seguimiento de ausentes. IA y comunicación con cargos separados según servicio.",
+      "clinical": "Declara odontograma, imágenes, perio y planes de tratamiento.",
+      "admin": "Declara facturación, claims, pagos y reportes. ARCA/obras sociales argentinas: No evidenciado.",
+      "integration": "API para Summit declarada; no se validó acceso público. WhatsApp, Google Calendar y Mercado Pago: No evidenciado.",
+      "security": "Declara Google Cloud, cifrado, backups automáticos, HIPAA/SOC2 y una exportación gratuita al salir. No se auditó cumplimiento.",
+      "price": "Página abierta vigente: desde $95/mes, usuarios/profesionales ilimitados; prueba 14 días. Sitio empresarial identifica dólares en cargos, pero moneda contractual argentina no confirmada. Claims $0,25, adjuntos $0,50 por claim, elegibilidad $0,75; otros cargos y migración separados. Snippet $125 descartado.",
+      "limits": "La búsqueda indexada y apertura mostraron planes distintos; se priorizó apertura. Ledger no se migra según FAQ; no confundir migración con exportación. Producto orientado a EE.UU.; disponibilidad argentina sin confirmar.",
+      "criteria": [
+        "NNCCC",
+        "CCCCC",
+        "NNNNN",
+        "NCCNC",
+        "CCNNC",
+        "CNCCC",
+        "DNDDD"
+      ],
+      "adoption": "No evidenciado",
+      "date": "2026-11-17",
+      "scores": {
+        "T": 1.5,
+        "C": 2.5,
+        "I": 0,
+        "A": 1.5,
+        "P": 1.5,
+        "S": 2.0,
+        "E": 4
+      },
+      "weighted_total": 1.65
+    }
+  ]
+}

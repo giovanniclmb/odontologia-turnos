@@ -1,0 +1,230 @@
+{
+  "method": "Cobertura provisional de evidencia; D=1 C=0.5 N=0, cinco criterios por dimensión",
+  "weights": {
+    "T": 25,
+    "C": 20,
+    "I": 15,
+    "A": 15,
+    "P": 10,
+    "S": 10,
+    "E": 5
+  },
+  "criteria": {
+    "T": [
+      "Vista diaria/semanal",
+      "Agenda por profesional",
+      "Agenda por sillón/box",
+      "Reserva online",
+      "Recordatorios"
+    ],
+    "C": [
+      "Historia clínica",
+      "Odontograma",
+      "Periodontograma",
+      "Imágenes",
+      "Planes de tratamiento"
+    ],
+    "I": [
+      "WhatsApp clínico",
+      "Google Calendar",
+      "Mercado Pago",
+      "ARCA operativa",
+      "API pública"
+    ],
+    "A": [
+      "Caja",
+      "Cobros",
+      "Facturación general",
+      "Obras sociales argentinas",
+      "Reportes"
+    ],
+    "P": [
+      "Reserva autónoma",
+      "Confirmación",
+      "Cancelación",
+      "Reprogramación",
+      "Lista de espera"
+    ],
+    "S": [
+      "Roles/permisos",
+      "Auditoría",
+      "Respaldos",
+      "Cifrado con alcance claro",
+      "Exportación con alcance claro"
+    ],
+    "E": [
+      "Tarifa aplicable publicada",
+      "Moneda identificada",
+      "Unidad de cobro",
+      "Prueba accesible declarada",
+      "Extras identificados"
+    ]
+  },
+  "scores": [
+    {
+      "product": "Dentalink",
+      "T": 2.5,
+      "C": 2.5,
+      "I": 0.5,
+      "A": 2.0,
+      "P": 1.5,
+      "S": 1.5,
+      "E": 0,
+      "weighted_total": 1.8
+    },
+    {
+      "product": "DentApp",
+      "T": 1.0,
+      "C": 2.0,
+      "I": 1.5,
+      "A": 2.0,
+      "P": 0,
+      "S": 1.0,
+      "E": 0,
+      "weighted_total": 1.275
+    },
+    {
+      "product": "Dentify",
+      "T": 1.0,
+      "C": 1.5,
+      "I": 0,
+      "A": 2.0,
+      "P": 0,
+      "S": 1.0,
+      "E": 3,
+      "weighted_total": 1.1
+    },
+    {
+      "product": "OdontoApp",
+      "T": 0.5,
+      "C": 1.5,
+      "I": 0.5,
+      "A": 0.5,
+      "P": 0,
+      "S": 1.0,
+      "E": 0,
+      "weighted_total": 0.675
+    },
+    {
+      "product": "Odontoly",
+      "T": 0.5,
+      "C": 1.5,
+      "I": 0,
+      "A": 1.0,
+      "P": 0.5,
+      "S": 1.0,
+      "E": 3,
+      "weighted_total": 0.875
+    },
+    {
+      "product": "Dentidesk",
+      "T": 2.0,
+      "C": 2.0,
+      "I": 0,
+      "A": 1.5,
+      "P": 1.5,
+      "S": 2,
+      "E": 2,
+      "weighted_total": 1.575
+    },
+    {
+      "product": "Odonto.me",
+      "T": 1.0,
+      "C": 1.0,
+      "I": 0,
+      "A": 0.5,
+      "P": 0,
+      "S": 0,
+      "E": 3,
+      "weighted_total": 0.675
+    },
+    {
+      "product": "AgendaPro",
+      "T": 2.0,
+      "C": 1.0,
+      "I": 1.5,
+      "A": 1.5,
+      "P": 3.0,
+      "S": 0,
+      "E": 1.5,
+      "weighted_total": 1.525
+    },
+    {
+      "product": "Clinic Cloud",
+      "T": 1.5,
+      "C": 3.0,
+      "I": 0,
+      "A": 2.0,
+      "P": 0.5,
+      "S": 0.5,
+      "E": 4.5,
+      "weighted_total": 1.6
+    },
+    {
+      "product": "XDentalCloud",
+      "T": 1.5,
+      "C": 2.5,
+      "I": 1.5,
+      "A": 2.0,
+      "P": 1.0,
+      "S": 1.5,
+      "E": 2.0,
+      "weighted_total": 1.75
+    },
+    {
+      "product": "Open Dental",
+      "T": 4.0,
+      "C": 5,
+      "I": 0,
+      "A": 0,
+      "P": 0.5,
+      "S": 1,
+      "E": 4,
+      "weighted_total": 2.35
+    },
+    {
+      "product": "Dentrix",
+      "T": 3.5,
+      "C": 1.5,
+      "I": 0,
+      "A": 1.5,
+      "P": 1.5,
+      "S": 0.5,
+      "E": 0,
+      "weighted_total": 1.6
+    },
+    {
+      "product": "Curve Dental",
+      "T": 1.0,
+      "C": 2.5,
+      "I": 0,
+      "A": 1.5,
+      "P": 0.5,
+      "S": 0.5,
+      "E": 0,
+      "weighted_total": 1.075
+    },
+    {
+      "product": "CareStack",
+      "T": 2.0,
+      "C": 2.5,
+      "I": 0,
+      "A": 2.0,
+      "P": 1.5,
+      "S": 1.0,
+      "E": 0,
+      "weighted_total": 1.55
+    },
+    {
+      "product": "tab32",
+      "T": 1.5,
+      "C": 2.5,
+      "I": 0,
+      "A": 1.5,
+      "P": 1.5,
+      "S": 2.0,
+      "E": 4,
+      "weighted_total": 1.65
+    }
+  ]
+}

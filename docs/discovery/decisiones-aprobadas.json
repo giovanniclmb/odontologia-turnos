@@ -1,0 +1,180 @@
+{
+  "approved_at": "2026-11-17T21:58:19.903417-03:00",
+  "approval": "Apruebo el resumen y actualizar los documentos",
+  "source": "Preguntas 1-20 y aprobación original; solicitud de ampliación, nueve respuestas adicionales y aprobación del resumen de once puntos en este chat",
+  "status": "approved_with_explicit_open_questions",
+  "target": {
+    "sites": 1,
+    "segment": "Consultorio con varios odontólogos",
+    "professionals_count": null,
+    "chairs_count": null
+  },
+  "problem_priorities": [
+    "Evitar solapamientos y errores al organizar turnos",
+    "Reducir horarios vacíos por inasistencias y cancelaciones"
+  ],
+  "roles": {
+    "recepcion_administracion": {
+      "agenda": "gestiona",
+      "clinical_record": "lectura"
+    },
+    "odontologo": {
+      "agenda": "opera",
+      "clinical_record": "lectura y edición"
+    },
+    "paciente": {
+      "cancellation": "Enlace del email, hasta 48 horas antes del turno",
+      "waiting_list": "Cuenta para gestionar su inscripción",
+      "notifications": "Email de creación, recordatorio y avisos de huecos",
+      "clinical_record": "No se aprobó acceso clínico del paciente; permisos detallados pendientes"
+    }
+  },
+  "use_cases": [
+    "Gestionar pacientes y ficha clínica sencilla con antecedentes y notas",
+    "Crear turnos internamente por el equipo",
+    "Reprogramar turnos",
+    "Cancelar turnos y liberar el horario",
+    "Registrar confirmaciones y seguimiento manual por recepción",
+    "Como paciente recibir email al crear el turno con enlace de cancelación",
+    "Como paciente recibir recordatorio por email 24 horas antes del turno",
+    "Como paciente cancelar mediante enlace hasta 48 horas antes del turno para liberar el horario",
+    "Como paciente gestionar con cuenta mi inscripción en lista de espera y recibir avisos de huecos",
+    "Como recepción confirmar quién toma un hueco anunciado a la lista",
+    "Como equipo consultar agenda por sillón con vistas diaria y semanal",
+    "Como recepción bloquear sillón y/o profesional por período, rechazando bloqueos que afectan turnos existentes"
+  ],
+  "rules": {
+    "professional_required": true,
+    "chair_required": true,
+    "overlap_allowed": false,
+    "duration": "Por prestación, ajustable por el equipo al crear el turno",
+    "buffer_scope": "Un único intervalo para toda la sede",
+    "initial_buffer_minutes": null,
+    "reschedule_mutable": [
+      "fecha",
+      "hora",
+      "profesional",
+      "sillón"
+    ],
+    "reschedule_preserved": [
+      "prestación",
+      "duración"
+    ],
+    "cancel_effect": "Libera inmediatamente el horario para que recepción pueda crear otro turno",
+    "confirmation": "Listado de turnos por confirmar y seguimiento manual por recepción",
+    "patient_cancellation_cutoff_hours": 48,
+    "reminder_hours_before": 24,
+    "creation_email": "Al crear el turno, email con enlace de cancelación",
+    "reminder_cancellation_option": "Sin opción de cancelar cuando el plazo venció",
+    "patient_access": "Enlace para cancelar; cuenta para gestionar lista de espera",
+    "agenda_views": [
+      "diaria",
+      "semanal"
+    ],
+    "agenda_resource_view": "sillón",
+    "blocks": {
+      "operator": "recepción",
+      "resources": [
+        "sillón",
+        "profesional"
+      ],
+      "period": "por período",
+      "existing_appointments": "rechazar si afecta turnos existentes"
+    },
+    "waiting_list": {
+      "preferences": [
+        "prestación",
+        "rango de fechas",
+        "franjas horarias"
+      ],
+      "optional_preference": "profesional",
+      "notification": "Email automático a interesados cuando se libera un hueco compatible; detalles de compatibilidad pendientes",
+      "allocation": "Recepción confirma quién toma el hueco; el aviso no reserva ni asigna automáticamente"
+    }
+  },
+  "out_of_mvp": [
+    "Autorreserva general del paciente",
+    "Adjudicación automática de huecos",
+    "WhatsApp automático",
+    "Odontograma",
+    "Pagos",
+    "Facturación"
+  ],
+  "required_external_integrations": [
+    "Email: envíos reales a direcciones de prueba del equipo, mediante opción gratuita por definir"
+  ],
+  "constraints": {
+    "delivery_date": "2026-11-25",
+    "team_members": 4,
+    "team_count_may_vary": true,
+    "teacher_exception": "El usuario declara autorización docente para 4 integrantes",
+    "external_services_budget": 0,
+    "frontend": [
+      "HTML",
+      "CSS",
+      "TypeScript vanilla"
+    ],
+    "backend": "Java Spring Boot",
+    "database": "PostgreSQL",
+    "patient_data": "Solo datos ficticios según consigna"
+  },
+  "risks": {
+    "clinical_data_permissions": "Preocupación prioritaria",
+    "overlap_rescheduling": "Preocupación prioritaria",
+    "deadline": "También preocupa, en menor grado; el usuario expresa confianza en llegar",
+    "relative_order_of_top_two": null
+  },
+  "demo_shortlist": [
+    "Dentalink",
+    "DentApp",
+    "Dentify",
+    "Dentidesk",
+    "AgendaPro"
+  ],
+  "ux_references": [
+    "Dentalink",
+    "AgendaPro",
+    "Dentrix"
+  ],
+  "open_questions": [
+    "Minutos iniciales del intervalo global",
+    "Cantidad de profesionales y sillones/boxes",
+    "Estados exactos del turno y transiciones",
+    "Campos mínimos de paciente y ficha clínica",
+    "Comportamiento exacto ante una reprogramación fallida",
+    "Nombres de integrantes y reparto de trabajo",
+    "Versiones concretas de Java, Spring Boot, PostgreSQL y herramientas de frontend",
+    "Revisión personal de al menos cinco fuentes por integrantes",
+    "Proveedor gratuito de email, límites y configuración de direcciones de prueba",
+    "Registro y vinculación de la cuenta con el paciente y permisos sobre datos propios",
+    "Seguridad, vigencia y uso de enlaces; tratamiento exacto del límite de 48 horas",
+    "Turnos creados dentro de las 48 o 24 horas; efectos de reprogramación y cancelación sobre emails",
+    "Duplicados, fallos, reintentos y constancia de envío",
+    "Gestión de desbloqueos y límites temporales de bloqueos",
+    "Compatibilidad exacta de huecos con duración, recursos, intervalo y preferencias; disponibilidad al asignar y comunicación si ya fue ocupado"
+  ],
+  "not_started": [
+    "Selección del primer change",
+    "Implementación",
+    "Selección de proveedor de email",
+    "Envío de emails"
+  ],
+  "human_source_verification": "pending",
+  "scope_revision_status": "consolidated",
+  "approval_history": [
+    {
+      "approved_at": "2026-11-17T20:27:45.363459-03:00",
+      "approval": "Continuar: apruebo el resumen y generar los documentos",
+      "scope": "Agenda interna y seguimiento manual previo a ampliación paciente/email."
+    }
+  ],
+  "scope_revision": 2,
+  "amendment_source": "docs/discovery/ampliacion-paciente.md",
+  "email_delivery": {
+    "mode": "real_test_team_addresses",
+    "provider": null,
+    "budget": 0,
+    "send_during_documentation": false
+  },
+  "documentation_status": "Discovery, KB y roadmap consolidados documentalmente; no equivalen a implementación"
+}

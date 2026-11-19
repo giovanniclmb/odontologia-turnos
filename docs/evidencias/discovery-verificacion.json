@@ -1,0 +1,39 @@
+{
+  "checked_at": "2026-11-19T02:09:20.356457-03:00",
+  "scope_revision": 2,
+  "products": 15,
+  "source_notes": 15,
+  "source_urls": 38,
+  "pdf_pages": 28,
+  "criteria_cells": 525,
+  "score_values": 120,
+  "weights_sum": 100,
+  "decisions_approved": true,
+  "markdown_sha256": "6f2aa9de7a5fc82fe7889de0f5a6f8b5f1ca1e31e3c0e28c8aab90767ee8032a",
+  "pdf_sha256": "ac1d9929e4d9e2c47b56574611e019d5b26d05691b8ad00df533851ac44db454",
+  "checklist_sha256": "1d05e4e8fad623ac2acfdbc2a32bc9d8130ff6253b6229c496582b62a5bd88f1",
+  "checks": [
+    "Checklist de once puntos y ampliación aprobada coherentes",
+    "Generador reproducible preserva alcance revisión2",
+    "Matrices de 525 criterios y 120 valores verificadas contra JSON",
+    "PDF de 28 páginas renderizado y revisado",
+    "Proveedor e intervalo permanecen pendientes; no implementación ni emails enviados"
+  ],
+  "pending": [
+    "Minutos iniciales del intervalo global",
+    "Cantidad de profesionales y sillones/boxes",
+    "Estados exactos del turno y transiciones",
+    "Campos mínimos de paciente y ficha clínica",
+    "Comportamiento exacto ante una reprogramación fallida",
+    "Nombres de integrantes y reparto de trabajo",
+    "Versiones concretas de Java, Spring Boot, PostgreSQL y herramientas de frontend",
+    "Revisión personal de al menos cinco fuentes por integrantes",
+    "Proveedor gratuito de email, límites y configuración de direcciones de prueba",
+    "Registro y vinculación de la cuenta con el paciente y permisos sobre datos propios",
+    "Seguridad, vigencia y uso de enlaces; tratamiento exacto del límite de 48 horas",
+    "Turnos creados dentro de las 48 o 24 horas; efectos de reprogramación y cancelación sobre emails",
+    "Duplicados, fallos, reintentos y constancia de envío",
+    "Gestión de desbloqueos y límites temporales de bloqueos",
+    "Compatibilidad exacta de huecos con duración, recursos, intervalo y preferencias; disponibilidad al asignar y comunicación si ya fue ocupado"
+  ]
+}

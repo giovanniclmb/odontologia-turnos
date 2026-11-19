@@ -1,0 +1,22 @@
+.DS_Store
+.env
+.env.*
+!.env.example
+node_modules/
+.engram/*.db
+.engram/*.db-*
+.atl/
+__pycache__/
+*.py[cod]
+.venv/
+target/
+.gradle/
+build/
+dist/
+coverage/
+
+# Respaldos locales de la fundación; conservar sin publicar duplicados históricos.
+docs/evidencias/antes-*/
+docs/evidencias/estado-antes-*.json
+docs/evidencias/discovery-antes-consolidacion/
+docs/evidencias/ampliacion-paciente-antes-*/
