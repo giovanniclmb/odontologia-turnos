@@ -1,0 +1,187 @@
+{
+  "checked_at": "2026-11-19T02:09:20.356457-03:00",
+  "scope_revision": 2,
+  "changes": [
+    "C-01",
+    "C-02",
+    "C-03",
+    "C-04",
+    "C-05",
+    "C-16",
+    "C-15",
+    "C-06",
+    "C-07",
+    "C-08",
+    "C-09",
+    "C-18",
+    "C-21",
+    "C-17",
+    "C-19",
+    "C-20",
+    "C-22",
+    "C-10",
+    "C-11",
+    "C-12",
+    "C-13",
+    "C-23",
+    "C-24",
+    "C-25",
+    "C-14"
+  ],
+  "phases": 6,
+  "gates": 11,
+  "critical_path": [
+    "C-01",
+    "C-02",
+    "C-03",
+    "C-05",
+    "C-15",
+    "C-06",
+    "C-08",
+    "C-18",
+    "C-19",
+    "C-20",
+    "C-14"
+  ],
+  "critical_path_changes": 11,
+  "schedule_steps": 14,
+  "kb_references": 106,
+  "dependencies": {
+    "C-01": [],
+    "C-02": [
+      "C-01"
+    ],
+    "C-03": [
+      "C-02"
+    ],
+    "C-04": [
+      "C-03"
+    ],
+    "C-05": [
+      "C-03"
+    ],
+    "C-16": [
+      "C-03",
+      "C-04"
+    ],
+    "C-15": [
+      "C-05"
+    ],
+    "C-06": [
+      "C-01",
+      "C-04",
+      "C-05",
+      "C-15"
+    ],
+    "C-07": [
+      "C-06"
+    ],
+    "C-08": [
+      "C-06"
+    ],
+    "C-09": [
+      "C-06"
+    ],
+    "C-18": [
+      "C-08"
+    ],
+    "C-21": [
+      "C-16",
+      "C-05"
+    ],
+    "C-17": [
+      "C-06"
+    ],
+    "C-19": [
+      "C-17",
+      "C-18"
+    ],
+    "C-20": [
+      "C-19",
+      "C-07"
+    ],
+    "C-22": [
+      "C-21",
+      "C-17",
+      "C-08"
+    ],
+    "C-10": [
+      "C-06"
+    ],
+    "C-11": [
+      "C-04"
+    ],
+    "C-12": [
+      "C-07",
+      "C-08",
+      "C-10"
+    ],
+    "C-13": [
+      "C-09",
+      "C-10"
+    ],
+    "C-23": [
+      "C-18",
+      "C-10"
+    ],
+    "C-24": [
+      "C-21",
+      "C-10"
+    ],
+    "C-25": [
+      "C-22",
+      "C-10"
+    ],
+    "C-14": [
+      "C-11",
+      "C-12",
+      "C-13",
+      "C-19",
+      "C-20",
+      "C-23",
+      "C-24",
+      "C-25"
+    ]
+  },
+  "schedule": {
+    "C-01": 1,
+    "C-02": 2,
+    "C-03": 3,
+    "C-04": 4,
+    "C-05": 4,
+    "C-16": 5,
+    "C-15": 5,
+    "C-11": 5,
+    "C-06": 6,
+    "C-08": 7,
+    "C-17": 7,
+    "C-10": 7,
+    "C-18": 8,
+    "C-09": 8,
+    "C-21": 9,
+    "C-19": 9,
+    "C-13": 9,
+    "C-07": 10,
+    "C-22": 10,
+    "C-23": 10,
+    "C-20": 11,
+    "C-12": 11,
+    "C-24": 12,
+    "C-25": 13,
+    "C-14": 14
+  },
+  "sha256": "93cd10a229121366e54869040dbf3f052ab70d55cefdbffa75f39e8c9191c90a",
+  "checks": [
+    "25 IDs únicos; C01..14 preservados",
+    "Fichas con cinco campos y tres a cinco referencias KB válidas",
+    "DAG sin ciclos; tabla y fichas concuerdan",
+    "Cronograma con precedencias estrictas y cada item una vez",
+    "Camino de mayor longitud calculado",
+    "Cobertura explícita de US001..015; todos los items pendientes"
+  ],
+  "format_update": {
+    "date": "2026-11-19",
+    "previous_sha256": "a5b0348834655e56900535b8284ab4be632c28f46c1a411c4444b2725ae84f71",
+    "change": "Eliminar 33 espacios finales y líneas vacías al final, sin modificar texto, IDs, alcance o dependencias."
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "checked_at": "2026-11-19T02:09:20.356457-03:00",
+  "scope_revision": 2,
+  "files": [
+    {
+      "path": "knowledge-base/01_vision_y_objetivos.md",
+      "lines": 53,
+      "sha256": "d6f3b93b237461dae56b6136ad62d7c436e7a0be012e7310478242487fd43c36"
+    },
+    {
+      "path": "knowledge-base/02_descripcion_general.md",
+      "lines": 65,
+      "sha256": "f6764faf214345b9d9d4ce89532f94bb53dacb64145ab187cfe60cb2d30feb98"
+    },
+    {
+      "path": "knowledge-base/03_actores_y_roles.md",
+      "lines": 49,
+      "sha256": "a97b616656fed1c682273fe593a0273edb29842111c75ac24bbc125b6d2166ba"
+    },
+    {
+      "path": "knowledge-base/04_modelo_de_datos.md",
+      "lines": 68,
+      "sha256": "d753d26068692b9a0ea16b1922d0d809e2d5eea78ab6e7584bcb40a9883f06e2"
+    },
+    {
+      "path": "knowledge-base/05_reglas_de_negocio.md",
+      "lines": 56,
+      "sha256": "6e24eabead72b1c03cf97348aaa0f21676a125c2388b67bd315923209e5703c1"
+    },
+    {
+      "path": "knowledge-base/06_funcionalidades.md",
+      "lines": 163,
+      "sha256": "4e4981734e18bb39be62cf86c0c5bd83705ab2655d4c35f508f7925d23c1c1c1"
+    },
+    {
+      "path": "knowledge-base/07_flujos_principales.md",
+      "lines": 111,
+      "sha256": "97eda80b4f728dceb605a66474384d89be5b050ce9cc9188ca24bec637560d8e"
+    },
+    {
+      "path": "knowledge-base/08_arquitectura_propuesta.md",
+      "lines": 83,
+      "sha256": "8c18501e11ba7b75acd1d2faaabea154a827ed5ee70d5380f817312de2f15526"
+    },
+    {
+      "path": "knowledge-base/09_decisiones_y_supuestos.md",
+      "lines": 91,
+      "sha256": "258297dfdacb30b3814e73d0ee1f3b60daab6bd037549577a1543280275e147f"
+    },
+    {
+      "path": "knowledge-base/10_preguntas_abiertas.md",
+      "lines": 50,
+      "sha256": "cdac9faa4e1cc20ec8e84c4a77b3ad44f4008a2bf06253ce3082d28291418890"
+    },
+    {
+      "path": "knowledge-base/README.md",
+      "lines": 50,
+      "sha256": "75f82c2fcdeb1c017aa2eb92f6066e19c7197993a63fb1f37604fe8573e18de9"
+    }
+  ],
+  "verified_local_links": 93,
+  "unique_business_rules": 21,
+  "unique_stories": 15,
+  "unique_open_questions": 21,
+  "checks": [
+    "Diez canónicos e índice presentes",
+    "Enlaces locales y anclas válidos",
+    "IDs originales preservados y nuevos IDs únicos",
+    "Referencias a reglas, historias y preguntas existentes",
+    "Revisión manual contra ampliación aprobada; sin elegir proveedor, autenticación, esquema físico o intervalo"
+  ]
+}
