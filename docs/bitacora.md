@@ -159,3 +159,9 @@ Fecha: 19/11/2026. Giovanni confirmó: «El reparto de changes queda aprobado».
 ## Exención de revisión para el líder
 
 Fecha: 19/11/2026. Giovanni indicó: «mis pushes no deben ser aprobados por mi mismo. Cada cambio mio va sin aprobar, al ser el lider». Se sustituye la exigencia anterior de excepción explícita por PR propio: sus cambios no requieren aprobación de revisión y el agente no volverá a solicitar esa excepción cuando la tarea autorice integrar. Se mantienen CI correcto, trazabilidad por PR y pedido explícito de push. Los colaboradores requieren aprobación de Giovanni. La configuración remota ya tenía enforce_admins=false y se verificó, por lo que no fue necesario modificar permisos. Documentación actualizada localmente; sin nuevo push ni merge.
+
+## Aplicación y Verify de C-02
+
+Fecha: 19/11/2026. Giovanni aprobó el plan e iniciar Apply. Se implementó Boot 4.1.2 no-web/JPA/Flyway y PostgreSQL 18.7 con cuatro referencias UUID/código, privilegios separados, Compose y Testcontainers. C-01 conserva sus 55 pruebas; el clean verify integrado aprobó además 61 IT sin omisiones, incluido el JAR ejecutable. Worker Sol/medium preparó infraestructura y Reviewer Astra/medium fue autorizado por el usuario para revisión independiente ante indisponibilidad de Luna.
+
+Los hallazgos de entorno de pruebas, identidad ordinaria/migrador, historial futuro y credenciales en URL se reprodujeron antes de corregir y se verificaron mediante regresiones. Evidencia y trazabilidad en el change C-02. No se modificó Postgres.app ni una base persistente del usuario. CI adaptado y comprobado localmente; ejecución remota, archivo e integración quedan pendientes. Sin push.

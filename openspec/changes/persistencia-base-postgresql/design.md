@@ -6,7 +6,7 @@ Ver [proposal.md](proposal.md) y el [spec](specs/persistencia-de-referencias/spe
 
 Giovanni confirmó el 19/11/2026: Boot 4.1.2, PostgreSQL 18.7, JPA/Hibernate separado del dominio, Flyway SQL, Compose para desarrollo, Testcontainers para pruebas, cuatro referencias UUID/código y versiones globales consecutivas coordinadas al integrar. Se usa la rama codex/c-02-persistencia en el worktree aislado existente; no se crea otro worktree ni se modifica Postgres.app, que tiene un servidor activo en el host.
 
-Approval: pending. Las decisiones del menú permiten redactar este plan; no equivalen a aprobar un diseño todavía no presentado ni a comenzar Apply.
+Approval: approved (19/11/2026, by user). El usuario aprobó expresamente el plan e iniciar Apply.
 
 ## Goals / Non-Goals
 
@@ -103,3 +103,7 @@ No quedan elecciones bloqueantes en el alcance del plan. Permanecen fuera de C-0
 ## Sources
 
 Fuentes primarias consultadas el 19/11/2026: [requisitos de Spring Boot](https://docs.spring.io/spring-boot/system-requirements.html), [JPA e inicialización en Boot 4.1.0](https://github.com/spring-projects/spring-boot/blob/v4.1.0/documentation/spring-boot-docs/src/docs/antora/modules/reference/pages/data/sql.adoc), [Testcontainers en Boot](https://github.com/spring-projects/spring-boot/blob/v4.1.0/documentation/spring-boot-docs/src/docs/antora/modules/reference/pages/testing/testcontainers.adoc), [versiones PostgreSQL](https://www.postgresql.org/support/versioning/) e [imagen oficial PostgreSQL](https://raw.githubusercontent.com/docker-library/docs/master/postgres/README.md). La documentación de la imagen y la página de versiones mostraron distinta actualización para PostgreSQL 19; se usa el 18.7 aprobado, presente en ambas, sin inferir otra versión.
+
+## Implementation notes
+
+La revisión independiente identificó y se corrigieron desvíos por propiedades Spring externas en las IT, identidades efectivas erróneas, historial futuro y credenciales en URL JDBC. La URL no admite user/password/service ni userinfo; se conserva transporte. Las credenciales se suministran separadamente y el diagnóstico no imprime sus valores. JUnit y librerías se alinean con el BOM; los 55 tests originales se mantienen. Los detalles y regresiones están en evidence/review.md. No se dejaron recursos de desarrollo persistentes con contraseñas inventadas; Compose se comprobó con un proyecto temporal dedicado.

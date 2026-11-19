@@ -8,10 +8,10 @@ Cliente de trabajo: Codex. `AGENTS.md` es la fuente principal de mantenimiento; 
 | Capa | Tecnología aprobada | Versión mínima |
 | --- | --- | --- |
 | Frontend | HTML, CSS y TypeScript vanilla | Pendiente; no se incorpora un framework de UI |
-| Backend | Java 25; Spring Boot previsto | Java 25 para C-01; versión Spring Boot pendiente |
-| Base de datos | PostgreSQL | Pendiente |
+| Backend | Java 25 y Spring Boot 4.1.2 | Maven, JPA/Hibernate y Flyway aprobados en C-02 |
+| Base de datos | PostgreSQL | 18.7; Compose desarrollo y Testcontainers pruebas |
 
-C-01 usa Java 25, Maven y JUnit en backend/. Las demás versiones, ORM, contratos de integración, autenticación, proveedor de email y despliegue siguen pendientes hasta acordarlos en el change correspondiente. El frontend es vanilla; no incorporar React, Next.js o shadcn por disponer de sus skills. Presupuesto externo cero.
+C-01 y C-02 usan Java 25/Maven en backend/. C-02 incorpora Boot 4.1.2, JPA/Hibernate separado del dominio y Flyway; PostgreSQL 18.7 mediante Compose y pruebas Testcontainers. El backend sigue sin HTTP. Contratos de integración, autenticación, proveedor de email y despliegue productivo siguen pendientes. El frontend es vanilla; no incorporar React, Next.js o shadcn por disponer de sus skills. Presupuesto externo cero.
 
 ## Base de Conocimiento
 

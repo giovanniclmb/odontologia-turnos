@@ -2,7 +2,7 @@
 
 Proyecto integrador de Desarrollo de Software de UTN: sistema de gestión de turnos para un consultorio de una sede con varios odontólogos.
 
-**Estado:** C-01 elegido por Giovanni, aprobado e implementado como dominio Java aislado. Sus 55 pruebas y `clean verify` pasaron. Está archivado e integrado en main; el resto del roadmap describe trabajo futuro, no una aplicación ya disponible.
+**Estado:** C-01 completado, archivado e integrado. C-02 implementado y verificado localmente, pendiente de archivo e integración; el resto del roadmap sigue pendiente. El backend aún no ofrece una aplicación HTTP ni interfaz.
 
 ## Alcance aprobado
 
@@ -20,8 +20,8 @@ La autorreserva general, WhatsApp automático, odontograma, pagos y facturación
 | Capa | Tecnología elegida | Estado |
 | --- | --- | --- |
 | Frontend | HTML, CSS y TypeScript vanilla | Versión y herramientas de build pendientes |
-| Backend | Java 25; Spring Boot previsto para C-02 | Maven y JUnit en C-01; versión Spring Boot pendiente |
-| Base de datos | PostgreSQL | Versión, esquema y ejecución pendientes |
+| Backend | Java 25 y Spring Boot 4.1.2 | Maven, JPA/Hibernate y Flyway; sin HTTP |
+| Base de datos | PostgreSQL 18.7 | Referencias mínimas; Compose y Testcontainers |
 
 Las herramientas de fundación ya verificadas se documentan en [preparación del entorno](docs/preparacion-entorno.md). Sus versiones observadas no constituyen versiones mínimas del producto.
 
@@ -56,9 +56,9 @@ cd odontologia-turnos
 
 ## Ejecución y pruebas
 
-C-01 incorpora [el módulo de dominio](backend/README.md), con JDK 25 y Maven como requisitos. Desde la raíz: `mvn -f backend/pom.xml test` o `mvn -f backend/pom.xml clean verify`. Todavía no hay servidor, API, interfaz ni PostgreSQL. La primera ejecución descarga las dependencias de pruebas. La [evidencia Verify](openspec/changes/archive/2026-11-19-crear-turno-sin-solapamientos-dominio/evidence/verify.md) conserva resultados y límites.
+C-01 incorpora [el módulo de dominio](backend/README.md), con JDK 25 y Maven como requisitos. Desde la raíz: `mvn -f backend/pom.xml test` o `mvn -f backend/pom.xml clean verify`. C-02 incorpora PostgreSQL real para referencias mínimas, sin servidor HTTP, API ni interfaz. La primera ejecución descarga las dependencias de pruebas. La [evidencia Verify](openspec/changes/archive/2026-11-19-crear-turno-sin-solapamientos-dominio/evidence/verify.md) conserva resultados y límites.
 
-OpenSpec ya tiene su configuración documental en [openspec/config.yaml](openspec/config.yaml) y seis skills de proyecto en `.agents/skills/`. No hay changes activos. C-01 (`crear-turno-sin-solapamientos-dominio`) está implementado, verificado y archivado; su spec vigente está en `openspec/specs/disponibilidad-de-turnos/spec.md`. El CLI OpenSpec debe estar disponible en el entorno para trabajar con ese flujo; su instalación no se realiza al clonar.
+OpenSpec ya tiene su configuración documental en [openspec/config.yaml](openspec/config.yaml) y seis skills de proyecto en `.agents/skills/`. C-02 (`persistencia-base-postgresql`) está activo, implementado y verificado localmente, pendiente de archivo e integración. C-01 (`crear-turno-sin-solapamientos-dominio`) está implementado, verificado y archivado; su spec vigente está en `openspec/specs/disponibilidad-de-turnos/spec.md`. El CLI OpenSpec debe estar disponible en el entorno para trabajar con ese flujo; su instalación no se realiza al clonar.
 
 Los scripts de Discovery son utilidades documentales, no pruebas del producto. [compilar_investigacion.py](docs/discovery/compilar_investigacion.py) usa Python y el helper global `web-scraper/scripts/slugify.py` de `~/.agents/skills/`. [generar_pdf.py](docs/discovery/generar_pdf.py) usa ReportLab; el PDF requiere además renderizado e inspección visual después de regenerarlo. Si faltan esas dependencias, los documentos ya generados pueden consultarse sin ejecutar los scripts.
 
@@ -71,3 +71,5 @@ El equipo está integrado por Giovanni (líder y propietario del repositorio), S
 Se permiten compilación, pruebas y commits autónomos dentro del alcance autorizado. Cada commit debe cubrir una tarea específica y tener un mensaje detallado que explique el cambio y su propósito. **El push requiere un pedido explícito del usuario.** Las reglas completas y los permisos por dominio están en las instrucciones aplicables; esta política no aprueba automáticamente cambios críticos.
 
 La revisión personal de al menos cinco fuentes, la reflexión de los integrantes y demás evidencias humanas siguen pendientes. Las verificaciones del agente no las sustituyen.
+
+C-02: [ejecución del backend](backend/README.md) y [Verify](openspec/changes/persistencia-base-postgresql/evidence/verify.md). La verificación completa exige Docker y usa PostgreSQL temporal; el entorno de desarrollo requiere credenciales locales privadas.

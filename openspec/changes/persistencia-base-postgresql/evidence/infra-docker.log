@@ -1,0 +1,17 @@
+19/11/2026 | Docker Desktop 29.7.2 | Compose 5.3.1
+Se verificó la configuración sin imprimir su entorno, con --env-file /dev/null y contraseñas desechables.
+El arranque de prueba usó un proyecto Compose propio, un puerto aleatorio en loopback y un tmpfs en vez del volumen persistente. Se cerró el proyecto de prueba al finalizar.
+Preflight con Docker accesible: código 0.
+docker compose config --quiet: código 0.
+Compose config: PostgreSQL 18.7, puerto 127.0.0.1:5433 y volumen en /var/lib/postgresql.
+Compose config: puerto alternativo aceptado.
+error while interpolating services.db.environment.DB_PASSWORD: required variable DB_PASSWORD is missing a value: Definí DB_PASSWORD
+Compose config sin DB_PASSWORD: código 1.
+Compose smoke: db saludable, puerto temporal 127.0.0.1:59881
+Compose smoke: resultado de psql [odonto_app|odontologia_dev|t]
+Compose smoke: autenticación odonto_app y acceso al esquema confirmados.
+Sintaxis sh verificada en preflight y bootstrap.
+Docker está instalado, pero no se pudo conectar al daemon. Comprobá que esté iniciado y que tu usuario tenga acceso.
+Preflight con DOCKER_HOST en socket inexistente: código 1.
+Docker no está instalado o no se encuentra en PATH.
+Preflight sin docker en PATH: código 1.

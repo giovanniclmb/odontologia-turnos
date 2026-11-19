@@ -1,0 +1,10 @@
+19/11/2026 | PostgreSQL 18.7 + Testcontainers 2.0.5 | Docker Desktop 29.7.2
+Comando (desde la raíz): mvn -B -ntp -f backend/pom.xml -Dit.test=BootstrapIT test-compile failsafe:integration-test failsafe:verify
+RED antes del bootstrap. PostgreSQL real temporal con puerto asignado por Docker. Maven salió con código 1.
+14:24:56.036 [main] INFO tc.postgres:18.7 -- Container is started (JDBC URL: jdbc:postgresql://localhost:59597/odontologia_test?loggerLevel=OFF)
+[ERROR] Tests run: 3, Failures: 2, Errors: 1, Skipped: 0, Time elapsed: 4.966 s <<< FAILURE! -- in ar.edu.utn.odontologia.persistencia.BootstrapIT
+org.opentest4j.AssertionFailedError: expected: <[odonto_app, odonto_migrator]> but was: <[]>
+org.opentest4j.AssertionFailedError: Falta el esquema odontologia ==> expected: <true> but was: <false>
+org.postgresql.util.PSQLException: FATAL: password authentication failed for user "odonto_app"
+[ERROR] Tests run: 3, Failures: 2, Errors: 1, Skipped: 0
+[INFO] BUILD FAILURE

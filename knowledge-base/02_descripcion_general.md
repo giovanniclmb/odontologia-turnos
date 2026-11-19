@@ -7,8 +7,8 @@ Las tecnologías fueron elegidas explícitamente por el usuario. La investigaci�
 | Capa | Tecnología aprobada | Versión mínima |
 | --- | --- | --- |
 | Frontend | HTML, CSS y TypeScript vanilla | Pendiente; no se incorpora un framework de UI |
-| Backend | Java con Spring Boot | Pendiente |
-| Base de datos | PostgreSQL | Pendiente |
+| Backend | Java 25 con Spring Boot 4.1.2 | Aprobados para C-02; Maven |
+| Base de datos | PostgreSQL 18.7 | Compose para desarrollo y Testcontainers para pruebas |
 
 Go, Node, OpenSpec, Active Stack y Engram pertenecen al entorno de trabajo preparado. Su instalación no decide el runtime, la herramienta de build o el despliegue del producto. Las versiones observadas del entorno no se convierten en versiones mínimas de la aplicación.
 
@@ -36,7 +36,7 @@ La relación entre esas capas representa el stack elegido, no un contrato REST n
 | --- | --- | --- |
 | Email obligatorio | Email al crear con enlace de cancelación, recordatorio automático 24 horas antes y aviso automático de huecos | Servicio gratuito por definir. Envíos reales a direcciones de prueba indicadas por el equipo. |
 
-Presupuesto externo cero. Google Calendar, WhatsApp Business API, Mercado Pago y ARCA quedan fuera de la integración requerida. La ubicación y el modo de ejecución de PostgreSQL quedan pendientes.
+Presupuesto externo cero. Google Calendar, WhatsApp Business API, Mercado Pago y ARCA quedan fuera de la integración requerida. C-02 usa PostgreSQL 18.7 dedicado mediante Compose y pruebas temporales Testcontainers; el despliegue productivo sigue pendiente.
 
 ## Interfaz entre frontend y backend
 

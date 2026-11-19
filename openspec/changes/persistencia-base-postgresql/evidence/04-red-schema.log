@@ -1,0 +1,98 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ---------------< ar.edu.utn.odontologia:agenda-dominio >----------------
+[INFO] Building agenda-dominio 0.1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.5.0:resources (default-resources) @ agenda-dominio ---
+[INFO] skip non existing resourceDirectory /Users/giovita/.codex/worktrees/c-01-dominio/Integrador odonto/backend/src/main/resources
+[INFO] skip non existing resourceDirectory /Users/giovita/.codex/worktrees/c-01-dominio/Integrador odonto/backend/src/main/resources
+[INFO] 
+[INFO] --- compiler:3.16.0:compile (default-compile) @ agenda-dominio ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 1 source file with javac [debug parameters release 25] to target/classes
+[INFO] 
+[INFO] --- resources:3.5.0:testResources (default-testResources) @ agenda-dominio ---
+[INFO] skip non existing resourceDirectory /Users/giovita/.codex/worktrees/c-01-dominio/Integrador odonto/backend/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.16.0:testCompile (default-testCompile) @ agenda-dominio ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 4 source files with javac [debug parameters release 25] to target/test-classes
+[INFO] 
+[INFO] --- failsafe:3.6.1:integration-test (default-cli) @ agenda-dominio ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running ar.edu.utn.odontologia.persistencia.SchemaIT
+14:26:34.618 [main] INFO org.testcontainers.images.PullPolicy -- Image pull policy will be performed by: DefaultPullPolicy()
+14:26:34.630 [main] INFO org.testcontainers.utility.ImageNameSubstitutor -- Image name substitution will be performed by: DefaultImageNameSubstitutor (composite of 'ConfigurationFileImageNameSubstitutor' and 'PrefixingImageNameSubstitutor')
+14:26:34.635 [main] INFO org.testcontainers.DockerClientFactory -- Testcontainers version: 2.0.5
+14:26:34.765 [main] INFO org.testcontainers.dockerclient.DockerClientProviderStrategy -- Loaded org.testcontainers.dockerclient.UnixSocketClientProviderStrategy from ~/.testcontainers.properties, will try it first
+14:26:35.007 [main] INFO org.testcontainers.dockerclient.DockerClientProviderStrategy -- Found Docker environment with local Unix socket (unix:///var/run/docker.sock)
+14:26:35.008 [main] INFO org.testcontainers.DockerClientFactory -- Docker host IP address is localhost
+14:26:35.024 [main] INFO org.testcontainers.DockerClientFactory -- Connected to docker: 
+  Server Version: 29.7.2
+  API Version: 1.55
+  Operating System: Docker Desktop
+  Total Memory: 3918 MB
+  Labels: 
+    com.docker.desktop.address=unix:///Users/giovita/Library/Containers/com.docker.docker/Data/docker-cli.sock
+14:26:35.164 [main] INFO tc.testcontainers/ryuk:0.14.0 -- Creating container for image: testcontainers/ryuk:0.14.0
+14:26:35.236 [main] INFO org.testcontainers.utility.RegistryAuthLocator -- Credential helper/store (docker-credential-desktop) does not have credentials for https://index.docker.io/v1/
+14:26:35.343 [main] INFO tc.testcontainers/ryuk:0.14.0 -- Container testcontainers/ryuk:0.14.0 is starting: f57f932b9330bc45551a80c235a07b7f592d2bd05a873f0d698417f45b8c3307
+14:26:35.606 [main] INFO tc.testcontainers/ryuk:0.14.0 -- Container testcontainers/ryuk:0.14.0 started in PT0.442288S
+14:26:35.611 [main] INFO org.testcontainers.utility.RyukResourceReaper -- Ryuk started - will monitor and terminate Testcontainers containers on JVM exit
+14:26:35.611 [main] INFO org.testcontainers.DockerClientFactory -- Checking the system...
+14:26:35.612 [main] INFO org.testcontainers.DockerClientFactory -- ✔︎ Docker server version should be at least 1.6.0
+14:26:35.612 [main] INFO tc.postgres:18.7 -- Creating container for image: postgres:18.7
+14:26:35.702 [main] INFO tc.postgres:18.7 -- Container postgres:18.7 is starting: cf6102034965398cf0e837f13b245d742e32a83d895d16bd2d2880e92666b10a
+14:26:36.902 [main] INFO tc.postgres:18.7 -- Container postgres:18.7 started in PT1.289403S
+14:26:36.909 [main] INFO tc.postgres:18.7 -- Container is started (JDBC URL: jdbc:postgresql://localhost:59650/odontologia_test?loggerLevel=OFF)
+14:26:37.148 [main] INFO org.flywaydb.core.FlywayExecutor -- Database: jdbc:postgresql://localhost:59650/odontologia_test?loggerLevel=OFF (PostgreSQL 18.7)
+14:26:37.195 [main] INFO org.flywaydb.core.internal.schemahistory.JdbcTableSchemaHistory -- Schema history table "odontologia"."flyway_schema_history" does not exist yet
+14:26:37.198 [main] INFO org.flywaydb.core.internal.command.DbValidate -- Successfully validated 0 migrations (execution time 00:00.013s)
+14:26:37.199 [main] WARN org.flywaydb.core.internal.command.DbValidate -- No migrations found. Are your locations set up correctly?
+14:26:37.222 [main] INFO org.flywaydb.core.internal.schemahistory.JdbcTableSchemaHistory -- Creating Schema History table "odontologia"."flyway_schema_history" ...
+14:26:37.268 [main] INFO org.flywaydb.core.internal.command.DbMigrate -- Current version of schema "odontologia": << Empty Schema >>
+14:26:37.272 [main] INFO org.flywaydb.core.internal.command.DbMigrate -- Schema "odontologia" is up to date. No migration necessary.
+[ERROR] Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 3.057 s <<< FAILURE! -- in ar.edu.utn.odontologia.persistencia.SchemaIT
+[ERROR] ar.edu.utn.odontologia.persistencia.SchemaIT.aplicaCuatroTablasUnaSolaVez -- Time elapsed: 0.388 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <4> but was: <0>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:158)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:139)
+	at org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:201)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:152)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:147)
+	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:558)
+	at ar.edu.utn.odontologia.persistencia.SchemaIT.aplicaCuatroTablasUnaSolaVez(SchemaIT.java:28)
+
+[INFO] 
+[INFO] Results:
+[INFO] 
+[ERROR] Failures: 
+[ERROR]   SchemaIT.aplicaCuatroTablasUnaSolaVez:28 expected: <4> but was: <0>
+[INFO] 
+[ERROR] Tests run: 1, Failures: 1, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- failsafe:3.6.1:verify (default-cli) @ agenda-dominio ---
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  5.273 s
+[INFO] Finished at: 2026-11-19T14:26:37-03:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-failsafe-plugin:3.6.1:verify (default-cli) on project agenda-dominio: There are test failures.
+[ERROR] 
+[ERROR] See /Users/giovita/.codex/worktrees/c-01-dominio/Integrador odonto/backend/target/failsafe-reports for the individual test results.
+[ERROR] See dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

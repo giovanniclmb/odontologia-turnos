@@ -1,0 +1,393 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ---------------< ar.edu.utn.odontologia:agenda-dominio >----------------
+[INFO] Building agenda-dominio 0.1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.5.0:resources (default-resources) @ agenda-dominio ---
+[INFO] Copying 0 resource from src/main/resources to target/classes
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.16.0:compile (default-compile) @ agenda-dominio ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.5.0:testResources (default-testResources) @ agenda-dominio ---
+[INFO] skip non existing resourceDirectory /Users/giovita/.codex/worktrees/c-01-dominio/Integrador odonto/backend/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.16.0:testCompile (default-testCompile) @ agenda-dominio ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- failsafe:3.6.1:integration-test (default-cli) @ agenda-dominio ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running ar.edu.utn.odontologia.persistencia.SchemaIT
+14:27:04.649 [main] INFO org.testcontainers.images.PullPolicy -- Image pull policy will be performed by: DefaultPullPolicy()
+14:27:04.663 [main] INFO org.testcontainers.utility.ImageNameSubstitutor -- Image name substitution will be performed by: DefaultImageNameSubstitutor (composite of 'ConfigurationFileImageNameSubstitutor' and 'PrefixingImageNameSubstitutor')
+14:27:04.667 [main] INFO org.testcontainers.DockerClientFactory -- Testcontainers version: 2.0.5
+14:27:04.787 [main] INFO org.testcontainers.dockerclient.DockerClientProviderStrategy -- Loaded org.testcontainers.dockerclient.UnixSocketClientProviderStrategy from ~/.testcontainers.properties, will try it first
+14:27:05.006 [main] INFO org.testcontainers.dockerclient.DockerClientProviderStrategy -- Found Docker environment with local Unix socket (unix:///var/run/docker.sock)
+14:27:05.007 [main] INFO org.testcontainers.DockerClientFactory -- Docker host IP address is localhost
+14:27:05.022 [main] INFO org.testcontainers.DockerClientFactory -- Connected to docker: 
+  Server Version: 29.7.2
+  API Version: 1.55
+  Operating System: Docker Desktop
+  Total Memory: 3918 MB
+  Labels: 
+    com.docker.desktop.address=unix:///Users/giovita/Library/Containers/com.docker.docker/Data/docker-cli.sock
+14:27:05.115 [main] INFO tc.testcontainers/ryuk:0.14.0 -- Creating container for image: testcontainers/ryuk:0.14.0
+14:27:05.158 [main] INFO org.testcontainers.utility.RegistryAuthLocator -- Credential helper/store (docker-credential-desktop) does not have credentials for https://index.docker.io/v1/
+14:27:05.269 [main] INFO tc.testcontainers/ryuk:0.14.0 -- Container testcontainers/ryuk:0.14.0 is starting: eda24f338a9955462710b8ab78bcb40cca0570dbb6bdb799676fb263326dda28
+14:27:05.524 [main] INFO tc.testcontainers/ryuk:0.14.0 -- Container testcontainers/ryuk:0.14.0 started in PT0.409282S
+14:27:05.529 [main] INFO org.testcontainers.utility.RyukResourceReaper -- Ryuk started - will monitor and terminate Testcontainers containers on JVM exit
+14:27:05.529 [main] INFO org.testcontainers.DockerClientFactory -- Checking the system...
+14:27:05.530 [main] INFO org.testcontainers.DockerClientFactory -- ✔︎ Docker server version should be at least 1.6.0
+14:27:05.530 [main] INFO tc.postgres:18.7 -- Creating container for image: postgres:18.7
+14:27:05.616 [main] INFO tc.postgres:18.7 -- Container postgres:18.7 is starting: ac2dfbec419ac8a011690765a90c76e23c8ab0ed3922ddf627bf46fd578ed9c1
+14:27:06.674 [main] INFO tc.postgres:18.7 -- Container postgres:18.7 started in PT1.143641S
+14:27:06.677 [main] INFO tc.postgres:18.7 -- Container is started (JDBC URL: jdbc:postgresql://localhost:59682/odontologia_test?loggerLevel=OFF)
+14:27:06.976 [main] INFO org.flywaydb.core.FlywayExecutor -- Database: jdbc:postgresql://localhost:59682/odontologia_test?loggerLevel=OFF (PostgreSQL 18.7)
+14:27:07.013 [main] INFO org.flywaydb.core.internal.schemahistory.JdbcTableSchemaHistory -- Schema history table "odontologia"."flyway_schema_history" does not exist yet
+14:27:07.017 [main] INFO org.flywaydb.core.internal.command.DbValidate -- Successfully validated 1 migration (execution time 00:00.011s)
+14:27:07.032 [main] INFO org.flywaydb.core.internal.schemahistory.JdbcTableSchemaHistory -- Creating Schema History table "odontologia"."flyway_schema_history" ...
+14:27:07.094 [main] INFO org.flywaydb.core.internal.command.DbMigrate -- Current version of schema "odontologia": << Empty Schema >>
+14:27:07.102 [main] INFO org.flywaydb.core.internal.command.DbMigrate -- Migrating schema "odontologia" to version "1 - referencias base"
+14:27:07.119 [main] INFO org.flywaydb.core.internal.command.DbMigrate -- Successfully applied 1 migration to schema "odontologia", now at version v1 (execution time 00:00.009s)
+14:27:07.185 [main] INFO org.flywaydb.core.FlywayExecutor -- Database: jdbc:postgresql://localhost:59682/odontologia_test?loggerLevel=OFF (PostgreSQL 18.7)
+14:27:07.203 [main] INFO org.flywaydb.core.internal.command.DbValidate -- Successfully validated 1 migration (execution time 00:00.006s)
+14:27:07.220 [main] INFO org.flywaydb.core.internal.command.DbMigrate -- Current version of schema "odontologia": 1
+14:27:07.221 [main] INFO org.flywaydb.core.internal.command.DbMigrate -- Schema "odontologia" is up to date. No migration necessary.
+14:27:07.251 [main] INFO org.flywaydb.core.FlywayExecutor -- Database: jdbc:postgresql://localhost:59682/odontologia_test?loggerLevel=OFF (PostgreSQL 18.7)
+14:27:07.259 [main] INFO org.flywaydb.core.internal.command.DbValidate -- Successfully validated 1 migration (execution time 00:00.002s)
+14:27:07.268 [main] INFO org.flywaydb.core.internal.command.DbMigrate -- Current version of schema "odontologia": 1
+14:27:07.268 [main] INFO org.flywaydb.core.internal.command.DbMigrate -- Schema "odontologia" is up to date. No migration necessary.
+14:27:07.290 [main] INFO org.flywaydb.core.FlywayExecutor -- Database: jdbc:postgresql://localhost:59682/odontologia_test?loggerLevel=OFF (PostgreSQL 18.7)
+14:27:07.298 [main] INFO org.flywaydb.core.internal.command.DbValidate -- Successfully validated 1 migration (execution time 00:00.002s)
+14:27:07.307 [main] INFO org.flywaydb.core.internal.command.DbMigrate -- Current version of schema "odontologia": 1
+14:27:07.307 [main] INFO org.flywaydb.core.internal.command.DbMigrate -- Schema "odontologia" is up to date. No migration necessary.
+14:27:07.331 [main] INFO org.flywaydb.core.FlywayExecutor -- Database: jdbc:postgresql://localhost:59682/odontologia_test?loggerLevel=OFF (PostgreSQL 18.7)
+14:27:07.342 [main] INFO org.flywaydb.core.internal.command.DbValidate -- Successfully validated 1 migration (execution time 00:00.002s)
+14:27:07.350 [main] INFO org.flywaydb.core.internal.command.DbMigrate -- Current version of schema "odontologia": 1
+14:27:07.351 [main] INFO org.flywaydb.core.internal.command.DbMigrate -- Schema "odontologia" is up to date. No migration necessary.
+14:27:07.371 [main] INFO org.flywaydb.core.FlywayExecutor -- Database: jdbc:postgresql://localhost:59682/odontologia_test?loggerLevel=OFF (PostgreSQL 18.7)
+14:27:07.377 [main] INFO org.flywaydb.core.internal.command.DbValidate -- Successfully validated 1 migration (execution time 00:00.002s)
+14:27:07.387 [main] INFO org.flywaydb.core.internal.command.DbMigrate -- Current version of schema "odontologia": 1
+14:27:07.388 [main] INFO org.flywaydb.core.internal.command.DbMigrate -- Schema "odontologia" is up to date. No migration necessary.
+14:27:07.407 [main] INFO org.flywaydb.core.FlywayExecutor -- Database: jdbc:postgresql://localhost:59682/odontologia_test?loggerLevel=OFF (PostgreSQL 18.7)
+14:27:07.414 [main] INFO org.flywaydb.core.internal.command.DbValidate -- Successfully validated 1 migration (execution time 00:00.002s)
+14:27:07.425 [main] INFO org.flywaydb.core.internal.command.DbMigrate -- Current version of schema "odontologia": 1
+14:27:07.426 [main] INFO org.flywaydb.core.internal.command.DbMigrate -- Schema "odontologia" is up to date. No migration necessary.
+14:27:07.449 [main] INFO org.flywaydb.core.FlywayExecutor -- Database: jdbc:postgresql://localhost:59682/odontologia_test?loggerLevel=OFF (PostgreSQL 18.7)
+14:27:07.458 [main] INFO org.flywaydb.core.internal.command.DbValidate -- Successfully validated 1 migration (execution time 00:00.002s)
+14:27:07.466 [main] INFO org.flywaydb.core.internal.command.DbMigrate -- Current version of schema "odontologia": 1
+14:27:07.466 [main] INFO org.flywaydb.core.internal.command.DbMigrate -- Schema "odontologia" is up to date. No migration necessary.
+14:27:07.483 [main] INFO org.flywaydb.core.FlywayExecutor -- Database: jdbc:postgresql://localhost:59682/odontologia_test?loggerLevel=OFF (PostgreSQL 18.7)
+14:27:07.492 [main] INFO org.flywaydb.core.internal.command.DbValidate -- Successfully validated 1 migration (execution time 00:00.002s)
+14:27:07.500 [main] INFO org.flywaydb.core.internal.command.DbMigrate -- Current version of schema "odontologia": 1
+14:27:07.501 [main] INFO org.flywaydb.core.internal.command.DbMigrate -- Schema "odontologia" is up to date. No migration necessary.
+14:27:07.517 [main] INFO org.flywaydb.core.FlywayExecutor -- Database: jdbc:postgresql://localhost:59682/odontologia_test?loggerLevel=OFF (PostgreSQL 18.7)
+14:27:07.523 [main] INFO org.flywaydb.core.internal.command.DbValidate -- Successfully validated 1 migration (execution time 00:00.002s)
+14:27:07.532 [main] INFO org.flywaydb.core.internal.command.DbMigrate -- Current version of schema "odontologia": 1
+14:27:07.533 [main] INFO org.flywaydb.core.internal.command.DbMigrate -- Schema "odontologia" is up to date. No migration necessary.
+14:27:07.552 [main] INFO org.flywaydb.core.FlywayExecutor -- Database: jdbc:postgresql://localhost:59682/odontologia_test?loggerLevel=OFF (PostgreSQL 18.7)
+14:27:07.566 [main] INFO org.flywaydb.core.internal.command.DbValidate -- Successfully validated 1 migration (execution time 00:00.007s)
+14:27:07.576 [main] INFO org.flywaydb.core.internal.command.DbMigrate -- Current version of schema "odontologia": 1
+14:27:07.577 [main] INFO org.flywaydb.core.internal.command.DbMigrate -- Schema "odontologia" is up to date. No migration necessary.
+14:27:07.596 [main] INFO org.flywaydb.core.FlywayExecutor -- Database: jdbc:postgresql://localhost:59682/odontologia_test?loggerLevel=OFF (PostgreSQL 18.7)
+14:27:07.605 [main] INFO org.flywaydb.core.internal.command.DbValidate -- Successfully validated 1 migration (execution time 00:00.002s)
+14:27:07.613 [main] INFO org.flywaydb.core.internal.command.DbMigrate -- Current version of schema "odontologia": 1
+14:27:07.614 [main] INFO org.flywaydb.core.internal.command.DbMigrate -- Schema "odontologia" is up to date. No migration necessary.
+14:27:07.632 [main] INFO org.flywaydb.core.FlywayExecutor -- Database: jdbc:postgresql://localhost:59682/odontologia_test?loggerLevel=OFF (PostgreSQL 18.7)
+14:27:07.639 [main] INFO org.flywaydb.core.internal.command.DbValidate -- Successfully validated 1 migration (execution time 00:00.002s)
+14:27:07.648 [main] INFO org.flywaydb.core.internal.command.DbMigrate -- Current version of schema "odontologia": 1
+14:27:07.648 [main] INFO org.flywaydb.core.internal.command.DbMigrate -- Schema "odontologia" is up to date. No migration necessary.
+14:27:07.665 [main] INFO org.flywaydb.core.FlywayExecutor -- Database: jdbc:postgresql://localhost:59682/odontologia_test?loggerLevel=OFF (PostgreSQL 18.7)
+14:27:07.672 [main] INFO org.flywaydb.core.internal.command.DbValidate -- Successfully validated 1 migration (execution time 00:00.002s)
+14:27:07.679 [main] INFO org.flywaydb.core.internal.command.DbMigrate -- Current version of schema "odontologia": 1
+14:27:07.680 [main] INFO org.flywaydb.core.internal.command.DbMigrate -- Schema "odontologia" is up to date. No migration necessary.
+14:27:07.698 [main] INFO org.flywaydb.core.FlywayExecutor -- Database: jdbc:postgresql://localhost:59682/odontologia_test?loggerLevel=OFF (PostgreSQL 18.7)
+14:27:07.704 [main] INFO org.flywaydb.core.internal.command.DbValidate -- Successfully validated 1 migration (execution time 00:00.001s)
+14:27:07.712 [main] INFO org.flywaydb.core.internal.command.DbMigrate -- Current version of schema "odontologia": 1
+14:27:07.712 [main] INFO org.flywaydb.core.internal.command.DbMigrate -- Schema "odontologia" is up to date. No migration necessary.
+14:27:07.729 [main] INFO org.flywaydb.core.FlywayExecutor -- Database: jdbc:postgresql://localhost:59682/odontologia_test?loggerLevel=OFF (PostgreSQL 18.7)
+14:27:07.735 [main] INFO org.flywaydb.core.internal.command.DbValidate -- Successfully validated 1 migration (execution time 00:00.002s)
+14:27:07.745 [main] INFO org.flywaydb.core.internal.command.DbMigrate -- Current version of schema "odontologia": 1
+14:27:07.745 [main] INFO org.flywaydb.core.internal.command.DbMigrate -- Schema "odontologia" is up to date. No migration necessary.
+14:27:07.761 [main] INFO org.flywaydb.core.FlywayExecutor -- Database: jdbc:postgresql://localhost:59682/odontologia_test?loggerLevel=OFF (PostgreSQL 18.7)
+14:27:07.767 [main] INFO org.flywaydb.core.internal.command.DbValidate -- Successfully validated 1 migration (execution time 00:00.001s)
+14:27:07.776 [main] INFO org.flywaydb.core.internal.command.DbMigrate -- Current version of schema "odontologia": 1
+14:27:07.776 [main] INFO org.flywaydb.core.internal.command.DbMigrate -- Schema "odontologia" is up to date. No migration necessary.
+14:27:07.793 [main] INFO org.flywaydb.core.FlywayExecutor -- Database: jdbc:postgresql://localhost:59682/odontologia_test?loggerLevel=OFF (PostgreSQL 18.7)
+14:27:07.798 [main] INFO org.flywaydb.core.internal.command.DbValidate -- Successfully validated 1 migration (execution time 00:00.001s)
+14:27:07.807 [main] INFO org.flywaydb.core.internal.command.DbMigrate -- Current version of schema "odontologia": 1
+14:27:07.807 [main] INFO org.flywaydb.core.internal.command.DbMigrate -- Schema "odontologia" is up to date. No migration necessary.
+14:27:07.825 [main] INFO org.flywaydb.core.FlywayExecutor -- Database: jdbc:postgresql://localhost:59682/odontologia_test?loggerLevel=OFF (PostgreSQL 18.7)
+14:27:07.830 [main] INFO org.flywaydb.core.internal.command.DbValidate -- Successfully validated 1 migration (execution time 00:00.001s)
+14:27:07.837 [main] INFO org.flywaydb.core.internal.command.DbMigrate -- Current version of schema "odontologia": 1
+14:27:07.838 [main] INFO org.flywaydb.core.internal.command.DbMigrate -- Schema "odontologia" is up to date. No migration necessary.
+14:27:07.857 [main] INFO org.flywaydb.core.FlywayExecutor -- Database: jdbc:postgresql://localhost:59682/odontologia_test?loggerLevel=OFF (PostgreSQL 18.7)
+14:27:07.863 [main] INFO org.flywaydb.core.internal.command.DbValidate -- Successfully validated 1 migration (execution time 00:00.002s)
+14:27:07.871 [main] INFO org.flywaydb.core.internal.command.DbMigrate -- Current version of schema "odontologia": 1
+14:27:07.871 [main] INFO org.flywaydb.core.internal.command.DbMigrate -- Schema "odontologia" is up to date. No migration necessary.
+14:27:07.885 [main] INFO org.flywaydb.core.FlywayExecutor -- Database: jdbc:postgresql://localhost:59682/odontologia_test?loggerLevel=OFF (PostgreSQL 18.7)
+14:27:07.892 [main] INFO org.flywaydb.core.internal.command.DbValidate -- Successfully validated 1 migration (execution time 00:00.003s)
+14:27:07.900 [main] INFO org.flywaydb.core.internal.command.DbMigrate -- Current version of schema "odontologia": 1
+14:27:07.900 [main] INFO org.flywaydb.core.internal.command.DbMigrate -- Schema "odontologia" is up to date. No migration necessary.
+14:27:07.915 [main] INFO org.flywaydb.core.FlywayExecutor -- Database: jdbc:postgresql://localhost:59682/odontologia_test?loggerLevel=OFF (PostgreSQL 18.7)
+14:27:07.921 [main] INFO org.flywaydb.core.internal.command.DbValidate -- Successfully validated 1 migration (execution time 00:00.001s)
+14:27:07.927 [main] INFO org.flywaydb.core.internal.command.DbMigrate -- Current version of schema "odontologia": 1
+14:27:07.928 [main] INFO org.flywaydb.core.internal.command.DbMigrate -- Schema "odontologia" is up to date. No migration necessary.
+14:27:07.941 [main] INFO org.flywaydb.core.FlywayExecutor -- Database: jdbc:postgresql://localhost:59682/odontologia_test?loggerLevel=OFF (PostgreSQL 18.7)
+14:27:07.948 [main] INFO org.flywaydb.core.internal.command.DbValidate -- Successfully validated 1 migration (execution time 00:00.001s)
+14:27:07.955 [main] INFO org.flywaydb.core.internal.command.DbMigrate -- Current version of schema "odontologia": 1
+14:27:07.956 [main] INFO org.flywaydb.core.internal.command.DbMigrate -- Schema "odontologia" is up to date. No migration necessary.
+14:27:07.974 [main] INFO org.flywaydb.core.FlywayExecutor -- Database: jdbc:postgresql://localhost:59682/odontologia_test?loggerLevel=OFF (PostgreSQL 18.7)
+14:27:07.980 [main] INFO org.flywaydb.core.internal.command.DbValidate -- Successfully validated 1 migration (execution time 00:00.001s)
+14:27:07.991 [main] INFO org.flywaydb.core.internal.command.DbMigrate -- Current version of schema "odontologia": 1
+14:27:07.992 [main] INFO org.flywaydb.core.internal.command.DbMigrate -- Schema "odontologia" is up to date. No migration necessary.
+[ERROR] Tests run: 24, Failures: 24, Errors: 0, Skipped: 0, Time elapsed: 3.691 s <<< FAILURE! -- in ar.edu.utn.odontologia.persistencia.SchemaIT
+[ERROR] ar.edu.utn.odontologia.persistencia.SchemaIT.restriccionesRealesConservanDatosConfirmados(String, String, String)[1] -- Time elapsed: 0.427 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: Expected java.sql.SQLException to be thrown, but nothing was thrown.
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:159)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:74)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3223)
+	at ar.edu.utn.odontologia.persistencia.SchemaIT.restriccionesRealesConservanDatosConfirmados(SchemaIT.java:58)
+
+[ERROR] ar.edu.utn.odontologia.persistencia.SchemaIT.restriccionesRealesConservanDatosConfirmados(String, String, String)[2] -- Time elapsed: 0.091 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: Expected java.sql.SQLException to be thrown, but nothing was thrown.
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:159)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:74)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3223)
+	at ar.edu.utn.odontologia.persistencia.SchemaIT.restriccionesRealesConservanDatosConfirmados(SchemaIT.java:58)
+
+[ERROR] ar.edu.utn.odontologia.persistencia.SchemaIT.restriccionesRealesConservanDatosConfirmados(String, String, String)[3] -- Time elapsed: 0.039 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: Expected java.sql.SQLException to be thrown, but nothing was thrown.
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:159)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:74)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3223)
+	at ar.edu.utn.odontologia.persistencia.SchemaIT.restriccionesRealesConservanDatosConfirmados(SchemaIT.java:58)
+
+[ERROR] ar.edu.utn.odontologia.persistencia.SchemaIT.restriccionesRealesConservanDatosConfirmados(String, String, String)[4] -- Time elapsed: 0.039 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: Expected java.sql.SQLException to be thrown, but nothing was thrown.
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:159)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:74)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3223)
+	at ar.edu.utn.odontologia.persistencia.SchemaIT.restriccionesRealesConservanDatosConfirmados(SchemaIT.java:58)
+
+[ERROR] ar.edu.utn.odontologia.persistencia.SchemaIT.restriccionesRealesConservanDatosConfirmados(String, String, String)[5] -- Time elapsed: 0.040 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: Expected java.sql.SQLException to be thrown, but nothing was thrown.
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:159)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:74)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3223)
+	at ar.edu.utn.odontologia.persistencia.SchemaIT.restriccionesRealesConservanDatosConfirmados(SchemaIT.java:58)
+
+[ERROR] ar.edu.utn.odontologia.persistencia.SchemaIT.restriccionesRealesConservanDatosConfirmados(String, String, String)[6] -- Time elapsed: 0.035 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: Expected java.sql.SQLException to be thrown, but nothing was thrown.
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:159)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:74)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3223)
+	at ar.edu.utn.odontologia.persistencia.SchemaIT.restriccionesRealesConservanDatosConfirmados(SchemaIT.java:58)
+
+[ERROR] ar.edu.utn.odontologia.persistencia.SchemaIT.restriccionesRealesConservanDatosConfirmados(String, String, String)[7] -- Time elapsed: 0.041 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: Expected java.sql.SQLException to be thrown, but nothing was thrown.
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:159)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:74)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3223)
+	at ar.edu.utn.odontologia.persistencia.SchemaIT.restriccionesRealesConservanDatosConfirmados(SchemaIT.java:58)
+
+[ERROR] ar.edu.utn.odontologia.persistencia.SchemaIT.restriccionesRealesConservanDatosConfirmados(String, String, String)[8] -- Time elapsed: 0.035 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: Expected java.sql.SQLException to be thrown, but nothing was thrown.
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:159)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:74)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3223)
+	at ar.edu.utn.odontologia.persistencia.SchemaIT.restriccionesRealesConservanDatosConfirmados(SchemaIT.java:58)
+
+[ERROR] ar.edu.utn.odontologia.persistencia.SchemaIT.restriccionesRealesConservanDatosConfirmados(String, String, String)[9] -- Time elapsed: 0.033 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: Expected java.sql.SQLException to be thrown, but nothing was thrown.
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:159)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:74)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3223)
+	at ar.edu.utn.odontologia.persistencia.SchemaIT.restriccionesRealesConservanDatosConfirmados(SchemaIT.java:58)
+
+[ERROR] ar.edu.utn.odontologia.persistencia.SchemaIT.restriccionesRealesConservanDatosConfirmados(String, String, String)[10] -- Time elapsed: 0.033 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: Expected java.sql.SQLException to be thrown, but nothing was thrown.
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:159)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:74)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3223)
+	at ar.edu.utn.odontologia.persistencia.SchemaIT.restriccionesRealesConservanDatosConfirmados(SchemaIT.java:58)
+
+[ERROR] ar.edu.utn.odontologia.persistencia.SchemaIT.restriccionesRealesConservanDatosConfirmados(String, String, String)[11] -- Time elapsed: 0.045 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: Expected java.sql.SQLException to be thrown, but nothing was thrown.
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:159)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:74)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3223)
+	at ar.edu.utn.odontologia.persistencia.SchemaIT.restriccionesRealesConservanDatosConfirmados(SchemaIT.java:58)
+
+[ERROR] ar.edu.utn.odontologia.persistencia.SchemaIT.restriccionesRealesConservanDatosConfirmados(String, String, String)[12] -- Time elapsed: 0.036 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: Expected java.sql.SQLException to be thrown, but nothing was thrown.
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:159)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:74)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3223)
+	at ar.edu.utn.odontologia.persistencia.SchemaIT.restriccionesRealesConservanDatosConfirmados(SchemaIT.java:58)
+
+[ERROR] ar.edu.utn.odontologia.persistencia.SchemaIT.restriccionesRealesConservanDatosConfirmados(String, String, String)[13] -- Time elapsed: 0.032 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: Expected java.sql.SQLException to be thrown, but nothing was thrown.
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:159)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:74)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3223)
+	at ar.edu.utn.odontologia.persistencia.SchemaIT.restriccionesRealesConservanDatosConfirmados(SchemaIT.java:58)
+
+[ERROR] ar.edu.utn.odontologia.persistencia.SchemaIT.restriccionesRealesConservanDatosConfirmados(String, String, String)[14] -- Time elapsed: 0.033 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: Expected java.sql.SQLException to be thrown, but nothing was thrown.
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:159)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:74)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3223)
+	at ar.edu.utn.odontologia.persistencia.SchemaIT.restriccionesRealesConservanDatosConfirmados(SchemaIT.java:58)
+
+[ERROR] ar.edu.utn.odontologia.persistencia.SchemaIT.restriccionesRealesConservanDatosConfirmados(String, String, String)[15] -- Time elapsed: 0.029 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: Expected java.sql.SQLException to be thrown, but nothing was thrown.
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:159)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:74)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3223)
+	at ar.edu.utn.odontologia.persistencia.SchemaIT.restriccionesRealesConservanDatosConfirmados(SchemaIT.java:58)
+
+[ERROR] ar.edu.utn.odontologia.persistencia.SchemaIT.restriccionesRealesConservanDatosConfirmados(String, String, String)[16] -- Time elapsed: 0.032 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: Expected java.sql.SQLException to be thrown, but nothing was thrown.
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:159)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:74)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3223)
+	at ar.edu.utn.odontologia.persistencia.SchemaIT.restriccionesRealesConservanDatosConfirmados(SchemaIT.java:58)
+
+[ERROR] ar.edu.utn.odontologia.persistencia.SchemaIT.restriccionesRealesConservanDatosConfirmados(String, String, String)[17] -- Time elapsed: 0.029 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: Expected java.sql.SQLException to be thrown, but nothing was thrown.
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:159)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:74)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3223)
+	at ar.edu.utn.odontologia.persistencia.SchemaIT.restriccionesRealesConservanDatosConfirmados(SchemaIT.java:58)
+
+[ERROR] ar.edu.utn.odontologia.persistencia.SchemaIT.restriccionesRealesConservanDatosConfirmados(String, String, String)[18] -- Time elapsed: 0.032 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: Expected java.sql.SQLException to be thrown, but nothing was thrown.
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:159)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:74)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3223)
+	at ar.edu.utn.odontologia.persistencia.SchemaIT.restriccionesRealesConservanDatosConfirmados(SchemaIT.java:58)
+
+[ERROR] ar.edu.utn.odontologia.persistencia.SchemaIT.restriccionesRealesConservanDatosConfirmados(String, String, String)[19] -- Time elapsed: 0.029 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: Expected java.sql.SQLException to be thrown, but nothing was thrown.
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:159)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:74)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3223)
+	at ar.edu.utn.odontologia.persistencia.SchemaIT.restriccionesRealesConservanDatosConfirmados(SchemaIT.java:58)
+
+[ERROR] ar.edu.utn.odontologia.persistencia.SchemaIT.restriccionesRealesConservanDatosConfirmados(String, String, String)[20] -- Time elapsed: 0.032 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: Expected java.sql.SQLException to be thrown, but nothing was thrown.
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:159)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:74)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3223)
+	at ar.edu.utn.odontologia.persistencia.SchemaIT.restriccionesRealesConservanDatosConfirmados(SchemaIT.java:58)
+
+[ERROR] ar.edu.utn.odontologia.persistencia.SchemaIT.restriccionesRealesConservanDatosConfirmados(String, String, String)[21] -- Time elapsed: 0.029 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: Expected java.sql.SQLException to be thrown, but nothing was thrown.
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:159)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:74)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3223)
+	at ar.edu.utn.odontologia.persistencia.SchemaIT.restriccionesRealesConservanDatosConfirmados(SchemaIT.java:58)
+
+[ERROR] ar.edu.utn.odontologia.persistencia.SchemaIT.restriccionesRealesConservanDatosConfirmados(String, String, String)[22] -- Time elapsed: 0.027 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: Expected java.sql.SQLException to be thrown, but nothing was thrown.
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:159)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:74)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3223)
+	at ar.edu.utn.odontologia.persistencia.SchemaIT.restriccionesRealesConservanDatosConfirmados(SchemaIT.java:58)
+
+[ERROR] ar.edu.utn.odontologia.persistencia.SchemaIT.restriccionesRealesConservanDatosConfirmados(String, String, String)[23] -- Time elapsed: 0.028 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: Expected java.sql.SQLException to be thrown, but nothing was thrown.
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:159)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:74)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3223)
+	at ar.edu.utn.odontologia.persistencia.SchemaIT.restriccionesRealesConservanDatosConfirmados(SchemaIT.java:58)
+
+[ERROR] ar.edu.utn.odontologia.persistencia.SchemaIT.restriccionesRealesConservanDatosConfirmados(String, String, String)[24] -- Time elapsed: 0.036 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: Expected java.sql.SQLException to be thrown, but nothing was thrown.
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:159)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:74)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3223)
+	at ar.edu.utn.odontologia.persistencia.SchemaIT.restriccionesRealesConservanDatosConfirmados(SchemaIT.java:58)
+
+[INFO] 
+[INFO] Results:
+[INFO] 
+[ERROR] Failures: 
+[ERROR]   SchemaIT.restriccionesRealesConservanDatosConfirmados:58 Expected java.sql.SQLException to be thrown, but nothing was thrown.
+[ERROR]   SchemaIT.restriccionesRealesConservanDatosConfirmados:58 Expected java.sql.SQLException to be thrown, but nothing was thrown.
+[ERROR]   SchemaIT.restriccionesRealesConservanDatosConfirmados:58 Expected java.sql.SQLException to be thrown, but nothing was thrown.
+[ERROR]   SchemaIT.restriccionesRealesConservanDatosConfirmados:58 Expected java.sql.SQLException to be thrown, but nothing was thrown.
+[ERROR]   SchemaIT.restriccionesRealesConservanDatosConfirmados:58 Expected java.sql.SQLException to be thrown, but nothing was thrown.
+[ERROR]   SchemaIT.restriccionesRealesConservanDatosConfirmados:58 Expected java.sql.SQLException to be thrown, but nothing was thrown.
+[ERROR]   SchemaIT.restriccionesRealesConservanDatosConfirmados:58 Expected java.sql.SQLException to be thrown, but nothing was thrown.
+[ERROR]   SchemaIT.restriccionesRealesConservanDatosConfirmados:58 Expected java.sql.SQLException to be thrown, but nothing was thrown.
+[ERROR]   SchemaIT.restriccionesRealesConservanDatosConfirmados:58 Expected java.sql.SQLException to be thrown, but nothing was thrown.
+[ERROR]   SchemaIT.restriccionesRealesConservanDatosConfirmados:58 Expected java.sql.SQLException to be thrown, but nothing was thrown.
+[ERROR]   SchemaIT.restriccionesRealesConservanDatosConfirmados:58 Expected java.sql.SQLException to be thrown, but nothing was thrown.
+[ERROR]   SchemaIT.restriccionesRealesConservanDatosConfirmados:58 Expected java.sql.SQLException to be thrown, but nothing was thrown.
+[ERROR]   SchemaIT.restriccionesRealesConservanDatosConfirmados:58 Expected java.sql.SQLException to be thrown, but nothing was thrown.
+[ERROR]   SchemaIT.restriccionesRealesConservanDatosConfirmados:58 Expected java.sql.SQLException to be thrown, but nothing was thrown.
+[ERROR]   SchemaIT.restriccionesRealesConservanDatosConfirmados:58 Expected java.sql.SQLException to be thrown, but nothing was thrown.
+[ERROR]   SchemaIT.restriccionesRealesConservanDatosConfirmados:58 Expected java.sql.SQLException to be thrown, but nothing was thrown.
+[ERROR]   SchemaIT.restriccionesRealesConservanDatosConfirmados:58 Expected java.sql.SQLException to be thrown, but nothing was thrown.
+[ERROR]   SchemaIT.restriccionesRealesConservanDatosConfirmados:58 Expected java.sql.SQLException to be thrown, but nothing was thrown.
+[ERROR]   SchemaIT.restriccionesRealesConservanDatosConfirmados:58 Expected java.sql.SQLException to be thrown, but nothing was thrown.
+[ERROR]   SchemaIT.restriccionesRealesConservanDatosConfirmados:58 Expected java.sql.SQLException to be thrown, but nothing was thrown.
+[ERROR]   SchemaIT.restriccionesRealesConservanDatosConfirmados:58 Expected java.sql.SQLException to be thrown, but nothing was thrown.
+[ERROR]   SchemaIT.restriccionesRealesConservanDatosConfirmados:58 Expected java.sql.SQLException to be thrown, but nothing was thrown.
+[ERROR]   SchemaIT.restriccionesRealesConservanDatosConfirmados:58 Expected java.sql.SQLException to be thrown, but nothing was thrown.
+[ERROR]   SchemaIT.restriccionesRealesConservanDatosConfirmados:58 Expected java.sql.SQLException to be thrown, but nothing was thrown.
+[INFO] 
+[ERROR] Tests run: 24, Failures: 24, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- failsafe:3.6.1:verify (default-cli) @ agenda-dominio ---
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  4.796 s
+[INFO] Finished at: 2026-11-19T14:27:08-03:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-failsafe-plugin:3.6.1:verify (default-cli) on project agenda-dominio: There are test failures.
+[ERROR] 
+[ERROR] See /Users/giovita/.codex/worktrees/c-01-dominio/Integrador odonto/backend/target/failsafe-reports for the individual test results.
+[ERROR] See dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
