@@ -2,7 +2,7 @@
 
 Proyecto integrador de Desarrollo de Software de UTN: sistema de gestión de turnos para un consultorio de una sede con varios odontólogos.
 
-**Estado:** C-01 completado, archivado e integrado. C-02 implementado y verificado localmente, pendiente de archivo e integración; el resto del roadmap sigue pendiente. El backend aún no ofrece una aplicación HTTP ni interfaz.
+**Estado:** C-01 completado, archivado e integrado. C-02 completado, archivado e integrado en main local; el resto del roadmap sigue pendiente. El backend aún no ofrece una aplicación HTTP ni interfaz.
 
 ## Alcance aprobado
 
@@ -58,7 +58,7 @@ cd odontologia-turnos
 
 C-01 incorpora [el módulo de dominio](backend/README.md), con JDK 25 y Maven como requisitos. Desde la raíz: `mvn -f backend/pom.xml test` o `mvn -f backend/pom.xml clean verify`. C-02 incorpora PostgreSQL real para referencias mínimas, sin servidor HTTP, API ni interfaz. La primera ejecución descarga las dependencias de pruebas. La [evidencia Verify](openspec/changes/archive/2026-11-19-crear-turno-sin-solapamientos-dominio/evidence/verify.md) conserva resultados y límites.
 
-OpenSpec ya tiene su configuración documental en [openspec/config.yaml](openspec/config.yaml) y seis skills de proyecto en `.agents/skills/`. C-02 (`persistencia-base-postgresql`) está activo, implementado y verificado localmente, pendiente de archivo e integración. C-01 (`crear-turno-sin-solapamientos-dominio`) está implementado, verificado y archivado; su spec vigente está en `openspec/specs/disponibilidad-de-turnos/spec.md`. El CLI OpenSpec debe estar disponible en el entorno para trabajar con ese flujo; su instalación no se realiza al clonar.
+OpenSpec ya tiene su configuración documental en [openspec/config.yaml](openspec/config.yaml) y seis skills de proyecto en `.agents/skills/`. C-02 (`persistencia-base-postgresql`) está implementado, verificado, archivado e integrado en main local; su spec vigente está en `openspec/specs/persistencia-de-referencias/spec.md`. C-01 (`crear-turno-sin-solapamientos-dominio`) está implementado, verificado y archivado; su spec vigente está en `openspec/specs/disponibilidad-de-turnos/spec.md`. El CLI OpenSpec debe estar disponible en el entorno para trabajar con ese flujo; su instalación no se realiza al clonar.
 
 Los scripts de Discovery son utilidades documentales, no pruebas del producto. [compilar_investigacion.py](docs/discovery/compilar_investigacion.py) usa Python y el helper global `web-scraper/scripts/slugify.py` de `~/.agents/skills/`. [generar_pdf.py](docs/discovery/generar_pdf.py) usa ReportLab; el PDF requiere además renderizado e inspección visual después de regenerarlo. Si faltan esas dependencias, los documentos ya generados pueden consultarse sin ejecutar los scripts.
 
@@ -72,4 +72,4 @@ Se permiten compilación, pruebas y commits autónomos dentro del alcance autori
 
 La revisión personal de al menos cinco fuentes, la reflexión de los integrantes y demás evidencias humanas siguen pendientes. Las verificaciones del agente no las sustituyen.
 
-C-02: [ejecución del backend](backend/README.md) y [Verify](openspec/changes/persistencia-base-postgresql/evidence/verify.md). La verificación completa exige Docker y usa PostgreSQL temporal; el entorno de desarrollo requiere credenciales locales privadas.
+C-02: [ejecución del backend](backend/README.md) y [Verify](openspec/changes/archive/2026-11-19-persistencia-base-postgresql/evidence/verify.md). La verificación completa exige Docker y usa PostgreSQL temporal; el entorno de desarrollo requiere credenciales locales privadas.
