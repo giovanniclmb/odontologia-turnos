@@ -2,7 +2,7 @@
 
 Proyecto integrador de Desarrollo de Software de UTN: sistema de gestión de turnos para un consultorio de una sede con varios odontólogos.
 
-**Estado:** C-01 elegido por Giovanni, aprobado e implementado como dominio Java aislado. Sus 55 pruebas y `clean verify` pasaron. Está pendiente de archivo e integración en main; el resto del roadmap describe trabajo futuro, no una aplicación ya disponible.
+**Estado:** C-01 elegido por Giovanni, aprobado e implementado como dominio Java aislado. Sus 55 pruebas y `clean verify` pasaron. Está archivado; pendiente de integración en main; el resto del roadmap describe trabajo futuro, no una aplicación ya disponible.
 
 ## Alcance aprobado
 
@@ -55,9 +55,9 @@ cd odontologia-turnos
 
 ## Ejecución y pruebas
 
-C-01 incorpora [el módulo de dominio](backend/README.md), con JDK 25 y Maven como requisitos. Desde la raíz: `mvn -f backend/pom.xml test` o `mvn -f backend/pom.xml clean verify`. Todavía no hay servidor, API, interfaz ni PostgreSQL. La primera ejecución descarga las dependencias de pruebas. La [evidencia Verify](openspec/changes/crear-turno-sin-solapamientos-dominio/evidence/verify.md) conserva resultados y límites.
+C-01 incorpora [el módulo de dominio](backend/README.md), con JDK 25 y Maven como requisitos. Desde la raíz: `mvn -f backend/pom.xml test` o `mvn -f backend/pom.xml clean verify`. Todavía no hay servidor, API, interfaz ni PostgreSQL. La primera ejecución descarga las dependencias de pruebas. La [evidencia Verify](openspec/changes/archive/2026-11-19-crear-turno-sin-solapamientos-dominio/evidence/verify.md) conserva resultados y límites.
 
-OpenSpec ya tiene su configuración documental en [openspec/config.yaml](openspec/config.yaml) y seis skills de proyecto en `.agents/skills/`. Hay un change activo: `crear-turno-sin-solapamientos-dominio`, implementado y verificado, pendiente de archivo. El CLI OpenSpec debe estar disponible en el entorno para trabajar con ese flujo; su instalación no se realiza al clonar.
+OpenSpec ya tiene su configuración documental en [openspec/config.yaml](openspec/config.yaml) y seis skills de proyecto en `.agents/skills/`. No hay changes activos. C-01 archivado: `crear-turno-sin-solapamientos-dominio`, implementado y verificado, archivado. El CLI OpenSpec debe estar disponible en el entorno para trabajar con ese flujo; su instalación no se realiza al clonar.
 
 Los scripts de Discovery son utilidades documentales, no pruebas del producto. [compilar_investigacion.py](docs/discovery/compilar_investigacion.py) usa Python y el helper global `web-scraper/scripts/slugify.py` de `~/.agents/skills/`. [generar_pdf.py](docs/discovery/generar_pdf.py) usa ReportLab; el PDF requiere además renderizado e inspección visual después de regenerarlo. Si faltan esas dependencias, los documentos ya generados pueden consultarse sin ejecutar los scripts.
 
