@@ -28,17 +28,17 @@ mvn -f backend/pom.xml clean verify
 2. Actualizar main local y crear una rama por change. Para Codex, usar `codex/c-02-persistencia` como ejemplo; el ID y el nombre deben corresponder al change real.
 3. Aplicar TDD a las reglas de negocio. Crear commits atómicos por tarea con mensajes concretos que expliquen propósito y resultado.
 4. Abrir un PR hacia main con la plantilla; incluir dependencias, verificación y evidencia. Solicitar revisión a Giovanni; CODEOWNERS también la solicita automáticamente al marcar listo un PR.
-5. Integrar mediante PR cuando `backend-verify` termine correctamente, la rama esté actualizada respecto de main y Giovanni apruebe. Un cambio posterior invalida la aprobación anterior y requiere nueva revisión.
+5. Integrar mediante PR cuando `backend-verify` termine correctamente, la rama esté actualizada respecto de main y, si el autor es otro integrante, Giovanni apruebe. Los PRs de Giovanni no requieren aprobación de revisión. En los PRs de colaboradores, un cambio posterior invalida la aprobación anterior y requiere nueva revisión.
 
-No asumir que tener escritura permite hacer push directo a main. La protección exige PR, aprobación del propietario de código y CI; no permite force push ni borrar main. No se exige historial lineal: los merges preservan el trabajo integrado como ya ocurrió con C-01.
+No asumir que tener escritura permite hacer push directo a main. Para colaboradores, la protección exige PR, aprobación de Giovanni y CI; no permite force push ni borrar main. Giovanni conserva la exención administrativa de revisión descrita abajo. No se exige historial lineal: los merges preservan el trabajo integrado como ya ocurrió con C-01.
 
-## PRs de Giovanni y excepción administrativa
+## Cambios de Giovanni sin aprobación de revisión
 
-GitHub no permite al autor aprobar su propio PR. Por decisión del usuario, los PRs cuyo autor sea Giovanni mantienen CI obligatorio como política del equipo y requieren una excepción explícita documentada al integrar. Giovanni conserva la capacidad administrativa de omitir la protección; no se aplica la regla a administradores para que esa excepción sea posible.
+Por decisión expresa del líder el 19/11/2026, los PRs de Giovanni no requieren autoaprobación, aprobación de otro integrante ni autorización adicional de excepción para cada PR. Si la tarea autoriza integrar su cambio y el CI del commit está correcto, el agente puede usar la facultad administrativa necesaria sin volver a pedir permiso de revisión.
 
-La excepción no se ejecuta automáticamente ni se interpreta como permiso para omitir un CI fallido. Registrar en el PR: motivo, autorización explícita y enlace al CI correcto del commit que se integra. Un agente debe solicitar esa autorización para el PR concreto antes de usar bypass. Para PRs de colaboradores, Giovanni aprueba normalmente; no usar bypass para sustituir esa revisión.
+Se mantienen PR para trazabilidad, CI correcto, dependencias del roadmap y reglas del proyecto. Los PRs de Fabi, Luciano y Sofia sí requieren la aprobación de Giovanni. Esta exención de revisión no elimina la regla de pedir explícitamente cada push al usuario, ni autoriza por sí sola un merge que no forme parte de la tarea solicitada.
 
-Limitación técnica: el bypass administrativo puede omitir más controles que la sola aprobación. Su uso está acotado por este procedimiento; GitHub no restringe esa capacidad únicamente a PRs propios en esta configuración.
+Implementación en GitHub: `enforce_admins=false` permite al propietario integrar sin satisfacer la aprobación requerida por CODEOWNERS. Los demás colaboradores no tienen administración y quedan sujetos a revisión. Limitación técnica: la capacidad administrativa puede omitir también otros controles; el procedimiento del equipo conserva CI correcto y no autoriza saltarse pruebas fallidas.
 
 ## CI y cambios compartidos
 

@@ -64,7 +64,7 @@ Los scripts de Discovery son utilidades documentales, no pruebas del producto. [
 
 ## Trabajo del equipo
 
-Guía: [CONTRIBUTING.md](CONTRIBUTING.md). GitHub: Giovanni `@giovanniclmb`, Fabi `@FabianoRamos05`, Luciano `@Dreamboy2006` y Sofia `@jowy0`. Política aprobada: colaboradores con escritura; PR con aprobación de Giovanni y CI correcto; para sus propios PRs, excepción explícita documentada al integrar.
+Guía: [CONTRIBUTING.md](CONTRIBUTING.md). GitHub: Giovanni `@giovanniclmb`, Fabi `@FabianoRamos05`, Luciano `@Dreamboy2006` y Sofia `@jowy0`. Política aprobada: colaboradores con escritura; PR con aprobación de Giovanni y CI correcto; sus propios PRs están exentos de aprobación, con CI correcto y trazabilidad mediante PR.
 
 El equipo está integrado por Giovanni (líder y propietario del repositorio), Sofia, Luciano y Fabi, con autorización docente informada para trabajar de a cuatro. Giovanni implementará la base y la lógica central de agenda; el reparto de los 25 changes está aprobado y figura en el plan de colaboración. El [plan de colaboración](docs/plan-colaboracion.md) registra la política aprobada de propuestas y contratos en paralelo, con implementación tras integrar las dependencias, y las recomendaciones docentes adaptadas. La entrega está prevista para el 25/11/2026. Completar el backlog entero no es un requisito del único change académico.
 
