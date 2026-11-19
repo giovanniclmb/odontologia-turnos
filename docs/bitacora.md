@@ -155,3 +155,7 @@ Se crearon CONTRIBUTING.md, CODEOWNERS con Giovanni como revisor, plantilla de P
 ## Aprobación del reparto nominal
 
 Fecha: 19/11/2026. Giovanni confirmó: «El reparto de changes queda aprobado». Se consolidó la distribución previamente presentada: Giovanni C-01/C-02/C-06/C-07/C-08/C-14/C-25; Sofia C-04/C-09/C-16/C-21/C-22/C-24; Luciano C-05/C-10/C-12/C-13/C-15/C-23; Fabi C-03/C-11/C-17/C-18/C-19/C-20. CHANGES incorpora responsables y once ondas orientativas sin alterar dependencias o alcances. C-01 sigue completado. La aprobación no inicia código CRITICO, no publica Issues y no autoriza un nuevo push. Permanecen pendientes disponibilidad, defensa y elección de seguimiento remoto.
+
+## Exención de revisión para el líder
+
+Fecha: 19/11/2026. Giovanni indicó: «mis pushes no deben ser aprobados por mi mismo. Cada cambio mio va sin aprobar, al ser el lider». Se sustituye la exigencia anterior de excepción explícita por PR propio: sus cambios no requieren aprobación de revisión y el agente no volverá a solicitar esa excepción cuando la tarea autorice integrar. Se mantienen CI correcto, trazabilidad por PR y pedido explícito de push. Los colaboradores requieren aprobación de Giovanni. La configuración remota ya tenía enforce_admins=false y se verificó, por lo que no fue necesario modificar permisos. Documentación actualizada localmente; sin nuevo push ni merge.

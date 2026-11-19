@@ -95,7 +95,7 @@ Antes de introducir migraciones, acordar herramienta, propietario y asignación 
 
 Los usuarios ya están confirmados y las invitaciones de escritura fueron enviadas el 19/11/2026: Fabi @FabianoRamos05, Luciano @Dreamboy2006 y Sofia @jowy0. Cada integrante debe aceptar su invitación; Giovanni mantiene la administración.
 
-Política aprobada: PR hacia main, aprobación de Giovanni mediante CODEOWNERS y CI backend-verify correcto, con rama actualizada. La excepción administrativa de los PRs propios requiere autorización explícita para cada integración y CI correcto, según [CONTRIBUTING.md](../CONTRIBUTING.md). Las Actions se fijan por SHA y se ejecutan con permisos de lectura.
+Política aprobada: PR hacia main, aprobación de Giovanni mediante CODEOWNERS y CI backend-verify correcto, con rama actualizada. Los PRs de Giovanni no requieren aprobación ni autorización de excepción por PR; conservan CI correcto, según [CONTRIBUTING.md](../CONTRIBUTING.md). Las Actions se fijan por SHA y se ejecutan con permisos de lectura.
 
 Se prepara la publicación de esta configuración y C-01, seguida de la comprobación del primer CI remoto y la activación de protección. La evidencia de preparación distingue política aprobada de estado remoto observado; GitHub conserva la configuración efectiva. El permiso de push otorgado es solo para esta publicación inicial, no permanente.
 
@@ -108,7 +108,7 @@ Revisar al integrar cada change: dependencias desbloqueadas, bloqueos de contrat
 Pendientes para cerrar el planning:
 
 1. Recoger perfiles y disponibilidad para estimar fechas reales; el reparto nominal ya está aprobado. Cualquier ajuste posterior requiere un nuevo acuerdo.
-2. Revisión e integración acordadas: aprobación de Giovanni y CI, con excepción propia explícita. El reparto ya está aprobado; queda pendiente elegir Issues/Projects.
+2. Revisión e integración acordadas: aprobación de Giovanni y CI para los colaboradores; sus propios PRs están exentos de aprobación y mantienen CI. El reparto ya está aprobado; queda pendiente elegir Issues/Projects.
 3. PA-13 resuelta: C-01 elegido y completado. Resolver las preguntas bloqueantes del siguiente change antes de implementar.
 4. Completar PA-10 sobre reparto, defensa y respaldo de la excepción docente si lo requiere la cátedra. La verificación personal de fuentes y la reflexión siguen a cargo de los integrantes.
 
@@ -123,6 +123,6 @@ Se mantienen las reglas del producto: recepción adjudica huecos; un aviso no re
 | Luciano | @Dreamboy2006 |
 | Sofia | @jowy0 |
 
-El usuario aprobó invitar a los tres como colaboradores con escritura, exigir PR con aprobación de Giovanni y CI correcto, y publicar main con C-01 y esta configuración tras verificarla. Para PRs propios de Giovanni se acordó una excepción explícita al integrar: no puede autoaprobarse. La capacidad administrativa de bypass se conserva y su uso debe documentarse para el PR concreto, con CI correcto; no es autorización permanente para omitir controles.
+El usuario aprobó invitar a los tres como colaboradores con escritura, exigir PR con aprobación de Giovanni y CI correcto, y publicar main con C-01 y esta configuración tras verificarla. Giovanni corrigió posteriormente la política: sus cambios no requieren autoaprobación ni aprobación adicional, y no se pide excepción individual por PR. Se conserva la facultad administrativa para integrar sus PRs cuando la tarea lo autorice, con CI correcto; no habilita omitir pruebas fallidas ni hacer pushes no pedidos.
 
 [CONTRIBUTING.md](../CONTRIBUTING.md) contiene el procedimiento vigente. CODEOWNERS requiere la revisión de Giovanni para todo el repositorio, sin asignar implementación por áreas. CI usa el build Maven/Java 25 ya incorporado en C-01. Estas decisiones sustituyen los pendientes de usuarios, revisión y CI de las secciones anteriores; perfiles, disponibilidad e Issues/Projects continúan pendientes. El reparto de changes fue aprobado posteriormente en esta misma fecha. La evidencia de configuración distingue invitaciones pendientes de colaboradores activos y configuración preparada de configuración aplicada.

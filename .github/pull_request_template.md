@@ -17,4 +17,4 @@ Evidencia y limitaciones:
 - [ ] Respeta el alcance y las dependencias del roadmap.
 - [ ] Pruebas pertinentes ejecutadas y CI backend-verify correcto.
 - [ ] Usa datos ficticios y no incorpora secretos.
-- [ ] Aprobación de Giovanni; si él es autor, excepción explícita documentada antes de integrar.
+- [ ] Aprobación de Giovanni cuando el autor sea otro integrante; sus propios PRs están exentos de aprobación.
