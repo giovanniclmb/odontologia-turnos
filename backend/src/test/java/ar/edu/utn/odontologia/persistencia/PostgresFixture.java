@@ -49,6 +49,10 @@ public final class PostgresFixture implements AutoCloseable {
         }
     }
 
+    static {
+        java.util.TimeZone.setDefault(java.util.TimeZone.getTimeZone("UTC"));
+    }
+
     public String jdbcUrl() {
         return container.getJdbcUrl();
     }

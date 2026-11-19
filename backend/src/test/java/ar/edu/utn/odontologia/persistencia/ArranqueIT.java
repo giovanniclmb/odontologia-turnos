@@ -122,7 +122,7 @@ class ArranqueIT {
         try(var aislada=PostgresFixture.start()){
             String sql=Files.readString(Path.of("src/main/resources/db/migration/V1__referencias_base.sql"));
             Files.writeString(temporal.resolve("V1__referencias_base.sql"),sql);
-            Files.writeString(temporal.resolve("V2__futura.sql"),"SELECT 1;\n");
+            Files.writeString(temporal.resolve("V2__futura.sql"),"CREATE TABLE odontologia.usuario (id uuid PRIMARY KEY, nombre_usuario text NOT NULL, hash_credencial text NOT NULL, rol text NOT NULL, activo boolean NOT NULL DEFAULT true, profesional_ref uuid NULL, creado_en timestamptz NOT NULL); CREATE TABLE odontologia.token_acceso (id uuid PRIMARY KEY, usuario_id uuid NOT NULL REFERENCES odontologia.usuario(id), hash_token text NOT NULL, creado_en timestamptz NOT NULL, expira_en timestamptz NOT NULL, revocado boolean NOT NULL DEFAULT false); SELECT 1;\n");
             try(var c=abrir(aislada,Map.of("spring.flyway.locations","filesystem:"+temporal))){}
             var error=assertThrows(RuntimeException.class,()->{try(var c=abrir(aislada,Map.of())){} });
             assertTrue(cadena(error).toLowerCase(Locale.ROOT).contains("migration"));

@@ -22,7 +22,8 @@ class ArranqueJarIT {
                 });
                 assertTrue(process.waitFor(30,TimeUnit.SECONDS),"El proceso no-web debe terminar");
                 String log=output.get(5,TimeUnit.SECONDS);
-                assertEquals(0,process.exitValue(),"El JAR debe poder arrancar con el entorno de prueba");
+                System.out.println("JAR_OUTPUT_START\n" + log + "\nJAR_OUTPUT_END");
+        assertEquals(0,process.exitValue(),"El JAR debe poder arrancar con el entorno de prueba");
                 assertTrue(log.contains("Started OdontologiaApplication"));
                 assertFalse(log.contains("Tomcat started"));assertFalse(log.contains("Jetty started"));
                 assertFalse(log.contains(db.appPassword()));assertFalse(log.contains(db.migrationPassword()));

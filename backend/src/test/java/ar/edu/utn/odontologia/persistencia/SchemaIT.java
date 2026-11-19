@@ -24,11 +24,11 @@ class SchemaIT {
         var f = flyway();
         f.migrate();
         try (var c = db.migrationConnection(); var st = c.createStatement()) {
-            var rs = st.executeQuery("select count(*) from information_schema.tables where table_schema='odontologia' and table_name in ('paciente','profesional','sillon','prestacion')");
-            assertTrue(rs.next()); assertEquals(4, rs.getInt(1));
+            var rs = st.executeQuery("select count(*) from information_schema.tables where table_schema='odontologia' and table_name in ('paciente','profesional','sillon','prestacion','usuario','token_acceso')");
+            assertTrue(rs.next()); assertEquals(6, rs.getInt(1));
         }
         assertEquals(0, f.migrate().migrationsExecuted);
-        assertEquals(1, f.info().applied().length);
+        assertEquals(2, f.info().applied().length);
     }
 
     @ParameterizedTest @ValueSource(strings={"paciente","profesional","sillon","prestacion"})
