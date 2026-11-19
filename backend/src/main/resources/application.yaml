@@ -1,0 +1,37 @@
+spring:
+  application:
+    name: odontologia-turnos
+  main:
+    web-application-type: none
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+    hikari:
+      maximum-pool-size: 3
+      connection-timeout: 1500
+      initialization-fail-timeout: 1000
+  jpa:
+    open-in-view: false
+    show-sql: false
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        default_schema: odontologia
+  sql:
+    init:
+      mode: never
+  flyway:
+    url: ${DB_URL}
+    user: ${DB_MIGRATION_USER}
+    password: ${DB_MIGRATION_PASSWORD}
+    schemas: odontologia
+    default-schema: odontologia
+    create-schemas: false
+    out-of-order: false
+    clean-disabled: true
+    validate-on-migrate: true
+    ignore-migration-patterns: ""
+    baseline-on-migrate: false
+    connect-retries: 0
