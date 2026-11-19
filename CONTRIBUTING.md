@@ -42,7 +42,7 @@ Implementación en GitHub: `enforce_admins=false` permite al propietario integra
 
 ## CI y cambios compartidos
 
-El workflow CI ejecuta `mvn --batch-mode --no-transfer-progress -f backend/pom.xml clean verify` con Temurin 25 en pushes a main y PRs hacia main, incluidos los que solo modifican documentación, para que el check requerido siempre tenga resultado. Las Actions están fijadas por SHA y el token del workflow solo tiene lectura de contenidos.
+El workflow CI ejecuta `mvn --batch-mode --no-transfer-progress -f backend/pom.xml clean verify` con Temurin 25 en pushes a main y PRs hacia main, incluidos los que solo modifican documentación, para que el check requerido siempre tenga resultado. Las Actions están fijadas por SHA. CI conserva su token con lectura de contenidos; el workflow separado de asignación solicita además escritura de Issues para aplicar el reparto aprobado.
 
 CODEOWNERS asigna a Giovanni la revisión de todos los archivos, según la política elegida. No adjudica a Giovanni la implementación de todo el backlog ni modifica las asignaciones nominales aprobadas. Coordinar cambios en build, contratos, instrucciones, configuración y futuras migraciones para evitar ediciones simultáneas incompatibles.
 
@@ -52,6 +52,6 @@ Usar pacientes y datos clínicos ficticios. No publicar secretos ni credenciales
 
 Los agentes pueden compilar, probar y crear commits dentro del trabajo autorizado; cada nuevo push requiere un pedido explícito del usuario. La autorización para publicar esta configuración inicial no constituye un permiso permanente.
 
-El reparto nominal de los 25 changes está aprobado y registrado en CHANGES.md y el plan de colaboración. La elección y creación de Issues/Projects continúa pendiente; esta aprobación no publica tareas remotas.
+El reparto nominal de los 25 changes está aprobado y registrado en CHANGES.md y el plan de colaboración. Los Issues C-02 a C-25 ya existen en GitHub; Projects no fue configurado. La [automatización de asignaciones](docs/automatizacion-asignaciones.md) aplica el reparto a Issues sin responsable cuando el integrante tiene acceso activo con escritura. Su preparación local no la activa: requiere integrar el workflow en la rama predeterminada. Una asignación no habilita implementar antes de cumplir las dependencias y aprobaciones.
 
 Fuentes: [protección de ramas](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches) y [CODEOWNERS](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners).

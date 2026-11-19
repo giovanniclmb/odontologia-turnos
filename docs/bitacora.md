@@ -169,3 +169,7 @@ Los hallazgos de entorno de pruebas, identidad ordinaria/migrador, historial fut
 ## Archivo e integración local de C-02
 
 Fecha: 19/11/2026. Tras el pedido de continuar al siguiente paso, se archivó C-02 mediante el CLI OpenSpec como `2026-11-19-persistencia-base-postgresql`, incorporando nueve requisitos y dieciocho escenarios a la especificación principal. Las 17 tareas estaban completas y ambas especificaciones pasaron validación estricta. Integración local en main mediante fast-forward desde su base limpia, conservando los commits de propuesta, implementación y evidencia. Sin push; CI remoto y actualización del Issue #3 quedan pendientes de publicación autorizada. La dependencia de C-03 queda satisfecha en el main local, no todavía en GitHub.
+
+## Preparación de asignación automática de Issues
+
+Fecha: 19/11/2026. Giovanni aprobó el diseño y la preparación local de un workflow horario y manual. Se mantiene CHANGES como fuente de responsables y CONTRIBUTING como tabla de usuarios. El asignador consulta colaboradores activos con escritura y añade únicamente responsables faltantes, sin alterar dependencias ni reemplazar asignaciones. Se incorporaron pruebas y simulación real de lectura; ver [operación y límites](automatizacion-asignaciones.md). Sin push ni activación; ejecución con token de Actions pendiente de publicación autorizada.
