@@ -2,7 +2,7 @@
 
 ## Estado de la propuesta
 
-El usuario aprobó el stack y las reglas de producto, no una arquitectura detallada. Este archivo delimita responsabilidades y decisiones pendientes; no convierte una recomendación técnica en una decisión del equipo. No hay código, migraciones ni infraestructura creados en esta fase.
+Este archivo conserva la propuesta inicial y sus límites. Las decisiones posteriores aprobadas para C-01 y C-02 se registran en los bloques correspondientes; C-02 tiene implementación y Verify local, pendiente de archivo e integración. Los puntos de otros changes siguen siendo propuestas o preguntas abiertas, no decisiones inferidas.
 
 ## Patrones aplicados o pendientes
 
@@ -81,3 +81,11 @@ La política visual permanece diferida desde el plan de fundación. Generar esta
 ## Fuentes y navegación
 
 [Decisiones aprobadas](../docs/discovery/decisiones-aprobadas.json), `constraints`, `rules` y `open_questions`; [modelo conceptual](04_modelo_de_datos.md); PA-01 a PA-09 y PA-15 a PA-21 en [preguntas abiertas](10_preguntas_abiertas.md).
+
+## Definición técnica acotada de C-02
+
+Decisiones aprobadas el 19/11/2026: Boot 4.1.2, Java 25/Maven, JPA/Hibernate con entidades separadas del dominio, Flyway SQL y PostgreSQL 18.7. El esquema odontologia contiene únicamente paciente, profesional, sillon y prestacion con UUID generado en aplicación y codigo único por tipo. Las cuentas, campos clínicos, catálogos completos, intervalo y turnos se incorporan en sus changes.
+
+Compose prepara la base local separada; el usuario aporta credenciales privadas. Testcontainers crea bases temporales y el Environment de las IT no hereda configuración Spring del anfitrión. Flyway usa migrador distinto del usuario ordinario, ambos sin superusuario; Hibernate valida el esquema. Versiones consecutivas coordinadas por Giovanni al integrar, sin out-of-order ni edición de migraciones ya aplicadas a bases compartidas. Credenciales en URL e identidades efectivas incorrectas se rechazan antes de conectar; historial futuro o checksum distinto bloquea el arranque.
+
+C-02 está implementado y verificado en su rama, pendiente de archivo e integración. Su backend no-web no publica endpoints. Estas decisiones actualizan los pendientes técnicos anteriores únicamente para este alcance; no aprueban APIs, autenticación ni despliegue productivo. Consultar backend/README.md para las variables DB_* y los comandos comprobados.

@@ -1,0 +1,30 @@
+name: odontologia-turnos
+
+services:
+  db:
+    image: postgres:18.7
+    environment:
+      POSTGRES_DB: odontologia_dev
+      POSTGRES_USER: odonto_bootstrap
+      POSTGRES_PASSWORD: ${DB_BOOTSTRAP_PASSWORD:?Definí DB_BOOTSTRAP_PASSWORD}
+      DB_PASSWORD: ${DB_PASSWORD:?Definí DB_PASSWORD}
+      DB_MIGRATION_PASSWORD: ${DB_MIGRATION_PASSWORD:?Definí DB_MIGRATION_PASSWORD}
+    ports:
+      - "127.0.0.1:${DB_PORT:-5433}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql
+      - type: bind
+        source: ./docker/postgres/10-bootstrap.sh
+        target: /docker-entrypoint-initdb.d/10-bootstrap.sh
+        read_only: true
+        bind:
+          create_host_path: false
+    healthcheck:
+      test: ["CMD-SHELL", "PGPASSWORD=\"$$DB_PASSWORD\" pg_isready -h 127.0.0.1 -U odonto_app -d \"$$POSTGRES_DB\""]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+      start_period: 10s
+
+volumes:
+  postgres_data:

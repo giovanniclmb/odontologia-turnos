@@ -1,0 +1,42 @@
+{
+  "fecha": "2026-11-19T15:38:28.290982-03:00",
+  "change": "C-02 / persistencia-base-postgresql",
+  "responsable": "Giovanni",
+  "estado": "implementado y verificado; pendiente de archivo e integración",
+  "pruebas": {
+    "unitarias": 55,
+    "integracion": 61,
+    "total": 116,
+    "fallos": 0,
+    "errores": 0,
+    "omitidas": 0
+  },
+  "comandos": [
+    "./scripts/check-docker.sh",
+    "mvn -B -ntp -f backend/pom.xml clean verify",
+    "openspec validate persistencia-base-postgresql --strict",
+    "git diff --check"
+  ],
+  "enlaces_locales_verificados": 263,
+  "filas_roadmap_sin_cambios": 25,
+  "dominio_C01_sin_cambios": true,
+  "AGENTS_igual_CLAUDE": true,
+  "revisor": {
+    "modelo": "gpt-6.2-astra",
+    "razonamiento": "medium",
+    "independiente": true,
+    "solo_lectura": true,
+    "hallazgos_corregidos": 4
+  },
+  "worker_infra": {
+    "modelo": "gpt-6.2-sol",
+    "razonamiento": "medium"
+  },
+  "CI_remoto": "pendiente de push autorizado",
+  "push_realizado": false,
+  "sha256": {
+    "backend/pom.xml": "b1835524f72835a3f4bcc7e75a7d23114c519ca0402635b5c5ed24c0d2d4c43a",
+    "openspec/changes/persistencia-base-postgresql/tasks.md": "e1980597ed36541937d6d568f607e58db226539882847e0a751dcc946bc376f7",
+    "openspec/changes/persistencia-base-postgresql/evidence/18-clean-verify.log": "cfec3237c515578126211ba46740f4d5fbf57c80d75317f840a338f5522850b4"
+  }
+}

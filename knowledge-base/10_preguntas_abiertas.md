@@ -52,3 +52,7 @@ Fuentes de las preguntas. [Discovery, secciones 2 y 7 a 11](../docs/discovery/di
 ## Resolución acotada para C-01 (19/11/2026)
 
 PA-01/PA-04: separación mínima inclusiva antes y después, para profesional y sillón; intervalo positivo explícito por invocación, sin valor inicial de producción. PA-02: el dominio recibe solo reservas ocupantes; no define estados ni su selección. PA-07: referencias opacas ficticias, sin modelo físico. PA-09: Java 25, Maven y JUnit en backend/; Spring Boot, PostgreSQL y frontend siguen pendientes. Estas precisiones no cierran las preguntas globales.
+
+## Resolución acotada para C-02 (19/11/2026)
+
+PA-07: cuatro referencias independientes, UUID generados por aplicación, código único por tipo; el modelo completo de usuarios, clínica y turnos sigue en los changes correspondientes. PA-09: Java 25, Boot 4.1.2, Maven, JPA/Hibernate, Flyway y PostgreSQL 18.7, Compose local y Testcontainers temporal aprobados. Migraciones consecutivas coordinadas al integrar, V1 inicial, sin out-of-order. Frontend y despliegue productivo siguen pendientes. C-02 implementado/Verify local no lo declara integrado ni cierra PA ajenas.

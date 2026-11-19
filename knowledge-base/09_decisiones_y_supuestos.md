@@ -80,6 +80,12 @@ Las decisiones DD provienen de respuestas explícitas del usuario, consolidadas 
 
 **Alternativas del menú**: Java 21 objetivo con JDK instalado o Java 25; se eligió Java 25. Se aprobó un worktree aislado para C-01. **Límite**: no elige Spring Boot, proveedor ni esquema de PostgreSQL. Las descripciones previas que presentan PA-13 como elección pendiente son antecedentes superados por esta decisión; las instrucciones de agentes conservan sus reglas técnicas confirmadas. Implementación y Verify permanecen separados de Archive y la integración a main.
 
+### DD-13 Persistencia base de C-02
+
+**Decisión expresa (19/11/2026)**: C-02 aprobado para Apply, con Boot 4.1.2, PostgreSQL 18.7, JPA/Hibernate, Flyway, Compose y Testcontainers. Referencias de paciente/profesional/sillón/prestación con UUID de aplicación y código único por tipo. Versiones globales consecutivas coordinadas por Giovanni al integrar; sin out-of-order. Entidades ORM separadas del dominio y usuarios de base distintos para migración y operación. Reviewer Astra/medium autorizado como alternativa a Luna para la revisión independiente de este change.
+
+**Alcance**: no-web y cuatro referencias mínimas; no cuentas, datos clínicos ni tabla de turnos. La prueba de persistencia real no implica integridad concurrente de agenda. El plan y Apply fueron aprobados; archivo, integración y push conservan sus respectivos pedidos y evidencias.
+
 ## Supuestos inferidos y límites
 
 ### SU-01 Clasificación como aplicación web

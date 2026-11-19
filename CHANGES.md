@@ -42,7 +42,7 @@ Los niveles CRITICO y ALTO requieren respetar la gobernanza del proyecto y las a
 
 ## Árbol de dependencias
 
-Dependencias completas en la tabla y en cada ficha. C-01 está implementado y verificado, archivado e integrado en main; los demás items siguen pendientes. Se conservan C-01 a C-14 y se añaden C-15 a C-25; el orden numérico no sustituye las dependencias.
+Dependencias completas en la tabla y en cada ficha. C-01 está implementado y verificado, archivado e integrado en main; C-02 está implementado, verificado, archivado e integrado en main local; los demás items siguen pendientes. Se conservan C-01 a C-14 y se añaden C-15 a C-25; el orden numérico no sustituye las dependencias.
 
 ```text
 C-01
@@ -178,7 +178,7 @@ Giovanni aprobó el reparto el 19/11/2026. Las ondas preservan las dependencias 
   - [10 Preguntas abiertas](knowledge-base/10_preguntas_abiertas.md) §PA-01, PA-02, PA-04, PA-07, PA-09 y PA-13
 
 ### [C-02] `persistencia-base-postgresql`
-- **Estado**: `[ ]` pendiente
+- **Estado**: `[x]` implementado, verificado, archivado e integrado en main local; publicación remota pendiente. [Verify](openspec/changes/archive/2026-11-19-persistencia-base-postgresql/evidence/verify.md). [Issue #3](https://github.com/giovanniclmb/odontologia-turnos/issues/3).
 - **Responsable**: Giovanni
 - **Scope**: Base mínima de persistencia para extender el dominio, sin implementar la agenda HTTP.
   - Resolver PA-07 y PA-09: versiones de Spring Boot/PostgreSQL, ejecución y estrategia de migraciones; mantener presupuesto externo cero sin elegir hosting o Docker por inferencia.

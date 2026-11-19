@@ -33,5 +33,7 @@ jobs:
           cache-dependency-path: backend/pom.xml
       - name: Verificar entorno
         run: mvn --version
+      - name: Comprobar Docker para PostgreSQL temporal
+        run: ./scripts/check-docker.sh
       - name: Compilar y ejecutar pruebas
         run: mvn --batch-mode --no-transfer-progress -f backend/pom.xml clean verify

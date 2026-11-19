@@ -1,0 +1,8 @@
+19/11/2026 | PostgreSQL 18.7 + Testcontainers 2.0.5 | Docker Desktop 29.7.2
+Comando (desde la raíz): mvn -B -ntp -f backend/pom.xml -Dit.test=BootstrapIT test-compile failsafe:integration-test failsafe:verify
+GREEN con el mismo bootstrap usado por Compose. Se confirmaron ambos roles de conexión, propietario y privilegios del esquema, y acceso limitado a la base temporal.
+Las contraseñas de prueba se generaron en memoria con caracteres especiales. Maven salió con código 0.
+14:25:59.582 [main] INFO tc.postgres:18.7 -- Container is started (JDBC URL: jdbc:postgresql://localhost:59635/odontologia_test?loggerLevel=OFF)
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.661 s -- in ar.edu.utn.odontologia.persistencia.BootstrapIT
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0
+[INFO] BUILD SUCCESS
