@@ -14,7 +14,7 @@
 
 ### Alcance, responsables y entrega
 
-El producto conserva HTML/CSS/TypeScript vanilla, Java Spring Boot y PostgreSQL. La fecha académica es 25/11/2026, con presupuesto externo cero y cuatro integrantes según autorización docente informada por el usuario. El plan usa tres carriles técnicos y un cuarto integrante posible para integración, revisión y evidencia; los nombres y la distribución real se acordarán en PA-10.
+El producto conserva HTML/CSS/TypeScript vanilla, Java Spring Boot y PostgreSQL. La fecha académica es 25/11/2026, con presupuesto externo cero y cuatro integrantes según autorización docente informada por el usuario. El reparto aprobado el 19/11/2026 asigna los 25 changes a Giovanni, Sofia, Luciano y Fabi. Los responsables y once ondas orientativas se registran abajo y en el plan de colaboración; PA-10 conserva únicamente los pendientes de defensa y respaldo académico.
 
 El backlog completo no es un compromiso de implementar las 25 fichas para esa fecha. La consigna exige un único change con reglas verificables y ciclo OPSX completo. Giovanni eligió C-01 y aprobó su propuesta y aplicación; su dominio está implementado y verificado en la rama de trabajo, archivado e integrado en main. Los demás items describen cómo extender el MVP después.
 
@@ -32,7 +32,7 @@ La revisión 2 aprobada incorpora paciente, email real de prueba, lista de esper
 | Modelo y campos pendientes, PA-06/PA-07 | No inventar DTO, tipos físicos, cardinalidades o migraciones al planificar |
 | Reprogramación fallida sin resultado acordado, PA-03 | Bloquea su spec; no elegir por inferencia qué ocurre con la reserva original |
 | Diseño visual diferido | Antes de Apply de cualquier ficha visual resolver la política visual y sus aprobaciones cuando corresponda |
-| Cuatro integrantes y reparto pendiente, PA-10 | Asignar propietarios y revisión; evitar editar simultáneamente archivos compartidos |
+| Reparto aprobado; disponibilidad y defensa pendientes, PA-10 | Respetar responsables y revisión; coordinar archivos compartidos y no inferir horas disponibles |
 | Verificación personal de cinco fuentes pendiente, PA-11 | La entrega académica no está completa por tener pruebas de software verdes |
 | Funciones y condiciones no evidenciadas de proveedores, PA-12 | Mantener el contraste competitivo pendiente; no agregar integraciones al MVP por inferencia |
 | Email, cuentas, enlaces y lista pendientes, PA-15 a PA-21 | Resolver cada contrato antes de implementarlo; no seleccionar proveedor ni permisos en el roadmap |
@@ -93,41 +93,41 @@ Los gates indican disponibilidad por dependencias, no ejecución simultánea obl
 
 ```text
 GATE 0: fuentes y alcance revisados
-  → C-01 crear-turno-sin-solapamientos-dominio [Agente A; comprobar todas sus dependencias]
+  → C-01 crear-turno-sin-solapamientos-dominio [Giovanni; comprobar todas sus dependencias]
 GATE 1: dependencias previas verificadas según tabla (nivel 1)
-  → C-02 persistencia-base-postgresql [Agente A; comprobar todas sus dependencias]
+  → C-02 persistencia-base-postgresql [Giovanni; comprobar todas sus dependencias]
 GATE 2: dependencias previas verificadas según tabla (nivel 2)
-  → C-03 acceso-y-permisos-internos [Agente A; comprobar todas sus dependencias]
+  → C-03 acceso-y-permisos-internos [Fabi; comprobar todas sus dependencias]
 GATE 3: dependencias previas verificadas según tabla (nivel 3)
-  → C-04 pacientes-y-ficha-clinica [Agente A; comprobar todas sus dependencias]
-  → C-05 recursos-prestaciones-e-intervalo [Agente B; comprobar todas sus dependencias]
+  → C-04 pacientes-y-ficha-clinica [Sofia; comprobar todas sus dependencias]
+  → C-05 recursos-prestaciones-e-intervalo [Luciano; comprobar todas sus dependencias]
 GATE 4: dependencias previas verificadas según tabla (nivel 4)
-  → C-11 interfaz-pacientes-y-ficha [Agente C; comprobar todas sus dependencias]
-  → C-15 bloqueos-de-recursos [Agente B; comprobar todas sus dependencias]
-  → C-16 cuenta-y-acceso-del-paciente [Agente A; comprobar todas sus dependencias]
+  → C-11 interfaz-pacientes-y-ficha [Fabi; comprobar todas sus dependencias]
+  → C-15 bloqueos-de-recursos [Luciano; comprobar todas sus dependencias]
+  → C-16 cuenta-y-acceso-del-paciente [Sofia; comprobar todas sus dependencias]
 GATE 5: dependencias previas verificadas según tabla (nivel 5)
-  → C-06 crear-turno-con-persistencia [Agente A; comprobar todas sus dependencias]
-  → C-21 inscripcion-y-preferencias-de-espera [Agente A; comprobar todas sus dependencias]
+  → C-06 crear-turno-con-persistencia [Giovanni; comprobar todas sus dependencias]
+  → C-21 inscripcion-y-preferencias-de-espera [Sofia; comprobar todas sus dependencias]
 GATE 6: dependencias previas verificadas según tabla (nivel 6)
-  → C-07 reprogramar-turno [Agente A; comprobar todas sus dependencias]
-  → C-08 cancelar-y-liberar-horario [Agente A; comprobar todas sus dependencias]
-  → C-09 confirmaciones-manuales [Agente B; comprobar todas sus dependencias]
-  → C-10 interfaz-agenda-y-alta [Agente C; comprobar todas sus dependencias]
-  → C-17 transporte-de-email-de-prueba [Agente B; comprobar todas sus dependencias]
+  → C-07 reprogramar-turno [Giovanni; comprobar todas sus dependencias]
+  → C-08 cancelar-y-liberar-horario [Giovanni; comprobar todas sus dependencias]
+  → C-09 confirmaciones-manuales [Sofia; comprobar todas sus dependencias]
+  → C-10 interfaz-agenda-y-alta [Luciano; comprobar todas sus dependencias]
+  → C-17 transporte-de-email-de-prueba [Fabi; comprobar todas sus dependencias]
 GATE 7: dependencias previas verificadas según tabla (nivel 7)
-  → C-12 interfaz-reprogramacion-y-cancelacion [Agente C; comprobar todas sus dependencias]
-  → C-13 interfaz-confirmaciones [Agente C; comprobar todas sus dependencias]
-  → C-18 cancelacion-del-paciente-por-enlace [Agente A; comprobar todas sus dependencias]
-  → C-22 avisos-de-huecos-y-asignacion-por-recepcion [Agente B; comprobar todas sus dependencias]
-  → C-24 interfaz-cuenta-y-lista-de-espera [Agente C; comprobar todas sus dependencias]
+  → C-12 interfaz-reprogramacion-y-cancelacion [Luciano; comprobar todas sus dependencias]
+  → C-13 interfaz-confirmaciones [Luciano; comprobar todas sus dependencias]
+  → C-18 cancelacion-del-paciente-por-enlace [Fabi; comprobar todas sus dependencias]
+  → C-22 avisos-de-huecos-y-asignacion-por-recepcion [Sofia; comprobar todas sus dependencias]
+  → C-24 interfaz-cuenta-y-lista-de-espera [Sofia; comprobar todas sus dependencias]
 GATE 8: dependencias previas verificadas según tabla (nivel 8)
-  → C-19 email-al-crear-turno [Agente B; comprobar todas sus dependencias]
-  → C-23 interfaz-cancelacion-por-enlace [Agente C; comprobar todas sus dependencias]
-  → C-25 interfaz-asignacion-de-huecos [Agente C; comprobar todas sus dependencias]
+  → C-19 email-al-crear-turno [Fabi; comprobar todas sus dependencias]
+  → C-23 interfaz-cancelacion-por-enlace [Luciano; comprobar todas sus dependencias]
+  → C-25 interfaz-asignacion-de-huecos [Giovanni; comprobar todas sus dependencias]
 GATE 9: dependencias previas verificadas según tabla (nivel 9)
-  → C-20 recordatorio-automatico-24-horas [Agente B; comprobar todas sus dependencias]
+  → C-20 recordatorio-automatico-24-horas [Fabi; comprobar todas sus dependencias]
 GATE 10: dependencias previas verificadas según tabla (nivel 10)
-  → C-14 integracion-y-ejecucion-reproducible [Agente A; comprobar todas sus dependencias]
+  → C-14 integracion-y-ejecucion-reproducible [Giovanni; comprobar todas sus dependencias]
 ```
 
 ### Camino crítico (11 changes — mínimo por precedencias)
@@ -138,31 +138,29 @@ C-01 → C-02 → C-03 → C-05 → C-15 → C-06 → C-08 → C-18 → C-19 →
 
 Es una cadena de mayor longitud del DAG usando unidades equivalentes, no una estimación en horas ni una promesa de entrega. Puede haber otras cadenas de igual longitud. C-14 integra el MVP local; no declara un despliegue clínico en producción. La entrega académica puede limitarse al único change elegido por el usuario, sin atribuirle las capacidades del resto.
 
-### Plan óptimo con 3 agentes
+### Plan aprobado con cuatro integrantes
 
-Distribución orientativa con prioridades por dependencias; no se afirma un óptimo temporal con duraciones aún desconocidas. Los carriles son funciones técnicas, no personas asignadas. El cuarto integrante puede revisar e integrar.
+Giovanni aprobó el reparto el 19/11/2026. Las ondas preservan las dependencias y consideran una tarea por integrante en cada onda; son unidades abstractas, no días ni promesa de un óptimo temporal. C-01 está completado. Se permiten propuestas y contratos anticipados, pero la implementación requiere dependencias integradas y aprobaciones de gobernanza.
 
-| Paso | Agente A Backend Core | Agente B Backend Aux | Agente C Frontend |
-| --- | --- | --- | --- |
-| 1 | C-01 | — | — |
-| 2 | C-02 | — | — |
-| 3 | C-03 | — | — |
-| 4 | C-04 | C-05 | — |
-| 5 | C-16 | C-15 | C-11 |
-| 6 | C-06 | — | — |
-| 7 | C-08 | C-17 | C-10 |
-| 8 | C-18 | C-09 | — |
-| 9 | C-21 | C-19 | C-13 |
-| 10 | C-07 | C-22 | C-23 |
-| 11 | — | C-20 | C-12 |
-| 12 | — | — | C-24 |
-| 13 | — | — | C-25 |
-| 14 | C-14 | — | — |
+| Onda | Giovanni | Sofia | Luciano | Fabi |
+| --- | --- | --- | --- | --- |
+| 1 | C-01 | — | — | — |
+| 2 | C-02 | — | — | — |
+| 3 | — | — | — | C-03 |
+| 4 | — | C-04 | C-05 | — |
+| 5 | — | C-16 | C-15 | C-11 |
+| 6 | C-06 | C-21 | — | — |
+| 7 | C-08 | C-09 | C-10 | C-17 |
+| 8 | C-07 | C-22 | C-13 | C-18 |
+| 9 | — | C-24 | C-12 | C-19 |
+| 10 | C-25 | — | C-23 | C-20 |
+| 11 | C-14 | — | — | — |
 
 ## FASE 0 — Dominio aislado y persistencia base
 
 ### [C-01] `crear-turno-sin-solapamientos-dominio`
 - **Estado**: `[x]` implementado, verificado, archivado e integrado en main. Responsable: Giovanni. Evidencia: [Verify](openspec/changes/archive/2026-11-19-crear-turno-sin-solapamientos-dominio/evidence/verify.md).
+- **Responsable**: Giovanni
 - **Scope**: Unidad de lógica de creación de un turno, elegida como único change académico por Giovanni.
   - Acordar PA-01, PA-02, PA-04 y PA-09 en el alcance mínimo necesario; identificar en PA-07 los conceptos y datos ficticios indispensables. PA-13 está resuelta por la elección de C-01; las demás preguntas se acotan al dominio según su propuesta aprobada.
   - Crear el build y el comando de pruebas Java mínimos, con versiones, herramienta y ubicación aprobadas en Propose. Definir primero las representaciones de paciente de referencia, profesional, sillón, prestación, duración y reservas relevantes para esta regla, sin persistencia física.
@@ -181,6 +179,7 @@ Distribución orientativa con prioridades por dependencias; no se afirma un ópt
 
 ### [C-02] `persistencia-base-postgresql`
 - **Estado**: `[ ]` pendiente
+- **Responsable**: Giovanni
 - **Scope**: Base mínima de persistencia para extender el dominio, sin implementar la agenda HTTP.
   - Resolver PA-07 y PA-09: versiones de Spring Boot/PostgreSQL, ejecución y estrategia de migraciones; mantener presupuesto externo cero sin elegir hosting o Docker por inferencia.
   - Integrar el módulo Java anterior en el backend Spring Boot acordado; definir el modelo físico mínimo de identidades y referencias compartidas que necesiten los siguientes changes, a partir del modelo conceptual.
@@ -200,6 +199,7 @@ Distribución orientativa con prioridades por dependencias; no se afirma un ópt
 
 ### [C-03] `acceso-y-permisos-internos`
 - **Estado**: `[ ]` pendiente
+- **Responsable**: Fabi
 - **Scope**: Identificación y autorización mínimas del equipo antes de recursos protegidos.
   - Resolver PA-05 y el alcance de usuarios/registros; aprobar mecanismo de autenticación y contrato de ingreso. No seleccionar JWT, sesiones, proveedor ni un rol superadministrador en este índice.
   - Incorporar el modelo de usuario y permisos mínimos acordados; conservar recepción lectura clínica y edición clínica exclusiva de odontólogos.
@@ -215,6 +215,7 @@ Distribución orientativa con prioridades por dependencias; no se afirma un ópt
 
 ### [C-04] `pacientes-y-ficha-clinica`
 - **Estado**: `[ ]` pendiente
+- **Responsable**: Sofia
 - **Scope**: Gestión mínima del paciente y lectura/edición de la ficha sencilla en backend.
   - Resolver PA-05, PA-06 y PA-07 para campos, operaciones y alcance por registro; no asumir permisos de eliminación.
   - Incorporar los modelos y migraciones de paciente, antecedentes y notas que se aprueben, sin odontograma ni funciones administrativas ampliadas.
@@ -231,6 +232,7 @@ Distribución orientativa con prioridades por dependencias; no se afirma un ópt
 
 ### [C-05] `recursos-prestaciones-e-intervalo`
 - **Estado**: `[ ]` pendiente
+- **Responsable**: Luciano
 - **Scope**: Configuración mínima de los recursos que necesita la agenda persistida.
   - Resolver PA-01, PA-04, PA-05, PA-08 y PA-14: intervalo, disponibilidad, cantidades, permisos y catálogo inicial.
   - Incorporar las representaciones persistidas de profesionales, sillones, prestaciones y configuración de la sede acordadas; no añadir múltiples sedes ni valores por defecto inventados.
@@ -247,6 +249,7 @@ Distribución orientativa con prioridades por dependencias; no se afirma un ópt
 
 ### [C-16] `cuenta-y-acceso-del-paciente`
 - **Estado**: `[ ]` pendiente
+- **Responsable**: Sofia
 - **Scope**: Identificación del paciente para gestionar su propia inscripción; parte de US-014 y RN-PA-01.
   - Resolver PA-16 y PA-05: habilitación o registro, verificación, vínculo con paciente y alcance por operación; no elegir JWT, sesión o proveedor en el roadmap.
   - Definir y luego implementar el contrato aprobado de cuenta, ingreso y control de acceso propio, sin extender permisos clínicos ni reservar turnos.
@@ -264,6 +267,7 @@ Distribución orientativa con prioridades por dependencias; no se afirma un ópt
 
 ### [C-15] `bloqueos-de-recursos`
 - **Estado**: `[ ]` pendiente
+- **Responsable**: Luciano
 - **Scope**: Indisponibilidad por período gestionada por recepción para US-010 y RN-AG-10.
   - Resolver PA-04/PA-19: límites temporales, concurrencia y condiciones de modificar o desbloquear; no atribuir estas últimas operaciones por inferencia.
   - Definir representación y contrato backend del bloqueo de sillón y/o profesional; rechazar si afecta turnos existentes. Hacer consultable la indisponibilidad para C-06 y C-07.
@@ -278,6 +282,7 @@ Distribución orientativa con prioridades por dependencias; no se afirma un ópt
 
 ### [C-06] `crear-turno-con-persistencia`
 - **Estado**: `[ ]` pendiente
+- **Responsable**: Giovanni
 - **Scope**: Conectar la regla de creación con pacientes, recursos y guardado real.
   - Resolver el contrato técnico y la estrategia de consistencia pendientes en PA-02, PA-04, PA-05 y PA-07; no elegir mecanismo de locking o aislamiento en el roadmap.
   - Incorporar la persistencia de turnos y la operación backend autorizada de crear/consultar agenda necesaria para US-004. Nombrar endpoints, migraciones y errores únicamente en el spec/diseño aprobados.
@@ -295,6 +300,7 @@ Distribución orientativa con prioridades por dependencias; no se afirma un ópt
 
 ### [C-07] `reprogramar-turno`
 - **Estado**: `[ ]` pendiente
+- **Responsable**: Giovanni
 - **Scope**: Modificar la asignación de un turno existente conservando su servicio.
   - Resolver PA-03 y los estados/transiciones de PA-02 antes de escribir el spec; acordar qué sucede con la reserva original y con el aviso al operador ante un fallo.
   - Implementar US-006 y RN-AG-06 sobre el contrato backend aprobado: cambiar fecha, hora, profesional o sillón conservando prestación y duración efectiva.
@@ -310,6 +316,7 @@ Distribución orientativa con prioridades por dependencias; no se afirma un ópt
 
 ### [C-08] `cancelar-y-liberar-horario`
 - **Estado**: `[ ]` pendiente
+- **Responsable**: Giovanni
 - **Scope**: Cancelación de una reserva existente y liberación inmediata de su horario.
   - Resolver PA-02 y el permiso aplicable de PA-05, incluidos los casos de repetición o turno inexistente.
   - Implementar US-007 y RN-AG-07 en la operación backend acordada, liberando el horario sin una acción manual adicional.
@@ -325,6 +332,7 @@ Distribución orientativa con prioridades por dependencias; no se afirma un ópt
 
 ### [C-09] `confirmaciones-manuales`
 - **Estado**: `[ ]` pendiente
+- **Responsable**: Sofia
 - **Scope**: Listado de pendientes y registro manual del seguimiento por recepción.
   - Resolver PA-02 y PA-05 para condición de pertenencia al listado, representación, transición y duplicación de confirmaciones.
   - Implementar el listado y la operación backend de registro de US-008 y RN-AG-08, con contratos acordados y datos ficticios.
@@ -341,6 +349,7 @@ Distribución orientativa con prioridades por dependencias; no se afirma un ópt
 
 ### [C-18] `cancelacion-del-paciente-por-enlace`
 - **Estado**: `[ ]` pendiente
+- **Responsable**: Fabi
 - **Scope**: Cancelación del turno asociado por enlace hasta 48 horas antes (US-013, RN-PA-01 y RN-PA-02).
   - Resolver PA-17/PA-18: protección, vigencia, uso, instante exacto del límite, referencia horaria y efecto de cambios del turno. El plazo no se cambia por inferencia.
   - Implementar emisión y validación del enlace según diseño aprobado y conectar la cancelación aceptada a C-08 para liberar inmediatamente el horario. La entrega del enlace por email pertenece a C-19.
@@ -355,6 +364,7 @@ Distribución orientativa con prioridades por dependencias; no se afirma un ópt
 
 ### [C-21] `inscripcion-y-preferencias-de-espera`
 - **Estado**: `[ ]` pendiente
+- **Responsable**: Sofia
 - **Scope**: Gestión backend de inscripción propia para US-014 y RN-LE-01.
   - Resolver PA-16/PA-20: ciclo y vigencia de inscripción, operaciones autorizadas y criterios de compatibilidad. No inventar vencimientos, prioridad o cantidad de inscripciones.
   - Implementar el contrato y representación aprobados para prestación, rango de fechas y franjas horarias, con profesional opcional; proteger cada operación mediante C-16.
@@ -372,6 +382,7 @@ Distribución orientativa con prioridades por dependencias; no se afirma un ópt
 
 ### [C-17] `transporte-de-email-de-prueba`
 - **Estado**: `[ ]` pendiente
+- **Responsable**: Fabi
 - **Scope**: Canal real de email gratuito para RN-EM-03, compartido por los tres tipos de correo.
   - Evaluar y acordar PA-15: proveedor sin costo, límites, destinatarios de prueba indicados por el equipo y configuración. No contratar ni asumir servicio, SMTP o API.
   - Implementar adaptador de envío y configuración sin secretos versionados conforme al contrato aprobado. Acordar constancia de entrega, errores y duplicados en PA-18.
@@ -386,6 +397,7 @@ Distribución orientativa con prioridades por dependencias; no se afirma un ópt
 
 ### [C-19] `email-al-crear-turno`
 - **Estado**: `[ ]` pendiente
+- **Responsable**: Fabi
 - **Scope**: Email de alta con enlace de cancelación para US-011 y RN-EM-01.
   - Resolver PA-15/PA-17/PA-18: destinatario, contenido, efecto de fallos y creación dentro de las ventanas de 48/24 horas; no inventar excepciones al plazo.
   - Conectar la creación persistida con transporte C-17 y enlace C-18. Especificar qué ocurre ante fallo de email sin suponer que se elimina o confirma el turno.
@@ -400,6 +412,7 @@ Distribución orientativa con prioridades por dependencias; no se afirma un ópt
 
 ### [C-20] `recordatorio-automatico-24-horas`
 - **Estado**: `[ ]` pendiente
+- **Responsable**: Fabi
 - **Scope**: Recordatorio de US-012 y RN-EM-02, separado de confirmaciones manuales.
   - Resolver PA-18: programación y referencia horaria, reprogramaciones, cancelaciones, altas cercanas, fallos y duplicados. Acordar tecnología antes de implementar.
   - Enviar automáticamente 24 horas antes usando C-17, sin opción de cancelar cuando venció el plazo de 48 horas. Conservar el registro manual de recepción.
@@ -414,6 +427,7 @@ Distribución orientativa con prioridades por dependencias; no se afirma un ópt
 
 ### [C-22] `avisos-de-huecos-y-asignacion-por-recepcion`
 - **Estado**: `[ ]` pendiente
+- **Responsable**: Sofia
 - **Scope**: Aviso automático a interesados y asignación manual del hueco para US-015 y RN-LE-02/RN-LE-03.
   - Resolver PA-20/PA-21 y PA-18: compatibilidad exacta de preferencias, duración, recursos e intervalo, selección por recepción, avisos repetidos y huecos ya ocupados.
   - Conectar liberación de horario a búsqueda de inscripciones compatibles y envío C-17. El aviso no reserva ni asigna automáticamente.
@@ -434,6 +448,7 @@ La política visual sigue diferida: resolverla antes de Apply y cumplir las apro
 
 ### [C-10] `interfaz-agenda-y-alta`
 - **Estado**: `[ ]` pendiente
+- **Responsable**: Luciano
 - **Scope**: Superficie interna de agenda diaria/semanal por sillón, alta y bloqueos (US-004, US-005, US-009 y US-010).
   - Resolver el gate visual, estructura/build frontend y contrato de uso del acceso interno aprobado. Incluir la superficie mínima de ingreso requerida por C-03, sin inventar un mecanismo nuevo.
   - Implementar la consulta y formulario mínimos de US-004, consumiendo C-06 y los contratos de pacientes/recursos que necesita. La configuración persistida de US-005 se consume sin inventar su valor ni un permiso de edición.
@@ -451,6 +466,7 @@ La política visual sigue diferida: resolverla antes de Apply y cumplir las apro
 
 ### [C-11] `interfaz-pacientes-y-ficha`
 - **Estado**: `[ ]` pendiente
+- **Responsable**: Fabi
 - **Scope**: Operación mínima de pacientes y ficha clínica sencilla en la interfaz.
   - Resolver el gate visual y compartir contratos/build de frontend con C-10 mediante un propietario común; esta ficha no depende del alta de turnos. La primera de las dos fichas visuales que se ejecute aporta la base y superficie de ingreso mínimas acordadas con C-03; la siguiente las reutiliza.
   - Implementar US-001, US-002 y US-003 con los campos y operaciones mínimos de C-04; conservar lectura de recepción y edición clínica exclusiva de odontólogos.
@@ -466,6 +482,7 @@ La política visual sigue diferida: resolverla antes de Apply y cumplir las apro
 
 ### [C-12] `interfaz-reprogramacion-y-cancelacion`
 - **Estado**: `[ ]` pendiente
+- **Responsable**: Luciano
 - **Scope**: Acciones de reorganización de una reserva desde la agenda existente.
   - Resolver el gate visual y consumir C-07/C-08 para US-006 y US-007, sin redefinir reglas o transiciones.
   - Permitir modificar los campos aprobados al reprogramar y mostrar prestación/duración conservadas; presentar el resultado acordado de conflictos o fallos.
@@ -481,6 +498,7 @@ La política visual sigue diferida: resolverla antes de Apply y cumplir las apro
 
 ### [C-13] `interfaz-confirmaciones`
 - **Estado**: `[ ]` pendiente
+- **Responsable**: Luciano
 - **Scope**: Operación visual del seguimiento manual por recepción.
   - Resolver el gate visual e incorporar listado y acción de confirmación de US-008 consumiendo C-09 dentro de la agenda de C-10.
   - Mostrar datos y resultados acordados sin incorporar canales de envío ni automatización.
@@ -495,6 +513,7 @@ La política visual sigue diferida: resolverla antes de Apply y cumplir las apro
 
 ### [C-23] `interfaz-cancelacion-por-enlace`
 - **Estado**: `[ ]` pendiente
+- **Responsable**: Luciano
 - **Scope**: Superficie del paciente para US-013, consumiendo el acceso limitado de C-18.
   - Resolver el gate visual y contrato de C-18; mostrar turno y acción permitida sin conceder autorreserva ni acceso clínico.
   - Presentar éxito, plazo vencido, enlace inválido y resultados acordados. No ofrecer cancelación cuando venció el plazo ni dar acceso a otros turnos.
@@ -509,6 +528,7 @@ La política visual sigue diferida: resolverla antes de Apply y cumplir las apro
 
 ### [C-24] `interfaz-cuenta-y-lista-de-espera`
 - **Estado**: `[ ]` pendiente
+- **Responsable**: Sofia
 - **Scope**: Acceso y gestión visual de la inscripción propia para US-014.
   - Resolver el gate visual y consumir ingreso/vínculo de C-16 y operaciones C-21; no redefinir registro o permisos desde la UI.
   - Presentar prestación, fechas, franjas y profesional opcional. Mostrar que la inscripción recibe avisos y no reserva el hueco.
@@ -523,6 +543,7 @@ La política visual sigue diferida: resolverla antes de Apply y cumplir las apro
 
 ### [C-25] `interfaz-asignacion-de-huecos`
 - **Estado**: `[ ]` pendiente
+- **Responsable**: Giovanni
 - **Scope**: Superficie de recepción para US-015 y asignación de C-22.
   - Resolver el gate visual y representar interesados y disponibilidad según contrato aprobado, sin inventar prioridad o selección automática.
   - Permitir que recepción confirme quién toma el hueco; reflejar reserva creada y conflicto si deja de estar disponible. Acordar el mensaje y tratamiento de avisos previos en PA-21.
@@ -540,6 +561,7 @@ La política visual sigue diferida: resolverla antes de Apply y cumplir las apro
 
 ### [C-14] `integracion-y-ejecucion-reproducible`
 - **Estado**: `[ ]` pendiente
+- **Responsable**: Giovanni
 - **Scope**: Comprobar la combinación de los items del MVP y preparar su ejecución local.
   - Integrar contratos backend/frontend y persistencia que ya fueron aprobados, resolviendo diferencias sin ampliar el alcance ni fijar nuevas reglas de negocio.
   - Ejecutar la suite integrada y los recorridos de agenda, pacientes/ficha y confirmaciones; verificar las reglas RN vigentes y US-001 a US-015, incluidos paciente, bloqueos, emails y lista de espera.
