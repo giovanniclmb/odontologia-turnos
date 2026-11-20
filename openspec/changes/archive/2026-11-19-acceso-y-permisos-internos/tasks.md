@@ -54,3 +54,9 @@ Responsable: Fabi. Gobernanza: CRITICO. Planificación autorizada; Apply requier
 - [x] P2 `AccesoPersistenciaIT.tokenEnClaroNoSeAlmacena` reemplazada por aserción efectiva sobre `hash_token`; agregadas IT de autenticación, autorización, alcance por registro y bootstrap contra PostgreSQL real (`AccesoPersistenciaIT`, `BootstrapPersistenciaIT`).
 - [x] P2 `ArranqueIT.rechazaHistorialDeUnaVersionFutura` corregido: copia real de V1 y V2, V3 temporal ausente del binario, rechazo correspondiente a la versión 3, historial sin repair/clean (3 migraciones exitosas).
 - Pendiente humano: revisión personal/académica y evidencia humana no se declaran resueltas por pruebas verdes. PA-05 sigue parcial sin resolver.
+
+## Correcciones de review PR #29 (segunda revisión, P2, sin nuevo alcance)
+
+- [x] P2-A Bootstrap CLI: corregida propiedad Maven documentada en `backend/README.md` (`-Dspring-boot.run.main-class`, con guion) para seleccionar `BootstrapCli`. Verificación end-to-end contra PostgreSQL temporal en `BootstrapCliIT`: primer usuario persistido y autenticable, segundo intento rechazado, una sola fila.
+- [x] P2-B Autorización/alcance real: `AccesoPersistenciaIT.autorizacionEfectivaReal` y `alcancePorRegistroReal` persisten usuarios ficticios de ambos roles (odontólogo vinculado y no vinculado), autentican mediante `ServicioAutenticacion` real y verifican lectura permitida, edición denegada para recepción y rechazo fuera de alcance para odontólogo no vinculado. Sin recursos clínicos ni HTTP.
+- Verificación: `mvn test` = 77 unitarias OK; `mvn clean verify` = 72 IT OK, BUILD SUCCESS (2026-11-20).
