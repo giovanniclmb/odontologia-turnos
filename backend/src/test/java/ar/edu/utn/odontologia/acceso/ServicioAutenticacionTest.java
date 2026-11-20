@@ -37,6 +37,11 @@ class ServicioAutenticacionTest {
         }
 
         @Override
+        public Optional<Usuario> buscarParaCambio(UUID id) {
+            return findById(id);
+        }
+
+        @Override
         public Object adquirirBloqueoBootstrap() {
             return null;
         }
