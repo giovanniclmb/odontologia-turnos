@@ -2,7 +2,10 @@ package ar.edu.utn.odontologia.acceso;
 
 import ar.edu.utn.odontologia.acceso.persistencia.Usuario;
 import ar.edu.utn.odontologia.acceso.persistencia.Usuarios;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+@Service
 public class ServicioBootstrap {
     private final Usuarios usuarios;
     private final ServicioCredenciales credenciales;
@@ -12,10 +15,13 @@ public class ServicioBootstrap {
         this.credenciales = credenciales;
     }
 
+    @Transactional
     public Usuario bootstrapInicial(DatosBootstrap datos) {
         if (datos == null) {
             throw new IllegalArgumentException("datos nulos");
         }
+        // Serializa check+insert entre procesos/conexiones; @Transactional solo no resuelve la carrera.
+        usuarios.adquirirBloqueoBootstrap();
         if (!usuarios.findAll().isEmpty()) {
             throw new IllegalStateException("Bootstrap ya ejecutado");
         }

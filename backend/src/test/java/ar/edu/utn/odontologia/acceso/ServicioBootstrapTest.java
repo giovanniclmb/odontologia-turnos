@@ -31,6 +31,11 @@ class ServicioBootstrapTest {
         public List<Usuario> findAll() {
             return new ArrayList<>(usuarios);
         }
+
+        @Override
+        public Object adquirirBloqueoBootstrap() {
+            return null;
+        }
     }
 
     private final ServicioCredenciales cred = new ServicioCredenciales();

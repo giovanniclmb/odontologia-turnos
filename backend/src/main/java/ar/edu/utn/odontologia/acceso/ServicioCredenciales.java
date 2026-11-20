@@ -2,7 +2,9 @@ package ar.edu.utn.odontologia.acceso;
 
 import java.util.List;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ServicioCredenciales {
     public static final int COSTO_BCRYPT = 12;
     public static final int N_REUTILIZACION_DEFAULT = 5;

@@ -35,6 +35,11 @@ class ServicioAutenticacionTest {
         public List<Usuario> findAll() {
             return new ArrayList<>(porNombre.values());
         }
+
+        @Override
+        public Object adquirirBloqueoBootstrap() {
+            return null;
+        }
     }
 
     private static void setId(Usuario u, java.util.UUID id) {
