@@ -173,3 +173,7 @@ Fecha: 19/11/2026. Tras el pedido de continuar al siguiente paso, se archivó C-
 ## Preparación de asignación automática de Issues
 
 Fecha: 19/11/2026. Giovanni aprobó el diseño y la preparación local de un workflow horario y manual. Se mantiene CHANGES como fuente de responsables y CONTRIBUTING como tabla de usuarios. El asignador consulta colaboradores activos con escritura y añade únicamente responsables faltantes, sin alterar dependencias ni reemplazar asignaciones. Se incorporaron pruebas y simulación real de lectura; ver [operación y límites](automatizacion-asignaciones.md). Sin push ni activación; ejecución con token de Actions pendiente de publicación autorizada.
+
+## Resolución de pendientes de C-03 — Issue #30
+
+20/11/2026. Giovanni autorizó resolver e integrar y aprobó el cambio propio de contraseña con ventana de cinco. Se aisló el CLI en un proceso con allowlist y se agregó V3 con historial/servicio transaccional, bloqueo por usuario y pruebas reales de ventana, reinicio, concurrencia, rollback y permisos. Se verificó el comando Maven literal con settings vacíos y modo offline. Resultado local: 78 unitarias, 82 IT, nueve pruebas Python y tres specs válidas. [Evidencia](evidencias/c03-pendientes/verify.md). Publicación, CI remoto e integración se verifican en PR #29; no se alteraron bases del equipo ni migraciones previas.

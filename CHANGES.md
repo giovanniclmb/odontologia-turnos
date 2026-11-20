@@ -198,7 +198,7 @@ Giovanni aprobó el reparto el 19/11/2026. Las ondas preservan las dependencias 
 ## FASE 1 — Acceso y recursos
 
 ### [C-03] `acceso-y-permisos-internos`
-- **Estado**: `[ ]` pendiente
+- **Estado**: `[x]` implementado, verificado y archivado (Issue #4). Correcciones del Issue #30 verificadas: [Verify](docs/evidencias/c03-pendientes/verify.md). Integración: [PR #29](https://github.com/giovanniclmb/odontologia-turnos/pull/29)
 - **Responsable**: Fabi
 - **Scope**: Identificación y autorización mínimas del equipo antes de recursos protegidos.
   - Resolver PA-05 y el alcance de usuarios/registros; aprobar mecanismo de autenticación y contrato de ingreso. No seleccionar JWT, sesiones, proveedor ni un rol superadministrador en este índice.

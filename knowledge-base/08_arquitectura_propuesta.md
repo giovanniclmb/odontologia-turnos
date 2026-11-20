@@ -89,3 +89,8 @@ Decisiones aprobadas el 19/11/2026: Boot 4.1.2, Java 25/Maven, JPA/Hibernate con
 Compose prepara la base local separada; el usuario aporta credenciales privadas. Testcontainers crea bases temporales y el Environment de las IT no hereda configuración Spring del anfitrión. Flyway usa migrador distinto del usuario ordinario, ambos sin superusuario; Hibernate valida el esquema. Versiones consecutivas coordinadas por Giovanni al integrar, sin out-of-order ni edición de migraciones ya aplicadas a bases compartidas. Credenciales en URL e identidades efectivas incorrectas se rechazan antes de conectar; historial futuro o checksum distinto bloquea el arranque.
 
 C-02 está implementado y verificado en su rama, pendiente de archivo e integración. Su backend no-web no publica endpoints. Estas decisiones actualizan los pendientes técnicos anteriores únicamente para este alcance; no aprueban APIs, autenticación ni despliegue productivo. Consultar backend/README.md para las variables DB_* y los comandos comprobados.
+
+
+## Actualización C-03 — correcciones de Issue #30
+
+El acceso interno usa servicios Spring, roles recepción/odontólogo y permisos definidos en la spec de C-03; pendientes de RBAC se mantienen denegados. El bootstrap técnico crea una única cuenta inicial y utiliza bloqueo transaccional en PostgreSQL. El cambio propio de contraseña confirma la actual y relee el usuario bajo bloqueo de fila; V3 agrega historial inmutable para la ventana de cinco aprobada en DD-14. Las pruebas no heredan configuración de conexión del anfitrión. El transporte y ciclo de tokens siguen fuera de estas correcciones.

@@ -45,16 +45,17 @@ El script docker/postgres/10-bootstrap.sh se monta de solo lectura y se ejecuta 
 - odonto_migrator: dueño del esquema odontologia, sin SUPERUSER, CREATEDB ni CREATEROLE.
 - odonto_app: USAGE en el esquema y SELECT/INSERT/UPDATE sobre las cuatro referencias, sin DDL ni DELETE.
 - Flyway usa conexión separada de JPA. El arranque valida las identidades efectivas antes de abrir conexiones.
+- Bootstrap del primer usuario (una sola vez por técnico), sin HTTP: `mvn -f backend/pom.xml spring-boot:run -Dspring-boot.run.main-class=ar.edu.utn.odontologia.acceso.cli.BootstrapCli` con DB_URL, DB_USER, DB_PASSWORD, DB_MIGRATION_USER y DB_MIGRATION_PASSWORD exportadas. Variables opcionales: BOOTSTRAP_NOMBRE_USUARIO, BOOTSTRAP_CONTRASENA y BOOTSTRAP_ROL; si faltan, se solicitan por consola (contraseña oculta). El proceso inicializa el contexto Spring/JPA, ejecuta la migración y llama a ServicioBootstrap.bootstrapInicial; un segundo intento se rechaza.
 
 Cambiar `.env` no cambia credenciales de un volumen ya inicializado. Ante un error, revisar credenciales y diagnóstico; no borrar volúmenes, ejecutar Flyway clean/repair ni modificar una base ajena como solución automática. Detener el servicio sin borrar datos es distinto de eliminar su volumen; cualquier operación destructiva requiere alcance y autorización propios.
 
 ## Modelo y migraciones
 
-El esquema odontologia contiene paciente, profesional, sillon y prestacion. Cada tabla tiene id uuid y codigo text obligatorio, no vacío ni formado solo por espacios comunes y único por tabla. La comparación es exacta, sin normalización. El mismo código puede existir en tipos distintos. Hibernate genera el UUID en la aplicación; PostgreSQL no tiene default de generación.
+El esquema odontologia contiene paciente, profesional, sillon, prestacion, usuario, token_acceso e historial_contrasena. usuario tiene id uuid, nombre_usuario text obligatorio no vacío y único, hash_credencial text, rol CHECK (recepcion/odontologo), activo, profesional_ref uuid opaco y creado_en. token_acceso tiene id uuid, usuario_id FK, hash_token, creado_en, expira_en y revocado. Hibernate genera el UUID en la aplicación; PostgreSQL no tiene default de generación. odonto_app tiene SELECT/INSERT/UPDATE sobre usuario y token_acceso, sin DELETE.
 
-No hay columnas clínicas, cuentas, duración de prestación, intervalo ni tabla de turnos. Esas ampliaciones pertenecen a los changes siguientes. Las entidades y repositorios JPA están separados del paquete agenda y no se exponen como contratos HTTP.
+No hay columnas clínicas, cuentas de paciente, duración de prestación, intervalo ni tabla de turnos. Esas ampliaciones pertenecen a los changes siguientes. Las entidades y repositorios JPA están separados del paquete agenda y no se exponen como contratos HTTP.
 
-V1__referencias_base.sql crea las tablas y permisos. Flyway es el único gestor de estructura; Hibernate usa validate y la inicialización SQL alternativa está desactivada. Flyway valida checksum y rechaza también migraciones futuras ausentes del binario; no hay baseline automático, clean ni out-of-order.
+V1__referencias_base.sql crea las referencias y permisos. V2__acceso_y_permisos.sql crea usuario y token_acceso con sus constraints y permisos. Flyway es el único gestor de estructura; Hibernate usa validate y la inicialización SQL alternativa está desactivada. Flyway valida checksum y rechaza también migraciones futuras ausentes del binario; no hay baseline automático, clean ni out-of-order.
 
 Versiones globales consecutivas: Giovanni coordina el próximo número según el orden real de integración. Una migración aplicada a una base de trabajo compartida no se renumera ni edita; se corrige con otra versión. Los tests de desarrollo usan contenedores nuevos al iterar V1 y nunca reparan el historial de una base persistente.
 
@@ -65,3 +66,16 @@ Versiones globales consecutivas: Giovanni coordina el próximo número según el
 El intervalo positivo es explícito en cada llamada. Se admite exactamente el intervalo antes y después para profesional y sillón, sin duplicarlo. Se evalúan todas las reservas ocupantes válidas sin asumir orden; las ajenas no interfieren. Las entradas son inmutables. Los diez minutos de los fixtures no son configuración de producción.
 
 C-02 no conecta aún la creación de turnos con estas tablas ni garantiza exclusión concurrente: C-06 deberá validar y persistir con garantías frente a cambios de la agenda. La evidencia de C-02 está en su change OpenSpec; los datos utilizados son ficticios.
+
+
+## Correcciones de C-03 — Issue #30 (20/11/2026)
+
+Contrato aprobado por Giovanni: un usuario activo cambia solo su propia contraseña mediante `ServicioCambioContrasena.cambiarContrasena(identidad, actual, nueva)`, confirmando la vigente. No recibe un usuario destino, no añade endpoints, recuperación ni permisos de gestión de cuentas ajenas. El estado activo se vuelve a comprobar en la base; presentar una identidad anterior no permite cambiar una cuenta desactivada.
+
+Se rechazan la contraseña vigente y las cuatro anteriores (cinco en total). V3__historial_contrasena.sql registra hashes previos, con UUID generado en aplicación y secuencia por usuario; una transacción con bloqueo de fila serializa validación, historial y actualización. Un rechazo o fallo de persistencia revierte el cambio completo. La clave vigente cuenta incluso para usuarios anteriores a V3; no se inventan contraseñas históricas inexistentes. El historial se conserva, mientras la consulta de validación toma solo las últimas cuatro previas; la secuencia determina el orden sin depender de empates de reloj.
+
+El usuario ordinario tiene SELECT/INSERT sobre el historial, sin UPDATE/DELETE. La unicidad usuario/secuencia sirve también como índice para la lectura ordenada. El servicio aplica la política existente a los datos disponibles: nombre de usuario; el modelo actual no almacena nombre personal ni email. El alcance no implementa todavía emisión/revocación de tokens, transportes ni recuperación.
+
+BootstrapCliIT ejecuta el CLI en un JVM hijo con entorno vacío y una allowlist del fixture; fuerza `classpath:/application.yaml`, acota memoria, tiempo y salida, y conserva la configuración original del proceso padre. La regresión mantiene valores Spring centinela inaccesibles en el padre. ProcesoAisladoTest verifica que el entorno del hijo contiene exclusivamente la allowlist, sin mostrar valores heredados en diagnósticos.
+
+BootstrapMavenIT comprueba el comando `spring-boot:run` documentado arriba, seleccionando explícitamente el CLI con `spring-boot.run.main-class`, contra PostgreSQL temporal y también el segundo intento rechazado. Usa settings vacíos, repositorio Maven local y modo offline; no lee settings/credenciales del usuario ni descarga dependencias desde el proceso hijo. El Maven de la ejecución principal debe estar disponible en PATH; la prueba se verifica en macOS y en el CI Linux del proyecto.

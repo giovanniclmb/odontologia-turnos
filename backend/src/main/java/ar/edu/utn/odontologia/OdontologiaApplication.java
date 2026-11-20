@@ -16,6 +16,9 @@ import org.springframework.core.env.Environment;
 
 @SpringBootApplication
 public class OdontologiaApplication {
+    static {
+        java.util.TimeZone.setDefault(java.util.TimeZone.getTimeZone("UTC"));
+    }
     public static void main(String[] args) {
         new SpringApplicationBuilder(OdontologiaApplication.class).web(WebApplicationType.NONE).run(args);
     }

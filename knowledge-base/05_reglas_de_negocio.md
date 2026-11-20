@@ -54,3 +54,8 @@
 ## Especificación pendiente
 
 El proveedor, las cuentas, los enlaces, los casos límite de envío, los desbloqueos y la compatibilidad de huecos se detallan en PA-15 a PA-21. El intervalo inicial y su aplicación (PA-01), los estados del turno (PA-02), el resultado de una reprogramación fallida (PA-03), los horarios y la disponibilidad (PA-04), los permisos detallados (PA-05) y los campos clínicos (PA-06) siguen abiertos. [Preguntas abiertas](10_preguntas_abiertas.md)
+
+
+## RN-AC-01 — Cambio propio de contraseña (DD-14)
+
+Un usuario interno activo puede cambiar únicamente su propia contraseña confirmando la vigente. Se rechaza reutilizar la actual o cualquiera de las cuatro anteriores. La operación conserva historial y credencial vigente de forma atómica; un rechazo no los modifica. Se vuelve a verificar el estado activo y se serializan cambios concurrentes por usuario. No autoriza recuperación ni administración de credenciales ajenas.
