@@ -176,6 +176,17 @@ class AccesoPersistenciaIT {
     }
 
     @Test
+    void autenticacionRechazaUsuarioInactivo() {
+        ServicioCredenciales cred = contexto.getBean(ServicioCredenciales.class);
+        Usuarios usuarios = contexto.getBean(Usuarios.class);
+        ServicioAutenticacion auth = contexto.getBean(ServicioAutenticacion.class);
+        String nombre = "INACTIVO-" + UUID.randomUUID();
+        String claro = "ClaveSegura123";
+        usuarios.save(new Usuario(nombre, cred.hash(claro), Rol.RECEPCION, false, null));
+        assertThrows(AutenticacionFallidaException.class, () -> auth.autenticar(nombre, claro));
+    }
+
+    @Test
     void autorizacionEfectivaReal() {
         ServicioCredenciales cred = contexto.getBean(ServicioCredenciales.class);
         Usuarios usuarios = contexto.getBean(Usuarios.class);
