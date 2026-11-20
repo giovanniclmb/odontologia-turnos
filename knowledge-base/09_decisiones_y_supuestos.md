@@ -101,3 +101,10 @@ Las decisiones DD provienen de respuestas explícitas del usuario, consolidadas 
 **Hipótesis pendiente de validación**: el seguimiento manual, los recordatorios y la lista pueden ayudar a reducir ausencias y huecos. **Origen**: objetivo y mecanismo elegidos en Discovery. **Riesgo**: que la operación real no mejore o no se mida. **Cómo validar**: definir línea de base y observaciones; no inventar porcentajes.
 
 No se adopta como supuesto un valor de intervalo, estados concretos, campos clínicos, cardinalidades físicas, permisos de eliminación o versiones. Esos puntos se mantienen en [preguntas abiertas](10_preguntas_abiertas.md).
+
+
+## DD-14 — Correcciones de C-03 y cambio de contraseña propia (20/11/2026)
+
+Giovanni pidió resolver Issue #30 antes de integrar PR #29 y aprobó expresamente: usuario activo cambia solo su propia contraseña presentando la actual; se rechaza la vigente o cualquiera de las cuatro anteriores (cinco en total). La validación y persistencia son transaccionales y el historial se conserva entre arranques. No se agregan HTTP, recuperación ni cambios de contraseñas ajenas. El bloqueo por usuario evita que dos solicitudes con la misma clave anterior prosperen. V3 es la siguiente migración libre observada para esta integración, coordinada por Giovanni; V1/V2 no se editan.
+
+La prueba del CLI debe usar un proceso con entorno vacío y allowlist del fixture, sin heredar overrides de Spring ni modificar la configuración original del JVM de pruebas. Las correcciones se realizan antes de integrar; la aprobación anterior con pendientes no equivale a evidencia de su resolución. No cambian el reparto nominal ni las dependencias del roadmap.

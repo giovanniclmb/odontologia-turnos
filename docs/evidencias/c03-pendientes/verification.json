@@ -1,0 +1,34 @@
+{
+  "fecha": "2026-11-20",
+  "issue": 30,
+  "pr": 29,
+  "base": "f88c56017b8ad57cbc2009d6104700f9ee165497",
+  "rama": "codex/c03-pendientes",
+  "resultado": "verificado localmente; CI e integración pendientes",
+  "pruebas": {
+    "unitarias": 78,
+    "integracion": 82
+  },
+  "python": 9,
+  "migraciones": [
+    "V1",
+    "V2",
+    "V3"
+  ],
+  "ventana": {
+    "vigente": 1,
+    "anteriores": 4
+  },
+  "revisor": "misma sesión; sin subagentes por preferencia del usuario",
+  "hashes_logs": {
+    "proceso-red.log": "d7f908ac56f89f0f77f1b5b398d27ad25bde08bc9f144b72f15d7d9cdfc7b0cf",
+    "cambio-green.log": "37bb1e2302e6b2e247bd90f51e1d69e162d3c2122add57ffe0a219ead147a0ce",
+    "cambio-red.log": "e69f2ee830010e7aa0507df16c935f2da06f4f6c5db602cf1db18effe16aa3ec",
+    "clean-verify.log": "d67bc8de1f712b389bc6a8b872c8dfaf959991c603fce33cf05c26950e4479af",
+    "maven-cli.log": "48886882ef9162dd84e562f4d8018bf0ed913f0d206ae3f0dff4c09b165e0352",
+    "historial-schema-green.log": "7015e02ff797ecc9b7f1a8627f053f9ee7a002c8499e487675904fb5d4876fce",
+    "historial-schema-red.log": "4c23c17b87e9f5161a905e1ea9d6d062c26dda2b91a803910b15a37c633daa56",
+    "proceso-green.log": "f5a8df6ef9a2406a814c1db4bd5dd764410a19675b582c7224e585f25bbd3b4f",
+    "cli-aislado.log": "5ccb177f0c190a5fde299eb7e5eb11a831c699559ccca2cadf18a195eac49496"
+  }
+}

@@ -90,7 +90,7 @@ El sistema SHALL otorgar a recepción lectura global de pacientes y turnos del s
 - **THEN** el sistema rechaza el acceso
 
 ### Requirement: Credenciales protegidas con hash y política mínima
-El sistema SHALL almacenar la credencial como un hash (bcrypt con costo 12 o argon2) con sal por usuario, nunca en texto plano. El sistema SHALL aplicar una política mínima de contraseña: longitud de al menos 12 caracteres, presencia de mayúscula, minúscula y número, ausencia de datos personales, y no reutilización de las últimas N contraseñas. El sistema SHALL NOT registrar credenciales en logs ni versionar secretos.
+El sistema SHALL almacenar la credencial como un hash (bcrypt con costo 12 o argon2) con sal por usuario, nunca en texto plano. El sistema SHALL aplicar una política mínima de contraseña: longitud de al menos 12 caracteres, presencia de mayúscula, minúscula y número, ausencia de datos personales, y no reutilización de la vigente y las cuatro anteriores (cinco en total). El sistema SHALL NOT registrar credenciales en logs ni versionar secretos.
 
 #### Scenario: Hash distinto del texto plano
 - **WHEN** se crea o actualiza la credencial de un usuario
@@ -109,7 +109,7 @@ El sistema SHALL almacenar la credencial como un hash (bcrypt con costo 12 o arg
 - **THEN** el sistema rechaza la credencial
 
 #### Scenario: Reutilización rechazada
-- **WHEN** se propone una contraseña igual a una de las últimas N usadas por el usuario
+- **WHEN** se propone una contraseña igual a la vigente o una de las cuatro anteriores usadas por el usuario
 - **THEN** el sistema rechaza la credencial
 
 #### Scenario: Sin credenciales en logs
@@ -167,3 +167,18 @@ El sistema SHALL NOT introducir endpoints HTTP, cookies, headers de transporte n
 #### Scenario: Transporte solo con aprobación
 - **WHEN** se propone introducir transporte HTTP
 - **THEN** requiere justificación y aprobación explícita documentada
+
+### Requirement: Cambio propio transaccional de contraseña
+Un usuario interno activo SHALL cambiar únicamente su propia contraseña presentando la vigente. El servicio SHALL volver a verificar su estado y actualizar credencial e historial atómicamente. El historial SHALL sobrevivir al reinicio. Este contrato SHALL NOT habilitar recuperación, cambios ajenos ni transporte HTTP.
+
+#### Scenario: Cambio propio y conservación del historial
+- **WHEN** un usuario activo confirma su contraseña actual y presenta una nueva que cumple la política
+- **THEN** se actualiza su credencial y se conserva la anterior como hash en el historial, incluso tras reiniciar
+
+#### Scenario: Rechazo sin cambios parciales
+- **WHEN** la contraseña actual es incorrecta, el usuario está inactivo, la nueva viola la política o falla la persistencia
+- **THEN** se rechaza la operación sin modificar la credencial ni agregar un historial confirmado
+
+#### Scenario: Solicitudes concurrentes
+- **WHEN** dos solicitudes intentan cambiar la misma cuenta con la misma contraseña actual
+- **THEN** solo una prospera y la otra vuelve a verificar la credencial vigente antes de rechazarla

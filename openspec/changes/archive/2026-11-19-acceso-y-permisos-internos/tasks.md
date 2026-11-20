@@ -66,5 +66,11 @@ Responsable: Fabi. Gobernanza: CRITICO. Planificación autorizada; Apply requier
 - [x] P2 Inyección: `ServicioBootstrap.crearUsuario` usa `ServicioAutorizacion` inyectado por constructor (no `new`); `JpaConfiguration` de ITs cablea el bean. Unit tests actualizados a la nueva firma.
 - [x] P2 `ServicioAutenticacion` y `ServicioAutorizacion` anotados `@Service` para DI en C-06/C-10; tests manuales siguen pasando.
 - [x] P2 IT `AccesoPersistenciaIT.autenticacionRechazaUsuarioInactivo`: usuario inactivo persistido y autenticación real rechazada con `AutenticacionFallidaException`.
-- [ ] P2 (pendiente, fuera de alcance de esta corrección) Historial de contraseñas N=5: no existe tabla `historial_contrasena`; requiere migración V3 y tabla nueva. `ServicioCredenciales.validarPolitica` acepta historial cuando se le provee, pero no se persiste aún. Diferido a change futuro (o C-06); no marcar completo.
-- [ ] P2 (pendiente de verificación manual) Invocación Maven exacta `mvn -f backend/pom.xml spring-boot:run -Dspring-boot.run.main-class=ar.edu.utn.odontologia.acceso.cli.BootstrapCli`: `BootstrapCliIT` cubre `BootstrapCli.main` contra PostgreSQL real, pero no el comando Maven literal. Verificar manualmente en entorno con Docker (documentado en backend/README.md, línea de bootstrap) y registrar evidencia; no se considera verificado por Failsafe.
+- [x] Historial de contraseñas: resuelto en Issue #30 con V3 y servicio de cambio propio transaccional; ventana aprobada de vigente + cuatro anteriores, conservación entre arranques y prueba real de concurrencia/rollback.
+- [x] Comando Maven exacto: BootstrapMavenIT verifica `spring-boot:run -Dspring-boot.run.main-class=ar.edu.utn.odontologia.acceso.cli.BootstrapCli`, primer usuario persistido/autenticable y segundo intento rechazado, con settings/entorno aislados.
+
+## Resolución de seguimiento Issue #30 (20/11/2026)
+
+Giovanni pidió resolver antes de integrar y aprobó mediante menú el cambio de contraseña propia: usuario activo confirma la actual, rechaza la vigente y cuatro anteriores, operación e historial transaccionales, sin HTTP/recuperación/cambios ajenos. V3 agrega historial inmutable y bloqueo de fila por usuario. BootstrapCliIT se ejecuta en proceso aislado con allowlist y configuración classpath explícita; no hereda overrides de Spring. No se cambia el estado de archivo de C-03.
+
+Verificación integrada: 78 unitarias y 82 IT sin fallos/errores/omisiones; comando Maven real incluido. [Verify del seguimiento](../../../../docs/evidencias/c03-pendientes/verify.md). Estas cifras sustituyen los resultados intermedios anteriores; la integración remota se registra en el PR #29. La revisión personal de fuentes sigue pendiente y no se da por resuelta con tests.

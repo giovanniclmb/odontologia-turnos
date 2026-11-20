@@ -2,7 +2,7 @@
 
 Proyecto integrador de Desarrollo de Software de UTN: sistema de gestión de turnos para un consultorio de una sede con varios odontólogos.
 
-**Estado:** C-01 completado, archivado e integrado. C-02 completado, archivado e integrado en main local; el resto del roadmap sigue pendiente. El backend aún no ofrece una aplicación HTTP ni interfaz.
+**Estado:** C-01 completado, archivado e integrado. C-02 completado, archivado e integrado en main local; C-03 incorpora acceso interno a nivel de servicio y [correcciones de credenciales](docs/evidencias/c03-pendientes/verify.md); el resto del roadmap sigue pendiente. El backend aún no ofrece una aplicación HTTP ni interfaz.
 
 ## Alcance aprobado
 
