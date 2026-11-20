@@ -2,7 +2,9 @@ package ar.edu.utn.odontologia.acceso;
 
 import ar.edu.utn.odontologia.acceso.persistencia.Usuario;
 import ar.edu.utn.odontologia.acceso.persistencia.Usuarios;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ServicioAutenticacion {
     private final Usuarios usuarios;
     private final ServicioCredenciales credenciales;
