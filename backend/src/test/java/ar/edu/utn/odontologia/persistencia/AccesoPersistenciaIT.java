@@ -1,6 +1,16 @@
 package ar.edu.utn.odontologia.persistencia;
 
 import static org.junit.jupiter.api.Assertions.*;
+import ar.edu.utn.odontologia.acceso.AutorizacionDenegadaException;
+import ar.edu.utn.odontologia.acceso.AutenticacionFallidaException;
+import ar.edu.utn.odontologia.acceso.DatosBootstrap;
+import ar.edu.utn.odontologia.acceso.Identidad;
+import ar.edu.utn.odontologia.acceso.Permiso;
+import ar.edu.utn.odontologia.acceso.Rol;
+import ar.edu.utn.odontologia.acceso.ServicioAutenticacion;
+import ar.edu.utn.odontologia.acceso.ServicioAutorizacion;
+import ar.edu.utn.odontologia.acceso.ServicioBootstrap;
+import ar.edu.utn.odontologia.acceso.ServicioCredenciales;
 import ar.edu.utn.odontologia.acceso.persistencia.TokenAcceso;
 import ar.edu.utn.odontologia.acceso.persistencia.TokensAcceso;
 import ar.edu.utn.odontologia.acceso.persistencia.Usuario;
@@ -31,6 +41,25 @@ class AccesoPersistenciaIT {
     @EntityScan(basePackages = "ar.edu.utn.odontologia.acceso.persistencia")
     @EnableJpaRepositories(basePackages = "ar.edu.utn.odontologia.acceso.persistencia")
     static class JpaConfiguration {
+        @org.springframework.context.annotation.Bean
+        ServicioCredenciales servicioCredenciales() {
+            return new ServicioCredenciales();
+        }
+
+        @org.springframework.context.annotation.Bean
+        ServicioAutenticacion servicioAutenticacion(Usuarios usuarios, ServicioCredenciales credenciales) {
+            return new ServicioAutenticacion(usuarios, credenciales);
+        }
+
+        @org.springframework.context.annotation.Bean
+        ServicioAutorizacion servicioAutorizacion() {
+            return new ServicioAutorizacion();
+        }
+
+        @org.springframework.context.annotation.Bean
+        ServicioBootstrap servicioBootstrap(Usuarios usuarios, ServicioCredenciales credenciales) {
+            return new ServicioBootstrap(usuarios, credenciales);
+        }
     }
 
     @BeforeAll
@@ -100,10 +129,78 @@ class AccesoPersistenciaIT {
 
     @Test
     void tokenEnClaroNoSeAlmacena() throws SQLException {
-        // direct DB check: hash_token column stores provided hash, not clear token
-        try (var c = db.appConnection(); var q = c.prepareStatement("select hash_token from odontologia.token_acceso limit 1")) {
-            // may be empty; not asserting
+        Usuarios usuarios = contexto.getBean(Usuarios.class);
+        Usuario u = usuarios.save(new Usuario("HASH-" + UUID.randomUUID(), "hash-credencial", ar.edu.utn.odontologia.acceso.Rol.ODONTOLOGO, true, null));
+        TokensAcceso tokens = contexto.getBean(TokensAcceso.class);
+        String hashToken = "hash-token-" + UUID.randomUUID();
+        tokens.save(new TokenAcceso(u.getId(), hashToken, Instant.now().plusSeconds(3600)));
+        try (var c = db.appConnection(); var q = c.prepareStatement("select hash_token from odontologia.token_acceso where usuario_id = ?")) {
+            q.setObject(1, u.getId());
+            var r = q.executeQuery();
+            assertTrue(r.next(), "debe existir fila de token");
+            assertEquals(hashToken, r.getString(1));
+            assertFalse(r.next(), "no debe haber filas duplicadas inesperadas");
         }
+    }
+
+    @Test
+    void hashCredencialNoEsTextoPlano() throws SQLException {
+        ServicioCredenciales cred = contexto.getBean(ServicioCredenciales.class);
+        Usuarios usuarios = contexto.getBean(Usuarios.class);
+        String claro = "ClaveSegura123";
+        String hash = cred.hash(claro);
+        Usuario u = usuarios.save(new Usuario("HASH2-" + UUID.randomUUID(), hash, ar.edu.utn.odontologia.acceso.Rol.RECEPCION, true, null));
+        try (var c = db.appConnection(); var q = c.prepareStatement("select hash_credencial from odontologia.usuario where id = ?")) {
+            q.setObject(1, u.getId());
+            var r = q.executeQuery();
+            assertTrue(r.next());
+            String almacenado = r.getString(1);
+            assertEquals(hash, almacenado);
+            assertTrue(almacenado.startsWith("$2"));
+            assertNotEquals(claro, almacenado);
+        }
+    }
+
+    @Test
+    void autenticacionRealExitosaYFallida() {
+        ServicioCredenciales cred = contexto.getBean(ServicioCredenciales.class);
+        Usuarios usuarios = contexto.getBean(Usuarios.class);
+        ServicioAutenticacion auth = contexto.getBean(ServicioAutenticacion.class);
+        String nombre = "AUTH-" + UUID.randomUUID();
+        String claro = "ClaveSegura123";
+        usuarios.save(new Usuario(nombre, cred.hash(claro), ar.edu.utn.odontologia.acceso.Rol.RECEPCION, true, null));
+        Identidad identidad = auth.autenticar(nombre, claro);
+        assertEquals(Rol.RECEPCION, identidad.rol());
+        assertThrows(AutenticacionFallidaException.class, () -> auth.autenticar(nombre, "otra-clave"));
+        assertThrows(AutenticacionFallidaException.class, () -> auth.autenticar("no-existe-" + UUID.randomUUID(), claro));
+    }
+
+    @Test
+    void autorizacionEfectivaReal() {
+        ServicioAutorizacion authz = contexto.getBean(ServicioAutorizacion.class);
+        Identidad recepcion = new Identidad(UUID.randomUUID(), "recepcion", Rol.RECEPCION, null);
+        assertTrue(authz.tienePermiso(recepcion, Permiso.FICHA_LEER));
+        assertFalse(authz.tienePermiso(recepcion, Permiso.FICHA_EDITAR));
+        assertThrows(AutorizacionDenegadaException.class, () -> authz.exigir(recepcion, Permiso.FICHA_EDITAR));
+        assertNullIdentidad(authz);
+    }
+
+    private void assertNullIdentidad(ServicioAutorizacion authz) {
+        assertFalse(authz.tienePermiso(null, Permiso.FICHA_LEER));
+        assertThrows(AutorizacionDenegadaException.class, () -> authz.exigir(null, Permiso.FICHA_LEER));
+    }
+
+    @Test
+    void alcancePorRegistroReal() {
+        ServicioAutorizacion authz = contexto.getBean(ServicioAutorizacion.class);
+        UUID profesional = UUID.randomUUID();
+        Identidad odontologoVinculado = new Identidad(UUID.randomUUID(), "odonto", Rol.ODONTOLOGO, profesional);
+        assertTrue(authz.puedeConsultarPaciente(odontologoVinculado, profesional));
+        assertFalse(authz.puedeConsultarPaciente(odontologoVinculado, UUID.randomUUID()));
+        Identidad odontologoSinVinculo = new Identidad(UUID.randomUUID(), "odonto2", Rol.ODONTOLOGO, null);
+        assertFalse(authz.puedeConsultarPaciente(odontologoSinVinculo, profesional));
+        Identidad recepcion = new Identidad(UUID.randomUUID(), "recep", Rol.RECEPCION, null);
+        assertTrue(authz.puedeConsultarPaciente(recepcion, profesional));
     }
 
     @Test
