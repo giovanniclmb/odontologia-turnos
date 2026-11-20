@@ -1,6 +1,14 @@
 package ar.edu.utn.odontologia.acceso.cli;
 
+import ar.edu.utn.odontologia.OdontologiaApplication;
+import ar.edu.utn.odontologia.acceso.DatosBootstrap;
+import ar.edu.utn.odontologia.acceso.DatosPersonales;
 import ar.edu.utn.odontologia.acceso.Rol;
+import ar.edu.utn.odontologia.acceso.ServicioBootstrap;
+import ar.edu.utn.odontologia.acceso.persistencia.Usuario;
+import org.springframework.boot.WebApplicationType;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.context.ConfigurableApplicationContext;
 import java.io.Console;
 
 public final class BootstrapCli {
@@ -21,9 +29,17 @@ public final class BootstrapCli {
             rolTexto = leer("Rol (recepcion/odontologo): ");
         }
         Rol rol = Rol.desdeCodigo(rolTexto.trim());
-        // El ensamblado real de repositorios/JPA se realiza en C-06/C-10; aqui solo se documenta el flujo.
-        System.out.println("Bootstrap solicitado para usuario=" + nombreUsuario + " rol=" + rol.codigo());
-        System.out.println("Requiere repositorios JPA inicializados por la aplicacion; sin transporte HTTP.");
+
+        try (ConfigurableApplicationContext contexto = new SpringApplicationBuilder(OdontologiaApplication.class)
+                .web(WebApplicationType.NONE)
+                .run(args)) {
+            ServicioBootstrap bootstrap = contexto.getBean(ServicioBootstrap.class);
+            DatosBootstrap datos = new DatosBootstrap(nombreUsuario.trim(), contrasena, rol,
+                    new DatosPersonales(null, nombreUsuario.trim(), null), null);
+            Usuario usuario = bootstrap.bootstrapInicial(datos);
+            System.out.println("Bootstrap creado: usuario=" + usuario.getNombreUsuario() + " id=" + usuario.getId()
+                    + " rol=" + usuario.getRol().codigo());
+        }
     }
 
     private static String variable(String nombre) {
