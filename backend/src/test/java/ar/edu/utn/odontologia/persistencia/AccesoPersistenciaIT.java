@@ -57,8 +57,8 @@ class AccesoPersistenciaIT {
         }
 
         @org.springframework.context.annotation.Bean
-        ServicioBootstrap servicioBootstrap(Usuarios usuarios, ServicioCredenciales credenciales) {
-            return new ServicioBootstrap(usuarios, credenciales);
+        ServicioBootstrap servicioBootstrap(Usuarios usuarios, ServicioCredenciales credenciales, ServicioAutorizacion autorizacion) {
+            return new ServicioBootstrap(usuarios, credenciales, autorizacion);
         }
     }
 

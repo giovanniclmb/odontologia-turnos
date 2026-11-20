@@ -39,11 +39,12 @@ class ServicioBootstrapTest {
     }
 
     private final ServicioCredenciales cred = new ServicioCredenciales();
+    private final ServicioAutorizacion authz = new ServicioAutorizacion();
 
     @Test
     void bootstrapInicialExitoso() {
         RepoMemoria repo = new RepoMemoria();
-        ServicioBootstrap svc = new ServicioBootstrap(repo, cred);
+        ServicioBootstrap svc = new ServicioBootstrap(repo, cred, authz);
         DatosBootstrap datos = new DatosBootstrap("admin", "ClaveSegura123", Rol.RECEPCION, null, null);
         Usuario u = svc.bootstrapInicial(datos);
         assertEquals("admin", u.getNombreUsuario());
@@ -53,7 +54,7 @@ class ServicioBootstrapTest {
     @Test
     void segundoBootstrapDenegado() {
         RepoMemoria repo = new RepoMemoria();
-        ServicioBootstrap svc = new ServicioBootstrap(repo, cred);
+        ServicioBootstrap svc = new ServicioBootstrap(repo, cred, authz);
         svc.bootstrapInicial(new DatosBootstrap("admin", "ClaveSegura123", Rol.RECEPCION, null, null));
         assertThrows(IllegalStateException.class, () -> svc.bootstrapInicial(new DatosBootstrap("admin2", "ClaveSegura123", Rol.RECEPCION, null, null)));
     }
@@ -61,7 +62,7 @@ class ServicioBootstrapTest {
     @Test
     void creacionSinPermisoDenegada() {
         RepoMemoria repo = new RepoMemoria();
-        ServicioBootstrap svc = new ServicioBootstrap(repo, cred);
+        ServicioBootstrap svc = new ServicioBootstrap(repo, cred, authz);
         svc.bootstrapInicial(new DatosBootstrap("admin", "ClaveSegura123", Rol.ODONTOLOGO, null, null));
         // solicitante sin permiso
         Identidad sinPermiso = new Identidad(java.util.UUID.randomUUID(), "x", Rol.ODONTOLOGO, null);

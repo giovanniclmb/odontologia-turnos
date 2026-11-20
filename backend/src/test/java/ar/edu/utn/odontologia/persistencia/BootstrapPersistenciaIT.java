@@ -5,6 +5,7 @@ import ar.edu.utn.odontologia.acceso.DatosBootstrap;
 import ar.edu.utn.odontologia.acceso.Identidad;
 import ar.edu.utn.odontologia.acceso.Rol;
 import ar.edu.utn.odontologia.acceso.ServicioAutenticacion;
+import ar.edu.utn.odontologia.acceso.ServicioAutorizacion;
 import ar.edu.utn.odontologia.acceso.ServicioBootstrap;
 import ar.edu.utn.odontologia.acceso.ServicioCredenciales;
 import ar.edu.utn.odontologia.acceso.persistencia.Usuario;
@@ -34,8 +35,13 @@ class BootstrapPersistenciaIT {
         }
 
         @org.springframework.context.annotation.Bean
-        ServicioBootstrap servicioBootstrap(Usuarios usuarios, ServicioCredenciales credenciales) {
-            return new ServicioBootstrap(usuarios, credenciales);
+        ServicioBootstrap servicioBootstrap(Usuarios usuarios, ServicioCredenciales credenciales, ServicioAutorizacion autorizacion) {
+            return new ServicioBootstrap(usuarios, credenciales, autorizacion);
+        }
+
+        @org.springframework.context.annotation.Bean
+        ServicioAutorizacion servicioAutorizacion() {
+            return new ServicioAutorizacion();
         }
     }
 

@@ -31,10 +31,16 @@ class BootstrapConcurrenciaIT {
         }
 
         @org.springframework.context.annotation.Bean
+        ar.edu.utn.odontologia.acceso.ServicioAutorizacion servicioAutorizacion() {
+            return new ar.edu.utn.odontologia.acceso.ServicioAutorizacion();
+        }
+
+        @org.springframework.context.annotation.Bean
         ar.edu.utn.odontologia.acceso.ServicioBootstrap servicioBootstrap(
                 ar.edu.utn.odontologia.acceso.persistencia.Usuarios usuarios,
-                ar.edu.utn.odontologia.acceso.ServicioCredenciales credenciales) {
-            return new ar.edu.utn.odontologia.acceso.ServicioBootstrap(usuarios, credenciales);
+                ar.edu.utn.odontologia.acceso.ServicioCredenciales credenciales,
+                ar.edu.utn.odontologia.acceso.ServicioAutorizacion autorizacion) {
+            return new ar.edu.utn.odontologia.acceso.ServicioBootstrap(usuarios, credenciales, autorizacion);
         }
     }
 

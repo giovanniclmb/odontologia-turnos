@@ -9,10 +9,12 @@ import org.springframework.transaction.annotation.Transactional;
 public class ServicioBootstrap {
     private final Usuarios usuarios;
     private final ServicioCredenciales credenciales;
+    private final ServicioAutorizacion autorizacion;
 
-    public ServicioBootstrap(Usuarios usuarios, ServicioCredenciales credenciales) {
+    public ServicioBootstrap(Usuarios usuarios, ServicioCredenciales credenciales, ServicioAutorizacion autorizacion) {
         this.usuarios = usuarios;
         this.credenciales = credenciales;
+        this.autorizacion = autorizacion;
     }
 
     @Transactional
@@ -38,7 +40,7 @@ public class ServicioBootstrap {
         if (datos == null) {
             throw new IllegalArgumentException("datos nulos");
         }
-        new ServicioAutorizacion().exigir(solicitante, Permiso.USUARIO_CREAR_ASIGNAR);
+        autorizacion.exigir(solicitante, Permiso.USUARIO_CREAR_ASIGNAR);
         DatosPersonales personales = datos.datosPersonales() == null
                 ? new DatosPersonales(null, datos.nombreUsuario(), null)
                 : datos.datosPersonales();
