@@ -60,3 +60,11 @@ Responsable: Fabi. Gobernanza: CRITICO. Planificación autorizada; Apply requier
 - [x] P2-A Bootstrap CLI: corregida propiedad Maven documentada en `backend/README.md` (`-Dspring-boot.run.main-class`, con guion) para seleccionar `BootstrapCli`. Verificación end-to-end contra PostgreSQL temporal en `BootstrapCliIT`: primer usuario persistido y autenticable, segundo intento rechazado, una sola fila.
 - [x] P2-B Autorización/alcance real: `AccesoPersistenciaIT.autorizacionEfectivaReal` y `alcancePorRegistroReal` persisten usuarios ficticios de ambos roles (odontólogo vinculado y no vinculado), autentican mediante `ServicioAutenticacion` real y verifican lectura permitida, edición denegada para recepción y rechazo fuera de alcance para odontólogo no vinculado. Sin recursos clínicos ni HTTP.
 - Verificación: `mvn test` = 77 unitarias OK; `mvn clean verify` = 72 IT OK, BUILD SUCCESS (2026-11-20).
+
+## Correcciones proactivas de calidad (sin nuevo alcance, rama codex/c-03-acceso-y-permisos)
+
+- [x] P2 Inyección: `ServicioBootstrap.crearUsuario` usa `ServicioAutorizacion` inyectado por constructor (no `new`); `JpaConfiguration` de ITs cablea el bean. Unit tests actualizados a la nueva firma.
+- [x] P2 `ServicioAutenticacion` y `ServicioAutorizacion` anotados `@Service` para DI en C-06/C-10; tests manuales siguen pasando.
+- [x] P2 IT `AccesoPersistenciaIT.autenticacionRechazaUsuarioInactivo`: usuario inactivo persistido y autenticación real rechazada con `AutenticacionFallidaException`.
+- [ ] P2 (pendiente, fuera de alcance de esta corrección) Historial de contraseñas N=5: no existe tabla `historial_contrasena`; requiere migración V3 y tabla nueva. `ServicioCredenciales.validarPolitica` acepta historial cuando se le provee, pero no se persiste aún. Diferido a change futuro (o C-06); no marcar completo.
+- [ ] P2 (pendiente de verificación manual) Invocación Maven exacta `mvn -f backend/pom.xml spring-boot:run -Dspring-boot.run.main-class=ar.edu.utn.odontologia.acceso.cli.BootstrapCli`: `BootstrapCliIT` cubre `BootstrapCli.main` contra PostgreSQL real, pero no el comando Maven literal. Verificar manualmente en entorno con Docker (documentado en backend/README.md, línea de bootstrap) y registrar evidencia; no se considera verificado por Failsafe.
