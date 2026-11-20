@@ -177,8 +177,14 @@ class AccesoPersistenciaIT {
 
     @Test
     void autorizacionEfectivaReal() {
+        ServicioCredenciales cred = contexto.getBean(ServicioCredenciales.class);
+        Usuarios usuarios = contexto.getBean(Usuarios.class);
+        ServicioAutenticacion auth = contexto.getBean(ServicioAutenticacion.class);
         ServicioAutorizacion authz = contexto.getBean(ServicioAutorizacion.class);
-        Identidad recepcion = new Identidad(UUID.randomUUID(), "recepcion", Rol.RECEPCION, null);
+        String nombre = "AUTHZ-RECEP-" + UUID.randomUUID();
+        String claro = "ClaveSegura123";
+        usuarios.save(new Usuario(nombre, cred.hash(claro), Rol.RECEPCION, true, null));
+        Identidad recepcion = auth.autenticar(nombre, claro);
         assertTrue(authz.tienePermiso(recepcion, Permiso.FICHA_LEER));
         assertFalse(authz.tienePermiso(recepcion, Permiso.FICHA_EDITAR));
         assertThrows(AutorizacionDenegadaException.class, () -> authz.exigir(recepcion, Permiso.FICHA_EDITAR));
@@ -192,14 +198,24 @@ class AccesoPersistenciaIT {
 
     @Test
     void alcancePorRegistroReal() {
+        ServicioCredenciales cred = contexto.getBean(ServicioCredenciales.class);
+        Usuarios usuarios = contexto.getBean(Usuarios.class);
+        ServicioAutenticacion auth = contexto.getBean(ServicioAutenticacion.class);
         ServicioAutorizacion authz = contexto.getBean(ServicioAutorizacion.class);
         UUID profesional = UUID.randomUUID();
-        Identidad odontologoVinculado = new Identidad(UUID.randomUUID(), "odonto", Rol.ODONTOLOGO, profesional);
+        String claro = "ClaveSegura123";
+        String nombreVinculado = "ODONTO-VINC-" + UUID.randomUUID();
+        usuarios.save(new Usuario(nombreVinculado, cred.hash(claro), Rol.ODONTOLOGO, true, profesional));
+        Identidad odontologoVinculado = auth.autenticar(nombreVinculado, claro);
         assertTrue(authz.puedeConsultarPaciente(odontologoVinculado, profesional));
         assertFalse(authz.puedeConsultarPaciente(odontologoVinculado, UUID.randomUUID()));
-        Identidad odontologoSinVinculo = new Identidad(UUID.randomUUID(), "odonto2", Rol.ODONTOLOGO, null);
+        String nombreSinVinculo = "ODONTO-SIN-" + UUID.randomUUID();
+        usuarios.save(new Usuario(nombreSinVinculo, cred.hash(claro), Rol.ODONTOLOGO, true, null));
+        Identidad odontologoSinVinculo = auth.autenticar(nombreSinVinculo, claro);
         assertFalse(authz.puedeConsultarPaciente(odontologoSinVinculo, profesional));
-        Identidad recepcion = new Identidad(UUID.randomUUID(), "recep", Rol.RECEPCION, null);
+        String nombreRecepcion = "RECEP-SCOPE-" + UUID.randomUUID();
+        usuarios.save(new Usuario(nombreRecepcion, cred.hash(claro), Rol.RECEPCION, true, null));
+        Identidad recepcion = auth.autenticar(nombreRecepcion, claro);
         assertTrue(authz.puedeConsultarPaciente(recepcion, profesional));
     }
 
