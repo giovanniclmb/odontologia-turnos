@@ -36,7 +36,7 @@ Responsable: Fabi. Gobernanza: CRITICO. Planificación autorizada; Apply requier
 ## 6. Integración y verificación
 
 - [x] 6.1 Ejecutar pruebas de integración (Failsafe) contra PostgreSQL real para autenticación, autorización, alcance y bootstrap; verificar que no se usan mocks como evidencia de autorización efectiva.
-- [x] 6.2 Ejecutar `mvn clean verify` con Docker disponible; registrar unitarias e IT; verificar preflight de Docker y que Failsafe no omite IT.
+- [x] 6.2 Ejecutar `mvn clean verify` con Docker disponible; registrar unitarias e IT; verificar preflight de Docker y que Failsafe no omite IT. (Review correction: mvn test = 77 unitarias OK; mvn clean verify = 71 IT OK, BUILD SUCCESS.)
 - [x] 6.3 Ejecutar `openspec validate acceso-y-permisos-internos --strict` y `git diff --check`; conciliar README/KB/CHANGES con decisiones y evidencia; verificar enlaces.
 
 ## Workflow follow-up
@@ -46,3 +46,11 @@ Responsable: Fabi. Gobernanza: CRITICO. Planificación autorizada; Apply requier
 - Hacer commits atómicos dentro del trabajo autorizado. Publicar y abrir/integrar PR únicamente con pedido expreso de push/integración.
 - Mantener Issue #4 y dependencias como seguimiento del trabajo real; la planificación no equivale a implementación ni desbloquea código de C-04 antes de integrar C-03.
 - Documentar preguntas abiertas remanentes (PA-05 parcial) sin resolverlas por inferencia.
+
+## Correcciones de review PR #29 (CRITICAL, sin nuevo alcance)
+
+- [x] P1 BootstrapCli conectado a `ServicioBootstrap` + repositorios reales (Usuario, TokenAcceso) mediante contexto Spring; contraseña leída y usada; sin HTTP. Comando documentado en backend/README.md. IT: `BootstrapPersistenciaIT` (creación persistente del primer usuario, autenticación posterior exitosa, segundo bootstrap rechazado).
+- [x] P2 Concurrencia de bootstrap serializada con `pg_advisory_xact_lock` en transacción (`@Transactional`); IT `BootstrapConcurrenciaIT` con dos hilos: exactamente una creación exitosa.
+- [x] P2 `AccesoPersistenciaIT.tokenEnClaroNoSeAlmacena` reemplazada por aserción efectiva sobre `hash_token`; agregadas IT de autenticación, autorización, alcance por registro y bootstrap contra PostgreSQL real (`AccesoPersistenciaIT`, `BootstrapPersistenciaIT`).
+- [x] P2 `ArranqueIT.rechazaHistorialDeUnaVersionFutura` corregido: copia real de V1 y V2, V3 temporal ausente del binario, rechazo correspondiente a la versión 3, historial sin repair/clean (3 migraciones exitosas).
+- Pendiente humano: revisión personal/académica y evidencia humana no se declaran resueltas por pruebas verdes. PA-05 sigue parcial sin resolver.
