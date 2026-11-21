@@ -231,10 +231,11 @@ Giovanni aprobó el reparto el 19/11/2026. Las ondas preservan las dependencias 
   - [10 Preguntas abiertas](knowledge-base/10_preguntas_abiertas.md) §PA-05, PA-06 y PA-07
 
 ### [C-05] `recursos-prestaciones-e-intervalo`
-- **Estado**: `[ ]` pendiente
+- **Estado**: `[x]` implementado, verificado y archivado en OpenSpec. [Tareas y evidencia](openspec/changes/archive/2026-11-21-recursos-prestaciones-e-intervalo/tasks.md)
 - **Responsable**: Luciano
 - **Scope**: Configuración mínima de los recursos que necesita la agenda persistida.
-  - Resolver PA-01, PA-04, PA-05, PA-08 y PA-14: intervalo, disponibilidad, cantidades, permisos y catálogo inicial.
+  - Decisiones aprobadas para C-05 sobre PA-01, PA-04, PA-05, PA-08 y PA-14. Intervalo sin valor inicial, en minutos enteros positivos y aplicable a futuras validaciones. Disponibilidad mínima por existencia y estado de los recursos e intervalo configurado. Altas sin cantidades fijas y catálogo inicialmente vacío.
+  - Recepción administra la configuración y tiene permiso para crear usuarios internos y vincularlos a profesionales. Odontología consulta la configuración y los recursos.
   - Incorporar las representaciones persistidas de profesionales, sillones, prestaciones y configuración de la sede acordadas; no añadir múltiples sedes ni valores por defecto inventados.
   - Implementar operaciones mínimas acordadas para consultar/establecer esos datos y aplicar US-005 con RN-AG-02, RN-AG-04 y RN-AG-05. No se presupone CRUD completo ni eliminación de recursos.
   - Tests: permisos de configuración, duración de referencia, intervalo único y uso de datos ficticios; validar límites que el usuario haya aprobado.
