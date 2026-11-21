@@ -125,14 +125,15 @@ class ArranqueIT {
             Files.writeString(temporal.resolve("V1__referencias_base.sql"),v1);
             Files.writeString(temporal.resolve("V2__acceso_y_permisos.sql"),v2);
             Files.copy(Path.of("src/main/resources/db/migration/V3__historial_contrasena.sql"),temporal.resolve("V3__historial_contrasena.sql"));
-            Files.writeString(temporal.resolve("V4__futura.sql"),"CREATE TABLE odontologia.futura (id uuid PRIMARY KEY); SELECT 1;\n");
+            Files.copy(Path.of("src/main/resources/db/migration/V4__recursos_e_intervalo.sql"),temporal.resolve("V4__recursos_e_intervalo.sql"));
+            Files.writeString(temporal.resolve("V5__futura.sql"),"CREATE TABLE odontologia.futura (id uuid PRIMARY KEY); SELECT 1;\n");
             try(var c=abrir(aislada,Map.of("spring.flyway.locations","filesystem:"+temporal))){}
             var error=assertThrows(RuntimeException.class,()->{try(var c=abrir(aislada,Map.of())){} });
             String mensaje=cadena(error).toLowerCase(Locale.ROOT);
             assertTrue(mensaje.contains("migration"));
-            assertTrue(mensaje.contains("4"), "El rechazo debe corresponder a la version futura 4: " + mensaje);
+            assertTrue(mensaje.contains("5"), "El rechazo debe corresponder a la version futura 5: " + mensaje);
             try(var c=aislada.migrationConnection();var q=c.createStatement();var result=q.executeQuery("select count(*) from odontologia.flyway_schema_history where success")){
-                assertTrue(result.next());assertEquals(4,result.getInt(1));
+                assertTrue(result.next());assertEquals(5,result.getInt(1));
             }
         }
     }

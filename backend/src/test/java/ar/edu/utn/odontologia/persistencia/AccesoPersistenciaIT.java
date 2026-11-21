@@ -208,12 +208,18 @@ class AccesoPersistenciaIT {
     }
 
     @Test
-    void alcancePorRegistroReal() {
+    void alcancePorRegistroReal() throws SQLException {
         ServicioCredenciales cred = contexto.getBean(ServicioCredenciales.class);
         Usuarios usuarios = contexto.getBean(Usuarios.class);
         ServicioAutenticacion auth = contexto.getBean(ServicioAutenticacion.class);
         ServicioAutorizacion authz = contexto.getBean(ServicioAutorizacion.class);
         UUID profesional = UUID.randomUUID();
+        try (var c = db.appConnection(); var q = c.prepareStatement(
+                "insert into odontologia.profesional(id,codigo) values (?,?)")) {
+            q.setObject(1, profesional);
+            q.setString(2, "PROFESIONAL-FICTICIO-" + profesional);
+            q.executeUpdate();
+        }
         String claro = "ClaveSegura123";
         String nombreVinculado = "ODONTO-VINC-" + UUID.randomUUID();
         usuarios.save(new Usuario(nombreVinculado, cred.hash(claro), Rol.ODONTOLOGO, true, profesional));
@@ -234,7 +240,7 @@ class AccesoPersistenciaIT {
     void migracionNoSeReaplica() throws Exception {
         try (var c = db.migrationConnection(); var q = c.createStatement(); var r = q.executeQuery("select count(*) from odontologia.flyway_schema_history where success")) {
             assertTrue(r.next());
-            assertEquals(3, r.getInt(1));
+            assertEquals(4, r.getInt(1));
         }
     }
 }

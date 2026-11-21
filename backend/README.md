@@ -1,6 +1,6 @@
 # Backend — dominio y base de persistencia
 
-C-01 aporta las reglas puras de agenda; C-02 añade Spring Boot no-web, referencias persistidas y migraciones. Todavía no hay endpoints, login, ficha clínica, turnos persistidos ni UI.
+C-01 aporta las reglas puras de agenda. C-02 añade Spring Boot no-web, referencias persistidas y migraciones. C-03 aporta el acceso interno y C-05 agrega la configuración de recursos. La ficha clínica, los turnos persistidos y la interfaz de usuario pertenecen a changes posteriores.
 
 ## Requisitos y versiones
 
@@ -53,11 +53,17 @@ Cambiar `.env` no cambia credenciales de un volumen ya inicializado. Ante un err
 
 El esquema odontologia contiene paciente, profesional, sillon, prestacion, usuario, token_acceso e historial_contrasena. usuario tiene id uuid, nombre_usuario text obligatorio no vacío y único, hash_credencial text, rol CHECK (recepcion/odontologo), activo, profesional_ref uuid opaco y creado_en. token_acceso tiene id uuid, usuario_id FK, hash_token, creado_en, expira_en y revocado. Hibernate genera el UUID en la aplicación; PostgreSQL no tiene default de generación. odonto_app tiene SELECT/INSERT/UPDATE sobre usuario y token_acceso, sin DELETE.
 
-No hay columnas clínicas, cuentas de paciente, duración de prestación, intervalo ni tabla de turnos. Esas ampliaciones pertenecen a los changes siguientes. Las entidades y repositorios JPA están separados del paquete agenda y no se exponen como contratos HTTP.
+Las entidades y repositorios JPA están separados del paquete agenda. La persistencia de turnos, las columnas clínicas y las cuentas de paciente pertenecen a changes posteriores.
 
 V1__referencias_base.sql crea las referencias y permisos. V2__acceso_y_permisos.sql crea usuario y token_acceso con sus constraints y permisos. Flyway es el único gestor de estructura; Hibernate usa validate y la inicialización SQL alternativa está desactivada. Flyway valida checksum y rechaza también migraciones futuras ausentes del binario; no hay baseline automático, clean ni out-of-order.
 
 Versiones globales consecutivas: Giovanni coordina el próximo número según el orden real de integración. Una migración aplicada a una base de trabajo compartida no se renumera ni edita; se corrige con otra versión. Los tests de desarrollo usan contenedores nuevos al iterar V1 y nunca reparan el historial de una base persistente.
+
+### C-05 — Recursos, prestaciones e intervalo
+
+V4 agrega el intervalo único de sede, inicialmente sin configurar, el estado operativo de profesionales y sillones y la duración de referencia de prestaciones. Conserva los UUID y códigos de V1. Un recurso heredado sin estado se considera no disponible. Una prestación heredada sin duración sigue consultable y recepción puede establecer su duración por el servicio. La FK de profesional valida los vínculos existentes al migrar. Antes de aplicar V4 en una base persistente, comprobar que las referencias no nulas a profesionales correspondan a filas existentes.
+
+Las operaciones están disponibles en `ServicioConfiguracionSede`, `ServicioRecursosAgenda` y `ServicioVinculacionProfesional`. Pasan la identidad interna autenticada a los servicios. Recepción puede configurar, dar de alta recursos, ajustar duraciones, crear usuarios internos y vincularlos a profesionales. Odontología puede consultar la configuración y los catálogos. La disponibilidad mínima devuelve el intervalo vigente cuando el profesional y el sillón existen y están activos. El dominio de agenda sigue recibiendo un intervalo explícito por invocación.
 
 ## Dominio C-01
 
