@@ -18,7 +18,10 @@ public class ServicioAutorizacion {
                     Permiso.BLOQUEO_CREAR,
                     Permiso.FICHA_LEER,
                     Permiso.CONFIRMACION_REGISTRAR,
-                    Permiso.PENDIENTES_CONSULTAR),
+                    Permiso.PENDIENTES_CONSULTAR,
+                    Permiso.CONFIG_INTERVALO,
+                    Permiso.CONFIG_RECURSOS,
+                    Permiso.USUARIO_CREAR_ASIGNAR),
             Rol.ODONTOLOGO, EnumSet.of(
                     Permiso.TURNO_CREAR,
                     Permiso.TURNO_REPROGRAMAR,

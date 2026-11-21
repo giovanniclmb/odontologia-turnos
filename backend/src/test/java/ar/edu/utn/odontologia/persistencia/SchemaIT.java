@@ -28,7 +28,7 @@ class SchemaIT {
             assertTrue(rs.next()); assertEquals(6, rs.getInt(1));
         }
         assertEquals(0, f.migrate().migrationsExecuted);
-        assertEquals(3, f.info().applied().length);
+        assertEquals(4, f.info().applied().length);
     }
 
     @ParameterizedTest @ValueSource(strings={"paciente","profesional","sillon","prestacion"})

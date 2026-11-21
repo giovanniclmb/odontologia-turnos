@@ -3,8 +3,7 @@ package ar.edu.utn.odontologia.acceso;
 import java.util.UUID;
 
 /**
- * Contrato (sin implementacion efectiva en C-03) para vincular un usuario interno
- * con una referencia opaca de profesional. La implementacion efectiva se realiza en C-05.
+ * Contrato de acceso y datos para vincular un usuario interno con un profesional.
  */
 public final class ContratoVinculacionUsuarioProfesional {
     private ContratoVinculacionUsuarioProfesional() {

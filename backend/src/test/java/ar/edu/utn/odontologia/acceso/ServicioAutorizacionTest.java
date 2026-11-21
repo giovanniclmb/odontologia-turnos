@@ -7,6 +7,17 @@ import org.junit.jupiter.api.Test;
 class ServicioAutorizacionTest {
     private final ServicioAutorizacion authz = new ServicioAutorizacion();
 
+    @Test void escriturasAdministrativasSonExclusivasDeRecepcion() {
+        Identidad recepcion = new Identidad(UUID.randomUUID(), "recepcion-ficticia", Rol.RECEPCION, null);
+        Identidad odontologo = new Identidad(UUID.randomUUID(), "odontologo-ficticio", Rol.ODONTOLOGO, null);
+        for (Permiso permiso : java.util.List.of(Permiso.CONFIG_INTERVALO, Permiso.CONFIG_RECURSOS,
+                Permiso.USUARIO_CREAR_ASIGNAR)) {
+            assertTrue(authz.tienePermiso(recepcion, permiso), permiso::codigo);
+            assertFalse(authz.tienePermiso(odontologo, permiso), permiso::codigo);
+            assertFalse(authz.tienePermiso(null, permiso), permiso::codigo);
+        }
+    }
+
     @Test void permisoConcedido() {
         Identidad id = new Identidad(UUID.randomUUID(), "u", Rol.RECEPCION, null);
         assertTrue(authz.tienePermiso(id, Permiso.FICHA_LEER));

@@ -12,6 +12,7 @@ public enum Permiso {
     PENDIENTES_CONSULTAR("pendientes:consultar"),
     PACIENTE_DATOS_ADMIN("paciente:datos-admin"),
     CONFIG_INTERVALO("config:intervalo"),
+    CONFIG_RECURSOS("config:recursos"),
     USUARIO_CREAR_ASIGNAR("usuario:crear/asignar"),
     PACIENTE_ELIMINAR("paciente:eliminar");
 
