@@ -26,7 +26,7 @@ Después de las correcciones, el integrador ejecutó nuevamente `mvn -f backend/
 
 Un subagente independiente GPT-6.2 Sol con razonamiento medio revisó la implementación y luego las correcciones. Confirmó el cierre del hallazgo de autorización durante la espera y de la cobertura de contigüidad inversa, sin hallazgos pendientes en la segunda revisión. Su revisión fue de solo lectura; la ejecución final de pruebas correspondió al integrador.
 
-OpenSpec registra las nueve tareas de Apply completas. El archivo y la integración del change siguen pendientes. No se realizó push.
+OpenSpec registra las nueve tareas de Apply completas. El change se archivó mediante el CLI y la capacidad se sincronizó con las especificaciones principales. La integración se tramita mediante PR hacia `main`.
 
 ## Qué prueban las carreras
 
