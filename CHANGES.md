@@ -267,7 +267,7 @@ Giovanni aprobó el reparto el 19/11/2026. Las ondas preservan las dependencias 
 ## FASE 2 — Agenda, bloqueos y participación del paciente
 
 ### [C-15] `bloqueos-de-recursos`
-- **Estado**: `[x]` implementado y verificado localmente. [Tareas y evidencia OpenSpec](openspec/changes/bloqueos-de-recursos/tasks.md)
+- **Estado**: `[x]` implementado, verificado localmente y archivado en OpenSpec. [Tareas y evidencia](openspec/changes/archive/2026-11-23-bloqueos-de-recursos/tasks.md)
 - **Responsable**: Luciano
 - **Scope**: Indisponibilidad por período gestionada por recepción para US-010 y RN-AG-10.
   - PA-04/PA-19 resueltas para C-15: períodos semiabiertos y coordinación transaccional por recurso. Modificación y desbloqueo quedan fuera del alcance.
