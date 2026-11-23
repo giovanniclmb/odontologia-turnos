@@ -23,4 +23,4 @@ C-01 calcula la disponibilidad a partir de reservas entregadas por el llamador. 
 ## Impact
 
 - Backend Java y Spring Boot, entidades JPA/Hibernate, migraciones Flyway y pruebas con PostgreSQL 18.7. Reutiliza el dominio de C-01, identidad de C-03, pacientes y asignaciones de C-04, y recursos e intervalo de C-05.
-- [C-15 está integrado en `main`](https://github.com/giovanniclmb/odontologia-turnos/pull/33). Esta propuesta incorpora su [contrato de bloqueos](../../specs/bloqueos-de-recursos/spec.md). La propuesta escrita sigue en revisión y Apply requiere un pedido explícito. La numeración de la migración se coordina sobre la base vigente. El [Issue #7](https://github.com/giovanniclmb/odontologia-turnos/issues/7) sigue abierto.
+- [C-15 está integrado en `main`](https://github.com/giovanniclmb/odontologia-turnos/pull/33). C-06 incorpora su [contrato de bloqueos](../../specs/bloqueos-de-recursos/spec.md) y agrega la migración V7 sobre esa base. Giovanni aprobó el diseño escrito y Apply de C-06 el 23/11/2026. El [Issue #7](https://github.com/giovanniclmb/odontologia-turnos/issues/7) sigue abierto.

@@ -22,6 +22,10 @@ El servicio SHALL exigir identidad interna autenticada y permiso `turno:crear`. 
 - **WHEN** odontología intenta reservar para otro profesional, carece de vinculación profesional o indica un paciente sin asignación activa a su profesional
 - **THEN** el sistema deniega el alta sin guardar el turno ni devolver información de registros ajenos
 
+#### Scenario: Se quita una asignación durante la espera por recursos
+- **WHEN** la asignación del paciente al profesional se desactiva y la transacción de ese cambio se confirma mientras el alta de odontología espera por los recursos
+- **THEN** el servicio revalida la asignación tras adquirir los recursos, deniega el alta y no guarda el turno
+
 #### Scenario: Operador sin identidad o permiso
 - **WHEN** se solicita el alta sin una identidad autenticada con `turno:crear`
 - **THEN** el sistema deniega la operación sin devolver datos de la agenda ni guardar un turno

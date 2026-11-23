@@ -22,13 +22,13 @@ El dominio `Agenda.crear` de C-01 recibe reservas ocupantes, un intervalo explí
 - Truncar el inicio solicitado una vez a microsegundos. Comparar ese instante con el `Clock` existente y exigir que sea estrictamente posterior. Pasarlo a `Agenda.crear` junto con la duración de C-05 y el posible ajuste. El fin se calcula sumando los minutos efectivos completos al inicio normalizado. Usar exactamente los mismos extremos para validar contra turnos, consultar bloqueos y persistir. Tratar fechas o cálculos fuera de rango como entradas inválidas.
 - Consultar las reservas ocupantes que compartan profesional o sillón y puedan infringir el margen, incluidas las que terminan antes o empiezan después del turno solicitado. Usar `Agenda.crear` para aplicar el intervalo vigente y aceptar la separación exacta. Para bloqueos, consultar `ConsultaBloqueos.buscar` con `RecursosBloqueo` y `PeriodoBloqueo`, usando intersección estricta `inicioExistente < finSolicitado && finExistente > inicioSolicitado`, sin margen entre turno y bloqueo.
 
-### Modelo físico propuesto para revisión
+### Modelo físico
 
-Entidad de persistencia separada de `Agenda`, con UUID generado por la aplicación, cuatro claves foráneas obligatorias a referencias existentes, inicio y fin `timestamptz`, duración efectiva positiva en minutos enteros y estado inicial `PENDIENTE`. La migración debe proteger la consistencia entre comienzo, fin y duración y otorgar al rol de aplicación únicamente los permisos que requiere C-06. Los nombres físicos y la numeración se revisarán sobre la secuencia Flyway vigente.
+`TurnoPersistido` se mapea a `odontologia.turno` con UUID generado por la aplicación, cuatro claves foráneas obligatorias a referencias existentes, inicio y fin `timestamptz`, duración efectiva positiva en minutos enteros y estado inicial `PENDIENTE`. V7 protege la consistencia entre comienzo, fin y duración y otorga al rol de aplicación `SELECT` e `INSERT`.
 
 ### Exclusión compartida con C-15
 
-Ejecutar el alta en una transacción `READ COMMITTED`. Tras validar el permiso y el alcance, adquirir ambos recursos con `LocksRecursosAgenda.adquirir`. El método requiere una transacción existente (`MANDATORY`) y toma `FOR NO KEY UPDATE` por profesional y luego por sillón, con UUID ordenados dentro de cada tipo. Después de adquirir los locks, leer disponibilidad y conflictos, validar el horario y guardar en la misma transacción. Mantener los locks hasta la confirmación o reversión. La operación que espera vuelve a validar con las filas confirmadas cuando adquiere los locks.
+Ejecutar el alta en una transacción `READ COMMITTED`. Tras validar el permiso y el alcance, adquirir ambos recursos con `LocksRecursosAgenda.adquirir`. El método requiere una transacción existente (`MANDATORY`) y toma `FOR NO KEY UPDATE` por profesional y luego por sillón, con UUID ordenados dentro de cada tipo. Después de adquirir los locks, volver a comprobar la asignación activa cuando el solicitante sea de odontología. Leer disponibilidad y conflictos, validar el horario y guardar en esa misma transacción. Mantener los locks hasta la confirmación o reversión.
 
 Sustituir `AgendaSinTurnosPersistidos` por un único adaptador real de `ConsultaTurnosOcupantes`. Dentro de la transacción del bloqueo, comprobar si existe un turno ocupante que se intersecta con el período y coincide en alguno de los recursos indicados. La consulta interna necesita ver la ocupación de ambos recursos aunque la vista de agenda del operador tenga alcance restringido. La comprobación de bloqueos se realiza por su propio contrato para admitir bloqueos de un solo recurso.
 
@@ -40,7 +40,7 @@ Sustituir `AgendaSinTurnosPersistidos` por un único adaptador real de `Consulta
 
 ## Migration Plan
 
-Coordinar la siguiente versión Flyway sobre la base integrada, que llega a `V6__bloqueos_de_recursos.sql`. Verificar la actualización desde V6 y el arranque con el rol de aplicación. Conservar las migraciones aplicadas. Ante un fallo de una versión ya migrada, preservar las reservas y corregir mediante otra migración.
+Flyway aplica `V7__turnos_persistidos.sql` después de `V6__bloqueos_de_recursos.sql`. Verificar la actualización desde V6 y el arranque con el rol de aplicación. Conservar las migraciones aplicadas. Ante un fallo de una versión ya migrada, preservar las reservas y corregir mediante otra migración.
 
 ## UI Mockups
 

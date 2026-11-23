@@ -282,7 +282,7 @@ Giovanni aprobó el reparto el 19/11/2026. Las ondas preservan las dependencias 
   - [Preguntas abiertas](knowledge-base/10_preguntas_abiertas.md)
 
 ### [C-06] `crear-turno-con-persistencia`
-- **Estado**: `[ ]` [propuesta en revisión](openspec/changes/crear-turno-con-persistencia/proposal.md) sobre el contrato de C-15 integrado. Implementación pendiente de revisión y autorización de Apply.
+- **Estado**: `[ ]` implementado y verificado sobre C-15 integrado, con revisión independiente cerrada. Pendientes archivo e integración. [Evidencia](openspec/changes/crear-turno-con-persistencia/verify.md)
 - **Responsable**: Giovanni
 - **Scope**: Conectar la regla de creación con pacientes, recursos y guardado real.
   - El alta crea turnos pendientes de confirmación que ocupan ambos recursos. Solo se admiten inicios futuros, sin franjas semanales adicionales. Recepción puede crear con cualquier profesional elegible. Odontología solo puede hacerlo para sí y pacientes con asignación activa. [Decisiones acotadas](knowledge-base/10_preguntas_abiertas.md#resolución-acotada-para-c-06-23112026)
