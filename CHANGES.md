@@ -267,10 +267,10 @@ Giovanni aprobó el reparto el 19/11/2026. Las ondas preservan las dependencias 
 ## FASE 2 — Agenda, bloqueos y participación del paciente
 
 ### [C-15] `bloqueos-de-recursos`
-- **Estado**: `[ ]` pendiente
+- **Estado**: `[x]` implementado, verificado localmente y archivado en OpenSpec. [Tareas y evidencia](openspec/changes/archive/2026-11-23-bloqueos-de-recursos/tasks.md)
 - **Responsable**: Luciano
 - **Scope**: Indisponibilidad por período gestionada por recepción para US-010 y RN-AG-10.
-  - Resolver PA-04/PA-19: límites temporales, concurrencia y condiciones de modificar o desbloquear; no atribuir estas últimas operaciones por inferencia.
+  - PA-04/PA-19 resueltas para C-15: períodos semiabiertos y coordinación transaccional por recurso. Modificación y desbloqueo quedan fuera del alcance.
   - Definir representación y contrato backend del bloqueo de sillón y/o profesional; rechazar si afecta turnos existentes. Hacer consultable la indisponibilidad para C-06 y C-07.
   - Tests: bloqueo de cada recurso y ambos, rechazo ante turno existente, alta y reprogramación impedidas sobre recursos bloqueados y solicitudes simultáneas según el spec. Acordar migraciones y rutas antes de código.
 - **Dependencias**: C-05

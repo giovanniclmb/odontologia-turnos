@@ -74,3 +74,8 @@ Estas decisiones cierran PA-05/06/07 únicamente para el alcance de C-04; no res
 - **PA-04 — horario de alta:** solo se crean turnos con inicio posterior al instante de validación, sin exigir franjas semanales adicionales. Antes de implementar C-06 se deben acordar con C-15 los bordes temporales y las comprobaciones concurrentes de bloqueos y turnos.
 - **PA-05 — alcance del alta:** recepción puede crear con cualquier profesional elegible del sitio. Odontología solo puede reservar para su propio profesional vinculado y pacientes con asignación activa a él. El alcance de las demás operaciones de agenda se especifica en sus respectivos changes.
 - Giovanni aprobó redactar la [propuesta de servicio interno](../openspec/changes/crear-turno-con-persistencia/proposal.md). El modelo físico y el contrato de consistencia se revisan junto con C-15 antes de Apply. PA-07 sigue abierta para la persistencia de agenda.
+
+## Resolución acotada para C-15 (23/11/2026)
+
+- **PA-04 y PA-19.** El período del bloqueo incluye el inicio y excluye el fin. Se admiten bordes contiguos y el intervalo global se aplica entre turnos. Una escritura de agenda y un bloqueo incompatibles se coordinan en PostgreSQL por los recursos compartidos. Prevalece la primera transacción que confirma. Un bloqueo de sillón y profesional se confirma de manera atómica.
+- **PA-19.** C-15 incluye el alta por recepción y la consulta interna de indisponibilidad. La modificación y el desbloqueo quedan pendientes de definición. El contrato es Java con migración Flyway. C-06 conectará la persistencia de turnos y C-07 conectará la reprogramación al protocolo transaccional.
