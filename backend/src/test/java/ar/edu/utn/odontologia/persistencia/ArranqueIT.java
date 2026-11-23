@@ -71,8 +71,8 @@ class ArranqueIT {
     @Test void checksumAlteradoFallaSinRepararNiBorrarDatos() throws Exception {
         try(var c=abrir(Map.of())){}
         var id=UUID.randomUUID();
-        try(var c=db.appConnection();var q=c.prepareStatement("insert into odontologia.paciente(id,codigo) values (?,?)")){
-            q.setObject(1,id);q.setString(2,"CHECKSUM-"+id);q.executeUpdate();
+        try(var c=db.appConnection();var q=c.prepareStatement("insert into odontologia.paciente(id,codigo,nombre,apellido,email) values (?,?,?,?,?)")){
+            q.setObject(1,id);q.setString(2,"CHECKSUM-"+id);q.setString(3,"Nombre ficticio");q.setString(4,"Apellido ficticio");q.setString(5,"checksum@example.invalid");q.executeUpdate();
         }
         String sql=Files.readString(Path.of("src/main/resources/db/migration/V1__referencias_base.sql"));
         Files.writeString(temporal.resolve("V1__referencias_base.sql"),sql+"\nSELECT 42;\n");
@@ -126,14 +126,15 @@ class ArranqueIT {
             Files.writeString(temporal.resolve("V2__acceso_y_permisos.sql"),v2);
             Files.copy(Path.of("src/main/resources/db/migration/V3__historial_contrasena.sql"),temporal.resolve("V3__historial_contrasena.sql"));
             Files.copy(Path.of("src/main/resources/db/migration/V4__recursos_e_intervalo.sql"),temporal.resolve("V4__recursos_e_intervalo.sql"));
-            Files.writeString(temporal.resolve("V5__futura.sql"),"CREATE TABLE odontologia.futura (id uuid PRIMARY KEY); SELECT 1;\n");
+            Files.copy(Path.of("src/main/resources/db/migration/V5__pacientes_y_ficha_clinica.sql"),temporal.resolve("V5__pacientes_y_ficha_clinica.sql"));
+            Files.writeString(temporal.resolve("V6__futura.sql"),"CREATE TABLE odontologia.futura (id uuid PRIMARY KEY); SELECT 1;\n");
             try(var c=abrir(aislada,Map.of("spring.flyway.locations","filesystem:"+temporal))){}
             var error=assertThrows(RuntimeException.class,()->{try(var c=abrir(aislada,Map.of())){} });
             String mensaje=cadena(error).toLowerCase(Locale.ROOT);
             assertTrue(mensaje.contains("migration"));
-            assertTrue(mensaje.contains("5"), "El rechazo debe corresponder a la version futura 5: " + mensaje);
+            assertTrue(mensaje.contains("6"), "El rechazo debe corresponder a la version futura 6: " + mensaje);
             try(var c=aislada.migrationConnection();var q=c.createStatement();var result=q.executeQuery("select count(*) from odontologia.flyway_schema_history where success")){
-                assertTrue(result.next());assertEquals(5,result.getInt(1));
+                assertTrue(result.next());assertEquals(6,result.getInt(1));
             }
         }
     }

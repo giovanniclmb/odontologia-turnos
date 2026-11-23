@@ -2,6 +2,7 @@ package ar.edu.utn.odontologia;
 
 import java.util.List;
 import java.util.Properties;
+import java.time.Clock;
 import java.net.URI;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
@@ -25,6 +26,9 @@ public class OdontologiaApplication {
 
     @Bean
     public Agenda agenda() { return new Agenda(); }
+
+    @Bean
+    public Clock relojSistema() { return Clock.systemUTC(); }
 
     @Bean
     static BeanFactoryPostProcessor configuracionObligatoria(Environment environment) {

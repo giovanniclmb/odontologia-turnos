@@ -6,21 +6,22 @@ Los pasos describen interacciones del equipo y del paciente con la aplicación y
 
 Un integrante del equipo necesita organizar la atención de un paciente (US-001 y US-002).
 
-1. El operador accede a la gestión de pacientes desde la interfaz.
-2. La aplicación consulta o registra los datos correspondientes a la operación autorizada en el almacenamiento.
-3. Si el operador solicita la ficha, la aplicación recupera los antecedentes y las notas y los presenta a recepción u odontología según sus permisos.
+1. El operador busca pacientes por código exacto o por coincidencia parcial de nombre/apellido sin distinguir mayúsculas. Recepción ve el sitio; odontología solo los pacientes asignados a su profesional.
+2. Recepción u odontología crea o edita los datos administrativos mínimos dentro de su alcance. Si odontología crea un paciente, queda sin asignar y recepción debe asignarlo para habilitar el acceso posterior.
+3. Recepción asigna o quita profesionales. Odontología no cambia asignaciones.
+4. Al cargar antecedentes o la primera nota, la aplicación crea la ficha si aún no existe. Una consulta clínica devuelve antecedentes y notas solo a recepción o a odontología asignada.
 
-El conjunto de operaciones sobre pacientes, los campos y la respuesta ante datos inválidos o un registro ausente quedan pendientes (PA-05 y PA-06).
+Los contratos de servicio y campos mínimos de C-04 se especifican en OpenSpec; no se definen rutas HTTP en este change (resolución acotada de PA-05/06/07).
 
 ## Flujo 2 · Editar la ficha clínica
 
 Un odontólogo necesita actualizar antecedentes o notas de un paciente (US-003).
 
-1. El odontólogo consulta la ficha en la interfaz e indica el cambio.
-2. La aplicación comprueba el permiso de edición de la información clínica.
-3. La aplicación guarda el cambio autorizado y la interfaz presenta la ficha con los datos actualizados.
+1. Un odontólogo asignado consulta la ficha e indica una actualización de antecedentes o agrega una nota no vacía.
+2. La aplicación comprueba el permiso y la asignación vigente en backend. Para editar una nota, comprueba también que el usuario sea su autor original.
+3. La aplicación guarda el cambio; para notas conserva autor y fecha de creación, asignados por el backend.
 
-Si recepción intenta editar, la aplicación impide la modificación (RN-CL-02). Quedan pendientes las validaciones de los campos y la respuesta visible cuando un cambio no pueda guardarse (PA-05 y PA-06).
+Si recepción intenta editar o un odontólogo intenta modificar una nota ajena o una ficha fuera de su alcance, la aplicación deniega la operación en backend. No se ofrece eliminar pacientes, fichas, antecedentes ni notas (RN-CL-02; resolución acotada de PA-05/06/07).
 
 ## Flujo 3 · Crear un turno
 

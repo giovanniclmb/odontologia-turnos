@@ -214,12 +214,12 @@ Giovanni aprobó el reparto el 19/11/2026. Las ondas preservan las dependencias 
   - [10 Preguntas abiertas](knowledge-base/10_preguntas_abiertas.md) §PA-05
 
 ### [C-04] `pacientes-y-ficha-clinica`
-- **Estado**: `[ ]` pendiente
+- **Estado**: `[x]` implementado, verificado y archivado en OpenSpec; integración pendiente. [Verify](openspec/changes/archive/2026-11-23-pacientes-y-ficha-clinica/evidence/verify.md)
 - **Responsable**: Sofia
 - **Scope**: Gestión mínima del paciente y lectura/edición de la ficha sencilla en backend.
   - Resolver PA-05, PA-06 y PA-07 para campos, operaciones y alcance por registro; no asumir permisos de eliminación.
   - Incorporar los modelos y migraciones de paciente, antecedentes y notas que se aprueben, sin odontograma ni funciones administrativas ampliadas.
-  - Implementar los contratos backend acordados para US-001, US-002 y US-003, preservando RN-CL-01, RN-CL-02 y RN-TR-01. Las rutas, DTO y migraciones se nombrarán en Propose.
+  - Implementar los contratos backend acordados para US-001, US-002 y US-003, preservando RN-CL-01, RN-CL-02 y RN-TR-01. Las operaciones y DTO de servicio, y la migración, se nombrarán en Propose; este change no incorpora rutas HTTP.
   - Tests: gestión mínima autorizada, lectura clínica por ambos perfiles y edición rechazada para recepción; comprobar autorización en el backend, no solo ocultando controles.
 - **Dependencias**: C-03
 - **Governance**: CRITICO

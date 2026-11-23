@@ -8,28 +8,33 @@ Las historias describen el MVP aprobado para el roadmap. Giovanni eligió C-01 p
 
 Como integrante del equipo, quiero gestionar pacientes y consultar sus datos para organizar su atención.
 
-- [ ] El operador autorizado puede gestionar pacientes y consultar sus datos.
+- [ ] Recepción puede crear, consultar, editar y buscar pacientes en todo el sitio; odontología puede realizar esas operaciones dentro del alcance de pacientes asignados. La búsqueda admite código exacto y nombre/apellido parcial sin distinguir mayúsculas.
+- [ ] Los datos mínimos son código, nombre, apellido y email obligatorios, más teléfono opcional. El email tiene formato válido y no es único.
+- [ ] Recepción asigna y quita uno o más profesionales por paciente. Un paciente creado por odontología queda sin asignación hasta que recepción lo asigne.
 - [ ] Los ejemplos y pruebas de la gestión usan datos ficticios.
 
-Quedan pendientes las operaciones concretas por rol y los campos mínimos (PA-05 y PA-06). Regla relacionada RN-TR-01.
+La creación, consulta, edición y búsqueda no conceden eliminación. El permiso de datos administrativos se verifica en el backend y respeta el alcance por registro (resolución acotada de PA-05/06). Regla relacionada RN-TR-01.
 
 ### US-002 · Consultar la ficha clínica
 
 Como integrante de recepción u odontólogo, quiero consultar los antecedentes y notas para contar con la información clínica disponible.
 
-- [ ] Recepción puede leer los antecedentes y las notas de la ficha.
-- [ ] Los odontólogos pueden leer los antecedentes y las notas de la ficha.
+- [ ] Recepción puede leer los antecedentes y las notas de cualquier paciente del sitio.
+- [ ] Los odontólogos pueden leer antecedentes y notas solo de pacientes asignados a su profesional.
+- [ ] La ficha se crea al registrar los primeros antecedentes o la primera nota; antecedentes se guardan como texto y las notas como entradas fechadas con autor.
 
-Queda pendiente el alcance por operación y por registro (PA-05). Reglas relacionadas RN-CL-01 y RN-CL-02.
+La ficha se consulta separada de los resultados administrativos de búsqueda. El alcance clínico por registro queda resuelto para C-04 en PA-05/07. Reglas relacionadas RN-CL-01 y RN-CL-02.
 
 ### US-003 · Editar antecedentes y notas
 
 Como odontólogo, quiero editar antecedentes y notas para mantener al día la ficha clínica.
 
-- [ ] Los odontólogos pueden editar antecedentes y notas.
-- [ ] Una persona de recepción carece del permiso de edición clínica.
+- [ ] Un odontólogo asignado puede crear/editar antecedentes y agregar notas.
+- [ ] Solo el odontólogo autor puede editar el texto de una nota y solo mientras siga asignado al paciente.
+- [ ] Una persona de recepción puede leer, pero no editar antecedentes ni notas.
+- [ ] No se permite eliminar pacientes, fichas, antecedentes ni notas.
 
-Quedan pendientes los campos y el alcance detallado de la edición (PA-05 y PA-06). Reglas relacionadas RN-CL-01 y RN-CL-02.
+La autoría y fecha de creación de una nota las fija el backend y permanecen inmutables. Reglas relacionadas RN-CL-01 y RN-CL-02.
 
 ## Épica 2 · Agenda interna
 

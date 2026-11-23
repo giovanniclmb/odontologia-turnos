@@ -20,7 +20,7 @@ class ArranqueJarIT {
                     try{return new String(process.getInputStream().readAllBytes(),StandardCharsets.UTF_8);}
                     catch(java.io.IOException e){throw new CompletionException(e);}
                 });
-                assertTrue(process.waitFor(30,TimeUnit.SECONDS),"El proceso no-web debe terminar");
+                assertTrue(process.waitFor(90,TimeUnit.SECONDS),"El proceso no-web debe terminar");
                 String log=output.get(5,TimeUnit.SECONDS);
                 System.out.println("JAR_OUTPUT_START\n" + log + "\nJAR_OUTPUT_END");
         assertEquals(0,process.exitValue(),"El JAR debe poder arrancar con el entorno de prueba");

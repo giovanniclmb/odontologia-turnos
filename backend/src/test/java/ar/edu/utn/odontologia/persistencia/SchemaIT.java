@@ -20,15 +20,15 @@ class SchemaIT {
                 .schemas("odontologia").createSchemas(false).cleanDisabled(true).outOfOrder(false).load();
     }
 
-    @Test void aplicaCuatroTablasUnaSolaVez() throws Exception {
+    @Test void aplicaCincoMigracionesYOnceTablasUnaSolaVez() throws Exception {
         var f = flyway();
         f.migrate();
         try (var c = db.migrationConnection(); var st = c.createStatement()) {
-            var rs = st.executeQuery("select count(*) from information_schema.tables where table_schema='odontologia' and table_name in ('paciente','profesional','sillon','prestacion','usuario','token_acceso')");
-            assertTrue(rs.next()); assertEquals(6, rs.getInt(1));
+            var rs = st.executeQuery("select count(*) from information_schema.tables where table_schema='odontologia' and table_name in ('paciente','profesional','sillon','prestacion','usuario','token_acceso','historial_contrasena','configuracion_sede','paciente_profesional','ficha_clinica','nota_clinica')");
+            assertTrue(rs.next()); assertEquals(11, rs.getInt(1));
         }
         assertEquals(0, f.migrate().migrationsExecuted);
-        assertEquals(4, f.info().applied().length);
+        assertEquals(5, f.info().applied().length);
     }
 
     @ParameterizedTest @ValueSource(strings={"paciente","profesional","sillon","prestacion"})
@@ -74,6 +74,12 @@ class SchemaIT {
 
     private static void insertar(Connection c,String tabla,UUID id,String codigo) throws SQLException {
         if(!List.of("paciente","profesional","sillon","prestacion").contains(tabla))throw new IllegalArgumentException("tabla desconocida");
-        try(var q=c.prepareStatement("insert into odontologia."+tabla+"(id,codigo) values (?,?)")) {q.setObject(1,id);q.setString(2,codigo);q.executeUpdate();}
+        if(tabla.equals("paciente")) {
+            try(var q=c.prepareStatement("insert into odontologia.paciente(id,codigo,nombre,apellido,email) values (?,?,?,?,?)")) {
+                q.setObject(1,id);q.setString(2,codigo);q.setString(3,"Nombre ficticio");q.setString(4,"Apellido ficticio");q.setString(5,"schema@example.invalid");q.executeUpdate();
+            }
+        } else {
+            try(var q=c.prepareStatement("insert into odontologia."+tabla+"(id,codigo) values (?,?)")) {q.setObject(1,id);q.setString(2,codigo);q.executeUpdate();}
+        }
     }
 }

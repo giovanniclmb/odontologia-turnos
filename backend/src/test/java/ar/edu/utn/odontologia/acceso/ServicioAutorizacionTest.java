@@ -21,6 +21,12 @@ class ServicioAutorizacionTest {
     @Test void permisoConcedido() {
         Identidad id = new Identidad(UUID.randomUUID(), "u", Rol.RECEPCION, null);
         assertTrue(authz.tienePermiso(id, Permiso.FICHA_LEER));
+        assertTrue(authz.tienePermiso(id, Permiso.PACIENTE_DATOS_ADMIN));
+        assertFalse(authz.tienePermiso(id, Permiso.PACIENTE_ELIMINAR));
+        Identidad odontologo = new Identidad(UUID.randomUUID(), "o", Rol.ODONTOLOGO, UUID.randomUUID());
+        assertTrue(authz.tienePermiso(odontologo, Permiso.PACIENTE_DATOS_ADMIN));
+        assertFalse(authz.tienePermiso(odontologo, Permiso.PACIENTE_ELIMINAR));
+        assertFalse(authz.tienePermiso(new Identidad(UUID.randomUUID(), "sin-rol", null, null), Permiso.FICHA_LEER));
     }
 
     @Test void permisoDenegado() {
