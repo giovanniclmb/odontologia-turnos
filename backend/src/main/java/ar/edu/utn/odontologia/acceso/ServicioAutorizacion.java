@@ -19,6 +19,7 @@ public class ServicioAutorizacion {
                     Permiso.FICHA_LEER,
                     Permiso.CONFIRMACION_REGISTRAR,
                     Permiso.PENDIENTES_CONSULTAR,
+                    Permiso.PACIENTE_DATOS_ADMIN,
                     Permiso.CONFIG_INTERVALO,
                     Permiso.CONFIG_RECURSOS,
                     Permiso.USUARIO_CREAR_ASIGNAR),
@@ -29,11 +30,12 @@ public class ServicioAutorizacion {
                     Permiso.AGENDA_SILLON_CONSULTAR,
                     Permiso.FICHA_LEER,
                     Permiso.FICHA_EDITAR,
+                    Permiso.PACIENTE_DATOS_ADMIN,
                     Permiso.CONFIRMACION_REGISTRAR,
                     Permiso.PENDIENTES_CONSULTAR));
 
     public boolean tienePermiso(Identidad identidad, Permiso permiso) {
-        if (identidad == null || permiso == null) {
+        if (identidad == null || identidad.rol() == null || permiso == null) {
             return false;
         }
         Set<Permiso> permisos = PERMISOS.get(identidad.rol());

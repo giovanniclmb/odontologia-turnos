@@ -15,11 +15,13 @@ El diagrama representa asociaciones del dominio. Su dirección expresa cómo se 
 
 ```mermaid
 flowchart LR
-    paciente[Paciente] -->|tiene información en| ficha[Ficha clínica]
+    paciente[Paciente] -->|tiene cero o una ficha, creada al primer contenido clínico| ficha[Ficha clínica]
     ficha -->|incluye| antecedentes[Antecedentes]
     ficha -->|incluye| notas[Notas clínicas]
+    paciente -->|asignación explícita, cero o más| profesional[Profesional]
+    nota[Nota clínica] -->|creada por| usuario[Usuario odontólogo]
     turno[Turno] -->|corresponde a| paciente
-    turno -->|reserva| profesional[Profesional]
+    turno -->|reserva| profesional
     turno -->|reserva| sillon[Sillón o box]
     turno -->|toma la duración de referencia de| prestacion[Prestación]
     turno -->|respeta el intervalo de| configuracion[Configuración de sede]
@@ -38,11 +40,12 @@ flowchart LR
 
 ## Entidades y conceptos
 
-| Concepto | Información respaldada por el relevamiento | Pendiente de especificación |
+| Concepto | Información respaldada por el relevamiento | Límite o estado pendiente |
 | --- | --- | --- |
-| Paciente | La gestión de pacientes y la consulta de sus datos forman parte del MVP. El turno corresponde a la atención de un paciente. | Campos mínimos, identificador y operaciones de gestión (PA-05 a PA-07). |
-| Ficha clínica, antecedentes y notas | La ficha cubre antecedentes y notas. Recepción puede leerla, y los odontólogos pueden leerla y editarla. | Contenido de cada componente y relaciones exactas entre paciente, ficha, antecedentes y notas (PA-06 y PA-07). |
-| Profesional y usuario interno | El profesional atiende turnos como recurso obligatorio. El personal opera con capacidades distintas según sea recepción/administración u odontólogo. | Relación entre cuenta y profesional, identificadores, autenticación y alcance de permisos (PA-05 y PA-07). |
+| Paciente | UUID y `codigo` existentes; nombre, apellido y email obligatorios; teléfono opcional. El email no es único. Recepción y odontología pueden crear, consultar y editar datos administrativos dentro de su alcance. | Los demás alcances de pacientes y turnos fuera de C-04 siguen pendientes. |
+| Asignación paciente-profesional | Un paciente puede estar asignado explícitamente a cero o más profesionales. Recepción asigna o quita profesionales; odontología no administra el vínculo. La asignación vigente delimita el acceso por registro. | C-04 no conserva historial de asignaciones ni concede eliminación del paciente. |
+| Ficha clínica, antecedentes y notas | Cada paciente tiene cero o una ficha, creada al guardar los primeros antecedentes o la primera nota. Antecedentes son texto editable; las notas son entradas separadas con autor y fecha de creación. Solo el autor odontólogo asignado edita su nota. | No se habilita eliminación de ficha, antecedentes o notas. Otros dominios clínicos (como odontograma) están fuera del alcance. |
+| Profesional y usuario interno | El profesional atiende turnos como recurso obligatorio. El usuario odontólogo se vincula a su referencia profesional según C-03/C-05. | Los demás alcances de permisos y modelos fuera de C-04 siguen abiertos (PA-05/07). |
 | Sillón o box | Recurso físico obligatorio de la única sede. Su ocupación debe comprobarse en la agenda. | Cantidad, identificador, atributos y reglas de disponibilidad (PA-04, PA-07 y PA-08). |
 | Prestación | Aporta la duración de referencia al crear un turno. Reprogramar conserva la prestación y la duración del turno. | Campos del catálogo, forma de administrarlo y relación con los turnos guardados (PA-07 y PA-14). |
 | Turno | Fecha, hora, profesional, sillón o box, prestación y duración efectiva son datos de la reserva. La confirmación manual y la cancelación tienen efectos en el flujo de agenda. | Identificador, estados, transiciones y representación de las confirmaciones (PA-02 y PA-07). |
@@ -59,7 +62,7 @@ flowchart LR
 - Un alta o reprogramación debe validar la disponibilidad del profesional y del sillón o box, incluidos sus bloqueos, además del intervalo de la sede.
 - La duración efectiva debe estar disponible al reprogramar, incluso si se ajustó en el alta. Cómo representarla en persistencia queda abierto.
 - La cancelación libera el horario de inmediato. Qué estado y qué representación se emplean queda abierto.
-- El esquema físico de PostgreSQL, los identificadores, las cardinalidades restantes, las restricciones de base de datos y los índices se definirán al especificar el cambio correspondiente (PA-07).
+- Para pacientes y ficha, C-04 define UUID/código existentes, relación muchos-a-muchos paciente-profesional, ficha opcional uno-a-uno y notas uno-a-muchos. El esquema físico de los demás dominios, sus restricciones e índices siguen abiertos (PA-07).
 
 ## Datos iniciales
 

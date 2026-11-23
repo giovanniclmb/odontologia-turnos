@@ -14,9 +14,18 @@ class BootstrapMavenIT {
             // Sin settings del equipo, sin descargas y sin configuración heredada de Spring/Maven.
             Path settings=temporal.resolve("settings.xml");
             Files.writeString(settings,"<settings xmlns=\"http://maven.apache.org/SETTINGS/1.2.0\"/>");
-            Path maven=Arrays.stream(System.getenv().getOrDefault("PATH", "").split(java.io.File.pathSeparator))
-                    .filter(p->!p.isBlank()).map(p->Path.of(p,"mvn")).filter(Files::isExecutable)
-                    .findFirst().orElseThrow(()->new IllegalStateException("Maven no está disponible en PATH"));
+            boolean windows=System.getProperty("os.name").toLowerCase(Locale.ROOT).contains("win");
+            String ejecutable=windows?"mvn.cmd":"mvn";
+            var candidatos=new ArrayList<Path>();
+            Arrays.stream(System.getenv().getOrDefault("PATH", "").split(java.io.File.pathSeparator))
+                    .filter(p->!p.isBlank()).map(p->Path.of(p,ejecutable)).forEach(candidatos::add);
+            Path wrapper=Path.of(System.getProperty("user.home"),".m2","wrapper","dists");
+            if(Files.isDirectory(wrapper))try(var rutas=Files.walk(wrapper)){
+                rutas.filter(p->p.getFileName().toString().equals(ejecutable)).forEach(candidatos::add);
+            }
+            Path maven=candidatos.stream().filter(Files::isRegularFile)
+                    .filter(p->windows||Files.isExecutable(p))
+                    .findFirst().orElseThrow(()->new IllegalStateException("Maven no está disponible en PATH ni en el wrapper local"));
             String repositorio=System.getProperty("maven.repo.local",Path.of(System.getProperty("user.home"),".m2","repository").toString());
             Map<String,String> env=new HashMap<>();db.properties().forEach((k,v)->env.put(k,v.toString()));
             String nombre="MAVEN-"+UUID.randomUUID();

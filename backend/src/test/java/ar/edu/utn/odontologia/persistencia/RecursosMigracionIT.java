@@ -12,7 +12,7 @@ class RecursosMigracionIT {
     @Test
     void unaInstalacionNuevaNoSiembraRecursosNiPrestaciones() throws Exception {
         try (var db = PostgresFixture.start()) {
-            assertEquals(4, migrador(db).load().migrate().migrationsExecuted);
+            assertEquals(5, migrador(db).load().migrate().migrationsExecuted);
             try (var con = db.appConnection(); var sql = con.createStatement();
                  var resultado = sql.executeQuery("""
                          select (select count(*) from odontologia.profesional)
@@ -43,7 +43,7 @@ class RecursosMigracionIT {
                         values ('%s','usuario-ficticio','hash-ficticio','odontologo',true,'%s',now())
                         """.formatted(usuario, profesional));
             }
-            assertEquals(1, migrador(db).load().migrate().migrationsExecuted);
+            assertEquals(1, migrador(db).target("4").load().migrate().migrationsExecuted);
             try (var con = db.appConnection(); var sql = con.createStatement()) {
                 try (var resultado = sql.executeQuery("select * from odontologia.prestacion where id='"
                         + prestacion + "'")) {

@@ -77,7 +77,7 @@ class ReferenciasIT {
 
     private static Referencia guardar(String tipo,String codigo) {
         return switch(tipo) {
-            case "paciente"->contexto.getBean(PacienteReferencias.class).save(new PacienteReferencia(codigo));
+            case "paciente"->contexto.getBean(PacienteReferencias.class).save(new PacienteReferencia(codigo,"Nombre ficticio","Apellido ficticio","referencias@example.invalid",null));
             case "profesional"->contexto.getBean(ProfesionalReferencias.class).save(new ProfesionalReferencia(codigo));
             case "sillon"->contexto.getBean(SillonReferencias.class).save(new SillonReferencia(codigo));
             case "prestacion"->contexto.getBean(PrestacionReferencias.class).save(new PrestacionReferencia(codigo));
