@@ -2,7 +2,7 @@
 
 ## Context
 
-El dominio `Agenda.crear` de C-01 recibe reservas ocupantes, un intervalo explícito y un `Instant` de inicio. C-03 aporta identidad y permisos por operación. C-04 conserva los UUID de paciente y permite comprobar la asignación activa. C-05 aporta las referencias y su estado, la duración de prestación y el intervalo vigente. El contrato de ocupación de C-15 sigue pendiente.
+El dominio `Agenda.crear` de C-01 recibe reservas ocupantes, un intervalo explícito y un `Instant` de inicio. C-03 aporta identidad y permisos por operación. C-04 conserva los UUID de paciente y permite comprobar la asignación activa. C-05 aporta las referencias y su estado, la duración de prestación y el intervalo vigente. C-15 aporta la migración V6, el protocolo transaccional y la consulta interna de bloqueos. Su contrato de lectura de turnos espera un adaptador real cuando C-06 incorpore la tabla de turnos.
 
 ## Goals / Non-Goals
 
@@ -15,28 +15,32 @@ El dominio `Agenda.crear` de C-01 recibe reservas ocupantes, un intervalo explí
 ### Contrato de servicio interno acordado
 
 - La entrada de alta contiene identidad autenticada, UUID de paciente, prestación, profesional y sillón, inicio como `Instant` y ajuste opcional en minutos enteros positivos. La operación aplica `turno:crear` y comprueba alcance por registro antes de exponer datos de referencia o conflictos. Los resultados distinguen entrada o referencia inválida, intervalo sin configurar, conflicto y acceso denegado. Un conflicto no identifica al paciente ni devuelve datos de otro turno.
-- La consulta recibe identidad, UUID de sillón e inicio y fin del período. Aplica `agenda-sillon:consultar` y filtra por profesional vinculado en odontología antes de construir el DTO. Usa intersección temporal y orden por inicio. Devuelve datos de agenda y duración efectiva. Las consultas del equipo no sustituyen las comprobaciones transaccionales del alta.
-- El alta compara el inicio con el `Clock` existente al validar. La duración de C-05 se toma al crear y se pasa, junto con el posible ajuste, a `Agenda.crear`. La reserva conserva su duración efectiva. La consulta de reservas ocupantes incluye las que puedan infringir el margen, incluso cuando terminan antes o empiezan después del turno solicitado.
+- La consulta recibe identidad, UUID de sillón e inicio y fin del período. Aplica `agenda-sillon:consultar` y filtra por profesional vinculado en odontología antes de construir el DTO. Trunca los extremos a microsegundos, valida `inicio < fin` y devuelve la intersección semiabierta en orden por inicio. Devuelve datos de agenda y duración efectiva.
+
+### Precisión y disponibilidad
+
+- Truncar el inicio solicitado una vez a microsegundos. Comparar ese instante con el `Clock` existente y exigir que sea estrictamente posterior. Pasarlo a `Agenda.crear` junto con la duración de C-05 y el posible ajuste. El fin se calcula sumando los minutos efectivos completos al inicio normalizado. Usar exactamente los mismos extremos para validar contra turnos, consultar bloqueos y persistir. Tratar fechas o cálculos fuera de rango como entradas inválidas.
+- Consultar las reservas ocupantes que compartan profesional o sillón y puedan infringir el margen, incluidas las que terminan antes o empiezan después del turno solicitado. Usar `Agenda.crear` para aplicar el intervalo vigente y aceptar la separación exacta. Para bloqueos, consultar `ConsultaBloqueos.buscar` con `RecursosBloqueo` y `PeriodoBloqueo`, usando intersección estricta `inicioExistente < finSolicitado && finExistente > inicioSolicitado`, sin margen entre turno y bloqueo.
 
 ### Modelo físico propuesto para revisión
 
-Entidad de persistencia separada de `Agenda`, con UUID generado por la aplicación, cuatro claves foráneas a referencias existentes, inicio y fin persistidos como instantes, duración efectiva positiva y estado inicial pendiente. La migración debe proteger la consistencia del período y otorgar al rol de aplicación únicamente los permisos que requiere C-06. La migración y nombres físicos se revisarán sobre la secuencia Flyway integrada.
+Entidad de persistencia separada de `Agenda`, con UUID generado por la aplicación, cuatro claves foráneas obligatorias a referencias existentes, inicio y fin `timestamptz`, duración efectiva positiva en minutos enteros y estado inicial `PENDIENTE`. La migración debe proteger la consistencia entre comienzo, fin y duración y otorgar al rol de aplicación únicamente los permisos que requiere C-06. Los nombres físicos y la numeración se revisarán sobre la secuencia Flyway vigente.
 
-### Exclusión compartida pendiente de C-15
+### Exclusión compartida con C-15
 
-La alternativa recomendada es serializar transacciones que compartan profesional o sillón. Si C-15 adopta bloqueos por recurso, ambas operaciones deben tomar los bloqueos en el mismo orden y leer las reservas y bloqueos tras obtenerlos. También se puede reutilizar otro mecanismo acordado con C-15 si garantiza la misma exclusión cruzada. Antes de Apply hay que concretar el contrato de consulta en ambos sentidos, los límites y precisión temporales, cómo se aplica el intervalo alrededor de bloqueos, y el resultado del intento incompatible.
+Ejecutar el alta en una transacción `READ COMMITTED`. Tras validar el permiso y el alcance, adquirir ambos recursos con `LocksRecursosAgenda.adquirir`. El método requiere una transacción existente (`MANDATORY`) y toma `FOR NO KEY UPDATE` por profesional y luego por sillón, con UUID ordenados dentro de cada tipo. Después de adquirir los locks, leer disponibilidad y conflictos, validar el horario y guardar en la misma transacción. Mantener los locks hasta la confirmación o reversión. La operación que espera vuelve a validar con las filas confirmadas cuando adquiere los locks.
 
-C-01 exige que cada reserva ocupante tenga los dos recursos. La comprobación de bloqueos debe representar un bloqueo unilateral según el contrato de C-15.
+Sustituir `AgendaSinTurnosPersistidos` por un único adaptador real de `ConsultaTurnosOcupantes`. Dentro de la transacción del bloqueo, comprobar si existe un turno ocupante que se intersecta con el período y coincide en alguno de los recursos indicados. La consulta interna necesita ver la ocupación de ambos recursos aunque la vista de agenda del operador tenga alcance restringido. La comprobación de bloqueos se realiza por su propio contrato para admitir bloqueos de un solo recurso.
 
 ## Risks / Trade-offs
 
-- Una consulta y un guardado sin exclusión compartida admiten una carrera entre turnos o entre turno y bloqueo. Verificar los casos de contención con transacciones y conexiones independientes en PostgreSQL, en ambos órdenes de la carrera turno–bloqueo.
-- La vista de odontología muestra solo sus turnos, pero la disponibilidad depende de todas las reservas y bloqueos que afectan los recursos. Evaluar esa ocupación internamente y responder con un conflicto sin datos ajenos.
+- Verificar la exclusión con conexiones y transacciones independientes en PostgreSQL. Las pruebas entre turno y bloqueo deben ejecutar los servicios de producción de C-06 y `ServicioBloqueos.crear`, con el adaptador real de ocupación y las tablas del esquema migrado.
+- La consulta de reservas ocupantes del alta debe incluir los turnos de cualquier profesional que comparta el sillón. El filtro por profesional se aplica a la consulta de agenda de odontología. Cuando un turno ajeno ocupa el sillón solicitado, el alta devuelve un conflicto genérico sin revelar datos de ese turno.
 - El intervalo y la duración de catálogo pueden cambiar. Usar el valor vigente al validar el alta y mantener los datos persistidos de turnos existentes.
 
 ## Migration Plan
 
-Asignar la siguiente versión Flyway sobre la base integrada de C-15. Verificar la actualización desde el esquema anterior y el arranque con el rol de aplicación. Ante un fallo en una base nueva, corregir y volver a verificar antes de desplegar. Para una base ya migrada, preservar las reservas y corregir mediante otra migración.
+Coordinar la siguiente versión Flyway sobre la base integrada, que llega a `V6__bloqueos_de_recursos.sql`. Verificar la actualización desde V6 y el arranque con el rol de aplicación. Conservar las migraciones aplicadas. Ante un fallo de una versión ya migrada, preservar las reservas y corregir mediante otra migración.
 
 ## UI Mockups
 

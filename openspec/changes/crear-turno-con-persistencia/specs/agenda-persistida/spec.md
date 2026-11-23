@@ -40,15 +40,19 @@ El alta SHALL exigir un paciente existente, una prestación existente con duraci
 
 ### Requirement: Inicio estrictamente futuro
 
-El alta SHALL exigir que el inicio sea posterior al instante de validación. La evaluación SHALL realizarse sin restricciones de jornada semanal adicionales.
+El alta SHALL exigir que el inicio que se persistirá, truncado a microsegundos, sea posterior al instante de validación. La evaluación SHALL realizarse sin restricciones de jornada semanal adicionales.
 
 #### Scenario: Inicio transcurrido o igual a la validación
-- **WHEN** el inicio es anterior o igual al instante de validación
+- **WHEN** el inicio truncado a microsegundos es anterior o igual al instante de validación
 - **THEN** el servicio rechaza el alta y no guarda el turno
+
+#### Scenario: Inicio futuro fuera de una jornada habitual
+- **WHEN** el inicio que se persistirá es futuro y la asignación es válida aunque se solicite fuera de una jornada semanal habitual
+- **THEN** el servicio permite el alta
 
 ### Requirement: Duración efectiva persistida
 
-El alta SHALL usar la duración vigente de la prestación cuando el operador omite el ajuste. Si el operador suministra un ajuste, este SHALL ser una duración positiva en minutos enteros. El sistema SHALL evaluar disponibilidad con la duración efectiva y conservarla en la reserva aunque más tarde cambie el catálogo.
+El alta SHALL usar la duración vigente de la prestación cuando el operador omite el ajuste. Un ajuste explícito SHALL ser una duración positiva en minutos enteros. El sistema SHALL evaluar disponibilidad y persistir el mismo período, calculando el fin con la duración efectiva completa desde el inicio truncado. La duración efectiva SHALL conservarse aunque más tarde cambie el catálogo.
 
 #### Scenario: Duración de referencia conservada
 - **WHEN** se crea un turno válido sin ajuste y después se modifica la duración de referencia de la prestación
@@ -61,6 +65,10 @@ El alta SHALL usar la duración vigente de la prestación cuando el operador omi
 #### Scenario: Ajuste inválido
 - **WHEN** el operador indica un ajuste de duración que no es un entero positivo en minutos
 - **THEN** el servicio rechaza el alta sin guardar el turno
+
+#### Scenario: Inicio con fracciones de microsegundo
+- **WHEN** el inicio solicitado contiene fracciones inferiores a un microsegundo y el alta es válida
+- **THEN** la reserva comienza en el instante truncado y el fin es exactamente ese instante más la duración efectiva en minutos completos
 
 ### Requirement: Reserva pendiente con identidad estable
 
@@ -78,6 +86,11 @@ El sistema SHALL rechazar una asignación cuando una reserva ocupante del mismo 
 - **WHEN** un turno ocupante incumple el intervalo del profesional o del sillón solicitados, aunque el otro recurso esté libre
 - **THEN** el alta devuelve un conflicto sin guardar el turno
 
+#### Scenario: Sillón ocupado por un turno fuera del alcance de odontología
+- **GIVEN** un sillón ocupado por un turno de otro profesional y otro paciente que no aparece en la consulta de agenda del odontólogo
+- **WHEN** el odontólogo solicita una reserva en ese sillón para su propio profesional y un paciente asignado, en un período que se solapa con el turno existente
+- **THEN** el alta devuelve un conflicto genérico de disponibilidad sin guardar un turno ni revelar datos del turno ajeno
+
 #### Scenario: Separación exacta
 - **WHEN** la separación respecto de una reserva en el mismo recurso, anterior o posterior, es exactamente el intervalo vigente y las demás reglas se cumplen
 - **THEN** el sistema permite el alta
@@ -88,19 +101,39 @@ El sistema SHALL rechazar una asignación cuando una reserva ocupante del mismo 
 
 ### Requirement: Exclusión entre alta y bloqueo de recurso
 
-El alta SHALL respetar la indisponibilidad del profesional o del sillón según el contrato de C-15. Una carrera entre un alta y un bloqueo incompatibles SHALL producir como máximo una escritura confirmada. La regla de bordes se definirá junto con C-15 antes de Apply.
+El alta SHALL respetar los bloqueos de profesional o sillón según `bloqueos-de-recursos`. Los períodos SHALL tratarse como semiabiertos, con precisión de microsegundos. El margen de la sede SHALL aplicarse entre turnos. Una escritura de bloqueo SHALL rechazar un solapamiento con un turno ocupante del mismo recurso.
 
 #### Scenario: Bloqueo vigente de uno o ambos recursos
 - **WHEN** un bloqueo de C-15 impide el uso de uno o ambos recursos en el período solicitado
 - **THEN** el alta devuelve un conflicto y no guarda un turno
 
-#### Scenario: Alta y bloqueo incompatibles en simultáneo
-- **WHEN** un alta y un bloqueo válidos por separado compiten por el mismo recurso en períodos incompatibles
-- **THEN** se confirma una transacción, la otra operación devuelve un conflicto y el estado persistido respeta ambos contratos sin importar qué operación obtuvo primero el recurso
+#### Scenario: Bloqueo contiguo sin solapamiento
+- **WHEN** un turno termina exactamente al comenzar su bloqueo o comienza exactamente al terminarlo, en el mismo recurso
+- **THEN** ambos períodos son compatibles sin requerir margen entre ellos
+
+#### Scenario: Solapamiento de un microsegundo
+- **WHEN** los períodos persistibles de un turno y un bloqueo se solapan en un microsegundo y comparten profesional o sillón
+- **THEN** se rechaza la segunda operación incompatible y queda solo la primera
+
+### Requirement: Exclusión transaccional entre turno y bloqueo
+
+El alta de turno y el alta de bloqueo SHALL coordinar la validación y el guardado con el contrato transaccional compartido de C-15. Si dos operaciones incompatibles compiten por un recurso, el resultado SHALL ser consistente con el estado confirmado de la primera transacción.
+
+#### Scenario: Bloqueo confirmado primero
+- **WHEN** la transacción del bloqueo se confirma antes de que el alta concurrente incompatible complete su validación
+- **THEN** el alta detecta el bloqueo persistido y devuelve un conflicto sin crear un turno
+
+#### Scenario: Turno persistido primero
+- **WHEN** la transacción del turno se confirma antes de que el bloqueo concurrente incompatible complete su validación
+- **THEN** el bloqueo detecta el turno pendiente de confirmación y devuelve un conflicto sin persistir un bloqueo
+
+#### Scenario: La primera transacción revierte
+- **WHEN** la primera operación adquiere el recurso y revierte mientras la otra espera
+- **THEN** la operación que esperaba vuelve a validar con el estado confirmado y puede guardarse si cumple las demás reglas
 
 ### Requirement: Consulta de agenda por sillón y período
 
-El servicio SHALL exigir `agenda-sillon:consultar` para consultar los turnos del sillón que se intersectan con el período indicado. Recepción SHALL recibir los turnos del sitio. Odontología SHALL recibir solo los turnos de su profesional vinculado. La consulta SHALL devolver los turnos por inicio con su duración efectiva y excluir los datos clínicos.
+El servicio SHALL exigir `agenda-sillon:consultar` y devolver los turnos que se intersectan con el período semiabierto consultado. Recepción SHALL recibir los turnos del sitio. Odontología SHALL recibir solo los turnos de su profesional vinculado. La consulta SHALL devolver los turnos por inicio con su duración efectiva y excluir los datos clínicos.
 
 #### Scenario: Consulta de recepción
 - **WHEN** recepción consulta un sillón entre dos instantes válidos y hay turnos de distintos profesionales que se intersectan con el período
@@ -110,6 +143,10 @@ El servicio SHALL exigir `agenda-sillon:consultar` para consultar los turnos del
 - **WHEN** odontología consulta un sillón que contiene turnos propios y ajenos
 - **THEN** el servicio solo devuelve los turnos de su profesional y ningún dato de los turnos ajenos
 
+#### Scenario: Turnos contiguos al período consultado
+- **WHEN** un turno termina al inicio del período consultado o comienza exactamente al final de ese período
+- **THEN** el servicio no incluye ese turno en la consulta
+
 #### Scenario: Consulta con período inválido o sin autorización
-- **WHEN** el período no está ordenado o falta una identidad que pueda consultar la agenda
+- **WHEN** el fin truncado a microsegundos no es posterior al inicio truncado o falta una identidad que pueda consultar la agenda
 - **THEN** el servicio rechaza la consulta sin devolver turnos

@@ -71,9 +71,9 @@ Estas decisiones cierran PA-05/06/07 únicamente para el alcance de C-04; no res
 ## Resolución acotada para C-06 (23/11/2026)
 
 - **PA-02 — alta:** el turno nace pendiente de confirmación y ocupa al profesional y al sillón. La confirmación manual permanece en C-09. Las demás transiciones se resuelven en sus changes.
-- **PA-04 — horario de alta:** solo se crean turnos con inicio posterior al instante de validación, sin exigir franjas semanales adicionales. Antes de implementar C-06 se deben acordar con C-15 los bordes temporales y las comprobaciones concurrentes de bloqueos y turnos.
+- **PA-04 — horario de alta:** solo se crean turnos con inicio posterior al instante de validación, sin exigir franjas semanales adicionales. La propuesta adopta el contrato integrado de C-15 para los bordes semiabiertos y el protocolo de concurrencia. La precisión compartida es de microsegundos y el intervalo global se aplica entre turnos.
 - **PA-05 — alcance del alta:** recepción puede crear con cualquier profesional elegible del sitio. Odontología solo puede reservar para su propio profesional vinculado y pacientes con asignación activa a él. El alcance de las demás operaciones de agenda se especifica en sus respectivos changes.
-- Giovanni aprobó redactar la [propuesta de servicio interno](../openspec/changes/crear-turno-con-persistencia/proposal.md). El modelo físico y el contrato de consistencia se revisan junto con C-15 antes de Apply. PA-07 sigue abierta para la persistencia de agenda.
+- Giovanni aprobó redactar la [propuesta de servicio interno](../openspec/changes/crear-turno-con-persistencia/proposal.md). El modelo físico propuesto para C-06 sigue en revisión y la versión Flyway se coordina sobre la base vigente. PA-07 se mantiene abierta en los alcances restantes de agenda.
 
 ## Resolución acotada para C-15 (23/11/2026)
 
