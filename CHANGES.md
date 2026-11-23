@@ -282,11 +282,11 @@ Giovanni aprobó el reparto el 19/11/2026. Las ondas preservan las dependencias 
   - [Preguntas abiertas](knowledge-base/10_preguntas_abiertas.md)
 
 ### [C-06] `crear-turno-con-persistencia`
-- **Estado**: `[ ]` pendiente
+- **Estado**: `[ ]` [propuesta en revisión](openspec/changes/crear-turno-con-persistencia/proposal.md). Implementación pendiente de C-15 integrado y de acordar el contrato compartido.
 - **Responsable**: Giovanni
 - **Scope**: Conectar la regla de creación con pacientes, recursos y guardado real.
-  - Resolver el contrato técnico y la estrategia de consistencia pendientes en PA-02, PA-04, PA-05 y PA-07; no elegir mecanismo de locking o aislamiento en el roadmap.
-  - Incorporar la persistencia de turnos y la operación backend autorizada de crear/consultar agenda necesaria para US-004. Nombrar endpoints, migraciones y errores únicamente en el spec/diseño aprobados.
+  - El alta crea turnos pendientes de confirmación que ocupan ambos recursos. Solo se admiten inicios futuros, sin franjas semanales adicionales. Recepción puede crear con cualquier profesional elegible. Odontología solo puede hacerlo para sí y pacientes con asignación activa. [Decisiones acotadas](knowledge-base/10_preguntas_abiertas.md#resolución-acotada-para-c-06-23112026)
+  - Incorporar la persistencia y las operaciones de servicio autorizadas de alta y consulta necesarias para US-004. Acordar el contrato técnico y la estrategia de consistencia con C-15 antes de implementar. C-06 se limita al servicio backend.
   - Reutilizar C-01 al validar profesional, sillón, duración e intervalo y proteger el resultado bajo solicitudes simultáneas; cubrir RN-AG-01 a RN-AG-05 y RN-AG-10. Consultar y respetar los bloqueos de C-15 al crear turnos, también bajo concurrencia.
   - Tests: éxito, conflictos por cada recurso, duración ajustada y borde del intervalo; añadir pruebas contra PostgreSQL para solicitudes concurrentes que compiten por un recurso.
   - Documentar qué evidencia prueba la exclusión concurrente y qué limitaciones conserva; no presentar los fixtures de C-01 como esta verificación.
