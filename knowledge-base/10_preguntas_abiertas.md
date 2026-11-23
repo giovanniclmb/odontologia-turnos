@@ -68,6 +68,13 @@ Aclaración de PA-05 (20/11/2026): DD-14 resuelve el contrato mínimo de cambio 
 
 Estas decisiones cierran PA-05/06/07 únicamente para el alcance de C-04; no resuelven permisos ni modelos de agenda, cuentas de paciente u otros recursos. Antes de migrar una base persistente, verificar sin exponer filas que la tabla paciente no contenga registros que requieran datos obligatorios no disponibles; no rellenarlos por inferencia.
 
+## Resolución acotada para C-06 (23/11/2026)
+
+- **PA-02 — alta:** el turno nace pendiente de confirmación y ocupa al profesional y al sillón. La confirmación manual permanece en C-09. Las demás transiciones se resuelven en sus changes.
+- **PA-04 — horario de alta:** solo se crean turnos con inicio posterior al instante de validación, sin exigir franjas semanales adicionales. C-06 usa el contrato integrado de C-15 para los bordes semiabiertos y el protocolo de concurrencia. La precisión compartida es de microsegundos y el intervalo global se aplica entre turnos.
+- **PA-05 — alcance del alta:** recepción puede crear con cualquier profesional elegible del sitio. Odontología solo puede reservar para su propio profesional vinculado y pacientes con asignación activa a él. El alcance de las demás operaciones de agenda se especifica en sus respectivos changes.
+- **PA-07 — persistencia de alta:** V7 agrega el turno con UUID de aplicación, referencias obligatorias a paciente, profesional, sillón y prestación, inicio y fin como instantes, duración efectiva en minutos y estado `PENDIENTE`. Giovanni aprobó el servicio interno y Apply de C-06 el 23/11/2026. PA-07 se mantiene abierta en los alcances restantes de agenda. [Diseño](../openspec/changes/archive/2026-11-23-crear-turno-con-persistencia/design.md)
+
 ## Resolución acotada para C-15 (23/11/2026)
 
 - **PA-04 y PA-19.** El período del bloqueo incluye el inicio y excluye el fin. Se admiten bordes contiguos y el intervalo global se aplica entre turnos. Una escritura de agenda y un bloqueo incompatibles se coordinan en PostgreSQL por los recursos compartidos. Prevalece la primera transacción que confirma. Un bloqueo de sillón y profesional se confirma de manera atómica.

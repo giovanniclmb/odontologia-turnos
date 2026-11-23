@@ -1,6 +1,6 @@
 # Backend — dominio y base de persistencia
 
-C-01 aporta las reglas puras de agenda. C-02 añade Spring Boot no-web, referencias persistidas y migraciones. C-03 aporta el acceso interno y C-05 agrega la configuración de recursos. La ficha clínica, los turnos persistidos y la interfaz de usuario pertenecen a changes posteriores.
+C-01 aporta las reglas puras de agenda. C-02 añade Spring Boot no-web, referencias persistidas y migraciones. C-03 aporta el acceso interno, C-04 la ficha clínica, C-05 la configuración de recursos y C-15 los bloqueos. C-06 conecta el alta y la consulta de turnos a PostgreSQL.
 
 ## Requisitos y versiones
 
@@ -53,7 +53,7 @@ Cambiar `.env` no cambia credenciales de un volumen ya inicializado. Ante un err
 
 El esquema odontologia contiene paciente, profesional, sillon, prestacion, usuario, token_acceso e historial_contrasena. usuario tiene id uuid, nombre_usuario text obligatorio no vacío y único, hash_credencial text, rol CHECK (recepcion/odontologo), activo, profesional_ref uuid opaco y creado_en. token_acceso tiene id uuid, usuario_id FK, hash_token, creado_en, expira_en y revocado. Hibernate genera el UUID en la aplicación; PostgreSQL no tiene default de generación. odonto_app tiene SELECT/INSERT/UPDATE sobre usuario y token_acceso, sin DELETE.
 
-Las entidades y repositorios JPA están separados del paquete agenda. La persistencia de turnos, las columnas clínicas y las cuentas de paciente pertenecen a changes posteriores.
+Las entidades y los repositorios JPA están separados del dominio. La agenda persistida usa `agenda.persistencia` y expone sus datos mediante DTO del servicio.
 
 V1__referencias_base.sql crea las referencias y permisos. V2__acceso_y_permisos.sql crea usuario y token_acceso con sus constraints y permisos. Flyway es el único gestor de estructura; Hibernate usa validate y la inicialización SQL alternativa está desactivada. Flyway valida checksum y rechaza también migraciones futuras ausentes del binario; no hay baseline automático, clean ni out-of-order.
 
@@ -65,13 +65,21 @@ V4 agrega el intervalo único de sede, inicialmente sin configurar, el estado op
 
 Las operaciones están disponibles en `ServicioConfiguracionSede`, `ServicioRecursosAgenda` y `ServicioVinculacionProfesional`. Pasan la identidad interna autenticada a los servicios. Recepción puede configurar, dar de alta recursos, ajustar duraciones, crear usuarios internos y vincularlos a profesionales. Odontología puede consultar la configuración y los catálogos. La disponibilidad mínima devuelve el intervalo vigente cuando el profesional y el sillón existen y están activos. El dominio de agenda sigue recibiendo un intervalo explícito por invocación.
 
+### C-06 — Turnos persistidos
+
+`ServicioAgenda.crear(identidad, solicitud)` recibe los UUID de paciente, profesional, sillón y prestación, un inicio `Instant` y un ajuste opcional en minutos. Valida el permiso y el alcance de la identidad autenticada. Recepción puede operar en toda la sede. Odontología puede crear para su profesional vinculado y pacientes con asignación activa. El servicio devuelve el turno en estado `PENDIENTE` o informa entrada o referencia inválida, falta de configuración, acceso denegado o conflicto de disponibilidad.
+
+`ServicioAgenda.consultarAgendaSillon(identidad, sillonId, inicio, fin)` devuelve los turnos que intersectan el período semiabierto, ordenados por inicio. Odontología ve los turnos de su profesional. El alta verifica la ocupación completa de ambos recursos y devuelve un conflicto genérico cuando el horario está ocupado.
+
+V7 agrega `odontologia.turno` con cuatro claves foráneas, UUID generado en la aplicación y permisos `SELECT`/`INSERT` para `odonto_app`. El servicio normaliza el inicio a microsegundos y conserva el fin y la duración efectiva. El alta valida y guarda bajo los locks compartidos de C-15 en `READ COMMITTED`. El intervalo se aplica entre turnos y la contigüidad con un bloqueo está permitida. Las pruebas de integración ejercitan ambos servicios con su almacenamiento real. [AgendaPersistidaIT](src/test/java/ar/edu/utn/odontologia/persistencia/AgendaPersistidaIT.java)
+
 ## Dominio C-01
 
 `new Agenda().crear(solicitud, reservas, intervalo)` devuelve Exito(Turno), EntradaInvalida(motivo) o NoDisponible(recurso). Solicitud incluye referencias opacas, prestación con duración positiva, inicio Instant y ajuste Duration opcional; null en el ajuste usa la duración de la prestación. No consulta catálogos ni persiste un turno.
 
 El intervalo positivo es explícito en cada llamada. Se admite exactamente el intervalo antes y después para profesional y sillón, sin duplicarlo. Se evalúan todas las reservas ocupantes válidas sin asumir orden; las ajenas no interfieren. Las entradas son inmutables. Los diez minutos de los fixtures no son configuración de producción.
 
-C-02 no conecta aún la creación de turnos con estas tablas ni garantiza exclusión concurrente: C-06 deberá validar y persistir con garantías frente a cambios de la agenda. La evidencia de C-02 está en su change OpenSpec; los datos utilizados son ficticios.
+Las pruebas puras de C-01 verifican el cálculo con reservas provistas por el llamador. La exclusión concurrente de la agenda persistida se comprueba en C-06 con PostgreSQL y transacciones independientes. Los datos de prueba son ficticios.
 
 
 ## Correcciones de C-03 — Issue #30 (20/11/2026)
