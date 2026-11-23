@@ -67,3 +67,8 @@ Aclaración de PA-05 (20/11/2026): DD-14 resuelve el contrato mínimo de cambio 
 - **PA-07 — pacientes y ficha:** se reutiliza el UUID y código existentes de paciente. La relación paciente-profesional es muchos-a-muchos y admite cero asignaciones; la ficha es cero-a-una y se crea al guardar los primeros antecedentes o la primera nota; las notas son entradas independientes de uno-a-muchos con referencia a paciente y usuario autor. Búsqueda por código exacto y por nombre/apellido parcial sin distinguir mayúsculas. Los contratos de C-04 son de servicio/DTO, sin HTTP. La migración física y sus nombres se especifican en OpenSpec C-04 y se coordinan con la secuencia Flyway al integrar.
 
 Estas decisiones cierran PA-05/06/07 únicamente para el alcance de C-04; no resuelven permisos ni modelos de agenda, cuentas de paciente u otros recursos. Antes de migrar una base persistente, verificar sin exponer filas que la tabla paciente no contenga registros que requieran datos obligatorios no disponibles; no rellenarlos por inferencia.
+
+## Resolución acotada para C-15 (23/11/2026)
+
+- **PA-04 y PA-19.** El período del bloqueo incluye el inicio y excluye el fin. Se admiten bordes contiguos y el intervalo global se aplica entre turnos. Una escritura de agenda y un bloqueo incompatibles se coordinan en PostgreSQL por los recursos compartidos. Prevalece la primera transacción que confirma. Un bloqueo de sillón y profesional se confirma de manera atómica.
+- **PA-19.** C-15 incluye el alta por recepción y la consulta interna de indisponibilidad. La modificación y el desbloqueo quedan pendientes de definición. El contrato es Java con migración Flyway. C-06 conectará la persistencia de turnos y C-07 conectará la reprogramación al protocolo transaccional.

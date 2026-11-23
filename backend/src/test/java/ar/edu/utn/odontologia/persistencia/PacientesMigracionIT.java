@@ -26,7 +26,7 @@ class PacientesMigracionIT {
                 sql.executeUpdate("update odontologia.paciente set nombre='Nombre ficticio', apellido='Apellido ficticio', email='migracion@example.invalid' where id='" + id + "'");
             }
 
-            assertEquals(1, migrador(db).load().migrate().migrationsExecuted);
+            assertEquals(1, migrador(db).target("5").load().migrate().migrationsExecuted);
             try (var con = db.appConnection(); var sql = con.prepareStatement(
                     "select id,codigo from odontologia.paciente where id=?")) {
                 sql.setObject(1, id);
