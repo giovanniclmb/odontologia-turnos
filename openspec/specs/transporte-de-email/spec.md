@@ -40,7 +40,8 @@ El sistema SHALL devolver un resultado que indique éxito o fallo y, en caso de 
 - **THEN** el resultado es fallido con el motivo registrado
 
 ### Requirement: Reintentos con backoff corto
-El sistema SHALL reintentar un envío fallido hasta el número configurado de reintentos, con backoff corto, antes de marcarlo como fallido.
+
+El sistema SHALL reintentar un envío fallido hasta el número configurado de reintentos, con backoff corto, antes de marcarlo como fallido, reenviando cada intento con la misma clave de idempotencia.
 
 #### Scenario: Recuperación en reintento
 - **WHEN** el primer intento falla y un reintento posterior tiene éxito
@@ -51,7 +52,8 @@ El sistema SHALL reintentar un envío fallido hasta el número configurado de re
 - **THEN** el estado final es fallido y no se realizan más intentos
 
 ### Requirement: Deduplicación por idempotencia
-El sistema SHALL no enviar un correo duplicado cuando ya existe un registro exitoso para la misma clave de idempotencia (tipo, turno, destinatario).
+
+El sistema SHALL garantizar la adquisición atómica de la clave de idempotencia y SHALL no enviar un correo duplicado cuando ya existe un registro exitoso para la misma clave de idempotencia (tipo, turno, destinatario).
 
 #### Scenario: Clave ya enviada
 - **WHEN** se solicita un envío cuya clave ya tiene estado exitoso
@@ -60,6 +62,14 @@ El sistema SHALL no enviar un correo duplicado cuando ya existe un registro exit
 #### Scenario: Clave nueva
 - **WHEN** no existe registro previo para la clave
 - **THEN** el sistema realiza el envío y registra el resultado
+
+#### Scenario: Condición de carrera concurrente
+- **WHEN** dos envíos concurrentes intentan adquirir la misma clave de idempotencia
+- **THEN** el sistema recupera el registro existente y devuelve su estado sin contactar al proveedor
+
+#### Scenario: Fallo de persistencia
+- **WHEN** la persistencia del registro de envío falla por una causa distinta a la violación de unicidad
+- **THEN** el sistema devuelve un fallo controlado sin contactar al proveedor
 
 ### Requirement: Registro auditable de envíos
 El sistema SHALL registrar cada intento de envío con estado, cantidad de intentos, marcas de tiempo y error cuando corresponda.
