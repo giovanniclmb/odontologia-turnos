@@ -1,4 +1,11 @@
-const BASE_URL = "";
+const BASE_URL = ((): string => {
+  const override = (window as { __API_BASE_URL__?: string }).__API_BASE_URL__;
+  if (override) return override.replace(/\/$/, "");
+  if (window.location.port === "5173") {
+    return "http://localhost:8080";
+  }
+  return "";
+})();
 
 export function getToken(): string | null {
   return localStorage.getItem("token");

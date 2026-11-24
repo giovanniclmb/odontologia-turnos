@@ -1,6 +1,7 @@
 package ar.edu.utn.odontologia.api;
 
 import ar.edu.utn.odontologia.acceso.AutorizacionDenegadaException;
+import ar.edu.utn.odontologia.acceso.AutenticacionFallidaException;
 import jakarta.servlet.http.HttpServletRequest;
 import java.util.Map;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -11,6 +12,12 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+    @ExceptionHandler(AutenticacionFallidaException.class)
+    public ResponseEntity<Map<String, String>> autenticacion(AutenticacionFallidaException ex, HttpServletRequest request) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                .body(Map.of("codigo", "autenticacion_fallida", "mensaje", "Credenciales invalidas"));
+    }
+
     @ExceptionHandler(AutorizacionDenegadaException.class)
     public ResponseEntity<Map<String, String>> autorizacion(AutorizacionDenegadaException ex, HttpServletRequest request) {
         return ResponseEntity.status(HttpStatus.FORBIDDEN)

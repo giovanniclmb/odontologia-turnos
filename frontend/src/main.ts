@@ -55,7 +55,7 @@ async function renderApp(): Promise<void> {
     <header>
       <h1>Pacientes y ficha clínica</h1>
       <div>
-        <span>${user?.nombreUsuario ?? ""} (${user?.rol ?? ""})</span>
+        <span>${escape(user?.nombreUsuario ?? "")} (${escape(user?.rol ?? "")})</span>
         <button id="btn-logout">Cerrar sesión</button>
       </div>
     </header>
@@ -148,18 +148,19 @@ async function verDetalle(pacienteId: string): Promise<void> {
     detalle.innerHTML = renderDetalle(paciente, ficha, profesionales);
     adjuntarEventosDetalle(paciente, profesionales);
   } catch (error) {
-    detalle.innerHTML = `<p class="mensaje error">${(error as Error).message}</p>`;
+    detalle.innerHTML = `<p class="mensaje error">${escape((error as Error).message)}</p>`;
   }
 }
 
 function renderDetalle(paciente: Paciente, ficha: Ficha | null, profesionales: Profesional[]): string {
-  const asignados = paciente.profesionalesAsignados.join(", ") || "sin asignaciones";
+  const asignados = (paciente.profesionalesAsignados.map((p) => escape(p)).join(", ")) || "sin asignaciones";
   const recepcion = esRecepcion();
+  const usuarioActual = currentUser()?.usuarioId;
   const notasHtml = (ficha?.notas ?? []).map((n) => `
     <li>
-      <p>${n.texto}</p>
-      <small>Autor: ${n.autorId} - ${n.creadaEn}</small>
-      ${!recepcion ? `<button data-editar-nota="${n.id}">Editar</button>` : ""}
+      <p>${escape(n.texto)}</p>
+      <small>Autor: ${escape(n.autorId)} - ${escape(n.creadaEn)}</small>
+      ${!recepcion && n.autorId === usuarioActual ? `<button data-editar-nota="${escape(n.id)}">Editar</button>` : ""}
     </li>
   `).join("");
   return `
@@ -188,7 +189,7 @@ function renderDetalle(paciente: Paciente, ficha: Ficha | null, profesionales: P
         <textarea id="antecedentes">${escape(ficha?.antecedentes ?? "")}</textarea>
         <button id="btn-guardar-antecedentes">Guardar antecedentes</button>
       `}
-      <p>${ficha?.antecedentes ?? "Sin antecedentes"}</p>
+      <p>${escape(ficha?.antecedentes ?? "Sin antecedentes")}</p>
       <h4>Notas</h4>
       <ul>${notasHtml}</ul>
       ${recepcion ? "" : `

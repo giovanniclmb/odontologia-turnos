@@ -1,7 +1,6 @@
 package ar.edu.utn.odontologia.api;
 
 import ar.edu.utn.odontologia.acceso.Identidad;
-import ar.edu.utn.odontologia.acceso.Rol;
 import ar.edu.utn.odontologia.acceso.ServicioAutenticacion;
 import jakarta.servlet.http.HttpServletRequest;
 import java.util.Map;
@@ -16,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/auth")
 public class AuthController {
     public record LoginRequest(String nombreUsuario, String contrasena) {}
-    public record LoginResponse(String token, UUID usuarioId, String nombreUsuario, Rol rol, UUID profesionalRef) {}
+    public record LoginResponse(String token, UUID usuarioId, String nombreUsuario, String rol, UUID profesionalRef) {}
 
     private final ServicioAutenticacion autenticacion;
 
@@ -31,7 +30,7 @@ public class AuthController {
                 request == null ? null : request.contrasena());
         String token = autenticacion.emitirToken(identidad);
         return ResponseEntity.ok(new LoginResponse(token, identidad.usuarioId(), identidad.nombreUsuario(),
-                identidad.rol(), identidad.profesionalRef()));
+                identidad.rol().codigo(), identidad.profesionalRef()));
     }
 
     @PostMapping("/logout")
