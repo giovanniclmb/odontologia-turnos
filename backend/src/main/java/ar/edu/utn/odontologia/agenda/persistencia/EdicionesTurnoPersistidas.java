@@ -13,7 +13,7 @@ import org.springframework.jdbc.core.simple.JdbcClient;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class ReprogramacionesPersistidas {
+public class EdicionesTurnoPersistidas {
     private static final String COLUMNAS = """
             t.id, t.paciente_id, t.profesional_id, t.sillon_id, t.prestacion_id,
             t.inicio, t.fin, t.duracion_minutos, t.estado, t.version
@@ -22,7 +22,7 @@ public class ReprogramacionesPersistidas {
     private final JdbcClient jdbc;
     private final EntityManager entidades;
 
-    public ReprogramacionesPersistidas(JdbcClient jdbc, EntityManager entidades) {
+    public EdicionesTurnoPersistidas(JdbcClient jdbc, EntityManager entidades) {
         this.jdbc = jdbc;
         this.entidades = entidades;
     }
@@ -42,7 +42,7 @@ public class ReprogramacionesPersistidas {
                 """)
                 .param("id", id)
                 .param("profesional", profesionalOdontologo)
-                .query(ReprogramacionesPersistidas::leer)
+                .query(EdicionesTurnoPersistidas::leer)
                 .optional();
     }
 
@@ -60,7 +60,20 @@ public class ReprogramacionesPersistidas {
                 .param("sillon", UUID.fromString(turno.sillon()))
                 .param("inicio", turno.inicio().atOffset(ZoneOffset.UTC))
                 .param("fin", turno.fin().atOffset(ZoneOffset.UTC))
-                .query(ReprogramacionesPersistidas::leer)
+                .query(EdicionesTurnoPersistidas::leer)
+                .optional();
+    }
+
+    public Optional<TurnoLeido> cancelar(UUID id, long version) {
+        return jdbc.sql("""
+                update odontologia.turno t
+                set estado = 'CANCELADO', version = t.version + 1
+                where t.id = :id and t.version = :version and t.estado = 'PENDIENTE'
+                returning
+                """ + COLUMNAS)
+                .param("id", id)
+                .param("version", version)
+                .query(EdicionesTurnoPersistidas::leer)
                 .optional();
     }
 

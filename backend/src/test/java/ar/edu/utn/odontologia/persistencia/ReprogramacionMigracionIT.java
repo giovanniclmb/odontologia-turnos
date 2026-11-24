@@ -9,6 +9,7 @@ import ar.edu.utn.odontologia.agenda.ServicioAgenda;
 import java.sql.SQLException;
 import java.time.OffsetDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import org.flywaydb.core.Flyway;
 import org.junit.jupiter.api.Test;
@@ -55,8 +56,11 @@ class ReprogramacionMigracionIT {
                     assertFalse(fila.next());
                 }
                 try (var app = new SpringApplicationBuilder(OdontologiaApplication.class)
-                        .initializers(ctx -> ctx.getEnvironment().getPropertySources()
-                                .addFirst(new MapPropertySource("postgres-fixture", db.properties()))).run()) {
+                        .initializers(ctx -> {
+                            var propiedades = ctx.getEnvironment().getPropertySources();
+                            propiedades.addFirst(new MapPropertySource("postgres-fixture", db.properties()));
+                            propiedades.addFirst(new MapPropertySource("flyway-objetivo", Map.of("spring.flyway.target", "8")));
+                        }).run()) {
                     var recepcion = new Identidad(UUID.randomUUID(), "recepcion-ficticia", Rol.RECEPCION, null);
                     var leido = app.getBean(ServicioAgenda.class).consultarAgendaSillon(recepcion, sillon,
                             INICIO.toInstant(), INICIO.plusMinutes(30).toInstant()).getFirst();

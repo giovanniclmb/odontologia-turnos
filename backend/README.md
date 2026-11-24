@@ -81,6 +81,14 @@ La operación mueve un turno pendiente cuyo inicio todavía es futuro a otro ini
 
 V8 inicializa la versión de turnos existentes y nuevos. El rol de aplicación recibe `UPDATE` solo sobre profesional, sillón, inicio, fin y versión. Se bloquea la fila del turno y después se adquieren juntos los recursos de origen y destino mediante C-15. La actualización y el incremento de versión se confirman en la misma transacción. [ReprogramacionPersistidaIT](src/test/java/ar/edu/utn/odontologia/persistencia/ReprogramacionPersistidaIT.java)
 
+### C-08 — Cancelación interna de turnos
+
+`ServicioAgenda.cancelar(Identidad, SolicitudCancelacion)` recibe el UUID del turno y su versión opaca esperada. Exige `turno:cancelar`. Recepción puede operar en toda la sede y odontología solo puede cancelar sus propios turnos de pacientes con asignación activa. El turno debe estar `PENDIENTE` y su inicio debe seguir siendo futuro tras adquirir los locks. Una versión anterior pide volver a consultar. Una solicitud con versión vigente sobre un turno ya cancelado se rechaza explícitamente.
+
+El `TurnoRegistrado` devuelto conserva la asignación y la duración, con estado `CANCELADO` y una versión nueva. El registro sigue visible en la agenda por sillón dentro del alcance de la consulta y deja de ocupar el profesional y el sillón al confirmar la transacción. Si el llamador abre una transacción exterior, usa `READ COMMITTED`, entra sin locks previos de agenda y respeta el orden fila → recursos durante toda la transacción. En ese caso el resultado es provisional hasta el commit exterior.
+
+V9 admite `PENDIENTE` y `CANCELADO` y suma únicamente el permiso de `UPDATE` sobre `estado` para `odonto_app`. La cancelación se persiste actualizando `estado` y `version` en la misma escritura. [CancelacionPersistidaIT](src/test/java/ar/edu/utn/odontologia/persistencia/CancelacionPersistidaIT.java)
+
 ## Dominio C-01
 
 `new Agenda().crear(solicitud, reservas, intervalo)` devuelve Exito(Turno), EntradaInvalida(motivo) o NoDisponible(recurso). Solicitud incluye referencias opacas, prestación con duración positiva, inicio Instant y ajuste Duration opcional; null en el ajuste usa la duración de la prestación. No consulta catálogos ni persiste un turno.
