@@ -34,4 +34,6 @@ La suite completa posterior a ese ajuste, `mvn -f backend/pom.xml clean verify`,
 
 ## Publicación
 
-Corrección local en `codex/c-16-correccion-migracion`, basada en la rama del PR #38. No se autorizaron push, aprobación ni integración de este PR. La numeración debe coordinarse de nuevo si otro PR incorpora una migración antes de publicarlo o integrarlo.
+La corrección se publicó en la rama `feature/c-16-cuenta-y-acceso-del-paciente` del [PR #38](https://github.com/giovanniclmb/odontologia-turnos/pull/38), commit `42ffe3f`, después de un pedido explícito de push. Su [CI 45407763697](https://github.com/giovanniclmb/odontologia-turnos/actions/runs/45407763697) pasó 114 pruebas unitarias y 176 integraciones, sin fallos, errores ni omisiones; los dos checks finalizaron correctamente y GitHub dejó de informar conflictos con main.
+
+Giovanni autorizó después aprobar e integrar el PR el 24/11/2026. El cierre incluye el seguimiento de C-16 y el Issue #17, la resolución del hilo de migración y la aprobación sobre el commit final con CI correcto. No se omiten los controles de revisión de colaboradores. Las migraciones siguientes deberán coordinarse a partir de V10, conservando V1–V10 ya integradas.
