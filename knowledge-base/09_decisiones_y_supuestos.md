@@ -117,3 +117,11 @@ La prueba del CLI debe usar un proceso con entorno vacío y allowlist del fixtur
 - **PA-18 (semántica):** best-effort + registro. El transporte no rompe la operación de negocio; registra éxito/fallo en `email_envio`. Dedup por clave de idempotencia `(tipo, turnoId, destinatario)`. 2 reintentos con backoff corto; luego `status=failed`. C-20/C-19 deciden reprogramación/cancelación según el registro.
 - **Contrato de salida:** interfaz neutra `comunicaciones.CorreoSalida` con `enviar(...) -> ResultadoEnvio`, implementada por adaptador Resend + fake para tests. Persistencia de envíos en tabla `email_envio` (próxima migración coordinada por Giovanni).
 - **Alcance C-17:** solo transporte, configuración, puerto y registro de envío. Sin lógica de negocio, plantillas ni scheduling.
+
+## DD-15 — Cancelación interna de C-08 (24/11/2026)
+
+Giovanni aprobó el diseño y el plan escrito de C-08 para Apply con TDD, trabajador GPT-6.2 Sol medio y revisor independiente del mismo modelo. Recepción puede cancelar turnos elegibles de la sede; odontología solo turnos propios de pacientes con asignación activa. Solo se cancela un turno `PENDIENTE` con inicio estrictamente futuro después de esperar los locks. Se exige la versión vigente: una versión anterior pide recargar y una repetición con versión vigente se rechaza indicando que el turno ya está cancelado.
+
+El registro conserva sus datos y permanece visible como `CANCELADO`, sin ocupar profesional ni sillón después del commit. La transición incrementa una vez la versión; cualquier rechazo o reversión conserva el estado confirmado anterior. El turno devuelto identifica el período y recursos liberados. En una transacción exterior `READ COMMITTED`, esa liberación solo es efectiva al confirmar y el llamador debe entrar sin locks previos de agenda, respetando el orden global fila de turno → profesionales → sillones.
+
+La migración es nueva y consecutiva (V9), coordinada con el historial integrado; V7 y V8 no se editan. La aprobación de Apply no incorpora HTTP, UI, emails, eventos, cancelación por enlace ni avisos de lista. Después de verificar la implementación, Giovanni autorizó expresamente el archivo, la integración y el push el 24/11/2026. [Plan aprobado](../openspec/changes/archive/2026-11-24-cancelar-y-liberar-horario/tasks.md)

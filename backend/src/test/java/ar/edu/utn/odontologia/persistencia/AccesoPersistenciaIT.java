@@ -11,10 +11,18 @@ import ar.edu.utn.odontologia.acceso.ServicioAutenticacion;
 import ar.edu.utn.odontologia.acceso.ServicioAutorizacion;
 import ar.edu.utn.odontologia.acceso.ServicioBootstrap;
 import ar.edu.utn.odontologia.acceso.ServicioCredenciales;
+import ar.edu.utn.odontologia.acceso.paciente.DatosRegistroCuentaPaciente;
+import ar.edu.utn.odontologia.acceso.paciente.EstadoVinculoCuentaPaciente;
+import ar.edu.utn.odontologia.acceso.paciente.ServicioCuentasPaciente;
+import ar.edu.utn.odontologia.acceso.paciente.VinculacionCuentaPaciente;
 import ar.edu.utn.odontologia.acceso.persistencia.TokenAcceso;
 import ar.edu.utn.odontologia.acceso.persistencia.TokensAcceso;
+import ar.edu.utn.odontologia.acceso.persistencia.CuentaPaciente;
+import ar.edu.utn.odontologia.acceso.persistencia.CuentasPacientes;
 import ar.edu.utn.odontologia.acceso.persistencia.Usuario;
 import ar.edu.utn.odontologia.acceso.persistencia.Usuarios;
+import ar.edu.utn.odontologia.referencias.persistencia.PacienteReferencia;
+import ar.edu.utn.odontologia.referencias.persistencia.PacienteReferencias;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.Instant;
@@ -38,8 +46,10 @@ class AccesoPersistenciaIT {
 
     @TestConfiguration(proxyBeanMethods = false)
     @EnableAutoConfiguration
-    @EntityScan(basePackages = "ar.edu.utn.odontologia.acceso.persistencia")
-    @EnableJpaRepositories(basePackages = "ar.edu.utn.odontologia.acceso.persistencia")
+    @EntityScan(basePackages = {"ar.edu.utn.odontologia.acceso.persistencia",
+            "ar.edu.utn.odontologia.referencias.persistencia"})
+    @EnableJpaRepositories(basePackages = {"ar.edu.utn.odontologia.acceso.persistencia",
+            "ar.edu.utn.odontologia.referencias.persistencia"})
     static class JpaConfiguration {
         @org.springframework.context.annotation.Bean
         ServicioCredenciales servicioCredenciales() {
@@ -59,6 +69,12 @@ class AccesoPersistenciaIT {
         @org.springframework.context.annotation.Bean
         ServicioBootstrap servicioBootstrap(Usuarios usuarios, ServicioCredenciales credenciales, ServicioAutorizacion autorizacion) {
             return new ServicioBootstrap(usuarios, credenciales, autorizacion);
+        }
+
+        @org.springframework.context.annotation.Bean
+        ServicioCuentasPaciente servicioCuentasPaciente(CuentasPacientes cuentas, ServicioCredenciales credenciales,
+                                                        PacienteReferencias pacientes) {
+            return new ServicioCuentasPaciente(cuentas, credenciales, pacientes);
         }
     }
 
@@ -112,6 +128,42 @@ class AccesoPersistenciaIT {
         Usuario leido = repo.findById(guardado.getId()).orElseThrow();
         assertEquals(guardado.getId(), leido.getId());
         assertEquals(u.getNombreUsuario(), leido.getNombreUsuario());
+    }
+
+    @Test
+    void guardaYRecuperaCuentaPacientePendiente() {
+        CuentasPacientes cuentas = contexto.getBean(CuentasPacientes.class);
+        String email = "paciente-" + UUID.randomUUID() + "@example.invalid";
+        CuentaPaciente guardada = cuentas.save(new CuentaPaciente(email, "$2-ficticio"));
+        assertNotNull(guardada.getId());
+        CuentaPaciente leida = cuentas.findByEmail(email).orElseThrow();
+        assertEquals(guardada.getId(), leida.getId());
+        assertNull(leida.getPacienteRef());
+    }
+
+    @Test
+    void cuentaConEmailDeFichaSiguePendienteHastaVinculacionManualYFichaAdmiteUnaCuenta() {
+        var servicio = contexto.getBean(ServicioCuentasPaciente.class);
+        var pacientes = contexto.getBean(PacienteReferencias.class);
+        String email = "vinculo-" + UUID.randomUUID() + "@example.invalid";
+        PacienteReferencia paciente = pacientes.save(new PacienteReferencia(
+                "C16-" + UUID.randomUUID(), "Paciente", "Ficticio", email, null));
+
+        var pendiente = servicio.registrar(new DatosRegistroCuentaPaciente(email, "PacienteClaveSegura123"));
+        assertEquals(EstadoVinculoCuentaPaciente.PENDIENTE, pendiente.estadoVinculo());
+
+        var recepcion = new Identidad(UUID.randomUUID(), "recepcion-ficticia", Rol.RECEPCION, null);
+        var vinculada = servicio.confirmarVinculo(recepcion,
+                new VinculacionCuentaPaciente(pendiente.cuentaId(), paciente.getId()));
+        assertEquals(EstadoVinculoCuentaPaciente.VINCULADA, vinculada.estadoVinculo());
+        assertEquals(paciente.getId(), servicio.autenticar(
+                new ar.edu.utn.odontologia.acceso.paciente.CredencialesCuentaPaciente(email,
+                        "PacienteClaveSegura123")).pacienteId());
+
+        var segundaCuenta = servicio.registrar(new DatosRegistroCuentaPaciente(
+                "segunda-" + UUID.randomUUID() + "@example.invalid", "OtraClaveSeguraPaciente123"));
+        assertThrows(IllegalArgumentException.class, () -> servicio.confirmarVinculo(recepcion,
+                new VinculacionCuentaPaciente(segundaCuenta.cuentaId(), paciente.getId())));
     }
 
     @Test
@@ -240,7 +292,7 @@ class AccesoPersistenciaIT {
     void migracionNoSeReaplica() throws Exception {
         try (var c = db.migrationConnection(); var q = c.createStatement(); var r = q.executeQuery("select count(*) from odontologia.flyway_schema_history where success")) {
             assertTrue(r.next());
-            assertEquals(8, r.getInt(1));
+            assertEquals(10, r.getInt(1));
         }
     }
 }

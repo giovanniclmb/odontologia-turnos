@@ -214,7 +214,7 @@ Giovanni aprobó el reparto el 19/11/2026. Las ondas preservan las dependencias 
   - [10 Preguntas abiertas](knowledge-base/10_preguntas_abiertas.md) §PA-05
 
 ### [C-04] `pacientes-y-ficha-clinica`
-- **Estado**: `[x]` implementado, verificado y archivado en OpenSpec; integración pendiente. [Verify](openspec/changes/archive/2026-11-23-pacientes-y-ficha-clinica/evidence/verify.md)
+- **Estado**: `[x]` implementado, verificado y archivado en OpenSpec; integrado en main mediante [PR #32](https://github.com/giovanniclmb/odontologia-turnos/pull/32) (merge `60d884c`). [Verify](openspec/changes/archive/2026-11-23-pacientes-y-ficha-clinica/evidence/verify.md)
 - **Responsable**: Sofia
 - **Scope**: Gestión mínima del paciente y lectura/edición de la ficha sencilla en backend.
   - Resolver PA-05, PA-06 y PA-07 para campos, operaciones y alcance por registro; no asumir permisos de eliminación.
@@ -249,7 +249,8 @@ Giovanni aprobó el reparto el 19/11/2026. Las ondas preservan las dependencias 
   - [10 Preguntas abiertas](knowledge-base/10_preguntas_abiertas.md) §PA-01, PA-04, PA-05, PA-08 y PA-14
 
 ### [C-16] `cuenta-y-acceso-del-paciente`
-- **Estado**: `[ ]` pendiente
+- **Estado**: `[x]` implementado, verificado y archivado, con corrección de integración sobre C-08 y revisión independiente sin bloqueantes. [PR #38](https://github.com/giovanniclmb/odontologia-turnos/pull/38) · [Issue #17](https://github.com/giovanniclmb/odontologia-turnos/issues/17).
+- **Seguimiento**: cuentas usa V10 sin cambiar su SQL; 290 pruebas correctas (114 unitarias y 176 integraciones). La corrección fue publicada y Giovanni autorizó aprobación e integración el 24/11/2026, sujetas al CI del commit final. [Evidencia](openspec/changes/archive/2026-11-24-c-16-cuenta-y-acceso-del-paciente/verify.md).
 - **Responsable**: Sofia
 - **Scope**: Identificación del paciente para gestionar su propia inscripción; parte de US-014 y RN-PA-01.
   - Resolver PA-16 y PA-05: habilitación o registro, verificación, vínculo con paciente y alcance por operación; no elegir JWT, sesión o proveedor en el roadmap.
@@ -300,10 +301,10 @@ Giovanni aprobó el reparto el 19/11/2026. Las ondas preservan las dependencias 
   - [10 Preguntas abiertas](knowledge-base/10_preguntas_abiertas.md) §PA-02, PA-04, PA-05 y PA-07
 
 ### [C-07] `reprogramar-turno`
-- **Estado**: `[ ]` pendiente
+- **Estado**: `[x]` implementado, verificado y archivado sobre C-06 integrado, con revisión independiente cerrada. [Evidencia](openspec/changes/archive/2026-11-23-reprogramar-turno/verify.md). [Issue #8](https://github.com/giovanniclmb/odontologia-turnos/issues/8).
 - **Responsable**: Giovanni
 - **Scope**: Modificar la asignación de un turno existente conservando su servicio.
-  - Resolver PA-03 y los estados/transiciones de PA-02 antes de escribir el spec; acordar qué sucede con la reserva original y con el aviso al operador ante un fallo.
+  - Se pueden mover turnos pendientes de inicio futuro a un destino futuro. Ante un fallo se conserva la reserva vigente. Si la versión consultada cambió, el operador debe volver a consultar. [Decisiones acotadas](knowledge-base/10_preguntas_abiertas.md#resolución-acotada-para-c-07-23112026)
   - Implementar US-006 y RN-AG-06 sobre el contrato backend aprobado: cambiar fecha, hora, profesional o sillón conservando prestación y duración efectiva.
   - Validar los bloqueos de C-15, la nueva disponibilidad e intervalo con el mecanismo persistido acordado. No incorporar cambio de prestación ni duración durante reprogramación.
   - Tests: reprogramación válida, conservación de datos, conflictos de cada recurso, intervalo y resultado de fallo definido; comprobar concurrencia persistida según su alcance.
@@ -316,7 +317,8 @@ Giovanni aprobó el reparto el 19/11/2026. Las ondas preservan las dependencias 
   - [10 Preguntas abiertas](knowledge-base/10_preguntas_abiertas.md) §PA-02, PA-03, PA-04 y PA-05
 
 ### [C-08] `cancelar-y-liberar-horario`
-- **Estado**: `[ ]` pendiente
+- **Estado**: `[x]` implementado, verificado y archivado sobre C-06 y C-07 integrados, con revisión independiente cerrada. [Evidencia](openspec/changes/archive/2026-11-24-cancelar-y-liberar-horario/verify.md). [Issue #9](https://github.com/giovanniclmb/odontologia-turnos/issues/9).
+- **Seguimiento**: 95 pruebas unitarias y 172 de integración, sin fallos, errores ni omisiones. Archivo, integración y push autorizados el 24/11/2026. V9 corresponde a cancelación; coordinar las siguientes migraciones de los PR #37 y #38 contra el historial integrado.
 - **Responsable**: Giovanni
 - **Scope**: Cancelación de una reserva existente y liberación inmediata de su horario.
   - Resolver PA-02 y el permiso aplicable de PA-05, incluidos los casos de repetición o turno inexistente.

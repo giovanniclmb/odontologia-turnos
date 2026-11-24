@@ -77,6 +77,22 @@ Las operaciones están disponibles en `ServicioConfiguracionSede`, `ServicioRecu
 
 V7 agrega `odontologia.turno` con cuatro claves foráneas, UUID generado en la aplicación y permisos `SELECT`/`INSERT` para `odonto_app`. El servicio normaliza el inicio a microsegundos y conserva el fin y la duración efectiva. El alta valida y guarda bajo los locks compartidos de C-15 en `READ COMMITTED`. El intervalo se aplica entre turnos y la contigüidad con un bloqueo está permitida. Las pruebas de integración ejercitan ambos servicios con su almacenamiento real. [AgendaPersistidaIT](src/test/java/ar/edu/utn/odontologia/persistencia/AgendaPersistidaIT.java)
 
+### C-07 — Reprogramación de turnos
+
+`ServicioAgenda.reprogramar(identidad, solicitud)` recibe el UUID del turno, su versión esperada y el inicio, profesional y sillón de destino. Alta y consulta incluyen la versión vigente en `TurnoRegistrado`. El operador usa ese valor como token opaco y vuelve a consultar si el servicio informa una versión desactualizada.
+
+La operación mueve un turno pendiente cuyo inicio todavía es futuro a otro inicio futuro, conservando el mismo paciente, prestación y duración efectiva. Recepción puede elegir otro profesional. Odontología puede cambiar horario y sillón de sus propios turnos de pacientes asignados, conservando el profesional. Un destino idéntico tras normalizar el inicio devuelve el turno vigente y conserva su versión. Un rechazo conserva la asignación que ya estaba confirmada.
+
+V8 inicializa la versión de turnos existentes y nuevos. El rol de aplicación recibe `UPDATE` solo sobre profesional, sillón, inicio, fin y versión. Se bloquea la fila del turno y después se adquieren juntos los recursos de origen y destino mediante C-15. La actualización y el incremento de versión se confirman en la misma transacción. [ReprogramacionPersistidaIT](src/test/java/ar/edu/utn/odontologia/persistencia/ReprogramacionPersistidaIT.java)
+
+### C-08 — Cancelación interna de turnos
+
+`ServicioAgenda.cancelar(Identidad, SolicitudCancelacion)` recibe el UUID del turno y su versión opaca esperada. Exige `turno:cancelar`. Recepción puede operar en toda la sede y odontología solo puede cancelar sus propios turnos de pacientes con asignación activa. El turno debe estar `PENDIENTE` y su inicio debe seguir siendo futuro tras adquirir los locks. Una versión anterior pide volver a consultar. Una solicitud con versión vigente sobre un turno ya cancelado se rechaza explícitamente.
+
+El `TurnoRegistrado` devuelto conserva la asignación y la duración, con estado `CANCELADO` y una versión nueva. El registro sigue visible en la agenda por sillón dentro del alcance de la consulta y deja de ocupar el profesional y el sillón al confirmar la transacción. Si el llamador abre una transacción exterior, usa `READ COMMITTED`, entra sin locks previos de agenda y respeta el orden fila → recursos durante toda la transacción. En ese caso el resultado es provisional hasta el commit exterior.
+
+V9 admite `PENDIENTE` y `CANCELADO` y suma únicamente el permiso de `UPDATE` sobre `estado` para `odonto_app`. La cancelación se persiste actualizando `estado` y `version` en la misma escritura. [CancelacionPersistidaIT](src/test/java/ar/edu/utn/odontologia/persistencia/CancelacionPersistidaIT.java)
+
 ## Dominio C-01
 
 `new Agenda().crear(solicitud, reservas, intervalo)` devuelve Exito(Turno), EntradaInvalida(motivo) o NoDisponible(recurso). Solicitud incluye referencias opacas, prestación con duración positiva, inicio Instant y ajuste Duration opcional; null en el ajuste usa la duración de la prestación. No consulta catálogos ni persiste un turno.
@@ -97,3 +113,15 @@ El usuario ordinario tiene SELECT/INSERT sobre el historial, sin UPDATE/DELETE. 
 BootstrapCliIT ejecuta el CLI en un JVM hijo con entorno vacío y una allowlist del fixture; fuerza `classpath:/application.yaml`, acota memoria, tiempo y salida, y conserva la configuración original del proceso padre. La regresión mantiene valores Spring centinela inaccesibles en el padre. ProcesoAisladoTest verifica que el entorno del hijo contiene exclusivamente la allowlist, sin mostrar valores heredados en diagnósticos.
 
 BootstrapMavenIT comprueba el comando `spring-boot:run` documentado arriba, seleccionando explícitamente el CLI con `spring-boot.run.main-class`, contra PostgreSQL temporal y también el segundo intento rechazado. Usa settings vacíos, repositorio Maven local y modo offline; no lee settings/credenciales del usuario ni descarga dependencias desde el proceso hijo. El Maven de la ejecución principal debe estar disponible en PATH; la prueba se verifica en macOS y en el CI Linux del proyecto.
+
+## Cuenta y acceso del paciente — C-16
+
+`ServicioCuentasPaciente.registrar(DatosRegistroCuentaPaciente)` crea una cuenta por email y contraseña, aplica la política de credenciales vigente y guarda el hash bcrypt; la identidad inicial queda `PENDIENTE`. El email de la cuenta es único entre cuentas, pero no se usa para asociarla con una ficha ni exige verificación por correo.
+
+`ServicioCuentasPaciente.autenticar(CredencialesCuentaPaciente)` permite ingresar a una cuenta pendiente y devuelve `IdentidadCuentaPaciente`, separada de `Identidad` y los roles internos. Las credenciales incorrectas o un email no reconocido producen el mismo `AutenticacionFallidaException` genérico.
+
+Recepción confirma el vínculo con `ServicioCuentasPaciente.confirmarVinculo(Identidad, VinculacionCuentaPaciente)`. La operación exige una identidad interna de recepción y una ficha existente. Cada ficha admite como máximo una cuenta; el usuario no puede confirmar ni cambiar su propio vínculo. Al vincular, el siguiente ingreso devuelve el identificador de paciente y el estado `VINCULADA`.
+
+Los consumidores de lista deben usar `AutorizadorCuentaPaciente`: `exigirPacienteVinculado` devuelve el paciente autenticado o deniega el acceso, y `exigirPropiedad` permite continuar solo si la inscripción pertenece a ese paciente. La identidad de paciente no se acepta en servicios clínicos, administrativos ni de agenda. C-16 no incorpora ciclo de inscripción, rutas HTTP, recuperación ni transporte de sesión/token.
+
+V10 crea `odontologia.cuenta_paciente` con email único, hash no vacío y referencia nullable/única a `paciente`; `odonto_app` tiene `SELECT`, `INSERT` y `UPDATE`, sin `DELETE`. Se conservan V8 de reprogramación y V9 de cancelación. `CuentasPacienteMigracionIT` verifica las restricciones y la actualización desde V9 preservando pacientes e historial con PostgreSQL real; `AccesoPersistenciaIT` verifica mapeo JPA y vinculación manual.

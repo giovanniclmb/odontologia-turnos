@@ -79,3 +79,19 @@ Estas decisiones cierran PA-05/06/07 únicamente para el alcance de C-04; no res
 
 - **PA-04 y PA-19.** El período del bloqueo incluye el inicio y excluye el fin. Se admiten bordes contiguos y el intervalo global se aplica entre turnos. Una escritura de agenda y un bloqueo incompatibles se coordinan en PostgreSQL por los recursos compartidos. Prevalece la primera transacción que confirma. Un bloqueo de sillón y profesional se confirma de manera atómica.
 - **PA-19.** C-15 incluye el alta por recepción y la consulta interna de indisponibilidad. La modificación y el desbloqueo quedan pendientes de definición. El contrato es Java con migración Flyway. C-06 conectará la persistencia de turnos y C-07 conectará la reprogramación al protocolo transaccional.
+
+## Resolución acotada para C-07 (23/11/2026)
+
+- **PA-02 y PA-04 — elegibilidad:** se reprograman turnos pendientes de confirmación que todavía no comenzaron. El inicio original y el destino normalizado deben ser estrictamente futuros al validar. Se conserva el estado, la prestación y la duración efectiva.
+- **PA-03 — fallo:** el turno y su ocupación vigentes se conservan ante un rechazo o una reversión. El servicio distingue la disponibilidad insuficiente de los datos inválidos y protege los datos de turnos ajenos.
+- **PA-04 — edición concurrente:** si la versión ya cambió, el operador debe volver a consultar. Un destino normalizado idéntico devuelve el turno vigente sin incrementar la versión después de verificar acceso, versión y elegibilidad temporal.
+- **PA-05 — alcance:** recepción puede reprogramar turnos elegibles de la sede y cambiar el profesional. Odontología solo puede mover sus propios turnos de pacientes asignados de forma activa y conservar el profesional original.
+- Giovanni aprobó el [diseño de servicio interno](../openspec/changes/archive/2026-11-23-reprogramar-turno/design.md) y Apply de C-07 el 23/11/2026. Las decisiones de otras transiciones y operaciones siguen abiertas en sus respectivos changes.
+
+## Resolución acotada para C-08 (24/11/2026)
+
+- **PA-02 y PA-04 — cancelación interna:** solo `PENDIENTE` con inicio estrictamente futuro al validar tras los locks pasa a `CANCELADO`. El registro permanece visible en agenda y no ocupa profesional ni sillón al confirmar. Se conserva el resto de los datos y se incrementa una vez la versión.
+- **PA-05 — alcance:** recepción tiene alcance global; odontología solo turnos propios de pacientes con asignación activa a su profesional. El alcance se revalida después de las esperas. Una referencia inexistente es un error para recepción y una denegación genérica para odontología.
+- **PA-02 — versión y repetición:** una versión desactualizada se rechaza pidiendo recargar. Con versión vigente, repetir sobre un turno cancelado se rechaza indicando que ya está cancelado. Un rechazo o rollback no modifica los datos ni genera una nueva liberación.
+- **Integración:** el resultado devuelve el turno actualizado para identificar recursos y período liberados después del commit, también cuando la confirmación depende de una transacción exterior. C-08 no agrega infraestructura de eventos.
+- Giovanni aprobó el [diseño](../openspec/changes/archive/2026-11-24-cancelar-y-liberar-horario/design.md) y el [plan de Apply](../openspec/changes/archive/2026-11-24-cancelar-y-liberar-horario/tasks.md) el 24/11/2026. El corte de 48 horas del enlace de C-18 y el tratamiento de emails/avisos siguen fuera de esta resolución.
