@@ -142,7 +142,6 @@ class ArranqueIT {
             try(var c=aislada.migrationConnection();var q=c.createStatement();var result=q.executeQuery("select count(*) from odontologia.flyway_schema_history where success")){
                 assertTrue(result.next());assertEquals(12,result.getInt(1));
             }
-            }
         }
     }
 
