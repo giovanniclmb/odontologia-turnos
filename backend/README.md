@@ -109,3 +109,15 @@ El usuario ordinario tiene SELECT/INSERT sobre el historial, sin UPDATE/DELETE. 
 BootstrapCliIT ejecuta el CLI en un JVM hijo con entorno vacío y una allowlist del fixture; fuerza `classpath:/application.yaml`, acota memoria, tiempo y salida, y conserva la configuración original del proceso padre. La regresión mantiene valores Spring centinela inaccesibles en el padre. ProcesoAisladoTest verifica que el entorno del hijo contiene exclusivamente la allowlist, sin mostrar valores heredados en diagnósticos.
 
 BootstrapMavenIT comprueba el comando `spring-boot:run` documentado arriba, seleccionando explícitamente el CLI con `spring-boot.run.main-class`, contra PostgreSQL temporal y también el segundo intento rechazado. Usa settings vacíos, repositorio Maven local y modo offline; no lee settings/credenciales del usuario ni descarga dependencias desde el proceso hijo. El Maven de la ejecución principal debe estar disponible en PATH; la prueba se verifica en macOS y en el CI Linux del proyecto.
+
+## Cuenta y acceso del paciente — C-16
+
+`ServicioCuentasPaciente.registrar(DatosRegistroCuentaPaciente)` crea una cuenta por email y contraseña, aplica la política de credenciales vigente y guarda el hash bcrypt; la identidad inicial queda `PENDIENTE`. El email de la cuenta es único entre cuentas, pero no se usa para asociarla con una ficha ni exige verificación por correo.
+
+`ServicioCuentasPaciente.autenticar(CredencialesCuentaPaciente)` permite ingresar a una cuenta pendiente y devuelve `IdentidadCuentaPaciente`, separada de `Identidad` y los roles internos. Las credenciales incorrectas o un email no reconocido producen el mismo `AutenticacionFallidaException` genérico.
+
+Recepción confirma el vínculo con `ServicioCuentasPaciente.confirmarVinculo(Identidad, VinculacionCuentaPaciente)`. La operación exige una identidad interna de recepción y una ficha existente. Cada ficha admite como máximo una cuenta; el usuario no puede confirmar ni cambiar su propio vínculo. Al vincular, el siguiente ingreso devuelve el identificador de paciente y el estado `VINCULADA`.
+
+Los consumidores de lista deben usar `AutorizadorCuentaPaciente`: `exigirPacienteVinculado` devuelve el paciente autenticado o deniega el acceso, y `exigirPropiedad` permite continuar solo si la inscripción pertenece a ese paciente. La identidad de paciente no se acepta en servicios clínicos, administrativos ni de agenda. C-16 no incorpora ciclo de inscripción, rutas HTTP, recuperación ni transporte de sesión/token.
+
+V10 crea `odontologia.cuenta_paciente` con email único, hash no vacío y referencia nullable/única a `paciente`; `odonto_app` tiene `SELECT`, `INSERT` y `UPDATE`, sin `DELETE`. Se conservan V8 de reprogramación y V9 de cancelación. `CuentasPacienteMigracionIT` verifica las restricciones y la actualización desde V9 preservando pacientes e historial con PostgreSQL real; `AccesoPersistenciaIT` verifica mapeo JPA y vinculación manual.

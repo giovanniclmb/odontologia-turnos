@@ -214,7 +214,7 @@ Giovanni aprobó el reparto el 19/11/2026. Las ondas preservan las dependencias 
   - [10 Preguntas abiertas](knowledge-base/10_preguntas_abiertas.md) §PA-05
 
 ### [C-04] `pacientes-y-ficha-clinica`
-- **Estado**: `[x]` implementado, verificado y archivado en OpenSpec; integración pendiente. [Verify](openspec/changes/archive/2026-11-23-pacientes-y-ficha-clinica/evidence/verify.md)
+- **Estado**: `[x]` implementado, verificado y archivado en OpenSpec; integrado en main mediante [PR #32](https://github.com/giovanniclmb/odontologia-turnos/pull/32) (merge `60d884c`). [Verify](openspec/changes/archive/2026-11-23-pacientes-y-ficha-clinica/evidence/verify.md)
 - **Responsable**: Sofia
 - **Scope**: Gestión mínima del paciente y lectura/edición de la ficha sencilla en backend.
   - Resolver PA-05, PA-06 y PA-07 para campos, operaciones y alcance por registro; no asumir permisos de eliminación.
@@ -249,7 +249,8 @@ Giovanni aprobó el reparto el 19/11/2026. Las ondas preservan las dependencias 
   - [10 Preguntas abiertas](knowledge-base/10_preguntas_abiertas.md) §PA-01, PA-04, PA-05, PA-08 y PA-14
 
 ### [C-16] `cuenta-y-acceso-del-paciente`
-- **Estado**: `[ ]` pendiente
+- **Estado**: `[x]` implementado, verificado y archivado, con corrección de integración sobre C-08 y revisión independiente sin bloqueantes. [PR #38](https://github.com/giovanniclmb/odontologia-turnos/pull/38) · [Issue #17](https://github.com/giovanniclmb/odontologia-turnos/issues/17).
+- **Seguimiento**: cuentas usa V10 sin cambiar su SQL; 290 pruebas correctas (114 unitarias y 176 integraciones). La corrección fue publicada y Giovanni autorizó aprobación e integración el 24/11/2026, sujetas al CI del commit final. [Evidencia](openspec/changes/archive/2026-11-24-c-16-cuenta-y-acceso-del-paciente/verify.md).
 - **Responsable**: Sofia
 - **Scope**: Identificación del paciente para gestionar su propia inscripción; parte de US-014 y RN-PA-01.
   - Resolver PA-16 y PA-05: habilitación o registro, verificación, vínculo con paciente y alcance por operación; no elegir JWT, sesión o proveedor en el roadmap.
