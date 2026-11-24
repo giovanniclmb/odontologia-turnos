@@ -317,6 +317,7 @@ Giovanni aprobó el reparto el 19/11/2026. Las ondas preservan las dependencias 
 
 ### [C-08] `cancelar-y-liberar-horario`
 - **Estado**: `[ ]` pendiente
+- **Seguimiento**: diseño y plan de Apply aprobados el 24/11/2026; implementación en curso en `codex/c-08-propuesta`. [Artefactos](openspec/changes/cancelar-y-liberar-horario/proposal.md). Pendiente de verificación, archivo e integración.
 - **Responsable**: Giovanni
 - **Scope**: Cancelación de una reserva existente y liberación inmediata de su horario.
   - Resolver PA-02 y el permiso aplicable de PA-05, incluidos los casos de repetición o turno inexistente.
