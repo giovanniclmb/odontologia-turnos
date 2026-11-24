@@ -214,7 +214,7 @@ Giovanni aprobó el reparto el 19/11/2026. Las ondas preservan las dependencias 
   - [10 Preguntas abiertas](knowledge-base/10_preguntas_abiertas.md) §PA-05
 
 ### [C-04] `pacientes-y-ficha-clinica`
-- **Estado**: `[x]` implementado, verificado y archivado en OpenSpec; integración pendiente. [Verify](openspec/changes/archive/2026-11-23-pacientes-y-ficha-clinica/evidence/verify.md)
+- **Estado**: `[x]` implementado, verificado y archivado en OpenSpec; integrado en main mediante [PR #32](https://github.com/giovanniclmb/odontologia-turnos/pull/32) (merge `60d884c`). [Verify](openspec/changes/archive/2026-11-23-pacientes-y-ficha-clinica/evidence/verify.md)
 - **Responsable**: Sofia
 - **Scope**: Gestión mínima del paciente y lectura/edición de la ficha sencilla en backend.
   - Resolver PA-05, PA-06 y PA-07 para campos, operaciones y alcance por registro; no asumir permisos de eliminación.
