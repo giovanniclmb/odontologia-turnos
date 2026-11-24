@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Edición de paciente</title>
+  <link rel="stylesheet" href="../../../../design-system/tokens.css" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar" aria-label="Navegación principal">
+      <div class="brand">
+        <img src="../../../../design-system/assets/logo.svg" alt="Logo provisional (TBD)" />
+        <span class="brand-name" data-brand-name></span>
+      </div>
+      <nav class="nav" aria-label="Secciones">
+        <a href="./pacientes-lista.html">Pacientes</a>
+        <a href="#">Agenda</a>
+        <a href="#">Ficha clínica</a>
+        <a href="#">Lista de espera</a>
+        <a href="#">Configuración</a>
+      </nav>
+    </aside>
+
+    <div class="main">
+      <header class="topbar">
+        <span class="topbar-title">Edición de paciente</span>
+        <span style="font-size: var(--text-sm); color: var(--color-text-muted);">Usuario ficticio</span>
+      </header>
+
+      <main class="content">
+        <section class="page-header">
+          <div>
+            <h1>Editar datos administrativos</h1>
+            <p>Código no editable. Edición dentro del alcance del rol.</p>
+          </div>
+          <a class="btn btn-secondary" href="./pacientes-lista.html">Volver</a>
+        </section>
+
+        <section class="card">
+          <div class="card-header">
+            <div class="card-title">Paciente P-001</div>
+            <span class="badge badge-success">Activo</span>
+          </div>
+          <form style="display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: var(--space-4);">
+            <div class="field">
+              <label for="codigo">Código</label>
+              <input id="codigo" class="input" type="text" value="P-001" readonly disabled />
+              <span class="hint">No editable.</span>
+            </div>
+            <div class="field">
+              <label for="nombre">Nombre *</label>
+              <input id="nombre" class="input" type="text" value="Ana" />
+            </div>
+            <div class="field">
+              <label for="apellido">Apellido *</label>
+              <input id="apellido" class="input" type="text" value="García (ficticio)" />
+            </div>
+            <div class="field">
+              <label for="email">Email *</label>
+              <input id="email" class="input" type="email" value="ana.ejemplo@correo.test" />
+            </div>
+            <div class="field">
+              <label for="telefono">Teléfono</label>
+              <input id="telefono" class="input" type="tel" value="+54 9 11 0000-0000" />
+            </div>
+            <div style="grid-column: 1 / -1; display: flex; gap: var(--space-2); justify-content: flex-end;">
+              <a class="btn btn-secondary" href="./paciente-detalle.html">Cancelar</a>
+              <button type="submit" class="btn btn-primary">Guardar cambios</button>
+            </div>
+          </form>
+        </section>
+
+        <section class="card">
+          <div class="alert alert-danger" role="alert">
+            <span aria-hidden="true">✕</span>
+            <div><strong>Denegado:</strong> odontólogo edita paciente no asignado. El backend rechaza la operación.</div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+  <script src="../../../../design-system/brand.js" defer></script>
+</body>
+</html>

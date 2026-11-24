@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ficha clínica</title>
+  <link rel="stylesheet" href="../../../../design-system/tokens.css" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar" aria-label="Navegación principal">
+      <div class="brand">
+        <img src="../../../../design-system/assets/logo.svg" alt="Logo provisional (TBD)" />
+        <span class="brand-name" data-brand-name></span>
+      </div>
+      <nav class="nav" aria-label="Secciones">
+        <a href="./pacientes-lista.html">Pacientes</a>
+        <a href="#">Agenda</a>
+        <a href="./ficha-clinica.html" aria-current="page">Ficha clínica</a>
+        <a href="#">Lista de espera</a>
+        <a href="#">Configuración</a>
+      </nav>
+    </aside>
+
+    <div class="main">
+      <header class="topbar">
+        <span class="topbar-title">Ficha clínica</span>
+        <div style="display: flex; align-items: center; gap: var(--space-3);">
+          <div class="role-toggle" role="group" aria-label="Vista por rol">
+            <button type="button" class="is-active" data-role-btn="recepcion">Recepción</button>
+            <button type="button" data-role-btn="odontologo">Odontólogo</button>
+          </div>
+          <span style="font-size: var(--text-sm); color: var(--color-text-muted);">Usuario ficticio</span>
+        </div>
+      </header>
+
+      <main class="content">
+        <section class="page-header">
+          <div>
+            <h1>Ficha clínica — Ana García (ficticio)</h1>
+            <p>Paciente P-001. Antecedentes y notas.</p>
+          </div>
+          <div style="display: flex; gap: var(--space-2);">
+            <a class="btn btn-secondary" href="./paciente-detalle.html">Volver</a>
+          </div>
+        </section>
+
+        <!-- Antecedentes -->
+        <section class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Antecedentes</div>
+              <div class="card-subtitle">Texto libre. <span class="tbd">TBD: estructura clínica</span></div>
+            </div>
+            <!-- recepción: sin edición -->
+            <div class="view is-active" data-view="recepcion">
+              <span class="badge badge-neutral">Solo lectura</span>
+            </div>
+            <div class="view" data-view="odontologo">
+              <a class="btn btn-primary btn-sm" href="./antecedentes-edicion.html">Editar antecedentes</a>
+            </div>
+          </div>
+          <p style="font-size: var(--text-sm); line-height: var(--line-height-relaxed);">
+            Alergia a penicilina (ficticio). Hipertensión controlada. Última profilaxis antibiótica 2025-03-12.
+          </p>
+          <p style="font-size: var(--text-xs); color: var(--color-text-subtle); margin-top: var(--space-3);">
+            Sin ficha previa → se crea al guardar antecedentes por primera vez.
+          </p>
+        </section>
+
+        <!-- Notas -->
+        <section class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Notas clínicas</div>
+              <div class="card-subtitle">Autor y fecha visibles.</div>
+            </div>
+            <div class="view" data-view="odontologo">
+              <a class="btn btn-primary btn-sm" href="./notas.html">+ Nueva nota</a>
+            </div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+            <article class="note">
+              <div class="note-meta">Dr. Ejemplo (ficticio) · 2026-11-20 10:30</div>
+              <div class="note-body">Control de rutina. Sin hallazgos. <span class="tbd">TBD</span></div>
+            </article>
+            <article class="note">
+              <div class="note-meta">Dra. Ejemplo B (ficticio) · 2026-11-18 09:15</div>
+              <div class="note-body">Se indica profilaxis. Paciente refiere sensibilidad.</div>
+            </article>
+          </div>
+          <div class="view is-active" data-view="recepcion" style="margin-top: var(--space-3);">
+            <p style="font-size: var(--text-xs); color: var(--color-text-subtle);">Recepción: solo lectura. Sin acciones de edición.</p>
+          </div>
+        </section>
+
+        <section class="card">
+          <div class="alert alert-danger" role="alert">
+            <span aria-hidden="true">✕</span>
+            <div><strong>Denegado:</strong> odontólogo no asignado consulta ficha → backend rechaza.</div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var btns = document.querySelectorAll("[data-role-btn]");
+      btns.forEach(function (b) {
+        b.addEventListener("click", function () {
+          var role = b.getAttribute("data-role-btn");
+          btns.forEach(function (x) { x.classList.remove("is-active"); });
+          b.classList.add("is-active");
+          document.querySelectorAll("[data-view]").forEach(function (v) {
+            v.classList.toggle("is-active", v.getAttribute("data-view") === role);
+          });
+        });
+      });
+    })();
+  </script>
+  <script src="../../../../design-system/brand.js" defer></script>
+</body>
+</html>

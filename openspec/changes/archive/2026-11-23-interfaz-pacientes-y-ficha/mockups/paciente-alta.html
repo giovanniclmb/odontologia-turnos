@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Alta de paciente</title>
+  <link rel="stylesheet" href="../../../../design-system/tokens.css" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar" aria-label="Navegación principal">
+      <div class="brand">
+        <img src="../../../../design-system/assets/logo.svg" alt="Logo provisional (TBD)" />
+        <span class="brand-name" data-brand-name></span>
+      </div>
+      <nav class="nav" aria-label="Secciones">
+        <a href="./pacientes-lista.html">Pacientes</a>
+        <a href="#">Agenda</a>
+        <a href="#">Ficha clínica</a>
+        <a href="#">Lista de espera</a>
+        <a href="#">Configuración</a>
+      </nav>
+    </aside>
+
+    <div class="main">
+      <header class="topbar">
+        <span class="topbar-title">Alta de paciente</span>
+        <span style="font-size: var(--text-sm); color: var(--color-text-muted);">Usuario ficticio</span>
+      </header>
+
+      <main class="content">
+        <section class="page-header">
+          <div>
+            <h1>Nuevo paciente</h1>
+            <p>Código, nombre, apellido y email obligatorios; teléfono opcional.</p>
+          </div>
+          <a class="btn btn-secondary" href="./pacientes-lista.html">Volver</a>
+        </section>
+
+        <section class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Datos administrativos</div>
+              <div class="card-subtitle">Sin asignación automática para odontología. <span class="tbd">TBD: validación email</span></div>
+            </div>
+          </div>
+          <form style="display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: var(--space-4);">
+            <div class="field">
+              <label for="codigo">Código *</label>
+              <input id="codigo" class="input" type="text" placeholder="P-004" required />
+              <span class="hint">Identificador interno (ficticio).</span>
+            </div>
+            <div class="field">
+              <label for="nombre">Nombre *</label>
+              <input id="nombre" class="input" type="text" required />
+            </div>
+            <div class="field">
+              <label for="apellido">Apellido *</label>
+              <input id="apellido" class="input" type="text" required />
+            </div>
+            <div class="field">
+              <label for="email">Email *</label>
+              <input id="email" class="input is-error" type="email" aria-describedby="email-err" />
+              <span id="email-err" class="error">Formato de email inválido.</span>
+            </div>
+            <div class="field">
+              <label for="telefono">Teléfono</label>
+              <input id="telefono" class="input" type="tel" />
+              <span class="hint">Opcional.</span>
+            </div>
+            <div style="grid-column: 1 / -1; display: flex; gap: var(--space-2); justify-content: flex-end;">
+              <a class="btn btn-secondary" href="./pacientes-lista.html">Cancelar</a>
+              <button type="submit" class="btn btn-primary">Guardar</button>
+            </div>
+          </form>
+        </section>
+
+        <section class="card">
+          <div class="empty">
+            <div class="empty-icon" aria-hidden="true">!</div>
+            <div class="empty-title">Datos inválidos</div>
+            <div class="empty-text">El sistema muestra el error y no crea el paciente.</div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+  <script src="../../../../design-system/brand.js" defer></script>
+</body>
+</html>

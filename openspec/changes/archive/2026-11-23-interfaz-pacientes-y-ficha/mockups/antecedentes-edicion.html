@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Edición de antecedentes</title>
+  <link rel="stylesheet" href="../../../../design-system/tokens.css" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar" aria-label="Navegación principal">
+      <div class="brand">
+        <img src="../../../../design-system/assets/logo.svg" alt="Logo provisional (TBD)" />
+        <span class="brand-name" data-brand-name></span>
+      </div>
+      <nav class="nav" aria-label="Secciones">
+        <a href="./pacientes-lista.html">Pacientes</a>
+        <a href="#">Agenda</a>
+        <a href="./ficha-clinica.html" aria-current="page">Ficha clínica</a>
+        <a href="#">Lista de espera</a>
+        <a href="#">Configuración</a>
+      </nav>
+    </aside>
+
+    <div class="main">
+      <header class="topbar">
+        <span class="topbar-title">Editar antecedentes</span>
+        <span style="font-size: var(--text-sm); color: var(--color-text-muted);">Odontólogo asignado</span>
+      </header>
+
+      <main class="content">
+        <section class="page-header">
+          <div>
+            <h1>Antecedentes — Ana García (ficticio)</h1>
+            <p>Paciente P-001. Guardar crea la ficha si no existe.</p>
+          </div>
+          <a class="btn btn-secondary" href="./ficha-clinica.html">Volver</a>
+        </section>
+
+        <section class="card">
+          <div class="card-header">
+            <div class="card-title">Texto de antecedentes</div>
+            <span class="badge badge-info">Edición por odontólogo asignado</span>
+          </div>
+          <form style="display: flex; flex-direction: column; gap: var(--space-4);">
+            <div class="field">
+              <label for="antecedentes">Antecedentes</label>
+              <textarea id="antecedentes" class="textarea" rows="8">Alergia a penicilina (ficticio). Hipertensión controlada.</textarea>
+              <span class="hint">Texto libre. Sin eliminación.</span>
+            </div>
+            <div style="display: flex; gap: var(--space-2); justify-content: flex-end;">
+              <a class="btn btn-secondary" href="./ficha-clinica.html">Cancelar</a>
+              <button type="submit" class="btn btn-primary">Guardar</button>
+            </div>
+          </form>
+        </section>
+
+        <section class="card">
+          <div class="alert alert-danger" role="alert">
+            <span aria-hidden="true">✕</span>
+            <div><strong>Denegado:</strong> recepción intenta editar antecedentes → interfaz no ofrece la acción y backend deniega.</div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+  <script src="../../../../design-system/brand.js" defer></script>
+</body>
+</html>

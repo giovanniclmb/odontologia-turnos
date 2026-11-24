@@ -466,7 +466,7 @@ La política visual sigue diferida: resolverla antes de Apply y cumplir las apro
   - [08 Arquitectura propuesta](knowledge-base/08_arquitectura_propuesta.md) §Operación y diseño visual
 
 ### [C-11] `interfaz-pacientes-y-ficha`
-- **Estado**: `[ ]` pendiente
+- **Estado**: `[x]` implementado, verificado y archivado (2026-11-23).
 - **Responsable**: Fabi
 - **Scope**: Operación mínima de pacientes y ficha clínica sencilla en la interfaz.
   - Resolver el gate visual y compartir contratos/build de frontend con C-10 mediante un propietario común; esta ficha no depende del alta de turnos. La primera de las dos fichas visuales que se ejecute aporta la base y superficie de ingreso mínimas acordadas con C-03; la siguiente las reutiliza.
