@@ -54,7 +54,7 @@ Un integrante del equipo necesita liberar el horario de un turno existente (US-0
 3. La transacción cambia únicamente el estado a `CANCELADO` y la versión. Conserva los datos y el registro visible en la agenda; al confirmar, deja de ocupar profesional y sillón. Un rechazo o rollback mantiene el último estado y ocupación confirmados.
 4. Recepción puede usar el horario para otra reserva que cumpla las reglas de agenda. El turno actualizado identifica el período y los recursos liberados para futuros consumidores después del commit. Si hay interesados en el hueco, C-22 desarrollará el flujo 12.
 
-El contrato de C-08 es un servicio interno: una referencia inexistente produce un error para recepción y una denegación genérica para odontología. La interfaz, el enlace del paciente y el tratamiento de los emails permanecen en sus changes; el corte de 48 horas de C-18 no se aplica a esta cancelación interna. [Diseño aprobado](../openspec/changes/cancelar-y-liberar-horario/design.md)
+El contrato de C-08 es un servicio interno: una referencia inexistente produce un error para recepción y una denegación genérica para odontología. La interfaz, el enlace del paciente y el tratamiento de los emails permanecen en sus changes; el corte de 48 horas de C-18 no se aplica a esta cancelación interna. [Diseño aprobado](../openspec/changes/archive/2026-11-24-cancelar-y-liberar-horario/design.md)
 
 ## Flujo 6 · Registrar una confirmación manual
 

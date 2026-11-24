@@ -37,4 +37,10 @@ La revisión pidió comprobar por separado la contención con un bloqueo que com
 
 `openspec validate cancelar-y-liberar-horario --strict` aprobó los artefactos del cambio. `git diff --check` pasó y se comprobó que el diff se limita al backend, los artefactos de C-08 y la documentación de sus decisiones y seguimiento en KB/CHANGES. La implementación y la revisión independiente usaron GPT-6.2 Sol con razonamiento medio. Queda cerrada la revisión de implementación y contención, sin hallazgos pendientes.
 
-El cambio tiene 11/11 tareas completas. Su archivo, integración y publicación siguen pendientes; esta evidencia corresponde a la verificación local, sin push ni CI remota de C-08.
+El cambio tiene 11/11 tareas completas. La evidencia anterior corresponde a la verificación local de Apply.
+
+## Archivo y publicación autorizados
+
+El 24/11/2026 Giovanni autorizó archivo, integración y push. `openspec archive cancelar-y-liberar-horario --yes --json` archivó el change y sincronizó tres requisitos nuevos y uno modificado en `agenda-persistida`, conservando los escenarios previos. `openspec validate --specs` pasó las siete capacidades y `openspec validate agenda-persistida --type spec --strict` pasó. La validación estricta global convierte en fallo una advertencia previa de longitud en `acceso-y-permisos-internos`, archivo no modificado por C-08; la validación global normal conserva esa advertencia y pasa.
+
+La publicación y la integración se realizan por PR con cierre del Issue #9 y CI del commit publicado, conforme a CONTRIBUTING.md. V9 seguía libre en `main` al iniciar este cierre; los PR #37 y #38 todavía requieren coordinar sus migraciones contra el historial integrado.

@@ -2,7 +2,7 @@
 
 ## Context
 
-C-06 persiste turnos `PENDIENTE` y usa sus períodos para validar la disponibilidad. C-07 agregó versión opaca y ya serializa las ediciones sobre una fila de turno antes de adquirir los locks de los recursos. La consulta por sillón usa una proyección con estado y versión que abarca todos los turnos visibles. [Especificación vigente](../../specs/agenda-persistida/spec.md) · [Diseño de C-07](../archive/2026-11-23-reprogramar-turno/design.md)
+C-06 persiste turnos `PENDIENTE` y usa sus períodos para validar la disponibilidad. C-07 agregó versión opaca y ya serializa las ediciones sobre una fila de turno antes de adquirir los locks de los recursos. La consulta por sillón usa una proyección con estado y versión que abarca todos los turnos visibles. [Especificación vigente](../../../specs/agenda-persistida/spec.md) · [Diseño de C-07](../2026-11-23-reprogramar-turno/design.md)
 
 ## Goals / Non-Goals
 
@@ -23,7 +23,7 @@ Una transacción exterior debe usar `READ COMMITTED` y respetar el orden global 
 3. En la misma transacción `READ COMMITTED`, adquirir todos los recursos de la fila mediante `LocksRecursosAgenda`: profesionales por UUID y luego sillones por UUID. Tras esperar, revalidar el acceso y la asignación activa de odontología. La fila de turno sigue bloqueada durante esas comprobaciones. La cancelación usa las referencias persistidas y no ejecuta la validación de alta de recursos activos, prestación ni intervalo.
 4. Con versión vigente e identidad autorizada, informar el rechazo si el estado es `CANCELADO`. Para un turno `PENDIENTE`, comparar su inicio persistido con el `Clock` después de adquirir los recursos y admitir la cancelación solo si el inicio es estrictamente futuro.
 
-El orden fila → recursos es compartido con reprogramación. El alta y la creación de bloqueos toman los recursos y consultan la ocupación sin bloquear filas de turno. [Contrato de bloqueos](../../specs/bloqueos-de-recursos/spec.md)
+El orden fila → recursos es compartido con reprogramación. El alta y la creación de bloqueos toman los recursos y consultan la ocupación sin bloquear filas de turno. [Contrato de bloqueos](../../../specs/bloqueos-de-recursos/spec.md)
 
 ### Escritura y lectura del resultado
 
