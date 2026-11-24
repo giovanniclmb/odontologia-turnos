@@ -382,7 +382,7 @@ Giovanni aprobó el reparto el 19/11/2026. Las ondas preservan las dependencias 
 ## FASE 3 — Comunicaciones y recuperación de huecos
 
 ### [C-17] `transporte-de-email-de-prueba`
-- **Estado**: `[ ]` pendiente
+- **Estado**: `[x]` implementado, verificado y archivado (2026-11-24; tarea 6.1 pendiente de autorización del equipo para envío real).
 - **Responsable**: Fabi
 - **Scope**: Canal real de email gratuito para RN-EM-03, compartido por los tres tipos de correo.
   - Evaluar y acordar PA-15: proveedor sin costo, límites, destinatarios de prueba indicados por el equipo y configuración. No contratar ni asumir servicio, SMTP o API.
