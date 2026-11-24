@@ -73,6 +73,14 @@ Las operaciones están disponibles en `ServicioConfiguracionSede`, `ServicioRecu
 
 V7 agrega `odontologia.turno` con cuatro claves foráneas, UUID generado en la aplicación y permisos `SELECT`/`INSERT` para `odonto_app`. El servicio normaliza el inicio a microsegundos y conserva el fin y la duración efectiva. El alta valida y guarda bajo los locks compartidos de C-15 en `READ COMMITTED`. El intervalo se aplica entre turnos y la contigüidad con un bloqueo está permitida. Las pruebas de integración ejercitan ambos servicios con su almacenamiento real. [AgendaPersistidaIT](src/test/java/ar/edu/utn/odontologia/persistencia/AgendaPersistidaIT.java)
 
+### C-07 — Reprogramación de turnos
+
+`ServicioAgenda.reprogramar(identidad, solicitud)` recibe el UUID del turno, su versión esperada y el inicio, profesional y sillón de destino. Alta y consulta incluyen la versión vigente en `TurnoRegistrado`. El operador usa ese valor como token opaco y vuelve a consultar si el servicio informa una versión desactualizada.
+
+La operación mueve un turno pendiente cuyo inicio todavía es futuro a otro inicio futuro, conservando el mismo paciente, prestación y duración efectiva. Recepción puede elegir otro profesional. Odontología puede cambiar horario y sillón de sus propios turnos de pacientes asignados, conservando el profesional. Un destino idéntico tras normalizar el inicio devuelve el turno vigente y conserva su versión. Un rechazo conserva la asignación que ya estaba confirmada.
+
+V8 inicializa la versión de turnos existentes y nuevos. El rol de aplicación recibe `UPDATE` solo sobre profesional, sillón, inicio, fin y versión. Se bloquea la fila del turno y después se adquieren juntos los recursos de origen y destino mediante C-15. La actualización y el incremento de versión se confirman en la misma transacción. [ReprogramacionPersistidaIT](src/test/java/ar/edu/utn/odontologia/persistencia/ReprogramacionPersistidaIT.java)
+
 ## Dominio C-01
 
 `new Agenda().crear(solicitud, reservas, intervalo)` devuelve Exito(Turno), EntradaInvalida(motivo) o NoDisponible(recurso). Solicitud incluye referencias opacas, prestación con duración positiva, inicio Instant y ajuste Duration opcional; null en el ajuste usa la duración de la prestación. No consulta catálogos ni persiste un turno.

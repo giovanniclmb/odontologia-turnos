@@ -9,6 +9,8 @@ import ar.edu.utn.odontologia.agenda.bloqueos.ConsultaBloqueos;
 import ar.edu.utn.odontologia.agenda.bloqueos.LocksRecursosAgenda;
 import ar.edu.utn.odontologia.agenda.bloqueos.PeriodoBloqueo;
 import ar.edu.utn.odontologia.agenda.bloqueos.RecursosBloqueo;
+import ar.edu.utn.odontologia.agenda.persistencia.ReprogramacionesPersistidas;
+import ar.edu.utn.odontologia.agenda.persistencia.TurnoLeido;
 import ar.edu.utn.odontologia.agenda.persistencia.TurnoPersistido;
 import ar.edu.utn.odontologia.agenda.persistencia.TurnosPersistidos;
 import ar.edu.utn.odontologia.recursos.ServicioRecursosAgenda;
@@ -39,13 +41,15 @@ public class ServicioAgenda {
     private final LocksRecursosAgenda locks;
     private final ConsultaBloqueos bloqueos;
     private final TurnosPersistidos turnos;
+    private final ReprogramacionesPersistidas reprogramaciones;
     private final Agenda agenda;
     private final Clock reloj;
 
     public ServicioAgenda(ServicioAutorizacion autorizacion, PacienteReferencias pacientes,
                           PacienteProfesionales asignaciones, PrestacionReferencias prestaciones,
                           ServicioRecursosAgenda recursos, LocksRecursosAgenda locks, ConsultaBloqueos bloqueos,
-                          TurnosPersistidos turnos, Agenda agenda, Clock reloj) {
+                          TurnosPersistidos turnos, ReprogramacionesPersistidas reprogramaciones,
+                          Agenda agenda, Clock reloj) {
         this.autorizacion = autorizacion;
         this.pacientes = pacientes;
         this.asignaciones = asignaciones;
@@ -54,6 +58,7 @@ public class ServicioAgenda {
         this.locks = locks;
         this.bloqueos = bloqueos;
         this.turnos = turnos;
+        this.reprogramaciones = reprogramaciones;
         this.agenda = agenda;
         this.reloj = reloj;
     }
@@ -62,7 +67,7 @@ public class ServicioAgenda {
     public TurnoRegistrado crear(Identidad solicitante, SolicitudAlta solicitud) {
         autorizacion.exigir(solicitante, Permiso.TURNO_CREAR);
         validarSolicitud(solicitud);
-        exigirAlcanceOdontologia(solicitante, solicitud);
+        exigirAlcanceOdontologia(solicitante, solicitud.pacienteId(), solicitud.profesionalId());
         if (solicitante.rol() == Rol.RECEPCION && pacientes.findById(solicitud.pacienteId()).isEmpty()) {
             throw new IllegalArgumentException("El paciente no existe");
         }
@@ -70,29 +75,74 @@ public class ServicioAgenda {
         var seleccion = new RecursosBloqueo(solicitud.profesionalId(), solicitud.sillonId());
         locks.adquirir(List.of(seleccion));
         // La asignación puede haber cambiado mientras el alta esperaba los recursos.
-        exigirAlcanceOdontologia(solicitante, solicitud);
-        var inicio = solicitud.inicio().truncatedTo(ChronoUnit.MICROS);
-        validarRango(inicio);
+        exigirAlcanceOdontologia(solicitante, solicitud.pacienteId(), solicitud.profesionalId());
+        var inicio = normalizarInicio(solicitud.inicio());
         if (!inicio.isAfter(reloj.instant())) {
             throw new IllegalArgumentException("El inicio del turno debe ser futuro");
         }
-        var intervalo = Duration.ofMinutes(recursos.validarDisponibilidadMinima(
-                solicitante, solicitud.profesionalId(), solicitud.sillonId()));
+        var intervalo = intervaloVigente(solicitante, seleccion);
         var referencia = duracionPrestacion(solicitud.prestacionId());
         var ajuste = solicitud.duracionAjustadaMinutos() == null
                 ? null : Duration.ofMinutes(solicitud.duracionAjustadaMinutos());
-        var fin = inicio.plus(ajuste == null ? referencia : ajuste);
-        validarRango(fin);
+        var dominio = solicitudDominio(solicitud.pacienteId(), solicitud.prestacionId(), seleccion,
+                inicio, referencia, ajuste);
+        var turno = validarDestino(seleccion, dominio, intervalo, null);
+        return vista(turnos.save(new TurnoPersistido(turno)).datos());
+    }
 
-        var dominio = new Agenda.Solicitud(solicitud.pacienteId().toString(), solicitud.profesionalId().toString(),
-                solicitud.sillonId().toString(), new Agenda.Prestacion(solicitud.prestacionId().toString(), referencia),
-                inicio, ajuste);
-        var desdeOcupacion = inicio.minus(intervalo);
+    @Transactional(isolation = Isolation.READ_COMMITTED)
+    public TurnoRegistrado reprogramar(Identidad solicitante, SolicitudReprogramacion solicitud) {
+        autorizacion.exigir(solicitante, Permiso.TURNO_REPROGRAMAR);
+        validarReprogramacion(solicitud);
+        boolean odontologo = solicitante.rol() == Rol.ODONTOLOGO;
+        UUID profesionalPropio = odontologo ? solicitante.profesionalRef() : null;
+        if (odontologo && !solicitud.profesionalId().equals(profesionalPropio)) {
+            throw new AutorizacionDenegadaException();
+        }
+
+        var actual = reprogramaciones.bloquear(solicitud.turnoId(), profesionalPropio)
+                .orElseThrow(() -> odontologo ? new AutorizacionDenegadaException()
+                        : new IllegalArgumentException("El turno no existe"));
+        exigirAlcanceOdontologia(solicitante, actual.pacienteId(), actual.profesionalId());
+        if (!versionOpaca(actual.version()).equals(solicitud.versionEsperada())) {
+            throw new VersionTurnoDesactualizadaException();
+        }
+
+        var origen = new RecursosBloqueo(actual.profesionalId(), actual.sillonId());
+        var destino = new RecursosBloqueo(solicitud.profesionalId(), solicitud.sillonId());
+        locks.adquirir(List.of(origen, destino));
+        exigirAlcanceOdontologia(solicitante, actual.pacienteId(), actual.profesionalId());
+        var inicio = normalizarInicio(solicitud.inicio());
+        var ahora = reloj.instant();
+        if (actual.estado() != EstadoTurno.PENDIENTE || !actual.inicio().isAfter(ahora)) {
+            throw new IllegalArgumentException("Solo se pueden reprogramar turnos pendientes que aún no comenzaron");
+        }
+        if (!inicio.isAfter(ahora)) {
+            throw new IllegalArgumentException("El inicio de destino debe ser futuro");
+        }
+        if (origen.equals(destino) && actual.inicio().equals(inicio)) {
+            return vista(actual);
+        }
+
+        var intervalo = intervaloVigente(solicitante, destino);
+        var dominio = solicitudDominio(actual.pacienteId(), actual.prestacionId(), destino,
+                inicio, Duration.ofMinutes(actual.duracionMinutos()), null);
+        var movimiento = validarDestino(destino, dominio, intervalo, actual.id());
+        return vista(reprogramaciones.mover(actual.id(), actual.version(), movimiento)
+                .orElseThrow(VersionTurnoDesactualizadaException::new));
+    }
+
+    private Agenda.Turno validarDestino(RecursosBloqueo seleccion, Agenda.Solicitud dominio,
+                                       Duration intervalo, UUID turnoExcluido) {
+        var duracion = dominio.duracionAjustada() == null ? dominio.prestacion().duracion() : dominio.duracionAjustada();
+        var fin = dominio.inicio().plus(duracion);
+        validarRango(fin);
+        var desdeOcupacion = dominio.inicio().minus(intervalo);
         var hastaOcupacion = fin.plus(intervalo);
         var ocupantes = turnos.buscarOcupantes(seleccion.profesionalId(), seleccion.sillonId(),
                 desdeOcupacion.isBefore(MINIMO_PERSISTIBLE) ? MINIMO_PERSISTIBLE : desdeOcupacion,
                 hastaOcupacion.isAfter(MAXIMO_PERSISTIBLE) ? MAXIMO_PERSISTIBLE : hastaOcupacion,
-                EstadoTurno.PENDIENTE).stream().map(TurnoPersistido::reserva).toList();
+                EstadoTurno.PENDIENTE, turnoExcluido).stream().map(TurnoLeido::reserva).toList();
         var turno = switch (agenda.crear(dominio, ocupantes, intervalo)) {
             case Agenda.Exito exito -> exito.turno();
             case Agenda.NoDisponible conflicto -> throw new ConflictoAgendaException();
@@ -101,7 +151,18 @@ public class ServicioAgenda {
         if (!bloqueos.buscar(seleccion, new PeriodoBloqueo(turno.inicio(), turno.fin())).isEmpty()) {
             throw new ConflictoAgendaException();
         }
-        return vista(turnos.save(new TurnoPersistido(turno)));
+        return turno;
+    }
+
+    private static Agenda.Solicitud solicitudDominio(UUID paciente, UUID prestacion, RecursosBloqueo seleccion,
+                                                     Instant inicio, Duration referencia, Duration ajuste) {
+        return new Agenda.Solicitud(paciente.toString(), seleccion.profesionalId().toString(),
+                seleccion.sillonId().toString(), new Agenda.Prestacion(prestacion.toString(), referencia), inicio, ajuste);
+    }
+
+    private Duration intervaloVigente(Identidad solicitante, RecursosBloqueo seleccion) {
+        return Duration.ofMinutes(recursos.validarDisponibilidadMinima(
+                solicitante, seleccion.profesionalId(), seleccion.sillonId()));
     }
 
     @Transactional(readOnly = true)
@@ -131,10 +192,18 @@ public class ServicioAgenda {
         }
     }
 
-    private void exigirAlcanceOdontologia(Identidad solicitante, SolicitudAlta solicitud) {
+    private static void validarReprogramacion(SolicitudReprogramacion solicitud) {
+        if (solicitud == null || solicitud.turnoId() == null || solicitud.versionEsperada() == null
+                || solicitud.versionEsperada().isBlank() || solicitud.inicio() == null
+                || solicitud.profesionalId() == null || solicitud.sillonId() == null) {
+            throw new IllegalArgumentException("Turno, versión, inicio, profesional y sillón de destino son obligatorios");
+        }
+    }
+
+    private void exigirAlcanceOdontologia(Identidad solicitante, UUID paciente, UUID profesional) {
         if (solicitante.rol() == Rol.ODONTOLOGO
-                && (!solicitud.profesionalId().equals(solicitante.profesionalRef())
-                || !asignaciones.tieneAsignacionActiva(solicitud.pacienteId(), solicitud.profesionalId()))) {
+                && (!profesional.equals(solicitante.profesionalRef())
+                || !asignaciones.tieneAsignacionActiva(paciente, profesional))) {
             throw new AutorizacionDenegadaException();
         }
     }
@@ -147,20 +216,39 @@ public class ServicioAgenda {
                 .orElseThrow(() -> new IllegalArgumentException("La prestación debe existir y tener una duración configurada"));
     }
 
+    private static Instant normalizarInicio(Instant inicio) {
+        var normalizado = inicio.truncatedTo(ChronoUnit.MICROS);
+        validarRango(normalizado);
+        return normalizado;
+    }
+
     private static void validarRango(Instant instante) {
         if (instante.isBefore(MINIMO_PERSISTIBLE) || instante.isAfter(MAXIMO_PERSISTIBLE)) {
             throw new IllegalArgumentException("El período excede el rango temporal de la agenda");
         }
     }
 
-    private static TurnoRegistrado vista(TurnoPersistido turno) {
+    private static TurnoRegistrado vista(TurnoLeido turno) {
         return new TurnoRegistrado(turno.id(), turno.pacienteId(), turno.profesionalId(), turno.sillonId(),
-                turno.prestacionId(), turno.inicio(), turno.fin(), turno.duracionMinutos(), turno.estado());
+                turno.prestacionId(), turno.inicio(), turno.fin(), turno.duracionMinutos(), turno.estado(),
+                versionOpaca(turno.version()));
+    }
+
+    private static String versionOpaca(long version) {
+        return Long.toString(version);
     }
 
     public record SolicitudAlta(UUID pacienteId, UUID profesionalId, UUID sillonId, UUID prestacionId,
                                 Instant inicio, Integer duracionAjustadaMinutos) {}
 
+    public record SolicitudReprogramacion(UUID turnoId, String versionEsperada, Instant inicio,
+                                          UUID profesionalId, UUID sillonId) {}
+
     public record TurnoRegistrado(UUID id, UUID pacienteId, UUID profesionalId, UUID sillonId, UUID prestacionId,
-                                 Instant inicio, Instant fin, int duracionMinutos, EstadoTurno estado) {}
+                                 Instant inicio, Instant fin, int duracionMinutos, EstadoTurno estado, String version) {
+        public TurnoRegistrado(UUID id, UUID pacienteId, UUID profesionalId, UUID sillonId, UUID prestacionId,
+                               Instant inicio, Instant fin, int duracionMinutos, EstadoTurno estado) {
+            this(id, pacienteId, profesionalId, sillonId, prestacionId, inicio, fin, duracionMinutos, estado, "0");
+        }
+    }
 }
