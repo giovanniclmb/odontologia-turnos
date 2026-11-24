@@ -36,6 +36,8 @@ public class TurnoPersistido {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private EstadoTurno estado;
+    @Column(nullable = false, updatable = false)
+    private long version;
 
     protected TurnoPersistido() {}
 
@@ -62,5 +64,10 @@ public class TurnoPersistido {
 
     public Agenda.Reserva reserva() {
         return new Agenda.Reserva(profesionalId.toString(), sillonId.toString(), inicio, fin);
+    }
+
+    public TurnoLeido datos() {
+        return new TurnoLeido(id, pacienteId, profesionalId, sillonId, prestacionId, inicio, fin,
+                duracionMinutos, estado, version);
     }
 }
