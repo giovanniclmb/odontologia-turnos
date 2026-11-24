@@ -24,6 +24,12 @@ spring:
       mode: never
   flyway:
     url: ${DB_URL}
+
+email:
+  resend-api-key: ${RESEND_API_KEY:}
+  from: ${EMAIL_FROM:}
+  test-allowlist: ${EMAIL_TEST_ALLOWLIST:}
+  max-retries: ${EMAIL_MAX_RETRIES:2}
     user: ${DB_MIGRATION_USER}
     password: ${DB_MIGRATION_PASSWORD}
     schemas: odontologia

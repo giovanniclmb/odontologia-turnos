@@ -67,7 +67,19 @@ public class AdaptadorResend implements CorreoSalida {
             }
 
             EmailEnvio registro = new EmailEnvio(tipo, turnoId, destinatario, key);
-            guardar(registro);
+            boolean adquirido = guardarAtomicamente(registro);
+            if (!adquirido) {
+                existente = buscarExistente(key);
+                if (existente != null) {
+                    if ("sent".equals(existente.estado())) {
+                        return new ResultadoEnvio(true, existente.intentos(), null, key);
+                    }
+                    if ("failed".equals(existente.estado())) {
+                        return new ResultadoEnvio(false, existente.intentos(), existente.error(), key);
+                    }
+                }
+                return new ResultadoEnvio(false, 0, "no se pudo adquirir la clave de idempotencia", key);
+            }
 
             String configError = validarConfiguracion();
             if (configError != null) {
@@ -83,7 +95,7 @@ public class AdaptadorResend implements CorreoSalida {
             for (int i = 0; i < maxIntentos && !exito; i++) {
                 intentos++;
                 try {
-                    HttpResultado r = enviarHttp(solicitud);
+                    HttpResultado r = enviarHttp(solicitud, key);
                     if (r.exitoso) {
                         exito = true;
                     } else {
@@ -106,6 +118,27 @@ public class AdaptadorResend implements CorreoSalida {
         }
     }
 
+    private boolean guardarAtomicamente(EmailEnvio registro) {
+        if (repositorio == null) return true;
+        try {
+            repositorio.save(registro);
+            return true;
+        } catch (DataIntegrityViolationException e) {
+            return false;
+        } catch (Exception e) {
+            throw new PersistenciaEmailException("no se pudo persistir el registro de envio", e);
+        }
+    }
+
+    private void guardar(EmailEnvio registro) {
+        if (repositorio == null) return;
+        try {
+            repositorio.save(registro);
+        } catch (Exception e) {
+            // no interrumpir
+        }
+    }
+
     private EmailEnvio buscarExistente(String key) {
         if (repositorio == null) return null;
         try {
@@ -115,33 +148,23 @@ public class AdaptadorResend implements CorreoSalida {
         }
     }
 
-    private void guardar(EmailEnvio registro) {
-        if (repositorio == null) return;
-        try {
-            repositorio.save(registro);
-        } catch (DataIntegrityViolationException e) {
-            // carrera: recuperar existente
-        } catch (Exception e) {
-            // no interrumpir
-        }
-    }
-
     private String validarConfiguracion() {
         if (config.resendApiKey() == null || config.resendApiKey().isBlank()) {
-            return "configuración de email incompleta: RESEND_API_KEY";
+            return "configuracion de email incompleta: RESEND_API_KEY";
         }
         if (config.from() == null || config.from().isBlank()) {
-            return "configuración de email incompleta: EMAIL_FROM";
+            return "configuracion de email incompleta: EMAIL_FROM";
         }
         return null;
     }
 
-    private HttpResultado enviarHttp(SolicitudEnvio s) throws Exception {
+    private HttpResultado enviarHttp(SolicitudEnvio s, String idempotencyKey) throws Exception {
         String json = construirJson(s);
         HttpRequest request = HttpRequest.newBuilder(URI.create(endpoint))
                 .timeout(config.timeout())
                 .header("Authorization", "Bearer " + config.resendApiKey())
                 .header("Content-Type", "application/json")
+                .header("Idempotency-Key", idempotencyKey)
                 .POST(HttpRequest.BodyPublishers.ofString(json, StandardCharsets.UTF_8))
                 .build();
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
@@ -158,12 +181,12 @@ public class AdaptadorResend implements CorreoSalida {
     }
 
     private String construirJson(SolicitudEnvio s) {
-        return "{"
-                + "\"from\":\"" + esc(config.from()) + "\","
-                + "\"to\":[\"" + esc(s.destinatario()) + "\"],"
-                + "\"subject\":\"" + esc(s.asunto()) + "\","
-                + "\"text\":\"" + esc(s.cuerpo()) + "\""
-                + "}";
+        return "{" +
+                "\"from\":\"" + esc(config.from()) + "\"," +
+                "\"to\":[\"" + esc(s.destinatario()) + "\"]," +
+                "\"subject\":\"" + esc(s.asunto()) + "\"," +
+                "\"text\":\"" + esc(s.cuerpo()) + "\"" +
+                "}";
     }
 
     private void registrarFallo(String tipo, UUID turnoId, String destinatario, String key, int intentos, String error) {
