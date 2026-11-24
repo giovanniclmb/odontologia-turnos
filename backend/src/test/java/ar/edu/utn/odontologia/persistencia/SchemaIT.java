@@ -20,7 +20,7 @@ class SchemaIT {
                 .schemas("odontologia").createSchemas(false).cleanDisabled(true).outOfOrder(false).load();
     }
 
-    @Test void aplicaOchoMigracionesYCatorceTablasUnaSolaVez() throws Exception {
+    @Test void aplicaOchoMigracionesYTreceTablasUnaSolaVez() throws Exception {
         var f = flyway();
         f.migrate();
         try (var c = db.migrationConnection(); var st = c.createStatement()) {
