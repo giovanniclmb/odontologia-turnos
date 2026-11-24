@@ -79,3 +79,11 @@ Estas decisiones cierran PA-05/06/07 únicamente para el alcance de C-04; no res
 
 - **PA-04 y PA-19.** El período del bloqueo incluye el inicio y excluye el fin. Se admiten bordes contiguos y el intervalo global se aplica entre turnos. Una escritura de agenda y un bloqueo incompatibles se coordinan en PostgreSQL por los recursos compartidos. Prevalece la primera transacción que confirma. Un bloqueo de sillón y profesional se confirma de manera atómica.
 - **PA-19.** C-15 incluye el alta por recepción y la consulta interna de indisponibilidad. La modificación y el desbloqueo quedan pendientes de definición. El contrato es Java con migración Flyway. C-06 conectará la persistencia de turnos y C-07 conectará la reprogramación al protocolo transaccional.
+
+## Resolución acotada para C-07 (23/11/2026)
+
+- **PA-02 y PA-04 — elegibilidad:** se reprograman turnos pendientes de confirmación que todavía no comenzaron. El inicio original y el destino normalizado deben ser estrictamente futuros al validar. Se conserva el estado, la prestación y la duración efectiva.
+- **PA-03 — fallo:** el turno y su ocupación vigentes se conservan ante un rechazo o una reversión. El servicio distingue la disponibilidad insuficiente de los datos inválidos y protege los datos de turnos ajenos.
+- **PA-04 — edición concurrente:** si la versión ya cambió, el operador debe volver a consultar. Un destino normalizado idéntico devuelve el turno vigente sin incrementar la versión después de verificar acceso, versión y elegibilidad temporal.
+- **PA-05 — alcance:** recepción puede reprogramar turnos elegibles de la sede y cambiar el profesional. Odontología solo puede mover sus propios turnos de pacientes asignados de forma activa y conservar el profesional original.
+- Giovanni aprobó redactar la [propuesta de servicio interno](../openspec/changes/reprogramar-turno/proposal.md). La autorización corresponde a planificación de C-07. Las decisiones de otras transiciones y operaciones siguen abiertas en sus respectivos changes.
