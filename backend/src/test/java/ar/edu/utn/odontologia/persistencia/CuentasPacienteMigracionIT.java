@@ -13,9 +13,9 @@ import org.junit.jupiter.api.Test;
 
 class CuentasPacienteMigracionIT {
     @Test
-    void v8PermiteCuentaPendienteYProtegeEmailVinculoYPropiedad() throws Exception {
+    void v9PermiteCuentaPendienteYProtegeEmailVinculoYPropiedad() throws Exception {
         try (var db = PostgresFixture.start()) {
-            assertEquals(8, migrador(db).load().migrate().migrationsExecuted);
+            assertEquals(9, migrador(db).load().migrate().migrationsExecuted);
             UUID pacienteA = UUID.randomUUID();
             UUID pacienteB = UUID.randomUUID();
             insertarPaciente(db, pacienteA, "PACIENTE-CUENTA-A", "compartido@example.invalid");

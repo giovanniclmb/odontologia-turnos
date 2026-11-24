@@ -292,7 +292,7 @@ class AccesoPersistenciaIT {
     void migracionNoSeReaplica() throws Exception {
         try (var c = db.migrationConnection(); var q = c.createStatement(); var r = q.executeQuery("select count(*) from odontologia.flyway_schema_history where success")) {
             assertTrue(r.next());
-            assertEquals(8, r.getInt(1));
+            assertEquals(9, r.getInt(1));
         }
     }
 }

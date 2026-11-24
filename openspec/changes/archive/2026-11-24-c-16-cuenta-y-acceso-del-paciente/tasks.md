@@ -7,7 +7,7 @@
 
 ## 2. Registro e ingreso de cuentas
 
-- [x] 2.1 Implementada V8 con entidad/repositorio de cuenta separados; `CuentasPacienteMigracionIT` pasó en PostgreSQL 18.7 (incluidos unicidad/FK/pendiente), y `AccesoPersistenciaIT` pasó con 10/10.
+- [x] 2.1 Implementada la migración de cuentas, renumerada a V9 tras el merge, con entidad/repositorio de cuenta separados; `CuentasPacienteMigracionIT` pasó en PostgreSQL 18.7 (incluidos unicidad/FK/pendiente), y `AccesoPersistenciaIT` pasó con 10/10.
 - [x] 2.2 Implementados registro pendiente e ingreso por email con `ServicioCredenciales`; TDD: 5/5 pruebas unitarias pasaron para hash, login pendiente, rechazo genérico, email duplicado y contraseña inválida.
 - [x] 2.3 La autenticación propaga identidad separada con estado coherente pendiente/vinculada; `IdentidadCuentaPacienteTest` pasó 4/4 y confirmó que los roles internos siguen siendo solo recepción y odontología.
 
