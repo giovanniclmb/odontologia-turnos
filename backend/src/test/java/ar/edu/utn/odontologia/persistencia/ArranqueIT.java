@@ -129,14 +129,15 @@ class ArranqueIT {
             Files.copy(Path.of("src/main/resources/db/migration/V5__pacientes_y_ficha_clinica.sql"),temporal.resolve("V5__pacientes_y_ficha_clinica.sql"));
             Files.copy(Path.of("src/main/resources/db/migration/V6__bloqueos_de_recursos.sql"),temporal.resolve("V6__bloqueos_de_recursos.sql"));
             Files.copy(Path.of("src/main/resources/db/migration/V7__turnos_persistidos.sql"),temporal.resolve("V7__turnos_persistidos.sql"));
-            Files.writeString(temporal.resolve("V8__futura.sql"),"CREATE TABLE odontologia.futura (id uuid PRIMARY KEY); SELECT 1;\n");
+            Files.copy(Path.of("src/main/resources/db/migration/V8__reprogramacion_de_turnos.sql"),temporal.resolve("V8__reprogramacion_de_turnos.sql"));
+            Files.writeString(temporal.resolve("V9__futura.sql"),"CREATE TABLE odontologia.futura (id uuid PRIMARY KEY); SELECT 1;\n");
             try(var c=abrir(aislada,Map.of("spring.flyway.locations","filesystem:"+temporal))){}
             var error=assertThrows(RuntimeException.class,()->{try(var c=abrir(aislada,Map.of())){} });
             String mensaje=cadena(error).toLowerCase(Locale.ROOT);
             assertTrue(mensaje.contains("migration"));
-            assertTrue(mensaje.contains("8"), "El rechazo debe corresponder a la version futura 8: " + mensaje);
+            assertTrue(mensaje.contains("9"), "El rechazo debe corresponder a la version futura 9: " + mensaje);
             try(var c=aislada.migrationConnection();var q=c.createStatement();var result=q.executeQuery("select count(*) from odontologia.flyway_schema_history where success")){
-                assertTrue(result.next());assertEquals(8,result.getInt(1));
+                assertTrue(result.next());assertEquals(9,result.getInt(1));
             }
         }
     }

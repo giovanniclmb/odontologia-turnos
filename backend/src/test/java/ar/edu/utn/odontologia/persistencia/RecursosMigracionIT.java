@@ -12,7 +12,7 @@ class RecursosMigracionIT {
     @Test
     void unaInstalacionNuevaNoSiembraRecursosNiPrestaciones() throws Exception {
         try (var db = PostgresFixture.start()) {
-            assertEquals(7, migrador(db).load().migrate().migrationsExecuted);
+            assertEquals(8, migrador(db).load().migrate().migrationsExecuted);
             try (var con = db.appConnection(); var sql = con.createStatement();
                  var resultado = sql.executeQuery("""
                          select (select count(*) from odontologia.profesional)

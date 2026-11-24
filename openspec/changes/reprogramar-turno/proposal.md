@@ -24,4 +24,4 @@ El equipo necesita mover un turno existente conservando su prestación y duraci�
 
 - Servicio `ServicioAgenda`, DTO de turno, consultas de ocupación, persistencia JPA y PostgreSQL. Se propone la siguiente migración consecutiva sobre V7 para inicializar la versión de turnos existentes y limitar permisos de actualización.
 - Se mantiene el alcance en el servicio backend. La interfaz, el transporte HTTP, la cancelación, la confirmación manual y las comunicaciones corresponden a otros changes.
-- C-06 está integrado en `main` por el PR #34. Giovanni aprobó el diseño conversacional y la preparación de la propuesta. La revisión de los artefactos escritos y la autorización explícita de Apply siguen pendientes. [Issue #8](https://github.com/giovanniclmb/odontologia-turnos/issues/8)
+- C-06 está integrado en `main` por el PR #34. Giovanni aprobó el diseño escrito y autorizó Apply de C-07 el 23/11/2026. [Issue #8](https://github.com/giovanniclmb/odontologia-turnos/issues/8)
