@@ -33,7 +33,7 @@ Se agregó `priorizaAlcanceTrasEsperarLaFilaConVersionDesactualizada`, sin cambi
 
 La producción permaneció idéntica a la suite completa: se compararon las huellas SHA-256 de sus 75 archivos. La corrida final revalida las clases afectadas e incorpora la única prueba agregada después del `clean verify`; las otras clases conservan la evidencia de aquella suite completa. Los resultados de cada corrida se registran por separado.
 
-OpenSpec registra las diez tareas de Apply completas. El archivo del change, su publicación y su integración siguen pendientes.
+OpenSpec registra las diez tareas de Apply completas. El change se archivó mediante el CLI y sus requisitos se sincronizaron con la especificación principal de agenda. La integración se gestiona mediante PR hacia `main`.
 
 ## Alcance de la evidencia de concurrencia
 

@@ -300,7 +300,7 @@ Giovanni aprobó el reparto el 19/11/2026. Las ondas preservan las dependencias 
   - [10 Preguntas abiertas](knowledge-base/10_preguntas_abiertas.md) §PA-02, PA-04, PA-05 y PA-07
 
 ### [C-07] `reprogramar-turno`
-- **Estado**: `[ ]` implementado y verificado sobre C-06 integrado, con revisión independiente cerrada. Pendientes archivo e integración. [Evidencia](openspec/changes/reprogramar-turno/verify.md).
+- **Estado**: `[x]` implementado, verificado y archivado sobre C-06 integrado, con revisión independiente cerrada. [Evidencia](openspec/changes/archive/2026-11-23-reprogramar-turno/verify.md). [Issue #8](https://github.com/giovanniclmb/odontologia-turnos/issues/8).
 - **Responsable**: Giovanni
 - **Scope**: Modificar la asignación de un turno existente conservando su servicio.
   - Se pueden mover turnos pendientes de inicio futuro a un destino futuro. Ante un fallo se conserva la reserva vigente. Si la versión consultada cambió, el operador debe volver a consultar. [Decisiones acotadas](knowledge-base/10_preguntas_abiertas.md#resolución-acotada-para-c-07-23112026)
