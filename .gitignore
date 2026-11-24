@@ -20,3 +20,6 @@ docs/evidencias/antes-*/
 docs/evidencias/estado-antes-*.json
 docs/evidencias/discovery-antes-consolidacion/
 docs/evidencias/ampliacion-paciente-antes-*/
+
+.playwright-mcp/
+docs/evidencias/active-orchestrator-state.pre-design-system.json
