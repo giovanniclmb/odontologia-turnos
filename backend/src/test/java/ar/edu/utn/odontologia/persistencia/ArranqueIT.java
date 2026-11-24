@@ -30,12 +30,13 @@ class ArranqueIT {
 
     private ConfigurableApplicationContext abrir(PostgresFixture database,Map<String,Object> extras){
         Map<String,Object> props=new HashMap<>(database.properties());props.putAll(extras);
+        props.put("spring.main.web-application-type","none");
         props.put("spring.main.banner-mode","off");
         var environment=new StandardEnvironment();
         environment.getPropertySources().remove(StandardEnvironment.SYSTEM_ENVIRONMENT_PROPERTY_SOURCE_NAME);
         environment.getPropertySources().remove(StandardEnvironment.SYSTEM_PROPERTIES_PROPERTY_SOURCE_NAME);
-        return new SpringApplicationBuilder(OdontologiaApplication.class).web(WebApplicationType.NONE).environment(environment)
-            .initializers(c->c.getEnvironment().getPropertySources().addFirst(new MapPropertySource("postgresTemporal",props))).run("--spring.config.location=classpath:/application.yaml");
+        return new SpringApplicationBuilder(OdontologiaApplication.class).web(WebApplicationType.NONE).properties("spring.main.web-application-type=none").environment(environment)
+            .initializers(c->c.getEnvironment().getPropertySources().addFirst(new MapPropertySource("postgresTemporal",props))).run("--spring.config.location=classpath:/application.yaml","--spring.main.web-application-type=none");
     }
 
     @Test void arrancaSinHttpYExponeAgenda() throws Exception {
