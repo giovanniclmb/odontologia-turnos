@@ -54,15 +54,6 @@ class ReprogramacionMigracionIT {
                     assertEquals(0L, fila.getLong("version"));
                     assertFalse(fila.next());
                 }
-                try (var app = new SpringApplicationBuilder(OdontologiaApplication.class)
-                        .initializers(ctx -> ctx.getEnvironment().getPropertySources()
-                                .addFirst(new MapPropertySource("postgres-fixture", db.properties()))).run()) {
-                    var recepcion = new Identidad(UUID.randomUUID(), "recepcion-ficticia", Rol.RECEPCION, null);
-                    var leido = app.getBean(ServicioAgenda.class).consultarAgendaSillon(recepcion, sillon,
-                            INICIO.toInstant(), INICIO.plusMinutes(30).toInstant()).getFirst();
-                    assertEquals(turno, leido.id());
-                    assertEquals("0", leido.version());
-                }
                 assertEquals(1, jdbc.update("""
                         update odontologia.turno set profesional_id=?, sillon_id=?, inicio=?, fin=?, version=version+1
                         where id=? and version=0
@@ -76,6 +67,21 @@ class ReprogramacionMigracionIT {
                 }
                 assertEquals("42501", assertThrows(SQLException.class,
                         () -> sql.executeUpdate("delete from odontologia.turno")).getSQLState());
+
+                // Los privilegios anteriores se comprueban en V8. La aplicación actual
+                // necesita todas las migraciones para validar también las entidades nuevas.
+                try (var app = new SpringApplicationBuilder(OdontologiaApplication.class)
+                        .initializers(ctx -> ctx.getEnvironment().getPropertySources()
+                                .addFirst(new MapPropertySource("postgres-fixture", db.properties()))).run()) {
+                    var recepcion = new Identidad(UUID.randomUUID(), "recepcion-ficticia", Rol.RECEPCION, null);
+                    var leidos = app.getBean(ServicioAgenda.class).consultarAgendaSillon(recepcion, sillon,
+                            INICIO.plusHours(2).toInstant(), INICIO.plusHours(4).plusMinutes(30).toInstant());
+                    assertEquals(2, leidos.size());
+                    assertEquals(turno, leidos.getFirst().id());
+                    assertEquals("1", leidos.getFirst().version());
+                    assertEquals(nuevo, leidos.getLast().id());
+                    assertEquals("0", leidos.getLast().version());
+                }
             }
         }
     }

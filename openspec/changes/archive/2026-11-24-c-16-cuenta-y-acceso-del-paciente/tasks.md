@@ -7,7 +7,7 @@
 
 ## 2. Registro e ingreso de cuentas
 
-- [x] 2.1 Implementada la migración de cuentas, renumerada a V9 tras el merge, con entidad/repositorio de cuenta separados; `CuentasPacienteMigracionIT` pasó en PostgreSQL 18.7 (incluidos unicidad/FK/pendiente), y `AccesoPersistenciaIT` pasó con 10/10.
+- [x] 2.1 Implementada la migración de cuentas con entidad/repositorio separados; originalmente renumerada a V9 tras C-07 y posteriormente a V10 al incorporar C-08, que ocupa V9. El SQL de cuentas se conserva. La evidencia de esta última actualización figura en `verify.md`; los resultados previos fueron `CuentasPacienteMigracionIT` correcto en PostgreSQL 18.7 (unicidad/FK/pendiente) y `AccesoPersistenciaIT` 10/10.
 - [x] 2.2 Implementados registro pendiente e ingreso por email con `ServicioCredenciales`; TDD: 5/5 pruebas unitarias pasaron para hash, login pendiente, rechazo genérico, email duplicado y contraseña inválida.
 - [x] 2.3 La autenticación propaga identidad separada con estado coherente pendiente/vinculada; `IdentidadCuentaPacienteTest` pasó 4/4 y confirmó que los roles internos siguen siendo solo recepción y odontología.
 
@@ -20,7 +20,7 @@
 ## 4. Integración y documentación
 
 - [x] 4.1 Documentado en `backend/README.md` el contrato de registro, ingreso genérico, vínculo manual, autorización y límites, consistente con los DTO y specs; no incluye recuperación.
-- [x] 4.2 Verificada la suite unitaria (114/114) y C-16 con PostgreSQL 18.7: `CuentasPacienteMigracionIT` 1/1 y `AccesoPersistenciaIT` 11/11. `clean verify` detectó expectativas previas de V7 obsoletas; se actualizaron conteo/tablas y fixture de historial futuro a V9. Los IT afectados pasaron luego: `ArranqueIT` 22/22, `RecursosMigracionIT` 2/2 y `SchemaIT` 30/30 (54/54). Solo se usaron datos ficticios.
+- [x] 4.2 Verificación inicial: suite unitaria 114/114 y C-16 con PostgreSQL 18.7, `CuentasPacienteMigracionIT` 1/1 y `AccesoPersistenciaIT` 11/11. Se corrigieron las expectativas previas de V7 y el fixture de historial futuro; los IT afectados pasaron: `ArranqueIT` 22/22, `RecursosMigracionIT` 2/2 y `SchemaIT` 30/30 (54/54). La actualización posterior con C-08 usa V10 para cuentas y V11 para el historial futuro; sus resultados actuales se registran en `verify.md`. Solo se usan datos ficticios.
 
 ## Workflow follow-up
 

@@ -13,9 +13,49 @@ import org.junit.jupiter.api.Test;
 
 class CuentasPacienteMigracionIT {
     @Test
-    void v9PermiteCuentaPendienteYProtegeEmailVinculoYPropiedad() throws Exception {
+    void actualizaDesdeV9IntegradaSinReescribirHistorialNiPerderPacientes() throws Exception {
         try (var db = PostgresFixture.start()) {
-            assertEquals(9, migrador(db).load().migrate().migrationsExecuted);
+            assertEquals(9, migrador(db).target("9").load().migrate().migrationsExecuted);
+            UUID paciente = UUID.randomUUID();
+            insertarPaciente(db, paciente, "PACIENTE-PREVIO-C16", "previo@example.invalid");
+            String historialPrevio;
+            try (var con = db.migrationConnection(); var sql = con.createStatement();
+                 var resultado = sql.executeQuery("""
+                         select string_agg(version || ':' || checksum, ',' order by installed_rank)
+                         from odontologia.flyway_schema_history where success
+                         """)) {
+                assertTrue(resultado.next());
+                historialPrevio = resultado.getString(1);
+            }
+
+            assertEquals(1, migrador(db).target("10").load().migrate().migrationsExecuted);
+            insertarCuenta(db, UUID.randomUUID(), "cuenta-previa@example.invalid", paciente);
+
+            try (var con = db.appConnection(); var sql = con.prepareStatement("""
+                    select p.email from odontologia.paciente p
+                    join odontologia.cuenta_paciente c on c.paciente_ref = p.id where p.id = ?
+                    """)) {
+                sql.setObject(1, paciente);
+                try (var resultado = sql.executeQuery()) {
+                    assertTrue(resultado.next());
+                    assertEquals("previo@example.invalid", resultado.getString(1));
+                }
+            }
+            try (var con = db.migrationConnection(); var sql = con.createStatement();
+                 var resultado = sql.executeQuery("""
+                         select string_agg(version || ':' || checksum, ',' order by installed_rank)
+                         from odontologia.flyway_schema_history where success and version <> '10'
+                         """)) {
+                assertTrue(resultado.next());
+                assertEquals(historialPrevio, resultado.getString(1));
+            }
+        }
+    }
+
+    @Test
+    void v10PermiteCuentaPendienteYProtegeEmailVinculoYPropiedad() throws Exception {
+        try (var db = PostgresFixture.start()) {
+            assertEquals(10, migrador(db).load().migrate().migrationsExecuted);
             UUID pacienteA = UUID.randomUUID();
             UUID pacienteB = UUID.randomUUID();
             insertarPaciente(db, pacienteA, "PACIENTE-CUENTA-A", "compartido@example.invalid");

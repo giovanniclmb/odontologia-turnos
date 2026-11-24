@@ -250,6 +250,7 @@ Giovanni aprobó el reparto el 19/11/2026. Las ondas preservan las dependencias 
 
 ### [C-16] `cuenta-y-acceso-del-paciente`
 - **Estado**: `[ ]` pendiente
+- **Seguimiento**: PR #38 corregido localmente el 24/11/2026 contra `main` con C-08: cuentas pasa a V10 sin cambiar su SQL; 290 pruebas correctas y revisión independiente sin bloqueantes. [Evidencia](openspec/changes/archive/2026-11-24-c-16-cuenta-y-acceso-del-paciente/verify.md). Publicación e integración pendientes.
 - **Responsable**: Sofia
 - **Scope**: Identificación del paciente para gestionar su propia inscripción; parte de US-014 y RN-PA-01.
   - Resolver PA-16 y PA-05: habilitación o registro, verificación, vínculo con paciente y alcance por operación; no elegir JWT, sesión o proveedor en el roadmap.
@@ -316,7 +317,8 @@ Giovanni aprobó el reparto el 19/11/2026. Las ondas preservan las dependencias 
   - [10 Preguntas abiertas](knowledge-base/10_preguntas_abiertas.md) §PA-02, PA-03, PA-04 y PA-05
 
 ### [C-08] `cancelar-y-liberar-horario`
-- **Estado**: `[ ]` pendiente
+- **Estado**: `[x]` implementado, verificado y archivado sobre C-06 y C-07 integrados, con revisión independiente cerrada. [Evidencia](openspec/changes/archive/2026-11-24-cancelar-y-liberar-horario/verify.md). [Issue #9](https://github.com/giovanniclmb/odontologia-turnos/issues/9).
+- **Seguimiento**: 95 pruebas unitarias y 172 de integración, sin fallos, errores ni omisiones. Archivo, integración y push autorizados el 24/11/2026. V9 corresponde a cancelación; coordinar las siguientes migraciones de los PR #37 y #38 contra el historial integrado.
 - **Responsable**: Giovanni
 - **Scope**: Cancelación de una reserva existente y liberación inmediata de su horario.
   - Resolver PA-02 y el permiso aplicable de PA-05, incluidos los casos de repetición o turno inexistente.

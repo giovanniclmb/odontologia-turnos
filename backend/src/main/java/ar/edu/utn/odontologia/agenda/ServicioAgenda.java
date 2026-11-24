@@ -9,7 +9,7 @@ import ar.edu.utn.odontologia.agenda.bloqueos.ConsultaBloqueos;
 import ar.edu.utn.odontologia.agenda.bloqueos.LocksRecursosAgenda;
 import ar.edu.utn.odontologia.agenda.bloqueos.PeriodoBloqueo;
 import ar.edu.utn.odontologia.agenda.bloqueos.RecursosBloqueo;
-import ar.edu.utn.odontologia.agenda.persistencia.ReprogramacionesPersistidas;
+import ar.edu.utn.odontologia.agenda.persistencia.EdicionesTurnoPersistidas;
 import ar.edu.utn.odontologia.agenda.persistencia.TurnoLeido;
 import ar.edu.utn.odontologia.agenda.persistencia.TurnoPersistido;
 import ar.edu.utn.odontologia.agenda.persistencia.TurnosPersistidos;
@@ -41,14 +41,14 @@ public class ServicioAgenda {
     private final LocksRecursosAgenda locks;
     private final ConsultaBloqueos bloqueos;
     private final TurnosPersistidos turnos;
-    private final ReprogramacionesPersistidas reprogramaciones;
+    private final EdicionesTurnoPersistidas ediciones;
     private final Agenda agenda;
     private final Clock reloj;
 
     public ServicioAgenda(ServicioAutorizacion autorizacion, PacienteReferencias pacientes,
                           PacienteProfesionales asignaciones, PrestacionReferencias prestaciones,
                           ServicioRecursosAgenda recursos, LocksRecursosAgenda locks, ConsultaBloqueos bloqueos,
-                          TurnosPersistidos turnos, ReprogramacionesPersistidas reprogramaciones,
+                          TurnosPersistidos turnos, EdicionesTurnoPersistidas ediciones,
                           Agenda agenda, Clock reloj) {
         this.autorizacion = autorizacion;
         this.pacientes = pacientes;
@@ -58,7 +58,7 @@ public class ServicioAgenda {
         this.locks = locks;
         this.bloqueos = bloqueos;
         this.turnos = turnos;
-        this.reprogramaciones = reprogramaciones;
+        this.ediciones = ediciones;
         this.agenda = agenda;
         this.reloj = reloj;
     }
@@ -94,16 +94,11 @@ public class ServicioAgenda {
     public TurnoRegistrado reprogramar(Identidad solicitante, SolicitudReprogramacion solicitud) {
         autorizacion.exigir(solicitante, Permiso.TURNO_REPROGRAMAR);
         validarReprogramacion(solicitud);
-        boolean odontologo = solicitante.rol() == Rol.ODONTOLOGO;
-        UUID profesionalPropio = odontologo ? solicitante.profesionalRef() : null;
-        if (odontologo && !solicitud.profesionalId().equals(profesionalPropio)) {
+        if (solicitante.rol() == Rol.ODONTOLOGO && !solicitud.profesionalId().equals(solicitante.profesionalRef())) {
             throw new AutorizacionDenegadaException();
         }
 
-        var actual = reprogramaciones.bloquear(solicitud.turnoId(), profesionalPropio)
-                .orElseThrow(() -> odontologo ? new AutorizacionDenegadaException()
-                        : new IllegalArgumentException("El turno no existe"));
-        exigirAlcanceOdontologia(solicitante, actual.pacienteId(), actual.profesionalId());
+        var actual = bloquearTurno(solicitante, solicitud.turnoId());
         if (!versionOpaca(actual.version()).equals(solicitud.versionEsperada())) {
             throw new VersionTurnoDesactualizadaException();
         }
@@ -128,8 +123,54 @@ public class ServicioAgenda {
         var dominio = solicitudDominio(actual.pacienteId(), actual.prestacionId(), destino,
                 inicio, Duration.ofMinutes(actual.duracionMinutos()), null);
         var movimiento = validarDestino(destino, dominio, intervalo, actual.id());
-        return vista(reprogramaciones.mover(actual.id(), actual.version(), movimiento)
+        return vista(ediciones.mover(actual.id(), actual.version(), movimiento)
                 .orElseThrow(VersionTurnoDesactualizadaException::new));
+    }
+
+    /**
+     * Cancela el turno y devuelve sus datos actualizados. Si el llamador abre una transacción exterior,
+     * debe usar READ COMMITTED, entrar sin locks previos de agenda y respetar el orden fila → recursos
+     * durante la transacción. El horario se libera al confirmar esa transacción.
+     */
+    @Transactional(isolation = Isolation.READ_COMMITTED)
+    public TurnoRegistrado cancelar(Identidad solicitante, SolicitudCancelacion solicitud) {
+        autorizacion.exigir(solicitante, Permiso.TURNO_CANCELAR);
+        if (solicitud == null || solicitud.turnoId() == null || solicitud.versionEsperada() == null
+                || solicitud.versionEsperada().isBlank()) {
+            throw new IllegalArgumentException("El turno y su versión son obligatorios");
+        }
+
+        var actual = bloquearTurno(solicitante, solicitud.turnoId());
+        if (!versionOpaca(actual.version()).equals(solicitud.versionEsperada())) {
+            throw new VersionTurnoDesactualizadaException("cancelarlo");
+        }
+
+        locks.adquirir(List.of(new RecursosBloqueo(actual.profesionalId(), actual.sillonId())));
+        exigirAlcanceOdontologia(solicitante, actual.pacienteId(), actual.profesionalId());
+        if (actual.estado() == EstadoTurno.CANCELADO) {
+            throw new IllegalArgumentException("El turno ya está cancelado");
+        }
+        if (actual.estado() != EstadoTurno.PENDIENTE || !actual.inicio().isAfter(reloj.instant())) {
+            throw new IllegalArgumentException("Solo se pueden cancelar turnos pendientes que aún no comenzaron");
+        }
+
+        return vista(ediciones.cancelar(actual.id(), actual.version())
+                .orElseThrow(() -> new VersionTurnoDesactualizadaException("cancelarlo")));
+    }
+
+    private TurnoLeido bloquearTurno(Identidad solicitante, UUID turnoId) {
+        boolean odontologo = solicitante.rol() == Rol.ODONTOLOGO;
+        UUID profesionalPropio = odontologo ? solicitante.profesionalRef() : null;
+        if (odontologo && profesionalPropio == null) {
+            throw new AutorizacionDenegadaException();
+        }
+
+        var actual = ediciones.bloquear(turnoId, profesionalPropio)
+                .orElseThrow(() -> odontologo ? new AutorizacionDenegadaException()
+                        : new IllegalArgumentException("El turno no existe"));
+        // La asignación puede haber cambiado mientras la solicitud esperaba la fila del turno.
+        exigirAlcanceOdontologia(solicitante, actual.pacienteId(), actual.profesionalId());
+        return actual;
     }
 
     private Agenda.Turno validarDestino(RecursosBloqueo seleccion, Agenda.Solicitud dominio,
@@ -243,6 +284,8 @@ public class ServicioAgenda {
 
     public record SolicitudReprogramacion(UUID turnoId, String versionEsperada, Instant inicio,
                                           UUID profesionalId, UUID sillonId) {}
+
+    public record SolicitudCancelacion(UUID turnoId, String versionEsperada) {}
 
     public record TurnoRegistrado(UUID id, UUID pacienteId, UUID profesionalId, UUID sillonId, UUID prestacionId,
                                  Instant inicio, Instant fin, int duracionMinutos, EstadoTurno estado, String version) {

@@ -49,11 +49,12 @@ Si la asignación tiene un conflicto o falla por otro motivo, el resultado del t
 
 Un integrante del equipo necesita liberar el horario de un turno existente (US-007).
 
-1. El operador selecciona el turno y solicita cancelarlo en la interfaz.
-2. La aplicación registra la cancelación y libera el horario de inmediato.
-3. Recepción puede usar el horario para otra reserva que cumpla las reglas de agenda. Si hay interesados en el hueco, se aplica el flujo 12.
+1. El operador consulta el turno y presenta su identificador y versión vigente. Recepción tiene alcance global; odontología solo cancela turnos propios de pacientes con asignación activa.
+2. El servicio bloquea el turno y los recursos, vuelve a comprobar el alcance y exige que el turno esté pendiente y su inicio siga siendo estrictamente futuro. Si la versión cambió, pide recargar; si ya está cancelado con versión vigente, rechaza la repetición.
+3. La transacción cambia únicamente el estado a `CANCELADO` y la versión. Conserva los datos y el registro visible en la agenda; al confirmar, deja de ocupar profesional y sillón. Un rechazo o rollback mantiene el último estado y ocupación confirmados.
+4. Recepción puede usar el horario para otra reserva que cumpla las reglas de agenda. El turno actualizado identifica el período y los recursos liberados para futuros consumidores después del commit. Si hay interesados en el hueco, C-22 desarrollará el flujo 12.
 
-Quedan pendientes las transiciones admitidas, el permiso concreto para cancelar, la respuesta ante un turno inexistente o una cancelación repetida y el tratamiento de los emails del turno cancelado (PA-02, PA-05 y PA-18).
+El contrato de C-08 es un servicio interno: una referencia inexistente produce un error para recepción y una denegación genérica para odontología. La interfaz, el enlace del paciente y el tratamiento de los emails permanecen en sus changes; el corte de 48 horas de C-18 no se aplica a esta cancelación interna. [Diseño aprobado](../openspec/changes/archive/2026-11-24-cancelar-y-liberar-horario/design.md)
 
 ## Flujo 6 · Registrar una confirmación manual
 
