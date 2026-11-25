@@ -109,8 +109,8 @@ public class ServicioAgenda {
         exigirAlcanceOdontologia(solicitante, actual.pacienteId(), actual.profesionalId());
         var inicio = normalizarInicio(solicitud.inicio());
         var ahora = reloj.instant();
-        if (actual.estado() != EstadoTurno.PENDIENTE || !actual.inicio().isAfter(ahora)) {
-            throw new IllegalArgumentException("Solo se pueden reprogramar turnos pendientes que aún no comenzaron");
+        if (!estadoEditable(solicitante, actual.estado()) || !actual.inicio().isAfter(ahora)) {
+            throw new IllegalArgumentException("Solo se pueden reprogramar turnos elegibles que aún no comenzaron");
         }
         if (!inicio.isAfter(ahora)) {
             throw new IllegalArgumentException("El inicio de destino debe ser futuro");
@@ -150,12 +150,53 @@ public class ServicioAgenda {
         if (actual.estado() == EstadoTurno.CANCELADO) {
             throw new IllegalArgumentException("El turno ya está cancelado");
         }
-        if (actual.estado() != EstadoTurno.PENDIENTE || !actual.inicio().isAfter(reloj.instant())) {
-            throw new IllegalArgumentException("Solo se pueden cancelar turnos pendientes que aún no comenzaron");
+        if (!estadoEditable(solicitante, actual.estado()) || !actual.inicio().isAfter(reloj.instant())) {
+            throw new IllegalArgumentException("Solo se pueden cancelar turnos elegibles que aún no comenzaron");
         }
 
-        return vista(ediciones.cancelar(actual.id(), actual.version())
+        return vista(ediciones.cambiarEstado(actual.id(), actual.version(), actual.estado(), EstadoTurno.CANCELADO)
                 .orElseThrow(() -> new VersionTurnoDesactualizadaException("cancelarlo")));
+    }
+
+    @Transactional(readOnly = true)
+    public List<TurnoRegistrado> consultarPendientes(Identidad solicitante) {
+        autorizacion.exigir(solicitante, Permiso.PENDIENTES_CONSULTAR);
+        // Los inicios persistidos tienen precisión de microsegundos.
+        var ahora = reloj.instant().truncatedTo(ChronoUnit.MICROS);
+        if (ahora.isAfter(MAXIMO_PERSISTIBLE)) {
+            return List.of();
+        }
+        return turnos.consultarPendientes(EstadoTurno.PENDIENTE, ahora)
+                .stream().map(ServicioAgenda::vista).toList();
+    }
+
+    @Transactional(isolation = Isolation.READ_COMMITTED)
+    public TurnoRegistrado confirmar(Identidad solicitante, UUID turnoId, String versionEsperada) {
+        autorizacion.exigir(solicitante, Permiso.CONFIRMACION_REGISTRAR);
+        if (turnoId == null || versionEsperada == null || versionEsperada.isBlank()) {
+            throw new IllegalArgumentException("El turno y su versión son obligatorios");
+        }
+
+        var actual = bloquearTurno(solicitante, turnoId);
+        if (!versionOpaca(actual.version()).equals(versionEsperada)) {
+            throw new VersionTurnoDesactualizadaException("confirmarlo");
+        }
+        switch (actual.estado()) {
+            case CONFIRMADO -> throw new IllegalArgumentException("El turno ya está confirmado");
+            case CANCELADO -> throw new IllegalArgumentException("El turno está cancelado");
+            case PENDIENTE -> {
+                if (!actual.inicio().isAfter(reloj.instant())) {
+                    throw new IllegalArgumentException("El turno ya alcanzó su inicio");
+                }
+            }
+        }
+        return vista(ediciones.cambiarEstado(actual.id(), actual.version(), EstadoTurno.PENDIENTE, EstadoTurno.CONFIRMADO)
+                .orElseThrow(() -> new VersionTurnoDesactualizadaException("confirmarlo")));
+    }
+
+    private static boolean estadoEditable(Identidad solicitante, EstadoTurno estado) {
+        return estado == EstadoTurno.PENDIENTE
+                || (solicitante.rol() == Rol.RECEPCION && estado == EstadoTurno.CONFIRMADO);
     }
 
     private TurnoLeido bloquearTurno(Identidad solicitante, UUID turnoId) {
@@ -183,7 +224,7 @@ public class ServicioAgenda {
         var ocupantes = turnos.buscarOcupantes(seleccion.profesionalId(), seleccion.sillonId(),
                 desdeOcupacion.isBefore(MINIMO_PERSISTIBLE) ? MINIMO_PERSISTIBLE : desdeOcupacion,
                 hastaOcupacion.isAfter(MAXIMO_PERSISTIBLE) ? MAXIMO_PERSISTIBLE : hastaOcupacion,
-                EstadoTurno.PENDIENTE, turnoExcluido).stream().map(TurnoLeido::reserva).toList();
+                EstadoTurno.OCUPANTES, turnoExcluido).stream().map(TurnoLeido::reserva).toList();
         var turno = switch (agenda.crear(dominio, ocupantes, intervalo)) {
             case Agenda.Exito exito -> exito.turno();
             case Agenda.NoDisponible conflicto -> throw new ConflictoAgendaException();

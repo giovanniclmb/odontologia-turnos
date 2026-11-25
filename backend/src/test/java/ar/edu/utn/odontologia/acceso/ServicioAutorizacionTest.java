@@ -11,7 +11,7 @@ class ServicioAutorizacionTest {
         Identidad recepcion = new Identidad(UUID.randomUUID(), "recepcion-ficticia", Rol.RECEPCION, null);
         Identidad odontologo = new Identidad(UUID.randomUUID(), "odontologo-ficticio", Rol.ODONTOLOGO, null);
         for (Permiso permiso : java.util.List.of(Permiso.CONFIG_INTERVALO, Permiso.CONFIG_RECURSOS,
-                Permiso.USUARIO_CREAR_ASIGNAR)) {
+                Permiso.USUARIO_CREAR_ASIGNAR, Permiso.PENDIENTES_CONSULTAR, Permiso.CONFIRMACION_REGISTRAR)) {
             assertTrue(authz.tienePermiso(recepcion, permiso), permiso::codigo);
             assertFalse(authz.tienePermiso(odontologo, permiso), permiso::codigo);
             assertFalse(authz.tienePermiso(null, permiso), permiso::codigo);

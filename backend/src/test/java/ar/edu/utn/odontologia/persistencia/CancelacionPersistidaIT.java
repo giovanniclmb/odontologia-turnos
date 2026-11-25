@@ -366,6 +366,112 @@ class CancelacionPersistidaIT {
         }
     }
 
+    @Test
+    void confirmadoSigueOcupandoProfesionalYSillon() {
+        jdbc.update("update odontologia.turno set estado = 'CONFIRMADO' where id = ?", original.id());
+        var otros = nuevosDatos();
+        for (var destino : List.of(
+                new Datos(otros.paciente(), datos.profesional(), otros.sillon(), otros.prestacion()),
+                new Datos(otros.paciente(), otros.profesional(), datos.sillon(), otros.prestacion()))) {
+            assertThrows(ConflictoAgendaException.class, () -> alta(destino, INICIO, 30));
+            assertThrows(TurnoOcupanteException.class, () -> bloqueos.crear(RECEPCION,
+                    new RecursosBloqueo(destino.profesional(), destino.sillon()),
+                    new PeriodoBloqueo(INICIO, original.fin())));
+        }
+        var otroTurno = alta(datos, original.fin().plusSeconds(600), 30);
+        assertThrows(ConflictoAgendaException.class, () -> mover(otroTurno, INICIO));
+    }
+
+    @Test
+    void registraYListaConfirmacionesSoloParaRecepcion() {
+        var otro = alta(nuevosDatos(), DESTINO, 30);
+        var simultaneo = alta(nuevosDatos(), INICIO, 30);
+        var vencido = alta(nuevosDatos(), INICIO.minusSeconds(60), 30);
+        AHORA.set(vencido.inicio());
+        var controlados = List.of(original, simultaneo, otro, vencido);
+        var esperados = new java.util.ArrayList<>(List.of(original, simultaneo));
+        esperados.sort(java.util.Comparator.comparing(turno -> turno.id().toString()));
+        esperados.add(otro);
+        assertEquals(esperados, agenda.consultarPendientes(RECEPCION).stream()
+                .filter(controlados::contains).toList());
+        var odontologo = identidad(Rol.ODONTOLOGO, datos.profesional());
+        assertThrows(AutorizacionDenegadaException.class, () -> agenda.consultarPendientes(odontologo));
+        assertThrows(AutorizacionDenegadaException.class,
+                () -> agenda.confirmar(odontologo, original.id(), original.version()));
+        assertThrows(IllegalArgumentException.class, () -> confirmar(vencido));
+        assertThrows(IllegalArgumentException.class, () -> agenda.confirmar(RECEPCION, UUID.randomUUID(), "0"));
+        assertThrows(IllegalArgumentException.class, () -> agenda.confirmar(RECEPCION, original.id(), ""));
+
+        var confirmado = confirmar(original);
+        assertEquals("CONFIRMADO", confirmado.estado().name());
+        assertEquals("1", confirmado.version());
+        assertEquals(confirmado, consultar(original));
+        assertTrue(agenda.consultarPendientes(RECEPCION).stream().noneMatch(t -> t.id().equals(original.id())));
+        assertThrows(VersionTurnoDesactualizadaException.class, () -> confirmar(original));
+        var repetido = assertThrows(IllegalArgumentException.class, () -> confirmar(confirmado));
+        assertTrue(repetido.getMessage().contains("ya está confirmado"));
+        assertEquals(confirmado, consultar(original));
+        var cancelado = cancelar(RECEPCION, otro);
+        assertThrows(IllegalArgumentException.class, () -> confirmar(cancelado));
+        assertTrue(agenda.consultarPendientes(RECEPCION).stream().noneMatch(t -> t.id().equals(otro.id())));
+    }
+
+    @Test
+    void recepcionPuedeMoverOCancelarUnConfirmado() {
+        var confirmado = confirmar(original);
+        var odontologo = identidad(Rol.ODONTOLOGO, datos.profesional());
+        asignaciones.asignar(RECEPCION, datos.paciente(), datos.profesional());
+        assertThrows(IllegalArgumentException.class, () -> cancelar(odontologo, confirmado));
+        assertThrows(IllegalArgumentException.class, () -> agenda.reprogramar(odontologo,
+                new SolicitudReprogramacion(confirmado.id(), confirmado.version(), DESTINO,
+                        confirmado.profesionalId(), confirmado.sillonId())));
+        assertEquals(confirmado, mover(confirmado, INICIO));
+        var ocupado = alta(datos, DESTINO, 30);
+        assertThrows(ConflictoAgendaException.class, () -> mover(confirmado, ocupado.inicio()));
+        assertEquals(confirmado, consultar(original));
+        var movido = mover(confirmado, DESTINO.plusSeconds(3600));
+        assertEquals("PENDIENTE", movido.estado().name());
+        assertEquals("2", movido.version());
+        var cancelado = cancelar(RECEPCION, confirmar(movido));
+        assertEquals("CANCELADO", cancelado.estado().name());
+        assertEquals("4", cancelado.version());
+        assertEquals(movido.inicio(), alta(datos, movido.inicio(), 30).inicio());
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"confirmar", "cancelar", "mover"})
+    void confirmacionCompitePorLaMismaVersion(String operacion) throws Exception {
+        var carrera = competir(() -> confirmar(original), () -> switch (operacion) {
+            case "cancelar" -> cancelar(RECEPCION, original);
+            case "mover" -> mover(original, DESTINO);
+            default -> confirmar(original);
+        }, false, resultado -> {});
+        assertInstanceOf(VersionTurnoDesactualizadaException.class, carrera.error());
+        assertEquals(carrera.primera(), consultar(original));
+    }
+
+    @Test
+    void confirmacionRevertidaPermiteReintentarConLaMismaVersion() throws Exception {
+        var carrera = competir(() -> confirmar(original), () -> confirmar(original), true, resultado -> {});
+        assertNull(carrera.error());
+        assertEquals(carrera.segunda(), consultar(original));
+    }
+
+    @Test
+    void confirmacionRevalidaElInicioTrasEsperarLaFila() throws Exception {
+        var carrera = competir(() -> {
+            jdbc.queryForObject("select id from odontologia.turno where id = ? for no key update",
+                    UUID.class, original.id());
+            return original;
+        }, () -> confirmar(original), false, resultado -> AHORA.set(INICIO));
+        assertInstanceOf(IllegalArgumentException.class, carrera.error());
+        assertEquals(original, consultar(original));
+    }
+
+    private static TurnoRegistrado confirmar(TurnoRegistrado turno) {
+        return agenda.confirmar(RECEPCION, turno.id(), turno.version());
+    }
+
     private void assertCancelado(TurnoRegistrado cancelado) {
         assertNotNull(cancelado);
         assertEquals("CANCELADO", cancelado.estado().name());

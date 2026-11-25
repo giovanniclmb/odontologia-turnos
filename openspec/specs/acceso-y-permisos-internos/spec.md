@@ -45,7 +45,7 @@ El sistema SHALL autenticar a un usuario interno a partir de su identificador y 
 - **THEN** el sistema rechaza la autenticación con el mismo error genérico
 
 ### Requirement: Catálogo de permisos por operación
-El sistema SHALL definir los siguientes permisos nombrados para operaciones del equipo: `turno:crear`, `turno:reprogramar`, `turno:cancelar`, `agenda-sillon:consultar`, `bloqueo:crear`, `ficha:leer`, `ficha:editar`, `confirmacion:registrar`, `pendientes:consultar`, `paciente:datos-admin`, `config:intervalo`, `config:recursos`, `usuario:crear/asignar` y `paciente:eliminar`. Cada recurso protegido SHALL verificar el permiso correspondiente antes de ejecutar la operación. El permiso `paciente:datos-admin` SHALL estar concedido a recepción y odontología, sujeto al alcance por registro definido para cada rol; `paciente:eliminar` SHALL permanecer denegado.
+El sistema SHALL definir los siguientes permisos nombrados para operaciones del equipo: `turno:crear`, `turno:reprogramar`, `turno:cancelar`, `agenda-sillon:consultar`, `bloqueo:crear`, `ficha:leer`, `ficha:editar`, `confirmacion:registrar`, `pendientes:consultar`, `paciente:datos-admin`, `config:intervalo`, `config:recursos`, `usuario:crear/asignar` y `paciente:eliminar`. Cada recurso protegido SHALL verificar el permiso correspondiente antes de ejecutar la operación. El permiso `paciente:datos-admin` SHALL estar concedido a recepción y odontología, sujeto al alcance por registro definido para cada rol; `paciente:eliminar` SHALL permanecer denegado. Los permisos `pendientes:consultar` y `confirmacion:registrar` SHALL concederse exclusivamente a recepción.
 
 #### Scenario: Permiso concedido
 - **WHEN** una identidad con el permiso requerido solicita la operación protegida
@@ -78,6 +78,10 @@ El sistema SHALL definir los siguientes permisos nombrados para operaciones del 
 #### Scenario: Eliminación del paciente denegada
 - **WHEN** una identidad de recepción u odontología solicita eliminar un paciente
 - **THEN** el sistema deniega la operación
+
+#### Scenario: Permisos de seguimiento manual
+- **WHEN** se evalúan los permisos de listado de pendientes y registro manual de confirmación
+- **THEN** recepción tiene ambos permisos y odontología carece de ambos
 
 ### Requirement: Separación clínica entre recepción y odontólogo
 El sistema SHALL permitir que recepción lea la ficha clínica de cualquier paciente del sitio y que odontología lea y edite antecedentes de pacientes asignados a su profesional. Solo el odontólogo autor SHALL poder editar una nota clínica, y SHALL estar asignado al paciente al momento de la edición. El sistema SHALL denegar a recepción toda edición clínica. Estas restricciones SHALL verificarse en el backend, no solo en la interfaz.

@@ -17,6 +17,6 @@ class ConsultaTurnosPersistidos implements ConsultaTurnosOcupantes {
     @Override
     public boolean existeConflicto(RecursosBloqueo recursos, PeriodoBloqueo periodo) {
         return turnos.existeOcupante(recursos.profesionalId(), recursos.sillonId(), periodo.inicio(), periodo.fin(),
-                EstadoTurno.PENDIENTE);
+                EstadoTurno.OCUPANTES);
     }
 }

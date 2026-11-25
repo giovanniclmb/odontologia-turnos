@@ -50,7 +50,7 @@ public class EdicionesTurnoPersistidas {
         return jdbc.sql("""
                 update odontologia.turno t
                 set profesional_id = :profesional, sillon_id = :sillon,
-                    inicio = :inicio, fin = :fin, version = t.version + 1
+                    inicio = :inicio, fin = :fin, estado = 'PENDIENTE', version = t.version + 1
                 where t.id = :id and t.version = :version
                 returning
                 """ + COLUMNAS)
@@ -64,15 +64,17 @@ public class EdicionesTurnoPersistidas {
                 .optional();
     }
 
-    public Optional<TurnoLeido> cancelar(UUID id, long version) {
+    public Optional<TurnoLeido> cambiarEstado(UUID id, long version, EstadoTurno origen, EstadoTurno destino) {
         return jdbc.sql("""
                 update odontologia.turno t
-                set estado = 'CANCELADO', version = t.version + 1
-                where t.id = :id and t.version = :version and t.estado = 'PENDIENTE'
+                set estado = :destino, version = t.version + 1
+                where t.id = :id and t.version = :version and t.estado = :origen
                 returning
                 """ + COLUMNAS)
                 .param("id", id)
                 .param("version", version)
+                .param("origen", origen.name())
+                .param("destino", destino.name())
                 .query(EdicionesTurnoPersistidas::leer)
                 .optional();
     }
