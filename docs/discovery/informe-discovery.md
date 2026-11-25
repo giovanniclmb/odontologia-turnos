@@ -610,7 +610,7 @@ La consigna exige que los integrantes comprueben personalmente al menos cinco fu
 
 ### Segunda comprobación del agente (25/11/2026)
 
-El agente volvió a abrir las ocho fuentes anteriores en un navegador y contrastó el texto publicado ese día con este informe. Tampoco sustituye la revisión personal, que sigue pendiente. Una diferencia puede deberse a una omisión del relevamiento o a un cambio de la página posterior al 17/11/2026; salvo indicación, no se distingue cuál. Las fichas, las matrices y los puntajes se conservan sin recalcular: aplicar cada corrección queda sujeto a la decisión del equipo (Continuar / Ajustar).
+El agente intentó volver a abrir en un navegador las ocho fuentes anteriores y contrastó con este informe el texto publicado ese día en las siete que respondieron. Tampoco sustituye la revisión personal, que sigue pendiente. Una diferencia puede deberse a una omisión del relevamiento o a un cambio de la página posterior al 17/11/2026; salvo indicación, no se distingue cuál. Las fichas, las matrices y los puntajes se conservan sin recalcular: aplicar cada corrección queda sujeto a la decisión del equipo (Continuar / Ajustar).
 
 | Fuente | Resultado | Diferencia o detalle |
 |---|---|---|
