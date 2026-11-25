@@ -151,3 +151,11 @@ La migración es nueva y consecutiva (V9), coordinada con el historial integrado
 **Alternativas presentadas**: redirigir a una dirección de prueba; contenido sin datos personales o con códigos de prestación y profesional; enlace a la API o página mínima en C-19; no enviar con menos de 48 horas; solo el alta; vista de fallos para recepción o reenvío posterior; enviar mensajes desactualizados.
 
 **Límite**: Giovanni aprobó la propuesta y su implementación el 25/11/2026. Autorizó además un único envío real de prueba el mismo día y confirmó su recepción. [Change](../openspec/changes/archive/2026-11-25-email-al-crear-turno/proposal.md)
+
+## DD-20 — Recordatorio de 24 horas (C-20, 25/11/2026)
+
+**Contexto**: RN-EM-02 fija el recordatorio, sin programación, bordes ni tratamiento de fallos. **Decisión** (Giovanni, por menú): revisión periódica en el backend cada minuto; envío atrasado mientras el turno no haya comenzado; sin recordatorio para horarios fijados con menos de 24 horas; turnos pendientes y confirmados; nombre, fecha y hora de Mendoza y aclaración de que ya no puede cancelarse por enlace; ante fallos agotados, solo registrar; envío automático apagado por defecto.
+
+**Alternativas presentadas**: temporizador por turno o proceso externo; atraso limitado a 12 horas o sin recuperación; recordar también los horarios cercanos; reintentar más tarde; solo pendientes; pedir aviso al consultorio u omitir la cancelación; encendido por defecto.
+
+**Límite**: Giovanni aprobó la propuesta y su implementación el 25/11/2026. Autorizó además un único envío real de prueba el mismo día y confirmó su recepción. [Change](../openspec/changes/archive/2026-11-25-recordatorio-automatico-24-horas/proposal.md)

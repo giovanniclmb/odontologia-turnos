@@ -124,3 +124,10 @@ Estas decisiones cierran PA-05/06/07 únicamente para el alcance de C-04; no res
 - **PA-17 — entrega del enlace:** URL base configurable con el token después de `#`; la página corresponde a C-23.
 - **PA-18 — email de alta y reprogramación:** se envía en ambas; con menos de 48 horas, sin enlace. Un fallo agotado solo se registra; no hay reenvío posterior. Un mensaje desactualizado antes del envío se descarta. La repetición del mismo aviso se deduplica.
 - El recordatorio y su programación siguen abiertos para C-20.
+
+## Resolución acotada para C-20 (25/11/2026)
+
+- **PA-18 — programación:** el backend revisa cada minuto los turnos a 24 horas o menos; si estaba apagado, envía al volver mientras el turno no haya comenzado. El envío automático se activa por configuración y está apagado por defecto.
+- **PA-18 — cambios y altas cercanas:** reciben recordatorio los turnos pendientes y confirmados. Un horario creado o reprogramado con menos de 24 horas no lo recibe.
+- **PA-18 — contenido y fallos:** nombre, fecha y hora de Mendoza y la aclaración de que ya no puede cancelarse por enlace, al email de la ficha. Un fallo agotado solo se registra.
+- Las precisiones sobre cada punto constan en la [propuesta de C-20](../openspec/changes/archive/2026-11-25-recordatorio-automatico-24-horas/proposal.md), aprobada el 25/11/2026.
