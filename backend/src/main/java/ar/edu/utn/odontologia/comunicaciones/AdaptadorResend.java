@@ -2,6 +2,7 @@ package ar.edu.utn.odontologia.comunicaciones;
 
 import ar.edu.utn.odontologia.comunicaciones.persistencia.EmailEnvio;
 import ar.edu.utn.odontologia.comunicaciones.persistencia.EmailsEnviados;
+import java.io.InputStream;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -178,7 +179,10 @@ public class AdaptadorResend implements CorreoSalida {
                 .header("Idempotency-Key", idempotencyKey)
                 .POST(HttpRequest.BodyPublishers.ofString(json, StandardCharsets.UTF_8))
                 .build();
-        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+        // El tiempo de espera del pedido cubre hasta recibir el estado, no el cuerpo. Como solo se usa el estado,
+        // la respuesta se descarta sin esperarla: un cuerpo que no termina no puede retener el envío.
+        HttpResponse<InputStream> response = httpClient.send(request, HttpResponse.BodyHandlers.ofInputStream());
+        response.body().close();
         int status = response.statusCode();
         if (status >= 200 && status < 300) {
             return new HttpResultado(true, null);
