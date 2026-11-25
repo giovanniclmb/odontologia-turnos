@@ -38,6 +38,29 @@ jobs:
       - name: Compilar y ejecutar pruebas
         run: mvn --batch-mode --no-transfer-progress -f backend/pom.xml clean verify
 
+  frontend-verify:
+    name: frontend-verify
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - name: Obtener el código
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - name: Preparar Node 24
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - name: Instalar dependencias fijadas
+        run: npm ci
+      - name: Verificar regresiones y compilar
+        run: npm test
+
   roadmap-assignment-tests:
     name: roadmap-assignment-tests
     runs-on: ubuntu-24.04

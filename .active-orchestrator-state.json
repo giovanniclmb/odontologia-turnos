@@ -938,5 +938,13 @@
       "observation_id": 40,
       "topic_key": "foundation/agents-rule-confirmation"
     }
+  },
+  "visual_design": {
+    "created_by": "design-system",
+    "mode": "system-and-mockups",
+    "status": "approved",
+    "revision": 1,
+    "path": "design-system/README.md",
+    "approved_at": "2026-11-23"
   }
 }

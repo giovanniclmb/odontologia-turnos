@@ -43,7 +43,7 @@ class PacientesServiciosIT {
             var entorno = new StandardEnvironment();
             entorno.getPropertySources().remove(StandardEnvironment.SYSTEM_ENVIRONMENT_PROPERTY_SOURCE_NAME);
             entorno.getPropertySources().remove(StandardEnvironment.SYSTEM_PROPERTIES_PROPERTY_SOURCE_NAME);
-            contexto = new SpringApplicationBuilder(OdontologiaApplication.class).web(WebApplicationType.NONE)
+            contexto = new SpringApplicationBuilder(OdontologiaApplication.class).web(WebApplicationType.NONE).properties("spring.main.web-application-type=none")
                     .environment(entorno)
                     .initializers(c -> c.getEnvironment().getPropertySources()
                             .addFirst(new MapPropertySource("postgresTemporal", propiedades)))

@@ -82,7 +82,7 @@ class BootstrapPersistenciaIT {
         environment.getPropertySources().remove(org.springframework.core.env.StandardEnvironment.SYSTEM_ENVIRONMENT_PROPERTY_SOURCE_NAME);
         environment.getPropertySources().remove(org.springframework.core.env.StandardEnvironment.SYSTEM_PROPERTIES_PROPERTY_SOURCE_NAME);
         return new org.springframework.boot.builder.SpringApplicationBuilder(JpaConfiguration.class)
-                .web(org.springframework.boot.WebApplicationType.NONE).environment(environment)
+                .web(org.springframework.boot.WebApplicationType.NONE).properties("spring.main.web-application-type=none").environment(environment)
                 .initializers(c -> c.getEnvironment().getPropertySources().addFirst(new org.springframework.core.env.MapPropertySource("postgresTemporal", props)))
                 .run("--spring.config.location=classpath:/application.yaml");
     }
