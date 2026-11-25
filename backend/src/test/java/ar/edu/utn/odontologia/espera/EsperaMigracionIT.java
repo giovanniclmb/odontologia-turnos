@@ -21,10 +21,10 @@ import org.springframework.core.env.StandardEnvironment;
 
 class EsperaMigracionIT {
     @Test
-    void actualizaV11YConservaReferenciasAlPersistirFranjas() throws Exception {
+    void actualizaV14YConservaReferenciasAlPersistirFranjas() throws Exception {
         try (var db = PostgresFixture.start()) {
             Flyway.configure().dataSource(db.jdbcUrl(), "odonto_migrator", db.migrationPassword())
-                    .schemas("odontologia").createSchemas(false).target("11").load().migrate();
+                    .schemas("odontologia").createSchemas(false).target("14").load().migrate();
             UUID paciente = insertarPaciente(db);
             UUID prestacion = UUID.randomUUID();
             try (var con = db.appConnection(); var sql = con.prepareStatement(
