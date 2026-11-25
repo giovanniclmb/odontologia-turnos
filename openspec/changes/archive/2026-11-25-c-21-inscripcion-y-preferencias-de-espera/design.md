@@ -12,9 +12,9 @@ La gestión se expone como servicio de aplicación consumible por el backend, co
 
 - Recibir la identidad autenticada de C-16 y exigir el vínculo antes de acceder a los datos. Derivar el dueño de esa identidad y buscar por identificador y paciente. Devolver el mismo resultado de ausencia ante un identificador inexistente o ajeno. Usar DTOs del servicio separados de las entidades JPA.
 - Persistir una fila por inscripción con UUID, referencia de paciente, prestación, profesional nullable, fechas y marca de baja. Guardar las franjas como filas dependientes y reemplazarlas en la misma transacción al editar. Usar claves foráneas, restricciones para rangos ordenados e índice por paciente y prestación.
-- Calcular la vigencia con la fecha local obtenida del reloj inyectable. Se propone usar `America/Argentina/Buenos_Aires` para la sede y conservar UTC para instantes. La fecha final es inclusiva. Dar de baja mediante una marca persistida conserva el registro consultable. Reservar un cupo desde el alta abarca también los rangos que empiezan en el futuro.
+- Calcular la vigencia con la fecha local obtenida del reloj inyectable. Se usa `America/Argentina/Buenos_Aires` para la sede y se conserva UTC para instantes; agenda y emails usan `America/Argentina/Mendoza`, que hoy da la misma fecha. Giovanni eligió mantener la zona el 25/11/2026. La fecha final es inclusiva. Dar de baja mediante una marca persistida conserva el registro consultable. Reservar un cupo desde el alta abarca también los rangos que empiezan en el futuro.
 - Serializar altas, ediciones y bajas del mismo paciente mediante un bloqueo pesimista de su fila persistida. Adquirirlo antes de leer la inscripción, calcular la fecha local y verificar el límite en la misma transacción. Una restricción única que dependa de la fecha actual requeriría materializar el vencimiento. Calcularlo al operar permite reutilizar el cupo en el cambio de día sin coordinación con un proceso programado.
-- Validar las referencias contra C-05 y las franjas como pares de horas locales del mismo día. Se propone admitir una única fecha, franjas múltiples y el cambio de prestación durante la edición. La validación de una inscripción se limita a la integridad de sus preferencias.
+- Validar las referencias contra C-05 y las franjas como pares de horas locales del mismo día. Se admiten una única fecha, franjas múltiples y el cambio de prestación durante la edición (confirmado por Giovanni el 25/11/2026). La validación de una inscripción se limita a la integridad de sus preferencias.
 
 ## Risks / Trade-offs
 
@@ -24,4 +24,4 @@ La gestión se expone como servicio de aplicación consumible por el backend, co
 
 ## Migration Plan
 
-La migración Flyway V12 crea las tablas e índices de espera con referencias a las tablas vigentes. Se verifica el arranque limpio y la actualización desde V11. Una reversión de la aplicación que conserve los datos requiere una versión compatible con el historial V12, porque la validación estricta de Flyway rechaza un historial con una versión desconocida.
+La migración Flyway V15 crea las tablas e índices de espera con referencias a las tablas vigentes. Se verifica el arranque limpio y la actualización desde V14. Una reversión de la aplicación que conserve los datos requiere una versión compatible con el historial V15, porque la validación estricta de Flyway rechaza un historial con una versión desconocida.

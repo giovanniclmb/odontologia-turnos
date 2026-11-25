@@ -159,3 +159,11 @@ La migración es nueva y consecutiva (V9), coordinada con el historial integrado
 **Alternativas presentadas**: temporizador por turno o proceso externo; atraso limitado a 12 horas o sin recuperación; recordar también los horarios cercanos; reintentar más tarde; solo pendientes; pedir aviso al consultorio u omitir la cancelación; encendido por defecto.
 
 **Límite**: Giovanni aprobó la propuesta y su implementación el 25/11/2026. Autorizó además un único envío real de prueba el mismo día y confirmó su recepción. [Change](../openspec/changes/archive/2026-11-25-recordatorio-automatico-24-horas/proposal.md)
+
+## DD-21 — Lista de espera y acceso del paciente (C-21, 25/11/2026)
+
+**Contexto**: C-21 llegó implementado sin constancia de quién había aprobado su ciclo, y sin transporte HTTP en C-16, C-21 ni la ficha de C-24. **Decisión** (Giovanni, por menú): confirmar operaciones propias, una inscripción vigente por prestación, vencimiento por fin de rango o baja, rango de un día, varias franjas y cambio de prestación; mantener la zona `America/Argentina/Buenos_Aires` en la vigencia; sumar a C-24 las rutas HTTP y el ingreso del paciente.
+
+**Alternativas presentadas**: consultar antes a Sofia o cambiar alguna regla; usar la zona de Mendoza; anotar el transporte como pendiente o implementarlo en el mismo PR.
+
+**Límite**: no aprueba el diseño de autenticación ni implementar C-24. [Change](../openspec/changes/archive/2026-11-25-c-21-inscripcion-y-preferencias-de-espera/proposal.md)

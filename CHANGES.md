@@ -368,7 +368,7 @@ El 25/11/2026 Giovanni reasignó expresamente C-19 y C-20 de Fabi a sí mismo. S
   - [Preguntas abiertas](knowledge-base/10_preguntas_abiertas.md)
 
 ### [C-21] `inscripcion-y-preferencias-de-espera`
-- **Estado**: `[x]` implementado, verificado localmente y archivado en OpenSpec. Migración V12, titularidad, vigencia y concurrencia verificadas con PostgreSQL 18.7. [Tareas y evidencia](openspec/changes/archive/2026-11-25-c-21-inscripcion-y-preferencias-de-espera/tasks.md)
+- **Estado**: `[x]` implementado, verificado y archivado en OpenSpec el 25/11/2026. Migración V15, titularidad, vigencia y concurrencia verificadas con PostgreSQL 18.7 sobre `main` actualizado. Pendiente de integración mediante el [PR #48](https://github.com/giovanniclmb/odontologia-turnos/pull/48). [Tareas y evidencia](openspec/changes/archive/2026-11-25-c-21-inscripcion-y-preferencias-de-espera/tasks.md) · [Issue #22](https://github.com/giovanniclmb/odontologia-turnos/issues/22).
 - **Responsable**: Sofia
 - **Scope**: Gestión backend de inscripción propia para US-014 y RN-LE-01.
   - C-16 define la autorización por vínculo y titularidad. Para C-21 se aprobó crear, consultar, editar y dar de baja inscripciones propias, con una vigente por prestación y fin de vigencia al finalizar el rango de fechas o al darla de baja. C-22 resuelve la compatibilidad exacta de huecos y la asignación.
@@ -416,7 +416,7 @@ El 25/11/2026 Giovanni reasignó expresamente C-19 y C-20 de Fabi a sí mismo. S
   - [Preguntas abiertas](knowledge-base/10_preguntas_abiertas.md)
 
 ### [C-20] `recordatorio-automatico-24-horas`
-- **Estado**: `[x]` implementado, verificado y archivado en OpenSpec el 25/11/2026, con revisión independiente atendida y un envío real de prueba recibido. Pendiente de integración. [Verificación](openspec/changes/archive/2026-11-25-recordatorio-automatico-24-horas/verify.md) · [Issue #21](https://github.com/giovanniclmb/odontologia-turnos/issues/21).
+- **Estado**: `[x]` implementado, verificado y archivado en OpenSpec el 25/11/2026, con revisión independiente atendida y un envío real de prueba recibido. Integrado el 25/11/2026 mediante el [PR #51](https://github.com/giovanniclmb/odontologia-turnos/pull/51). [Verificación](openspec/changes/archive/2026-11-25-recordatorio-automatico-24-horas/verify.md) · [Issue #21](https://github.com/giovanniclmb/odontologia-turnos/issues/21).
 - **Responsable**: Giovanni
 - **Scope**: Recordatorio de US-012 y RN-EM-02, separado de confirmaciones manuales.
   - Resolver PA-18: programación y referencia horaria, reprogramaciones, cancelaciones, altas cercanas, fallos y duplicados. Acordar tecnología antes de implementar.
@@ -535,6 +535,7 @@ La política visual sigue diferida: resolverla antes de Apply y cumplir las apro
 - **Estado**: `[ ]` pendiente
 - **Responsable**: Sofia
 - **Scope**: Acceso y gestión visual de la inscripción propia para US-014.
+  - Incorporar en el backend las rutas HTTP y el ingreso del paciente que consumen C-16 y C-21, antes de la interfaz; acordar autenticación y sesión en la propuesta, antes de implementar ([decisión del 25/11/2026](knowledge-base/09_decisiones_y_supuestos.md#dd-21--lista-de-espera-y-acceso-del-paciente-c-21-25112026)).
   - Resolver el gate visual y consumir ingreso/vínculo de C-16 y operaciones C-21; no redefinir registro o permisos desde la UI.
   - Presentar prestación, fechas, franjas y profesional opcional. Mostrar que la inscripción recibe avisos y no reserva el hueco.
   - Tests: acceso propio, preferencias y errores aprobados; comprobar que controles visuales y backend respetan el mismo contrato. Reutilizar frontend vanilla y base de C-10.

@@ -131,3 +131,13 @@ Estas decisiones cierran PA-05/06/07 únicamente para el alcance de C-04; no res
 - **PA-18 — cambios y altas cercanas:** reciben recordatorio los turnos pendientes y confirmados. Un horario creado o reprogramado con menos de 24 horas no lo recibe.
 - **PA-18 — contenido y fallos:** nombre, fecha y hora de Mendoza y la aclaración de que ya no puede cancelarse por enlace, al email de la ficha. Un fallo agotado solo se registra.
 - Las precisiones sobre cada punto constan en la [propuesta de C-20](../openspec/changes/archive/2026-11-25-recordatorio-automatico-24-horas/proposal.md), aprobada el 25/11/2026.
+
+## Resolución acotada para C-21 (25/11/2026)
+
+Confirmada por Giovanni por menú al revisar el [PR #48](https://github.com/giovanniclmb/odontologia-turnos/pull/48).
+
+- **PA-20 — ciclo de la inscripción:** el paciente vinculado crea, consulta, edita y da de baja sus inscripciones; hay una vigente por prestación; vence al terminar el rango de fechas o con la baja.
+- **PA-20 — preferencias:** se admite un rango de un solo día, varias franjas y cambiar la prestación al editar.
+- **Referencia horaria:** la vigencia usa `America/Argentina/Buenos_Aires`. Agenda y emails siguen en `America/Argentina/Mendoza`; hoy ambas dan la misma fecha.
+- **Acceso del paciente por HTTP:** las rutas y el ingreso se suman a C-24. El diseño de autenticación y sesión se acuerda en su propuesta.
+- La compatibilidad de huecos, los avisos y la asignación siguen pendientes para C-22.

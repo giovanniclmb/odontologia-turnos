@@ -25,3 +25,6 @@
 - La ejecución completa con Maven `verify` aprobó 132 pruebas unitarias y 187 de 191 pruebas de integración. `ArranqueJarIT` y `BootstrapMavenIT` agotaron la espera de sus procesos de arranque. `BootstrapCliIT` y un caso de `ConfiguracionRecursosIT` agotaron la espera de PostgreSQL en Testcontainers.
 - En la repetición focalizada pasaron el JAR, el bootstrap Maven y el caso de configuración de recursos. `BootstrapCliIT` llegó al arranque del proceso Java hijo y agotó su espera de 45 segundos.
 - `BootstrapCliIT` pasó al ejecutarse de forma aislada. Las 191 pruebas de integración pasaron entre la ejecución completa y las repeticiones focalizadas.
+- 25/11/2026, tras integrar `main` y renumerar la migración a V15: `mvn -f backend/pom.xml clean verify` pasó 161 pruebas unitarias y 331 de integración en una sola corrida, incluida la actualización desde V14. Las pruebas del roadmap pasaron y las specs validan en modo estricto.
+- En una revisión posterior del PR, quitar el bloqueo del paciente en una copia temporal hizo fallar la prueba de concurrencia en 5 de 5 corridas. Las reglas fueron [confirmadas por Giovanni](../../../../knowledge-base/10_preguntas_abiertas.md#resolución-acotada-para-c-21-25112026) ese día.
+- Límite: C-21 expone un servicio interno; el transporte HTTP del paciente pasa a C-24.
