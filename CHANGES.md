@@ -366,10 +366,10 @@ Giovanni aprobó el reparto el 19/11/2026. Las ondas preservan las dependencias 
   - [Preguntas abiertas](knowledge-base/10_preguntas_abiertas.md)
 
 ### [C-21] `inscripcion-y-preferencias-de-espera`
-- **Estado**: `[ ]` pendiente
+- **Estado**: `[x]` implementado, verificado localmente y archivado en OpenSpec. Migración V12, titularidad, vigencia y concurrencia verificadas con PostgreSQL 18.7. [Tareas y evidencia](openspec/changes/archive/2026-11-25-c-21-inscripcion-y-preferencias-de-espera/tasks.md)
 - **Responsable**: Sofia
 - **Scope**: Gestión backend de inscripción propia para US-014 y RN-LE-01.
-  - Resolver PA-16/PA-20: ciclo y vigencia de inscripción, operaciones autorizadas y criterios de compatibilidad. No inventar vencimientos, prioridad o cantidad de inscripciones.
+  - C-16 define la autorización por vínculo y titularidad. Para C-21 se aprobó crear, consultar, editar y dar de baja inscripciones propias, con una vigente por prestación y fin de vigencia al finalizar el rango de fechas o al darla de baja. C-22 resuelve la compatibilidad exacta de huecos y la asignación.
   - Implementar el contrato y representación aprobados para prestación, rango de fechas y franjas horarias, con profesional opcional; proteger cada operación mediante C-16.
   - Tests: preferencias válidas e inválidas según spec, profesional omitido y acceso propio/ajeno; mantener separada la inscripción de una reserva.
 - **Dependencias**: C-16, C-05
