@@ -215,6 +215,8 @@ select.input { appearance: auto; }
 .state-title { font-weight: var(--font-weight-semibold); margin-bottom: var(--space-1); }
 .skeleton { height: 3.5rem; margin-bottom: var(--space-2); border-radius: var(--radius-sm); background: var(--color-divider); }
 @media (max-width: 1100px) { .week { grid-template-columns: minmax(0, 1fr); gap: var(--space-4); } .week .slot { font-size: var(--text-sm); } }
+/* Con la barra lateral, las cuatro columnas no entran: campos en una fila y botones en la siguiente. */
+@media (max-width: 1100px) { .toolbar { grid-template-columns: minmax(0, 1fr) auto; } }
 @media (max-width: 768px) {
   .toolbar { grid-template-columns: minmax(0, 1fr); }
   .segmented .btn, .stepper .btn { flex: 1; }
