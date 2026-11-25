@@ -16,7 +16,7 @@
 
 El producto conserva HTML/CSS/TypeScript vanilla, Java Spring Boot y PostgreSQL. La fecha académica es 25/11/2026, con presupuesto externo cero y cuatro integrantes según autorización docente informada por el usuario. El reparto aprobado el 19/11/2026 asigna los 25 changes a Giovanni, Sofia, Luciano y Fabi. Los responsables y once ondas orientativas se registran abajo y en el plan de colaboración; PA-10 conserva únicamente los pendientes de defensa y respaldo académico.
 
-El backlog completo no es un compromiso de implementar las 25 fichas para esa fecha. La consigna exige un único change con reglas verificables y ciclo OPSX completo. Giovanni eligió C-01 y aprobó su propuesta y aplicación; su dominio está implementado y verificado en la rama de trabajo, archivado e integrado en main. Los demás items describen cómo extender el MVP después.
+El backlog completo no es un compromiso de implementar las 25 fichas para esa fecha. La consigna exige un único change con reglas verificables y ciclo OPSX completo. Giovanni eligió C-01 y aprobó su propuesta y aplicación; su dominio está implementado, verificado, archivado e integrado en main. Los demás items extienden el MVP y su estado consta en cada ficha.
 
 Se reutilizan OpenSpec, Git, Discovery y KB ya preparados; no se agregan fichas para reinstalarlos. C-01 incluye únicamente el build y las pruebas mínimos que faltan para ejecutar su módulo de dominio. La persistencia y el acceso protegido se incorporan después, sin presentar el módulo aislado como aplicación desplegada.
 
@@ -40,9 +40,11 @@ La revisión 2 aprobada incorpora paciente, email real de prueba, lista de esper
 
 Los niveles CRITICO y ALTO requieren respetar la gobernanza del proyecto y las aprobaciones específicas antes de código o configuración afectada. Generar este roadmap no aprueba esos cambios de implementación.
 
+La tabla conserva las condiciones planteadas al preparar el roadmap. Las resoluciones posteriores constan en la [KB 09](knowledge-base/09_decisiones_y_supuestos.md) y la [KB 10](knowledge-base/10_preguntas_abiertas.md).
+
 ## Árbol de dependencias
 
-Dependencias completas en la tabla y en cada ficha. C-01 está implementado y verificado, archivado e integrado en main; C-02 está implementado, verificado, archivado e integrado en main local; los demás items siguen pendientes. Se conservan C-01 a C-14 y se añaden C-15 a C-25; el orden numérico no sustituye las dependencias.
+Dependencias completas en la tabla y en cada ficha. Al 25/11/2026, C-01 a C-12 y C-15 a C-21 están implementados, archivados e integrados en main; siguen pendientes C-13, C-14 y C-22 a C-25. El estado de cada item consta en su ficha. Se conservan C-01 a C-14 y se añaden C-15 a C-25; el orden numérico no sustituye las dependencias.
 
 ```text
 C-01
@@ -180,7 +182,7 @@ El 25/11/2026 Giovanni reasignó expresamente C-19 y C-20 de Fabi a sí mismo. S
   - [10 Preguntas abiertas](knowledge-base/10_preguntas_abiertas.md) §PA-01, PA-02, PA-04, PA-07, PA-09 y PA-13
 
 ### [C-02] `persistencia-base-postgresql`
-- **Estado**: `[x]` implementado, verificado, archivado e integrado en main local; publicación remota pendiente. [Verify](openspec/changes/archive/2026-11-19-persistencia-base-postgresql/evidence/verify.md). [Issue #3](https://github.com/giovanniclmb/odontologia-turnos/issues/3).
+- **Estado**: `[x]` implementado, verificado, archivado e integrado en main, y publicado en el repositorio remoto. [Verify](openspec/changes/archive/2026-11-19-persistencia-base-postgresql/evidence/verify.md). [Issue #3](https://github.com/giovanniclmb/odontologia-turnos/issues/3).
 - **Responsable**: Giovanni
 - **Scope**: Base mínima de persistencia para extender el dominio, sin implementar la agenda HTTP.
   - Resolver PA-07 y PA-09: versiones de Spring Boot/PostgreSQL, ejecución y estrategia de migraciones; mantener presupuesto externo cero sin elegir hosting o Docker por inferencia.
@@ -339,7 +341,7 @@ El 25/11/2026 Giovanni reasignó expresamente C-19 y C-20 de Fabi a sí mismo. S
 - **Estado**: `[x]` implementado y verificado localmente. La suite integrada `mvn clean verify` pasó 128 pruebas unitarias y 195 de integración con PostgreSQL 18.7; la prueba focalizada de migración C-09 también pasó. Reviewer independiente sin hallazgos. [Verificación](openspec/changes/archive/2026-11-25-c-09-confirmaciones-manuales/verify.md) · [Tareas](openspec/changes/archive/2026-11-25-c-09-confirmaciones-manuales/tasks.md)
 - **Responsable**: Sofia
 - **Scope**: Listado de pendientes y registro manual del seguimiento por recepción. `CONFIRMADO` conserva la ocupación de profesional y sillón; recepción puede cancelar o reprogramar confirmados futuros, y un movimiento efectivo los devuelve a `PENDIENTE`.
-  - Aplicar la [resolución acotada de PA-02 y PA-05](knowledge-base/10_preguntas_abiertas.md#resolución-acotada-para-c-09-24112026) para listado, transición, versiones y alcance por rol.
+  - Aplicar la [resolución acotada de PA-02 y PA-05](knowledge-base/10_preguntas_abiertas.md#resolución-acotada-para-c-09-aprobada-por-giovanni-24112026) para listado, transición, versiones y alcance por rol.
   - Implementar el listado y la operación backend de registro de US-008 y RN-AG-08, con contratos acordados y datos ficticios.
   - Tests: solo aparecen los turnos que cumplen la condición definida, confirmación permitida a recepción y resultados ante errores/duplicación según el spec.
   - Esta ficha conserva el seguimiento manual; los emails automáticos pertenecen a C-17/C-19/C-20/C-22. No añadir WhatsApp ni convertir el recordatorio en confirmación automática.
@@ -368,7 +370,7 @@ El 25/11/2026 Giovanni reasignó expresamente C-19 y C-20 de Fabi a sí mismo. S
   - [Preguntas abiertas](knowledge-base/10_preguntas_abiertas.md)
 
 ### [C-21] `inscripcion-y-preferencias-de-espera`
-- **Estado**: `[x]` implementado, verificado y archivado en OpenSpec el 25/11/2026. Migración V15, titularidad, vigencia y concurrencia verificadas con PostgreSQL 18.7 sobre `main` actualizado. Pendiente de integración mediante el [PR #48](https://github.com/giovanniclmb/odontologia-turnos/pull/48). [Tareas y evidencia](openspec/changes/archive/2026-11-25-c-21-inscripcion-y-preferencias-de-espera/tasks.md) · [Issue #22](https://github.com/giovanniclmb/odontologia-turnos/issues/22).
+- **Estado**: `[x]` implementado, verificado y archivado en OpenSpec el 25/11/2026. Migración V15, titularidad, vigencia y concurrencia verificadas con PostgreSQL 18.7 sobre `main` actualizado. Integrado el 25/11/2026 mediante el [PR #48](https://github.com/giovanniclmb/odontologia-turnos/pull/48). [Tareas y evidencia](openspec/changes/archive/2026-11-25-c-21-inscripcion-y-preferencias-de-espera/tasks.md) · [Issue #22](https://github.com/giovanniclmb/odontologia-turnos/issues/22).
 - **Responsable**: Sofia
 - **Scope**: Gestión backend de inscripción propia para US-014 y RN-LE-01.
   - C-16 define la autorización por vínculo y titularidad. Para C-21 se aprobó crear, consultar, editar y dar de baja inscripciones propias, con una vigente por prestación y fin de vigencia al finalizar el rango de fechas o al darla de baja. C-22 resuelve la compatibilidad exacta de huecos y la asignación.

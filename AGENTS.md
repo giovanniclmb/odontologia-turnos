@@ -11,7 +11,7 @@ Cliente de trabajo: Codex. `AGENTS.md` es la fuente principal de mantenimiento; 
 | Backend | Java 25 y Spring Boot 4.1.2 | Maven, JPA/Hibernate y Flyway aprobados en C-02 |
 | Base de datos | PostgreSQL | 18.7; Compose desarrollo y Testcontainers pruebas |
 
-C-01 y C-02 usan Java 25/Maven en backend/. C-02 incorpora Boot 4.1.2, JPA/Hibernate separado del dominio y Flyway; PostgreSQL 18.7 mediante Compose y pruebas Testcontainers. El backend sigue sin HTTP. Contratos de integración, autenticación, proveedor de email y despliegue productivo siguen pendientes. El frontend es vanilla; no incorporar React, Next.js o shadcn por disponer de sus skills. Presupuesto externo cero.
+C-01 y C-02 usan Java 25/Maven en backend/. C-02 incorpora Boot 4.1.2, JPA/Hibernate separado del dominio y Flyway; PostgreSQL 18.7 mediante Compose y pruebas Testcontainers. Desde C-11 el backend expone HTTP; las decisiones posteriores sobre contratos, autenticación y email constan en las KB 09 y 10. El despliegue productivo sigue pendiente. El frontend es vanilla; no incorporar React, Next.js o shadcn por disponer de sus skills. Presupuesto externo cero.
 
 ## Base de Conocimiento
 

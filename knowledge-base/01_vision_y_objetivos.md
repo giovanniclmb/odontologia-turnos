@@ -4,7 +4,7 @@
 
 Organizar los turnos de un consultorio odontológico de una sede con varios profesionales, evitando solapamientos de profesional y sillón y ayudando a recepción a seguir confirmaciones, inasistencias y cancelaciones.
 
-El usuario eligió ambos problemas como prioritarios, sin ordenarlos entre sí. El MVP incluye una ficha clínica sencilla con antecedentes y notas. Todavía no existe una implementación ni evidencia de reducción efectiva de ausencias.
+El usuario eligió ambos problemas como prioritarios, sin ordenarlos entre sí. El MVP incluye una ficha clínica sencilla con antecedentes y notas. Al consolidar esta KB no existía una implementación; el estado actual consta en el [roadmap](../CHANGES.md). No hay evidencia de reducción efectiva de ausencias.
 
 ## Objetivos por actor
 
