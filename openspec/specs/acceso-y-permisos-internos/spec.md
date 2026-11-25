@@ -45,7 +45,7 @@ El sistema SHALL autenticar a un usuario interno a partir de su identificador y 
 - **THEN** el sistema rechaza la autenticación con el mismo error genérico
 
 ### Requirement: Catálogo de permisos por operación
-El sistema SHALL definir los siguientes permisos nombrados para operaciones del equipo: `turno:crear`, `turno:reprogramar`, `turno:cancelar`, `agenda-sillon:consultar`, `bloqueo:crear`, `ficha:leer`, `ficha:editar`, `confirmacion:registrar`, `pendientes:consultar`, `paciente:datos-admin`, `config:intervalo`, `config:recursos`, `usuario:crear/asignar` y `paciente:eliminar`. Cada recurso protegido SHALL verificar el permiso correspondiente antes de ejecutar la operación. El permiso `paciente:datos-admin` SHALL estar concedido a recepción y odontología, sujeto al alcance por registro definido para cada rol; `paciente:eliminar` SHALL permanecer denegado.
+El sistema SHALL definir los siguientes permisos nombrados para operaciones del equipo: `turno:crear`, `turno:reprogramar`, `turno:cancelar`, `agenda-sillon:consultar`, `bloqueo:crear`, `ficha:leer`, `ficha:editar`, `confirmacion:registrar`, `pendientes:consultar`, `paciente:datos-admin`, `config:intervalo`, `config:recursos`, `usuario:crear/asignar` y `paciente:eliminar`. Cada recurso protegido SHALL verificar el permiso correspondiente antes de ejecutar la operación. El permiso `paciente:datos-admin` SHALL estar concedido a recepción y odontología, sujeto al alcance por registro definido para cada rol; `paciente:eliminar` SHALL permanecer denegado. Los permisos `pendientes:consultar` y `confirmacion:registrar` SHALL concederse exclusivamente a recepción.
 
 #### Scenario: Permiso concedido
 - **WHEN** una identidad con el permiso requerido solicita la operación protegida
@@ -78,6 +78,10 @@ El sistema SHALL definir los siguientes permisos nombrados para operaciones del 
 #### Scenario: Eliminación del paciente denegada
 - **WHEN** una identidad de recepción u odontología solicita eliminar un paciente
 - **THEN** el sistema deniega la operación
+
+#### Scenario: Permisos de seguimiento manual
+- **WHEN** se evalúan los permisos de listado de pendientes y registro manual de confirmación
+- **THEN** recepción tiene ambos permisos y odontología carece de ambos
 
 ### Requirement: Separación clínica entre recepción y odontólogo
 El sistema SHALL permitir que recepción lea la ficha clínica de cualquier paciente del sitio y que odontología lea y edite antecedentes de pacientes asignados a su profesional. Solo el odontólogo autor SHALL poder editar una nota clínica, y SHALL estar asignado al paciente al momento de la edición. El sistema SHALL denegar a recepción toda edición clínica. Estas restricciones SHALL verificarse en el backend, no solo en la interfaz.
@@ -230,3 +234,29 @@ Un usuario interno activo SHALL cambiar únicamente su propia contraseña presen
 #### Scenario: Solicitudes concurrentes
 - **WHEN** dos solicitudes intentan cambiar la misma cuenta con la misma contraseña actual
 - **THEN** solo una prospera y la otra vuelve a verificar la credencial vigente antes de rechazarla
+
+### Requirement: Autenticación por token opaco
+El sistema SHALL emitir un token opaco al autenticar credenciales válidas y resolver la identidad a partir del token enviado en el encabezado Authorization. El sistema SHALL NOT usar cookies ni sesiones de transporte.
+
+#### Scenario: Login exitoso emite token
+- **WHEN** un usuario envía credenciales válidas al endpoint de login
+- **THEN** el sistema devuelve un token opaco asociado a la identidad
+
+#### Scenario: Token inválido o ausente
+- **WHEN** una solicitud protegida no incluye un token válido
+- **THEN** el sistema rechaza la solicitud sin revelar detalles
+
+#### Scenario: Cierre de sesión revoca token
+- **WHEN** el usuario cierra sesión
+- **THEN** el sistema revoca el token y las solicitudes posteriores con ese token son rechazadas
+
+### Requirement: Transporte HTTP justificado para autenticación y operaciones
+El sistema SHALL permitir transporte HTTP para autenticación y operaciones de C-11, manteniendo la autorización y el alcance a nivel de servicio.
+
+#### Scenario: Endpoints protegidos por permiso
+- **WHEN** se invoca un endpoint protegido
+- **THEN** el sistema verifica el permiso correspondiente antes de ejecutar la operación
+
+#### Scenario: Autorización se mantiene en backend
+- **WHEN** el cliente intenta omitir el gating de la interfaz
+- **THEN** el backend aplica las mismas reglas y deniega lo no autorizado

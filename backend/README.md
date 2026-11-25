@@ -1,6 +1,6 @@
 # Backend — dominio y base de persistencia
 
-C-01 aporta las reglas puras de agenda. C-02 añade Spring Boot no-web, referencias persistidas y migraciones. C-03 aporta el acceso interno, C-04 la ficha clínica, C-05 la configuración de recursos y C-15 los bloqueos. C-06 conecta el alta y la consulta de turnos a PostgreSQL.
+C-01 aporta las reglas puras de agenda. C-02 añade Spring Boot no-web, referencias persistidas y migraciones. C-03 aporta el acceso interno, C-04 la ficha clínica, C-05 la configuración de recursos y C-15 los bloqueos. C-06 conecta el alta y la consulta de turnos a PostgreSQL. C-11 incorpora el servidor HTTP para acceso interno, pacientes y ficha clínica.
 
 ## Requisitos y versiones
 
@@ -26,6 +26,10 @@ mvn -f backend/pom.xml clean verify
 
 Las pruebas no leen la conexión de desarrollo: aíslan el Environment de Spring, fuerzan configuración de classpath y suministran sus credenciales temporales. Las pruebas negativas usan destinos centinela inaccesibles y V2/checksums solo en recursos temporales. El fixture cierra únicamente sus contenedores.
 
+## Transporte de email (C-17)
+
+Variables de entorno opcionales para arranque y obligatorias al enviar: `RESEND_API_KEY`, `EMAIL_FROM`, `EMAIL_TEST_ALLOWLIST` (lista separada por comas), `EMAIL_MAX_RETRIES` (default 2) y `EMAIL_TIMEOUT` (default `10s`). Los secretos no se versionan; `.env` está ignorado por Git. El puerto neutro es `comunicaciones.CorreoSalida`; el adaptador Resend usa `java.net.http.HttpClient` y `email_envio` registra cada intento con idempotencia por `(tipo, turno, destinatario)`.
+
 ## Desarrollo local
 
 1. Copiar `.env.example` de la raíz a `.env` y definir las tres contraseñas privadas: DB_BOOTSTRAP_PASSWORD, DB_PASSWORD y DB_MIGRATION_PASSWORD. `.env` está ignorado por Git; no publicar ni imprimir sus valores.
@@ -36,7 +40,7 @@ Las pruebas no leen la conexión de desarrollo: aíslan el Environment de Spring
 
 La URL de ejemplo es jdbc:postgresql://127.0.0.1:5433/odontologia_dev. DB_PORT permite cambiar el puerto de Compose; ajustar también DB_URL. No poner user, password ni service en la URL: se rechazan, incluso como claves codificadas, para evitar que sobreescriban las credenciales separadas. Los parámetros de transporte como connectTimeout y socketTimeout siguen permitidos.
 
-El proceso valida conexión, migraciones y entidades y termina normalmente: no queda un servidor HTTP escuchando. El contenedor PostgreSQL sí permanece disponible con su volumen. No utiliza el Postgres.app del host. El nombre de proyecto predeterminado es odontologia-turnos; para varias copias en una misma máquina, acordar un nombre Compose y puerto distintos y usarlo consistentemente.
+Desde C-11, el proceso principal valida conexión, migraciones y entidades y permanece escuchando HTTP en el puerto 8080. El CLI de bootstrap conserva su ejecución no-web. El contenedor PostgreSQL permanece disponible con su volumen. No utiliza el Postgres.app del host. El nombre de proyecto predeterminado es odontologia-turnos; para varias copias en una misma máquina, acordar un nombre Compose y puerto distintos y usarlo consistentemente.
 
 ## Bootstrap y privilegios
 
@@ -121,3 +125,16 @@ Recepción confirma el vínculo con `ServicioCuentasPaciente.confirmarVinculo(Id
 Los consumidores de lista deben usar `AutorizadorCuentaPaciente`: `exigirPacienteVinculado` devuelve el paciente autenticado o deniega el acceso, y `exigirPropiedad` permite continuar solo si la inscripción pertenece a ese paciente. La identidad de paciente no se acepta en servicios clínicos, administrativos ni de agenda. C-16 no incorpora ciclo de inscripción, rutas HTTP, recuperación ni transporte de sesión/token.
 
 V10 crea `odontologia.cuenta_paciente` con email único, hash no vacío y referencia nullable/única a `paciente`; `odonto_app` tiene `SELECT`, `INSERT` y `UPDATE`, sin `DELETE`. Se conservan V8 de reprogramación y V9 de cancelación. `CuentasPacienteMigracionIT` verifica las restricciones y la actualización desde V9 preservando pacientes e historial con PostgreSQL real; `AccesoPersistenciaIT` verifica mapeo JPA y vinculación manual.
+
+### C-11 — Verificación HTTP y entorno temporal para la interfaz
+
+`ApiPacientesIT` levanta el servidor en loopback y puerto aleatorio sobre PostgreSQL 18.7 desechable. Comprueba el contrato de roles del login, rechazo 401, preflight CORS, permisos clínicos, alcance administrativo y revocación real al cerrar sesión. Se ejecuta con `mvn -f backend/pom.xml clean verify` junto con el resto de las pruebas.
+
+Para reproducir la comprobación visual sin tocar la base de desarrollo, desde `backend/`:
+
+```sh
+mvn test-compile dependency:build-classpath -Dmdep.outputFile=/tmp/odonto-c11-classpath
+java -cp "target/test-classes:target/classes:$(cat /tmp/odonto-c11-classpath)" ar.edu.utn.odontologia.persistencia.ApiC11Fixture
+```
+
+El fixture imprime `C11_DEMO_URL` con su puerto aleatorio. Crea únicamente datos ficticios y tres usuarios de prueba: `recepcion-demo`, `odonto-demo` y `colega-demo`, con contraseña pública de prueba `PruebaSegura986!`. Nunca usar estas credenciales en una base persistente. El fixture está en código de pruebas y no se empaqueta en el JAR de la aplicación. Ctrl-C cierra la API y su contenedor temporal. Configurar la URL del cliente con `window.__API_BASE_URL__` antes de cargar su módulo; el origen permitido de desarrollo es `http://localhost:5173`.

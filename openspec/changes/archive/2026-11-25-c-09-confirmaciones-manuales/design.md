@@ -10,6 +10,10 @@
 
 **Non-Goals:** Transporte HTTP, interfaz, comunicaciones automáticas y seguimiento de inasistencias.
 
+## UI Mockups
+
+Decision: no (no UI), 2026-11-25.
+
 ## Decisions
 
 1. Usar la fila existente como fuente del estado de confirmación. Una tabla separada requeriría coordinar la escritura y lectura de dos registros. Reutilizar la proyección de agenda con el identificador y la versión, y consultar por estado e inicio con un instante tomado del reloj inyectado. Aplicar el filtro y orden en PostgreSQL.
@@ -23,4 +27,4 @@
 
 ## Migration Plan
 
-Agregar una migración Flyway posterior a V10 que amplíe la restricción de estado existente, conservando todas las filas y permisos de operación. Desplegar el esquema y el backend actualizado coordinadamente, retirando las instancias antiguas antes de habilitar escrituras de `CONFIRMADO`. Un binario previo no puede leer ese estado y lo omite en sus consultas de ocupación. Si ya existen confirmaciones, aplicar una corrección hacia adelante o restaurar conjuntamente una copia compatible de aplicación y base bajo la política de recuperación del equipo.
+Agregar una migración Flyway V12, posterior a V11 (email de C-17), que amplíe la restricción de estado existente, conservando todas las filas y permisos de operación. Desplegar el esquema y el backend actualizado coordinadamente, retirando las instancias antiguas antes de habilitar escrituras de `CONFIRMADO`. Un binario previo no puede leer ese estado y lo omite en sus consultas de ocupación. Si ya existen confirmaciones, aplicar una corrección hacia adelante o restaurar conjuntamente una copia compatible de aplicación y base bajo la política de recuperación del equipo.

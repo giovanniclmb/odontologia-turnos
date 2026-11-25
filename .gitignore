@@ -20,3 +20,7 @@ docs/evidencias/antes-*/
 docs/evidencias/estado-antes-*.json
 docs/evidencias/discovery-antes-consolidacion/
 docs/evidencias/ampliacion-paciente-antes-*/
+
+# Playwright MCP artefactos locales
+.playwright-mcp/
+docs/evidencias/active-orchestrator-state.pre-design-system.json

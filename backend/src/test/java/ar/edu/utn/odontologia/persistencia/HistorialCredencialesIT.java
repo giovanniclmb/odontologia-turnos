@@ -33,7 +33,7 @@ class HistorialCredencialesIT {
         var env=new StandardEnvironment();
         env.getPropertySources().remove(StandardEnvironment.SYSTEM_ENVIRONMENT_PROPERTY_SOURCE_NAME);
         env.getPropertySources().remove(StandardEnvironment.SYSTEM_PROPERTIES_PROPERTY_SOURCE_NAME);
-        return new SpringApplicationBuilder(OdontologiaApplication.class).web(WebApplicationType.NONE).environment(env)
+        return new SpringApplicationBuilder(OdontologiaApplication.class).web(WebApplicationType.NONE).properties("spring.main.web-application-type=none").environment(env)
                 .initializers(c->c.getEnvironment().getPropertySources().addFirst(new MapPropertySource("fixture",props)))
                 .run("--spring.config.location=classpath:/application.yaml");
     }

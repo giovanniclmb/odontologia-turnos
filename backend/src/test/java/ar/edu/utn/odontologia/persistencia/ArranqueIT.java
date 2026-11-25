@@ -30,12 +30,13 @@ class ArranqueIT {
 
     private ConfigurableApplicationContext abrir(PostgresFixture database,Map<String,Object> extras){
         Map<String,Object> props=new HashMap<>(database.properties());props.putAll(extras);
+        props.put("spring.main.web-application-type","none");
         props.put("spring.main.banner-mode","off");
         var environment=new StandardEnvironment();
         environment.getPropertySources().remove(StandardEnvironment.SYSTEM_ENVIRONMENT_PROPERTY_SOURCE_NAME);
         environment.getPropertySources().remove(StandardEnvironment.SYSTEM_PROPERTIES_PROPERTY_SOURCE_NAME);
-        return new SpringApplicationBuilder(OdontologiaApplication.class).web(WebApplicationType.NONE).environment(environment)
-            .initializers(c->c.getEnvironment().getPropertySources().addFirst(new MapPropertySource("postgresTemporal",props))).run("--spring.config.location=classpath:/application.yaml");
+        return new SpringApplicationBuilder(OdontologiaApplication.class).web(WebApplicationType.NONE).properties("spring.main.web-application-type=none").environment(environment)
+            .initializers(c->c.getEnvironment().getPropertySources().addFirst(new MapPropertySource("postgresTemporal",props))).run("--spring.config.location=classpath:/application.yaml","--spring.main.web-application-type=none");
     }
 
     @Test void arrancaSinHttpYExponeAgenda() throws Exception {
@@ -132,16 +133,17 @@ class ArranqueIT {
             Files.copy(Path.of("src/main/resources/db/migration/V8__reprogramacion_de_turnos.sql"),temporal.resolve("V8__reprogramacion_de_turnos.sql"));
             Files.copy(Path.of("src/main/resources/db/migration/V9__cancelacion_de_turnos.sql"),temporal.resolve("V9__cancelacion_de_turnos.sql"));
             Files.copy(Path.of("src/main/resources/db/migration/V10__cuentas_paciente.sql"),temporal.resolve("V10__cuentas_paciente.sql"));
-            Files.copy(Path.of("src/main/resources/db/migration/V11__confirmaciones_manuales.sql"),
-                    temporal.resolve("V11__confirmaciones_manuales.sql"));
-            Files.writeString(temporal.resolve("V12__futura.sql"),"CREATE TABLE odontologia.futura (id uuid PRIMARY KEY); SELECT 1;\n");
+            Files.copy(Path.of("src/main/resources/db/migration/V11__email_envio.sql"),temporal.resolve("V11__email_envio.sql"));
+            Files.copy(Path.of("src/main/resources/db/migration/V12__confirmaciones_manuales.sql"),
+                    temporal.resolve("V12__confirmaciones_manuales.sql"));
+            Files.writeString(temporal.resolve("V13__futura.sql"),"CREATE TABLE odontologia.futura (id uuid PRIMARY KEY); SELECT 1;\n");
             try(var c=abrir(aislada,Map.of("spring.flyway.locations","filesystem:"+temporal))){}
             var error=assertThrows(RuntimeException.class,()->{try(var c=abrir(aislada,Map.of())){} });
             String mensaje=cadena(error).toLowerCase(Locale.ROOT);
             assertTrue(mensaje.contains("migration"));
-            assertTrue(mensaje.contains("12"), "El rechazo debe corresponder a la version futura 12: " + mensaje);
+            assertTrue(mensaje.contains("13"), "El rechazo debe corresponder a la version futura 13: " + mensaje);
             try(var c=aislada.migrationConnection();var q=c.createStatement();var result=q.executeQuery("select count(*) from odontologia.flyway_schema_history where success")){
-                assertTrue(result.next());assertEquals(12,result.getInt(1));
+                assertTrue(result.next());assertEquals(13,result.getInt(1));
             }
         }
     }

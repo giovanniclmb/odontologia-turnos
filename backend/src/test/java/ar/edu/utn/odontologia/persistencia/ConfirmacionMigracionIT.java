@@ -19,6 +19,8 @@ class ConfirmacionMigracionIT {
             var migrador = Flyway.configure().dataSource(db.jdbcUrl(), "odonto_migrator", db.migrationPassword())
                     .schemas("odontologia").createSchemas(false);
             migrador.target("10").load().migrate();
+            assertEquals(1, migrador.target("11").load().migrate().migrationsExecuted,
+                    "V11 debe conservar la migración de email ya integrada");
             try (var con = db.appConnection(); var sql = con.createStatement()) {
                 var jdbc = new JdbcTemplate(new SingleConnectionDataSource(con, true));
                 var paciente = UUID.randomUUID();
@@ -44,8 +46,8 @@ class ConfirmacionMigracionIT {
                 assertEquals("23514", assertThrows(SQLException.class, () -> sql.executeUpdate(
                         "update odontologia.turno set estado = 'CONFIRMADO'")).getSQLState());
 
-                assertEquals(1, migrador.target("11").load().migrate().migrationsExecuted,
-                        "Debe existir una migración posterior a V10 que habilite la confirmación");
+                assertEquals(1, migrador.target("12").load().migrate().migrationsExecuted,
+                        "Debe existir una migración posterior a V11 que habilite la confirmación");
                 assertEquals(filaAnterior, jdbc.queryForObject(consulta, String.class, turno));
                 assertEquals(1, jdbc.update("""
                         update odontologia.turno set estado = 'CONFIRMADO', version = version + 1

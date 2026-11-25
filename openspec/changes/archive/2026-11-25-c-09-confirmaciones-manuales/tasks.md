@@ -2,7 +2,7 @@
 
 ## 1. Persistencia y ocupación
 
-- [x] 1.1 Escribir y observar el fallo esperado de la prueba de migración desde V10. Ampliar la restricción Flyway y agregar `CONFIRMADO` al modelo. Verificar en PostgreSQL que conserva registros y versiones, permite el nuevo valor al rol de aplicación y sigue rechazando estados desconocidos.
+- [x] 1.1 Escribir y observar el fallo esperado de la prueba de migración desde V11. Agregar V12 sin alterar la migración de email V11. Ampliar la restricción Flyway y agregar `CONFIRMADO` al modelo. Verificar en PostgreSQL que conserva registros y versiones, permite el nuevo valor al rol de aplicación y sigue rechazando estados desconocidos.
 - [x] 1.2 Escribir en rojo los casos de conflicto con turnos confirmados. Usar ambos estados ocupantes en las consultas de alta, reprogramación y bloqueo. Verificar con PostgreSQL conflictos por profesional o sillón y separación exacta conforme al intervalo vigente.
 
 ## 2. Contrato interno de recepción

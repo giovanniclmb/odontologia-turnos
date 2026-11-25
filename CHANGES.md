@@ -334,9 +334,9 @@ Giovanni aprobó el reparto el 19/11/2026. Las ondas preservan las dependencias 
   - [10 Preguntas abiertas](knowledge-base/10_preguntas_abiertas.md) §PA-02 y PA-05
 
 ### [C-09] `confirmaciones-manuales`
-- **Estado**: `[x]` implementado y verificado localmente. Pasaron 114 pruebas unitarias y se verificaron 185 de integración con PostgreSQL 18.7, incluidas las 104 de la reejecución focalizada tras actualizar las pruebas de migración a V11. [Tareas](openspec/changes/c-09-confirmaciones-manuales/tasks.md)
+- **Estado**: `[x]` implementado y verificado localmente. La suite integrada `mvn clean verify` pasó 128 pruebas unitarias y 195 de integración con PostgreSQL 18.7; la prueba focalizada de migración C-09 también pasó. Reviewer independiente sin hallazgos. [Verificación](openspec/changes/archive/2026-11-25-c-09-confirmaciones-manuales/verify.md) · [Tareas](openspec/changes/archive/2026-11-25-c-09-confirmaciones-manuales/tasks.md)
 - **Responsable**: Sofia
-- **Scope**: Listado de pendientes y registro manual del seguimiento por recepción.
+- **Scope**: Listado de pendientes y registro manual del seguimiento por recepción. `CONFIRMADO` conserva la ocupación de profesional y sillón; recepción puede cancelar o reprogramar confirmados futuros, y un movimiento efectivo los devuelve a `PENDIENTE`.
   - Aplicar la [resolución acotada de PA-02 y PA-05](knowledge-base/10_preguntas_abiertas.md#resolución-acotada-para-c-09-24112026) para listado, transición, versiones y alcance por rol.
   - Implementar el listado y la operación backend de registro de US-008 y RN-AG-08, con contratos acordados y datos ficticios.
   - Tests: solo aparecen los turnos que cumplen la condición definida, confirmación permitida a recepción y resultados ante errores/duplicación según el spec.
@@ -384,7 +384,7 @@ Giovanni aprobó el reparto el 19/11/2026. Las ondas preservan las dependencias 
 ## FASE 3 — Comunicaciones y recuperación de huecos
 
 ### [C-17] `transporte-de-email-de-prueba`
-- **Estado**: `[ ]` pendiente
+- **Estado**: `[x]` implementación y verificación local completadas; 6.1 incluye una prueba real autorizada, estado `Delivered` en Resend y recepción confirmada por el usuario (2026-11-24, America/Mendoza). El issue #18 remoto no se modificó en esta operación.
 - **Responsable**: Fabi
 - **Scope**: Canal real de email gratuito para RN-EM-03, compartido por los tres tipos de correo.
   - Evaluar y acordar PA-15: proveedor sin costo, límites, destinatarios de prueba indicados por el equipo y configuración. No contratar ni asumir servicio, SMTP o API.
@@ -468,7 +468,7 @@ La política visual sigue diferida: resolverla antes de Apply y cumplir las apro
   - [08 Arquitectura propuesta](knowledge-base/08_arquitectura_propuesta.md) §Operación y diseño visual
 
 ### [C-11] `interfaz-pacientes-y-ficha`
-- **Estado**: `[ ]` pendiente
+- **Estado**: `[x]` implementado y archivado; correcciones y verificación ampliada completadas el 24/11/2026. [Evidencia](docs/evidencias/c11-correcciones/verify.md). Integración mediante [PR #35](https://github.com/giovanniclmb/odontologia-turnos/pull/35), cierre de [Issue #12](https://github.com/giovanniclmb/odontologia-turnos/issues/12).
 - **Responsable**: Fabi
 - **Scope**: Operación mínima de pacientes y ficha clínica sencilla en la interfaz.
   - Resolver el gate visual y compartir contratos/build de frontend con C-10 mediante un propietario común; esta ficha no depende del alta de turnos. La primera de las dos fichas visuales que se ejecute aporta la base y superficie de ingreso mínimas acordadas con C-03; la siguiente las reutiliza.

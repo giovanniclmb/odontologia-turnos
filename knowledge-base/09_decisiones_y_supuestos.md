@@ -109,6 +109,15 @@ Giovanni pidió resolver Issue #30 antes de integrar PR #29 y aprobó expresamen
 
 La prueba del CLI debe usar un proceso con entorno vacío y allowlist del fixture, sin heredar overrides de Spring ni modificar la configuración original del JVM de pruebas. Las correcciones se realizan antes de integrar; la aprobación anterior con pendientes no equivale a evidencia de su resolución. No cambian el reparto nominal ni las dependencias del roadmap.
 
+## Decisiones aprobadas para C-17 (transporte de email de prueba) — 2026-11-24
+
+- **PA-15 (proveedor):** Resend (3000 emails/mes, 100/día, sin tarjeta). Sender en sandbox (`onboarding@resend.dev`) mientras no haya dominio propio verificado (presupuesto cero).
+- **Direcciones de prueba:** se usarán placeholders/allowlist en desarrollo; el equipo completará las direcciones reales antes de Apply. Variable `EMAIL_TEST_ALLOWLIST` (env).
+- **Variables de entorno:** `RESEND_API_KEY`, `EMAIL_FROM`, `EMAIL_TEST_ALLOWLIST`, `EMAIL_MAX_RETRIES` (default 2), `EMAIL_TIMEOUT`.
+- **PA-18 (semántica):** best-effort + registro. El transporte no rompe la operación de negocio; registra éxito/fallo en `email_envio`. Dedup por clave de idempotencia `(tipo, turnoId, destinatario)`. 2 reintentos con backoff corto; luego `status=failed`. C-20/C-19 deciden reprogramación/cancelación según el registro.
+- **Contrato de salida:** interfaz neutra `comunicaciones.CorreoSalida` con `enviar(...) -> ResultadoEnvio`, implementada por adaptador Resend + fake para tests. Persistencia de envíos en tabla `email_envio` (próxima migración coordinada por Giovanni).
+- **Alcance C-17:** solo transporte, configuración, puerto y registro de envío. Sin lógica de negocio, plantillas ni scheduling.
+
 ## DD-15 — Cancelación interna de C-08 (24/11/2026)
 
 Giovanni aprobó el diseño y el plan escrito de C-08 para Apply con TDD, trabajador GPT-6.2 Sol medio y revisor independiente del mismo modelo. Recepción puede cancelar turnos elegibles de la sede; odontología solo turnos propios de pacientes con asignación activa. Solo se cancela un turno `PENDIENTE` con inicio estrictamente futuro después de esperar los locks. Se exige la versión vigente: una versión anterior pide recargar y una repetición con versión vigente se rechaza indicando que el turno ya está cancelado.

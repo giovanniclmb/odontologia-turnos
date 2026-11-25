@@ -17,6 +17,8 @@ import ar.edu.utn.odontologia.recursos.ServicioConfiguracionSede;
 import ar.edu.utn.odontologia.recursos.ServicioRecursosAgenda;
 import java.time.Duration;
 import java.time.Instant;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 import org.junit.jupiter.api.Test;
@@ -195,8 +197,10 @@ class ConfiguracionRecursosIT {
         var entorno = new StandardEnvironment();
         entorno.getPropertySources().remove(StandardEnvironment.SYSTEM_ENVIRONMENT_PROPERTY_SOURCE_NAME);
         entorno.getPropertySources().remove(StandardEnvironment.SYSTEM_PROPERTIES_PROPERTY_SOURCE_NAME);
-        entorno.getPropertySources().addFirst(new MapPropertySource("postgresTemporal", db.properties()));
-        return new SpringApplicationBuilder(OdontologiaApplication.class).web(WebApplicationType.NONE)
+        Map<String, Object> props = new HashMap<>(db.properties());
+        props.put("spring.main.web-application-type", "none");
+        entorno.getPropertySources().addFirst(new MapPropertySource("postgresTemporal", props));
+        return new SpringApplicationBuilder(OdontologiaApplication.class).web(WebApplicationType.NONE).properties("spring.main.web-application-type=none")
                 .environment(entorno).run("--spring.config.location=classpath:/application.yaml");
     }
 }
