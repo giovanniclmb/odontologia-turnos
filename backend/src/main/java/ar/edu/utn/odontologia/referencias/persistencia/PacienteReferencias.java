@@ -1,6 +1,6 @@
 package ar.edu.utn.odontologia.referencias.persistencia;
 
-import jakarta.persistence.LockModeType;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -12,6 +12,12 @@ public interface PacienteReferencias extends Referencias<PacienteReferencia> {
     @Lock(LockModeType.PESSIMISTIC_WRITE)
     @Query("select p from PacienteReferencia p where p.id = :id")
     Optional<PacienteReferencia> buscarParaModificarEspera(@Param("id") UUID id);
+
+    @Query("""
+            select new ar.edu.utn.odontologia.referencias.persistencia.NombrePaciente(p.id, p.nombre, p.apellido)
+            from PacienteReferencia p where p.id in :ids
+            """)
+    List<NombrePaciente> buscarNombres(@Param("ids") Collection<UUID> ids);
 
     @Query("""
             select p from PacienteReferencia p

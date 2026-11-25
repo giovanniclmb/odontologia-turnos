@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Agenda | Flujos de C-12</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../../../../design-system/tokens.css">
+  <link rel="stylesheet" href="../../../../frontend/public/styles.css">
+  <link rel="stylesheet" href="./mockup.css">
+  <script defer src="../../../../design-system/brand.js"></script>
+  <script defer src="./mockup.js"></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Navegación principal">
+      <div class="brand">
+        <img src="../../../../design-system/assets/logo.svg" alt="">
+        <strong data-brand-name></strong>
+      </div>
+      <nav class="nav" aria-label="Secciones">
+        <span>Pacientes</span>
+        <a href="./index.html" aria-current="page">Agenda</a>
+        <span aria-disabled="true">Ficha clínica</span>
+        <span aria-disabled="true">Lista de espera</span>
+        <span>Configuración</span>
+      </nav>
+    </aside>
+    <div class="main">
+      <header class="topbar">
+        <span class="topbar-title">Agenda</span>
+        <span class="topbar-user" id="operador">Recepción</span>
+      </header>
+      <main class="content">
+        <section class="content-view" id="agenda" aria-labelledby="agenda-titulo">
+          <header class="page-header">
+            <div><h1 id="agenda-titulo" tabindex="-1">Agenda diaria</h1><p id="agenda-dia">Jueves 26 de noviembre de 2026 · Sillón 1 · Hora de Mendoza</p></div>
+          </header>
+          <p id="resultado" class="notice" role="status" hidden></p>
+          <p id="destino" hidden><button class="btn btn-secondary" id="ver-destino" type="button">Ver destino</button></p>
+          <section class="card" aria-labelledby="turnos-titulo">
+            <header class="card-header"><h2 class="card-title" id="turnos-titulo">Turnos del día</h2></header>
+            <ul class="day-list">
+              <li class="slot" id="turno">
+                <div class="slot-time" id="horario">09:00–09:45</div>
+                <div class="slot-info"><strong>Ana Ejemplo</strong><small id="turno-detalles">Control odontológico · Dra. Soto</small></div>
+                <span id="estado" class="badge badge-confirmed">Confirmado</span>
+                <div class="turno-acciones" id="acciones">
+                  <button class="btn btn-secondary" type="button" id="abrir-reprogramar">Reprogramar</button>
+                  <button class="btn btn-secondary" type="button" id="abrir-cancelar">Cancelar turno</button>
+                </div>
+              </li>
+              <li class="slot" id="otro-turno">
+                <div class="slot-time">10:00–10:30</div>
+                <div class="slot-info"><strong>Bruno Ejemplo</strong><small>Consulta odontológica · Dra. Soto</small></div>
+                <span class="badge badge-pending">Pendiente</span>
+              </li>
+            </ul>
+          </section>
+        </section>
+        <section class="content-view" id="reprogramar" aria-labelledby="reprogramar-titulo" hidden>
+          <header class="page-header">
+            <div><h1 id="reprogramar-titulo" tabindex="-1">Reprogramar turno</h1><p>Elija el nuevo horario y los recursos del turno.</p></div>
+          </header>
+          <section class="card" aria-labelledby="turno-original">
+            <h2 class="card-title" id="turno-original">Turno de Ana Ejemplo</h2>
+            <p class="card-subtitle" id="origen">Jueves 26 de noviembre, 09:00–09:45 · Dra. Soto · Sillón 1</p>
+            <dl class="turno-datos">
+              <div><dt>Prestación</dt><dd>Control odontológico</dd></div>
+              <div><dt>Duración</dt><dd>45 minutos</dd></div>
+            </dl>
+            <form class="patient-form" id="formulario">
+              <p class="alert" id="conflicto" role="alert" tabindex="-1" hidden>El horario solicitado no está disponible. Ajuste el horario o los recursos y vuelva a intentar.</p>
+              <div class="alert" id="desactualizado" hidden>
+                <p role="alert">El turno cambió desde la última consulta. Recargue la agenda para ver el estado actual.</p>
+                <button class="btn btn-secondary" id="recargar" type="button">Recargar agenda</button>
+              </div>
+              <div class="field">
+                <label for="fecha">Nueva fecha</label>
+                <input class="input" id="fecha" type="date" required value="2026-11-26">
+              </div>
+              <div class="field">
+                <label for="hora">Nueva hora de inicio (Mendoza)</label>
+                <input class="input" id="hora" type="time" required value="09:00">
+              </div>
+              <div class="field">
+                <label for="profesional">Profesional</label>
+                <select class="input" id="profesional">
+                  <option>Dra. Soto</option>
+                  <option>Dr. Ríos</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="sillon">Sillón</label>
+                <select class="input" id="sillon">
+                  <option>Sillón 1</option>
+                  <option>Sillón 2</option>
+                </select>
+              </div>
+              <div class="form-actions">
+                <button class="btn btn-secondary" type="button" id="volver">Volver a la agenda</button>
+                <button class="btn btn-primary" type="submit">Guardar reprogramación</button>
+              </div>
+            </form>
+          </section>
+        </section>
+        <dialog id="confirmacion" aria-labelledby="confirmar-titulo" aria-describedby="confirmar-descripcion">
+          <form method="dialog" class="stack">
+            <h2 class="card-title" id="confirmar-titulo">¿Cancelar el turno de Ana Ejemplo?</h2>
+            <p id="confirmar-descripcion">El turno quedará registrado como cancelado y liberará los recursos que ocupa.</p>
+            <p class="card-subtitle" id="cancelar-detalles">Jueves 26 de noviembre, 09:00–09:45 · Dra. Soto · Sillón 1</p>
+            <div class="header-actions confirmar-acciones">
+              <button class="btn btn-secondary" value="mantener" autofocus>Mantener turno</button>
+              <button class="btn btn-danger" value="cancelar">Confirmar cancelación</button>
+            </div>
+          </form>
+        </dialog>
+      </main>
+    </div>
+  </div>
+</body>
+</html>

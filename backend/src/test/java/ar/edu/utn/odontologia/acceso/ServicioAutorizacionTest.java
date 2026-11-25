@@ -11,11 +11,22 @@ class ServicioAutorizacionTest {
         Identidad recepcion = new Identidad(UUID.randomUUID(), "recepcion-ficticia", Rol.RECEPCION, null);
         Identidad odontologo = new Identidad(UUID.randomUUID(), "odontologo-ficticio", Rol.ODONTOLOGO, null);
         for (Permiso permiso : java.util.List.of(Permiso.CONFIG_INTERVALO, Permiso.CONFIG_RECURSOS,
-                Permiso.USUARIO_CREAR_ASIGNAR)) {
+                Permiso.USUARIO_CREAR_ASIGNAR, Permiso.PENDIENTES_CONSULTAR, Permiso.CONFIRMACION_REGISTRAR)) {
             assertTrue(authz.tienePermiso(recepcion, permiso), permiso::codigo);
             assertFalse(authz.tienePermiso(odontologo, permiso), permiso::codigo);
             assertFalse(authz.tienePermiso(null, permiso), permiso::codigo);
         }
+    }
+
+    @Test void ambosRolesConsultanBloqueosPeroSoloRecepcionLosCrea() {
+        Identidad recepcion = new Identidad(UUID.randomUUID(), "recepcion-ficticia", Rol.RECEPCION, null);
+        Identidad odontologo = new Identidad(UUID.randomUUID(), "odontologo-ficticio", Rol.ODONTOLOGO, null);
+        Permiso consultar = Permiso.desdeCodigo("bloqueo:consultar");
+        assertTrue(authz.tienePermiso(recepcion, consultar));
+        assertTrue(authz.tienePermiso(odontologo, consultar));
+        assertFalse(authz.tienePermiso(null, consultar));
+        assertTrue(authz.tienePermiso(recepcion, Permiso.BLOQUEO_CREAR));
+        assertFalse(authz.tienePermiso(odontologo, Permiso.BLOQUEO_CREAR));
     }
 
     @Test void permisoConcedido() {

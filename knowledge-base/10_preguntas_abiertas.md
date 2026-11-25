@@ -95,3 +95,25 @@ Estas decisiones cierran PA-05/06/07 únicamente para el alcance de C-04; no res
 - **PA-02 — versión y repetición:** una versión desactualizada se rechaza pidiendo recargar. Con versión vigente, repetir sobre un turno cancelado se rechaza indicando que ya está cancelado. Un rechazo o rollback no modifica los datos ni genera una nueva liberación.
 - **Integración:** el resultado devuelve el turno actualizado para identificar recursos y período liberados después del commit, también cuando la confirmación depende de una transacción exterior. C-08 no agrega infraestructura de eventos.
 - Giovanni aprobó el [diseño](../openspec/changes/archive/2026-11-24-cancelar-y-liberar-horario/design.md) y el [plan de Apply](../openspec/changes/archive/2026-11-24-cancelar-y-liberar-horario/tasks.md) el 24/11/2026. El corte de 48 horas del enlace de C-18 y el tratamiento de emails/avisos siguen fuera de esta resolución.
+
+## Resolución acotada para C-09 (aprobada por Giovanni, 24/11/2026)
+
+- **PA-02 y PA-05.** Solo recepción consulta y confirma los turnos pendientes de toda la sede. El listado y la confirmación requieren un inicio estrictamente futuro. La confirmación manual cambia el estado a `CONFIRMADO`, conserva la ocupación de ambos recursos, incrementa la versión y rechaza repeticiones.
+- **PA-02 y PA-05.** Recepción puede cancelar o reprogramar un turno `CONFIRMADO` cuyo inicio siga estrictamente futuro al validar después de adquirir locks. Odontología conserva su alcance anterior: solo turnos `PENDIENTE` propios de pacientes asignados activamente.
+- **PA-02.** Una confirmación, cancelación o reprogramación exige la versión vigente; una versión desactualizada pide volver a consultar sin mutar datos. La confirmación ocupa ambos recursos y aumenta una vez la versión. Repetirla con la versión vigente se rechaza sin cambio.
+- **PA-02.** Una reprogramación efectiva de un confirmado lo devuelve a `PENDIENTE`, incrementa la versión y conserva paciente, prestación y duración efectiva. Si el destino normalizado es idéntico, conserva estado y versión. Cancelarlo lo lleva a `CANCELADO`, libera los recursos al commit e incrementa la versión.
+- El detalle del contrato interno está en el [delta de agenda archivado](../openspec/changes/archive/2026-11-25-c-09-confirmaciones-manuales/specs/agenda-persistida/spec.md); la migración C-09 debe seguir a V11 de email de C-17.
+
+## Resolución acotada para C-10 (aprobada por Giovanni, 25/11/2026)
+
+- **PA-01 — operación del intervalo:** recepción lo consulta y establece en una sección Configuración propia, visible solo para su rol. Se mantienen las reglas de C-05: entero positivo, sin valor inicial y vigente para validaciones futuras.
+- **PA-05 — paciente en la agenda:** recepción ve nombre y apellido en todos los turnos. Odontología los ve en todos sus turnos propios, aunque no tenga asignación activa con el paciente; la excepción no habilita otros datos administrativos ni clínicos.
+- **PA-05 y PA-19 — consulta de bloqueos:** recepción ve todos. Odontología ve período y recurso de los que afectan al sillón consultado o a su profesional, sin datos de otros profesionales. Solo recepción crea. Modificación y desbloqueo siguen pendientes en PA-19.
+- **PA-04 — presentación horaria:** las vistas diaria y semanal (lunes a domingo) usan `America/Argentina/Mendoza` y no imponen jornada laboral.
+
+## Resolución acotada para C-18 (25/11/2026)
+
+- **PA-17 — confirmación:** el enlace vigente y no usado sigue sirviendo después de confirmar el turno (DD-17). Reprogramar lo invalida.
+- **PA-17 — instante del plazo:** el comienzo del turno y el corte de 48 horas se evalúan después de las esperas por otras operaciones, al momento de cancelar. Es la corrección de un defecto sobre la regla ya especificada en C-18.
+- **PA-17 — entrega interna:** C-19 recibe el token por un evento posterior al commit (DD-18).
+- Quedan sin resolver aquí el envío del enlace y el tratamiento de los emails (PA-18, C-19).

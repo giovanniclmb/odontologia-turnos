@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Agenda</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../../../../../design-system/tokens.css">
+  <link rel="stylesheet" href="../../../../../frontend/public/styles.css">
+  <link rel="stylesheet" href="./agenda.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Navegación principal">
+      <div class="brand"><img src="../../../../../design-system/assets/logo.svg" alt="Logo provisional"><strong data-brand-name></strong></div>
+      <nav class="nav" aria-label="Secciones"><a href="#pacientes">Pacientes</a><a href="#agenda" aria-current="page">Agenda</a><span aria-disabled="true">Ficha clínica</span><span aria-disabled="true">Lista de espera</span><a href="#configuracion">Configuración</a></nav>
+    </aside>
+    <div class="main">
+      <header class="topbar"><span class="topbar-title">Agenda</span><div class="topbar-user"><span>recepcion.demo (recepcion)</span><button class="btn btn-secondary" type="button">Cerrar sesión</button></div></header>
+      <main class="content">
+<section class="page-header"><div><h1>Estados de la agenda</h1><p>Referencia de carga, vacío, error y datos faltantes.</p></div><div class="header-actions"></div></section><section class="card"><p class="state-title">Cargando</p><div role="status" aria-live="polite"><div class="skeleton"></div><div class="skeleton"></div><span class="hint">Cargando agenda…</span></div></section><section class="card"><p class="state-title">Sin actividad</p><p class="empty-state" role="status">No hay turnos ni bloqueos en este período para el sillón elegido.</p></section><section class="card"><p class="state-title">Error de consulta</p><p class="alert" role="alert">No se pudo cargar la agenda.</p><p style="margin-top: var(--space-3)"><button class="btn btn-secondary" type="button">Reintentar</button></p></section><section class="card"><p class="state-title">Faltan datos de catálogo</p><p class="notice">No hay sillones disponibles. Sin ellos no se puede consultar la agenda ni crear turnos.</p></section><section class="card"><p class="state-title">Intervalo sin configurar (recepción)</p><p class="alert" role="alert">Falta configurar el intervalo entre turnos. <a href="#configuracion">Ir a Configuración</a></p></section><section class="card"><p class="state-title">Intervalo sin configurar (odontología)</p><p class="alert" role="alert">Falta configurar el intervalo entre turnos. Solicítelo a recepción.</p></section>
+      </main>
+    </div>
+  </div>
+  <script defer src="../../../../../design-system/brand.js"></script>
+</body>
+</html>

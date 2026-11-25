@@ -334,10 +334,10 @@ Giovanni aprobó el reparto el 19/11/2026. Las ondas preservan las dependencias 
   - [10 Preguntas abiertas](knowledge-base/10_preguntas_abiertas.md) §PA-02 y PA-05
 
 ### [C-09] `confirmaciones-manuales`
-- **Estado**: `[ ]` pendiente
+- **Estado**: `[x]` implementado y verificado localmente. La suite integrada `mvn clean verify` pasó 128 pruebas unitarias y 195 de integración con PostgreSQL 18.7; la prueba focalizada de migración C-09 también pasó. Reviewer independiente sin hallazgos. [Verificación](openspec/changes/archive/2026-11-25-c-09-confirmaciones-manuales/verify.md) · [Tareas](openspec/changes/archive/2026-11-25-c-09-confirmaciones-manuales/tasks.md)
 - **Responsable**: Sofia
-- **Scope**: Listado de pendientes y registro manual del seguimiento por recepción.
-  - Resolver PA-02 y PA-05 para condición de pertenencia al listado, representación, transición y duplicación de confirmaciones.
+- **Scope**: Listado de pendientes y registro manual del seguimiento por recepción. `CONFIRMADO` conserva la ocupación de profesional y sillón; recepción puede cancelar o reprogramar confirmados futuros, y un movimiento efectivo los devuelve a `PENDIENTE`.
+  - Aplicar la [resolución acotada de PA-02 y PA-05](knowledge-base/10_preguntas_abiertas.md#resolución-acotada-para-c-09-24112026) para listado, transición, versiones y alcance por rol.
   - Implementar el listado y la operación backend de registro de US-008 y RN-AG-08, con contratos acordados y datos ficticios.
   - Tests: solo aparecen los turnos que cumplen la condición definida, confirmación permitida a recepción y resultados ante errores/duplicación según el spec.
   - Esta ficha conserva el seguimiento manual; los emails automáticos pertenecen a C-17/C-19/C-20/C-22. No añadir WhatsApp ni convertir el recordatorio en confirmación automática.
@@ -351,7 +351,7 @@ Giovanni aprobó el reparto el 19/11/2026. Las ondas preservan las dependencias 
   - [10 Preguntas abiertas](knowledge-base/10_preguntas_abiertas.md) §PA-02 y PA-05
 
 ### [C-18] `cancelacion-del-paciente-por-enlace`
-- **Estado**: `[ ]` pendiente
+- **Estado**: `[x]` implementado, verificado, archivado e integrado el 25/11/2026, con revisión independiente de las correcciones sin bloqueantes. El envío del enlace sigue en C-19, que debe contemplar las advertencias de la [entrega interna](openspec/changes/archive/2026-11-25-c-18-entrega-del-enlace/verify.md); los pendientes menores constan además en las [correcciones de la revisión](openspec/changes/archive/2026-11-25-c-18-fixes-hallazgos-pr44/verify.md). [PR #44](https://github.com/giovanniclmb/odontologia-turnos/pull/44) · [Issue #19](https://github.com/giovanniclmb/odontologia-turnos/issues/19).
 - **Responsable**: Fabi
 - **Scope**: Cancelación del turno asociado por enlace hasta 48 horas antes (US-013, RN-PA-01 y RN-PA-02).
   - Resolver PA-17/PA-18: protección, vigencia, uso, instante exacto del límite, referencia horaria y efecto de cambios del turno. El plazo no se cambia por inferencia.
@@ -450,7 +450,7 @@ Giovanni aprobó el reparto el 19/11/2026. Las ondas preservan las dependencias 
 La política visual sigue diferida: resolverla antes de Apply y cumplir las aprobaciones de sistema/mockups que correspondan. Mantener HTML/CSS/TypeScript vanilla.
 
 ### [C-10] `interfaz-agenda-y-alta`
-- **Estado**: `[ ]` pendiente
+- **Estado**: `[x]` implementado, verificado y archivado el 25/11/2026, con revisión independiente sin bloqueantes. Giovanni confirmó la coordinación con Luciano. [Verificación](openspec/changes/archive/2026-11-25-interfaz-agenda-y-alta/verify.md) · [PR #42](https://github.com/giovanniclmb/odontologia-turnos/pull/42) · [Issue #11](https://github.com/giovanniclmb/odontologia-turnos/issues/11).
 - **Responsable**: Luciano
 - **Scope**: Superficie interna de agenda diaria/semanal por sillón, alta y bloqueos (US-004, US-005, US-009 y US-010).
   - Resolver el gate visual, estructura/build frontend y contrato de uso del acceso interno aprobado. Incluir la superficie mínima de ingreso requerida por C-03, sin inventar un mecanismo nuevo.
@@ -484,7 +484,7 @@ La política visual sigue diferida: resolverla antes de Apply y cumplir las apro
   - [08 Arquitectura propuesta](knowledge-base/08_arquitectura_propuesta.md) §Operación y diseño visual
 
 ### [C-12] `interfaz-reprogramacion-y-cancelacion`
-- **Estado**: `[ ]` pendiente
+- **Estado**: `[x]` implementado, verificado y archivado en OpenSpec el 25/11/2026. Verificación combinada con C-18 completada; revisión e integración registradas en el [PR #45](https://github.com/giovanniclmb/odontologia-turnos/pull/45). [Verificación](openspec/changes/archive/2026-11-25-interfaz-reprogramacion-y-cancelacion/verify.md).
 - **Responsable**: Luciano
 - **Scope**: Acciones de reorganización de una reserva desde la agenda existente.
   - Resolver el gate visual y consumir C-07/C-08 para US-006 y US-007, sin redefinir reglas o transiciones.
