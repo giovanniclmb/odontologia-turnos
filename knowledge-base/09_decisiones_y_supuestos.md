@@ -150,4 +150,4 @@ La migración es nueva y consecutiva (V9), coordinada con el historial integrado
 
 **Alternativas presentadas**: redirigir a una dirección de prueba; contenido sin datos personales o con códigos de prestación y profesional; enlace a la API o página mínima en C-19; no enviar con menos de 48 horas; solo el alta; vista de fallos para recepción o reenvío posterior; enviar mensajes desactualizados.
 
-**Límite**: Giovanni aprobó la propuesta y su implementación el 25/11/2026. No autoriza envíos reales ni push; la evidencia con envío real sigue pendiente. [Change](../openspec/changes/email-al-crear-turno/proposal.md)
+**Límite**: Giovanni aprobó la propuesta y su implementación el 25/11/2026. Autorizó además un único envío real de prueba el mismo día y confirmó su recepción. [Change](../openspec/changes/archive/2026-11-25-email-al-crear-turno/proposal.md)

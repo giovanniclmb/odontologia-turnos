@@ -4,7 +4,7 @@ Fecha: 25/11/2026. Base: `main` en `5eaba41`, rama `feature/c-19-email-al-crear-
 
 ## Estado
 
-Implementado y verificado localmente con proveedor simulado. El envío real autorizado fue aceptado por el proveedor; **falta confirmar la recepción (tarea 4.3)**, por lo que el change no está completo ni archivado.
+Implementado y verificado localmente con proveedor simulado. El envío real autorizado fue aceptado por el proveedor y el usuario confirmó su recepción. Pendiente de integración.
 
 ## Fallo observado antes de implementar
 
@@ -26,13 +26,13 @@ Tras la revisión, las pruebas nuevas de representación en texto y de motivo en
 
 ## Preparación del envío real
 
-`EnvioTurnoRealManual` crea un turno ficticio en una base temporal y deja que la aplicación envíe su email; la selección automática no lo ejecuta. El ensayo con servidor local pasó. Las validaciones previas pasaron con valores ficticios, y rechazan una lista con más de una dirección. No se cargó la configuración privada ni se contactó a Resend. Procedimiento: [prueba real](../../../docs/evidencias/c19-envio-real/prueba-real-runbook.md).
+`EnvioTurnoRealManual` crea un turno ficticio en una base temporal y deja que la aplicación envíe su email; la selección automática no lo ejecuta. El ensayo con servidor local pasó. Las validaciones previas pasaron con valores ficticios, y rechazan una lista con más de una dirección. No se cargó la configuración privada ni se contactó a Resend. Procedimiento: [prueba real](../../../../docs/evidencias/c19-envio-real/prueba-real-runbook.md).
 
 Al prepararlo se observó que el aislamiento de las integraciones agregado en este change vaciaba también la configuración de las pruebas manuales, incluida la de C-17. Ahora se desactiva solo con `-Denvio.real=true`; con esa opción las validaciones pasan y sin ella siguen aisladas. La suite completa posterior dio 151 unitarias y 292 de integración sin fallos. Este ajuste y la herramienta no pasaron por revisión independiente.
 
 ## Envío real
 
-25/11/2026, 15:33 (America/Mendoza): un único envío autorizado por el recorrido completo, con turno ficticio. El registro quedó `sent` con un intento. Falta la confirmación de recepción. Detalle en el [procedimiento](../../../docs/evidencias/c19-envio-real/prueba-real-runbook.md).
+25/11/2026, 15:33 (America/Mendoza): un único envío autorizado por el recorrido completo, con turno ficticio. El registro quedó `sent` con un intento y el usuario confirmó que el correo llegó. Detalle en el [procedimiento](../../../../docs/evidencias/c19-envio-real/prueba-real-runbook.md).
 
 ## Revisión independiente
 
@@ -40,7 +40,7 @@ Un agente sin el contexto de la implementación revisó en solo lectura, sin eje
 
 ## Pendientes
 
-- Confirmación de recepción del envío real y, si está disponible, estado e identificador del panel de Resend.
+- No se registraron el estado ni el identificador del panel de Resend para el envío real.
 - La página de cancelación corresponde a C-23; hasta entonces el enlace no cancela desde el navegador.
 - Un aviso se pierde si el proceso cae, si la cola está llena o si el cierre supera la espera; un envío interrumpido puede quedar `pending`.
 - La vigencia se comprueba antes del primer intento; un cambio durante los reintentos no detiene el mensaje.
@@ -50,4 +50,4 @@ Un agente sin el contexto de la implementación revisó en solo lectura, sin eje
 - El ejecutor de email es el único declarado: un `@Async` futuro sin calificador lo usaría.
 - Las integraciones ejecutadas fuera de Maven no vacían las variables de email del entorno.
 - Preexistentes de C-17: el adaptador no escapa todos los caracteres de control del JSON, no restaura una interrupción y puede dejar `pending` si falla la persistencia tras un envío aceptado.
-- `CHANGES.md` en `main` todavía muestra a Fabi como responsable.
+- La reasignación de C-19 y C-20 a Giovanni se incorpora en la misma rama; `main` la reflejará al integrarla.

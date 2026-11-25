@@ -21,7 +21,7 @@
 
 - [x] 4.1 Ejecutar `mvn -f backend/pom.xml clean verify`, `openspec validate email-al-crear-turno --strict` y las pruebas del roadmap; registrar en `verify.md`.
 - [x] 4.2 Obtener revisión independiente de fugas del token, aislamiento de destinatarios y concurrencia.
-- [ ] 4.3 Con autorización expresa y direcciones de prueba del equipo, realizar un envío real y registrar la evidencia sin credenciales ni direcciones.
+- [x] 4.3 Con autorización expresa y direcciones de prueba del equipo, realizar un envío real y registrar la evidencia sin credenciales ni direcciones.
 
 ## Workflow follow-up
 

@@ -158,8 +158,12 @@ El sistema SHALL entregar a los consumidores internos el token en claro emitido 
 - **THEN** el consumidor recibe un token nuevo y el anterior queda rechazado
 
 #### Scenario: Sin entrega
-- **WHEN** la transacción revierte, la ventana está cerrada o el turno solo se confirma
-- **THEN** el consumidor no recibe ningún token
+- **WHEN** la transacción revierte o el turno solo se confirma
+- **THEN** el consumidor no recibe ningún aviso
+
+#### Scenario: Ventana cerrada
+- **WHEN** se confirma un alta o reprogramación con menos de 48 horas de anticipación
+- **THEN** el consumidor recibe el aviso sin token
 
 #### Scenario: Fallo del consumidor
 - **WHEN** el consumidor falla al recibir el token

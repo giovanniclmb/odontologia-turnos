@@ -401,7 +401,7 @@ El 25/11/2026 Giovanni reasignó expresamente C-19 y C-20 de Fabi a sí mismo. S
   - [Preguntas abiertas](knowledge-base/10_preguntas_abiertas.md)
 
 ### [C-19] `email-al-crear-turno`
-- **Estado**: `[ ]` pendiente
+- **Estado**: `[x]` implementado, verificado y archivado en OpenSpec el 25/11/2026, con revisión independiente sin bloqueantes en producción y un envío real de prueba recibido. Pendiente de integración. La página de cancelación corresponde a C-23. [Verificación](openspec/changes/archive/2026-11-25-email-al-crear-turno/verify.md) · [Issue #20](https://github.com/giovanniclmb/odontologia-turnos/issues/20).
 - **Responsable**: Giovanni
 - **Scope**: Email de alta con enlace de cancelación para US-011 y RN-EM-01.
   - Resolver PA-15/PA-17/PA-18: destinatario, contenido, efecto de fallos y creación dentro de las ventanas de 48/24 horas; no inventar excepciones al plazo.
