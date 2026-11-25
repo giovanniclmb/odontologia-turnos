@@ -110,3 +110,9 @@ Estas decisiones cierran PA-05/06/07 únicamente para el alcance de C-04; no res
 - **PA-05 — paciente en la agenda:** recepción ve nombre y apellido en todos los turnos. Odontología los ve en todos sus turnos propios, aunque no tenga asignación activa con el paciente; la excepción no habilita otros datos administrativos ni clínicos.
 - **PA-05 y PA-19 — consulta de bloqueos:** recepción ve todos. Odontología ve período y recurso de los que afectan al sillón consultado o a su profesional, sin datos de otros profesionales. Solo recepción crea. Modificación y desbloqueo siguen pendientes en PA-19.
 - **PA-04 — presentación horaria:** las vistas diaria y semanal (lunes a domingo) usan `America/Argentina/Mendoza` y no imponen jornada laboral.
+
+## Resolución acotada para C-18 (25/11/2026)
+
+- **PA-17 — confirmación:** el enlace vigente y no usado sigue sirviendo después de confirmar el turno (DD-17). Reprogramar lo invalida.
+- **PA-17 — instante del plazo:** el comienzo del turno y el corte de 48 horas se evalúan después de las esperas por otras operaciones, al momento de cancelar. Es la corrección de un defecto sobre la regla ya especificada en C-18.
+- Quedan sin resolver aquí la entrega del enlace y el tratamiento de los emails (PA-18, C-19).
