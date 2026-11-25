@@ -121,11 +121,11 @@ GATE 7: dependencias previas verificadas según tabla (nivel 7)
   → C-22 avisos-de-huecos-y-asignacion-por-recepcion [Sofia; comprobar todas sus dependencias]
   → C-24 interfaz-cuenta-y-lista-de-espera [Sofia; comprobar todas sus dependencias]
 GATE 8: dependencias previas verificadas según tabla (nivel 8)
-  → C-19 email-al-crear-turno [Fabi; comprobar todas sus dependencias]
+  → C-19 email-al-crear-turno [Giovanni; comprobar todas sus dependencias]
   → C-23 interfaz-cancelacion-por-enlace [Luciano; comprobar todas sus dependencias]
   → C-25 interfaz-asignacion-de-huecos [Giovanni; comprobar todas sus dependencias]
 GATE 9: dependencias previas verificadas según tabla (nivel 9)
-  → C-20 recordatorio-automatico-24-horas [Fabi; comprobar todas sus dependencias]
+  → C-20 recordatorio-automatico-24-horas [Giovanni; comprobar todas sus dependencias]
 GATE 10: dependencias previas verificadas según tabla (nivel 10)
   → C-14 integracion-y-ejecucion-reproducible [Giovanni; comprobar todas sus dependencias]
 ```
@@ -140,7 +140,7 @@ Es una cadena de mayor longitud del DAG usando unidades equivalentes, no una est
 
 ### Plan aprobado con cuatro integrantes
 
-Giovanni aprobó el reparto el 19/11/2026. Las ondas preservan las dependencias y consideran una tarea por integrante en cada onda; son unidades abstractas, no días ni promesa de un óptimo temporal. C-01 está completado. Se permiten propuestas y contratos anticipados, pero la implementación requiere dependencias integradas y aprobaciones de gobernanza.
+Giovanni aprobó el reparto el 19/11/2026 y reasignó C-19 y C-20 el 25/11/2026. Las ondas preservan las dependencias; el plan original consideraba una tarea por integrante en cada onda y la reasignación requiere coordinar la secuencia de los dos items de Giovanni en la onda 10. Son unidades abstractas, no días ni promesa de un óptimo temporal. C-01 está completado. Se permiten propuestas y contratos anticipados, pero la implementación requiere dependencias integradas y aprobaciones de gobernanza.
 
 | Onda | Giovanni | Sofia | Luciano | Fabi |
 | --- | --- | --- | --- | --- |
@@ -152,9 +152,11 @@ Giovanni aprobó el reparto el 19/11/2026. Las ondas preservan las dependencias 
 | 6 | C-06 | C-21 | — | — |
 | 7 | C-08 | C-09 | C-10 | C-17 |
 | 8 | C-07 | C-22 | C-13 | C-18 |
-| 9 | — | C-24 | C-12 | C-19 |
-| 10 | C-25 | — | C-23 | C-20 |
+| 9 | C-19 | C-24 | C-12 | — |
+| 10 | C-25 y C-20 | — | C-23 | — |
 | 11 | C-14 | — | — | — |
+
+El 25/11/2026 Giovanni reasignó expresamente C-19 y C-20 de Fabi a sí mismo. Se conservan las dependencias y las ondas como referencia; C-25 y C-20 comparten responsable y su secuencia de ejecución queda por coordinar, sin presumir paralelismo personal.
 
 ## FASE 0 — Dominio aislado y persistencia base
 
@@ -400,7 +402,7 @@ Giovanni aprobó el reparto el 19/11/2026. Las ondas preservan las dependencias 
 
 ### [C-19] `email-al-crear-turno`
 - **Estado**: `[ ]` pendiente
-- **Responsable**: Fabi
+- **Responsable**: Giovanni
 - **Scope**: Email de alta con enlace de cancelación para US-011 y RN-EM-01.
   - Resolver PA-15/PA-17/PA-18: destinatario, contenido, efecto de fallos y creación dentro de las ventanas de 48/24 horas; no inventar excepciones al plazo.
   - Conectar la creación persistida con transporte C-17 y enlace C-18. Especificar qué ocurre ante fallo de email sin suponer que se elimina o confirma el turno.
@@ -415,7 +417,7 @@ Giovanni aprobó el reparto el 19/11/2026. Las ondas preservan las dependencias 
 
 ### [C-20] `recordatorio-automatico-24-horas`
 - **Estado**: `[ ]` pendiente
-- **Responsable**: Fabi
+- **Responsable**: Giovanni
 - **Scope**: Recordatorio de US-012 y RN-EM-02, separado de confirmaciones manuales.
   - Resolver PA-18: programación y referencia horaria, reprogramaciones, cancelaciones, altas cercanas, fallos y duplicados. Acordar tecnología antes de implementar.
   - Enviar automáticamente 24 horas antes usando C-17, sin opción de cancelar cuando venció el plazo de 48 horas. Conservar el registro manual de recepción.
