@@ -36,6 +36,17 @@ class ApiPacientesIT {
         assertTrue(denied.headers().firstValue("Access-Control-Allow-Origin").isEmpty());
     }
 
+    @Test void tokenInvalidoExponeEl401SoloAlOrigenConfigurado() throws Exception {
+        var permitido = conTokenInvalido("http://localhost:5173");
+        assertEquals(401, permitido.statusCode());
+        assertEquals("no_autenticado", json(permitido).get("codigo").asString());
+        assertEquals("http://localhost:5173",
+                permitido.headers().firstValue("Access-Control-Allow-Origin").orElse(null));
+        var ajeno = conTokenInvalido("https://otro.example.invalid");
+        assertEquals(403, ajeno.statusCode());
+        assertTrue(ajeno.headers().firstValue("Access-Control-Allow-Origin").isEmpty());
+    }
+
     @Test void recepcionLeePeroNoEditaClinicaYOdontologoNoEditaNotaAjena() throws Exception {
         String recepcion = login("recepcion-demo").get("token").asString();
         String odonto = login("odonto-demo").get("token").asString();
@@ -88,6 +99,12 @@ class ApiPacientesIT {
         builder.method(method, body == null ? HttpRequest.BodyPublishers.noBody()
                 : HttpRequest.BodyPublishers.ofString(JSON.writeValueAsString(body)));
         return HTTP.send(builder.build(), HttpResponse.BodyHandlers.ofString());
+    }
+    private static HttpResponse<String> conTokenInvalido(String origin) throws Exception {
+        return HTTP.send(HttpRequest.newBuilder(URI.create(fixture.base + "/pacientes"))
+                .timeout(Duration.ofSeconds(10)).header("Origin", origin)
+                .header("Authorization", "Bearer token-inexistente").GET().build(),
+                HttpResponse.BodyHandlers.ofString());
     }
     private static HttpResponse<String> preflight(String origin) throws Exception {
         return HTTP.send(HttpRequest.newBuilder(URI.create(fixture.base + "/pacientes"))
