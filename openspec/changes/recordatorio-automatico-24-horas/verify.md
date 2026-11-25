@@ -46,5 +46,5 @@ Se alteró temporalmente la implementación para comprobar que las pruebas nueva
 
 ## Pendiente
 
-- Envío real a una dirección de prueba del equipo, con autorización expresa (tarea 5.3).
+- Envío real a una dirección de prueba del equipo, con autorización expresa (tarea 5.3). La [prueba manual](../../../docs/evidencias/c20-envio-real/prueba-real-runbook.md) está preparada: el ensayo con servidor local y la validación previa de la configuración pasaron, sin envíos.
 - Archivo en OpenSpec, publicación e integración.

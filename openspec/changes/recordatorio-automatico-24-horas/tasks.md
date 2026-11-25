@@ -26,6 +26,7 @@
 - [x] 5.1 Ejecutar `mvn -f backend/pom.xml clean verify`, `openspec validate recordatorio-automatico-24-horas --strict` y las pruebas del roadmap; registrar en `verify.md`.
 - [x] 5.2 Obtener revisión independiente de duplicados, bordes temporales, concurrencia y datos en registros.
 - [ ] 5.3 Con autorización expresa y direcciones de prueba del equipo, realizar un envío real y registrar la evidencia sin credenciales ni direcciones.
+  - 25/11/2026: preparada la [prueba manual](../../../docs/evidencias/c20-envio-real/prueba-real-runbook.md); ensayo y validación previa sin envío. Falta la autorización del envío.
 - [x] 5.4 Actualizar el flujo 9 de la KB y `CHANGES.md` con el estado verificado.
 
 ## Workflow follow-up
