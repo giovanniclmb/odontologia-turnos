@@ -450,7 +450,7 @@ Giovanni aprobó el reparto el 19/11/2026. Las ondas preservan las dependencias 
 La política visual sigue diferida: resolverla antes de Apply y cumplir las aprobaciones de sistema/mockups que correspondan. Mantener HTML/CSS/TypeScript vanilla.
 
 ### [C-10] `interfaz-agenda-y-alta`
-- **Estado**: `[x]` implementado, verificado y archivado el 25/11/2026, con revisión independiente sin bloqueantes. Giovanni confirmó la coordinación con Luciano. [Verificación](openspec/changes/archive/2026-11-25-interfaz-agenda-y-alta/verify.md) · [Issue #11](https://github.com/giovanniclmb/odontologia-turnos/issues/11).
+- **Estado**: `[x]` implementado, verificado y archivado el 25/11/2026, con revisión independiente sin bloqueantes. Giovanni confirmó la coordinación con Luciano. [Verificación](openspec/changes/archive/2026-11-25-interfaz-agenda-y-alta/verify.md) · [PR #42](https://github.com/giovanniclmb/odontologia-turnos/pull/42) · [Issue #11](https://github.com/giovanniclmb/odontologia-turnos/issues/11).
 - **Responsable**: Luciano
 - **Scope**: Superficie interna de agenda diaria/semanal por sillón, alta y bloqueos (US-004, US-005, US-009 y US-010).
   - Resolver el gate visual, estructura/build frontend y contrato de uso del acceso interno aprobado. Incluir la superficie mínima de ingreso requerida por C-03, sin inventar un mecanismo nuevo.
