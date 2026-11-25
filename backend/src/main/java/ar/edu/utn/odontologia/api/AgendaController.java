@@ -50,12 +50,20 @@ public class AgendaController {
     @ResponseStatus(HttpStatus.CREATED)
     public TurnoResponse crear(@RequestBody CrearTurnoRequest cuerpo, HttpServletRequest request) {
         var identidad = Solicitudes.identidad(request);
-        var solicitud = cuerpo == null ? null : new ServicioAgenda.SolicitudAlta(
-                cuerpo.pacienteId(), cuerpo.profesionalId(), cuerpo.sillonId(), cuerpo.prestacionId(),
-                Solicitudes.instante(cuerpo.inicio()), Solicitudes.entero(cuerpo.duracionAjustadaMinutos()));
-        var turno = agenda.crear(identidad, solicitud);
+        var turno = agenda.crear(identidad, solicitudDeAlta(cuerpo));
         return new TurnoResponse(turno.id(), turno.profesionalId(), turno.sillonId(), turno.prestacionId(),
                 turno.inicio(), turno.fin(), turno.duracionMinutos(), turno.estado(), turno.version());
+    }
+
+    private static ServicioAgenda.SolicitudAlta solicitudDeAlta(CrearTurnoRequest cuerpo) {
+        if (cuerpo == null) {
+            return null;
+        }
+        var inicio = Solicitudes.instante(cuerpo.inicio());
+        var minutos = Solicitudes.entero(cuerpo.duracionAjustadaMinutos());
+        Solicitudes.exigirFinRepresentable(inicio, minutos);
+        return new ServicioAgenda.SolicitudAlta(cuerpo.pacienteId(), cuerpo.profesionalId(), cuerpo.sillonId(),
+                cuerpo.prestacionId(), inicio, minutos);
     }
 
     private static TurnoAgendaResponse mapear(ConsultaAgenda.TurnoAgenda vista) {

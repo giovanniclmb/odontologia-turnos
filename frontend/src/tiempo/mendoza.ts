@@ -7,11 +7,14 @@ const FORMATO = new Intl.DateTimeFormat("en-US", {
   year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit"
 });
 const MS_POR_DIA = 86_400_000;
+// La agenda no opera fuera de este rango; el margen superior permite calcular el período siguiente.
+const ANIO_MINIMO = 1970;
+const ANIO_MAXIMO = 9997;
 
 function partes(instante: Date): { fecha: string; hora: string } {
   const valores = new Map(FORMATO.formatToParts(instante).map((parte) => [parte.type, parte.value]));
   return {
-    fecha: `${valores.get("year")}-${valores.get("month")}-${valores.get("day")}`,
+    fecha: `${(valores.get("year") ?? "").padStart(4, "0")}-${valores.get("month")}-${valores.get("day")}`,
     hora: `${valores.get("hour")}:${valores.get("minute")}`
   };
 }
@@ -24,8 +27,14 @@ export function horaEnSede(instante: Date): string {
   return partes(instante).hora;
 }
 
-/** Devuelve null si la fecha u hora no existen o no respetan AAAA-MM-DD y HH:MM. */
+/** Devuelve null si la fecha u hora no existen, no respetan AAAA-MM-DD y HH:MM o exceden el rango admitido. */
 export function instanteDesdeSede(fecha: string, hora: string): Date | null {
+  const anio = Number(fecha.slice(0, 4));
+  return anio < ANIO_MINIMO || anio > ANIO_MAXIMO ? null : convertir(fecha, hora);
+}
+
+/** Sin límite de rango: la semana de una fecha admitida puede incluir días contiguos que lo exceden. */
+function convertir(fecha: string, hora: string): Date | null {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(fecha) || !/^\d{2}:\d{2}$/.test(hora)) return null;
   const comoUtc = Date.parse(`${fecha}T${hora}:00Z`);
   if (Number.isNaN(comoUtc)) return null;
@@ -50,7 +59,7 @@ export function diasDelPeriodo(vista: Vista, fecha: string): string[] {
 }
 
 export function inicioDelDia(fecha: string): Date {
-  const instante = instanteDesdeSede(fecha, "00:00");
+  const instante = convertir(fecha, "00:00");
   if (instante === null) throw new RangeError(`Fecha inválida: ${fecha}`);
   return instante;
 }

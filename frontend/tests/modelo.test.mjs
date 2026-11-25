@@ -60,3 +60,9 @@ test("a odontología le describe la afectación sin códigos ajenos", () => {
   assert.deepEqual(dia.elementos.map((e) => e.detalle),
     ["Afecta este sillón", "Afecta su agenda profesional", "Afecta este sillón y su agenda profesional"]);
 });
+
+test("un bloqueo que empieza en una fecha muy antigua no impide componer la agenda", () => {
+  const [dia] = componer({ bloqueos: [bloqueo("antiguo", "0001-01-01T00:00:00Z", "2026-11-25T15:00:00Z")] });
+  assert.equal(dia.elementos.length, 1);
+  assert.ok(dia.elementos[0].horario.startsWith("Desde "));
+});

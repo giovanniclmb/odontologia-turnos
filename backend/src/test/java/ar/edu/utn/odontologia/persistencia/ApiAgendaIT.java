@@ -211,6 +211,38 @@ class ApiAgendaIT {
     }
 
     @Test
+    void ningunAltaPuedeTerminarFueraDelRangoDeFechasAdmitido() throws Exception {
+        UUID sillon = nuevoSillon();
+        var valida = alta(fixture.paciente, fixture.profesional, sillon, nuevaPrestacion(30), "2090-10-01T12:00:00Z");
+        var desbordada = new LinkedHashMap<String, Object>(valida);
+        desbordada.put("inicio", "7000-01-01T12:00:00Z");
+        desbordada.put("duracionAjustadaMinutos", Integer.MAX_VALUE);
+        error(request("POST", "/agenda/turnos", tokenRecepcion, desbordada), 400, "solicitud_invalida");
+        var alLimite = new LinkedHashMap<String, Object>(valida);
+        alLimite.put("inicio", "9999-12-31T23:59:00Z");
+        error(request("POST", "/agenda/turnos", tokenRecepcion, alLimite), 400, "solicitud_invalida");
+        assertEquals(0, cantidadTurnos(sillon));
+    }
+
+    @Test
+    void unaPrestacionInexistenteSeInformaComoReferenciaInexistente() throws Exception {
+        UUID sillon = nuevoSillon();
+        var cuerpo = alta(fixture.paciente, fixture.profesional, sillon, UUID.randomUUID(), "2090-11-01T12:00:00Z");
+
+        error(request("POST", "/agenda/turnos", tokenRecepcion, cuerpo), 404, "solicitud_invalida");
+
+        assertEquals(0, cantidadTurnos(sillon));
+    }
+
+    @Test
+    void unTokenInvalidoSeRechazaEnLasOperacionesDeAgenda() throws Exception {
+        for (String ruta : List.of("/sede/intervalo", "/recursos/sillones", "/recursos/prestaciones")) {
+            error(request("GET", ruta, "token-inexistente", null), 401, "no_autenticado");
+        }
+        error(request("POST", "/agenda/turnos", "token-inexistente", Map.of()), 401, "no_autenticado");
+    }
+
+    @Test
     void lasConsultasExigenUnPeriodoValidoDeHastaSieteDias() throws Exception {
         UUID sillon = nuevoSillon();
         for (String ruta : List.of("/agenda/sillones/" + sillon + "/turnos?",

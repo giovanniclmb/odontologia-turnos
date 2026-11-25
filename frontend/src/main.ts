@@ -137,10 +137,10 @@ async function renderApp(): Promise<void> {
     </div>
   `;
   aplicarNombreMarca();
-  const aplicarRuta = montarNavegacion();
+  const navegacion = montarNavegacion();
   el<HTMLButtonElement>("btn-logout").addEventListener("click", async () => {
+    navegacion.cerrar();
     await logout();
-    window.onhashchange = null;
     history.replaceState(null, "", window.location.pathname);
     document.title = "Odontología";
     renderLogin();
@@ -174,7 +174,7 @@ async function renderApp(): Promise<void> {
       mostrarMensaje(mensaje, (error as Error).message, true);
     }
   });
-  aplicarRuta();
+  navegacion.aplicar();
   await cargarListado();
 }
 
@@ -186,8 +186,8 @@ const TITULOS: Record<Ruta["seccion"], string> = {
   configuracion: "Configuración"
 };
 
-/** Muestra la sección indicada por el hash y devuelve la función que vuelve a aplicarlo. */
-function montarNavegacion(): () => void {
+/** Muestra la sección indicada por el hash. */
+function montarNavegacion(): { aplicar(): void; cerrar(): void } {
   const user = currentUser();
   const rol = user?.rol === "recepcion" ? "recepcion" : "odontologo";
   const hoy = () => fechaEnSede(new Date());
@@ -222,7 +222,13 @@ function montarNavegacion(): () => void {
     else void seccion.mostrar(ruta);
   }
   window.onhashchange = aplicarRuta;
-  return aplicarRuta;
+  return {
+    aplicar: aplicarRuta,
+    cerrar(): void {
+      window.onhashchange = null;
+      seccion.cerrar();
+    }
+  };
 }
 
 async function cargarListado(codigo?: string, texto?: string): Promise<void> {

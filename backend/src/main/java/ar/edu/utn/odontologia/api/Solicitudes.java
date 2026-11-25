@@ -10,7 +10,9 @@ import java.time.format.DateTimeParseException;
 /** Validaciones de entrada compartidas por los controladores de agenda. */
 final class Solicitudes {
     private static final Instant MINIMO = Instant.parse("0001-01-01T00:00:00Z");
-    private static final Instant MAXIMO = Instant.parse("9999-12-31T23:59:59Z");
+    // El último año se reserva para que ningún fin calculado exceda las cuatro cifras que admite el contrato.
+    private static final Instant MAXIMO = Instant.parse("9998-12-31T23:59:59Z");
+    private static final Instant MAXIMO_FIN = Instant.parse("9999-12-31T23:59:59Z");
     private static final Duration PERIODO_MAXIMO = Duration.ofDays(7);
 
     private Solicitudes() {}
@@ -48,6 +50,14 @@ final class Solicitudes {
             return numero.intValueExact();
         } catch (ArithmeticException error) {
             throw new IllegalArgumentException("Se requiere un número entero");
+        }
+    }
+
+    /** Sin imponer una duración máxima de negocio, impide fechas de fin que los clientes no pueden representar. */
+    static void exigirFinRepresentable(Instant inicio, Integer minutos) {
+        if (inicio != null && minutos != null && minutos > 0
+                && inicio.plus(Duration.ofMinutes(minutos)).isAfter(MAXIMO_FIN)) {
+            throw new IllegalArgumentException("La duración excede el rango de fechas admitido");
         }
     }
 

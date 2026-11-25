@@ -29,9 +29,9 @@
 
 ## 5. Integración
 
-- [ ] 5.1 Ejecutar `./scripts/check-docker.sh`, `mvn -f backend/pom.xml clean verify` y `npm test`; registrar resultados en `verify.md`.
-- [ ] 5.2 Recorrer ambos roles contra la API real con datos ficticios, a 390×844 y 1440×900 y solo con teclado; registrar capturas y diferencias respecto de los mockups.
-- [ ] 5.3 Solicitar revisión independiente de permisos y exposición de datos; verificar que no queden hallazgos bloqueantes.
+- [x] 5.1 Ejecutar `./scripts/check-docker.sh`, `mvn -f backend/pom.xml clean verify` y `npm test`; registrar resultados en `verify.md`.
+- [x] 5.2 Recorrer ambos roles contra la API real con datos ficticios, a 390×844 y 1440×900 y solo con teclado; registrar capturas y diferencias respecto de los mockups.
+- [x] 5.3 Solicitar revisión independiente de permisos y exposición de datos; verificar que no queden hallazgos bloqueantes.
 
 ## Workflow follow-up
 

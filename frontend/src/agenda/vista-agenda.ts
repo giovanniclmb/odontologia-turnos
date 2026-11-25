@@ -35,6 +35,28 @@ function cabecera(contexto: Contexto, ruta: RutaAgenda): HTMLElement {
   return encabezado(doc, "Agenda por sillón", subtitulo, acciones);
 }
 
+/**
+ * Al tipear, cada dígito puede formar una fecha válida: navegar en ese momento destruiría el campo.
+ * Con teclado se aplica al salir o con Enter; elegida en el calendario, de inmediato.
+ */
+function alElegirFecha(control: HTMLInputElement, actual: string, aplicar: (fecha: string) => void): void {
+  let tecleando = false;
+  let aplicada = actual;
+  const confirmar = () => {
+    const elegida = control.value;
+    if (elegida === aplicada || instanteDesdeSede(elegida, "00:00") === null) return;
+    aplicada = elegida;
+    aplicar(elegida);
+  };
+  control.addEventListener("keydown", (evento) => {
+    if (evento.key === "Enter") confirmar();
+    else if (evento.key !== "Tab") tecleando = true;
+  });
+  control.addEventListener("pointerdown", () => { tecleando = false; });
+  control.addEventListener("change", () => { if (!tecleando) confirmar(); });
+  control.addEventListener("blur", confirmar);
+}
+
 function barra(contexto: Contexto, ruta: RutaAgenda, sillones: readonly Sillon[]): HTMLElement {
   const { doc } = contexto;
   const ir = (cambios: Partial<RutaAgenda>) => contexto.navegar({ ...ruta, ...cambios });
@@ -42,9 +64,7 @@ function barra(contexto: Contexto, ruta: RutaAgenda, sillones: readonly Sillon[]
     sillones.map((s) => ({ valor: s.id, texto: s.activo ? s.codigo : `${s.codigo} (inactivo)` })), ruta.sillonId ?? "");
   sillon.control.addEventListener("change", () => ir({ sillonId: sillon.control.value }));
   const fecha = entrada(doc, "agenda-fecha", ruta.vista === "dia" ? "Fecha" : "Fecha dentro de la semana", "date", ruta.fecha);
-  fecha.control.addEventListener("change", () => {
-    if (instanteDesdeSede(fecha.control.value, "00:00") !== null) ir({ fecha: fecha.control.value });
-  });
+  alElegirFecha(fecha.control, ruta.fecha, (elegida) => ir({ fecha: elegida }));
   const salto = ruta.vista === "dia" ? 1 : 7;
   const control = (id: string, texto: string, cambios: Partial<RutaAgenda>) => {
     const elemento = boton(doc, texto, "btn-secondary", () => ir(cambios));

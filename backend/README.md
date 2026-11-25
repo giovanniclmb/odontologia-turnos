@@ -153,7 +153,7 @@ Todas las rutas requieren `Authorization: Bearer <token>`; sin identidad respond
 | `PUT /sede/intervalo` | Establece `minutos`, entero positivo | Recepción |
 | `GET /recursos/sillones`, `GET /recursos/prestaciones` | Catálogos | Equipo |
 
-Los instantes usan ISO 8601 con zona, entre los años 1 y 9999. Las consultas aceptan períodos semiabiertos de hasta 7 días. Los errores devuelven `{codigo, mensaje}`:
+Los instantes usan ISO 8601 con zona, entre los años 1 y 9998; un alta cuyo fin superaría el año 9999 se rechaza. No hay una duración máxima de negocio definida. Las consultas aceptan períodos semiabiertos de hasta 7 días. Los errores devuelven `{codigo, mensaje}`:
 
 | Estado y código | Caso |
 | --- | --- |

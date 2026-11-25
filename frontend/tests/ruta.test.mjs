@@ -30,3 +30,9 @@ test("odontología no accede a bloqueo ni a configuración", () => {
   assert.equal(leerRuta("#configuracion", "odontologo", HOY).seccion, "agenda");
   assert.equal(leerRuta("#agenda/bloqueo", "odontologo", HOY).seccion, "agenda");
 });
+
+test("una fecha fuera de rango en la dirección vuelve a hoy", () => {
+  for (const fecha of ["0001-01-01", "0999-12-31", "9999-12-31"]) {
+    assert.equal(leerRuta(`#agenda?fecha=${fecha}`, "recepcion", HOY).fecha, HOY, fecha);
+  }
+});

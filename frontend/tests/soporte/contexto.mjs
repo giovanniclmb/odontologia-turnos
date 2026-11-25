@@ -35,6 +35,7 @@ export function apiFalsa(sustituciones = {}) {
 export function contexto({ api = apiFalsa().api, rol = "recepcion", profesionalRef = null } = {}) {
   const navegaciones = [];
   const reemplazos = [];
+  const enCurso = new Set();
   return {
     doc: documentoFalso(),
     raiz: new Nodo("main"),
@@ -45,6 +46,11 @@ export function contexto({ api = apiFalsa().api, rol = "recepcion", profesionalR
     navegar: (ruta) => navegaciones.push(ruta),
     reemplazar: (ruta) => reemplazos.push(ruta),
     vigente: () => true,
+    enviar: (clave, operacion) => {
+      if (enCurso.has(clave)) return null;
+      enCurso.add(clave);
+      return operacion().finally(() => enCurso.delete(clave));
+    },
     navegaciones,
     reemplazos
   };

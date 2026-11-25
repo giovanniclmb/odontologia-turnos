@@ -43,8 +43,8 @@ export function fechaCorta(fecha: string): string {
 
 function horario(inicio: Date, fin: Date): string {
   const fechaInicio = fechaEnSede(inicio);
-  // Terminar exactamente a medianoche sigue perteneciendo al día de inicio.
-  if (fin.getTime() <= inicioDelDia(sumarDias(fechaInicio, 1)).getTime()) {
+  // El fin se excluye: terminar exactamente a medianoche sigue perteneciendo al día de inicio.
+  if (fechaEnSede(new Date(fin.getTime() - 1)) === fechaInicio) {
     return `${horaEnSede(inicio)} – ${horaEnSede(fin)}`;
   }
   return `Desde ${fechaCorta(fechaInicio)} ${horaEnSede(inicio)} hasta ${fechaCorta(fechaEnSede(fin))} ${horaEnSede(fin)}`;

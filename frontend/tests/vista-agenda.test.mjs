@@ -133,3 +133,38 @@ test("no expone detalles internos de un error inesperado", async () => {
   await montarAgenda(ctx, ruta());
   assert.ok(!ctx.raiz.textContent.includes("SQLException"));
 });
+
+test("al tipear la fecha espera a salir del campo para no perder dígitos", async () => {
+  const ctx = contexto();
+  await montarAgenda(ctx, ruta());
+  const fecha = porId(ctx.raiz, "agenda-fecha");
+  fecha.emitir("keydown", { key: "1" });
+  fecha.value = "2026-11-01";
+  fecha.emitir("change");
+  assert.deepEqual(ctx.navegaciones, []);
+  fecha.emitir("keydown", { key: "5" });
+  fecha.value = "2026-11-15";
+  fecha.emitir("change");
+  fecha.emitir("blur");
+  fecha.emitir("blur");
+  assert.deepEqual(ctx.navegaciones, [ruta({ fecha: "2026-11-15" })]);
+});
+
+test("Enter aplica la fecha tipeada y el calendario la aplica al elegirla", async () => {
+  const tipeada = contexto();
+  await montarAgenda(tipeada, ruta());
+  const campo = porId(tipeada.raiz, "agenda-fecha");
+  campo.emitir("keydown", { key: "2" });
+  campo.value = "2026-12-02";
+  campo.emitir("change");
+  campo.emitir("keydown", { key: "Enter" });
+  assert.deepEqual(tipeada.navegaciones, [ruta({ fecha: "2026-12-02" })]);
+  const elegida = contexto();
+  await montarAgenda(elegida, ruta());
+  const otro = porId(elegida.raiz, "agenda-fecha");
+  otro.emitir("keydown", { key: " " });
+  otro.emitir("pointerdown");
+  otro.value = "2026-12-03";
+  otro.emitir("change");
+  assert.deepEqual(elegida.navegaciones, [ruta({ fecha: "2026-12-03" })]);
+});

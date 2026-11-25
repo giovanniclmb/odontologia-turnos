@@ -183,3 +183,17 @@ test("el error del intervalo se muestra asociado al campo y se limpia al corregi
   assert.equal(ayuda.className, "hint");
   assert.deepEqual(alertas(ctx.raiz), []);
 });
+
+test("una búsqueda correcta limpia el error de la anterior", async () => {
+  let intentos = 0;
+  const { api } = apiFalsa({ buscarPacientes: async () => { if (++intentos === 1) throw new TypeError("sin red"); return []; } });
+  const ctx = contexto({ api });
+  await montarAltaTurno(ctx, ruta("agenda/nuevo"));
+  escribir(ctx, { "turno-buscar": "Ana" });
+  boton(ctx.raiz, "Buscar").emitir("click");
+  await esperar();
+  assert.equal(alertas(ctx.raiz).length, 1);
+  boton(ctx.raiz, "Buscar").emitir("click");
+  await esperar();
+  assert.deepEqual(alertas(ctx.raiz), []);
+});

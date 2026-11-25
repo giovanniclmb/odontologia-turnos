@@ -38,3 +38,12 @@ test("los límites del período son medianoches de Mendoza con fin excluido", ()
   assert.deepEqual(limitesDePeriodo("dia", "2026-11-25"), { desde: "2026-11-25T03:00:00.000Z", hasta: "2026-11-26T03:00:00.000Z" });
   assert.deepEqual(limitesDePeriodo("semana", "2026-11-25"), { desde: "2026-11-23T03:00:00.000Z", hasta: "2026-11-30T03:00:00.000Z" });
 });
+
+test("los años fuera del rango admitido se rechazan sin lanzar errores", () => {
+  for (const fecha of ["0000-01-01", "0001-01-01", "0026-11-26", "1000-01-01", "1969-12-31", "9998-01-01", "9999-12-31"]) {
+    assert.equal(instanteDesdeSede(fecha, "09:00"), null, fecha);
+  }
+  assert.ok(instanteDesdeSede("1970-01-02", "00:00"));
+  assert.ok(limitesDePeriodo("semana", "9997-12-31").hasta);
+  assert.ok(limitesDePeriodo("semana", "1970-01-01").desde);
+});

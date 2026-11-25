@@ -32,6 +32,8 @@ function tarjeta(contexto: Contexto, inicial: number | null): HTMLElement {
     else minutos.ayuda.setAttribute("role", "alert");
   };
   const formulario = formularioUnico(doc, {
+    clave: "intervalo",
+    enviarUnaVez: contexto.enviar,
     campos: [minutos.contenedor],
     textoConfirmar: "Guardar intervalo",
     traducir: (error) => mensajeDeError(error, usuario.rol),

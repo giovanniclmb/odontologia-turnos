@@ -44,4 +44,6 @@ export interface Contexto {
   navegar(ruta: Ruta): void;
   reemplazar(ruta: Ruta): void;
   vigente(): boolean;
+  /** Inicia un envío; devuelve null si otro con la misma clave sigue en curso, aunque se haya cambiado de vista. */
+  enviar(clave: string, operacion: () => Promise<void>): Promise<void> | null;
 }

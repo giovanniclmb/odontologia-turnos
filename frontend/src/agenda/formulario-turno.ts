@@ -25,7 +25,7 @@ function cabecera(contexto: Contexto, ruta: RutaAgenda): HTMLElement {
     [boton(contexto.doc, "Volver a la agenda", "btn-secondary", () => contexto.navegar({ ...ruta, seccion: "agenda" }))]);
 }
 
-function buscadorDePacientes(contexto: Contexto, mostrarError: (texto: string) => void) {
+function buscadorDePacientes(contexto: Contexto, mostrarError: (texto: string) => void, limpiarError: () => void) {
   const { doc, api, usuario } = contexto;
   const texto = entrada(doc, "turno-buscar", "Buscar paciente", "search", "", usuario.rol === "recepcion"
     ? "Busque por código exacto, o por parte del nombre o del apellido."
@@ -43,6 +43,7 @@ function buscadorDePacientes(contexto: Contexto, mostrarError: (texto: string) =
     try {
       const encontrados = await api.buscarPacientes(consulta);
       if (propia !== busqueda || !contexto.vigente()) return;
+      limpiarError();
       cargarOpciones(doc, paciente.control, [
         { valor: "", texto: encontrados.length === 0 ? "Sin coincidencias" : "Seleccione un paciente" },
         ...encontrados.map((p) => ({ valor: p.id, texto: `${p.nombre} ${p.apellido} · ${p.codigo}` }))
@@ -85,7 +86,8 @@ function construir(contexto: Contexto, ruta: RutaAgenda, catalogos: CatalogosAlt
   const sillones = catalogos.sillones.filter((s) => s.activo);
   const prestaciones = catalogos.prestaciones.filter((p) => p.duracionReferenciaMinutos !== null);
   let formulario: Formulario | null = null;
-  const buscador = buscadorDePacientes(contexto, (texto) => formulario?.error.mostrar(texto));
+  const buscador = buscadorDePacientes(contexto, (texto) => formulario?.error.mostrar(texto),
+    () => formulario?.error.limpiar());
   const profesional = campoProfesional(contexto, catalogos.profesionales.filter((p) => p.activo));
   const sillon = seleccion(doc, "turno-sillon", "Sillón *", opcionesDe(sillones), ruta.sillonId ?? "");
   const prestacion = seleccion(doc, "turno-prestacion", "Prestación *", opcionesDe(prestaciones));
@@ -101,6 +103,8 @@ function construir(contexto: Contexto, ruta: RutaAgenda, catalogos: CatalogosAlt
   const hora = entrada(doc, "turno-hora", "Hora de inicio (Mendoza) *", "time");
 
   formulario = formularioUnico(doc, {
+    clave: "turno",
+    enviarUnaVez: contexto.enviar,
     campos: [...buscador.nodos, profesional.campo.contenedor, sillon.contenedor, prestacion.contenedor,
       duracion.contenedor, fecha.contenedor, hora.contenedor],
     textoConfirmar: "Crear turno",

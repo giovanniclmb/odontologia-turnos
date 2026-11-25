@@ -32,6 +32,8 @@ export async function montarAltaBloqueo(contexto: Contexto, ruta: RutaAgenda): P
     const grupo = (titulo: string, campos: readonly Node[]) =>
       nodo(doc, "fieldset", {}, [nodo(doc, "legend", { texto: titulo }), ...campos]);
     const formulario = formularioUnico(doc, {
+      clave: "bloqueo",
+      enviarUnaVez: contexto.enviar,
       campos: [
         grupo("Recursos (al menos uno)", [sillon.contenedor, profesional.contenedor]),
         grupo("Desde (hora de Mendoza)", [desdeFecha.contenedor, desdeHora.contenedor]),

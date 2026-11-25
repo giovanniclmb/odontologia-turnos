@@ -30,7 +30,7 @@ Ver [proposal.md](proposal.md). `ServicioAgenda`, `ServicioBloqueos`, `ServicioC
 | `PUT /sede/intervalo` | Establecer | `config:intervalo` |
 | `GET /recursos/sillones`, `GET /recursos/prestaciones` | Catálogos | identidad interna |
 
-- Instantes en ISO 8601 con zona. Las consultas admiten un período máximo de 7 días: alcanza para la vista semanal y evita listados sin límite. Se descartó paginar porque la grilla necesita el período completo.
+- Instantes en ISO 8601 con zona, hasta 9998 para dejar margen al fin calculado, que no puede superar 9999. No fija una duración máxima de negocio. Las consultas admiten un período máximo de 7 días: alcanza para la vista semanal y evita listados sin límite. Se descartó paginar porque la grilla necesita el período completo.
 - DTO `record` propios de transporte, validados al ingresar. `minutos` y `duracionAjustadaMinutos` rechazan decimales en vez de truncarlos.
 - Se conserva el formato de error `{codigo, mensaje}` de C-11. Migrar a `ProblemDetail` rompería ese contrato y queda fuera.
 
@@ -55,7 +55,7 @@ El caso sin configurar usa una excepción propia que extiende `IllegalStateExcep
 - El estado de la vista (sección, día o semana, fecha, sillón) va en el hash de la URL.
 - El render usa nodos y `textContent`; los nombres no se interpolan en HTML.
 - Vista como lista cronológica por día, no grilla horaria: sin jornada definida (PA-04), una grilla obligaría a inventar un rango. En 1440 px la semana usa columnas; en 390 px se apila.
-- El botón de envío se deshabilita mientras la petición está en curso. Es la única protección contra bloqueos duplicados, que el modelo permite.
+- Cada operación admite un solo envío en curso por sección, aun si se cambia de vista, y el botón se deshabilita. Es la única protección contra bloqueos duplicados, que el modelo permite. Cubre una pestaña, no varias.
 
 ## UI Mockups
 
@@ -64,7 +64,7 @@ El caso sin configurar usa una excepción propia que extiende `IllegalStateExcep
 - Mockups: openspec/changes/interfaz-agenda-y-alta/mockups/
 - Approval: approved (2026-11-25, by user: mockups y plan)
 - Preview: rendered (2026-11-25, previews/)
-- Visual verify: pending
+- Visual verify: differences (minor, 2026-11-25; ver verify.md y mockups/verify/)
 
 ## Risks / Trade-offs
 

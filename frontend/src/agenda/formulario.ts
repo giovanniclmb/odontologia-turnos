@@ -1,6 +1,7 @@
 /** Envío único y errores sin perder lo ingresado. */
 import { boton, nodo, type Documento } from "../dom/nodo.js";
 import { zonaDeError } from "./comunes.js";
+import type { Contexto } from "./contexto.js";
 
 export interface Formulario {
   nodo: HTMLFormElement;
@@ -9,6 +10,9 @@ export interface Formulario {
 }
 
 export interface OpcionesFormulario {
+  /** Identifica la operación para impedir repetirla mientras está en curso. */
+  clave: string;
+  enviarUnaVez: Contexto["enviar"];
   campos: readonly Node[];
   textoConfirmar: string;
   alCancelar?: () => void;
@@ -25,10 +29,9 @@ export function formularioUnico(doc: Documento, opciones: OpcionesFormulario): F
     ? [confirmar] : [boton(doc, "Cancelar", "btn-secondary", opciones.alCancelar), confirmar];
   const formulario = nodo(doc, "form", { clase: "patient-form", atributos: { novalidate: "" } },
     [error.nodo, ...opciones.campos, nodo(doc, "div", { clase: "form-actions" }, acciones)]);
-  let enviando = false;
   formulario.addEventListener("submit", (evento) => {
     evento.preventDefault();
-    if (enviando || confirmar.disabled) return;
+    if (confirmar.disabled) return;
     const preparado = opciones.enviar();
     if (preparado === null) {
       error.limpiar();
@@ -39,12 +42,15 @@ export function formularioUnico(doc: Documento, opciones: OpcionesFormulario): F
       return;
     }
     error.limpiar();
-    enviando = true;
+    const envio = opciones.enviarUnaVez(opciones.clave, preparado);
+    if (envio === null) {
+      error.mostrar("Hay un envío en curso. Espere su resultado antes de enviar otro.");
+      return;
+    }
     confirmar.disabled = true;
-    void preparado()
+    void envio
       .catch((fallo: unknown) => error.mostrar(opciones.traducir(fallo)))
       .finally(() => {
-        enviando = false;
         confirmar.disabled = false;
       });
   });
