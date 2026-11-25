@@ -30,9 +30,7 @@ public class ServicioAutorizacion {
                     Permiso.AGENDA_SILLON_CONSULTAR,
                     Permiso.FICHA_LEER,
                     Permiso.FICHA_EDITAR,
-                    Permiso.PACIENTE_DATOS_ADMIN,
-                    Permiso.CONFIRMACION_REGISTRAR,
-                    Permiso.PENDIENTES_CONSULTAR));
+                    Permiso.PACIENTE_DATOS_ADMIN));
 
     public boolean tienePermiso(Identidad identidad, Permiso permiso) {
         if (identidad == null || identidad.rol() == null || permiso == null) {

@@ -2,6 +2,7 @@ package ar.edu.utn.odontologia.agenda.persistencia;
 
 import ar.edu.utn.odontologia.agenda.EstadoTurno;
 import java.time.Instant;
+import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 import org.springframework.data.jpa.repository.Query;
@@ -18,21 +19,28 @@ public interface TurnosPersistidos extends Repository<TurnoPersistido, UUID> {
     TurnoPersistido save(TurnoPersistido turno);
 
     @Query(PROYECTAR_TURNO + """
-            where t.estado = :estado and (t.profesionalId = :profesional or t.sillonId = :sillon)
+            where t.estado in :estados and (t.profesionalId = :profesional or t.sillonId = :sillon)
               and t.inicio < :fin and t.fin > :inicio
               and (:turnoExcluido is null or t.id <> :turnoExcluido)
             """)
     List<TurnoLeido> buscarOcupantes(UUID profesional, UUID sillon, Instant inicio, Instant fin,
-                                   EstadoTurno estado, UUID turnoExcluido);
+                                   Collection<EstadoTurno> estados, UUID turnoExcluido);
 
     @Query("""
             select exists (
                 select t.id from TurnoPersistido t
-                where t.estado = :estado and (t.profesionalId = :profesional or t.sillonId = :sillon)
+                where t.estado in :estados and (t.profesionalId = :profesional or t.sillonId = :sillon)
                   and t.inicio < :fin and t.fin > :inicio
             )
             """)
-    boolean existeOcupante(UUID profesional, UUID sillon, Instant inicio, Instant fin, EstadoTurno estado);
+    boolean existeOcupante(UUID profesional, UUID sillon, Instant inicio, Instant fin,
+                           Collection<EstadoTurno> estados);
+
+    @Query(PROYECTAR_TURNO + """
+            where t.estado = :estado and t.inicio > :ahora
+            order by t.inicio, t.id
+            """)
+    List<TurnoLeido> consultarPendientes(EstadoTurno estado, Instant ahora);
 
     @Query(PROYECTAR_TURNO + """
             where t.sillonId = :sillon and (:profesional is null or t.profesionalId = :profesional)

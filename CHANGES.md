@@ -334,10 +334,10 @@ Giovanni aprobó el reparto el 19/11/2026. Las ondas preservan las dependencias 
   - [10 Preguntas abiertas](knowledge-base/10_preguntas_abiertas.md) §PA-02 y PA-05
 
 ### [C-09] `confirmaciones-manuales`
-- **Estado**: `[ ]` pendiente
+- **Estado**: `[x]` implementado y verificado localmente. Pasaron 114 pruebas unitarias y se verificaron 185 de integración con PostgreSQL 18.7, incluidas las 104 de la reejecución focalizada tras actualizar las pruebas de migración a V11. [Tareas](openspec/changes/c-09-confirmaciones-manuales/tasks.md)
 - **Responsable**: Sofia
 - **Scope**: Listado de pendientes y registro manual del seguimiento por recepción.
-  - Resolver PA-02 y PA-05 para condición de pertenencia al listado, representación, transición y duplicación de confirmaciones.
+  - Aplicar la [resolución acotada de PA-02 y PA-05](knowledge-base/10_preguntas_abiertas.md#resolución-acotada-para-c-09-24112026) para listado, transición, versiones y alcance por rol.
   - Implementar el listado y la operación backend de registro de US-008 y RN-AG-08, con contratos acordados y datos ficticios.
   - Tests: solo aparecen los turnos que cumplen la condición definida, confirmación permitida a recepción y resultados ante errores/duplicación según el spec.
   - Esta ficha conserva el seguimiento manual; los emails automáticos pertenecen a C-17/C-19/C-20/C-22. No añadir WhatsApp ni convertir el recordatorio en confirmación automática.

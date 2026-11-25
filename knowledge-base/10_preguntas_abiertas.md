@@ -95,3 +95,8 @@ Estas decisiones cierran PA-05/06/07 únicamente para el alcance de C-04; no res
 - **PA-02 — versión y repetición:** una versión desactualizada se rechaza pidiendo recargar. Con versión vigente, repetir sobre un turno cancelado se rechaza indicando que ya está cancelado. Un rechazo o rollback no modifica los datos ni genera una nueva liberación.
 - **Integración:** el resultado devuelve el turno actualizado para identificar recursos y período liberados después del commit, también cuando la confirmación depende de una transacción exterior. C-08 no agrega infraestructura de eventos.
 - Giovanni aprobó el [diseño](../openspec/changes/archive/2026-11-24-cancelar-y-liberar-horario/design.md) y el [plan de Apply](../openspec/changes/archive/2026-11-24-cancelar-y-liberar-horario/tasks.md) el 24/11/2026. El corte de 48 horas del enlace de C-18 y el tratamiento de emails/avisos siguen fuera de esta resolución.
+
+## Resolución acotada para C-09 (24/11/2026)
+
+- **PA-02 y PA-05.** Solo recepción consulta y confirma los turnos pendientes de toda la sede. El listado y la confirmación requieren un inicio estrictamente futuro. La confirmación manual cambia el estado a `CONFIRMADO`, conserva la ocupación de ambos recursos, incrementa la versión y rechaza repeticiones.
+- **PA-02.** Recepción puede cancelar o reprogramar un turno confirmado antes de que empiece. Al reprogramarlo vuelve a `PENDIENTE`. El detalle del contrato interno está en el [delta de agenda](../openspec/changes/c-09-confirmaciones-manuales/specs/agenda-persistida/spec.md).
