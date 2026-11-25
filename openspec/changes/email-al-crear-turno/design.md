@@ -50,7 +50,9 @@ El adaptador registra `HTTP <estado>` o el tipo de excepción, sin cuerpo ni men
 
 - [Un proceso que cae entre el commit y el envío pierde el email] → aceptado con «solo registrar»; no queda registro.
 - [Un envío fallido ocupa su clave y no se puede repetir] → aceptado; una reprogramación genera uno nuevo.
-- [El turno puede cambiar entre la comprobación y la llamada al proveedor] → ventana mínima aceptada; un enlace viejo se rechaza.
+- [El turno puede cambiar entre la comprobación y el fin del envío] → la comprobación precede al primer intento y los reintentos pueden durar unos 30 segundos; en ese lapso sale el mensaje anterior, cuyo enlace se rechaza. Revalidar por intento exige cambiar el puerto de C-17.
+- [Sin enlace, un turno que cambia solo de recurso o que vuelve al mismo horario antes del envío conserva vigente el aviso anterior] → pueden salir dos mensajes con la misma fecha.
+- [Al cerrar, la espera de 10 segundos es menor que un envío con reintentos] → se pierden avisos en cola y uno interrumpido puede quedar `pending`.
 - [Sin página de cancelación el enlace no funciona en el navegador] → C-23 debe leer el token del fragmento y usar `POST`.
 - [El remitente de prueba de Resend solo entrega a la dirección de la cuenta] → condiciona la evidencia real; confirmar antes de enviar.
 - [Un entorno con configuración real envía al crear turnos de pacientes cuya dirección esté en la lista] → las pruebas usan transporte falso y direcciones ficticias.
