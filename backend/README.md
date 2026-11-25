@@ -174,3 +174,19 @@ java -cp "target/test-classes:target/classes:$(cat target/demo-classpath)" ar.ed
 ```
 
 `ApiC10Demo` suma al fixture de C-11 los sillones `SIL-01` y `SIL-02`, las prestaciones `CONTROL` y `TRATAMIENTO` y un paciente sin asignación, todos ficticios. El intervalo queda sin configurar. Usa los mismos usuarios de prueba, nunca en una base persistente. Ctrl-C cierra la API y su contenedor.
+
+### C-19 — Email del turno
+
+Cada alta y cada reprogramación confirmadas envían un email en texto plano a la dirección de la ficha del paciente, con su nombre, la fecha y hora de Mendoza y, si faltan más de 48 horas, el enlace de cancelación y su fecha límite. Confirmar, cancelar o reprogramar al mismo destino (horario, profesional y sillón) no envía nada; cambiar solo el profesional o el sillón sí envía, porque es una reprogramación efectiva.
+
+El envío ocurre después del commit, en un hilo aparte con una cola de 100 avisos, y nunca afecta al turno. Antes de enviar se descarta el mensaje si el turno se canceló, cambió de horario o su enlace fue reemplazado. La comprobación es previa al primer intento: con un proveedor lento, los reintentos pueden durar unos 30 segundos y un cambio en ese lapso no detiene el mensaje.
+
+No hay reenvío posterior. Los rechazos y fallos del transporte quedan en `odontologia.email_envio` y en el registro de la aplicación, con el turno y el motivo; si falla la propia persistencia, puede no haber fila o quedar `pending` y solo consta en el registro. La URL base ausente y los errores al preparar el mensaje solo se registran en la aplicación; el descarte por cola llena se registra sin identificar el turno. Se pierden avisos si el proceso cae o si al cerrar no terminan en 10 segundos; un envío interrumpido puede quedar `pending`, que impide repetir esa clave.
+
+| Variable | Uso |
+| --- | --- |
+| `RESEND_API_KEY`, `EMAIL_FROM` | Credencial y remitente del transporte de C-17 |
+| `EMAIL_TEST_ALLOWLIST` | Únicas direcciones a las que se envía; cualquier otra queda registrada como fallida |
+| `EMAIL_CANCELACION_URL_BASE` | Dirección `http` o `https`, sin `#` ni credenciales, a la que se agrega `#<token>`. Si falta, no se envían los emails que necesitan enlace |
+
+La página que lee el token del fragmento y cancela con `POST /cancelacion/{token}` corresponde a C-23: hasta entonces el enlace no permite cancelar desde el navegador. Al ejecutarlas con Maven, las pruebas de integración vacían la credencial, el remitente y la lista definidos en el entorno; `EnvioEmailTurnoIT` usa además un servidor local en lugar del proveedor.

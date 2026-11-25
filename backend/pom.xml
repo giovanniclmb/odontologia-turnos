@@ -61,7 +61,10 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-failsafe-plugin</artifactId>
         <version>3.6.1</version>
-        <configuration><failIfNoTests>true</failIfNoTests></configuration>
+        <configuration><failIfNoTests>true</failIfNoTests>
+          <!-- Las pruebas de integración nunca usan credenciales ni destinatarios reales del entorno. -->
+          <environmentVariables><RESEND_API_KEY></RESEND_API_KEY><EMAIL_FROM></EMAIL_FROM><EMAIL_TEST_ALLOWLIST></EMAIL_TEST_ALLOWLIST></environmentVariables>
+        </configuration>
         <executions><execution><goals><goal>integration-test</goal><goal>verify</goal></goals></execution></executions>
       </plugin>
       <plugin>

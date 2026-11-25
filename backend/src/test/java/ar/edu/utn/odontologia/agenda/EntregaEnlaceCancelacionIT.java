@@ -93,6 +93,9 @@ class EntregaEnlaceCancelacionIT {
         assertEquals(1, consumidor.recibidos.size());
         var enlace = consumidor.recibidos.getFirst();
         assertEquals(turno.id(), enlace.turnoId());
+        assertEquals(TurnoProgramado.Motivo.ALTA, enlace.motivo());
+        assertEquals(turno.inicio(), enlace.inicio());
+        assertEquals(Long.parseLong(turno.version()), enlace.version());
         assertEquals(turno.id(), agenda.cancelarPorToken(enlace.token()).id());
     }
 
@@ -102,9 +105,13 @@ class EntregaEnlaceCancelacionIT {
         var anterior = consumidor.recibidos.getFirst().token();
         consumidor.reiniciar();
 
-        mover(turno, INICIO.plus(Duration.ofHours(2)));
+        var movido = mover(turno, INICIO.plus(Duration.ofHours(2)));
 
-        var nuevo = consumidor.recibidos.getFirst().token();
+        var aviso = consumidor.recibidos.getFirst();
+        assertEquals(TurnoProgramado.Motivo.REPROGRAMACION, aviso.motivo());
+        assertEquals(movido.inicio(), aviso.inicio());
+        assertEquals(Long.parseLong(movido.version()), aviso.version());
+        var nuevo = aviso.token();
         assertEquals(1, consumidor.recibidos.size());
         assertNotEquals(anterior, nuevo);
         assertThrows(TokenCancelacionInvalidoException.class, () -> agenda.cancelarPorToken(anterior));
@@ -122,8 +129,20 @@ class EntregaEnlaceCancelacionIT {
     }
 
     @Test
-    void noEntregaConLaVentanaCerrada() {
-        alta(BASE.plus(Duration.ofHours(47)));
+    void avisaSinTokenConLaVentanaCerrada() {
+        var turno = alta(BASE.plus(Duration.ofHours(47)));
+
+        assertEquals(1, consumidor.recibidos.size());
+        assertEquals(turno.id(), consumidor.recibidos.getFirst().turnoId());
+        assertNull(consumidor.recibidos.getFirst().token());
+    }
+
+    @Test
+    void noAvisaCuandoElDestinoEsIdentico() {
+        var turno = alta(INICIO);
+        consumidor.reiniciar();
+
+        mover(turno, INICIO);
 
         assertTrue(consumidor.recibidos.isEmpty());
     }
@@ -152,7 +171,8 @@ class EntregaEnlaceCancelacionIT {
 
     @Test
     void elTextoDelEventoNoContieneElToken() {
-        var texto = new EnlaceCancelacionEmitido(UUID.randomUUID(), "valor-secreto-ficticio").toString();
+        var texto = new TurnoProgramado(UUID.randomUUID(), 0, INICIO, TurnoProgramado.Motivo.ALTA,
+                "valor-secreto-ficticio").toString();
 
         assertFalse(texto.contains("valor-secreto-ficticio"), texto);
     }
@@ -184,11 +204,11 @@ class EntregaEnlaceCancelacionIT {
 
     /** Hace el papel de C-19. */
     static class Consumidor {
-        final List<EnlaceCancelacionEmitido> recibidos = new CopyOnWriteArrayList<>();
+        final List<TurnoProgramado> recibidos = new CopyOnWriteArrayList<>();
         volatile boolean fallar;
 
         @TransactionalEventListener
-        public void recibir(EnlaceCancelacionEmitido enlace) {
+        public void recibir(TurnoProgramado enlace) {
             recibidos.add(enlace);
             if (fallar) throw new IllegalStateException("Fallo simulado del consumidor");
         }

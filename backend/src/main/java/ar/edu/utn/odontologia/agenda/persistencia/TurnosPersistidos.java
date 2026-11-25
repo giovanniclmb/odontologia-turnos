@@ -4,6 +4,7 @@ import ar.edu.utn.odontologia.agenda.EstadoTurno;
 import java.time.Instant;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
@@ -17,6 +18,11 @@ public interface TurnosPersistidos extends Repository<TurnoPersistido, UUID> {
             """;
 
     TurnoPersistido save(TurnoPersistido turno);
+
+    @Query(PROYECTAR_TURNO + """
+            where t.id = :id
+            """)
+    Optional<TurnoLeido> buscar(UUID id);
 
     @Query(PROYECTAR_TURNO + """
             where t.estado in :estados and (t.profesionalId = :profesional or t.sillonId = :sillon)
