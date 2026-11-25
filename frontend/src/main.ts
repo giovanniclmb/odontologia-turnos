@@ -17,6 +17,13 @@ function mostrarMensaje(contenedor: HTMLElement, mensaje: string, error = false)
   contenedor.className = error ? "mensaje error" : "mensaje";
 }
 
+function formatearFecha(fechaIso: string): string {
+  const fecha = new Date(fechaIso);
+  return Number.isNaN(fecha.getTime())
+    ? fechaIso
+    : new Intl.DateTimeFormat("es-AR", { dateStyle: "short", timeStyle: "short" }).format(fecha);
+}
+
 function aplicarNombreMarca(): void {
   (window as Window & { applyBrandName?: () => void }).applyBrandName?.();
 }
@@ -242,12 +249,12 @@ function renderEstadoDetalle(mensaje: string, error = false): string {
 function renderDetalle(paciente: Paciente, ficha: Ficha | null, profesionales: Profesional[], fichaError: boolean): string {
   const asignados = renderProfesionalesAsignados(paciente.profesionalesAsignados, profesionales);
   const recepcion = esRecepcion();
-  const usuarioActual = currentUser()?.usuarioId;
+  const usuario = currentUser();
   const notasHtml = (ficha?.notas ?? []).map((n) => `
     <li>
       <p>${escape(n.texto)}</p>
-      <small>Autor: ${escape(n.autorId)} - ${escape(n.creadaEn)}</small>
-      ${!recepcion && n.autorId === usuarioActual ? `<button data-editar-nota="${escape(n.id)}">Editar</button>` : ""}
+      <small>Autor: ${escape(n.autorId === usuario?.usuarioId ? `${usuario.nombreUsuario} (${n.autorId})` : `Otro profesional (${n.autorId})`)} · ${escape(formatearFecha(n.creadaEn))}</small>
+      ${!recepcion && n.autorId === usuario?.usuarioId ? `<button class="btn btn-ghost btn-sm" data-editar-nota="${escape(n.id)}">Editar</button>` : ""}
     </li>
   `).join("");
   return `
@@ -330,6 +337,7 @@ function adjuntarEventosDetalle(paciente: Paciente, profesionales: Profesional[]
       });
       mostrarMensaje(mensaje, "Datos actualizados");
       await verDetalle(paciente.id);
+      mostrarMensaje(el<HTMLParagraphElement>("detalle-mensaje"), "Datos actualizados");
     } catch (error) {
       mostrarMensaje(mensaje, (error as Error).message, true);
     }
@@ -340,8 +348,8 @@ function adjuntarEventosDetalle(paciente: Paciente, profesionales: Profesional[]
       const select = el<HTMLSelectElement>("select-profesional");
       try {
         await asignarProfesional(paciente.id, select.value);
-        mostrarMensaje(mensaje, "Profesional asignado");
         await verDetalle(paciente.id);
+        mostrarMensaje(el<HTMLParagraphElement>("detalle-mensaje"), "Profesional asignado");
       } catch (error) {
         mostrarMensaje(mensaje, (error as Error).message, true);
       }
@@ -350,8 +358,8 @@ function adjuntarEventosDetalle(paciente: Paciente, profesionales: Profesional[]
       const select = el<HTMLSelectElement>("select-profesional");
       try {
         await desasignarProfesional(paciente.id, select.value);
-        mostrarMensaje(mensaje, "Asignación quitada");
         await verDetalle(paciente.id);
+        mostrarMensaje(el<HTMLParagraphElement>("detalle-mensaje"), "Asignación quitada");
       } catch (error) {
         mostrarMensaje(mensaje, (error as Error).message, true);
       }
@@ -361,8 +369,8 @@ function adjuntarEventosDetalle(paciente: Paciente, profesionales: Profesional[]
       const texto = (el<HTMLTextAreaElement>("antecedentes")).value;
       try {
         await actualizarAntecedentes(paciente.id, texto);
-        mostrarMensaje(mensaje, "Antecedentes guardados");
         await verDetalle(paciente.id);
+        mostrarMensaje(el<HTMLParagraphElement>("detalle-mensaje"), "Antecedentes guardados");
       } catch (error) {
         mostrarMensaje(mensaje, (error as Error).message, true);
       }
@@ -371,8 +379,8 @@ function adjuntarEventosDetalle(paciente: Paciente, profesionales: Profesional[]
       const texto = (el<HTMLTextAreaElement>("nueva-nota")).value.trim();
       try {
         await agregarNota(paciente.id, texto);
-        mostrarMensaje(mensaje, "Nota agregada");
         await verDetalle(paciente.id);
+        mostrarMensaje(el<HTMLParagraphElement>("detalle-mensaje"), "Nota agregada");
       } catch (error) {
         mostrarMensaje(mensaje, (error as Error).message, true);
       }
@@ -385,8 +393,8 @@ function adjuntarEventosDetalle(paciente: Paciente, profesionales: Profesional[]
         if (nuevo === null) return;
         try {
           await editarNota(paciente.id, notaId, nuevo);
-          mostrarMensaje(mensaje, "Nota actualizada");
           await verDetalle(paciente.id);
+          mostrarMensaje(el<HTMLParagraphElement>("detalle-mensaje"), "Nota actualizada");
         } catch (error) {
           mostrarMensaje(mensaje, (error as Error).message, true);
         }
