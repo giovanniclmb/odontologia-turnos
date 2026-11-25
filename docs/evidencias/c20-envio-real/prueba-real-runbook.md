@@ -42,4 +42,12 @@ Anotar fecha y hora, resultado de la prueba, estado observado en el panel y su i
 
 ## Preparación
 
-El 25/11/2026 el ensayo y la validación previa de la configuración pasaron. No se envió ningún correo real.
+El 25/11/2026 el ensayo y la validación previa de la configuración pasaron sin enviar correos.
+
+## Resultado de la ejecución autorizada
+
+El 25/11/2026 a las 16:30 (America/Mendoza), con autorización expresa del usuario, se ejecutó una vez `SEND_ONE_C20_TEST`: Maven terminó con código 0, 1 prueba sin fallos. La prueba exige que el registro temporal quede `sent` con un intento, también después de una segunda revisión, lo que indica una respuesta 2xx de Resend. En el registro de la ejecución no aparecieron la credencial ni la dirección.
+
+La aplicación que prepara el turno registró que no envió el email de alta por no tener `EMAIL_CANCELACION_URL_BASE`; es lo esperado, y esa aplicación además no tiene salida de correo.
+
+La confirmación de recepción está pendiente. No se registraron el estado ni el identificador del panel de Resend. No repetir el envío.
