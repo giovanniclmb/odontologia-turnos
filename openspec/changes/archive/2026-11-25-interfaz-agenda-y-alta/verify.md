@@ -72,10 +72,20 @@ Un agente sin el contexto de la implementación revisó `main..HEAD` en modo de 
 | Hallazgo | Estado |
 | --- | --- |
 | No hay duración máxima de un turno: una duración enorme ocupa recursos durante años y C-10 no ofrece cancelar | Regla de dominio pendiente de decisión |
-| El `401` del filtro de token sale sin cabecera CORS, así que una sesión vencida puede mostrarse como falta de conexión | Preexistente en C-11; pendiente de decisión |
 | A recepción, un bloqueo que no afecta al sillón consultado se muestra igual como «No disponible» | Cumple el spec y el mockup aprobado; ajuste visual pendiente de decisión |
 | `404` de referencia inexistente comparte el código `solicitud_invalida` y se distingue por el estado | Se conserva el contrato de C-11 |
 | Con datos inválidos, odontología recibe `400` antes que `403`, y sin token un cuerpo mal formado recibe `400` antes que `401` | No persiste ni expone datos |
 | Cadenas vacías se interpretan como ausentes, `"15"` se acepta como número y los campos desconocidos se ignoran | La interfaz no los envía |
 | `415`, `405` y `/recursos/profesionales` sin token no siguen el formato o estado de las rutas nuevas | Preexistente |
 | El foco puede perderse durante envíos y cargas; los errores de alta y bloqueo no se asocian a cada campo | Mejora de accesibilidad pendiente |
+
+## Correcciones sumadas antes de integrar
+
+El 25/11/2026 el usuario pidió sumar a este PR las correcciones del `401` sin cabecera CORS, preexistente en C-11, que antes figuraba entre lo no corregido.
+
+| Commit | Cambio |
+| --- | --- |
+| `29cd92c` | Un filtro CORS precede a los demás, de modo que el `401` por token inválido llega al origen permitido |
+| `78e647c` | Una falla interna al resolver el token responde `500 error_interno` con un identificador de correlación, sin detalles internos |
+
+Sobre el árbol combinado con `ba9b2a2`, `mvn -f backend/pom.xml clean verify` terminó con 129 pruebas unitarias y 219 de integración, sin fallos, errores ni omisiones. No cambian el código de la interfaz, las especificaciones ni el esquema. Esa ejecución no incluye una comprobación en navegador de la sesión vencida.

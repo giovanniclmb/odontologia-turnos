@@ -141,7 +141,7 @@ El fixture imprime `C11_DEMO_URL` con su puerto aleatorio. Crea únicamente dato
 
 ### C-10 — HTTP de agenda, bloqueos, intervalo y catálogos
 
-Todas las rutas requieren `Authorization: Bearer <token>`; sin identidad responden `401 no_autenticado`. El backend aplica permiso y alcance en cada operación.
+Todas las rutas requieren `Authorization: Bearer <token>`; sin identidad responden `401 no_autenticado`, con las cabeceras CORS si el origen está permitido. Una falla interna al resolver el token responde `500 error_interno` con `correlacion`; el detalle queda solo en el registro del servidor. El backend aplica permiso y alcance en cada operación.
 
 | Método y ruta | Uso | Acceso |
 | --- | --- | --- |
