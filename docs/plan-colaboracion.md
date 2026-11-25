@@ -89,7 +89,7 @@ Las siguientes medidas quedan preparadas para acordar con el equipo; no configur
 
 ## Entornos reproducibles y base de datos
 
-Cada integrante deberá poder clonar, consultar instrucciones y regenerar su registro local de skills verificando disponibilidad real. `.atl/skill-registry.md` está ignorado por Git y no se distribuye automáticamente. [README](../README.md) documenta las limitaciones actuales de herramientas y utilidades.
+Cada integrante deberá poder clonar, consultar instrucciones y regenerar su registro local de skills verificando disponibilidad real. La copia de `.atl/skill-registry.md` versionada para la entrega (25/11/2026) describe un único equipo y no sustituye regenerarlo en cada entorno. [README](../README.md) documenta las limitaciones actuales de herramientas y utilidades.
 
 El primer change que incorpore un entorno ejecutable deberá documentar versiones elegidas y comandos reproducibles. Cuando se definan variables de entorno, preparar un ejemplo sin secretos; `.env.example` ya está permitido por `.gitignore`.
 

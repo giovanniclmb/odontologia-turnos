@@ -46,7 +46,7 @@ Elegir solo las skills pertinentes al encargo, desde el [registro local](.atl/sk
 | Reviewer | Revisión enfocada de lógica, permisos y UI | `security-audit`, `web-design-guidelines`, `verification-before-completion` |
 | Integrator | Verificación y cierre | `verification-before-completion`, `openspec-sync-specs`, `openspec-archive-change` |
 
-Los compact rules se resuelven desde `.atl/skill-registry.md`, generado por skill-registry y no versionado; no se duplican aquí. Sus rutas globales son propias del entorno. Si falta el registro, verificar el inventario disponible antes de delegar; no asumir skills instaladas. Este mapeo conserva los roles globales y sus límites de disponibilidad, sin elegir modelos sustitutos ni activar una auditoría completa.
+Los compact rules se resuelven desde `.atl/skill-registry.md`, generado por skill-registry; no se duplican aquí. La copia versionada para la entrega corresponde al equipo donde se generó: sus rutas globales son propias de ese entorno y conviene regenerarlo localmente sin publicar esa regeneración salvo acuerdo. Si falta el registro, verificar el inventario disponible antes de delegar; no asumir skills instaladas. Este mapeo conserva los roles globales y sus límites de disponibilidad, sin elegir modelos sustitutos ni activar una auditoría completa.
 
 ## Roadmap de Changes
 

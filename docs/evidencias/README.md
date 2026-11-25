@@ -16,7 +16,7 @@ Los logs y parches históricos conservan su formato exacto. `.gitattributes` los
 
 Los respaldos `antes-*`, `estado-antes-*`, `discovery-antes-consolidacion` y `ampliacion-paciente-antes-*` están excluidos de Git y se mantienen en disco. Son snapshots intermedios, no el estado vigente. El historial Git conserva los cambios posteriores al primer versionado.
 
-El registro operativo `.atl/skill-registry.md` también es local e ignorado, de acuerdo con la política del proyecto. Para trabajar desde otro entorno debe regenerarse con `skill-registry`. Cuando se prepare la entrega académica, incluir explícitamente una copia del registro vigente si el formato de entrega lo exige; no atribuir las skills globales de una máquina a todos los integrantes.
+El [registro de skills](../../.atl/skill-registry.md) se versiona desde el 25/11/2026 porque la consigna lo exige; el resto de `.atl/` sigue ignorado. Para trabajar desde otro entorno debe regenerarse con `skill-registry`; no atribuir las skills globales de una máquina a todos los integrantes.
 
 ## Pendientes
 
