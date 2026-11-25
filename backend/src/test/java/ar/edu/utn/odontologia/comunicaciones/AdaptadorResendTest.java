@@ -70,6 +70,30 @@ class AdaptadorResendTest {
     }
 
     @Test
+    void elMotivoDeUnRechazoNoIncluyeLaRespuestaDelProveedor() throws Exception {
+        start(422, "{\"message\":\"enlace-secreto-ficticio\"}", new AtomicInteger());
+        String url = "http://127.0.0.1:" + server.getAddress().getPort() + "/";
+        var cfg = config("dest@test.com");
+        cfg.setMaxRetries(0);
+        var adapter = new AdaptadorResend(cfg, new AllowlistEmail(cfg.testAllowlist()), null, java.net.http.HttpClient.newHttpClient(), url);
+
+        var r = adapter.enviar(new SolicitudEnvio("ALTA", UUID.randomUUID(), "dest@test.com", "subj", "body"));
+
+        assertEquals("HTTP 422", r.error());
+    }
+
+    @Test
+    void elMotivoDeUnaFallaDeRedSoloIndicaSuTipo() {
+        var cfg = config("dest@test.com");
+        cfg.setMaxRetries(0);
+        var adapter = new AdaptadorResend(cfg, new AllowlistEmail(cfg.testAllowlist()), null, java.net.http.HttpClient.newHttpClient(), "http://127.0.0.1:1/");
+
+        var r = adapter.enviar(new SolicitudEnvio("ALTA", UUID.randomUUID(), "dest@test.com", "subj", "body"));
+
+        assertEquals("ConnectException", r.error());
+    }
+
+    @Test
     void recuperaEnReintento() throws Exception {
         AtomicInteger counter = new AtomicInteger();
         var keys = new java.util.concurrent.CopyOnWriteArrayList<String>();

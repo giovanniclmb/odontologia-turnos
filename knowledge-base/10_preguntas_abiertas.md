@@ -117,3 +117,10 @@ Estas decisiones cierran PA-05/06/07 únicamente para el alcance de C-04; no res
 - **PA-17 — instante del plazo:** el comienzo del turno y el corte de 48 horas se evalúan después de las esperas por otras operaciones, al momento de cancelar. Es la corrección de un defecto sobre la regla ya especificada en C-18.
 - **PA-17 — entrega interna:** C-19 recibe el token por un evento posterior al commit (DD-18).
 - Quedan sin resolver aquí el envío del enlace y el tratamiento de los emails (PA-18, C-19).
+
+## Resolución acotada para C-19 (25/11/2026)
+
+- **PA-15 — destinatario:** email registrado del paciente; el transporte sigue limitado a las direcciones de prueba.
+- **PA-17 — entrega del enlace:** URL base configurable con el token después de `#`; la página corresponde a C-23.
+- **PA-18 — email de alta y reprogramación:** se envía en ambas; con menos de 48 horas, sin enlace. Un fallo agotado solo se registra; no hay reenvío posterior. Un mensaje desactualizado antes del envío se descarta. La repetición del mismo aviso se deduplica.
+- El recordatorio y su programación siguen abiertos para C-20.
