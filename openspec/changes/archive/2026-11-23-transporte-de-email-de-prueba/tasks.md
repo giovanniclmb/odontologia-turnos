@@ -28,10 +28,14 @@
 
 ## 6. Verificación e integración
 
-- [ ] 6.1 (bloqueada: requiere RESEND_API_KEY y allowlist autorizada del equipo) Ejecutar prueba real autorizada a una dirección de la allowlist y registrar evidencia sin secretos ni direcciones privadas en capturas públicas.
+- [x] 6.1 Ejecutar prueba real autorizada a una dirección de la allowlist y registrar evidencia sin secretos ni direcciones privadas en capturas públicas (completada localmente el 2026-11-24; Resend `Delivered`, ID `01a21090-09ec-7520-8d10-61817a35d31b`; recepción confirmada por el usuario).
 - [x] 6.2 Ejecutar suite completa del backend (`mvn test` y failsafe) y verificar que no hay regresiones.
 
 ## Workflow follow-up
 
 - Archivar el change tras satisfacer los requisitos de revisión del proyecto.
 - Verificar el resultado archivado.
+
+## Addendum de estado — 2026-11-24
+
+La casilla 6.1 estaba pendiente cuando se archivó el cambio por falta de credenciales y destinatario autorizado. Se completa localmente tras la prueba de una sola ejecución: el API aceptó el mensaje, el panel de Resend mostró `Delivered` y el usuario confirmó recepción. No se actualizaron issues remotos ni se publicaron secretos o dirección destinataria.

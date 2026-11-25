@@ -384,7 +384,7 @@ Giovanni aprobó el reparto el 19/11/2026. Las ondas preservan las dependencias 
 ## FASE 3 — Comunicaciones y recuperación de huecos
 
 ### [C-17] `transporte-de-email-de-prueba`
-- **Estado**: incompleto: implementación y pruebas locales verificadas; la tarea 6.1 requiere una demostración real autorizada del equipo y sigue pendiente. Mantener C-17 abierto hasta registrar esa evidencia (2026-11-24, America/Mendoza).
+- **Estado**: `[x]` implementación y verificación local completadas; 6.1 incluye una prueba real autorizada, estado `Delivered` en Resend y recepción confirmada por el usuario (2026-11-24, America/Mendoza). El issue #18 remoto no se modificó en esta operación.
 - **Responsable**: Fabi
 - **Scope**: Canal real de email gratuito para RN-EM-03, compartido por los tres tipos de correo.
   - Evaluar y acordar PA-15: proveedor sin costo, límites, destinatarios de prueba indicados por el equipo y configuración. No contratar ni asumir servicio, SMTP o API.
