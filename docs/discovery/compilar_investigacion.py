@@ -23,6 +23,7 @@ def ref(i,j,p):
  return f'[F{i:02}.{j} {title}]({url})'
 for i,p in enumerate(PRODUCTS,1):
  refs='; '.join(ref(i,j,p) for j in range(1,len(p['sources'])+1))
+ rechecked=' Parte de ellas se volvió a revisar el 25/11/2026.' if p.get('rechecks') else ''
  note=f'''# {p['name']}
 
 - **URL**: {p['sources'][0][1]}
@@ -61,7 +62,7 @@ Aspectos observables para contrastar: {p['limits']}
 
 {p['adoption']}
 
-Fuentes consultadas: {refs}. Todas consultadas el {p['date']}. Declaraciones comerciales no equivalen a una prueba independiente. Documentación e interfaz pública acreditan lo publicado, no el comportamiento de una instalación real. No se crearon cuentas ni se enviaron formularios.
+Fuentes consultadas: {refs}. Todas consultadas el {p['date']}.{rechecked} Declaraciones comerciales no equivalen a una prueba independiente. Documentación e interfaz pública acreditan lo publicado, no el comportamiento de una instalación real. No se crearon cuentas ni se enviaron formularios.
 '''
  (ROOT/'sources'/f'{SLUG(p["name"])}.md').write_text(note)
 
@@ -120,6 +121,8 @@ Cada dimensión tiene cinco criterios. Por criterio: Documentado = 1 punto; Decl
 
 Total ponderado = T × 0,25 + C × 0,20 + I × 0,15 + A × 0,15 + P × 0,10 + S × 0,10 + E × 0,05. Se calcula sin redondear los componentes y se muestran tres decimales. Las matrices detalladas de criterios explican cada componente. No mezclar planes o países para concluir que todo está incluido en una misma tarifa.
 
+Tras la segunda comprobación del 25/11/2026 cambiaron cuatro celdas de DentApp (respaldos, tarifa publicada, unidad de cobro y prueba), y su total pasó de 1,275 a 1,475. La validación de recursos documentada por Dentalink no suma en «Agenda por sillón/box» porque el manual no identifica el recurso como sillón.
+
 '''
 summary=[]
 for p in PRODUCTS:
@@ -149,7 +152,7 @@ Las promesas de IA, reducción de ausencias, mayor facturación o facilidad de u
 
 ### Vacíos de evidencia para el mercado argentino
 
-En las páginas consultadas no suele estar descrita la transacción que evita simultáneamente la ocupación del profesional y del sillón. Tampoco hay evidencia suficiente para comparar de forma uniforme auditoría, exportación completa y restauración. Una integración fiscal extranjera no prueba ARCA; listar obras sociales no prueba comunicación electrónica con ellas. Estos son vacíos de información pública de esta muestra, no una afirmación de que ningún proveedor los resuelva.
+En las páginas consultadas no suele estar descrita la transacción que evita simultáneamente la ocupación del profesional y del sillón. Dentalink documenta que su agenda online valida a la vez al profesional y al recurso asociado al servicio, sin identificar ese recurso como sillón ni describir el control de concurrencia. Tampoco hay evidencia suficiente para comparar de forma uniforme auditoría, exportación completa y restauración. Una integración fiscal extranjera no prueba ARCA; listar obras sociales no prueba comunicación electrónica con ellas. Estos son vacíos de información pública de esta muestra, no una afirmación de que ningún proveedor los resuelva.
 
 Los precios mezclan profesional, usuario, sede, anualidad, extras, mensajes y migración. Las páginas de AgendaPro requieren distinguir categorías; Clinic Cloud requiere distinguir módulos. La moneda no identificada de Odonto.me y los importes equivalentes anuales de XDentalCloud impiden comparar automáticamente el costo total.
 
@@ -191,28 +194,30 @@ La consigna exige que los integrantes comprueben personalmente al menos cinco fu
 checks=[
  ['Sitio oficial: DentApp','Proveedor argentino, nube e integraciones locales','La página específica identifica Codilium S.A.S. y publica Google Calendar/MercadoPago. No se verificó inscripción registral.','https://www.dentapp.ar/software-odontologico-argentina'],
  ['Precios: tab32','El buscador mostraba $125/mes','La apertura vigente mostró desde $95/mes; se descartó el precio indexado anterior y se registraron cargos variables.','https://tab32.com/pricing/'],
- ['Ayuda: Dentalink','Reserva mediante enlace y configuración profesional','El manual explica enlace, permisos, bloques y profesionales habilitados. No prueba disponibilidad conjunta de sillón y profesional.','https://ayuda.softwaredentalink.com/es/articles/9493139-configura-tu-agenda-online'],
+ ['Ayuda: Dentalink','Reserva mediante enlace y configuración profesional','El manual explica enlace, permisos, bloques y profesionales habilitados. No prueba disponibilidad conjunta de sillón y profesional. Corregido el 25/11: ver la segunda comprobación.','https://ayuda.softwaredentalink.com/es/articles/9493139-configura-tu-agenda-online'],
  ['Términos: Dentidesk','Exportación de datos','Licencia activa: Excel estándar sin costo; después del término: hasta 30 días y posible cargo. No se redujo todo a exportación gratuita.','https://app.dentidesk.com/terminos.php'],
  ['Interfaz pública: AgendaPro','Reserva y duración variable por servicio','Se observaron servicios con diferentes duraciones y botón Agendar; no se completó reserva ni se copiaron reseñas o datos de pacientes.','https://agendapro.com/site/ar/odontologiaor/239004'],
  ['Precios: Clinic Cloud','La extracción inicial señalaba promoción de dos meses','La apertura posterior mostró 50% durante tres meses. Se priorizó la página abierta y se aclaró que Max incluye odontograma.','https://clinic-cloud.com/tarifas'],
- ['Sitio y FAQ: Dentify','País, cifrado y precio anual de extracción inicial','La portada actual declara Hecho en Argentina, nube cifrada y $30.000/$45.000 mensuales. Se retiró el anual no corroborado y no se inventó código de moneda.','https://www.dentify.com.ar/'],
+ ['Sitio y FAQ: Dentify','País, cifrado y precio anual de extracción inicial','La portada actual declara Hecho en Argentina, nube cifrada y $30.000/$45.000 mensuales. Se retiró el anual no corroborado y no se inventó código de moneda. Corregido el 25/11: la modalidad anual sí está publicada.','https://www.dentify.com.ar/'],
  ['Producto: Odontoly','WhatsApp y ARCA podrían parecer disponibles por figurar en catálogo','El sitio los identifica como complementos próximos. También distingue backups cifrados de base de trabajo aún sin cifrado por la app.','https://odontoly.com/']]
 md+=table(['Tipo y fuente','Afirmación contrastada','Hallazgo y corrección','URL','Revisión personal'],[[*r[:3],f'[Abrir]({r[3]})','Pendiente del integrante'] for r in checks])+'\n'
 md+='''### Segunda comprobación del agente (25/11/2026)
 
-El agente intentó volver a abrir en un navegador las ocho fuentes anteriores y contrastó con este informe el texto publicado ese día en las siete que respondieron. Tampoco sustituye la revisión personal, que sigue pendiente. Una diferencia puede deberse a una omisión del relevamiento o a un cambio de la página posterior al 17/11/2026; salvo indicación, no se distingue cuál. Las fichas, las matrices y los puntajes se conservan sin recalcular: aplicar cada corrección queda sujeto a la decisión del equipo (Continuar / Ajustar).
+El agente intentó volver a abrir en un navegador las ocho fuentes anteriores y contrastó con este informe el texto publicado ese día en las siete que respondieron. Tampoco sustituye la revisión personal, que sigue pendiente. Por decisión del 25/11/2026 (Ajustar), las diferencias se incorporaron a las fichas, la matriz B y la sección C. Una diferencia puede deberse a una omisión del relevamiento o a un cambio de la página posterior al 17/11/2026; salvo indicación, no se distingue cuál.
+
+En su primera pasada de ese día el agente no vio el adicional de Clinic Cloud, publicado en un texto emergente, ni los importes anuales de Dentify, visibles al cambiar un selector. Una segunda pasada corrigió ambas observaciones.
 
 '''
 second=[
- ['DentApp','Coinciden Codilium S.A.S., nube, Google Calendar, MercadoPago, roles y ReNaPDiS declarado.','Hoy publica 30 días de prueba y precios mensuales con IVA ($24.900, $54.900 y $74.900; Empresarial a medida), recordatorios por correo en Profesional y por WhatsApp desde Clínica Plus, y «backups diarios». La ficha 02 consigna importe, prueba y frecuencia de backup como No evidenciado.'],
- ['tab32','Coinciden desde $95/mes, usuarios ilimitados, prueba de 14 días, cargos por claim, adjuntos y elegibilidad, y que los ledgers no se migran.','Hoy la prueba pide email y tarjeta; la migración se publica desde $1,250; la exportación gratuita al salir incluye el ledger.'],
- ['Dentalink','Coinciden el enlace de reserva, los permisos y los bloqueos de horario.','El manual (fechado el 12/06/2026) tiene una sección plegada, «Cruce con Recursos», que declara que el sistema valida que el profesional y el recurso asociado al servicio estén disponibles en el mismo horario en la agenda online. Contradice «No prueba disponibilidad conjunta» y obliga a revisar la ficha 01 y la sección C. El texto habla de «recurso», no de sillón, y no describe control de concurrencia.'],
- ['Dentidesk','Coinciden Excel estándar sin costo con licencia activa, solicitud hasta 30 días después del término con posible cargo y prueba de 15 días.','Los términos indican que cada cuenta de odontólogo adicional «generará un cargo según el plan contratado»; el informe lo expresa como posible.'],
- ['AgendaPro','No se pudo comprobar.','La interfaz pública respondió HTTP 403. No se reintentó ni se evadió el bloqueo; la observación del 17/11 queda sin recomprobar.'],
- ['Clinic Cloud','Coinciden 29, 49 y 79 EUR más IVA, 50 % durante tres meses, odontograma en Max y reserva por Doctoralia.','La página declara más de 3.000 consultas y clínicas en España y exhibe ISO/IEC 27001; la ficha 09 consigna adopción como No evidenciado. El adicional de 10 EUR por agenda no se localizó.'],
- ['Dentify','Coinciden $30.000 y $45.000 mensuales, 14 días sin tarjeta, «Hecho en Argentina» y nube cifrada.','La sección de precios ofrece una modalidad anual con «2 meses gratis», sin importe anual visible, y el pie indica «Desarrollado por IB Digital».'],
- ['Odontoly','Coinciden USD 149,99 sin permanencia; WhatsApp Business, SMS, ARCA y visor RX como próximos; copias cifradas y base de trabajo sin cifrar; Windows en desarrollo.','El plan publica además dos usuarios y hasta cuatro dispositivos autorizados.']]
-md+=table(['Fuente','Resultado','Diferencia o detalle'],second)+'\n'
+ ['DentApp','Coinciden Codilium S.A.S., nube, Google Calendar, MercadoPago, roles y ReNaPDiS declarado.','Publica 30 días de prueba y precios mensuales con IVA ($24.900, $54.900 y $74.900; Empresarial a medida), recordatorios según plan, API y webhooks en Empresarial y «backups diarios».','Ficha 02 y cuatro celdas de la matriz B.'],
+ ['tab32','Coinciden desde $95/mes, usuarios ilimitados, prueba de 14 días, cargos por claim, adjuntos y elegibilidad, y que los ledgers no se migran.','La prueba pide email y tarjeta; la migración se publica desde $1,250; la exportación gratuita al salir incluye el ledger.','Ficha 15.'],
+ ['Dentalink','Coinciden el enlace de reserva, los permisos y los bloqueos de horario.','El manual (fechado el 12/06/2026) tiene una sección plegada, «Cruce con Recursos», que declara que la agenda online valida que el profesional y el recurso asociado al servicio estén disponibles en el mismo horario. No identifica el recurso como sillón ni describe control de concurrencia.','Ficha 01 y sección C. La matriz B no cambia.'],
+ ['Dentidesk','Coinciden Excel estándar sin costo con licencia activa, solicitud hasta 30 días después del término con posible cargo y prueba de 15 días.','Cada cuenta de odontólogo adicional «generará un cargo según el plan contratado»; el informe lo expresaba como posible.','Ficha 06.'],
+ ['AgendaPro','No se pudo comprobar.','La interfaz pública respondió HTTP 403. No se reintentó ni se evadió el bloqueo.','Se anota en la ficha 08; las celdas conservan la observación del 17/11.'],
+ ['Clinic Cloud','Coinciden 29, 49 y 79 EUR más IVA, 50 % durante tres meses, 10 EUR por agenda extra, odontograma en Max y reserva por Doctoralia.','Declara más de 3.000 consultas y clínicas en España y exhibe ISO/IEC 27001.','Ficha 09: adopción y sello declarados.'],
+ ['Dentify','Coinciden $30.000 y $45.000 mensuales, 14 días sin tarjeta, «Hecho en Argentina» y nube cifrada.','La modalidad anual publica $25.000 y $38.000 por mes ($300.000 y $456.000 por año); el informe había descartado el anual. El pie indica «Desarrollado por IB Digital».','Ficha 03.'],
+ ['Odontoly','Coinciden USD 149,99 sin permanencia; WhatsApp Business, SMS, ARCA y visor RX como próximos; copias cifradas y base de trabajo sin cifrar; Windows en desarrollo.','El plan publica además dos usuarios y hasta cuatro dispositivos autorizados.','Ficha 05.']]
+md+=table(['Fuente','Resultado','Diferencia o detalle','Corrección aplicada'],second)+'\n'
 md+='''### Fuentes no accesibles y exclusiones
 
 Doctoralia PRO Argentina devolvió 403 en sus páginas de agenda/precio; no se afirmó un precio a partir de resultados indexados. DentalTap tuvo timeouts/502 en producto y precios; se localizó un manual, pero no se lo usó para rellenar prestaciones no corroboradas. Se sustituyeron esos candidatos en el núcleo por Dentidesk y Odonto.me. DriCloud se exploró como software médico general y se reemplazó por XDentalCloud, sin trasladar funcionalidades entre productos. No se usaron mecanismos de evasión, cuentas personales ni contacto comercial.
@@ -229,12 +234,13 @@ No se generó discovery.md con respuestas inferidas. Discovery permanece en prog
 
 ## Referencias completas
 
-Todas las referencias siguientes fueron consultadas el 2026-11-17. Las rutas enlazadas son fuentes primarias abiertas; las limitaciones se describen en sus fichas. Las capacidades comerciales y las condiciones pueden cambiar.
+Todas las referencias siguientes fueron consultadas el 2026-11-17; las que indican una nueva consulta se volvieron a abrir, o se intentó abrirlas, en esa segunda fecha. Las rutas enlazadas son fuentes primarias abiertas; las limitaciones se describen en sus fichas. Las capacidades comerciales y las condiciones pueden cambiar.
 
 '''
 for i,p in enumerate(PRODUCTS,1):
  for j,(title,url) in enumerate(p['sources'],1):
-  md+=f'- **F{i:02}.{j} - {p["name"]}: {title}**. [{url}]({url}). Consulta: {p["date"]}.\n'
+  again=p.get('rechecks',{}).get(url)
+  md+=f'- **F{i:02}.{j} - {p["name"]}: {title}**. [{url}]({url}). Consulta: {p["date"]}.'+(f' Nueva consulta: {again}.' if again else '')+'\n'
 approved = ROOT/'decisiones-aprobadas.json'
 if approved.exists():
  decisions=json.loads(approved.read_text())
@@ -249,7 +255,7 @@ if approved.exists():
   return match.group(1).strip()
  # El alcance del informe se deriva del checklist aprobado; regenerarlo no
  # puede restaurar la exclusión histórica de paciente, email o lista de espera.
- new='Tras la investigación y las preguntas por menú, el usuario aprobó el resumen de once puntos y su ampliación (revisión 2). El MVP incluye agenda de sillón diaria/semanal, bloqueos por recepción, ficha clínica sencilla, disponibilidad conjunta de profesional y sillón y confirmaciones manuales. El paciente cancela por enlace hasta 48 horas antes y gestiona con cuenta la lista de espera; recepción asigna los huecos. Se envía email al crear con enlace y recordatorio 24 horas antes, sin opción de cancelar cuando el plazo venció. Se requieren envíos reales a direcciones de prueba del equipo mediante proveedor gratuito aún por definir. El stack elegido es HTML/CSS/TypeScript vanilla, Java Spring Boot y PostgreSQL; entrega 25/11/2026 y presupuesto externo cero. El intervalo inicial, los detalles técnicos y la revisión personal de cinco fuentes siguen pendientes. Este informe es un corte al cierre del Discovery (revisión 2, consolidada el 19/11/2026): a esa fecha no se había implementado código ni seleccionado un change. El estado posterior consta en README.md y CHANGES.md; la segunda comprobación de fuentes del 25/11/2026 figura en «Verificación de fuentes».'
+ new='Tras la investigación y las preguntas por menú, el usuario aprobó el resumen de once puntos y su ampliación (revisión 2). El MVP incluye agenda de sillón diaria/semanal, bloqueos por recepción, ficha clínica sencilla, disponibilidad conjunta de profesional y sillón y confirmaciones manuales. El paciente cancela por enlace hasta 48 horas antes y gestiona con cuenta la lista de espera; recepción asigna los huecos. Se envía email al crear con enlace y recordatorio 24 horas antes, sin opción de cancelar cuando el plazo venció. Se requieren envíos reales a direcciones de prueba del equipo mediante proveedor gratuito aún por definir. El stack elegido es HTML/CSS/TypeScript vanilla, Java Spring Boot y PostgreSQL; entrega 25/11/2026 y presupuesto externo cero. El intervalo inicial, los detalles técnicos y la revisión personal de cinco fuentes siguen pendientes. Este informe es un corte al cierre del Discovery (revisión 2, consolidada el 19/11/2026): a esa fecha no se había implementado código ni seleccionado un change. El estado posterior consta en README.md y CHANGES.md; la segunda comprobación de fuentes del 25/11/2026 y sus correcciones, ya incorporadas, figuran en «Verificación de fuentes».'
  assert old in md
  md=md.replace(old,new)
  section='''## D Recomendación y alcance aprobados por el usuario

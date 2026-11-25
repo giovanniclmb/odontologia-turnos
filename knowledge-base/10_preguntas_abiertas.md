@@ -3,7 +3,7 @@
 ## Inconsistencias y límites de la evidencia
 
 - **IN-01 · Tamaño del equipo.** La consigna fija un máximo general de tres integrantes. El usuario informó una excepción docente para el equipo de cuatro, cuya composición puede variar. La declaración está registrada en Discovery. Su respaldo para la entrega, si lo requiere la cátedra, se considera en PA-10. [Discovery, sección 9](../docs/discovery/discovery.md)
-- **IN-02 · Precios y planes de competidores.** En tab32, Clinic Cloud y Dentify, la apertura de fuentes oficiales corrigió cifras o condiciones de extracciones previas. El informe conserva los valores observados y fechados, sujetos a corroboración en PA-12. [Informe, verificación de fuentes](../docs/discovery/informe-discovery.md#verificación-de-fuentes)
+- **IN-02 · Precios y planes de competidores.** En tab32, Clinic Cloud y Dentify, la apertura de fuentes oficiales corrigió cifras o condiciones de extracciones previas. El 25/11/2026 una segunda comprobación del agente actualizó o anotó fichas de ocho proveedores y cuatro celdas de la matriz; la revisión personal sigue pendiente. El informe conserva los valores observados y fechados, sujetos a corroboración en PA-12. [Informe, verificación de fuentes](../docs/discovery/informe-discovery.md#verificación-de-fuentes)
 - El valor inicial del intervalo figura como `null` en las decisiones y en el estado de Discovery. Ese registro expresa la falta de un valor acordado. La pregunta sigue en PA-01. [Decisiones aprobadas](../docs/discovery/decisiones-aprobadas.json) · [Estado de Discovery](../.active-orchestrator-state.json)
 
 ## Preguntas priorizadas

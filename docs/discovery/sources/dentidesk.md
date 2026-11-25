@@ -22,7 +22,7 @@ Consultorios, clínicas y múltiples sucursales. Proveedor: Servicios Tecnológi
 
 ## Pricing
 
-Precio: No evidenciado. Prueba 15 días y posible cargo por odontólogo adicional en términos. Otros formatos de extracción pueden tener costo.
+Precio: No evidenciado. Prueba de 15 días; los términos indican que cada cuenta de odontólogo adicional generará un cargo según el plan contratado. Otros formatos de extracción pueden tener costo.
 
 ## Posicionamiento
 
@@ -36,4 +36,4 @@ Aspectos observables para contrastar: No confundir gratuidad de exportación con
 
 No evidenciado
 
-Fuentes consultadas: [F06.1 Características](https://www.dentidesk.cl/dentidesk/feature); [F06.2 Términos de uso](https://app.dentidesk.com/terminos.php); [F06.3 Ayuda roles y profesionales](https://dentidesk.freshdesk.com/support/solutions/articles/150000201446--c%C3%B3mo-agregar-doctores-y-personal-a-mi-cl%C3%ADnica-en-dentidesk-). Todas consultadas el 2026-11-17. Declaraciones comerciales no equivalen a una prueba independiente. Documentación e interfaz pública acreditan lo publicado, no el comportamiento de una instalación real. No se crearon cuentas ni se enviaron formularios.
+Fuentes consultadas: [F06.1 Características](https://www.dentidesk.cl/dentidesk/feature); [F06.2 Términos de uso](https://app.dentidesk.com/terminos.php); [F06.3 Ayuda roles y profesionales](https://dentidesk.freshdesk.com/support/solutions/articles/150000201446--c%C3%B3mo-agregar-doctores-y-personal-a-mi-cl%C3%ADnica-en-dentidesk-). Todas consultadas el 2026-11-17. Parte de ellas se volvió a revisar el 25/11/2026. Declaraciones comerciales no equivalen a una prueba independiente. Documentación e interfaz pública acreditan lo publicado, no el comportamiento de una instalación real. No se crearon cuentas ni se enviaron formularios.

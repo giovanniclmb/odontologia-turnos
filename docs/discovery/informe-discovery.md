@@ -18,7 +18,7 @@ Agenda, ficha del paciente, odontograma y administración aparecen repetidamente
 
 Se encontraron precios indexados distintos de las aperturas actuales, promociones cambiantes, módulos dependientes del plan y prestaciones anunciadas como próximas. El relevamiento conserva estas limitaciones. No se realizó una auditoría técnica, prueba de carga, compra ni demo con cuenta.
 
-Tras la investigación y las preguntas por menú, el usuario aprobó el resumen de once puntos y su ampliación (revisión 2). El MVP incluye agenda de sillón diaria/semanal, bloqueos por recepción, ficha clínica sencilla, disponibilidad conjunta de profesional y sillón y confirmaciones manuales. El paciente cancela por enlace hasta 48 horas antes y gestiona con cuenta la lista de espera; recepción asigna los huecos. Se envía email al crear con enlace y recordatorio 24 horas antes, sin opción de cancelar cuando el plazo venció. Se requieren envíos reales a direcciones de prueba del equipo mediante proveedor gratuito aún por definir. El stack elegido es HTML/CSS/TypeScript vanilla, Java Spring Boot y PostgreSQL; entrega 25/11/2026 y presupuesto externo cero. El intervalo inicial, los detalles técnicos y la revisión personal de cinco fuentes siguen pendientes. Este informe es un corte al cierre del Discovery (revisión 2, consolidada el 19/11/2026): a esa fecha no se había implementado código ni seleccionado un change. El estado posterior consta en README.md y CHANGES.md; la segunda comprobación de fuentes del 25/11/2026 figura en «Verificación de fuentes».
+Tras la investigación y las preguntas por menú, el usuario aprobó el resumen de once puntos y su ampliación (revisión 2). El MVP incluye agenda de sillón diaria/semanal, bloqueos por recepción, ficha clínica sencilla, disponibilidad conjunta de profesional y sillón y confirmaciones manuales. El paciente cancela por enlace hasta 48 horas antes y gestiona con cuenta la lista de espera; recepción asigna los huecos. Se envía email al crear con enlace y recordatorio 24 horas antes, sin opción de cancelar cuando el plazo venció. Se requieren envíos reales a direcciones de prueba del equipo mediante proveedor gratuito aún por definir. El stack elegido es HTML/CSS/TypeScript vanilla, Java Spring Boot y PostgreSQL; entrega 25/11/2026 y presupuesto externo cero. El intervalo inicial, los detalles técnicos y la revisión personal de cinco fuentes siguen pendientes. Este informe es un corte al cierre del Discovery (revisión 2, consolidada el 19/11/2026): a esa fecha no se había implementado código ni seleccionado un change. El estado posterior consta en README.md y CHANGES.md; la segunda comprobación de fuentes del 25/11/2026 y sus correcciones, ya incorporadas, figuran en «Verificación de fuentes».
 
 ## Alcance y método
 
@@ -60,7 +60,7 @@ Las fuentes F01 a F15 se enumeran completas al final. Las fichas complementan la
 
 Fuentes: [F01.1 Sitio argentino](https://web-ar.softwaredentalink.com/); [F01.2 Manual de agenda online](https://ayuda.softwaredentalink.com/es/articles/9493139-configura-tu-agenda-online).
 
-- **Agenda y recursos**: El manual documenta enlace de agenda, profesionales habilitados, bloques y permisos. Asignación simultánea de sillón y profesional: No evidenciado.
+- **Agenda y recursos**: El manual documenta enlace de agenda, profesionales habilitados, bloques y permisos. La sección «Cruce con Recursos» documenta cómo asociar recursos a un servicio y afirma que la agenda online valida que el profesional y el recurso estén disponibles en el mismo horario (consulta del 25/11/2026). Identificación de ese recurso como sillón y control de concurrencia: No evidenciado.
 - **Turnos digitales y automatización**: Reserva por enlace documentada. Declara confirmaciones por WhatsApp/email, campañas y seguimiento de citas anuladas o ausentes. Compartir enlace por WhatsApp no demuestra WhatsApp Business API.
 - **Clínica**: Declara historia, odontograma, periodontograma, imágenes, firma y planes de tratamiento.
 - **Administración**: Declara caja, gastos, liquidación a odontólogos, KPI, reportes Excel y obras sociales.
@@ -75,12 +75,12 @@ Fuentes: [F01.1 Sitio argentino](https://web-ar.softwaredentalink.com/); [F01.2 
 Fuentes: [F02.1 Producto y país](https://www.dentapp.ar/software-odontologico-argentina); [F02.2 Funcionalidades y planes](https://www.dentapp.ar/).
 
 - **Agenda y recursos**: Declara agenda por profesional con Google Calendar y estados. Vistas, sillones, duración por prestación y bloqueo de solapamientos simultáneos: No evidenciado.
-- **Turnos digitales y automatización**: Declara recordatorios por WhatsApp; reserva autónoma, lista de espera y reprogramación por paciente: No evidenciado.
+- **Turnos digitales y automatización**: Declara recordatorios automáticos por correo en el plan Profesional y por WhatsApp desde Clínica Plus (consulta del 25/11/2026); reserva autónoma, lista de espera y reprogramación por paciente: No evidenciado.
 - **Clínica**: Declara historia, odontograma FDI, imágenes, recetas, consentimientos y presupuestos. Periodontograma: No evidenciado.
 - **Administración**: Declara caja, cobros, facturas, presupuestos y reportes. Integración fiscal ARCA: No evidenciado.
-- **Integraciones**: Declara Google Calendar, MercadoPago y RCTA. Inscripción ReNaPDiS declarada, sin contraste registral independiente.
-- **Seguridad y exportación**: Declara roles admin/doctor/secretaría y documentos cifrados. Exportación completa, auditoría y frecuencia de backup: No evidenciado.
-- **Modelo comercial**: Planes por cantidad de profesionales. Importe y condiciones de prueba: No evidenciado en el contenido corroborado.
+- **Integraciones**: Declara Google Calendar, MercadoPago y RCTA. El plan Empresarial menciona API y webhooks e integraciones a medida con obras sociales y prepagas (consulta del 25/11/2026); acceso público a la API: No evidenciado. Inscripción ReNaPDiS declarada, sin contraste registral independiente.
+- **Seguridad y exportación**: Declara roles admin/doctor/secretaría, documentos cifrados, cifrado en tránsito y en reposo y backups diarios (consulta del 25/11/2026). Exportación completa y auditoría: No evidenciado.
+- **Modelo comercial**: Publica por mes, con IVA 21 % incluido: Profesional $24.900 (1 profesional), Clínica Plus $54.900 (hasta 5) y Clínica Pro $74.900 (hasta 10); Empresarial a medida. 30 días de prueba sin cargo (consulta del 25/11/2026). Código de moneda: No evidenciado explícitamente.
 - **Fortalezas y límites de la evidencia**: El soporte por WhatsApp y un recordatorio automático son capacidades diferentes. No se validó habilitación normativa ni receta electrónica real.
 - **Adopción**: No evidenciado
 
@@ -94,8 +94,8 @@ Fuentes: [F03.1 Producto, FAQ y precios](https://www.dentify.com.ar/); [F03.2 P�
 - **Administración**: Declara ingresos, cobros, egresos, balances y obras sociales. Emisión fiscal integrada: No evidenciado.
 - **Integraciones**: Obras sociales declaradas; Mercado Pago, Google Calendar, ARCA y API: No evidenciado.
 - **Seguridad y exportación**: FAQ declara nube cifrada y acceso de profesionales invitados. Exportación integral, auditoría y política de backup verificable: No evidenciado.
-- **Modelo comercial**: Página abierta: Básico $30.000/mes y Clínicas $45.000/mes; prueba 14 días sin tarjeta. Código de moneda e impuestos: No evidenciado explícitamente; no inferir ARS solo por el dominio. No usar como vigente el valor anual de $25.000 mencionado en otra extracción.
-- **Fortalezas y límites de la evidencia**: Hay una demostración ilustrada en la portada, sin prueba operativa. Se corrigió la ausencia de evidencia de país y cifrado al leer la portada actual.
+- **Modelo comercial**: Página abierta: en modalidad mensual, Básico $30.000/mes y Clínicas $45.000/mes; en modalidad anual, $25.000/mes ($300.000 por año) y $38.000/mes ($456.000 por año), anunciada con «2 meses gratis» (consulta del 25/11/2026). Prueba 14 días sin tarjeta. Código de moneda e impuestos: No evidenciado explícitamente; no inferir ARS solo por el dominio.
+- **Fortalezas y límites de la evidencia**: Hay una demostración ilustrada en la portada, sin prueba operativa. Se corrigió la ausencia de evidencia de país y cifrado al leer la portada actual. El pie indica «Desarrollado por IB Digital», sin acreditar entidad legal.
 - **Adopción**: No evidenciado
 
 ### 04 OdontoApp
@@ -122,7 +122,7 @@ Fuentes: [F05.1 Producto, restricciones y precios](https://odontoly.com/).
 - **Administración**: Declara caja, deudas y pagos ARS/USD con cotización manual. ARCA y cobros automatizados figuran próximos.
 - **Integraciones**: Mercado Pago, Google Calendar y API: No evidenciado. WhatsApp Business y ARCA son anuncios futuros.
 - **Seguridad y exportación**: Declara cuentas/permisos y copias completas cifradas. Aclara que la base de trabajo aún no está cifrada por la app. Auditoría y exportación interoperable: No evidenciado.
-- **Modelo comercial**: Referencia publicada USD 149,99/mes sin permanencia; el sitio pide confirmar precio final, moneda e impuestos. No se evidenció prueba gratuita.
+- **Modelo comercial**: Referencia publicada USD 149,99/mes sin permanencia; el sitio pide confirmar precio final, moneda e impuestos. No se evidenció prueba gratuita. El plan incluye dos usuarios y hasta cuatro dispositivos autorizados (consulta del 25/11/2026).
 - **Fortalezas y límites de la evidencia**: Mac Apple Silicon; Windows en desarrollo. Seguir durante un corte exige sesión y autorización vigentes; el acceso remoto requiere equipo principal encendido. No asumir operación offline absoluta.
 - **Adopción**: No evidenciado
 
@@ -136,7 +136,7 @@ Fuentes: [F06.1 Características](https://www.dentidesk.cl/dentidesk/feature); [
 - **Administración**: Declara presupuestos por pieza, egresos, inventario, liquidaciones y reportes. Facturación argentina y obras sociales: No evidenciado.
 - **Integraciones**: Integraciones argentinas, WhatsApp API, Google Calendar y API pública: No evidenciado.
 - **Seguridad y exportación**: Ayuda documenta permisos. Términos contemplan Excel estándar sin costo con licencia activa; tras el término, solicitud hasta 30 días y posible cargo. No demuestra exportación de todos los archivos clínicos.
-- **Modelo comercial**: Precio: No evidenciado. Prueba 15 días y posible cargo por odontólogo adicional en términos. Otros formatos de extracción pueden tener costo.
+- **Modelo comercial**: Precio: No evidenciado. Prueba de 15 días; los términos indican que cada cuenta de odontólogo adicional generará un cargo según el plan contratado. Otros formatos de extracción pueden tener costo.
 - **Fortalezas y límites de la evidencia**: No confundir gratuidad de exportación con licencia activa con extracción posterior al cierre. No atribuir usuarios de la plataforma U-DESK al producto dental.
 - **Adopción**: No evidenciado
 
@@ -165,7 +165,7 @@ Fuentes: [F08.1 Oferta dental](https://agendapro.com/es/dental/software-odontolo
 - **Integraciones**: Mercado Pago y API con cargo US$200/mes declarados. WhatsApp tiene cupos/costos Meta y condiciones de categoría. ARCA operativa: No evidenciado.
 - **Seguridad y exportación**: Seguridad específica, auditoría y exportación integral: No evidenciado en las páginas examinadas.
 - **Modelo comercial**: La página abierta muestra precios de Belleza/Barbería en ARS con IVA. Tarifa aplicable a odontología: No evidenciado; no usar $7.900 o $15.900 como precio de Salud. API US$200/mes es un adicional, no la suscripción dental.
-- **Fortalezas y límites de la evidencia**: La reserva se observó sin completarla. No confundir confirmación de una interfaz con prueba de integridad del backend. Precio indexado antiguo descartado.
+- **Fortalezas y límites de la evidencia**: La reserva se observó sin completarla. No confundir confirmación de una interfaz con prueba de integridad del backend. Precio indexado antiguo descartado. El 25/11/2026 la interfaz de reserva respondió HTTP 403; la observación del 17/11 no pudo recomprobarse.
 - **Adopción**: No evidenciado
 
 ### 09 Clinic Cloud
@@ -177,10 +177,10 @@ Fuentes: [F09.1 Tarifas y módulos](https://clinic-cloud.com/tarifas); [F09.2 Ay
 - **Clínica**: Historia clínica y odontograma en Max declarados; ayuda documenta presupuesto desde odontograma. Periodontograma: No evidenciado.
 - **Administración**: Caja, presupuestos, liquidaciones y reportes; facturación TicketBAI/VeriFactu, que no prueba facturación ARCA.
 - **Integraciones**: Doctoralia declarado. Mercado Pago, obras sociales argentinas, Google Calendar y API pública: No evidenciado.
-- **Seguridad y exportación**: Permisos por niveles declarados. Exportación, auditoría, cifrado y política de backup: No evidenciado en las fuentes examinadas.
+- **Seguridad y exportación**: Permisos por niveles declarados. La página de tarifas exhibe ISO/IEC 27001, sin certificado inspeccionado (consulta del 25/11/2026). Exportación, auditoría, cifrado y política de backup: No evidenciado en las fuentes examinadas.
 - **Modelo comercial**: Mini 29, Pro 49 y Max 79 EUR/mes + IVA; Enterprise a convenir. Odontograma en Max. Apertura actual muestra 50% de descuento durante 3 meses, no 2. Agendas adicionales +10 EUR según límite del plan.
 - **Fortalezas y límites de la evidencia**: No comparar Mini como si incluyera odontograma. Precios y promoción están sujetos a contratación; no se abrió cuenta ni aceptó términos.
-- **Adopción**: No evidenciado
+- **Adopción**: Declara más de 3.000 consultas y clínicas en España (consulta del 25/11/2026); cifra comercial no verificada externamente.
 
 ### 10 XDentalCloud
 
@@ -261,8 +261,8 @@ Fuentes: [F15.1 Producto](https://tab32.com/); [F15.2 Tarifa vigente abierta](ht
 - **Clínica**: Declara odontograma, imágenes, perio y planes de tratamiento.
 - **Administración**: Declara facturación, claims, pagos y reportes. ARCA/obras sociales argentinas: No evidenciado.
 - **Integraciones**: API para Summit declarada; no se validó acceso público. WhatsApp, Google Calendar y Mercado Pago: No evidenciado.
-- **Seguridad y exportación**: Declara Google Cloud, cifrado, backups automáticos, HIPAA/SOC2 y una exportación gratuita al salir. No se auditó cumplimiento.
-- **Modelo comercial**: Página abierta vigente: desde $95/mes, usuarios/profesionales ilimitados; prueba 14 días. Sitio empresarial identifica dólares en cargos, pero moneda contractual argentina no confirmada. Claims $0,25, adjuntos $0,50 por claim, elegibilidad $0,75; otros cargos y migración separados. Snippet $125 descartado.
+- **Seguridad y exportación**: Declara Google Cloud, cifrado, backups automáticos, HIPAA/SOC2 y una exportación gratuita al salir que incluye el ledger. No se auditó cumplimiento.
+- **Modelo comercial**: Página abierta vigente: desde $95/mes, usuarios/profesionales ilimitados; prueba 14 días, que pide email y tarjeta (consulta del 25/11/2026). Sitio empresarial identifica dólares en cargos, pero moneda contractual argentina no confirmada. Claims $0,25, adjuntos $0,50 por claim, elegibilidad $0,75; migración publicada desde $1,250 y otros cargos separados. Snippet $125 descartado.
 - **Fortalezas y límites de la evidencia**: La búsqueda indexada y apertura mostraron planes distintos; se priorizó apertura. Ledger no se migra según FAQ; no confundir migración con exportación. Producto orientado a EE.UU.; disponibilidad argentina sin confirmar.
 - **Adopción**: No evidenciado
 
@@ -274,10 +274,12 @@ Cada dimensión tiene cinco criterios. Por criterio: Documentado = 1 punto; Decl
 
 Total ponderado = T × 0,25 + C × 0,20 + I × 0,15 + A × 0,15 + P × 0,10 + S × 0,10 + E × 0,05. Se calcula sin redondear los componentes y se muestran tres decimales. Las matrices detalladas de criterios explican cada componente. No mezclar planes o países para concluir que todo está incluido en una misma tarifa.
 
+Tras la segunda comprobación del 25/11/2026 cambiaron cuatro celdas de DentApp (respaldos, tarifa publicada, unidad de cobro y prueba), y su total pasó de 1,275 a 1,475. La validación de recursos documentada por Dentalink no suma en «Agenda por sillón/box» porque el manual no identifica el recurso como sillón.
+
 | Sistema | T 25% | C 20% | I 15% | A 15% | P 10% | S 10% | E 5% | Total /5 |
 |---|---|---|---|---|---|---|---|---|
 | Dentalink | 2.5 | 2.5 | 0.5 | 2.0 | 1.5 | 1.5 | 0.0 | 1.800 |
-| DentApp | 1.0 | 2.0 | 1.5 | 2.0 | 0.0 | 1.0 | 0.0 | 1.275 |
+| DentApp | 1.0 | 2.0 | 1.5 | 2.0 | 0.0 | 1.5 | 3.0 | 1.475 |
 | Dentify | 1.0 | 1.5 | 0.0 | 2.0 | 0.0 | 1.0 | 3.0 | 1.100 |
 | OdontoApp | 0.5 | 1.5 | 0.5 | 0.5 | 0.0 | 1.0 | 0.0 | 0.675 |
 | Odontoly | 0.5 | 1.5 | 0.0 | 1.0 | 0.5 | 1.0 | 3.0 | 0.875 |
@@ -409,7 +411,7 @@ Peso: 10 %. Las fuentes de cada fila son las mismas referencias F del producto c
 | Sistema | Roles/permisos | Auditoría | Respaldos | Cifrado con alcance claro | Exportación con alcance claro |
 |---|---|---|---|---|---|
 | Dentalink | Documentado | No evidenciado | No evidenciado | No evidenciado | Declarado |
-| DentApp | Declarado | No evidenciado | No evidenciado | Declarado | No evidenciado |
+| DentApp | Declarado | No evidenciado | Declarado | Declarado | No evidenciado |
 | Dentify | Declarado | No evidenciado | No evidenciado | Declarado | No evidenciado |
 | OdontoApp | Declarado | No evidenciado | No evidenciado | Declarado | No evidenciado |
 | Odontoly | Declarado | No evidenciado | Declarado | No evidenciado | No evidenciado |
@@ -431,7 +433,7 @@ Peso: 5 %. Las fuentes de cada fila son las mismas referencias F del producto co
 | Sistema | Tarifa aplicable publicada | Moneda identificada | Unidad de cobro | Prueba accesible declarada | Extras identificados |
 |---|---|---|---|---|---|
 | Dentalink | No evidenciado | No evidenciado | No evidenciado | No evidenciado | No evidenciado |
-| DentApp | No evidenciado | No evidenciado | No evidenciado | No evidenciado | No evidenciado |
+| DentApp | Documentado | No evidenciado | Documentado | Documentado | No evidenciado |
 | Dentify | Documentado | No evidenciado | Documentado | Documentado | No evidenciado |
 | OdontoApp | No evidenciado | No evidenciado | No evidenciado | No evidenciado | No evidenciado |
 | Odontoly | Documentado | Documentado | Documentado | No evidenciado | No evidenciado |
@@ -464,7 +466,7 @@ Las promesas de IA, reducción de ausencias, mayor facturación o facilidad de u
 
 ### Vacíos de evidencia para el mercado argentino
 
-En las páginas consultadas no suele estar descrita la transacción que evita simultáneamente la ocupación del profesional y del sillón. Tampoco hay evidencia suficiente para comparar de forma uniforme auditoría, exportación completa y restauración. Una integración fiscal extranjera no prueba ARCA; listar obras sociales no prueba comunicación electrónica con ellas. Estos son vacíos de información pública de esta muestra, no una afirmación de que ningún proveedor los resuelva.
+En las páginas consultadas no suele estar descrita la transacción que evita simultáneamente la ocupación del profesional y del sillón. Dentalink documenta que su agenda online valida a la vez al profesional y al recurso asociado al servicio, sin identificar ese recurso como sillón ni describir el control de concurrencia. Tampoco hay evidencia suficiente para comparar de forma uniforme auditoría, exportación completa y restauración. Una integración fiscal extranjera no prueba ARCA; listar obras sociales no prueba comunicación electrónica con ellas. Estos son vacíos de información pública de esta muestra, no una afirmación de que ningún proveedor los resuelva.
 
 Los precios mezclan profesional, usuario, sede, anualidad, extras, mensajes y migración. Las páginas de AgendaPro requieren distinguir categorías; Clinic Cloud requiere distinguir módulos. La moneda no identificada de Odonto.me y los importes equivalentes anuales de XDentalCloud impiden comparar automáticamente el costo total.
 
@@ -601,27 +603,29 @@ La consigna exige que los integrantes comprueben personalmente al menos cinco fu
 |---|---|---|---|---|
 | Sitio oficial: DentApp | Proveedor argentino, nube e integraciones locales | La página específica identifica Codilium S.A.S. y publica Google Calendar/MercadoPago. No se verificó inscripción registral. | [Abrir](https://www.dentapp.ar/software-odontologico-argentina) | Pendiente del integrante |
 | Precios: tab32 | El buscador mostraba $125/mes | La apertura vigente mostró desde $95/mes; se descartó el precio indexado anterior y se registraron cargos variables. | [Abrir](https://tab32.com/pricing/) | Pendiente del integrante |
-| Ayuda: Dentalink | Reserva mediante enlace y configuración profesional | El manual explica enlace, permisos, bloques y profesionales habilitados. No prueba disponibilidad conjunta de sillón y profesional. | [Abrir](https://ayuda.softwaredentalink.com/es/articles/9493139-configura-tu-agenda-online) | Pendiente del integrante |
+| Ayuda: Dentalink | Reserva mediante enlace y configuración profesional | El manual explica enlace, permisos, bloques y profesionales habilitados. No prueba disponibilidad conjunta de sillón y profesional. Corregido el 25/11: ver la segunda comprobación. | [Abrir](https://ayuda.softwaredentalink.com/es/articles/9493139-configura-tu-agenda-online) | Pendiente del integrante |
 | Términos: Dentidesk | Exportación de datos | Licencia activa: Excel estándar sin costo; después del término: hasta 30 días y posible cargo. No se redujo todo a exportación gratuita. | [Abrir](https://app.dentidesk.com/terminos.php) | Pendiente del integrante |
 | Interfaz pública: AgendaPro | Reserva y duración variable por servicio | Se observaron servicios con diferentes duraciones y botón Agendar; no se completó reserva ni se copiaron reseñas o datos de pacientes. | [Abrir](https://agendapro.com/site/ar/odontologiaor/239004) | Pendiente del integrante |
 | Precios: Clinic Cloud | La extracción inicial señalaba promoción de dos meses | La apertura posterior mostró 50% durante tres meses. Se priorizó la página abierta y se aclaró que Max incluye odontograma. | [Abrir](https://clinic-cloud.com/tarifas) | Pendiente del integrante |
-| Sitio y FAQ: Dentify | País, cifrado y precio anual de extracción inicial | La portada actual declara Hecho en Argentina, nube cifrada y $30.000/$45.000 mensuales. Se retiró el anual no corroborado y no se inventó código de moneda. | [Abrir](https://www.dentify.com.ar/) | Pendiente del integrante |
+| Sitio y FAQ: Dentify | País, cifrado y precio anual de extracción inicial | La portada actual declara Hecho en Argentina, nube cifrada y $30.000/$45.000 mensuales. Se retiró el anual no corroborado y no se inventó código de moneda. Corregido el 25/11: la modalidad anual sí está publicada. | [Abrir](https://www.dentify.com.ar/) | Pendiente del integrante |
 | Producto: Odontoly | WhatsApp y ARCA podrían parecer disponibles por figurar en catálogo | El sitio los identifica como complementos próximos. También distingue backups cifrados de base de trabajo aún sin cifrado por la app. | [Abrir](https://odontoly.com/) | Pendiente del integrante |
 
 ### Segunda comprobación del agente (25/11/2026)
 
-El agente intentó volver a abrir en un navegador las ocho fuentes anteriores y contrastó con este informe el texto publicado ese día en las siete que respondieron. Tampoco sustituye la revisión personal, que sigue pendiente. Una diferencia puede deberse a una omisión del relevamiento o a un cambio de la página posterior al 17/11/2026; salvo indicación, no se distingue cuál. Las fichas, las matrices y los puntajes se conservan sin recalcular: aplicar cada corrección queda sujeto a la decisión del equipo (Continuar / Ajustar).
+El agente intentó volver a abrir en un navegador las ocho fuentes anteriores y contrastó con este informe el texto publicado ese día en las siete que respondieron. Tampoco sustituye la revisión personal, que sigue pendiente. Por decisión del 25/11/2026 (Ajustar), las diferencias se incorporaron a las fichas, la matriz B y la sección C. Una diferencia puede deberse a una omisión del relevamiento o a un cambio de la página posterior al 17/11/2026; salvo indicación, no se distingue cuál.
 
-| Fuente | Resultado | Diferencia o detalle |
-|---|---|---|
-| DentApp | Coinciden Codilium S.A.S., nube, Google Calendar, MercadoPago, roles y ReNaPDiS declarado. | Hoy publica 30 días de prueba y precios mensuales con IVA ($24.900, $54.900 y $74.900; Empresarial a medida), recordatorios por correo en Profesional y por WhatsApp desde Clínica Plus, y «backups diarios». La ficha 02 consigna importe, prueba y frecuencia de backup como No evidenciado. |
-| tab32 | Coinciden desde $95/mes, usuarios ilimitados, prueba de 14 días, cargos por claim, adjuntos y elegibilidad, y que los ledgers no se migran. | Hoy la prueba pide email y tarjeta; la migración se publica desde $1,250; la exportación gratuita al salir incluye el ledger. |
-| Dentalink | Coinciden el enlace de reserva, los permisos y los bloqueos de horario. | El manual (fechado el 12/06/2026) tiene una sección plegada, «Cruce con Recursos», que declara que el sistema valida que el profesional y el recurso asociado al servicio estén disponibles en el mismo horario en la agenda online. Contradice «No prueba disponibilidad conjunta» y obliga a revisar la ficha 01 y la sección C. El texto habla de «recurso», no de sillón, y no describe control de concurrencia. |
-| Dentidesk | Coinciden Excel estándar sin costo con licencia activa, solicitud hasta 30 días después del término con posible cargo y prueba de 15 días. | Los términos indican que cada cuenta de odontólogo adicional «generará un cargo según el plan contratado»; el informe lo expresa como posible. |
-| AgendaPro | No se pudo comprobar. | La interfaz pública respondió HTTP 403. No se reintentó ni se evadió el bloqueo; la observación del 17/11 queda sin recomprobar. |
-| Clinic Cloud | Coinciden 29, 49 y 79 EUR más IVA, 50 % durante tres meses, odontograma en Max y reserva por Doctoralia. | La página declara más de 3.000 consultas y clínicas en España y exhibe ISO/IEC 27001; la ficha 09 consigna adopción como No evidenciado. El adicional de 10 EUR por agenda no se localizó. |
-| Dentify | Coinciden $30.000 y $45.000 mensuales, 14 días sin tarjeta, «Hecho en Argentina» y nube cifrada. | La sección de precios ofrece una modalidad anual con «2 meses gratis», sin importe anual visible, y el pie indica «Desarrollado por IB Digital». |
-| Odontoly | Coinciden USD 149,99 sin permanencia; WhatsApp Business, SMS, ARCA y visor RX como próximos; copias cifradas y base de trabajo sin cifrar; Windows en desarrollo. | El plan publica además dos usuarios y hasta cuatro dispositivos autorizados. |
+En su primera pasada de ese día el agente no vio el adicional de Clinic Cloud, publicado en un texto emergente, ni los importes anuales de Dentify, visibles al cambiar un selector. Una segunda pasada corrigió ambas observaciones.
+
+| Fuente | Resultado | Diferencia o detalle | Corrección aplicada |
+|---|---|---|---|
+| DentApp | Coinciden Codilium S.A.S., nube, Google Calendar, MercadoPago, roles y ReNaPDiS declarado. | Publica 30 días de prueba y precios mensuales con IVA ($24.900, $54.900 y $74.900; Empresarial a medida), recordatorios según plan, API y webhooks en Empresarial y «backups diarios». | Ficha 02 y cuatro celdas de la matriz B. |
+| tab32 | Coinciden desde $95/mes, usuarios ilimitados, prueba de 14 días, cargos por claim, adjuntos y elegibilidad, y que los ledgers no se migran. | La prueba pide email y tarjeta; la migración se publica desde $1,250; la exportación gratuita al salir incluye el ledger. | Ficha 15. |
+| Dentalink | Coinciden el enlace de reserva, los permisos y los bloqueos de horario. | El manual (fechado el 12/06/2026) tiene una sección plegada, «Cruce con Recursos», que declara que la agenda online valida que el profesional y el recurso asociado al servicio estén disponibles en el mismo horario. No identifica el recurso como sillón ni describe control de concurrencia. | Ficha 01 y sección C. La matriz B no cambia. |
+| Dentidesk | Coinciden Excel estándar sin costo con licencia activa, solicitud hasta 30 días después del término con posible cargo y prueba de 15 días. | Cada cuenta de odontólogo adicional «generará un cargo según el plan contratado»; el informe lo expresaba como posible. | Ficha 06. |
+| AgendaPro | No se pudo comprobar. | La interfaz pública respondió HTTP 403. No se reintentó ni se evadió el bloqueo. | Se anota en la ficha 08; las celdas conservan la observación del 17/11. |
+| Clinic Cloud | Coinciden 29, 49 y 79 EUR más IVA, 50 % durante tres meses, 10 EUR por agenda extra, odontograma en Max y reserva por Doctoralia. | Declara más de 3.000 consultas y clínicas en España y exhibe ISO/IEC 27001. | Ficha 09: adopción y sello declarados. |
+| Dentify | Coinciden $30.000 y $45.000 mensuales, 14 días sin tarjeta, «Hecho en Argentina» y nube cifrada. | La modalidad anual publica $25.000 y $38.000 por mes ($300.000 y $456.000 por año); el informe había descartado el anual. El pie indica «Desarrollado por IB Digital». | Ficha 03. |
+| Odontoly | Coinciden USD 149,99 sin permanencia; WhatsApp Business, SMS, ARCA y visor RX como próximos; copias cifradas y base de trabajo sin cifrar; Windows en desarrollo. | El plan publica además dos usuarios y hasta cuatro dispositivos autorizados. | Ficha 05. |
 
 ### Fuentes no accesibles y exclusiones
 
@@ -653,25 +657,25 @@ Discovery, KB y roadmap se consolidan con la revisión 2 aprobada. El primer cha
 
 ## Referencias completas
 
-Todas las referencias siguientes fueron consultadas el 2026-11-17. Las rutas enlazadas son fuentes primarias abiertas; las limitaciones se describen en sus fichas. Las capacidades comerciales y las condiciones pueden cambiar.
+Todas las referencias siguientes fueron consultadas el 2026-11-17; las que indican una nueva consulta se volvieron a abrir, o se intentó abrirlas, en esa segunda fecha. Las rutas enlazadas son fuentes primarias abiertas; las limitaciones se describen en sus fichas. Las capacidades comerciales y las condiciones pueden cambiar.
 
 - **F01.1 - Dentalink: Sitio argentino**. [https://web-ar.softwaredentalink.com/](https://web-ar.softwaredentalink.com/). Consulta: 2026-11-17.
-- **F01.2 - Dentalink: Manual de agenda online**. [https://ayuda.softwaredentalink.com/es/articles/9493139-configura-tu-agenda-online](https://ayuda.softwaredentalink.com/es/articles/9493139-configura-tu-agenda-online). Consulta: 2026-11-17.
-- **F02.1 - DentApp: Producto y país**. [https://www.dentapp.ar/software-odontologico-argentina](https://www.dentapp.ar/software-odontologico-argentina). Consulta: 2026-11-17.
-- **F02.2 - DentApp: Funcionalidades y planes**. [https://www.dentapp.ar/](https://www.dentapp.ar/). Consulta: 2026-11-17.
-- **F03.1 - Dentify: Producto, FAQ y precios**. [https://www.dentify.com.ar/](https://www.dentify.com.ar/). Consulta: 2026-11-17.
+- **F01.2 - Dentalink: Manual de agenda online**. [https://ayuda.softwaredentalink.com/es/articles/9493139-configura-tu-agenda-online](https://ayuda.softwaredentalink.com/es/articles/9493139-configura-tu-agenda-online). Consulta: 2026-11-17. Nueva consulta: 2026-11-25.
+- **F02.1 - DentApp: Producto y país**. [https://www.dentapp.ar/software-odontologico-argentina](https://www.dentapp.ar/software-odontologico-argentina). Consulta: 2026-11-17. Nueva consulta: 2026-11-25.
+- **F02.2 - DentApp: Funcionalidades y planes**. [https://www.dentapp.ar/](https://www.dentapp.ar/). Consulta: 2026-11-17. Nueva consulta: 2026-11-25.
+- **F03.1 - Dentify: Producto, FAQ y precios**. [https://www.dentify.com.ar/](https://www.dentify.com.ar/). Consulta: 2026-11-17. Nueva consulta: 2026-11-25.
 - **F03.2 - Dentify: Página de consultorio**. [https://www.dentify.com.ar/software-consultorio-odontologico](https://www.dentify.com.ar/software-consultorio-odontologico). Consulta: 2026-11-17.
 - **F04.1 - OdontoApp: Portada parcial**. [https://odontoapp.com.ar/](https://odontoapp.com.ar/). Consulta: 2026-11-17.
 - **F04.2 - OdontoApp: Política de privacidad**. [https://odontoapp.com.ar/privacidad](https://odontoapp.com.ar/privacidad). Consulta: 2026-11-17.
-- **F05.1 - Odontoly: Producto, restricciones y precios**. [https://odontoly.com/](https://odontoly.com/). Consulta: 2026-11-17.
+- **F05.1 - Odontoly: Producto, restricciones y precios**. [https://odontoly.com/](https://odontoly.com/). Consulta: 2026-11-17. Nueva consulta: 2026-11-25.
 - **F06.1 - Dentidesk: Características**. [https://www.dentidesk.cl/dentidesk/feature](https://www.dentidesk.cl/dentidesk/feature). Consulta: 2026-11-17.
-- **F06.2 - Dentidesk: Términos de uso**. [https://app.dentidesk.com/terminos.php](https://app.dentidesk.com/terminos.php). Consulta: 2026-11-17.
+- **F06.2 - Dentidesk: Términos de uso**. [https://app.dentidesk.com/terminos.php](https://app.dentidesk.com/terminos.php). Consulta: 2026-11-17. Nueva consulta: 2026-11-25.
 - **F06.3 - Dentidesk: Ayuda roles y profesionales**. [https://dentidesk.freshdesk.com/support/solutions/articles/150000201446--c%C3%B3mo-agregar-doctores-y-personal-a-mi-cl%C3%ADnica-en-dentidesk-](https://dentidesk.freshdesk.com/support/solutions/articles/150000201446--c%C3%B3mo-agregar-doctores-y-personal-a-mi-cl%C3%ADnica-en-dentidesk-). Consulta: 2026-11-17.
 - **F07.1 - Odonto.me: Producto y planes**. [https://odonto.me/?locale=es](https://odonto.me/?locale=es). Consulta: 2026-11-17.
 - **F08.1 - AgendaPro: Oferta dental**. [https://agendapro.com/es/dental/software-odontologico](https://agendapro.com/es/dental/software-odontologico). Consulta: 2026-11-17.
 - **F08.2 - AgendaPro: Planes Argentina**. [https://agendapro.com/ar/planes](https://agendapro.com/ar/planes). Consulta: 2026-11-17.
-- **F08.3 - AgendaPro: Interfaz pública de reserva**. [https://agendapro.com/site/ar/odontologiaor/239004](https://agendapro.com/site/ar/odontologiaor/239004). Consulta: 2026-11-17.
-- **F09.1 - Clinic Cloud: Tarifas y módulos**. [https://clinic-cloud.com/tarifas](https://clinic-cloud.com/tarifas). Consulta: 2026-11-17.
+- **F08.3 - AgendaPro: Interfaz pública de reserva**. [https://agendapro.com/site/ar/odontologiaor/239004](https://agendapro.com/site/ar/odontologiaor/239004). Consulta: 2026-11-17. Nueva consulta: 2026-11-25 (respondió HTTP 403).
+- **F09.1 - Clinic Cloud: Tarifas y módulos**. [https://clinic-cloud.com/tarifas](https://clinic-cloud.com/tarifas). Consulta: 2026-11-17. Nueva consulta: 2026-11-25.
 - **F09.2 - Clinic Cloud: Ayuda presupuesto y odontograma**. [https://clinic-cloud.com/faq/agenda-y-comunicaciones/presupuestos](https://clinic-cloud.com/faq/agenda-y-comunicaciones/presupuestos). Consulta: 2026-11-17.
 - **F10.1 - XDentalCloud: Producto**. [https://xdentalcloud.com/](https://xdentalcloud.com/). Consulta: 2026-11-17.
 - **F10.2 - XDentalCloud: Precios**. [https://xdentalcloud.com/precios/](https://xdentalcloud.com/precios/). Consulta: 2026-11-17.
@@ -691,5 +695,5 @@ Todas las referencias siguientes fueron consultadas el 2026-11-17. Las rutas enl
 - **F14.1 - CareStack: Plataforma y certificaciones declaradas**. [https://carestack.com/](https://carestack.com/). Consulta: 2026-11-17.
 - **F14.2 - CareStack: Reserva online**. [https://carestack.com/dental-software/features/online-scheduling](https://carestack.com/dental-software/features/online-scheduling). Consulta: 2026-11-17.
 - **F15.1 - tab32: Producto**. [https://tab32.com/](https://tab32.com/). Consulta: 2026-11-17.
-- **F15.2 - tab32: Tarifa vigente abierta**. [https://tab32.com/pricing/](https://tab32.com/pricing/). Consulta: 2026-11-17.
+- **F15.2 - tab32: Tarifa vigente abierta**. [https://tab32.com/pricing/](https://tab32.com/pricing/). Consulta: 2026-11-17. Nueva consulta: 2026-11-25.
 - **F15.3 - tab32: Empresa y seguridad declarada**. [https://tab32.com/about/](https://tab32.com/about/). Consulta: 2026-11-17.
