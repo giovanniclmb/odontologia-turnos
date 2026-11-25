@@ -1,6 +1,5 @@
 package ar.edu.utn.odontologia.referencias.persistencia;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -9,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 public interface PacienteReferencias extends Referencias<PacienteReferencia> {
-    @Lock(LockModeType.PESSIMISTIC_WRITE)
+    @Lock(jakarta.persistence.LockModeType.PESSIMISTIC_WRITE)
     @Query("select p from PacienteReferencia p where p.id = :id")
     Optional<PacienteReferencia> buscarParaModificarEspera(@Param("id") UUID id);
 
