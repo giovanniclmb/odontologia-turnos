@@ -13,10 +13,10 @@
 
 ## 3. Contrato HTTP
 
-- [ ] 3.1 Con TDD, exponer sillones, prestaciones e intervalo con sus errores; verificar con pruebas HTTP y PostgreSQL real 401, 403, decimales y valores no positivos sin cambios persistidos.
-- [ ] 3.2 Con TDD, exponer consulta y alta de turnos; verificar alta válida, conflictos por profesional, sillón, intervalo y bloqueo, intervalo sin configurar, período mayor a 7 días y alcance de odontología.
-- [ ] 3.3 Con TDD, exponer consulta y alta de bloqueos; verificar turno ocupante, referencias inexistentes, solicitudes inválidas y acceso por rol.
-- [ ] 3.4 Documentar las rutas y códigos nuevos en `backend/README.md`; verificar contra las pruebas HTTP.
+- [x] 3.1 Con TDD, exponer sillones, prestaciones e intervalo con sus errores; verificar con pruebas HTTP y PostgreSQL real 401, 403, decimales y valores no positivos sin cambios persistidos.
+- [x] 3.2 Con TDD, exponer consulta y alta de turnos; verificar alta válida, conflictos por profesional, sillón, intervalo y bloqueo, intervalo sin configurar, período mayor a 7 días y alcance de odontología.
+- [x] 3.3 Con TDD, exponer consulta y alta de bloqueos; verificar turno ocupante, referencias inexistentes, solicitudes inválidas y acceso por rol.
+- [x] 3.4 Documentar las rutas y códigos nuevos en `backend/README.md`; verificar contra las pruebas HTTP.
 
 ## 4. Interfaz
 

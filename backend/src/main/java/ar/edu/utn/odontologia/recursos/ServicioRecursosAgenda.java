@@ -66,7 +66,7 @@ public class ServicioRecursosAgenda {
             throw new IllegalArgumentException("El sillón debe existir y estar activo");
         }
         return sede.consultarIntervalo(solicitante)
-                .orElseThrow(() -> new IllegalStateException("El intervalo de sede está sin configurar"));
+                .orElseThrow(IntervaloSinConfigurarException::new);
     }
 
     public Prestacion altaPrestacion(Identidad solicitante, String codigo, Integer minutos) {
