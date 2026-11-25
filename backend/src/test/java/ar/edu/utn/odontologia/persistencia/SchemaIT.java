@@ -20,7 +20,7 @@ class SchemaIT {
                 .schemas("odontologia").createSchemas(false).cleanDisabled(true).outOfOrder(false).load();
     }
 
-    @Test void aplicaDoceMigracionesYCatorceTablasUnaSolaVez() throws Exception {
+    @Test void aplicaCatorceMigracionesYQuinceTablasUnaSolaVez() throws Exception {
         var f = flyway();
         f.migrate();
         try (var c = db.migrationConnection(); var st = c.createStatement()) {
@@ -28,7 +28,7 @@ class SchemaIT {
             assertTrue(rs.next()); assertEquals(15, rs.getInt(1));
         }
         assertEquals(0, f.migrate().migrationsExecuted);
-        assertEquals(13, f.info().applied().length);
+        assertEquals(14, f.info().applied().length);
     }
 
     @ParameterizedTest @ValueSource(strings={"paciente","profesional","sillon","prestacion"})

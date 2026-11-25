@@ -34,6 +34,13 @@ public record MensajeTurno(String asunto, String cuerpo) {
                 + FECHA_Y_HORA.format(inicio) + " (hora de Mendoza).\n\n" + cancelacion + "\n");
     }
 
+    /** El recordatorio sale cuando el plazo de 48 horas ya venció, por eso nunca lleva enlace. */
+    public static MensajeTurno recordatorio(String nombre, Instant inicio) {
+        return new MensajeTurno("Recordatorio de tu turno", "Hola, " + nombre + ":\n\nTe recordamos tu turno del "
+                + FECHA_Y_HORA.format(inicio) + " (hora de Mendoza).\n\n"
+                + "Ya venció el plazo para cancelarlo por enlace.\n");
+    }
+
     /** El cuerpo lleva el nombre y el enlace: no debe llegar a un registro por accidente. */
     @Override
     public String toString() {

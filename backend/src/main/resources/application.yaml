@@ -43,3 +43,5 @@ email:
   test-allowlist: ${EMAIL_TEST_ALLOWLIST:}
   max-retries: ${EMAIL_MAX_RETRIES:2}
   timeout: ${EMAIL_TIMEOUT:10s}
+  recordatorio:
+    activo: ${EMAIL_RECORDATORIO_ACTIVO:false}
