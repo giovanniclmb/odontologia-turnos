@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Configuración</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../../../../design-system/tokens.css">
+  <link rel="stylesheet" href="../../../../frontend/public/styles.css">
+  <link rel="stylesheet" href="./agenda.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Navegación principal">
+      <div class="brand"><img src="../../../../design-system/assets/logo.svg" alt="Logo provisional"><strong data-brand-name></strong></div>
+      <nav class="nav" aria-label="Secciones"><a href="#pacientes">Pacientes</a><a href="#agenda">Agenda</a><span aria-disabled="true">Ficha clínica</span><span aria-disabled="true">Lista de espera</span><a href="#configuracion" aria-current="page">Configuración</a></nav>
+    </aside>
+    <div class="main">
+      <header class="topbar"><span class="topbar-title">Configuración</span><div class="topbar-user"><span>recepcion.demo (recepcion)</span><button class="btn btn-secondary" type="button">Cerrar sesión</button></div></header>
+      <main class="content">
+<section class="page-header"><div><h1>Configuración</h1><p>Reglas comunes de la sede.</p></div><div class="header-actions"></div></section><section class="card" aria-labelledby="int-titulo"><div class="card-header"><div><h2 class="card-title" id="int-titulo">Intervalo entre turnos</h2><p class="card-subtitle">Se aplica antes y después, a profesional y sillón. El cambio rige para las próximas validaciones.</p></div></div>
+ <p class="current-value">Sin configurar</p><p class="notice">No se pueden crear turnos hasta configurar el intervalo.</p>
+ <form class="patient-form" style="margin-top: var(--space-4)"><div class="field"><label for="min">Minutos *</label><input class="input" id="min" type="number" min="1" step="1"><span class="hint">Número entero mayor que cero.</span></div><div class="form-actions"><button class="btn btn-primary" type="submit">Guardar intervalo</button></div></form></section>
+ <section class="card" aria-labelledby="int2-titulo"><div class="card-header"><div><h2 class="card-title" id="int2-titulo">Ejemplo: valor vigente y dato inválido</h2></div></div>
+ <p class="current-value">Vigente: 15 minutos</p><form class="patient-form"><div class="field"><label for="min2">Minutos *</label><input class="input is-error" id="min2" type="text" value="7,5" aria-invalid="true" aria-describedby="min2-error"><span class="field-error" id="min2-error">Ingrese un número entero mayor que cero. Se conserva el valor vigente.</span></div><div class="form-actions"><button class="btn btn-primary" type="submit">Guardar intervalo</button></div></form></section>
+      </main>
+    </div>
+  </div>
+  <script defer src="../../../../design-system/brand.js"></script>
+</body>
+</html>
