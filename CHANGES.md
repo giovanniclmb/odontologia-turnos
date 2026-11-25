@@ -121,11 +121,11 @@ GATE 7: dependencias previas verificadas según tabla (nivel 7)
   → C-22 avisos-de-huecos-y-asignacion-por-recepcion [Sofia; comprobar todas sus dependencias]
   → C-24 interfaz-cuenta-y-lista-de-espera [Sofia; comprobar todas sus dependencias]
 GATE 8: dependencias previas verificadas según tabla (nivel 8)
-  → C-19 email-al-crear-turno [Fabi; comprobar todas sus dependencias]
+  → C-19 email-al-crear-turno [Giovanni; comprobar todas sus dependencias]
   → C-23 interfaz-cancelacion-por-enlace [Luciano; comprobar todas sus dependencias]
   → C-25 interfaz-asignacion-de-huecos [Giovanni; comprobar todas sus dependencias]
 GATE 9: dependencias previas verificadas según tabla (nivel 9)
-  → C-20 recordatorio-automatico-24-horas [Fabi; comprobar todas sus dependencias]
+  → C-20 recordatorio-automatico-24-horas [Giovanni; comprobar todas sus dependencias]
 GATE 10: dependencias previas verificadas según tabla (nivel 10)
   → C-14 integracion-y-ejecucion-reproducible [Giovanni; comprobar todas sus dependencias]
 ```
@@ -140,7 +140,7 @@ Es una cadena de mayor longitud del DAG usando unidades equivalentes, no una est
 
 ### Plan aprobado con cuatro integrantes
 
-Giovanni aprobó el reparto el 19/11/2026. Las ondas preservan las dependencias y consideran una tarea por integrante en cada onda; son unidades abstractas, no días ni promesa de un óptimo temporal. C-01 está completado. Se permiten propuestas y contratos anticipados, pero la implementación requiere dependencias integradas y aprobaciones de gobernanza.
+Giovanni aprobó el reparto el 19/11/2026 y reasignó C-19 y C-20 el 25/11/2026. Las ondas preservan las dependencias; el plan original consideraba una tarea por integrante en cada onda y la reasignación requiere coordinar la secuencia de los dos items de Giovanni en la onda 10. Son unidades abstractas, no días ni promesa de un óptimo temporal. C-01 está completado. Se permiten propuestas y contratos anticipados, pero la implementación requiere dependencias integradas y aprobaciones de gobernanza.
 
 | Onda | Giovanni | Sofia | Luciano | Fabi |
 | --- | --- | --- | --- | --- |
@@ -152,9 +152,11 @@ Giovanni aprobó el reparto el 19/11/2026. Las ondas preservan las dependencias 
 | 6 | C-06 | C-21 | — | — |
 | 7 | C-08 | C-09 | C-10 | C-17 |
 | 8 | C-07 | C-22 | C-13 | C-18 |
-| 9 | — | C-24 | C-12 | C-19 |
-| 10 | C-25 | — | C-23 | C-20 |
+| 9 | C-19 | C-24 | C-12 | — |
+| 10 | C-25 y C-20 | — | C-23 | — |
 | 11 | C-14 | — | — | — |
+
+El 25/11/2026 Giovanni reasignó expresamente C-19 y C-20 de Fabi a sí mismo. Se conservan las dependencias y las ondas como referencia; C-25 y C-20 comparten responsable y su secuencia de ejecución queda por coordinar, sin presumir paralelismo personal.
 
 ## FASE 0 — Dominio aislado y persistencia base
 
@@ -351,7 +353,7 @@ Giovanni aprobó el reparto el 19/11/2026. Las ondas preservan las dependencias 
   - [10 Preguntas abiertas](knowledge-base/10_preguntas_abiertas.md) §PA-02 y PA-05
 
 ### [C-18] `cancelacion-del-paciente-por-enlace`
-- **Estado**: `[ ]` pendiente
+- **Estado**: `[x]` implementado, verificado, archivado e integrado el 25/11/2026, con revisión independiente de las correcciones sin bloqueantes. El envío del enlace sigue en C-19, que debe contemplar las advertencias de la [entrega interna](openspec/changes/archive/2026-11-25-c-18-entrega-del-enlace/verify.md); los pendientes menores constan además en las [correcciones de la revisión](openspec/changes/archive/2026-11-25-c-18-fixes-hallazgos-pr44/verify.md). [PR #44](https://github.com/giovanniclmb/odontologia-turnos/pull/44) · [Issue #19](https://github.com/giovanniclmb/odontologia-turnos/issues/19).
 - **Responsable**: Fabi
 - **Scope**: Cancelación del turno asociado por enlace hasta 48 horas antes (US-013, RN-PA-01 y RN-PA-02).
   - Resolver PA-17/PA-18: protección, vigencia, uso, instante exacto del límite, referencia horaria y efecto de cambios del turno. El plazo no se cambia por inferencia.
@@ -366,10 +368,10 @@ Giovanni aprobó el reparto el 19/11/2026. Las ondas preservan las dependencias 
   - [Preguntas abiertas](knowledge-base/10_preguntas_abiertas.md)
 
 ### [C-21] `inscripcion-y-preferencias-de-espera`
-- **Estado**: `[ ]` pendiente
+- **Estado**: `[x]` implementado, verificado y archivado en OpenSpec el 25/11/2026. Migración V15, titularidad, vigencia y concurrencia verificadas con PostgreSQL 18.7 sobre `main` actualizado. Pendiente de integración mediante el [PR #48](https://github.com/giovanniclmb/odontologia-turnos/pull/48). [Tareas y evidencia](openspec/changes/archive/2026-11-25-c-21-inscripcion-y-preferencias-de-espera/tasks.md) · [Issue #22](https://github.com/giovanniclmb/odontologia-turnos/issues/22).
 - **Responsable**: Sofia
 - **Scope**: Gestión backend de inscripción propia para US-014 y RN-LE-01.
-  - Resolver PA-16/PA-20: ciclo y vigencia de inscripción, operaciones autorizadas y criterios de compatibilidad. No inventar vencimientos, prioridad o cantidad de inscripciones.
+  - C-16 define la autorización por vínculo y titularidad. Para C-21 se aprobó crear, consultar, editar y dar de baja inscripciones propias, con una vigente por prestación y fin de vigencia al finalizar el rango de fechas o al darla de baja. C-22 resuelve la compatibilidad exacta de huecos y la asignación.
   - Implementar el contrato y representación aprobados para prestación, rango de fechas y franjas horarias, con profesional opcional; proteger cada operación mediante C-16.
   - Tests: preferencias válidas e inválidas según spec, profesional omitido y acceso propio/ajeno; mantener separada la inscripción de una reserva.
 - **Dependencias**: C-16, C-05
@@ -399,8 +401,8 @@ Giovanni aprobó el reparto el 19/11/2026. Las ondas preservan las dependencias 
   - [Preguntas abiertas](knowledge-base/10_preguntas_abiertas.md)
 
 ### [C-19] `email-al-crear-turno`
-- **Estado**: `[ ]` pendiente
-- **Responsable**: Fabi
+- **Estado**: `[x]` implementado, verificado y archivado en OpenSpec el 25/11/2026, con revisión independiente sin bloqueantes en producción y un envío real de prueba recibido. Integrado el 25/11/2026 mediante el [PR #49](https://github.com/giovanniclmb/odontologia-turnos/pull/49). La página de cancelación corresponde a C-23. [Verificación](openspec/changes/archive/2026-11-25-email-al-crear-turno/verify.md) · [Issue #20](https://github.com/giovanniclmb/odontologia-turnos/issues/20).
+- **Responsable**: Giovanni
 - **Scope**: Email de alta con enlace de cancelación para US-011 y RN-EM-01.
   - Resolver PA-15/PA-17/PA-18: destinatario, contenido, efecto de fallos y creación dentro de las ventanas de 48/24 horas; no inventar excepciones al plazo.
   - Conectar la creación persistida con transporte C-17 y enlace C-18. Especificar qué ocurre ante fallo de email sin suponer que se elimina o confirma el turno.
@@ -414,8 +416,8 @@ Giovanni aprobó el reparto el 19/11/2026. Las ondas preservan las dependencias 
   - [Preguntas abiertas](knowledge-base/10_preguntas_abiertas.md)
 
 ### [C-20] `recordatorio-automatico-24-horas`
-- **Estado**: `[ ]` pendiente
-- **Responsable**: Fabi
+- **Estado**: `[x]` implementado, verificado y archivado en OpenSpec el 25/11/2026, con revisión independiente atendida y un envío real de prueba recibido. Integrado el 25/11/2026 mediante el [PR #51](https://github.com/giovanniclmb/odontologia-turnos/pull/51). [Verificación](openspec/changes/archive/2026-11-25-recordatorio-automatico-24-horas/verify.md) · [Issue #21](https://github.com/giovanniclmb/odontologia-turnos/issues/21).
+- **Responsable**: Giovanni
 - **Scope**: Recordatorio de US-012 y RN-EM-02, separado de confirmaciones manuales.
   - Resolver PA-18: programación y referencia horaria, reprogramaciones, cancelaciones, altas cercanas, fallos y duplicados. Acordar tecnología antes de implementar.
   - Enviar automáticamente 24 horas antes usando C-17, sin opción de cancelar cuando venció el plazo de 48 horas. Conservar el registro manual de recepción.
@@ -484,7 +486,7 @@ La política visual sigue diferida: resolverla antes de Apply y cumplir las apro
   - [08 Arquitectura propuesta](knowledge-base/08_arquitectura_propuesta.md) §Operación y diseño visual
 
 ### [C-12] `interfaz-reprogramacion-y-cancelacion`
-- **Estado**: `[x]` implementado, verificado y archivado en OpenSpec el 25/11/2026. Pendiente de integración. [Verificación](openspec/changes/archive/2026-11-25-interfaz-reprogramacion-y-cancelacion/verify.md).
+- **Estado**: `[x]` implementado, verificado y archivado en OpenSpec el 25/11/2026. Verificación combinada con C-18 completada; revisión e integración registradas en el [PR #45](https://github.com/giovanniclmb/odontologia-turnos/pull/45). [Verificación](openspec/changes/archive/2026-11-25-interfaz-reprogramacion-y-cancelacion/verify.md).
 - **Responsable**: Luciano
 - **Scope**: Acciones de reorganización de una reserva desde la agenda existente.
   - Resolver el gate visual y consumir C-07/C-08 para US-006 y US-007, sin redefinir reglas o transiciones.
@@ -533,6 +535,7 @@ La política visual sigue diferida: resolverla antes de Apply y cumplir las apro
 - **Estado**: `[ ]` pendiente
 - **Responsable**: Sofia
 - **Scope**: Acceso y gestión visual de la inscripción propia para US-014.
+  - Incorporar en el backend las rutas HTTP y el ingreso del paciente que consumen C-16 y C-21, antes de la interfaz; acordar autenticación y sesión en la propuesta, antes de implementar ([decisión del 25/11/2026](knowledge-base/09_decisiones_y_supuestos.md#dd-21--lista-de-espera-y-acceso-del-paciente-c-21-25112026)).
   - Resolver el gate visual y consumir ingreso/vínculo de C-16 y operaciones C-21; no redefinir registro o permisos desde la UI.
   - Presentar prestación, fechas, franjas y profesional opcional. Mostrar que la inscripción recibe avisos y no reserva el hueco.
   - Tests: acceso propio, preferencias y errores aprobados; comprobar que controles visuales y backend respetan el mismo contrato. Reutilizar frontend vanilla y base de C-10.

@@ -131,3 +131,39 @@ La migración es nueva y consecutiva (V9), coordinada con el historial integrado
 **Contexto**: la interfaz de C-11 guarda token de sesión e identidad en `localStorage`, contra la regla de seguridad y sin excepción documentada. **Decisión**: Giovanni eligió por menú una cookie `HttpOnly`, `Secure` y `SameSite=Strict` con token anti-CSRF propio. **Alternativas presentadas**: token solo en memoria, excepción documentada para `localStorage` y cookie con Spring Security.
 
 **Límite**: se aprobó preparar la propuesta, sin Apply. La deuda sigue abierta y la spec vigente mantiene el token en `Authorization` hasta implementar y archivar el change. [Propuesta](../openspec/changes/sesion-en-cookie-httponly/proposal.md)
+
+## DD-17 — Vigencia del enlace ante la confirmación (C-18, 25/11/2026)
+
+**Contexto**: la revisión del PR #44 mostró que confirmar un turno incrementa su versión y dejaba sin efecto el enlace de cancelación ya emitido. **Decisión**: Giovanni eligió por menú que el enlace conserve su validez al confirmar, con el mismo plazo de 48 horas. **Alternativas presentadas**: invalidar y emitir un reemplazo con entrega diferida a C-19, o reemplazar y definir ahora el contrato de entrega. La reprogramación sigue invalidando el enlace y el uso repetido se rechaza.
+
+**Límite**: no incorpora emails ni entrega del enlace (C-19). [Change](../openspec/changes/archive/2026-11-25-c-18-fixes-hallazgos-pr44/proposal.md)
+
+## DD-18 — Entrega interna del enlace a C-19 (C-18, 25/11/2026)
+
+**Contexto**: el token de cancelación se generaba al crear y reprogramar, pero su valor en claro se descartaba. **Decisión**: Giovanni eligió por menú un evento interno que el consumidor recibe después de confirmar la transacción. **Alternativas presentadas**: que C-19 emita el token al enviar, o dejar la entrega solo registrada como pendiente. El token no se persiste en claro ni se expone por HTTP.
+
+**Límite**: no se envían emails. La entrega no se persiste: si el proceso cae antes del consumo, ese enlace se pierde. Contenido, destinatario, fallos y reintentos quedan para C-19. [Change](../openspec/changes/archive/2026-11-25-c-18-entrega-del-enlace/proposal.md)
+
+## DD-19 — Email del turno (C-19, 25/11/2026)
+
+**Contexto**: C-17 aporta el transporte y C-18 el enlace; faltaba definir destinatario, contenido, disparadores y fallos. **Decisión** (Giovanni, por menú): enviar al email de la ficha del paciente, con la lista de prueba vigente; incluir nombre, fecha y hora de Mendoza y enlace con su plazo, sin prestación, profesional ni datos clínicos; enlace a una URL base configurable con el token después de `#`; con menos de 48 horas, email sin enlace; enviar también al reprogramar; ante fallos agotados, solo registrar; descartar el mensaje desactualizado antes de enviarlo.
+
+**Alternativas presentadas**: redirigir a una dirección de prueba; contenido sin datos personales o con códigos de prestación y profesional; enlace a la API o página mínima en C-19; no enviar con menos de 48 horas; solo el alta; vista de fallos para recepción o reenvío posterior; enviar mensajes desactualizados.
+
+**Límite**: Giovanni aprobó la propuesta y su implementación el 25/11/2026. Autorizó además un único envío real de prueba el mismo día y confirmó su recepción. [Change](../openspec/changes/archive/2026-11-25-email-al-crear-turno/proposal.md)
+
+## DD-20 — Recordatorio de 24 horas (C-20, 25/11/2026)
+
+**Contexto**: RN-EM-02 fija el recordatorio, sin programación, bordes ni tratamiento de fallos. **Decisión** (Giovanni, por menú): revisión periódica en el backend cada minuto; envío atrasado mientras el turno no haya comenzado; sin recordatorio para horarios fijados con menos de 24 horas; turnos pendientes y confirmados; nombre, fecha y hora de Mendoza y aclaración de que ya no puede cancelarse por enlace; ante fallos agotados, solo registrar; envío automático apagado por defecto.
+
+**Alternativas presentadas**: temporizador por turno o proceso externo; atraso limitado a 12 horas o sin recuperación; recordar también los horarios cercanos; reintentar más tarde; solo pendientes; pedir aviso al consultorio u omitir la cancelación; encendido por defecto.
+
+**Límite**: Giovanni aprobó la propuesta y su implementación el 25/11/2026. Autorizó además un único envío real de prueba el mismo día y confirmó su recepción. [Change](../openspec/changes/archive/2026-11-25-recordatorio-automatico-24-horas/proposal.md)
+
+## DD-21 — Lista de espera y acceso del paciente (C-21, 25/11/2026)
+
+**Contexto**: C-21 llegó implementado sin constancia de quién había aprobado su ciclo, y sin transporte HTTP en C-16, C-21 ni la ficha de C-24. **Decisión** (Giovanni, por menú): confirmar operaciones propias, una inscripción vigente por prestación, vencimiento por fin de rango o baja, rango de un día, varias franjas y cambio de prestación; mantener la zona `America/Argentina/Buenos_Aires` en la vigencia; sumar a C-24 las rutas HTTP y el ingreso del paciente.
+
+**Alternativas presentadas**: consultar antes a Sofia o cambiar alguna regla; usar la zona de Mendoza; anotar el transporte como pendiente o implementarlo en el mismo PR.
+
+**Límite**: no aprueba el diseño de autenticación ni implementar C-24. [Change](../openspec/changes/archive/2026-11-25-c-21-inscripcion-y-preferencias-de-espera/proposal.md)

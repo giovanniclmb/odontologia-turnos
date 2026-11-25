@@ -38,10 +38,13 @@ public class TurnoPersistido {
     private EstadoTurno estado;
     @Column(nullable = false, updatable = false)
     private long version;
+    @Column(name = "horario_fijado_en", updatable = false)
+    private Instant horarioFijadoEn;
 
     protected TurnoPersistido() {}
 
-    public TurnoPersistido(Agenda.Turno turno) {
+    public TurnoPersistido(Agenda.Turno turno, Instant horarioFijadoEn) {
+        this.horarioFijadoEn = horarioFijadoEn;
         pacienteId = UUID.fromString(turno.paciente());
         profesionalId = UUID.fromString(turno.profesional());
         sillonId = UUID.fromString(turno.sillon());

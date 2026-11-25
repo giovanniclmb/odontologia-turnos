@@ -28,7 +28,7 @@ Las pruebas no leen la conexión de desarrollo: aíslan el Environment de Spring
 
 ## Transporte de email (C-17)
 
-Variables de entorno opcionales para arranque y obligatorias al enviar: `RESEND_API_KEY`, `EMAIL_FROM`, `EMAIL_TEST_ALLOWLIST` (lista separada por comas), `EMAIL_MAX_RETRIES` (default 2) y `EMAIL_TIMEOUT` (default `10s`). Los secretos no se versionan; `.env` está ignorado por Git. El puerto neutro es `comunicaciones.CorreoSalida`; el adaptador Resend usa `java.net.http.HttpClient` y `email_envio` registra cada intento con idempotencia por `(tipo, turno, destinatario)`.
+Variables de entorno opcionales para arranque y obligatorias al enviar: `RESEND_API_KEY`, `EMAIL_FROM`, `EMAIL_TEST_ALLOWLIST` (lista separada por comas), `EMAIL_MAX_RETRIES` (default 2) y `EMAIL_TIMEOUT` (default `10s`). Los secretos no se versionan; `.env` está ignorado por Git. El puerto neutro es `comunicaciones.CorreoSalida`; el adaptador Resend usa `java.net.http.HttpClient` y `email_envio` registra cada intento con idempotencia por `(tipo, turno, destinatario)`. Cada intento se decide por el estado HTTP, con `EMAIL_TIMEOUT` como límite para recibirlo; el cuerpo de la respuesta se descarta sin esperarlo.
 
 ## Desarrollo local
 
@@ -174,3 +174,31 @@ java -cp "target/test-classes:target/classes:$(cat target/demo-classpath)" ar.ed
 ```
 
 `ApiC10Demo` suma al fixture de C-11 los sillones `SIL-01` y `SIL-02`, las prestaciones `CONTROL` y `TRATAMIENTO` y un paciente sin asignación, todos ficticios. El intervalo queda sin configurar. Usa los mismos usuarios de prueba, nunca en una base persistente. Ctrl-C cierra la API y su contenedor.
+
+### C-19 — Email del turno
+
+Cada alta y cada reprogramación confirmadas envían un email en texto plano a la dirección de la ficha del paciente, con su nombre, la fecha y hora de Mendoza y, si faltan más de 48 horas, el enlace de cancelación y su fecha límite. Confirmar, cancelar o reprogramar al mismo destino (horario, profesional y sillón) no envía nada; cambiar solo el profesional o el sillón sí envía, porque es una reprogramación efectiva.
+
+El envío ocurre después del commit, en un hilo aparte con una cola de 100 avisos, y nunca afecta al turno. Antes de enviar se descarta el mensaje si el turno se canceló, cambió de horario o su enlace fue reemplazado. La comprobación es previa al primer intento: con un proveedor lento, los reintentos pueden durar unos 30 segundos y un cambio en ese lapso no detiene el mensaje.
+
+No hay reenvío posterior. Los rechazos y fallos del transporte quedan en `odontologia.email_envio` y en el registro de la aplicación, con el turno y el motivo; si falla la propia persistencia, puede no haber fila o quedar `pending` y solo consta en el registro. La URL base ausente y los errores al preparar el mensaje solo se registran en la aplicación; el descarte por cola llena se registra sin identificar el turno. Se pierden avisos si el proceso cae o si al cerrar no terminan en 10 segundos; un envío interrumpido puede quedar `pending`, que impide repetir esa clave.
+
+| Variable | Uso |
+| --- | --- |
+| `RESEND_API_KEY`, `EMAIL_FROM` | Credencial y remitente del transporte de C-17 |
+| `EMAIL_TEST_ALLOWLIST` | Únicas direcciones a las que se envía; cualquier otra queda registrada como fallida |
+| `EMAIL_CANCELACION_URL_BASE` | Dirección `http` o `https`, sin `#` ni credenciales, a la que se agrega `#<token>`. Si falta, no se envían los emails que necesitan enlace |
+
+La página que lee el token del fragmento y cancela con `POST /cancelacion/{token}` corresponde a C-23: hasta entonces el enlace no permite cancelar desde el navegador. Al ejecutarlas con Maven, las pruebas de integración vacían la credencial, el remitente y la lista definidos en el entorno; `EnvioEmailTurnoIT` usa además un servidor local en lugar del proveedor.
+
+### C-20 — Recordatorio de 24 horas
+
+Con `EMAIL_RECORDATORIO_ACTIVO=true` (por defecto `false`), la aplicación web revisa al arrancar, y un minuto después de terminar cada revisión, los turnos pendientes o confirmados a 24 horas o menos de su inicio. Envía al email de la ficha el nombre, la fecha y hora de Mendoza y la aclaración de que venció el plazo para cancelar por enlace. No lleva enlace ni confirma el turno. El CLI de bootstrap no envía.
+
+No se recuerda un horario fijado (alta, o reprogramación que cambia el inicio) con menos de 24 horas de anticipación. Los turnos anteriores a la migración V14 no tienen ese dato y se recuerdan.
+
+**Antes de activarlo:** en la primera revisión salen los recordatorios de todos los turnos de las próximas 24 horas, solo a las direcciones de `EMAIL_TEST_ALLOWLIST`. Usa las variables de C-17; `EMAIL_CANCELACION_URL_BASE` no interviene.
+
+Cada horario tiene un solo intento. Cualquier registro en `odontologia.email_envio`, también `failed` o `pending`, impide repetirlo: activar sin credenciales válidas o con destinatarios fuera de la lista deja esos recordatorios sin enviar. Si la aplicación está apagada, se envían al volver mientras el turno no haya comenzado. Un cambio del turno durante los reintentos no detiene el mensaje en curso. Al cerrar no se inician envíos nuevos y Spring espera al que está en curso hasta su límite por fase de cierre (30 segundos por defecto); si no termina, puede quedar sin enviar.
+
+Las pruebas de integración fijan el recordatorio apagado y `EnvioRecordatorioIT` usa un servidor local.

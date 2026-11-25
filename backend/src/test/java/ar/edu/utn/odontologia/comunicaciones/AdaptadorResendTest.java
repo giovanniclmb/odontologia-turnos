@@ -11,9 +11,15 @@ import java.io.OutputStream;
 import java.net.InetSocketAddress;
 import java.time.Duration;
 import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 class AdaptadorResendTest {
     private HttpServer server;
@@ -67,6 +73,72 @@ class AdaptadorResendTest {
         assertFalse(r.exitoso());
         assertTrue(r.error().contains("permitido") || r.error().contains("permit"));
         assertEquals(0, counter.get());
+    }
+
+    @Test
+    void elMotivoDeUnRechazoNoIncluyeLaRespuestaDelProveedor() throws Exception {
+        start(422, "{\"message\":\"enlace-secreto-ficticio\"}", new AtomicInteger());
+        String url = "http://127.0.0.1:" + server.getAddress().getPort() + "/";
+        var cfg = config("dest@test.com");
+        cfg.setMaxRetries(0);
+        var adapter = new AdaptadorResend(cfg, new AllowlistEmail(cfg.testAllowlist()), null, java.net.http.HttpClient.newHttpClient(), url);
+
+        var r = adapter.enviar(new SolicitudEnvio("ALTA", UUID.randomUUID(), "dest@test.com", "subj", "body"));
+
+        assertEquals("HTTP 422", r.error());
+    }
+
+    @Test
+    void elMotivoDeUnaFallaDeRedSoloIndicaSuTipo() {
+        var cfg = config("dest@test.com");
+        cfg.setMaxRetries(0);
+        var adapter = new AdaptadorResend(cfg, new AllowlistEmail(cfg.testAllowlist()), null, java.net.http.HttpClient.newHttpClient(), "http://127.0.0.1:1/");
+
+        var r = adapter.enviar(new SolicitudEnvio("ALTA", UUID.randomUUID(), "dest@test.com", "subj", "body"));
+
+        assertEquals("ConnectException", r.error());
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"200,true,NULL", "500,false,HTTP 500"}, nullValues = "NULL")
+    void noEsperaElCuerpoDeUnaRespuestaQueNoTermina(int estado, boolean exitoso, String motivo) throws Exception {
+        var liberar = new CountDownLatch(1);
+        var pedidos = new AtomicInteger();
+        server = HttpServer.create(new InetSocketAddress("127.0.0.1", 0), 0);
+        var hilos = Executors.newCachedThreadPool();
+        server.setExecutor(hilos);
+        server.createContext("/", ex -> {
+            pedidos.incrementAndGet();
+            ex.getRequestBody().readAllBytes();
+            ex.sendResponseHeaders(estado, 0);
+            ex.getResponseBody().write('x');
+            ex.getResponseBody().flush();
+            try {
+                liberar.await();
+            } catch (InterruptedException interrupcion) {
+                Thread.currentThread().interrupt();
+            }
+            ex.close();
+        });
+        server.start();
+        String url = "http://127.0.0.1:" + server.getAddress().getPort() + "/";
+        var cfg = config("dest@test.com");
+        cfg.setMaxRetries(1);
+        cfg.setTimeout(Duration.ofSeconds(1));
+        var adapter = new AdaptadorResend(cfg, new AllowlistEmail(cfg.testAllowlist()), null, java.net.http.HttpClient.newHttpClient(), url);
+
+        try {
+            var envio = CompletableFuture.supplyAsync(() -> adapter.enviar(
+                    new SolicitudEnvio("ALTA", UUID.randomUUID(), "dest@test.com", "subj", "body")), hilos);
+            var r = envio.get(5, TimeUnit.SECONDS);
+
+            assertEquals(exitoso, r.exitoso());
+            assertEquals(motivo, r.error());
+            assertEquals(exitoso ? 1 : 2, pedidos.get());
+        } finally {
+            liberar.countDown();
+            hilos.shutdownNow();
+        }
     }
 
     @Test

@@ -5,6 +5,7 @@ import ar.edu.utn.odontologia.agenda.EstadoTurno;
 import jakarta.persistence.EntityManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.Instant;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.Optional;
@@ -46,11 +47,13 @@ public class EdicionesTurnoPersistidas {
                 .optional();
     }
 
-    public Optional<TurnoLeido> mover(UUID id, long version, Agenda.Turno turno) {
+    /** El horario solo se vuelve a fijar si cambia el inicio: en SET, {@code t.inicio} es el valor anterior. */
+    public Optional<TurnoLeido> mover(UUID id, long version, Agenda.Turno turno, Instant fijadoEn) {
         return jdbc.sql("""
                 update odontologia.turno t
                 set profesional_id = :profesional, sillon_id = :sillon,
-                    inicio = :inicio, fin = :fin, estado = 'PENDIENTE', version = t.version + 1
+                    inicio = :inicio, fin = :fin, estado = 'PENDIENTE', version = t.version + 1,
+                    horario_fijado_en = case when t.inicio = :inicio then t.horario_fijado_en else :fijado end
                 where t.id = :id and t.version = :version
                 returning
                 """ + COLUMNAS)
@@ -60,6 +63,7 @@ public class EdicionesTurnoPersistidas {
                 .param("sillon", UUID.fromString(turno.sillon()))
                 .param("inicio", turno.inicio().atOffset(ZoneOffset.UTC))
                 .param("fin", turno.fin().atOffset(ZoneOffset.UTC))
+                .param("fijado", fijadoEn.atOffset(ZoneOffset.UTC))
                 .query(EdicionesTurnoPersistidas::leer)
                 .optional();
     }

@@ -2,6 +2,7 @@ package ar.edu.utn.odontologia.comunicaciones;
 
 import ar.edu.utn.odontologia.comunicaciones.persistencia.EmailEnvio;
 import ar.edu.utn.odontologia.comunicaciones.persistencia.EmailsEnviados;
+import java.io.InputStream;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -178,17 +179,16 @@ public class AdaptadorResend implements CorreoSalida {
                 .header("Idempotency-Key", idempotencyKey)
                 .POST(HttpRequest.BodyPublishers.ofString(json, StandardCharsets.UTF_8))
                 .build();
-        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+        // El tiempo de espera del pedido cubre hasta recibir el estado, no el cuerpo. Como solo se usa el estado,
+        // la respuesta se descarta sin esperarla: un cuerpo que no termina no puede retener el envío.
+        HttpResponse<InputStream> response = httpClient.send(request, HttpResponse.BodyHandlers.ofInputStream());
+        response.body().close();
         int status = response.statusCode();
         if (status >= 200 && status < 300) {
             return new HttpResultado(true, null);
         }
-        String cuerpo = response.body();
-        String motivo = "HTTP " + status;
-        if (cuerpo != null && !cuerpo.isBlank()) {
-            motivo = motivo + ": " + truncar(saneadoTexto(cuerpo));
-        }
-        return new HttpResultado(false, motivo);
+        // La respuesta del proveedor no se registra: puede repetir el mensaje y su enlace.
+        return new HttpResultado(false, "HTTP " + status);
     }
 
     private String construirJson(SolicitudEnvio s) {
@@ -217,19 +217,9 @@ public class AdaptadorResend implements CorreoSalida {
                 .replace("\n", "\\n").replace("\r", "\\r").replace("\t", "\\t");
     }
 
+    /** Solo los mensajes propios; de cualquier otra falla se informa el tipo, sin datos del envío. */
     private static String saneado(Exception e) {
-        String msg = e.getMessage();
-        if (msg == null || msg.isBlank()) msg = e.getClass().getSimpleName();
-        return truncar(msg);
-    }
-
-    private static String saneadoTexto(String s) {
-        return s == null ? "" : s;
-    }
-
-    private static String truncar(String s) {
-        if (s == null) return "";
-        return s.length() > 300 ? s.substring(0, 300) + "..." : s;
+        return e instanceof PersistenciaEmailException ? e.getMessage() : e.getClass().getSimpleName();
     }
 
     private static void dormir(long ms) {
