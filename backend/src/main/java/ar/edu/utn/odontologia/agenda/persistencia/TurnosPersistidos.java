@@ -24,6 +24,17 @@ public interface TurnosPersistidos extends Repository<TurnoPersistido, UUID> {
             """)
     Optional<TurnoLeido> buscar(UUID id);
 
+    @Query("""
+            select new ar.edu.utn.odontologia.agenda.persistencia.TurnoRecordable(
+                t.id, t.pacienteId, t.inicio, t.horarioFijadoEn)
+            from TurnoPersistido t
+            where t.estado in :estados and t.inicio > :despuesDe and t.inicio <= :hasta
+              and (:soloTurno is null or t.id = :soloTurno)
+            order by t.inicio, t.id
+            """)
+    List<TurnoRecordable> consultarRecordables(Collection<EstadoTurno> estados, Instant despuesDe, Instant hasta,
+                                              UUID soloTurno);
+
     @Query(PROYECTAR_TURNO + """
             where t.estado in :estados and (t.profesionalId = :profesional or t.sillonId = :sillon)
               and t.inicio < :fin and t.fin > :inicio

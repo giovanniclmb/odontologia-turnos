@@ -47,6 +47,21 @@ class MensajeTurnoTest {
     }
 
     @Test
+    void elRecordatorioInformaLaFechaDeMendozaYQueYaNoPuedeCancelarsePorEnlace() {
+        var mensaje = MensajeTurno.recordatorio("Ana", INICIO);
+
+        assertEquals("Recordatorio de tu turno", mensaje.asunto());
+        assertEquals("""
+                Hola, Ana:
+
+                Te recordamos tu turno del 10/04/2040 a las 07:00 (hora de Mendoza).
+
+                Ya venció el plazo para cancelarlo por enlace.
+                """, mensaje.cuerpo());
+        assertFalse(mensaje.toString().contains("Ana"));
+    }
+
+    @Test
     void convierteALaFechaDeMendozaAunqueCambieElDia() {
         var cuerpo = MensajeTurno.componer("Ana", Instant.parse("2040-01-01T02:30:00Z"), Motivo.ALTA, null).cuerpo();
 
