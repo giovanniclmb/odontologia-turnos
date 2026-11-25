@@ -3,6 +3,7 @@ package ar.edu.utn.odontologia.api;
 import ar.edu.utn.odontologia.acceso.AutorizacionDenegadaException;
 import ar.edu.utn.odontologia.acceso.AutenticacionFallidaException;
 import ar.edu.utn.odontologia.agenda.ConflictoAgendaException;
+import ar.edu.utn.odontologia.agenda.TokenCancelacionInvalidoException;
 import ar.edu.utn.odontologia.agenda.bloqueos.TurnoOcupanteException;
 import ar.edu.utn.odontologia.recursos.IntervaloSinConfigurarException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -33,6 +34,14 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(NoAutenticadoException.class)
     public ResponseEntity<Map<String, String>> sinIdentidad() {
         return respuesta(HttpStatus.UNAUTHORIZED, "no_autenticado", "Token invalido o ausente");
+    }
+
+    @ExceptionHandler(TokenCancelacionInvalidoException.class)
+    public ResponseEntity<Map<String, String>> enlaceNoDisponible(TokenCancelacionInvalidoException ex,
+                                                                  HttpServletRequest request) {
+        // Respuesta generica para cualquier falla del enlace (token ausente, invalido, expirado, consumido o
+        // no elegible). No revela existencia, estado ni datos del turno.
+        return respuesta(HttpStatus.NOT_FOUND, "enlace_no_disponible", "El enlace de cancelación no está disponible");
     }
 
     @ExceptionHandler(ConflictoAgendaException.class)

@@ -131,3 +131,15 @@ La migración es nueva y consecutiva (V9), coordinada con el historial integrado
 **Contexto**: la interfaz de C-11 guarda token de sesión e identidad en `localStorage`, contra la regla de seguridad y sin excepción documentada. **Decisión**: Giovanni eligió por menú una cookie `HttpOnly`, `Secure` y `SameSite=Strict` con token anti-CSRF propio. **Alternativas presentadas**: token solo en memoria, excepción documentada para `localStorage` y cookie con Spring Security.
 
 **Límite**: se aprobó preparar la propuesta, sin Apply. La deuda sigue abierta y la spec vigente mantiene el token en `Authorization` hasta implementar y archivar el change. [Propuesta](../openspec/changes/sesion-en-cookie-httponly/proposal.md)
+
+## DD-17 — Vigencia del enlace ante la confirmación (C-18, 25/11/2026)
+
+**Contexto**: la revisión del PR #44 mostró que confirmar un turno incrementa su versión y dejaba sin efecto el enlace de cancelación ya emitido. **Decisión**: Giovanni eligió por menú que el enlace conserve su validez al confirmar, con el mismo plazo de 48 horas. **Alternativas presentadas**: invalidar y emitir un reemplazo con entrega diferida a C-19, o reemplazar y definir ahora el contrato de entrega. La reprogramación sigue invalidando el enlace y el uso repetido se rechaza.
+
+**Límite**: no incorpora emails ni entrega del enlace (C-19). [Change](../openspec/changes/archive/2026-11-25-c-18-fixes-hallazgos-pr44/proposal.md)
+
+## DD-18 — Entrega interna del enlace a C-19 (C-18, 25/11/2026)
+
+**Contexto**: el token de cancelación se generaba al crear y reprogramar, pero su valor en claro se descartaba. **Decisión**: Giovanni eligió por menú un evento interno que el consumidor recibe después de confirmar la transacción. **Alternativas presentadas**: que C-19 emita el token al enviar, o dejar la entrega solo registrada como pendiente. El token no se persiste en claro ni se expone por HTTP.
+
+**Límite**: no se envían emails. La entrega no se persiste: si el proceso cae antes del consumo, ese enlace se pierde. Contenido, destinatario, fallos y reintentos quedan para C-19. [Change](../openspec/changes/archive/2026-11-25-c-18-entrega-del-enlace/proposal.md)

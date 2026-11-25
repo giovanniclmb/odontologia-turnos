@@ -45,12 +45,13 @@ public class ServicioAgenda {
     private final EdicionesTurnoPersistidas ediciones;
     private final Agenda agenda;
     private final Clock reloj;
+    private final ServicioCancelacionPorEnlace tokensCancelacion;
 
     public ServicioAgenda(ServicioAutorizacion autorizacion, PacienteReferencias pacientes,
                           PacienteProfesionales asignaciones, PrestacionReferencias prestaciones,
                           ServicioRecursosAgenda recursos, LocksRecursosAgenda locks, ConsultaBloqueos bloqueos,
                           TurnosPersistidos turnos, EdicionesTurnoPersistidas ediciones,
-                          Agenda agenda, Clock reloj) {
+                          Agenda agenda, Clock reloj, ServicioCancelacionPorEnlace tokensCancelacion) {
         this.autorizacion = autorizacion;
         this.pacientes = pacientes;
         this.asignaciones = asignaciones;
@@ -62,6 +63,7 @@ public class ServicioAgenda {
         this.ediciones = ediciones;
         this.agenda = agenda;
         this.reloj = reloj;
+        this.tokensCancelacion = tokensCancelacion;
     }
 
     @Transactional(isolation = Isolation.READ_COMMITTED)
@@ -88,7 +90,9 @@ public class ServicioAgenda {
         var dominio = solicitudDominio(solicitud.pacienteId(), solicitud.prestacionId(), seleccion,
                 inicio, referencia, ajuste);
         var turno = validarDestino(seleccion, dominio, intervalo, null);
-        return vista(turnos.save(new TurnoPersistido(turno)).datos());
+        var persistido = turnos.save(new TurnoPersistido(turno));
+        tokensCancelacion.emitir(persistido.id(), persistido.datos().version(), persistido.inicio(), reloj.instant());
+        return vista(persistido.datos());
     }
 
     @Transactional(isolation = Isolation.READ_COMMITTED)
@@ -124,8 +128,11 @@ public class ServicioAgenda {
         var dominio = solicitudDominio(actual.pacienteId(), actual.prestacionId(), destino,
                 inicio, Duration.ofMinutes(actual.duracionMinutos()), null);
         var movimiento = validarDestino(destino, dominio, intervalo, actual.id());
-        return vista(ediciones.mover(actual.id(), actual.version(), movimiento)
-                .orElseThrow(VersionTurnoDesactualizadaException::new));
+        var movido = ediciones.mover(actual.id(), actual.version(), movimiento)
+                .orElseThrow(VersionTurnoDesactualizadaException::new);
+        // La reprogramacion invalida el token previo y emite uno nuevo solo si el nuevo inicio cumple la ventana.
+        tokensCancelacion.emitir(movido.id(), movido.version(), movido.inicio(), ahora);
+        return vista(movido);
     }
 
     /**
@@ -157,6 +164,20 @@ public class ServicioAgenda {
 
         return vista(ediciones.cambiarEstado(actual.id(), actual.version(), actual.estado(), EstadoTurno.CANCELADO)
                 .orElseThrow(() -> new VersionTurnoDesactualizadaException("cancelarlo")));
+    }
+
+    /**
+     * Cancela un turno ya autorizado por un token de enlace del paciente. La autorizacion proviene unicamente
+     * del token; no se requiere ni se acepta identidad interna, cookie de sesion ni identificador de turno
+     * como credencial. Delegara en la misma logica transaccional de cancelacion interna y consume el token
+     * en la misma transaccion.
+     */
+    @Transactional(isolation = Isolation.READ_COMMITTED)
+    public TurnoRegistrado cancelarPorToken(String token) {
+        if (token == null || token.isBlank()) {
+            throw new TokenCancelacionInvalidoException();
+        }
+        return tokensCancelacion.cancelar(token);
     }
 
     @Transactional(readOnly = true)
@@ -191,8 +212,10 @@ public class ServicioAgenda {
                 }
             }
         }
-        return vista(ediciones.cambiarEstado(actual.id(), actual.version(), EstadoTurno.PENDIENTE, EstadoTurno.CONFIRMADO)
-                .orElseThrow(() -> new VersionTurnoDesactualizadaException("confirmarlo")));
+        var confirmado = ediciones.cambiarEstado(actual.id(), actual.version(), EstadoTurno.PENDIENTE,
+                EstadoTurno.CONFIRMADO).orElseThrow(() -> new VersionTurnoDesactualizadaException("confirmarlo"));
+        tokensCancelacion.conservarTrasConfirmacion(confirmado.id(), actual.version(), confirmado.version());
+        return vista(confirmado);
     }
 
     private static boolean estadoEditable(Identidad solicitante, EstadoTurno estado) {
