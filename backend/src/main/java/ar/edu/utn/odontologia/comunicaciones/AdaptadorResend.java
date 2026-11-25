@@ -58,12 +58,7 @@ public class AdaptadorResend implements CorreoSalida {
 
             EmailEnvio existente = buscarExistente(key);
             if (existente != null) {
-                if ("sent".equals(existente.estado())) {
-                    return new ResultadoEnvio(true, existente.intentos(), null, key);
-                }
-                if ("failed".equals(existente.estado())) {
-                    return new ResultadoEnvio(false, existente.intentos(), existente.error(), key);
-                }
+                return resultadoExistente(existente, key);
             }
 
             EmailEnvio registro = new EmailEnvio(tipo, turnoId, destinatario, key);
@@ -71,12 +66,7 @@ public class AdaptadorResend implements CorreoSalida {
             if (!adquirido) {
                 existente = buscarExistente(key);
                 if (existente != null) {
-                    if ("sent".equals(existente.estado())) {
-                        return new ResultadoEnvio(true, existente.intentos(), null, key);
-                    }
-                    if ("failed".equals(existente.estado())) {
-                        return new ResultadoEnvio(false, existente.intentos(), existente.error(), key);
-                    }
+                    return resultadoExistente(existente, key);
                 }
                 return new ResultadoEnvio(false, 0, "no se pudo adquirir la clave de idempotencia", key);
             }
@@ -118,24 +108,45 @@ public class AdaptadorResend implements CorreoSalida {
         }
     }
 
+    private static ResultadoEnvio resultadoExistente(EmailEnvio existente, String key) {
+        return switch (existente.estado()) {
+            case "sent" -> new ResultadoEnvio(true, existente.intentos(), null, key);
+            case "failed" -> new ResultadoEnvio(false, existente.intentos(), existente.error(), key);
+            case "pending" -> new ResultadoEnvio(false, existente.intentos(), "envio pendiente", key);
+            default -> new ResultadoEnvio(false, existente.intentos(), "estado de envio desconocido", key);
+        };
+    }
+
     private boolean guardarAtomicamente(EmailEnvio registro) {
         if (repositorio == null) return true;
         try {
-            repositorio.save(registro);
+            repositorio.saveAndFlush(registro);
             return true;
         } catch (DataIntegrityViolationException e) {
-            return false;
+            if (esConflictoDeIdempotencia(e)) return false;
+            throw new PersistenciaEmailException("no se pudo persistir el registro de envio", e);
         } catch (Exception e) {
             throw new PersistenciaEmailException("no se pudo persistir el registro de envio", e);
         }
     }
 
+    private static boolean esConflictoDeIdempotencia(Throwable error) {
+        for (Throwable actual = error; actual != null; actual = actual.getCause()) {
+            if (actual instanceof org.postgresql.util.PSQLException postgres) {
+                var detalle = postgres.getServerErrorMessage();
+                return "23505".equals(postgres.getSQLState()) && detalle != null
+                        && "email_envio_idempotency_key_uk".equals(detalle.getConstraint());
+            }
+        }
+        return false;
+    }
+
     private void guardar(EmailEnvio registro) {
         if (repositorio == null) return;
         try {
-            repositorio.save(registro);
+            repositorio.saveAndFlush(registro);
         } catch (Exception e) {
-            // no interrumpir
+            throw new PersistenciaEmailException("no se pudo persistir el resultado del envio", e);
         }
     }
 
@@ -144,7 +155,7 @@ public class AdaptadorResend implements CorreoSalida {
         try {
             return repositorio.findByIdempotencyKey(key);
         } catch (Exception e) {
-            return null;
+            throw new PersistenciaEmailException("no se pudo consultar el registro de envio", e);
         }
     }
 
@@ -194,9 +205,9 @@ public class AdaptadorResend implements CorreoSalida {
         try {
             EmailEnvio r = new EmailEnvio(tipo, turnoId, destinatario, key);
             r.marcar(false, intentos, error, null);
-            repositorio.save(r);
+            repositorio.saveAndFlush(r);
         } catch (Exception e) {
-            // no interrumpir
+            throw new PersistenciaEmailException("no se pudo persistir el rechazo del envio", e);
         }
     }
 

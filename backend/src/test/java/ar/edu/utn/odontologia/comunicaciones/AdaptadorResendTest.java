@@ -1,6 +1,10 @@
 package ar.edu.utn.odontologia.comunicaciones;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
+import ar.edu.utn.odontologia.comunicaciones.persistencia.EmailEnvio;
+import ar.edu.utn.odontologia.comunicaciones.persistencia.EmailsEnviados;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpServer;
 import java.io.OutputStream;
@@ -68,9 +72,11 @@ class AdaptadorResendTest {
     @Test
     void recuperaEnReintento() throws Exception {
         AtomicInteger counter = new AtomicInteger();
+        var keys = new java.util.concurrent.CopyOnWriteArrayList<String>();
         server = HttpServer.create(new InetSocketAddress(0), 0);
         server.createContext("/", ex -> {
             int n = counter.incrementAndGet();
+            keys.add(ex.getRequestHeaders().getFirst("Idempotency-Key"));
             if (n == 1) {
                 byte[] b = "err".getBytes();
                 ex.sendResponseHeaders(500, b.length);
@@ -89,6 +95,9 @@ class AdaptadorResendTest {
         var r = adapter.enviar(new SolicitudEnvio("ALTA", UUID.randomUUID(), "dest@test.com", "subj", "body"));
         assertTrue(r.exitoso());
         assertEquals(2, r.intentos());
+        assertEquals(2, keys.size());
+        assertEquals(r.idempotencyKey(), keys.get(0));
+        assertEquals(r.idempotencyKey(), keys.get(1));
     }
 
     @Test
@@ -113,5 +122,46 @@ class AdaptadorResendTest {
         var r = adapter.enviar(new SolicitudEnvio("ALTA", UUID.randomUUID(), "dest@test.com", "subj", "body"));
         assertFalse(r.exitoso());
         assertNotNull(r.error());
+    }
+
+    @Test
+    void noDevuelveExitoCuandoNoPuedePersistirResultadoFinal() throws Exception {
+        AtomicInteger counter = new AtomicInteger();
+        start(200, "{\"id\":\"abc\"}", counter);
+        String url = "http://127.0.0.1:" + server.getAddress().getPort() + "/";
+        var cfg = config("dest@test.com");
+        var repo = mock(EmailsEnviados.class);
+        when(repo.saveAndFlush(any(EmailEnvio.class))).thenAnswer(invocation -> invocation.getArgument(0))
+                .thenThrow(new IllegalStateException("database unavailable"));
+        var adapter = new AdaptadorResend(cfg, new AllowlistEmail(cfg.testAllowlist()), repo,
+                java.net.http.HttpClient.newHttpClient(), url);
+
+        var result = adapter.enviar(new SolicitudEnvio("ALTA", UUID.randomUUID(), "dest@test.com", "subj", "body"));
+
+        assertFalse(result.exitoso());
+        assertNotNull(result.error());
+        assertTrue(result.error().contains("persist"));
+        assertEquals(1, counter.get());
+    }
+
+    @Test
+    void noReenviaCuandoLaClaveYaTieneUnEnvioPendiente() throws Exception {
+        AtomicInteger counter = new AtomicInteger();
+        start(200, "{\"id\":\"abc\"}", counter);
+        String url = "http://127.0.0.1:" + server.getAddress().getPort() + "/";
+        var cfg = config("dest@test.com");
+        var repo = mock(EmailsEnviados.class);
+        UUID turno = UUID.randomUUID();
+        String key = ClaveIdempotencia.generar("ALTA", turno, "dest@test.com");
+        when(repo.findByIdempotencyKey(key)).thenReturn(new EmailEnvio("ALTA", turno, "dest@test.com", key));
+        var adapter = new AdaptadorResend(cfg, new AllowlistEmail(cfg.testAllowlist()), repo,
+                java.net.http.HttpClient.newHttpClient(), url);
+
+        var result = adapter.enviar(new SolicitudEnvio("ALTA", turno, "dest@test.com", "subj", "body"));
+
+        assertFalse(result.exitoso());
+        assertTrue(result.error().contains("pendiente"));
+        assertEquals(0, counter.get());
+        verify(repo, never()).saveAndFlush(any(EmailEnvio.class));
     }
 }
