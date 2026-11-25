@@ -6,7 +6,6 @@ Seguimiento de lo que pide la [consigna](<../desarrollo-active-stack%20Global%20
 
 | Pendiente | Puntos de la rúbrica | Cómo cerrarlo | Estado |
 | --- | --- | --- | --- |
-| Confirmar el alcance de la simulación en AgendaPro | 10 (revisión de cinco fuentes ya [registrada](verificacion-fuentes.md#planilla-personal)) | Resolver el [punto a confirmar](verificacion-fuentes.md#punto-a-confirmar) | Pendiente |
 | Video de defensa, 8 a 12 minutos | 10 | Todos hablan y muestran cámara al presentarse; pantalla trabajando. Orden: Discovery y MVP; KB, roadmap y `AGENTS.md`; revisión del Propose; Apply y Verify; Archive; consulta a Engram; conclusiones | Pendiente |
 | Reflexión escrita, 1 a 2 páginas | 5 | La redactan los integrantes, incluida la declaración de uso de IA y qué hizo cada uno | Pendiente |
 | Relatar qué se ajustó en el Propose de C-01 | Change (25), video y reflexión | No hay registro de un «Ajustar» ([detalle](inspecciones.md#change-académico-c-01)). Contar lo que ocurrió, sin reconstruirlo | Pendiente |
@@ -38,7 +37,7 @@ bash docs/evidencias/mostrar-evidencia.sh harnesses
 | Documento | Contenido |
 | --- | --- |
 | [Cotejo contra la consigna](cotejo.md) | Cada requisito, su cobertura, estado y responsable |
-| [Verificación de fuentes](verificacion-fuentes.md) | Revisión personal de cinco fuentes, correcciones del agente y un punto a confirmar |
+| [Verificación de fuentes](verificacion-fuentes.md) | Revisión personal de cinco fuentes, correcciones del agente y detalle del importe de tab32 |
 | [Inspecciones](inspecciones.md) | Decisiones Continuar o Ajustar que constan por etapa |
 | [Engram](engram.md) | Qué hay guardado y una consulta real |
 | [Verificación en un clon limpio](verificacion-clon-limpio.md) | Resultados de las pruebas siguiendo el README |

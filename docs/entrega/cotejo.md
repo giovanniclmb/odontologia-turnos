@@ -52,7 +52,7 @@ Estados: **Cubierto** (hay evidencia), **Parcial**, **Pendiente**. En «Quién»
 | PDF: resumen ejecutivo de una página como máximo | Página 2 | Cubierto | Describe el corte del 19/11, y lo dice | — |
 | PDF: tabla A, matriz B con nota y análisis C | Secciones A a C, con las correcciones del 25/11 | Cubierto | — | — |
 | PDF: D con cinco competidores, tres referencias y MVP en tres listas | Sección D | Cubierto | — | — |
-| PDF: verificación personal de fuentes | [Planilla](verificacion-fuentes.md#planilla-personal) e informe: cinco fuentes de cinco tipos, cuatro integrantes | Cubierto, con [un dato a confirmar](verificacion-fuentes.md#punto-a-confirmar) | Alcance de la simulación en AgendaPro | Equipo |
+| PDF: verificación personal de fuentes | [Planilla](verificacion-fuentes.md#planilla-personal) e informe: cinco fuentes de cinco tipos, cuatro integrantes | Cubierto | — | — |
 | PDF: referencias completas | Sección final | Cubierto | — | — |
 | Video de 8 a 12 minutos | — | **Pendiente** | Grabación | Equipo |
 | Reflexión de 1 a 2 páginas | — | **Pendiente** | Redacción propia y declaración de uso de IA | Equipo |

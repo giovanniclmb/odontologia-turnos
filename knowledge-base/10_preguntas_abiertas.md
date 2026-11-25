@@ -43,7 +43,7 @@ La columna de consulta identifica a quién le correspondería resolver cada preg
 
 ## Investigación pendiente
 
-La revisión personal de cinco fuentes se registró el 25/11/2026, cada una asociada a su integrante y hallazgo, y aparte de las comprobaciones del agente. Queda a confirmar el alcance de la simulación en AgendaPro. [Planilla y punto a confirmar](../docs/entrega/verificacion-fuentes.md#planilla-personal) · [Informe, verificación de fuentes](../docs/discovery/informe-discovery.md#verificación-de-fuentes)
+La revisión personal de cinco fuentes se registró el 25/11/2026, cada una asociada a su integrante y hallazgo, y aparte de las comprobaciones del agente. [Planilla](../docs/entrega/verificacion-fuentes.md#planilla-personal) · [Informe, verificación de fuentes](../docs/discovery/informe-discovery.md#verificación-de-fuentes)
 
 Para PA-12, «No evidenciado» describe el alcance de las fuentes revisadas para cada proveedor. La integración fiscal local, el uso efectivo de WhatsApp Business API, la concurrencia y la exportación clínica completa requieren evidencia específica. Hay condiciones documentadas que cubren partes del problema, como el Excel estándar y las condiciones de cierre de Dentidesk. La selección para contraste posterior comprende Dentalink, DentApp, Dentify, Dentidesk y AgendaPro. [Informe de Discovery](../docs/discovery/informe-discovery.md) · [Fichas de competidores](../docs/discovery/competidores.json)
 

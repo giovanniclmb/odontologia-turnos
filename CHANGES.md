@@ -33,7 +33,7 @@ La revisión 2 aprobada incorpora paciente, email real de prueba, lista de esper
 | Reprogramación fallida sin resultado acordado, PA-03 | Bloquea su spec; no elegir por inferencia qué ocurre con la reserva original |
 | Diseño visual diferido | Antes de Apply de cualquier ficha visual resolver la política visual y sus aprobaciones cuando corresponda |
 | Reparto aprobado; disponibilidad y defensa pendientes, PA-10 | Respetar responsables y revisión; coordinar archivos compartidos y no inferir horas disponibles |
-| Verificación personal de cinco fuentes registrada el 25/11/2026, PA-11 | Confirmar el alcance de la simulación en AgendaPro; las pruebas de software verdes no completan la entrega académica |
+| Verificación personal de cinco fuentes registrada el 25/11/2026, PA-11 | Las pruebas de software verdes no completan la entrega académica: faltan los demás trabajos personales |
 | Funciones y condiciones no evidenciadas de proveedores, PA-12 | Mantener el contraste competitivo pendiente; no agregar integraciones al MVP por inferencia |
 | Email, cuentas, enlaces y lista pendientes, PA-15 a PA-21 | Resolver cada contrato antes de implementarlo; no seleccionar proveedor ni permisos en el roadmap |
 | Riesgo de plazo | Priorizar el único change elegido y su evidencia; el cronograma de abajo no garantiza fechas |
