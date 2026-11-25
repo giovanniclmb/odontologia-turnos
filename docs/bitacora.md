@@ -177,3 +177,9 @@ Fecha: 19/11/2026. Giovanni aprobó el diseño y la preparación local de un wor
 ## Resolución de pendientes de C-03 — Issue #30
 
 20/11/2026. Giovanni autorizó resolver e integrar y aprobó el cambio propio de contraseña con ventana de cinco. Se aisló el CLI en un proceso con allowlist y se agregó V3 con historial/servicio transaccional, bloqueo por usuario y pruebas reales de ventana, reinicio, concurrencia, rollback y permisos. Se verificó el comando Maven literal con settings vacíos y modo offline. Resultado local: 78 unitarias, 82 IT, nueve pruebas Python y tres specs válidas. [Evidencia](evidencias/c03-pendientes/verify.md). Publicación, CI remoto e integración se verifican en PR #29; no se alteraron bases del equipo ni migraciones previas.
+
+## Preparación de la documentación de entrega
+
+25/11/2026. Se cotejó `main` (`6aa8796`) contra la consigna y el usuario respondió por menú: portada con nombre y apellido de los cuatro integrantes; versionar el registro de skills existente; actualizar README y estados, informe y PDF, y armar el paquete de entrega. Sobre las fuentes, pidió que el agente contrastara lo documentado antes y expusiera las diferencias. El resultado consta como comprobación del agente; la revisión personal de los integrantes sigue pendiente y no se completó ninguna fila en su nombre. Las diferencias no se aplicaron a fichas, matrices ni puntajes: requieren decisión del equipo.
+
+Trabajo en la rama `docs/entrega-academica`, con commits locales y sin push. El detalle está en [docs/entrega](entrega/README.md). Esta entrada no reconstruye las decisiones tomadas entre el 21 y el 25/11, que constan en OpenSpec y en la KB.
