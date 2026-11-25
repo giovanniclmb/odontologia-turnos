@@ -198,6 +198,21 @@ checks=[
  ['Sitio y FAQ: Dentify','País, cifrado y precio anual de extracción inicial','La portada actual declara Hecho en Argentina, nube cifrada y $30.000/$45.000 mensuales. Se retiró el anual no corroborado y no se inventó código de moneda.','https://www.dentify.com.ar/'],
  ['Producto: Odontoly','WhatsApp y ARCA podrían parecer disponibles por figurar en catálogo','El sitio los identifica como complementos próximos. También distingue backups cifrados de base de trabajo aún sin cifrado por la app.','https://odontoly.com/']]
 md+=table(['Tipo y fuente','Afirmación contrastada','Hallazgo y corrección','URL','Revisión personal'],[[*r[:3],f'[Abrir]({r[3]})','Pendiente del integrante'] for r in checks])+'\n'
+md+='''### Segunda comprobación del agente (25/11/2026)
+
+El agente volvió a abrir las ocho fuentes anteriores en un navegador y contrastó el texto publicado ese día con este informe. Tampoco sustituye la revisión personal, que sigue pendiente. Una diferencia puede deberse a una omisión del relevamiento o a un cambio de la página posterior al 17/11/2026; salvo indicación, no se distingue cuál. Las fichas, las matrices y los puntajes se conservan sin recalcular: aplicar cada corrección queda sujeto a la decisión del equipo (Continuar / Ajustar).
+
+'''
+second=[
+ ['DentApp','Coinciden Codilium S.A.S., nube, Google Calendar, MercadoPago, roles y ReNaPDiS declarado.','Hoy publica 30 días de prueba y precios mensuales con IVA ($24.900, $54.900 y $74.900; Empresarial a medida), recordatorios por correo en Profesional y por WhatsApp desde Clínica Plus, y «backups diarios». La ficha 02 consigna importe, prueba y frecuencia de backup como No evidenciado.'],
+ ['tab32','Coinciden desde $95/mes, usuarios ilimitados, prueba de 14 días, cargos por claim, adjuntos y elegibilidad, y que los ledgers no se migran.','Hoy la prueba pide email y tarjeta; la migración se publica desde $1,250; la exportación gratuita al salir incluye el ledger.'],
+ ['Dentalink','Coinciden el enlace de reserva, los permisos y los bloqueos de horario.','El manual (fechado el 12/06/2026) tiene una sección plegada, «Cruce con Recursos», que declara que el sistema valida que el profesional y el recurso asociado al servicio estén disponibles en el mismo horario en la agenda online. Contradice «No prueba disponibilidad conjunta» y obliga a revisar la ficha 01 y la sección C. El texto habla de «recurso», no de sillón, y no describe control de concurrencia.'],
+ ['Dentidesk','Coinciden Excel estándar sin costo con licencia activa, solicitud hasta 30 días después del término con posible cargo y prueba de 15 días.','Los términos indican que cada cuenta de odontólogo adicional «generará un cargo según el plan contratado»; el informe lo expresa como posible.'],
+ ['AgendaPro','No se pudo comprobar.','La interfaz pública respondió HTTP 403. No se reintentó ni se evadió el bloqueo; la observación del 17/11 queda sin recomprobar.'],
+ ['Clinic Cloud','Coinciden 29, 49 y 79 EUR más IVA, 50 % durante tres meses, odontograma en Max y reserva por Doctoralia.','La página declara más de 3.000 consultas y clínicas en España y exhibe ISO/IEC 27001; la ficha 09 consigna adopción como No evidenciado. El adicional de 10 EUR por agenda no se localizó.'],
+ ['Dentify','Coinciden $30.000 y $45.000 mensuales, 14 días sin tarjeta, «Hecho en Argentina» y nube cifrada.','La sección de precios ofrece una modalidad anual con «2 meses gratis», sin importe anual visible, y el pie indica «Desarrollado por IB Digital».'],
+ ['Odontoly','Coinciden USD 149,99 sin permanencia; WhatsApp Business, SMS, ARCA y visor RX como próximos; copias cifradas y base de trabajo sin cifrar; Windows en desarrollo.','El plan publica además dos usuarios y hasta cuatro dispositivos autorizados.']]
+md+=table(['Fuente','Resultado','Diferencia o detalle'],second)+'\n'
 md+='''### Fuentes no accesibles y exclusiones
 
 Doctoralia PRO Argentina devolvió 403 en sus páginas de agenda/precio; no se afirmó un precio a partir de resultados indexados. DentalTap tuvo timeouts/502 en producto y precios; se localizó un manual, pero no se lo usó para rellenar prestaciones no corroboradas. Se sustituyeron esos candidatos en el núcleo por Dentidesk y Odonto.me. DriCloud se exploró como software médico general y se reemplazó por XDentalCloud, sin trasladar funcionalidades entre productos. No se usaron mecanismos de evasión, cuentas personales ni contacto comercial.
@@ -224,7 +239,7 @@ approved = ROOT/'decisiones-aprobadas.json'
 if approved.exists():
  decisions=json.loads(approved.read_text())
  assert decisions['status']=='approved_with_explicit_open_questions'
- md=md.replace('Fecha de consulta: 17 de noviembre de 2026. Integrantes y datos de portada: pendientes de informar.', 'Fecha de consulta y aprobación: 17 de noviembre de 2026. Equipo de cuatro integrantes con autorización docente informada por el usuario; nombres pendientes.')
+ md=md.replace('Fecha de consulta: 17 de noviembre de 2026. Integrantes y datos de portada: pendientes de informar.', 'Integrantes: Giovanni Colombo, Sofia Martinez, Luciano Izquierdo Cafici y Fabiano Ramos.\n\nFecha de entrega: 25 de noviembre de 2026. Consulta de fuentes y aprobación del Discovery: 17 de noviembre de 2026.\n\nEquipo de cuatro integrantes con autorización docente informada por el equipo.\n\n<!-- salto-de-pagina -->')
  old='Este documento es el resultado de investigación previo a la entrevista. El usuario pidió responder las preguntas después del relevamiento. Segmento objetivo, roles, MVP, integraciones, reglas, presupuesto y stack siguen sin decidirse. No se creó la KB, el roadmap ni un change. La sección D se completará con las respuestas y la aprobación del usuario.'
  checklist=(ROOT/'discovery.md').read_text()
  def checklist_section(number):
@@ -234,7 +249,7 @@ if approved.exists():
   return match.group(1).strip()
  # El alcance del informe se deriva del checklist aprobado; regenerarlo no
  # puede restaurar la exclusión histórica de paciente, email o lista de espera.
- new='Tras la investigación y las preguntas por menú, el usuario aprobó el resumen de once puntos y su ampliación (revisión 2). El MVP incluye agenda de sillón diaria/semanal, bloqueos por recepción, ficha clínica sencilla, disponibilidad conjunta de profesional y sillón y confirmaciones manuales. El paciente cancela por enlace hasta 48 horas antes y gestiona con cuenta la lista de espera; recepción asigna los huecos. Se envía email al crear con enlace y recordatorio 24 horas antes, sin opción de cancelar cuando el plazo venció. Se requieren envíos reales a direcciones de prueba del equipo mediante proveedor gratuito aún por definir. El stack elegido es HTML/CSS/TypeScript vanilla, Java Spring Boot y PostgreSQL; entrega 25/11/2026 y presupuesto externo cero. El intervalo inicial, los detalles técnicos y la revisión personal de cinco fuentes siguen pendientes. Discovery, KB y roadmap son documentación de planificación: no se implementó código ni se seleccionó un change.'
+ new='Tras la investigación y las preguntas por menú, el usuario aprobó el resumen de once puntos y su ampliación (revisión 2). El MVP incluye agenda de sillón diaria/semanal, bloqueos por recepción, ficha clínica sencilla, disponibilidad conjunta de profesional y sillón y confirmaciones manuales. El paciente cancela por enlace hasta 48 horas antes y gestiona con cuenta la lista de espera; recepción asigna los huecos. Se envía email al crear con enlace y recordatorio 24 horas antes, sin opción de cancelar cuando el plazo venció. Se requieren envíos reales a direcciones de prueba del equipo mediante proveedor gratuito aún por definir. El stack elegido es HTML/CSS/TypeScript vanilla, Java Spring Boot y PostgreSQL; entrega 25/11/2026 y presupuesto externo cero. El intervalo inicial, los detalles técnicos y la revisión personal de cinco fuentes siguen pendientes. Este informe es un corte al cierre del Discovery (revisión 2, consolidada el 19/11/2026): a esa fecha no se había implementado código ni seleccionado un change. El estado posterior consta en README.md y CHANGES.md; la segunda comprobación de fuentes del 25/11/2026 figura en «Verificación de fuentes».'
  assert old in md
  md=md.replace(old,new)
  section='''## D Recomendación y alcance aprobados por el usuario
@@ -261,7 +276,7 @@ Estas referencias no autorizan copiar una interfaz ni agregar autorreserva gener
 
 '''
  section+=checklist_section(5)+'\n\n### Usuarios y reglas de la revisión aprobada\n\n'+checklist_section(2)+'\n\n'+checklist_section(7)
- section+='\n\n### Diferenciadores buscados dentro del alcance aprobado\n\nSe priorizan reglas verificables sobre profesional y sillón, intervalo configurable y separación entre lectura administrativa y edición clínica. Son objetivos de calidad, no exclusividad comercial demostrada. La reducción de ausencias y huecos mediante emails y lista de espera todavía requiere medición.\n\n### Funcionalidades para etapas posteriores\n\n'
+ section+='\n\n### Diferenciadores buscados dentro del alcance aprobado\n\nSe priorizan:\n\n- Reglas verificables sobre profesional y sillón.\n- Intervalo configurable común para la sede.\n- Separación entre lectura administrativa y edición clínica.\n\nSon objetivos de calidad, no exclusividad comercial demostrada. La reducción de ausencias y huecos mediante emails y lista de espera todavía requiere medición.\n\n### Funcionalidades para etapas posteriores\n\n'
  section+='\n'.join('- '+v+'.' for v in decisions['out_of_mvp'])
  section+='''
 

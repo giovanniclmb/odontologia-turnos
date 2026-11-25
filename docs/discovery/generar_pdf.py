@@ -12,7 +12,7 @@ from reportlab.lib.pagesizes import A4, landscape
 from reportlab.lib.styles import ParagraphStyle
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
-from reportlab.platypus import CondPageBreak, LongTable, Paragraph, SimpleDocTemplate
+from reportlab.platypus import CondPageBreak, LongTable, PageBreak, Paragraph, SimpleDocTemplate, Spacer
 
 
 PAGE = landscape(A4)
@@ -24,6 +24,8 @@ PALE = colors.HexColor("#EEF2F5")
 LINK = "#185C80"
 HEADING = re.compile(r"^(#{1,6})\s+(.+)")
 LIST_ITEM = re.compile(r"^(\s*)([-+*]|\d+\.)\s+(.+)")
+PAGE_BREAK = "<!-- salto-de-pagina -->"
+COVER_OFFSET = PAGE[1] * 0.22
 SEPARATOR = re.compile(r"^\s*\|?\s*:?-{3,}:?\s*(?:\|\s*:?-{3,}:?\s*)*\|?\s*$")
 INLINE = re.compile(
     r"`([^`]+)`|\[([^\]]+)\]\((https?://[^\s()]+(?:\([^\s()]*\)[^\s()]*)*)\)"
@@ -188,6 +190,12 @@ def markdown_story(markdown, width, styles):
         item = LIST_ITEM.fullmatch(raw)
         if not line:
             flush_paragraph()
+        elif line == PAGE_BREAK:
+            # El primer salto cierra la portada: su contenido baja hacia el centro.
+            flush_paragraph()
+            if not any(isinstance(flowable, PageBreak) for flowable in story):
+                story.insert(0, Spacer(1, COVER_OFFSET))
+            story.append(PageBreak())
         elif heading:
             flush_paragraph()
             depth, text = heading.groups()
