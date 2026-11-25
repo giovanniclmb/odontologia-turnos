@@ -115,4 +115,5 @@ Estas decisiones cierran PA-05/06/07 únicamente para el alcance de C-04; no res
 
 - **PA-17 — confirmación:** el enlace vigente y no usado sigue sirviendo después de confirmar el turno (DD-17). Reprogramar lo invalida.
 - **PA-17 — instante del plazo:** el comienzo del turno y el corte de 48 horas se evalúan después de las esperas por otras operaciones, al momento de cancelar. Es la corrección de un defecto sobre la regla ya especificada en C-18.
-- Quedan sin resolver aquí la entrega del enlace y el tratamiento de los emails (PA-18, C-19).
+- **PA-17 — entrega interna:** C-19 recibe el token por un evento posterior al commit (DD-18).
+- Quedan sin resolver aquí el envío del enlace y el tratamiento de los emails (PA-18, C-19).
