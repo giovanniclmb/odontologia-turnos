@@ -1,12 +1,13 @@
 import { boton, buscarElemento, nodo, type Documento } from "../dom/nodo.js";
 import { entrada, seleccion } from "../dom/campos.js";
-import { diasDelPeriodo, instanteDesdeSede, limitesDePeriodo, sumarDias, type Vista } from "../tiempo/mendoza.js";
+import { diasDelPeriodo, fechaEnSede, instanteDesdeSede, limitesDePeriodo, sumarDias, type Vista } from "../tiempo/mendoza.js";
 import { alerta, aviso, cargando, encabezado, falloConReintento } from "./comunes.js";
 import type { Contexto } from "./contexto.js";
+import { mostrarCancelacion, mostrarReprogramacion, resumenTurno } from "./edicion-turno.js";
 import { mensajeDeError, mensajeSinIntervalo } from "./mensajes.js";
 import { componerDias, fechaCorta, type Dia, type Elemento } from "./modelo.js";
 import type { RutaAgenda } from "./ruta.js";
-import type { Catalogos, Sillon } from "./tipos.js";
+import type { Catalogos, ResultadoEdicion, Sillon, TurnoActualizado, TurnoAgenda } from "./tipos.js";
 
 const NOMBRES_DIA = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
 
@@ -93,7 +94,9 @@ function barra(contexto: Contexto, ruta: RutaAgenda, sillones: readonly Sillon[]
   ]);
 }
 
-function elementoDeLista(doc: Documento, elemento: Elemento, conDuracionJunto: boolean): HTMLLIElement {
+type Acciones = (elemento: Elemento, fecha: string) => HTMLElement | null;
+
+function elementoDeLista(doc: Documento, elemento: Elemento, conDuracionJunto: boolean, acciones: HTMLElement | null): HTMLLIElement {
   const clase = elemento.estado === "bloqueo" ? "slot is-block" : elemento.estado === "cancelado" ? "slot is-cancelled" : "slot";
   const insignia: Record<Elemento["estado"], string> = {
     pendiente: "badge-pending", confirmado: "badge-confirmed", cancelado: "badge-cancelled", bloqueo: "badge-block"
@@ -106,15 +109,17 @@ function elementoDeLista(doc: Documento, elemento: Elemento, conDuracionJunto: b
       nodo(doc, "strong", { texto: elemento.titulo }),
       nodo(doc, "small", { texto: elemento.detalle })
     ]),
-    nodo(doc, "span", { clase: `badge ${insignia[elemento.estado]}`, texto: elemento.etiqueta })
+    nodo(doc, "span", { clase: `badge ${insignia[elemento.estado]}`, texto: elemento.etiqueta }),
+    ...(acciones === null ? [] : [acciones])
   ]);
 }
 
-function lista(doc: Documento, dia: Dia, semanal: boolean): HTMLUListElement {
-  return nodo(doc, "ul", { clase: "day-list" }, dia.elementos.map((elemento) => elementoDeLista(doc, elemento, semanal)));
+function lista(doc: Documento, dia: Dia, semanal: boolean, acciones: Acciones): HTMLUListElement {
+  return nodo(doc, "ul", { clase: "day-list" },
+    dia.elementos.map((elemento) => elementoDeLista(doc, elemento, semanal, acciones(elemento, dia.fecha))));
 }
 
-function periodo(contexto: Contexto, ruta: RutaAgenda, dias: readonly Dia[], sillon: string): HTMLElement {
+function periodo(contexto: Contexto, ruta: RutaAgenda, dias: readonly Dia[], sillon: string, acciones: Acciones): HTMLElement {
   const { doc } = contexto;
   const primero = dias[0];
   const ultimo = dias[dias.length - 1];
@@ -134,15 +139,42 @@ function periodo(contexto: Contexto, ruta: RutaAgenda, dias: readonly Dia[], sil
     titulos.append(nodo(doc, "p", {
       clase: "card-subtitle", texto: `${plural(primero.turnos, "turno")} y ${plural(primero.bloqueos, "bloqueo")}`
     }));
-    return tarjeta(lista(doc, primero, false));
+    return tarjeta(lista(doc, primero, false, acciones));
   }
   return tarjeta(nodo(doc, "div", { clase: "week" }, dias.map((dia) => nodo(doc, "section", { clase: "week-day" }, [
     nodo(doc, "h3", { texto: `${nombreDia(dia.fecha).slice(0, 3)} ${fechaCorta(dia.fecha)}` }),
-    dia.elementos.length === 0 ? nodo(doc, "p", { clase: "week-empty", texto: "Sin actividad visible" }) : lista(doc, dia, true)
+    dia.elementos.length === 0 ? nodo(doc, "p", { clase: "week-empty", texto: "Sin actividad visible" }) : lista(doc, dia, true, acciones)
   ]))));
 }
 
-export async function montarAgenda(contexto: Contexto, ruta: RutaAgenda): Promise<void> {
+function resultadoEdicion(original: TurnoAgenda, actualizado: TurnoActualizado, catalogos: Catalogos): ResultadoEdicion {
+  const destino = resumenTurno(actualizado, catalogos);
+  if (actualizado.estado === "CANCELADO") {
+    return { texto: `Turno cancelado. Se liberaron el sillón y el horario del profesional. ${destino}.`, destino: null };
+  }
+  return original.version === actualizado.version
+    ? { texto: "Se mantuvo el horario original.", destino: null }
+    : { texto: `Turno reprogramado para ${destino}.`, destino: actualizado };
+}
+
+function mostrarResultado(contexto: Contexto, ruta: RutaAgenda, resultado: ResultadoEdicion): HTMLElement {
+  const { doc } = contexto;
+  const { destino } = resultado;
+  const aviso = nodo(doc, "p", {
+    texto: resultado.texto, atributos: { id: "agenda-resultado", role: "status", tabindex: "-1" }
+  });
+  const contenido: Node[] = [aviso];
+  const { desde, hasta } = limitesDePeriodo(ruta.vista, ruta.fecha);
+  if (destino !== null && (destino.sillonId !== ruta.sillonId
+    || Date.parse(destino.inicio) >= Date.parse(hasta) || Date.parse(destino.fin) <= Date.parse(desde))) {
+    contenido.push(nodo(doc, "div", {}, [boton(doc, "Ver destino", "btn-secondary", () => contexto.navegar({
+      ...ruta, sillonId: destino.sillonId, fecha: fechaEnSede(new Date(destino.inicio))
+    }))]));
+  }
+  return nodo(doc, "div", { clase: "notice stack" }, contenido);
+}
+
+export async function montarAgenda(contexto: Contexto, ruta: RutaAgenda, resultado?: ResultadoEdicion): Promise<void> {
   const { doc, raiz, api, usuario } = contexto;
   raiz.replaceChildren(cabecera(contexto, ruta), cargando(doc, "Cargando agenda…"));
   try {
@@ -152,6 +184,7 @@ export async function montarAgenda(contexto: Contexto, ruta: RutaAgenda): Promis
     const sillon = sillones.find((s) => s.id === ruta.sillonId) ?? sillones.find((s) => s.activo) ?? sillones[0];
     if (sillon === undefined) {
       raiz.replaceChildren(cabecera(contexto, ruta),
+        ...(resultado === undefined ? [] : [mostrarResultado(contexto, ruta, resultado)]),
         aviso(doc, "No hay sillones disponibles. Sin ellos no se puede consultar la agenda ni crear turnos."));
       return;
     }
@@ -164,15 +197,65 @@ export async function montarAgenda(contexto: Contexto, ruta: RutaAgenda): Promis
     const catalogos: Catalogos = { sillones, profesionales, prestaciones };
     const dias = componerDias({ dias: diasDelPeriodo(ruta.vista, ruta.fecha), rol: usuario.rol, catalogos, turnos, bloqueos });
     const contenido = [cabecera(contexto, efectiva), barra(contexto, efectiva, sillones)];
+    if (resultado !== undefined) contenido.push(mostrarResultado(contexto, efectiva, resultado));
     if (intervalo === null) contenido.push(alerta(doc, mensajeSinIntervalo(usuario.rol)));
     if (usuario.rol === "odontologo") {
       contenido.push(aviso(doc, "Ve únicamente sus turnos. Un horario sin turnos visibles puede no estar disponible."));
     }
-    raiz.replaceChildren(...contenido, periodo(contexto, efectiva, dias, sillon.codigo));
-    if (contexto.foco !== null) buscarElemento(raiz, (elemento) => elemento.id === contexto.foco)?.focus();
+    const editables = new Map(turnos.filter((turno) => Date.parse(turno.inicio) > Date.now() && (
+      usuario.rol === "recepcion" ? turno.estado !== "CANCELADO"
+        : turno.estado === "PENDIENTE" && turno.profesionalId === usuario.profesionalRef
+    )).map((turno) => [turno.id, turno]));
+    const acciones: Acciones = (elemento, fecha) => {
+      const turno = elemento.tipo === "turno" ? editables.get(elemento.id) : undefined;
+      if (turno === undefined) return null;
+      const accion = (texto: string, abrir: typeof mostrarReprogramacion) => {
+        const control = boton(doc, texto, "btn-secondary", () => {
+          if (!contexto.vigente()) return;
+          let recargaObligatoria = false;
+          const recargar = () => void montarAgenda({ ...contexto, foco: control.id }, efectiva);
+          abrir({
+            contexto, turno, catalogos,
+            volver: () => {
+              if (!contexto.vigente()) return;
+              if (recargaObligatoria) {
+                recargar();
+                return;
+              }
+              raiz.replaceChildren(...contenido);
+              control.focus();
+            },
+            recargar,
+            exigirRecarga: () => { recargaObligatoria = true; },
+            completada: (actualizado) => {
+              const resultado = resultadoEdicion(turno, actualizado, catalogos);
+              if (contexto.vigente()) void montarAgenda({ ...contexto, foco: control.id }, efectiva, resultado);
+              else contexto.conservarEdicion?.(resultado);
+            }
+          });
+        });
+        control.id = `${texto === "Reprogramar" ? "reprogramar" : "cancelar"}-${turno.id}-${fecha}`;
+        const verbo = texto === "Reprogramar" ? "Reprogramar turno" : texto;
+        control.setAttribute("aria-label", `${verbo} de ${elemento.titulo} (${elemento.horario})`);
+        return control;
+      };
+      return nodo(doc, "div", { clase: "turno-acciones" }, [
+        accion("Reprogramar", mostrarReprogramacion), accion("Cancelar turno", mostrarCancelacion)
+      ]);
+    };
+    contenido.push(periodo(contexto, efectiva, dias, sillon.codigo, acciones));
+    raiz.replaceChildren(...contenido);
+    if (contexto.foco !== null) {
+      const foco = buscarElemento(raiz, (elemento) => elemento.id === contexto.foco);
+      (foco ?? buscarElemento(raiz, (elemento) => elemento.id === "agenda-resultado"))?.focus();
+    }
   } catch (error) {
     if (!contexto.vigente()) return;
-    raiz.replaceChildren(cabecera(contexto, ruta), falloConReintento(doc,
-      `No se pudo cargar la agenda. ${mensajeDeError(error, usuario.rol)}`, () => void montarAgenda(contexto, ruta)));
+    const texto = resultado === undefined ? "No se pudo cargar la agenda." : "No se pudo actualizar la agenda.";
+    raiz.replaceChildren(cabecera(contexto, ruta),
+      ...(resultado === undefined ? [] : [mostrarResultado(contexto, ruta, resultado)]),
+      falloConReintento(doc, `${texto} ${mensajeDeError(error, usuario.rol)}`,
+        () => void montarAgenda(contexto, ruta, resultado)));
+    if (resultado !== undefined) buscarElemento(raiz, (elemento) => elemento.id === "agenda-resultado")?.focus();
   }
 }

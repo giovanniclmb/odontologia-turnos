@@ -18,6 +18,8 @@ export class Nodo {
   replaceChildren(...nodos) { this.propio = ""; this.children = [...nodos]; }
   addEventListener(tipo, oyente) { (this.listeners[tipo] ??= []).push(oyente); }
   focus() { this.enfocado = true; }
+  showModal() { this.open = true; }
+  close() { this.open = false; this.emitir("close"); }
   emitir(tipo, evento = {}) {
     for (const oyente of this.listeners[tipo] ?? []) oyente({ preventDefault() {}, ...evento });
   }

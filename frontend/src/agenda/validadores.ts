@@ -1,6 +1,6 @@
 /** Validación de las respuestas de la API en el límite: nada entra sin comprobar su forma. */
 import type { Profesional } from "../api/types.js";
-import type { Bloqueo, EstadoTurno, PacienteElegible, Prestacion, Sillon, TurnoAgenda } from "./tipos.js";
+import type { Bloqueo, EstadoTurno, PacienteElegible, Prestacion, Sillon, TurnoActualizado, TurnoAgenda } from "./tipos.js";
 
 export class RespuestaInvalidaError extends Error {
   constructor(detalle: string) {
@@ -61,9 +61,16 @@ function estado(origen: Objeto): EstadoTurno {
 
 export function leerTurnos(valor: unknown): TurnoAgenda[] {
   return lista(valor, (turno) => ({
-    id: texto(turno, "id"),
+    ...leerTurno(turno),
     pacienteNombre: texto(turno, "pacienteNombre"),
-    pacienteApellido: texto(turno, "pacienteApellido"),
+    pacienteApellido: texto(turno, "pacienteApellido")
+  }));
+}
+
+export function leerTurno(valor: unknown): TurnoActualizado {
+  const turno = objeto(valor);
+  return {
+    id: texto(turno, "id"),
     profesionalId: texto(turno, "profesionalId"),
     sillonId: texto(turno, "sillonId"),
     prestacionId: texto(turno, "prestacionId"),
@@ -72,7 +79,7 @@ export function leerTurnos(valor: unknown): TurnoAgenda[] {
     duracionMinutos: enteroPositivo(turno, "duracionMinutos"),
     estado: estado(turno),
     version: texto(turno, "version")
-  }));
+  };
 }
 
 export function leerBloqueos(valor: unknown): Bloqueo[] {

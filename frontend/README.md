@@ -33,6 +33,14 @@ Para usar la agenda deben existir sillones y prestaciones, y recepción debe con
 
 El código está en `src/agenda/`, `src/configuracion/` y `src/tiempo/`. Las respuestas de la API se validan antes de usarse y las vistas se construyen con nodos de texto. Las pruebas de vistas usan el DOM mínimo de `tests/soporte/`.
 
+## Reprogramar o cancelar desde la agenda (C-12)
+
+En día o semana, seleccione **Reprogramar** o **Cancelar turno** en un turno pendiente futuro. Recepción puede operar sobre confirmados futuros y elegir otro profesional. Odontología conserva su profesional y la API comprueba que el paciente siga asignado.
+
+- Al reprogramar, elija fecha, hora de Mendoza y sillón. El formulario muestra el paciente, la prestación y la duración guardada. Si el horario está ocupado, ajuste el destino y vuelva a intentar.
+- Al cancelar, revise los datos y confirme la operación o elija **Mantener turno**. La agenda conserva el registro cancelado. El horario puede usarse para otra reserva si cumple las demás reglas de disponibilidad.
+- La agenda conserva sus filtros después de guardar. Si la reprogramación movió el turno fuera de la vista actual, use **Ver destino**. Si otra persona modificó el turno o no pudo confirmarse el resultado del envío, use **Recargar agenda** antes de editarlo otra vez. Cuando se confirma la operación y falla la consulta posterior, **Reintentar** solo vuelve a cargar la agenda.
+
 ## Interfaz y permisos
 
 La marca provisional y los tokens provienen de `design-system/`. Las acciones visibles dependen del rol devuelto por la API; el backend vuelve a validar cada operación. Recepción solo lee la ficha clínica y odontología edita según asignación y autoría. Los enlaces a módulos todavía no integrados permanecen deshabilitados.
