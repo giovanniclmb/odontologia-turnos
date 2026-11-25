@@ -191,3 +191,5 @@ Trabajo en la rama `docs/entrega-academica`, con commits locales y sin push. El 
 ## Revisión personal de fuentes
 
 25/11/2026. Giovanni Colombo transmitió los resultados de cinco fuentes: DentApp y tab32 a su cargo, Dentalink de Sofia Martinez, Dentidesk de Fabiano Ramos y AgendaPro de Luciano Izquierdo Cafici. Se incorporaron al informe y al PDF, con los cargos por servicio de tab32 y la distinción en Dentidesk entre 15 días de prueba y 30 días para pedir la exportación. El agente no localizó en tab32 un plan cercano a $400; ese dato y el alcance de la simulación en AgendaPro quedan a confirmar. [Planilla](entrega/verificacion-fuentes.md#planilla-personal).
+
+25/11/2026. Giovanni Colombo confirmó que el importe observado en tab32 era $427. En la página corresponde al costo mensual estimado de Open Dental dentro de un comparador; el precio de tab32 en el informe no cambia. Sigue por confirmar el alcance de la simulación en AgendaPro. [Detalle](entrega/verificacion-fuentes.md#tab32-importe-observado).

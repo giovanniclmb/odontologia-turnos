@@ -2,7 +2,7 @@
 
 La consigna pide que los integrantes **abran y comprueben personalmente** al menos cinco fuentes citadas, de distintos tipos, y anoten si lo que afirma el informe está en esa URL.
 
-**Estado: 5 fuentes revisadas por cuatro integrantes**, según los resultados que Giovanni Colombo transmitió el 25/11/2026 ([planilla](#planilla-personal)). Quedan dos [puntos a confirmar](#puntos-a-confirmar). La segunda comprobación del agente se registra aparte: no reemplaza esa revisión ni debe presentarse como trabajo del equipo. Para el video se pueden exponer las diferencias aclarando quién las encontró y qué comprobó cada integrante.
+**Estado: 5 fuentes revisadas por cuatro integrantes**, según los resultados que Giovanni Colombo transmitió el 25/11/2026 ([planilla](#planilla-personal)). Queda un [punto a confirmar](#punto-a-confirmar). La segunda comprobación del agente se registra aparte: no reemplaza esa revisión ni debe presentarse como trabajo del equipo. Para el video se pueden exponer las diferencias aclarando quién las encontró y qué comprobó cada integrante.
 
 ## Segunda comprobación del agente (25/11/2026)
 
@@ -35,16 +35,19 @@ Resultados transmitidos por Giovanni Colombo el 25/11/2026. No consta la fecha d
 | Tipo | Fuente y URL | Integrante | Hallazgo | Corrección y contraste |
 | --- | --- | --- | --- | --- |
 | Sitio oficial | [DentApp](https://www.dentapp.ar/software-odontologico-argentina) | Giovanni Colombo | Sin diferencias | Sin cambios |
-| Página de precios | [tab32](https://tab32.com/pricing/) | Giovanni Colombo | Diferencias de precio según el servicio; para el servicio dental, un precio más alto, cercano a $400 | Se agregaron a la ficha 15 los cargos por servicio. El importe base no cambia ([punto a confirmar](#puntos-a-confirmar)) |
+| Página de precios | [tab32](https://tab32.com/pricing/) | Giovanni Colombo | Diferencias de precio según el servicio; para el servicio dental, un precio más alto, cercano a $400 | Importe observado confirmado: $427 ([detalle](#tab32-importe-observado)). Se agregaron a la ficha 15 los cargos por servicio; el precio base no cambia |
 | Centro de ayuda | [Dentalink](https://ayuda.softwaredentalink.com/es/articles/9493139-configura-tu-agenda-online) | Sofia Martinez | Sin diferencias con los datos obtenidos | Sin cambios |
 | Términos de uso | [Dentidesk](https://app.dentidesk.com/terminos.php) | Fabiano Ramos | La prueba es de 15 días, no de 30; después empiezan los cargos | La ficha 06 ya indicaba 15 días. El agente reabrió los términos: 15 días de prueba (2.2 y 12.1) y 30 días corridos para pedir la exportación tras el término (7.6). Se aclaró la diferencia en el informe |
 | Interfaz pública | [AgendaPro](https://agendapro.com/site/ar/odontologiaor/239004) | Luciano Izquierdo Cafici | Sin diferencias, luego de simular una reserva en la app, que consideró bastante buena | Sin cambios en las celdas. El agente había recibido HTTP 403 ese día |
 
 Sin revisión personal: [Clinic Cloud](https://clinic-cloud.com/tarifas), [Dentify](https://www.dentify.com.ar/) y [Odontoly](https://odontoly.com/).
 
-## Puntos a confirmar
+## tab32: importe observado
 
-1. **tab32, importe cercano a $400.** El 25/11/2026 el agente reabrió la [página de precios](https://tab32.com/pricing/) y recorrió otras diez páginas del sitio, además del inicio, sin localizar un plan de tab32 cercano a ese valor. La página de precios anuncia el sistema desde $95 por mes. Las cifras próximas que muestra son $427, estimación mensual de **Open Dental** en un comparador, y $349, paquete mensual de agentes de IA que se agrega aparte. En otras páginas, los rangos de $300 a $600 son costos atribuidos a otros sistemas. Falta que quien revisó indique qué importe vio; hasta entonces el informe lo registra como diferencia sin confirmar.
-2. **AgendaPro, alcance de la simulación.** Falta precisar que la reserva no se confirmó ni se enviaron datos, porque el informe declara que no se contactó a proveedores.
+El 25/11/2026 Giovanni Colombo confirmó que el importe cercano a $400 era **$427**. El agente había reabierto la [página de precios](https://tab32.com/pricing/): $427 es la estimación mensual de **Open Dental**, otro producto, en un comparador con valores iniciales de 15 turnos por día, 70 % de pacientes asegurados y 48 semanas al año. El mismo comparador estima $179 por mes para tab32, que anuncia su sistema desde $95. La página suma aparte cargos por uso y paquetes de agentes de IA. El agente tampoco localizó un plan de tab32 cercano a $400 en el inicio ni en otras diez páginas del sitio.
+
+## Punto a confirmar
+
+**AgendaPro, alcance de la simulación.** Falta precisar que la reserva no se confirmó ni se enviaron datos, porque el informe declara que no se contactó a proveedores.
 
 Los cambios al informe se hacen desde [compilar_investigacion.py](../discovery/compilar_investigacion.py) y [competidores.json](../discovery/competidores.json), regenerando el PDF. Los cambios hechos solo en el Markdown se pierden al volver a generarlo.
