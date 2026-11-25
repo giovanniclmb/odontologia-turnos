@@ -1,7 +1,7 @@
 /** Único punto de la agenda que conoce las rutas HTTP. */
 import { http } from "../api/client.js";
 import type { ApiAgenda } from "./contexto.js";
-import { leerBloqueos, leerIntervalo, leerPacientes, leerPrestaciones, leerRecursos, leerTurnos } from "./validadores.js";
+import { leerBloqueos, leerIntervalo, leerPacientes, leerPrestaciones, leerRecursos, leerTurno, leerTurnos } from "./validadores.js";
 import type { PacienteElegible } from "./tipos.js";
 
 const consulta = (parametros: Record<string, string>) => new URLSearchParams(parametros).toString();
@@ -29,6 +29,10 @@ export const apiAgenda: ApiAgenda = {
   crearTurno: async (solicitud) => {
     await http.post<unknown>("/agenda/turnos", solicitud);
   },
+  reprogramarTurno: async (id, solicitud) => leerTurno(
+    await http.post<unknown>(`/agenda/turnos/${encodeURIComponent(id)}/reprogramacion`, solicitud)),
+  cancelarTurno: async (id, versionEsperada) => leerTurno(
+    await http.post<unknown>(`/agenda/turnos/${encodeURIComponent(id)}/cancelacion`, { versionEsperada })),
   crearBloqueo: async (solicitud) => {
     await http.post<unknown>("/agenda/bloqueos", solicitud);
   },

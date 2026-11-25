@@ -1,7 +1,7 @@
 import type { Documento } from "../dom/nodo.js";
 import type { Profesional } from "../api/types.js";
 import type { Ruta } from "./ruta.js";
-import type { Bloqueo, PacienteElegible, Prestacion, Rol, Sillon, TurnoAgenda } from "./tipos.js";
+import type { Bloqueo, PacienteElegible, Prestacion, ResultadoEdicion, Rol, Sillon, TurnoActualizado, TurnoAgenda } from "./tipos.js";
 
 export interface AltaTurno {
   pacienteId: string;
@@ -19,6 +19,13 @@ export interface AltaBloqueo {
   fin: string;
 }
 
+export interface ReprogramacionTurno {
+  versionEsperada: string;
+  profesionalId: string;
+  sillonId: string;
+  inicio: string;
+}
+
 export interface ApiAgenda {
   sillones(): Promise<Sillon[]>;
   profesionales(): Promise<Profesional[]>;
@@ -28,6 +35,8 @@ export interface ApiAgenda {
   turnos(sillonId: string, desde: string, hasta: string): Promise<TurnoAgenda[]>;
   bloqueos(sillonId: string, desde: string, hasta: string): Promise<Bloqueo[]>;
   crearTurno(solicitud: AltaTurno): Promise<void>;
+  reprogramarTurno(turnoId: string, solicitud: ReprogramacionTurno): Promise<TurnoActualizado>;
+  cancelarTurno(turnoId: string, versionEsperada: string): Promise<TurnoActualizado>;
   crearBloqueo(solicitud: AltaBloqueo): Promise<void>;
   buscarPacientes(texto: string): Promise<PacienteElegible[]>;
 }
@@ -44,6 +53,7 @@ export interface Contexto {
   navegar(ruta: Ruta): void;
   reemplazar(ruta: Ruta): void;
   vigente(): boolean;
+  conservarEdicion?(resultado: ResultadoEdicion): void;
   /** Inicia un envío; devuelve null si otro con la misma clave sigue en curso, aunque se haya cambiado de vista. */
-  enviar(clave: string, operacion: () => Promise<void>): Promise<void> | null;
+  enviar(clave: string, operacion: () => Promise<void>, traducirFuera?: (error: unknown) => string): Promise<void> | null;
 }

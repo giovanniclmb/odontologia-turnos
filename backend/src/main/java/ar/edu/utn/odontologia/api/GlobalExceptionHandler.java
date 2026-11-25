@@ -4,6 +4,7 @@ import ar.edu.utn.odontologia.acceso.AutorizacionDenegadaException;
 import ar.edu.utn.odontologia.acceso.AutenticacionFallidaException;
 import ar.edu.utn.odontologia.agenda.ConflictoAgendaException;
 import ar.edu.utn.odontologia.agenda.TokenCancelacionInvalidoException;
+import ar.edu.utn.odontologia.agenda.VersionTurnoDesactualizadaException;
 import ar.edu.utn.odontologia.agenda.bloqueos.TurnoOcupanteException;
 import ar.edu.utn.odontologia.recursos.IntervaloSinConfigurarException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -47,6 +48,11 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(ConflictoAgendaException.class)
     public ResponseEntity<Map<String, String>> horario() {
         return respuesta(HttpStatus.CONFLICT, "horario_no_disponible", "El horario solicitado no está disponible");
+    }
+
+    @ExceptionHandler(VersionTurnoDesactualizadaException.class)
+    public ResponseEntity<Map<String, String>> versionDesactualizada(VersionTurnoDesactualizadaException error) {
+        return respuesta(HttpStatus.CONFLICT, "version_turno_desactualizada", error.getMessage());
     }
 
     @ExceptionHandler(TurnoOcupanteException.class)

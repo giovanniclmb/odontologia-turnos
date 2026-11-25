@@ -44,3 +44,36 @@ test("busca por código y por nombre y une los resultados sin repetir", async ()
   assert.deepEqual(encontrados.map((p) => p.id), ["c1", "c2"]);
   assert.deepEqual(pedidos.map((p) => p.url.replace(BASE, "")), ["/pacientes?codigo=Ana", "/pacientes?texto=Ana"]);
 });
+
+const turnoEditado = {
+  id: "turno/1", profesionalId: "p1",
+  sillonId: "s1", prestacionId: "r1", inicio: "2026-11-27T12:00:00.123456Z",
+  fin: "2026-11-27T12:45:00.123456Z", duracionMinutos: 45, estado: "PENDIENTE", version: "nueva/=?"
+};
+
+test("reprograma con la versión opaca y recibe el turno actualizado", async () => {
+  pedidos.length = 0;
+  responder = () => turnoEditado;
+  const datos = { versionEsperada: "vieja?=/", profesionalId: "p1", sillonId: "s1", inicio: turnoEditado.inicio };
+  assert.deepEqual(await apiAgenda.reprogramarTurno(turnoEditado.id, datos), turnoEditado);
+  assert.equal(pedidos[0].url, BASE + "/agenda/turnos/turno%2F1/reprogramacion");
+  assert.equal(pedidos[0].metodo, "POST");
+  assert.deepEqual(JSON.parse(pedidos[0].cuerpo), datos);
+});
+
+test("cancela con solo la versión del turno y valida la respuesta", async () => {
+  pedidos.length = 0;
+  const cancelado = { ...turnoEditado, estado: "CANCELADO", version: "cancelada/=? " };
+  responder = () => cancelado;
+  assert.deepEqual(await apiAgenda.cancelarTurno(turnoEditado.id, turnoEditado.version), cancelado);
+  assert.equal(pedidos[0].url, BASE + "/agenda/turnos/turno%2F1/cancelacion");
+  assert.equal(pedidos[0].metodo, "POST");
+  assert.deepEqual(JSON.parse(pedidos[0].cuerpo), { versionEsperada: turnoEditado.version });
+});
+
+test("rechaza respuestas de edición con versión o estado malformados", async () => {
+  responder = () => ({ ...turnoEditado, version: 17 });
+  await assert.rejects(apiAgenda.reprogramarTurno(turnoEditado.id, {}), { name: "RespuestaInvalidaError" });
+  responder = () => ({ ...turnoEditado, estado: "DESCONOCIDO" });
+  await assert.rejects(apiAgenda.cancelarTurno(turnoEditado.id, "original"), { name: "RespuestaInvalidaError" });
+});

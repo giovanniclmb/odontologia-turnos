@@ -2,10 +2,8 @@ import type { Profesional } from "../api/types.js";
 
 export type EstadoTurno = "PENDIENTE" | "CONFIRMADO" | "CANCELADO";
 
-export interface TurnoAgenda {
+export interface TurnoActualizado {
   id: string;
-  pacienteNombre: string;
-  pacienteApellido: string;
   profesionalId: string;
   sillonId: string;
   prestacionId: string;
@@ -14,6 +12,16 @@ export interface TurnoAgenda {
   duracionMinutos: number;
   estado: EstadoTurno;
   version: string;
+}
+
+export interface TurnoAgenda extends TurnoActualizado {
+  pacienteNombre: string;
+  pacienteApellido: string;
+}
+
+export interface ResultadoEdicion {
+  texto: string;
+  destino: { inicio: string; fin: string; sillonId: string } | null;
 }
 
 /** Las referencias que el rol no puede ver llegan en null. */

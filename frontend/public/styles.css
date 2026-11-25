@@ -226,3 +226,24 @@ select.input { appearance: auto; }
   .patient-form .form-actions { flex-direction: column-reverse; }
 }
 .patient-form > .span-2:empty { display: none; }
+
+.turno-acciones { grid-column: 2 / -1; display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.turno-datos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-3); margin: var(--space-4) 0; padding: var(--space-3); background: var(--color-surface-muted); border-radius: var(--radius-sm); }
+.turno-datos dt { color: var(--color-text-muted); font-size: var(--text-sm); }
+.turno-datos dd { margin: 0; font-weight: var(--font-weight-semibold); }
+.confirmar-cancelacion { width: min(32rem, 100% - 2rem); padding: var(--space-5); color: var(--color-text); background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-md); box-shadow: var(--shadow-sm); }
+.confirmar-cancelacion::backdrop { background: rgb(23 45 50 / 50%); }
+.confirmar-acciones { justify-content: flex-end; }
+.confirmar-cancelacion [role="status"]:empty { display: none; }
+.btn-danger { color: var(--color-primary-contrast); background: var(--color-danger); }
+.btn-danger:hover { text-decoration: underline; }
+.errores-edicion:empty { display: none; }
+.errores-edicion .btn { margin-top: var(--space-2); }
+.errores-edicion .alert:focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: 2px; }
+.week .turno-acciones { grid-column: 1; }
+.week .turno-acciones .btn { max-width: 100%; white-space: normal; padding-inline: var(--space-2); }
+
+@media (max-width: 768px) {
+  .turno-acciones { grid-column: 1; }
+  .confirmar-acciones .btn { width: 100%; }
+}
