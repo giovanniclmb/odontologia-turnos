@@ -9,6 +9,7 @@ Recopilación de lo que consta en el [estado de la fundación](../../.active-orc
 | Inicialización de OpenSpec | «Continuar»; «Usuario: Vamos con Discovery.» | Continuar | No consta |
 | Discovery inicial | «Continuar: apruebo el resumen y generar los documentos» | Continuar | No consta |
 | Ampliación de Discovery | El usuario agregó paciente, email, lista de espera y bloqueos, y cambió el límite de cancelación de 24 a 48 horas; «Apruebo el resumen y actualizar los documentos» | Cambio de alcance antes de aprobar | El cambio de plazo dejó el recordatorio fuera de término y llevó a enviar el enlace al crear el turno. El motivo de las 48 horas no consta |
+| Verificación de fuentes de Discovery, 25/11 | El agente halló diferencias en una segunda comprobación; ante la pregunta de si corregirlas: «Sí, corregilas» | **Ajustar** | [Afirmaciones desactualizadas o incompletas](verificacion-fuentes.md#correcciones-aplicadas). Las halló el agente, no una revisión personal |
 | Base de conocimiento | «Continuar»; «Usuario: Vamos con el siguiente paso» (el estado conserva `pending_user_review`) | Continuar | No consta |
 | Roadmap | «Continuar»; «Usuario: Vamos con el siguiente paso» | Continuar | No consta. El agente corrigió dos precisiones al verificar |
 | Seguimiento, `find-skill` y registro | Frases de avance a la fase siguiente | Sin elección Continuar o Ajustar rotulada | No consta |

@@ -183,3 +183,7 @@ Fecha: 19/11/2026. Giovanni aprobó el diseño y la preparación local de un wor
 25/11/2026. Se cotejó `main` (`6aa8796`) contra la consigna y el usuario respondió por menú: portada con nombre y apellido de los cuatro integrantes; versionar el registro de skills existente; actualizar README y estados, informe y PDF, y armar el paquete de entrega. Sobre las fuentes, pidió que el agente contrastara lo documentado antes y expusiera las diferencias. El resultado consta como comprobación del agente; la revisión personal de los integrantes sigue pendiente y no se completó ninguna fila en su nombre. Las diferencias no se aplicaron a fichas, matrices ni puntajes: requieren decisión del equipo.
 
 Trabajo en la rama `docs/entrega-academica`, con commits locales y sin push. El detalle está en [docs/entrega](entrega/README.md). Esta entrada no reconstruye las decisiones tomadas entre el 21 y el 25/11, que constan en OpenSpec y en la KB.
+
+## Corrección del informe tras la segunda comprobación de fuentes
+
+25/11/2026. Ante la pregunta de si corregir en el informe las diferencias halladas, la respuesta fue «Sí, corregilas» (Ajustar). Antes de aplicarlas, el agente repitió dos comprobaciones y detectó que su primera pasada había informado mal el adicional por agenda de Clinic Cloud y los importes anuales de Dentify. Se actualizaron fichas, cuatro celdas de DentApp en la matriz B (total de 1,275 a 1,475), la sección C, el resumen de fuentes y el PDF. La revisión personal sigue pendiente. [Detalle](entrega/verificacion-fuentes.md#correcciones-aplicadas).
