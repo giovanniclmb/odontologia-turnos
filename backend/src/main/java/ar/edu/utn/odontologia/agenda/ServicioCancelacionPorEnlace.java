@@ -13,6 +13,7 @@ import java.time.Instant;
 import java.util.Base64;
 import java.util.List;
 import java.util.UUID;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
@@ -27,9 +28,11 @@ public class ServicioCancelacionPorEnlace {
     private final EdicionesTurnoPersistidas ediciones;
     private final LocksRecursosAgenda locks;
     private final Clock reloj;
+    private final ApplicationEventPublisher eventos;
 
     public ServicioCancelacionPorEnlace(TokensCancelacionPersistidos tokens, EdicionesTurnoPersistidas ediciones,
-                                       LocksRecursosAgenda locks, Clock reloj) {
+                                       LocksRecursosAgenda locks, Clock reloj, ApplicationEventPublisher eventos) {
+        this.eventos = eventos;
         this.tokens = tokens;
         this.ediciones = ediciones;
         this.locks = locks;
@@ -39,7 +42,8 @@ public class ServicioCancelacionPorEnlace {
     /**
      * Emite un token solo si el inicio es estrictamente posterior a ahora + 48h.
      * Invalida los tokens previos del turno antes de emitir.
-     * Devuelve el token en claro para que C-19 lo envíe; null si la ventana está cerrada.
+     * Publica {@link EnlaceCancelacionEmitido} para que C-19 lo envíe y devuelve el token en claro; null si la
+     * ventana está cerrada.
      */
     @Transactional(isolation = Isolation.READ_COMMITTED)
     public String emitir(UUID turnoId, long version, Instant inicio, Instant ahora) {
@@ -53,6 +57,7 @@ public class ServicioCancelacionPorEnlace {
         tokens.eliminarPorTurno(turnoId);
         String crudo = generar();
         tokens.guardar(turnoId, hash(crudo), version, ahora);
+        eventos.publishEvent(new EnlaceCancelacionEmitido(turnoId, crudo));
         return crudo;
     }
 
