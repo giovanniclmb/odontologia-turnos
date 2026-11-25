@@ -143,3 +143,11 @@ La migración es nueva y consecutiva (V9), coordinada con el historial integrado
 **Contexto**: el token de cancelación se generaba al crear y reprogramar, pero su valor en claro se descartaba. **Decisión**: Giovanni eligió por menú un evento interno que el consumidor recibe después de confirmar la transacción. **Alternativas presentadas**: que C-19 emita el token al enviar, o dejar la entrega solo registrada como pendiente. El token no se persiste en claro ni se expone por HTTP.
 
 **Límite**: no se envían emails. La entrega no se persiste: si el proceso cae antes del consumo, ese enlace se pierde. Contenido, destinatario, fallos y reintentos quedan para C-19. [Change](../openspec/changes/archive/2026-11-25-c-18-entrega-del-enlace/proposal.md)
+
+## DD-19 — Email del turno (C-19, 25/11/2026)
+
+**Contexto**: C-17 aporta el transporte y C-18 el enlace; faltaba definir destinatario, contenido, disparadores y fallos. **Decisión** (Giovanni, por menú): enviar al email de la ficha del paciente, con la lista de prueba vigente; incluir nombre, fecha y hora de Mendoza y enlace con su plazo, sin prestación, profesional ni datos clínicos; enlace a una URL base configurable con el token después de `#`; con menos de 48 horas, email sin enlace; enviar también al reprogramar; ante fallos agotados, solo registrar; descartar el mensaje desactualizado antes de enviarlo.
+
+**Alternativas presentadas**: redirigir a una dirección de prueba; contenido sin datos personales o con códigos de prestación y profesional; enlace a la API o página mínima en C-19; no enviar con menos de 48 horas; solo el alta; vista de fallos para recepción o reenvío posterior; enviar mensajes desactualizados.
+
+**Límite**: se aprueban las reglas para la propuesta, no Apply ni envíos reales. [Change](../openspec/changes/email-al-crear-turno/proposal.md)
