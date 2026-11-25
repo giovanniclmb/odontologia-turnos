@@ -183,6 +183,7 @@ const TITULOS: Record<Ruta["seccion"], string> = {
   agenda: "Agenda",
   "agenda/nuevo": "Nuevo turno",
   "agenda/bloqueo": "Bloquear período",
+  "agenda/confirmaciones": "Confirmaciones",
   configuracion: "Configuración"
 };
 

@@ -77,3 +77,24 @@ test("rechaza respuestas de edición con versión o estado malformados", async (
   responder = () => ({ ...turnoEditado, estado: "DESCONOCIDO" });
   await assert.rejects(apiAgenda.cancelarTurno(turnoEditado.id, "original"), { name: "RespuestaInvalidaError" });
 });
+
+test("consulta pendientes y registra una confirmación con versión opaca", async () => {
+  pedidos.length = 0;
+  const pendiente = { ...turnoEditado, pacienteNombre: "Ana", pacienteApellido: "Ficticia" };
+  responder = () => [pendiente];
+  assert.deepEqual(await apiAgenda.pendientes(), [pendiente]);
+  responder = () => ({ ...turnoEditado, estado: "CONFIRMADO" });
+  assert.equal((await apiAgenda.confirmarTurno(turnoEditado.id, "v/=?")).estado, "CONFIRMADO");
+  assert.equal(pedidos[0].url, BASE + "/agenda/turnos/pendientes");
+  assert.equal(pedidos[1].url, BASE + "/agenda/turnos/turno%2F1/confirmacion");
+  assert.deepEqual(JSON.parse(pedidos[1].cuerpo), { versionEsperada: "v/=?" });
+});
+
+test("rechaza datos inválidos al consultar o registrar confirmaciones", async () => {
+  responder = () => [{ ...turnoEditado, pacienteNombre: 42, pacienteApellido: "Ficticia" }];
+  await assert.rejects(apiAgenda.pendientes(), { name: "RespuestaInvalidaError" });
+  responder = () => ({ ...turnoEditado, version: null });
+  await assert.rejects(apiAgenda.confirmarTurno("id", "original"), { name: "RespuestaInvalidaError" });
+  responder = () => turnoEditado;
+  await assert.rejects(apiAgenda.confirmarTurno("id", "original"), { name: "RespuestaInvalidaError" });
+});
