@@ -83,10 +83,10 @@ Los límites del período, los conflictos entre solicitudes simultáneas y la ge
 ## Flujo 9 · Enviar el email de alta y el recordatorio
 
 1. Al crear el turno, la aplicación envía al paciente un email con el enlace para cancelar.
-2. El recordatorio se envía automáticamente 24 horas antes del turno. Cuando el plazo de cancelación venció, se envía sin opción de cancelar.
+2. Con el envío activado, la aplicación recuerda automáticamente los turnos pendientes o confirmados a 24 horas o menos de su inicio, salvo los horarios fijados con menos de 24 horas. Como el plazo de cancelación ya venció, el recordatorio va sin opción de cancelar. Cada horario tiene un solo intento ([C-20](09_decisiones_y_supuestos.md#dd-20--recordatorio-de-24-horas-c-20-25112026)).
 3. Recepción registra las confirmaciones mediante el flujo 6 (US-011, US-012 y RN-EM-01 a RN-EM-03).
 
-La demostración requiere envíos reales a las direcciones de prueba indicadas por el equipo mediante un servicio gratuito por definir. La verificación del destinatario y el tratamiento de altas cercanas al turno, reprogramaciones, cancelaciones, duplicados y fallos siguen pendientes (PA-15 y PA-18).
+La demostración requiere envíos reales a las direcciones de prueba indicadas por el equipo. El tratamiento acordado para C-19 y C-20 consta en las [resoluciones acotadas](10_preguntas_abiertas.md#resolución-acotada-para-c-20-25112026); la verificación del destinatario y las condiciones del proveedor siguen abiertas (PA-15).
 
 ## Flujo 10 · Cancelar desde el enlace
 

@@ -39,7 +39,7 @@ Si la PR de C-21 se integra primero con la versión 14, esta migración se renum
 2. Comunicaciones descarta con una sola consulta los que ya tienen un registro en `email_envio` con el tipo del horario, sin importar el destinatario. Así un fallo no se reintenta ni se vuelve a avisar cada minuto, y un cambio de email no duplica.
 3. Para cada turno restante vuelve a leerlo, comprueba estado, inicio y que no haya comenzado según el reloj, obtiene el paciente, compone el mensaje y llama a `CorreoSalida`.
 
-El tipo es `turno-recordatorio-<inicio en segundos>`. No usa la versión porque confirmar la incrementa sin cambiar el horario. Un turno que vuelve a un horario ya recordado queda excluido por la regla de anticipación.
+El tipo es `turno-recordatorio-<inicio ISO-8601 completo>`, para distinguir inicios del mismo segundo. No usa la versión porque confirmar la incrementa sin cambiar el horario. Un turno que vuelve a un horario ya recordado queda excluido por la regla de anticipación.
 
 Cada turno se procesa dentro de su propio manejo de errores y la revisión captura sus fallos. No hay transacción alrededor de la llamada al proveedor.
 
@@ -57,9 +57,15 @@ Ya venció el plazo para cancelarlo por enlace.
 
 Reutiliza el formato horario de `MensajeTurno`; su representación textual oculta el cuerpo.
 
+### Cierre de la aplicación
+
+Un envío interrumpido quedaría fallido y no se repetiría. El cierre ordenado de Spring ya espera la tarea en curso hasta su límite por fase (30 segundos por defecto), así que no se agrega configuración. Avisado el cierre o interrumpido el hilo, la revisión no inicia otro; los restantes quedan sin registro para la próxima ejecución.
+
+La revisión se registra solo en la aplicación web: el CLI de bootstrap no envía.
+
 ### Aislamiento de las pruebas
 
-El perfil de Maven que vacía las variables de email en las pruebas de integración fija además el recordatorio como desactivado.
+La configuración base de las pruebas de integración fija el recordatorio como desactivado, también cuando se desactiva el aislamiento de credenciales para un envío real.
 
 ## UI Mockups
 

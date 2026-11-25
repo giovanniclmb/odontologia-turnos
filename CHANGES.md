@@ -401,7 +401,7 @@ El 25/11/2026 Giovanni reasignó expresamente C-19 y C-20 de Fabi a sí mismo. S
   - [Preguntas abiertas](knowledge-base/10_preguntas_abiertas.md)
 
 ### [C-19] `email-al-crear-turno`
-- **Estado**: `[x]` implementado, verificado y archivado en OpenSpec el 25/11/2026, con revisión independiente sin bloqueantes en producción y un envío real de prueba recibido. Pendiente de integración. La página de cancelación corresponde a C-23. [Verificación](openspec/changes/archive/2026-11-25-email-al-crear-turno/verify.md) · [Issue #20](https://github.com/giovanniclmb/odontologia-turnos/issues/20).
+- **Estado**: `[x]` implementado, verificado y archivado en OpenSpec el 25/11/2026, con revisión independiente sin bloqueantes en producción y un envío real de prueba recibido. Integrado el 25/11/2026 mediante el [PR #49](https://github.com/giovanniclmb/odontologia-turnos/pull/49). La página de cancelación corresponde a C-23. [Verificación](openspec/changes/archive/2026-11-25-email-al-crear-turno/verify.md) · [Issue #20](https://github.com/giovanniclmb/odontologia-turnos/issues/20).
 - **Responsable**: Giovanni
 - **Scope**: Email de alta con enlace de cancelación para US-011 y RN-EM-01.
   - Resolver PA-15/PA-17/PA-18: destinatario, contenido, efecto de fallos y creación dentro de las ventanas de 48/24 horas; no inventar excepciones al plazo.
@@ -416,7 +416,7 @@ El 25/11/2026 Giovanni reasignó expresamente C-19 y C-20 de Fabi a sí mismo. S
   - [Preguntas abiertas](knowledge-base/10_preguntas_abiertas.md)
 
 ### [C-20] `recordatorio-automatico-24-horas`
-- **Estado**: `[ ]` pendiente
+- **Estado**: `[ ]` implementado y verificado localmente el 25/11/2026, con revisión independiente atendida. Pendientes el envío real autorizado, el archivo en OpenSpec y la integración. [Verificación](openspec/changes/recordatorio-automatico-24-horas/verify.md) · [Issue #21](https://github.com/giovanniclmb/odontologia-turnos/issues/21).
 - **Responsable**: Giovanni
 - **Scope**: Recordatorio de US-012 y RN-EM-02, separado de confirmaciones manuales.
   - Resolver PA-18: programación y referencia horaria, reprogramaciones, cancelaciones, altas cercanas, fallos y duplicados. Acordar tecnología antes de implementar.
