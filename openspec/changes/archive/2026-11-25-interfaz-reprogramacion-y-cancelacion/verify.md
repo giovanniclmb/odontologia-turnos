@@ -48,3 +48,21 @@ Se pulsaron Enter, Tab y Escape mediante eventos de teclado del navegador. Los c
 Ocho capturas de la aplicación en [mockups/verify](mockups/verify/), a 390×844 y 1440×900. El ancho del documento coincidió con el viewport y los diálogos quedaron dentro de sus límites. El recorrido no registró excepciones JavaScript. Se corrigió la repetición del prefijo del sillón cuando el código ya incluía la palabra Sillón.
 
 La implementación muestra la cuenta de prueba y la acción de cerrar sesión en la barra real de C-10. El resumen usa fecha ISO, hora de Mendoza y los códigos devueltos por la API. La confirmación usa un diálogo nativo que toma foco en Mantener turno. El formulario conserva la disposición y los controles del mockup aprobado.
+
+## Verificación combinada con C-18 para PR #45
+
+Fecha de ejecución 25/11/2026. Se integró `origin/main` (`4750af6e`) sobre la rama de C-12 (`da80b8e`), manteniendo ambos padres del merge. Los únicos conflictos fueron `ServicioAgenda.java` y `GlobalExceptionHandler.java`.
+
+| Comprobación | Resultado |
+| --- | --- |
+| `ServicioAgenda.reprogramar(..., finMaximo)` | Conserva el límite de fin consumido por la API de C-12; tras persistir el movimiento, emite el enlace nuevo de C-18 con la versión e inicio actualizados. |
+| Protocolo de enlace de C-18 | Se conservan `emitir` al crear, `conservarTrasConfirmacion`, `cancelarPorToken` y la invalidación/emisión tras reprogramar. |
+| `GlobalExceptionHandler` | Conserva el 404 genérico de enlace no disponible y el 409 de versión de turno desactualizada. |
+| `mvn -B -f backend/pom.xml clean verify` | 401 pruebas: 129 unitarias y 272 de integración, 0 fallos, 0 errores y 0 omitidas; Testcontainers usó PostgreSQL 18.7. |
+| `npm test` en `frontend/` | 81/81 pruebas. |
+| `python3 -m unittest discover -s scripts/tests -v` | 9/9 pruebas de roadmap. |
+| `openspec validate cancelacion-por-enlace --type spec --strict` | Spec de C-18 válida. |
+| `openspec validate --archived --strict` | 20/20 changes archivados válidos. |
+| `git diff --check` | Sin problemas de espacios en blanco. |
+
+La validación global `openspec validate --all --strict` reporta 12/13 items válidos; falla en la spec existente `acceso-y-permisos-internos` por dos requisitos de más de 500 caracteres. La validación específica de C-18 y la de los changes archivados pasan.

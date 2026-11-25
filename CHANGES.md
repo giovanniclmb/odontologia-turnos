@@ -351,7 +351,7 @@ Giovanni aprobó el reparto el 19/11/2026. Las ondas preservan las dependencias 
   - [10 Preguntas abiertas](knowledge-base/10_preguntas_abiertas.md) §PA-02 y PA-05
 
 ### [C-18] `cancelacion-del-paciente-por-enlace`
-- **Estado**: `[ ]` pendiente
+- **Estado**: `[x]` implementado, verificado, archivado e integrado el 25/11/2026, con revisión independiente de las correcciones sin bloqueantes. El envío del enlace sigue en C-19, que debe contemplar las advertencias de la [entrega interna](openspec/changes/archive/2026-11-25-c-18-entrega-del-enlace/verify.md); los pendientes menores constan además en las [correcciones de la revisión](openspec/changes/archive/2026-11-25-c-18-fixes-hallazgos-pr44/verify.md). [PR #44](https://github.com/giovanniclmb/odontologia-turnos/pull/44) · [Issue #19](https://github.com/giovanniclmb/odontologia-turnos/issues/19).
 - **Responsable**: Fabi
 - **Scope**: Cancelación del turno asociado por enlace hasta 48 horas antes (US-013, RN-PA-01 y RN-PA-02).
   - Resolver PA-17/PA-18: protección, vigencia, uso, instante exacto del límite, referencia horaria y efecto de cambios del turno. El plazo no se cambia por inferencia.
@@ -484,7 +484,7 @@ La política visual sigue diferida: resolverla antes de Apply y cumplir las apro
   - [08 Arquitectura propuesta](knowledge-base/08_arquitectura_propuesta.md) §Operación y diseño visual
 
 ### [C-12] `interfaz-reprogramacion-y-cancelacion`
-- **Estado**: `[x]` implementado, verificado y archivado en OpenSpec el 25/11/2026. Pendiente de integración. [Verificación](openspec/changes/archive/2026-11-25-interfaz-reprogramacion-y-cancelacion/verify.md).
+- **Estado**: `[x]` implementado, verificado y archivado en OpenSpec el 25/11/2026. Integración preparada en el PR #45; pendiente de revisión e integración a `main`. [Verificación](openspec/changes/archive/2026-11-25-interfaz-reprogramacion-y-cancelacion/verify.md).
 - **Responsable**: Luciano
 - **Scope**: Acciones de reorganización de una reserva desde la agenda existente.
   - Resolver el gate visual y consumir C-07/C-08 para US-006 y US-007, sin redefinir reglas o transiciones.

@@ -121,29 +121,25 @@ class ArranqueIT {
 
     @Test void rechazaHistorialDeUnaVersionFutura() throws Exception {
         try(var aislada=PostgresFixture.start()){
-            String v1=Files.readString(Path.of("src/main/resources/db/migration/V1__referencias_base.sql"));
-            String v2=Files.readString(Path.of("src/main/resources/db/migration/V2__acceso_y_permisos.sql"));
-            Files.writeString(temporal.resolve("V1__referencias_base.sql"),v1);
-            Files.writeString(temporal.resolve("V2__acceso_y_permisos.sql"),v2);
-            Files.copy(Path.of("src/main/resources/db/migration/V3__historial_contrasena.sql"),temporal.resolve("V3__historial_contrasena.sql"));
-            Files.copy(Path.of("src/main/resources/db/migration/V4__recursos_e_intervalo.sql"),temporal.resolve("V4__recursos_e_intervalo.sql"));
-            Files.copy(Path.of("src/main/resources/db/migration/V5__pacientes_y_ficha_clinica.sql"),temporal.resolve("V5__pacientes_y_ficha_clinica.sql"));
-            Files.copy(Path.of("src/main/resources/db/migration/V6__bloqueos_de_recursos.sql"),temporal.resolve("V6__bloqueos_de_recursos.sql"));
-            Files.copy(Path.of("src/main/resources/db/migration/V7__turnos_persistidos.sql"),temporal.resolve("V7__turnos_persistidos.sql"));
-            Files.copy(Path.of("src/main/resources/db/migration/V8__reprogramacion_de_turnos.sql"),temporal.resolve("V8__reprogramacion_de_turnos.sql"));
-            Files.copy(Path.of("src/main/resources/db/migration/V9__cancelacion_de_turnos.sql"),temporal.resolve("V9__cancelacion_de_turnos.sql"));
-            Files.copy(Path.of("src/main/resources/db/migration/V10__cuentas_paciente.sql"),temporal.resolve("V10__cuentas_paciente.sql"));
-            Files.copy(Path.of("src/main/resources/db/migration/V11__email_envio.sql"),temporal.resolve("V11__email_envio.sql"));
-            Files.copy(Path.of("src/main/resources/db/migration/V12__confirmaciones_manuales.sql"),
-                    temporal.resolve("V12__confirmaciones_manuales.sql"));
-            Files.writeString(temporal.resolve("V13__futura.sql"),"CREATE TABLE odontologia.futura (id uuid PRIMARY KEY); SELECT 1;\n");
+            int ultima=0;
+            try(var migraciones=Files.list(Path.of("src/main/resources/db/migration"))){
+                for(Path migracion:migraciones.toList()){
+                    String nombre=migracion.getFileName().toString();
+                    Files.copy(migracion,temporal.resolve(nombre));
+                    ultima=Math.max(ultima,Integer.parseInt(nombre.substring(1,nombre.indexOf("__"))));
+                }
+            }
+            // Siempre posterior a las existentes: una versión fija terminaría chocando con una migración real.
+            int futura=ultima+1;
+            Files.writeString(temporal.resolve("V"+futura+"__futura.sql"),"CREATE TABLE odontologia.futura (id uuid PRIMARY KEY); SELECT 1;\n");
             try(var c=abrir(aislada,Map.of("spring.flyway.locations","filesystem:"+temporal))){}
             var error=assertThrows(RuntimeException.class,()->{try(var c=abrir(aislada,Map.of())){} });
             String mensaje=cadena(error).toLowerCase(Locale.ROOT);
-            assertTrue(mensaje.contains("migration"));
-            assertTrue(mensaje.contains("13"), "El rechazo debe corresponder a la version futura 13: " + mensaje);
+            assertTrue(mensaje.contains("not resolved locally: "+futura),
+                    "El rechazo debe corresponder a una version futura desconocida: " + mensaje);
+            assertFalse(mensaje.contains("checksum mismatch"), "No debe chocar con una migracion existente: " + mensaje);
             try(var c=aislada.migrationConnection();var q=c.createStatement();var result=q.executeQuery("select count(*) from odontologia.flyway_schema_history where success")){
-                assertTrue(result.next());assertEquals(13,result.getInt(1));
+                assertTrue(result.next());assertEquals(futura,result.getInt(1));
             }
         }
     }
