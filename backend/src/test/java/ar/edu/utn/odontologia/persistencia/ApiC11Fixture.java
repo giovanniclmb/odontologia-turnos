@@ -4,6 +4,8 @@ import ar.edu.utn.odontologia.OdontologiaApplication;
 import ar.edu.utn.odontologia.acceso.*;
 import ar.edu.utn.odontologia.pacientes.*;
 import ar.edu.utn.odontologia.recursos.ServicioRecursosAgenda;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.UUID;
 import java.util.concurrent.CountDownLatch;
@@ -24,12 +26,16 @@ public final class ApiC11Fixture implements AutoCloseable {
     final String base;
 
     public ApiC11Fixture() {
+        this(0);
+    }
+
+    ApiC11Fixture(int puerto) {
         db = PostgresFixture.start();
         ConfigurableApplicationContext started = null;
         try {
             var properties = new HashMap<String, Object>(db.properties());
             properties.put("server.address", "127.0.0.1");
-            properties.put("server.port", "0");
+            properties.put("server.port", Integer.toString(puerto));
             properties.put("spring.main.web-application-type", "servlet");
             var env = new StandardEnvironment();
             env.getPropertySources().remove(StandardEnvironment.SYSTEM_ENVIRONMENT_PROPERTY_SOURCE_NAME);
@@ -67,6 +73,8 @@ public final class ApiC11Fixture implements AutoCloseable {
             throw failure;
         }
     }
+
+    Connection conexionAdmin() throws SQLException { return db.adminConnection(); }
 
     @Override public void close() { try { context.close(); } finally { db.close(); } }
 

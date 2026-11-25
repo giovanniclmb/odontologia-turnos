@@ -1,11 +1,18 @@
 package ar.edu.utn.odontologia.referencias.persistencia;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 public interface PacienteReferencias extends Referencias<PacienteReferencia> {
+    @Query("""
+            select new ar.edu.utn.odontologia.referencias.persistencia.NombrePaciente(p.id, p.nombre, p.apellido)
+            from PacienteReferencia p where p.id in :ids
+            """)
+    List<NombrePaciente> buscarNombres(@Param("ids") Collection<UUID> ids);
+
     @Query("""
             select p from PacienteReferencia p
             where (coalesce(:codigo, '') = '' or p.codigo = :codigo)

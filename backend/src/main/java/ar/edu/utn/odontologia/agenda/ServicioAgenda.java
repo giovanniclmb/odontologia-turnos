@@ -22,6 +22,7 @@ import java.time.Duration;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -291,11 +292,12 @@ public class ServicioAgenda {
     }
 
     private Duration duracionPrestacion(UUID prestacion) {
-        return prestaciones.findById(prestacion)
-                .map(referencia -> referencia.getDuracionReferenciaMinutos())
+        var existente = prestaciones.findById(prestacion)
+                .orElseThrow(() -> new IllegalArgumentException("La prestación no existe"));
+        return Optional.ofNullable(existente.getDuracionReferenciaMinutos())
                 .filter(minutos -> minutos > 0)
                 .map(Duration::ofMinutes)
-                .orElseThrow(() -> new IllegalArgumentException("La prestación debe existir y tener una duración configurada"));
+                .orElseThrow(() -> new IllegalArgumentException("La prestación debe tener una duración configurada"));
     }
 
     private static Instant normalizarInicio(Instant inicio) {

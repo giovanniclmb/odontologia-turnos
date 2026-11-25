@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bloquear período</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../../../../../design-system/tokens.css">
+  <link rel="stylesheet" href="../../../../../frontend/public/styles.css">
+  <link rel="stylesheet" href="./agenda.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Navegación principal">
+      <div class="brand"><img src="../../../../../design-system/assets/logo.svg" alt="Logo provisional"><strong data-brand-name></strong></div>
+      <nav class="nav" aria-label="Secciones"><a href="#pacientes">Pacientes</a><a href="#agenda" aria-current="page">Agenda</a><span aria-disabled="true">Ficha clínica</span><span aria-disabled="true">Lista de espera</span><a href="#configuracion">Configuración</a></nav>
+    </aside>
+    <div class="main">
+      <header class="topbar"><span class="topbar-title">Bloquear período</span><div class="topbar-user"><span>recepcion.demo (recepcion)</span><button class="btn btn-secondary" type="button">Cerrar sesión</button></div></header>
+      <main class="content">
+<section class="page-header"><div><h1>Bloquear período</h1><p>Elija un sillón, un profesional o ambos. Un bloqueo no se puede modificar ni quitar por ahora.</p></div><div class="header-actions"><button class="btn btn-secondary" type="button">Volver a la agenda</button></div></section><section class="card"><form class="patient-form"><p class="alert" role="alert">El bloqueo afecta a un turno existente. No se creó.</p>
+  <fieldset><legend>Recursos (al menos uno)</legend><div class="field"><label for="bsil">Sillón</label><select class="input" id="bsil" ><option>SIL-01</option><option>Ninguno</option><option>SIL-02</option></select></div><div class="field"><label for="bpro">Profesional</label><select class="input" id="bpro" ><option>Ninguno</option><option>PRO-01</option><option>PRO-02</option></select></div></fieldset>
+  <fieldset><legend>Desde (hora de Mendoza)</legend><div class="field"><label for="dfe">Fecha *</label><input class="input" id="dfe" type="date" value="2026-11-25" ></div><div class="field"><label for="dho">Hora *</label><input class="input" id="dho" type="time" value="09:00" ></div></fieldset>
+  <fieldset><legend>Hasta (no incluido)</legend><div class="field"><label for="hfe">Fecha *</label><input class="input" id="hfe" type="date" value="2026-11-25" ></div><div class="field"><label for="hho">Hora *</label><input class="input" id="hho" type="time" value="10:00" ></div></fieldset>
+  <div class="form-actions"><button class="btn btn-secondary" type="button">Cancelar</button><button class="btn btn-primary" type="submit">Crear bloqueo</button></div>
+</form></section>
+      </main>
+    </div>
+  </div>
+  <script defer src="../../../../../design-system/brand.js"></script>
+</body>
+</html>

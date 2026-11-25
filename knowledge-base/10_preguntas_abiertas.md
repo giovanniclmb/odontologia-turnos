@@ -103,3 +103,10 @@ Estas decisiones cierran PA-05/06/07 únicamente para el alcance de C-04; no res
 - **PA-02.** Una confirmación, cancelación o reprogramación exige la versión vigente; una versión desactualizada pide volver a consultar sin mutar datos. La confirmación ocupa ambos recursos y aumenta una vez la versión. Repetirla con la versión vigente se rechaza sin cambio.
 - **PA-02.** Una reprogramación efectiva de un confirmado lo devuelve a `PENDIENTE`, incrementa la versión y conserva paciente, prestación y duración efectiva. Si el destino normalizado es idéntico, conserva estado y versión. Cancelarlo lo lleva a `CANCELADO`, libera los recursos al commit e incrementa la versión.
 - El detalle del contrato interno está en el [delta de agenda archivado](../openspec/changes/archive/2026-11-25-c-09-confirmaciones-manuales/specs/agenda-persistida/spec.md); la migración C-09 debe seguir a V11 de email de C-17.
+
+## Resolución acotada para C-10 (aprobada por Giovanni, 25/11/2026)
+
+- **PA-01 — operación del intervalo:** recepción lo consulta y establece en una sección Configuración propia, visible solo para su rol. Se mantienen las reglas de C-05: entero positivo, sin valor inicial y vigente para validaciones futuras.
+- **PA-05 — paciente en la agenda:** recepción ve nombre y apellido en todos los turnos. Odontología los ve en todos sus turnos propios, aunque no tenga asignación activa con el paciente; la excepción no habilita otros datos administrativos ni clínicos.
+- **PA-05 y PA-19 — consulta de bloqueos:** recepción ve todos. Odontología ve período y recurso de los que afectan al sillón consultado o a su profesional, sin datos de otros profesionales. Solo recepción crea. Modificación y desbloqueo siguen pendientes en PA-19.
+- **PA-04 — presentación horaria:** las vistas diaria y semanal (lunes a domingo) usan `America/Argentina/Mendoza` y no imponen jornada laboral.

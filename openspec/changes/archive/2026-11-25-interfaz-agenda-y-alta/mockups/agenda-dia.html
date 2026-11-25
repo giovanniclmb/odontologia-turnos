@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Agenda</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../../../../../design-system/tokens.css">
+  <link rel="stylesheet" href="../../../../../frontend/public/styles.css">
+  <link rel="stylesheet" href="./agenda.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Navegación principal">
+      <div class="brand"><img src="../../../../../design-system/assets/logo.svg" alt="Logo provisional"><strong data-brand-name></strong></div>
+      <nav class="nav" aria-label="Secciones"><a href="#pacientes">Pacientes</a><a href="#agenda" aria-current="page">Agenda</a><span aria-disabled="true">Ficha clínica</span><span aria-disabled="true">Lista de espera</span><a href="#configuracion">Configuración</a></nav>
+    </aside>
+    <div class="main">
+      <header class="topbar"><span class="topbar-title">Agenda</span><div class="topbar-user"><span>recepcion.demo (recepcion)</span><button class="btn btn-secondary" type="button">Cerrar sesión</button></div></header>
+      <main class="content">
+<section class="page-header"><div><h1>Agenda por sillón</h1><p>Hora de Mendoza. Duración efectiva de cada turno.</p></div><div class="header-actions"><button class="btn btn-secondary" type="button">Bloquear período</button><button class="btn btn-primary" type="button">+ Nuevo turno</button></div></section><section class="card" aria-label="Período y sillón"><div class="toolbar">
+  <div class="field"><label for="sillon">Sillón</label><select class="input" id="sillon"><option>SIL-01</option><option>SIL-02</option></select></div>
+  <div class="field"><label for="fecha">Fecha</label><input class="input" id="fecha" type="date" value="2026-11-25"></div>
+  <div class="stepper" aria-label="Cambiar período"><button class="btn btn-secondary" type="button">Anterior</button><button class="btn btn-secondary" type="button">Hoy</button><button class="btn btn-secondary" type="button">Siguiente</button></div>
+  <div class="segmented" role="group" aria-label="Vista"><button class="btn btn-secondary" type="button" aria-pressed="true">Día</button><button class="btn btn-secondary" type="button" aria-pressed="false">Semana</button></div>
+</div></section><section class="card" aria-labelledby="dia-titulo"><div class="card-header"><div><h2 class="card-title" id="dia-titulo">Miércoles 25/11/2026 · SIL-01</h2><p class="card-subtitle">3 turnos y 1 bloqueo</p></div></div><ul class="day-list"><li class="slot "><div class="slot-time">09:00 – 09:30<small>30 min</small></div><div class="slot-info"><strong>Ana Ficticia</strong><small>Profesional PRO-01 · Control</small></div><span class="badge badge-confirmed">Confirmado</span></li><li class="slot "><div class="slot-time">09:45 – 10:45<small>60 min</small></div><div class="slot-info"><strong>Bruno Ejemplo</strong><small>Profesional PRO-02 · Tratamiento</small></div><span class="badge badge-pending">Pendiente</span></li><li class="slot is-cancelled"><div class="slot-time">11:00 – 12:00<small>60 min</small></div><div class="slot-info"><strong>Carla Prueba</strong><small>Profesional PRO-01 · Tratamiento</small></div><span class="badge badge-cancelled">Cancelado</span></li><li class="slot is-block"><div class="slot-time">13:00 – 14:00<small>60 min</small></div><div class="slot-info"><strong>Bloqueo</strong><small>Sillón SIL-01 · Profesional PRO-02</small></div><span class="badge badge-block">No disponible</span></li></ul></section>
+      </main>
+    </div>
+  </div>
+  <script defer src="../../../../../design-system/brand.js"></script>
+</body>
+</html>

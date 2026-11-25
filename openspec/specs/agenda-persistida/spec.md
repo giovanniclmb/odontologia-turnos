@@ -54,8 +54,6 @@ Los estados `PENDIENTE` y `CONFIRMADO` SHALL ocupar al profesional y al sillón.
 - **WHEN** se intenta un alta, movimiento o bloqueo incompatible con un turno confirmado
 - **THEN** la operación se rechaza con las mismas reglas aplicables a una reserva pendiente
 
-
-
 ### Requirement: Alta autorizada por rol y registro
 
 El servicio SHALL exigir identidad interna autenticada y permiso `turno:crear`. Recepción SHALL poder usar cualquier profesional elegible y paciente existente del sitio. Odontología SHALL poder reservar solo para su propio profesional vinculado y para pacientes con asignación activa a ese profesional.
@@ -412,3 +410,18 @@ La cancelación SHALL guardar `CANCELADO` y una versión nueva en la misma trans
 #### Scenario: Reversión con una operación en espera
 - **WHEN** la transacción de cancelación revierte mientras un alta, un bloqueo o una reprogramación espera por el turno o sus recursos
 - **THEN** la otra operación vuelve a evaluar los datos confirmados y no observa el horario como liberado por la cancelación revertida
+
+### Requirement: Identificación del paciente en la agenda
+Cada turno devuelto por la consulta de agenda SHALL incluir nombre y apellido de su paciente y ningún otro dato personal ni clínico. La regla SHALL aplicarse a todos los turnos visibles para el solicitante, incluidos los cancelados.
+
+#### Scenario: Recepción consulta la agenda
+- **WHEN** recepción consulta un sillón con turnos de distintos profesionales
+- **THEN** cada turno incluye nombre y apellido del paciente, sin email, teléfono ni contenido clínico
+
+#### Scenario: Odontología sin asignación activa
+- **WHEN** un odontólogo consulta un turno propio de un paciente que ya no tiene asignado
+- **THEN** el turno incluye solo nombre y apellido como datos del paciente
+
+#### Scenario: Turnos de otro profesional
+- **WHEN** un odontólogo consulta un sillón que tiene turnos de otro profesional
+- **THEN** no recibe esos turnos ni los nombres de sus pacientes

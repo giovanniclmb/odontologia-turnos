@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/recursos")
 public class RecursosController {
     public record ProfesionalResponse(UUID id, String codigo, boolean activo) {}
+    public record SillonResponse(UUID id, String codigo, boolean activo) {}
+    public record PrestacionResponse(UUID id, String codigo, Integer duracionReferenciaMinutos) {}
 
     private final ServicioRecursosAgenda recursos;
 
@@ -28,5 +30,17 @@ public class RecursosController {
     public List<ProfesionalResponse> profesionales(HttpServletRequest request) {
         return recursos.consultarProfesionales(identidad(request)).stream()
                 .map(p -> new ProfesionalResponse(p.id(), p.codigo(), p.activo())).toList();
+    }
+
+    @GetMapping("/sillones")
+    public List<SillonResponse> sillones(HttpServletRequest request) {
+        return recursos.consultarSillones(Solicitudes.identidad(request)).stream()
+                .map(s -> new SillonResponse(s.id(), s.codigo(), s.activo())).toList();
+    }
+
+    @GetMapping("/prestaciones")
+    public List<PrestacionResponse> prestaciones(HttpServletRequest request) {
+        return recursos.consultarPrestaciones(Solicitudes.identidad(request)).stream()
+                .map(p -> new PrestacionResponse(p.id(), p.codigo(), p.duracionReferenciaMinutos())).toList();
     }
 }

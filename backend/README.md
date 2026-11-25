@@ -138,3 +138,39 @@ java -cp "target/test-classes:target/classes:$(cat /tmp/odonto-c11-classpath)" a
 ```
 
 El fixture imprime `C11_DEMO_URL` con su puerto aleatorio. Crea únicamente datos ficticios y tres usuarios de prueba: `recepcion-demo`, `odonto-demo` y `colega-demo`, con contraseña pública de prueba `PruebaSegura986!`. Nunca usar estas credenciales en una base persistente. El fixture está en código de pruebas y no se empaqueta en el JAR de la aplicación. Ctrl-C cierra la API y su contenedor temporal. Configurar la URL del cliente con `window.__API_BASE_URL__` antes de cargar su módulo; el origen permitido de desarrollo es `http://localhost:5173`.
+
+### C-10 — HTTP de agenda, bloqueos, intervalo y catálogos
+
+Todas las rutas requieren `Authorization: Bearer <token>`; sin identidad responden `401 no_autenticado`, con las cabeceras CORS si el origen está permitido. Una falla interna al resolver el token responde `500 error_interno` con `correlacion`; el detalle queda solo en el registro del servidor. El backend aplica permiso y alcance en cada operación.
+
+| Método y ruta | Uso | Acceso |
+| --- | --- | --- |
+| `GET /agenda/sillones/{sillonId}/turnos?desde&hasta` | Turnos del sillón con nombre y apellido del paciente | Recepción: todos; odontología: los de su profesional |
+| `POST /agenda/turnos` | Alta (`201`): `pacienteId`, `profesionalId`, `sillonId`, `prestacionId`, `inicio` y `duracionAjustadaMinutos` opcional | Según alcance de C-06 |
+| `GET /agenda/bloqueos?sillonId&desde&hasta` | Bloqueos del período | Recepción: todos; odontología: los del sillón consultado o de su profesional, con las demás referencias en `null` |
+| `POST /agenda/bloqueos` | Alta (`201`): `inicio`, `fin` y `sillonId`, `profesionalId` o ambos | Recepción |
+| `GET /sede/intervalo` | `{ "minutos": número o null }` | Equipo |
+| `PUT /sede/intervalo` | Establece `minutos`, entero positivo | Recepción |
+| `GET /recursos/sillones`, `GET /recursos/prestaciones` | Catálogos | Equipo |
+
+Los instantes usan ISO 8601 con zona, entre los años 1 y 9998; un alta cuyo fin superaría el año 9999 se rechaza. No hay una duración máxima de negocio definida. Las consultas aceptan períodos semiabiertos de hasta 7 días. Los errores devuelven `{codigo, mensaje}`:
+
+| Estado y código | Caso |
+| --- | --- |
+| `400 solicitud_invalida` | Dato ausente, mal formado, decimal donde se pide un entero o período inválido |
+| `403 autorizacion_denegada` | Sin permiso o fuera de alcance |
+| `404 solicitud_invalida` | Referencia inexistente |
+| `409 horario_no_disponible` | Choque por profesional, sillón, intervalo o bloqueo, sin identificar la causa |
+| `409 bloqueo_afecta_turno` | El bloqueo alcanza un turno ocupante |
+| `409 intervalo_sin_configurar` | Alta sin intervalo de sede |
+
+`ApiAgendaIT` verifica este contrato y `LecturasAgendaIT` el alcance de las lecturas, ambas sobre PostgreSQL real.
+
+Para recorrer la interfaz de agenda sin tocar la base de desarrollo, con el puerto 8080 libre, desde `backend/`:
+
+```sh
+mvn test-compile dependency:build-classpath -Dmdep.outputFile=target/demo-classpath
+java -cp "target/test-classes:target/classes:$(cat target/demo-classpath)" ar.edu.utn.odontologia.persistencia.ApiC10Demo
+```
+
+`ApiC10Demo` suma al fixture de C-11 los sillones `SIL-01` y `SIL-02`, las prestaciones `CONTROL` y `TRATAMIENTO` y un paciente sin asignación, todos ficticios. El intervalo queda sin configurar. Usa los mismos usuarios de prueba, nunca en una base persistente. Ctrl-C cierra la API y su contenedor.

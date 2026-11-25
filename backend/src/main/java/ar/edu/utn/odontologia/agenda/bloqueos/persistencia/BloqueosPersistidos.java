@@ -11,6 +11,13 @@ public interface BloqueosPersistidos extends Repository<BloqueoPersistido, UUID>
 
     @Query("""
             select b from BloqueoPersistido b
+            where b.inicio < :fin and b.fin > :inicio
+            order by b.inicio, b.id
+            """)
+    List<BloqueoPersistido> buscarPeriodo(Instant inicio, Instant fin);
+
+    @Query("""
+            select b from BloqueoPersistido b
             where (b.profesionalId = :profesionalId or b.sillonId = :sillonId)
               and b.inicio < :fin and b.fin > :inicio
             order by b.inicio, b.id
