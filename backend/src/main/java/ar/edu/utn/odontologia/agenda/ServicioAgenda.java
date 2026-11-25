@@ -212,8 +212,10 @@ public class ServicioAgenda {
                 }
             }
         }
-        return vista(ediciones.cambiarEstado(actual.id(), actual.version(), EstadoTurno.PENDIENTE, EstadoTurno.CONFIRMADO)
-                .orElseThrow(() -> new VersionTurnoDesactualizadaException("confirmarlo")));
+        var confirmado = ediciones.cambiarEstado(actual.id(), actual.version(), EstadoTurno.PENDIENTE,
+                EstadoTurno.CONFIRMADO).orElseThrow(() -> new VersionTurnoDesactualizadaException("confirmarlo"));
+        tokensCancelacion.conservarTrasConfirmacion(confirmado.id(), actual.version(), confirmado.version());
+        return vista(confirmado);
     }
 
     private static boolean estadoEditable(Identidad solicitante, EstadoTurno estado) {

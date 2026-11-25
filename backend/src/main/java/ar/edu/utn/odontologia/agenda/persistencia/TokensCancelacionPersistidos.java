@@ -90,6 +90,20 @@ public class TokensCancelacionPersistidos {
                 .update();
     }
 
+    /** No recupera tokens consumidos ni ligados a una versión que ya no era la anterior. */
+    @Transactional
+    public void actualizarVersion(UUID turnoId, long versionAnterior, long versionVigente) {
+        jdbc.sql("""
+                update odontologia.token_cancelacion
+                set version_turno = :vigente
+                where turno_id = :turno and version_turno = :anterior and consumido = false
+                """)
+                .param("turno", turnoId)
+                .param("anterior", versionAnterior)
+                .param("vigente", versionVigente)
+                .update();
+    }
+
     @Transactional
     public void eliminarPorTurno(UUID turnoId) {
         jdbc.sql("delete from odontologia.token_cancelacion where turno_id = :turno")

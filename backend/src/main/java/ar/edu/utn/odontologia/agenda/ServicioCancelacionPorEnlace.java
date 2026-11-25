@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.UUID;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
@@ -59,25 +60,31 @@ public class ServicioCancelacionPorEnlace {
         tokens.eliminarPorTurno(turnoId);
     }
 
+    /** Mantiene vigente el enlace al confirmar. Exige la transacción que ya bloqueó la fila del turno. */
+    @Transactional(propagation = Propagation.MANDATORY)
+    public void conservarTrasConfirmacion(UUID turnoId, long versionAnterior, long versionConfirmada) {
+        tokens.actualizarVersion(turnoId, versionAnterior, versionConfirmada);
+    }
+
     @Transactional(isolation = Isolation.READ_COMMITTED)
     public boolean esValido(String tokenCrudo, Instant ahora) {
         if (tokenCrudo == null || tokenCrudo.isBlank() || ahora == null) {
             return false;
         }
-        var registro = tokens.buscarPorHash(hash(tokenCrudo));
+        var hashToken = hash(tokenCrudo);
+        var registro = tokens.buscarPorHash(hashToken);
         if (registro.isEmpty()) {
             return false;
         }
-        var r = registro.get();
-        if (r.consumido()) {
-            return false;
-        }
-        var turno = ediciones.bloquear(r.turnoId(), null);
+        var turno = ediciones.bloquear(registro.get().turnoId(), null);
         if (turno.isEmpty()) {
             return false;
         }
         var t = turno.get();
-        if (t.version() != r.version()) {
+        // El token se vuelve a leer: una confirmación pudo actualizar su versión durante la espera.
+        var vigente = tokens.buscarPorHash(hashToken)
+                .filter(r -> !r.consumido() && r.version() == t.version());
+        if (vigente.isEmpty()) {
             return false;
         }
         if (t.estado() != EstadoTurno.PENDIENTE && t.estado() != EstadoTurno.CONFIRMADO) {
@@ -93,23 +100,30 @@ public class ServicioCancelacionPorEnlace {
         return true;
     }
 
+    /**
+     * Respeta el orden de locks de la agenda: fila del turno, recursos y, al final, token. Invertirlo
+     * permite un ciclo de espera con la reprogramación.
+     */
     @Transactional(isolation = Isolation.READ_COMMITTED)
     public ServicioAgenda.TurnoRegistrado cancelar(String tokenCrudo) {
         if (tokenCrudo == null || tokenCrudo.isBlank()) {
             throw new TokenCancelacionInvalidoException();
         }
+        var hashToken = hash(tokenCrudo);
+        // Lectura sin lock para identificar el turno; el token se revalida bajo los locks. Un enlace usado
+        // o un turno cancelado no vuelven a servir: se rechazan sin retener los recursos.
+        var turnoId = tokens.buscarPorHash(hashToken)
+                .filter(r -> !r.consumido())
+                .orElseThrow(TokenCancelacionInvalidoException::new).turnoId();
+        var turno = ediciones.bloquear(turnoId, null)
+                .filter(t -> t.estado() != EstadoTurno.CANCELADO)
+                .orElseThrow(TokenCancelacionInvalidoException::new);
+        locks.adquirir(List.of(new RecursosBloqueo(turno.profesionalId(), turno.sillonId())));
+        var registro = tokens.bloquearPorHash(hashToken)
+                .filter(r -> !r.consumido() && r.turnoId().equals(turno.id()) && r.version() == turno.version())
+                .orElseThrow(TokenCancelacionInvalidoException::new);
+        // El plazo se evalúa después de las esperas, inmediatamente antes de modificar datos.
         Instant ahora = reloj.instant();
-        var registro = tokens.bloquearPorHash(hash(tokenCrudo))
-                .orElseThrow(TokenCancelacionInvalidoException::new);
-        if (registro.consumido()) {
-            throw new TokenCancelacionInvalidoException();
-        }
-
-        var turno = ediciones.bloquear(registro.turnoId(), null)
-                .orElseThrow(TokenCancelacionInvalidoException::new);
-        if (turno.version() != registro.version()) {
-            throw new TokenCancelacionInvalidoException();
-        }
         if (turno.estado() != EstadoTurno.PENDIENTE && turno.estado() != EstadoTurno.CONFIRMADO) {
             throw new TokenCancelacionInvalidoException();
         }
@@ -120,7 +134,6 @@ public class ServicioCancelacionPorEnlace {
             throw new TokenCancelacionInvalidoException();
         }
 
-        locks.adquirir(List.of(new RecursosBloqueo(turno.profesionalId(), turno.sillonId())));
         var cancelado = ediciones.cambiarEstado(turno.id(), turno.version(), turno.estado(), EstadoTurno.CANCELADO)
                 .orElseThrow(TokenCancelacionInvalidoException::new);
 
