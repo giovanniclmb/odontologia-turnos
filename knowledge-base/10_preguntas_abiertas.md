@@ -36,7 +36,7 @@ La columna de consulta identifica a quién le correspondería resolver cada preg
 | PA-17 | Alta | ¿Cómo se evalúa el instante exacto del corte de 48 horas, incluyendo la referencia horaria aplicable? ¿Qué vigencia y condiciones de uso tiene el enlace y qué ocurre si se reutiliza, vence o el turno cambia? | Cancelación por enlace | Usuario y equipo |
 | PA-18 | Alta | ¿Cómo se tratan el email de alta y el recordatorio ante reprogramación, cancelación o creación dentro de las ventanas de 48 o 24 horas? ¿Qué tratamiento reciben los envíos duplicados o fallidos en cada tipo de email? | Programación y entrega de email | Usuario y equipo |
 | PA-19 | Alta | ¿Quién puede quitar o cambiar un bloqueo, con qué condiciones y qué ocurre con la disponibilidad resultante? ¿Cómo se validan límites de períodos y solicitudes simultáneas de bloqueo y turno? | Agenda y bloqueos | Usuario y equipo |
-| PA-20 | Alta | ¿Cómo se determina la compatibilidad del hueco con preferencias, duración, recursos e intervalo? ¿Qué operaciones y vigencia tiene la inscripción, cómo decide recepción entre interesados y cómo se revalida la disponibilidad al asignar? | Lista de espera y agenda | Usuario y equipo |
+| PA-20 | Alta | C-21 tiene aprobadas las operaciones de alta, consulta, edición y baja propias, una inscripción vigente por prestación y el fin de vigencia al finalizar el rango de fechas o al darla de baja. Para C-22 queda pendiente cómo se determina la compatibilidad con preferencias, duración, recursos e intervalo, cómo decide recepción entre interesados y cómo se revalida la disponibilidad al asignar. | Lista de espera y agenda | Usuario y equipo |
 | PA-21 | Alta | ¿Qué ocurre con quienes recibieron un aviso si el hueco se ocupa antes de la asignación? ¿Qué información se muestra o comunica y cómo se tratan avisos pendientes o repetidos? | Disponibilidad y avisos de lista de espera | Usuario y equipo |
 
 [Ampliación aprobada y sus pendientes de especificación](../docs/discovery/ampliacion-paciente.md#pendientes-de-especificación-que-no-se-resuelven-por-inferencia)
@@ -131,3 +131,13 @@ Estas decisiones cierran PA-05/06/07 únicamente para el alcance de C-04; no res
 - **PA-18 — cambios y altas cercanas:** reciben recordatorio los turnos pendientes y confirmados. Un horario creado o reprogramado con menos de 24 horas no lo recibe.
 - **PA-18 — contenido y fallos:** nombre, fecha y hora de Mendoza y la aclaración de que ya no puede cancelarse por enlace, al email de la ficha. Un fallo agotado solo se registra.
 - Las precisiones sobre cada punto constan en la [propuesta de C-20](../openspec/changes/archive/2026-11-25-recordatorio-automatico-24-horas/proposal.md), aprobada el 25/11/2026.
+
+## Resolución acotada para C-21 (25/11/2026)
+
+Confirmada por Giovanni por menú al revisar el [PR #48](https://github.com/giovanniclmb/odontologia-turnos/pull/48).
+
+- **PA-20 — ciclo de la inscripción:** el paciente vinculado crea, consulta, edita y da de baja sus inscripciones; hay una vigente por prestación; vence al terminar el rango de fechas o con la baja.
+- **PA-20 — preferencias:** se admite un rango de un solo día, varias franjas y cambiar la prestación al editar.
+- **Referencia horaria:** la vigencia usa `America/Argentina/Buenos_Aires`. Agenda y emails siguen en `America/Argentina/Mendoza`; hoy ambas dan la misma fecha.
+- **Acceso del paciente por HTTP:** las rutas y el ingreso se suman a C-24. El diseño de autenticación y sesión se acuerda en su propuesta.
+- La compatibilidad de huecos, los avisos y la asignación siguen pendientes para C-22.
