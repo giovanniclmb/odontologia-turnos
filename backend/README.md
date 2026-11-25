@@ -28,7 +28,7 @@ Las pruebas no leen la conexión de desarrollo: aíslan el Environment de Spring
 
 ## Transporte de email (C-17)
 
-Variables de entorno opcionales para arranque y obligatorias al enviar: `RESEND_API_KEY`, `EMAIL_FROM`, `EMAIL_TEST_ALLOWLIST` (lista separada por comas), `EMAIL_MAX_RETRIES` (default 2) y `EMAIL_TIMEOUT` (default `10s`). Los secretos no se versionan; `.env` está ignorado por Git. El puerto neutro es `comunicaciones.CorreoSalida`; el adaptador Resend usa `java.net.http.HttpClient` y `email_envio` registra cada intento con idempotencia por `(tipo, turno, destinatario)`.
+Variables de entorno opcionales para arranque y obligatorias al enviar: `RESEND_API_KEY`, `EMAIL_FROM`, `EMAIL_TEST_ALLOWLIST` (lista separada por comas), `EMAIL_MAX_RETRIES` (default 2) y `EMAIL_TIMEOUT` (default `10s`). Los secretos no se versionan; `.env` está ignorado por Git. El puerto neutro es `comunicaciones.CorreoSalida`; el adaptador Resend usa `java.net.http.HttpClient` y `email_envio` registra cada intento con idempotencia por `(tipo, turno, destinatario)`. Cada intento se decide por el estado HTTP, con `EMAIL_TIMEOUT` como límite para recibirlo; el cuerpo de la respuesta se descarta sin esperarlo.
 
 ## Desarrollo local
 
