@@ -22,7 +22,7 @@ Alpine para práctica individual; Summit para grupos. Proveedor: tab32; entidad 
 
 ## Pricing
 
-Página abierta vigente: desde $95/mes, usuarios/profesionales ilimitados; prueba 14 días, que pide email y tarjeta (consulta del 25/11/2026). Sitio empresarial identifica dólares en cargos, pero moneda contractual argentina no confirmada. Claims $0,25, adjuntos $0,50 por claim, elegibilidad $0,75; migración publicada desde $1,250 y otros cargos separados. Snippet $125 descartado.
+Página abierta vigente: desde $95/mes, usuarios/profesionales ilimitados; prueba 14 días, que pide email y tarjeta (consulta del 25/11/2026). Sitio empresarial identifica dólares en cargos, pero moneda contractual argentina no confirmada. Claims $0,25, adjuntos $0,50 por claim, elegibilidad $0,75; migración publicada desde $1,250 y otros cargos separados. La misma página cobra aparte por servicio: voz $0,20 por minuto, asistente de IA por tokens, registro de pagos 1,25 % y agentes de IA a $25 por mes cada uno, $325 los catorce o $349 con agentes propios; mensajes y llamadas $0,05 (consulta del 25/11/2026). Snippet $125 descartado.
 
 ## Posicionamiento
 

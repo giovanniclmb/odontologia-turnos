@@ -186,24 +186,36 @@ No se eligió ninguna opción. La separación definitiva entre imprescindibles, 
 
 ## Verificación de fuentes
 
-### Comprobaciones realizadas por el agente
+### Revisión personal del equipo
 
-La consigna exige que los integrantes comprueben personalmente al menos cinco fuentes. Las comprobaciones siguientes son automatizadas por el agente y **no sustituyen esa revisión humana**. La columna de revisión personal queda pendiente; no se atribuye trabajo no realizado a los integrantes.
+Cuatro integrantes revisaron cinco fuentes de distintos tipos. Giovanni Colombo transmitió los resultados el 25/11/2026; no consta la fecha de cada apertura. «Hallazgo» recoge lo informado por quien revisó. En «Corrección y contraste» se indica qué cambió y qué comprobó después el agente.
+
+'''
+personal=[
+ ['Giovanni Colombo','Sitio oficial: [DentApp](https://www.dentapp.ar/software-odontologico-argentina)','Sin diferencias.','Sin cambios.'],
+ ['Giovanni Colombo','Precios: [tab32](https://tab32.com/pricing/)','Diferencias de precio según el servicio; para el servicio dental, un precio más alto, cercano a $400.','Ficha 15: se agregaron los cargos por servicio. El importe base no cambia: el agente no localizó un plan de tab32 cercano a $400; en la página, $427 estima el costo mensual de Open Dental y $349 es un paquete de agentes de IA. Falta confirmar qué importe se observó.'],
+ ['Sofia Martinez','Centro de ayuda: [Dentalink](https://ayuda.softwaredentalink.com/es/articles/9493139-configura-tu-agenda-online)','Sin diferencias con los datos obtenidos.','Sin cambios.'],
+ ['Fabiano Ramos','Términos de uso: [Dentidesk](https://app.dentidesk.com/terminos.php)','La prueba es de 15 días, no de 30; después empiezan los cargos.','La ficha 06 ya indicaba 15 días (punto 2.2). Los 30 días son el plazo para pedir la exportación tras el término (punto 7.6). Se aclaró la diferencia y se agregó que luego de la prueba se requiere suscripción.'],
+ ['Luciano Izquierdo Cafici','Interfaz pública: [AgendaPro](https://agendapro.com/site/ar/odontologiaor/239004)','Sin diferencias, luego de simular una reserva en la app, que consideró bastante buena.','Sin cambios en las celdas. El agente había recibido HTTP 403 ese día.']]
+md+=table(['Integrante','Tipo y fuente','Hallazgo','Corrección y contraste'],personal)+'\n'
+md+='''### Comprobaciones realizadas por el agente
+
+Las comprobaciones siguientes son automatizadas y se muestran aparte de la revisión personal, a la que **no sustituyen**.
 
 '''
 checks=[
- ['Sitio oficial: DentApp','Proveedor argentino, nube e integraciones locales','La página específica identifica Codilium S.A.S. y publica Google Calendar/MercadoPago. No se verificó inscripción registral.','https://www.dentapp.ar/software-odontologico-argentina'],
- ['Precios: tab32','El buscador mostraba $125/mes','La apertura vigente mostró desde $95/mes; se descartó el precio indexado anterior y se registraron cargos variables.','https://tab32.com/pricing/'],
- ['Ayuda: Dentalink','Reserva mediante enlace y configuración profesional','El manual explica enlace, permisos, bloques y profesionales habilitados. No prueba disponibilidad conjunta de sillón y profesional. Corregido el 25/11: ver la segunda comprobación.','https://ayuda.softwaredentalink.com/es/articles/9493139-configura-tu-agenda-online'],
- ['Términos: Dentidesk','Exportación de datos','Licencia activa: Excel estándar sin costo; después del término: hasta 30 días y posible cargo. No se redujo todo a exportación gratuita.','https://app.dentidesk.com/terminos.php'],
- ['Interfaz pública: AgendaPro','Reserva y duración variable por servicio','Se observaron servicios con diferentes duraciones y botón Agendar; no se completó reserva ni se copiaron reseñas o datos de pacientes.','https://agendapro.com/site/ar/odontologiaor/239004'],
- ['Precios: Clinic Cloud','La extracción inicial señalaba promoción de dos meses','La apertura posterior mostró 50% durante tres meses. Se priorizó la página abierta y se aclaró que Max incluye odontograma.','https://clinic-cloud.com/tarifas'],
- ['Sitio y FAQ: Dentify','País, cifrado y precio anual de extracción inicial','La portada actual declara Hecho en Argentina, nube cifrada y $30.000/$45.000 mensuales. Se retiró el anual no corroborado y no se inventó código de moneda. Corregido el 25/11: la modalidad anual sí está publicada.','https://www.dentify.com.ar/'],
- ['Producto: Odontoly','WhatsApp y ARCA podrían parecer disponibles por figurar en catálogo','El sitio los identifica como complementos próximos. También distingue backups cifrados de base de trabajo aún sin cifrado por la app.','https://odontoly.com/']]
-md+=table(['Tipo y fuente','Afirmación contrastada','Hallazgo y corrección','URL','Revisión personal'],[[*r[:3],f'[Abrir]({r[3]})','Pendiente del integrante'] for r in checks])+'\n'
+ ['Sitio oficial: DentApp','Proveedor argentino, nube e integraciones locales','La página específica identifica Codilium S.A.S. y publica Google Calendar/MercadoPago. No se verificó inscripción registral.','https://www.dentapp.ar/software-odontologico-argentina','Giovanni Colombo: sin diferencias'],
+ ['Precios: tab32','El buscador mostraba $125/mes','La apertura vigente mostró desde $95/mes; se descartó el precio indexado anterior y se registraron cargos variables.','https://tab32.com/pricing/','Giovanni Colombo: diferencia de precio'],
+ ['Ayuda: Dentalink','Reserva mediante enlace y configuración profesional','El manual explica enlace, permisos, bloques y profesionales habilitados. No prueba disponibilidad conjunta de sillón y profesional. Corregido el 25/11: ver la segunda comprobación.','https://ayuda.softwaredentalink.com/es/articles/9493139-configura-tu-agenda-online','Sofia Martinez: sin diferencias'],
+ ['Términos: Dentidesk','Exportación de datos','Licencia activa: Excel estándar sin costo; después del término: solicitud de exportación hasta 30 días corridos y posible cargo. Ese plazo no es la prueba gratuita, que dura 15 días. No se redujo todo a exportación gratuita.','https://app.dentidesk.com/terminos.php','Fabiano Ramos: prueba de 15 días'],
+ ['Interfaz pública: AgendaPro','Reserva y duración variable por servicio','Se observaron servicios con diferentes duraciones y botón Agendar; no se completó reserva ni se copiaron reseñas o datos de pacientes.','https://agendapro.com/site/ar/odontologiaor/239004','Luciano Izquierdo Cafici: sin diferencias'],
+ ['Precios: Clinic Cloud','La extracción inicial señalaba promoción de dos meses','La apertura posterior mostró 50% durante tres meses. Se priorizó la página abierta y se aclaró que Max incluye odontograma.','https://clinic-cloud.com/tarifas','Sin revisión personal'],
+ ['Sitio y FAQ: Dentify','País, cifrado y precio anual de extracción inicial','La portada actual declara Hecho en Argentina, nube cifrada y $30.000/$45.000 mensuales. Se retiró el anual no corroborado y no se inventó código de moneda. Corregido el 25/11: la modalidad anual sí está publicada.','https://www.dentify.com.ar/','Sin revisión personal'],
+ ['Producto: Odontoly','WhatsApp y ARCA podrían parecer disponibles por figurar en catálogo','El sitio los identifica como complementos próximos. También distingue backups cifrados de base de trabajo aún sin cifrado por la app.','https://odontoly.com/','Sin revisión personal']]
+md+=table(['Tipo y fuente','Afirmación contrastada','Hallazgo y corrección','URL','Revisión personal'],[[*r[:3],f'[Abrir]({r[3]})',r[4]] for r in checks])+'\n'
 md+='''### Segunda comprobación del agente (25/11/2026)
 
-El agente intentó volver a abrir en un navegador las ocho fuentes anteriores y contrastó con este informe el texto publicado ese día en las siete que respondieron. Tampoco sustituye la revisión personal, que sigue pendiente. Por decisión del 25/11/2026 (Ajustar), las diferencias se incorporaron a las fichas, la matriz B y la sección C. Una diferencia puede deberse a una omisión del relevamiento o a un cambio de la página posterior al 17/11/2026; salvo indicación, no se distingue cuál.
+El agente intentó volver a abrir en un navegador las ocho fuentes anteriores y contrastó con este informe el texto publicado ese día en las siete que respondieron. No sustituye la revisión personal. Por decisión del 25/11/2026 (Ajustar), las diferencias se incorporaron a las fichas, la matriz B y la sección C. Una diferencia puede deberse a una omisión del relevamiento o a un cambio de la página posterior al 17/11/2026; salvo indicación, no se distingue cuál.
 
 En su primera pasada de ese día el agente no vio el adicional de Clinic Cloud, publicado en un texto emergente, ni los importes anuales de Dentify, visibles al cambiar un selector. Una segunda pasada corrigió ambas observaciones.
 
@@ -255,7 +267,7 @@ if approved.exists():
   return match.group(1).strip()
  # El alcance del informe se deriva del checklist aprobado; regenerarlo no
  # puede restaurar la exclusión histórica de paciente, email o lista de espera.
- new='Tras la investigación y las preguntas por menú, el usuario aprobó el resumen de once puntos y su ampliación (revisión 2). El MVP incluye agenda de sillón diaria/semanal, bloqueos por recepción, ficha clínica sencilla, disponibilidad conjunta de profesional y sillón y confirmaciones manuales. El paciente cancela por enlace hasta 48 horas antes y gestiona con cuenta la lista de espera; recepción asigna los huecos. Se envía email al crear con enlace y recordatorio 24 horas antes, sin opción de cancelar cuando el plazo venció. Se requieren envíos reales a direcciones de prueba del equipo mediante proveedor gratuito aún por definir. El stack elegido es HTML/CSS/TypeScript vanilla, Java Spring Boot y PostgreSQL; entrega 25/11/2026 y presupuesto externo cero. El intervalo inicial, los detalles técnicos y la revisión personal de cinco fuentes siguen pendientes. Este informe es un corte al cierre del Discovery (revisión 2, consolidada el 19/11/2026): a esa fecha no se había implementado código ni seleccionado un change. El estado posterior consta en README.md y CHANGES.md; la segunda comprobación de fuentes del 25/11/2026 y sus correcciones, ya incorporadas, figuran en «Verificación de fuentes».'
+ new='Tras la investigación y las preguntas por menú, el usuario aprobó el resumen de once puntos y su ampliación (revisión 2). El MVP incluye agenda de sillón diaria/semanal, bloqueos por recepción, ficha clínica sencilla, disponibilidad conjunta de profesional y sillón y confirmaciones manuales. El paciente cancela por enlace hasta 48 horas antes y gestiona con cuenta la lista de espera; recepción asigna los huecos. Se envía email al crear con enlace y recordatorio 24 horas antes, sin opción de cancelar cuando el plazo venció. Se requieren envíos reales a direcciones de prueba del equipo mediante proveedor gratuito aún por definir. El stack elegido es HTML/CSS/TypeScript vanilla, Java Spring Boot y PostgreSQL; entrega 25/11/2026 y presupuesto externo cero. A ese corte seguían pendientes el intervalo inicial, los detalles técnicos y la revisión personal de cinco fuentes. Este informe es un corte al cierre del Discovery (revisión 2, consolidada el 19/11/2026): a esa fecha no se había implementado código ni seleccionado un change. El estado posterior consta en README.md y CHANGES.md; la revisión personal y la segunda comprobación del agente, informadas el 25/11/2026, figuran en «Verificación de fuentes».'
  assert old in md
  md=md.replace(old,new)
  section='''## D Recomendación y alcance aprobados por el usuario
@@ -272,7 +284,7 @@ Las elecciones siguientes fueron realizadas por el usuario después de la invest
   'Dentidesk':'Examinar separación de perfiles y condiciones de exportación documentadas.',
   'AgendaPro':'Examinar claridad del recorrido público de reserva y condiciones por servicio; la autorreserva no se incorpora al MVP.'}
  section+=table(['Competidor elegido','Objetivo de contraste'],[[n,rationales[n]] for n in decisions['demo_shortlist']])
- section+='\nNo se contactó a proveedores ni se crearon cuentas. Las demos y comprobaciones personales siguen como trabajo posterior; no se presentan como realizadas.\n\n### Tres referencias de experiencia de usuario elegidas\n\n'
+ section+='\nNo se contactó a proveedores ni se crearon cuentas. Las demos siguen como trabajo posterior y no se presentan como realizadas; la revisión personal de fuentes figura en «Verificación de fuentes».\n\n### Tres referencias de experiencia de usuario elegidas\n\n'
  ux={'Dentalink':'Configuración y presentación de opciones de agenda en documentación oficial.','AgendaPro':'Interfaz pública con servicios, duraciones y condiciones de reserva.','Dentrix':'Flujo documentado de motivo, profesional y horario; artículo histórico acompañado por página vigente.'}
  section+=table(['Referencia','Qué estudiar'],[[n,ux[n]] for n in decisions['ux_references']])
  section+='''
@@ -296,7 +308,10 @@ El checklist completo de once puntos y las decisiones aprobadas están en discov
 
 '''
  questions+='\n'.join('- '+v+'.' for v in decisions['open_questions'])
- questions+='\n\nDiscovery, KB y roadmap se consolidan con la revisión 2 aprobada. El primer change todavía no fue elegido y no se inició implementación, se seleccionó proveedor o se enviaron emails. La revisión personal de al menos cinco fuentes sigue pendiente y debe registrarse con hallazgos reales de los integrantes.\n\n'
+ questions+='\n\nDiscovery, KB y roadmap se consolidan con la revisión 2 aprobada. El primer change todavía no fue elegido y no se inició implementación, se seleccionó proveedor o se enviaron emails. La revisión personal de cinco fuentes, pendiente al consolidar, se informó el 25/11/2026 y figura en «Verificación de fuentes».\n\n'
+ reviewed='- Revisión personal de al menos cinco fuentes por integrantes.'
+ assert reviewed in questions
+ questions=questions.replace(reviewed,reviewed+' Informada el 25/11/2026.')
  md=re.sub(r'## Preguntas pendientes de la entrevista\n.*?(?=## Referencias completas)',lambda _:questions,md,flags=re.S)
 (ROOT/'informe-discovery.md').write_text(md)
 (ROOT/'competidores.json').write_text(json.dumps(DATA,ensure_ascii=False,indent=2)+'\n')

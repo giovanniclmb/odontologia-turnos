@@ -18,11 +18,11 @@ Consultorios, clínicas y múltiples sucursales. Proveedor: Servicios Tecnológi
 - Clínica: Declara historia/anamnesis, odontograma, fichas de periodoncia e imágenes; ficha periodontal no demuestra un periodontograma gráfico.
 - Administración: Declara presupuestos por pieza, egresos, inventario, liquidaciones y reportes. Facturación argentina y obras sociales: No evidenciado.
 - Integraciones: Integraciones argentinas, WhatsApp API, Google Calendar y API pública: No evidenciado.
-- Seguridad y portabilidad: Ayuda documenta permisos. Términos contemplan Excel estándar sin costo con licencia activa; tras el término, solicitud hasta 30 días y posible cargo. No demuestra exportación de todos los archivos clínicos.
+- Seguridad y portabilidad: Ayuda documenta permisos. Términos contemplan Excel estándar sin costo con licencia activa; tras el término, solicitud de exportación hasta 30 días corridos y posible cargo. No demuestra exportación de todos los archivos clínicos.
 
 ## Pricing
 
-Precio: No evidenciado. Prueba de 15 días; los términos indican que cada cuenta de odontólogo adicional generará un cargo según el plan contratado. Otros formatos de extracción pueden tener costo.
+Precio: No evidenciado. Prueba de 15 días y, al finalizar, suscripción según el plan elegido; los términos indican que cada cuenta de odontólogo adicional generará un cargo según el plan contratado. Otros formatos de extracción pueden tener costo.
 
 ## Posicionamiento
 

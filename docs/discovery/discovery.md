@@ -4,7 +4,7 @@ Fecha: 17 de noviembre de 2026. Revisión 2. Ampliación aprobada explícitament
 
 Este documento registra las decisiones del usuario tras la investigación de 15 sistemas y 38 referencias oficiales. El relevamiento está en `informe-discovery.md` y su PDF; las notas de fuentes están en `sources/`. Las respuestas estructuradas y la aprobación están en `decisiones-aprobadas.json`.
 
-La documentación queda consolidada con preguntas abiertas explícitas. La revisión personal de cinco fuentes exigida por la consigna continúa pendiente; las verificaciones del agente no se presentan como verificaciones de los integrantes.
+La documentación queda consolidada con preguntas abiertas explícitas. La revisión personal de cinco fuentes exigida por la consigna continúa pendiente; las verificaciones del agente no se presentan como verificaciones de los integrantes. Actualización del 25/11/2026: la revisión personal se registró en el [informe](informe-discovery.md#verificación-de-fuentes).
 
 ## 1. Problema que resuelve
 
@@ -114,7 +114,7 @@ Persisten límites de investigación: declaraciones comerciales no auditadas, pr
 - ¿Quiénes integran el equipo y cómo se repartirán los cambios y la defensa?
 - ¿Qué versiones concretas de Java, Spring Boot, PostgreSQL y herramientas de frontend se usarán?
 - ¿Qué funcionalidades no evidenciadas y condiciones de precios/exportación se corroborarán al revisar las fuentes?
-- ¿Qué integrantes comprobarán personalmente al menos cinco fuentes y registrarán sus hallazgos?
+- ¿Qué integrantes comprobarán personalmente al menos cinco fuentes y registrarán sus hallazgos? Registrado el 25/11/2026.
 
 - Proveedor gratuito de email, límites y configuración de direcciones de prueba?
 - Registro y vinculación de la cuenta con el paciente y permisos sobre datos propios?

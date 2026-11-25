@@ -266,8 +266,8 @@
       "clinical": "Declara historia/anamnesis, odontograma, fichas de periodoncia e imágenes; ficha periodontal no demuestra un periodontograma gráfico.",
       "admin": "Declara presupuestos por pieza, egresos, inventario, liquidaciones y reportes. Facturación argentina y obras sociales: No evidenciado.",
       "integration": "Integraciones argentinas, WhatsApp API, Google Calendar y API pública: No evidenciado.",
-      "security": "Ayuda documenta permisos. Términos contemplan Excel estándar sin costo con licencia activa; tras el término, solicitud hasta 30 días y posible cargo. No demuestra exportación de todos los archivos clínicos.",
-      "price": "Precio: No evidenciado. Prueba de 15 días; los términos indican que cada cuenta de odontólogo adicional generará un cargo según el plan contratado. Otros formatos de extracción pueden tener costo.",
+      "security": "Ayuda documenta permisos. Términos contemplan Excel estándar sin costo con licencia activa; tras el término, solicitud de exportación hasta 30 días corridos y posible cargo. No demuestra exportación de todos los archivos clínicos.",
+      "price": "Precio: No evidenciado. Prueba de 15 días y, al finalizar, suscripción según el plan elegido; los términos indican que cada cuenta de odontólogo adicional generará un cargo según el plan contratado. Otros formatos de extracción pueden tener costo.",
       "limits": "No confundir gratuidad de exportación con licencia activa con extracción posterior al cierre. No atribuir usuarios de la plataforma U-DESK al producto dental.",
       "criteria": [
         "NDNCC",
@@ -363,7 +363,7 @@
       "integration": "Mercado Pago y API con cargo US$200/mes declarados. WhatsApp tiene cupos/costos Meta y condiciones de categoría. ARCA operativa: No evidenciado.",
       "security": "Seguridad específica, auditoría y exportación integral: No evidenciado en las páginas examinadas.",
       "price": "La página abierta muestra precios de Belleza/Barbería en ARS con IVA. Tarifa aplicable a odontología: No evidenciado; no usar $7.900 o $15.900 como precio de Salud. API US$200/mes es un adicional, no la suscripción dental.",
-      "limits": "La reserva se observó sin completarla. No confundir confirmación de una interfaz con prueba de integridad del backend. Precio indexado antiguo descartado. El 25/11/2026 la interfaz de reserva respondió HTTP 403; la observación del 17/11 no pudo recomprobarse.",
+      "limits": "La reserva se observó sin completarla. No confundir confirmación de una interfaz con prueba de integridad del backend. Precio indexado antiguo descartado. El 25/11/2026 la interfaz de reserva respondió HTTP 403; el agente no pudo recomprobar la observación del 17/11. En la revisión personal informada ese día, Luciano Izquierdo Cafici no halló diferencias.",
       "criteria": [
         "NCNDC",
         "CNNCN",
@@ -722,7 +722,7 @@
       "admin": "Declara facturación, claims, pagos y reportes. ARCA/obras sociales argentinas: No evidenciado.",
       "integration": "API para Summit declarada; no se validó acceso público. WhatsApp, Google Calendar y Mercado Pago: No evidenciado.",
       "security": "Declara Google Cloud, cifrado, backups automáticos, HIPAA/SOC2 y una exportación gratuita al salir que incluye el ledger. No se auditó cumplimiento.",
-      "price": "Página abierta vigente: desde $95/mes, usuarios/profesionales ilimitados; prueba 14 días, que pide email y tarjeta (consulta del 25/11/2026). Sitio empresarial identifica dólares en cargos, pero moneda contractual argentina no confirmada. Claims $0,25, adjuntos $0,50 por claim, elegibilidad $0,75; migración publicada desde $1,250 y otros cargos separados. Snippet $125 descartado.",
+      "price": "Página abierta vigente: desde $95/mes, usuarios/profesionales ilimitados; prueba 14 días, que pide email y tarjeta (consulta del 25/11/2026). Sitio empresarial identifica dólares en cargos, pero moneda contractual argentina no confirmada. Claims $0,25, adjuntos $0,50 por claim, elegibilidad $0,75; migración publicada desde $1,250 y otros cargos separados. La misma página cobra aparte por servicio: voz $0,20 por minuto, asistente de IA por tokens, registro de pagos 1,25 % y agentes de IA a $25 por mes cada uno, $325 los catorce o $349 con agentes propios; mensajes y llamadas $0,05 (consulta del 25/11/2026). Snippet $125 descartado.",
       "limits": "La búsqueda indexada y apertura mostraron planes distintos; se priorizó apertura. Ledger no se migra según FAQ; no confundir migración con exportación. Producto orientado a EE.UU.; disponibilidad argentina sin confirmar.",
       "criteria": [
         "NNCCC",

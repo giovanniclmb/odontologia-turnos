@@ -30,7 +30,7 @@ Plataforma online para agenda multisector; oferta para dentistas en argentina. N
 
 ## Diferenciadores
 
-Aspectos observables para contrastar: La reserva se observó sin completarla. No confundir confirmación de una interfaz con prueba de integridad del backend. Precio indexado antiguo descartado. El 25/11/2026 la interfaz de reserva respondió HTTP 403; la observación del 17/11 no pudo recomprobarse.
+Aspectos observables para contrastar: La reserva se observó sin completarla. No confundir confirmación de una interfaz con prueba de integridad del backend. Precio indexado antiguo descartado. El 25/11/2026 la interfaz de reserva respondió HTTP 403; el agente no pudo recomprobar la observación del 17/11. En la revisión personal informada ese día, Luciano Izquierdo Cafici no halló diferencias.
 
 ## Notas del investigador
 
