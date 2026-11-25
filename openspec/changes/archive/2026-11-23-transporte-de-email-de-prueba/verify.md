@@ -33,3 +33,9 @@ Fecha: 2026-11-24
 1. Autorizar credenciales y allowlist del equipo; ejecutar la prueba real y registrar evidencia sin secretos/direcciones privadas.
 2. C-19 (email al crear turno), C-20 (recordatorio 24h) y C-22 (avisos de huecos) consumirán el puerto `CorreoSalida` de este change.
 3. Archivar cuando 6.1 quede resuelto o aceptado como pendiente humano.
+
+## Addendum de revisión posterior — 2026-11-24 (America/Mendoza; logs fechados 2026-11-25 UTC)
+
+La verificación anterior es un registro histórico de la rama original y no acredita el estado integrado actual ni completa C-17. La mención a `V8__email_envio.sql` quedó superada por la colisión de versiones: la migración vigente es `V11__email_envio.sql`. El conteo de 122 pruebas también corresponde solo a aquella ejecución histórica; consultar `docs/evidencias/c17-correcciones/verify.md` para la verificación actual.
+
+La tarea 6.1 continúa pendiente: no se usaron credenciales ni destinatarios reales y no se envió ningún correo. El usuario autorizó integrar el código verificado y mantener C-17 incompleto hasta que el equipo autorice y aporte la prueba real.

@@ -49,3 +49,9 @@ Ver `proposal.md` para la motivación. El change `c-17-fixes-hallazgos-pr37` cor
 ## UI Mockups
 
 Decision: no (no UI)
+
+## Addendum de corrección posterior — 2026-11-24 (America/Mendoza; logs fechados 2026-11-25 UTC)
+
+La implementación revisada endurece el plan histórico anterior. Las operaciones de lectura y `saveAndFlush` del registro se ejecutan en transacciones `REQUIRES_NEW`, por lo que la reserva se confirma antes del HTTP y no depende del commit de una transacción llamadora. La actualización final también hace flush antes de informar éxito. Si falla después de que el proveedor acepte el mensaje, `CorreoSalida` devuelve fallo controlado y la fila permanece `pending`; una nueva solicitud para esa clave reporta el pendiente y no vuelve a contactar al proveedor. Esto evita un falso éxito y un duplicado, aunque la entrega externa queda incierta para ese registro y requiere inspección operativa futura.
+
+El guardado ya no es best-effort silencioso. La violación de unicidad se identifica por SQLSTATE `23505` y el nombre de constraint `email_envio_idempotency_key_uk`; otros errores de persistencia se devuelven como fallos controlados sin enviar. También se incorporó el binding de `EMAIL_TIMEOUT` documentado, con default `10s`. La evidencia actual se conserva en `docs/evidencias/c17-correcciones/verify.md`; la prueba real autorizada 6.1 sigue pendiente.
