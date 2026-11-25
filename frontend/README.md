@@ -17,7 +17,7 @@ Para abrir la aplicación, iniciar la API siguiendo [el README del backend](../b
 python3 -m http.server 5173 --bind 127.0.0.1
 ```
 
-Abrir [la interfaz local](http://localhost:5173/frontend/public/index.html). Usar `localhost` en el navegador: es el origen permitido por CORS. Este servidor es solo para desarrollo local; detenerlo con Ctrl-C. El servidor debe tener la raíz del repositorio para resolver `design-system/`, `frontend/public/` y los módulos compilados. No copiar únicamente `public/`.
+Abrir <http://localhost:5173/>: el `index.html` de la raíz redirige a [la interfaz local](http://localhost:5173/frontend/public/index.html). Usar `localhost` en el navegador: es el origen permitido por CORS. Este servidor es solo para desarrollo local; detenerlo con Ctrl-C. El servidor debe tener la raíz del repositorio para resolver `design-system/`, `frontend/public/` y los módulos compilados. No copiar únicamente `public/`.
 
 En el puerto 5173, el cliente usa `http://localhost:8080` como API. Para otro destino, definir `window.__API_BASE_URL__` antes de cargar el módulo; las pruebas de navegador usan esta opción con la API temporal. El backend permite configurar otros orígenes mediante `app.cors.allowed-origins`; no abrirlos a `*` para resolver problemas de arranque.
 
