@@ -20,15 +20,15 @@ class SchemaIT {
                 .schemas("odontologia").createSchemas(false).cleanDisabled(true).outOfOrder(false).load();
     }
 
-    @Test void aplicaDiezMigracionesYCatorceTablasUnaSolaVez() throws Exception {
+    @Test void aplicaOnceMigracionesYCatorceTablasUnaSolaVez() throws Exception {
         var f = flyway();
         f.migrate();
         try (var c = db.migrationConnection(); var st = c.createStatement()) {
-            var rs = st.executeQuery("select count(*) from information_schema.tables where table_schema='odontologia' and table_name in ('paciente','profesional','sillon','prestacion','usuario','token_acceso','historial_contrasena','configuracion_sede','paciente_profesional','ficha_clinica','nota_clinica','bloqueo_recurso','turno','cuenta_paciente')");
+            var rs = st.executeQuery("select count(*) from information_schema.tables where table_schema='odontologia' and table_name in ('paciente','profesional','sillon','prestacion','usuario','token_acceso','historial_contrasena','configuracion_sede','paciente_profesional','ficha_clinica','nota_clinica','bloqueo_recurso','turno','email_envio')");
             assertTrue(rs.next()); assertEquals(14, rs.getInt(1));
         }
         assertEquals(0, f.migrate().migrationsExecuted);
-        assertEquals(10, f.info().applied().length);
+        assertEquals(11, f.info().applied().length);
     }
 
     @ParameterizedTest @ValueSource(strings={"paciente","profesional","sillon","prestacion"})

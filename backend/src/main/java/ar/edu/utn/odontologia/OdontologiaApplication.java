@@ -11,11 +11,14 @@ import ar.edu.utn.odontologia.agenda.Agenda;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import ar.edu.utn.odontologia.comunicaciones.ConfiguracionEmail;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;
 
 @SpringBootApplication
+@EnableConfigurationProperties(ConfiguracionEmail.class)
 public class OdontologiaApplication {
     static {
         java.util.TimeZone.setDefault(java.util.TimeZone.getTimeZone("UTC"));

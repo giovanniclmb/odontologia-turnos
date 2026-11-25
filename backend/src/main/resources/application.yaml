@@ -35,3 +35,10 @@ spring:
     ignore-migration-patterns: ""
     baseline-on-migrate: false
     connect-retries: 0
+
+email:
+  resend-api-key: ${RESEND_API_KEY:}
+  from: ${EMAIL_FROM:}
+  test-allowlist: ${EMAIL_TEST_ALLOWLIST:}
+  max-retries: ${EMAIL_MAX_RETRIES:2}
+  timeout: ${EMAIL_TIMEOUT:10s}

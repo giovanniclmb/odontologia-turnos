@@ -26,6 +26,10 @@ mvn -f backend/pom.xml clean verify
 
 Las pruebas no leen la conexión de desarrollo: aíslan el Environment de Spring, fuerzan configuración de classpath y suministran sus credenciales temporales. Las pruebas negativas usan destinos centinela inaccesibles y V2/checksums solo en recursos temporales. El fixture cierra únicamente sus contenedores.
 
+## Transporte de email (C-17)
+
+Variables de entorno opcionales para arranque y obligatorias al enviar: `RESEND_API_KEY`, `EMAIL_FROM`, `EMAIL_TEST_ALLOWLIST` (lista separada por comas), `EMAIL_MAX_RETRIES` (default 2) y `EMAIL_TIMEOUT` (default `10s`). Los secretos no se versionan; `.env` está ignorado por Git. El puerto neutro es `comunicaciones.CorreoSalida`; el adaptador Resend usa `java.net.http.HttpClient` y `email_envio` registra cada intento con idempotencia por `(tipo, turno, destinatario)`.
+
 ## Desarrollo local
 
 1. Copiar `.env.example` de la raíz a `.env` y definir las tres contraseñas privadas: DB_BOOTSTRAP_PASSWORD, DB_PASSWORD y DB_MIGRATION_PASSWORD. `.env` está ignorado por Git; no publicar ni imprimir sus valores.
