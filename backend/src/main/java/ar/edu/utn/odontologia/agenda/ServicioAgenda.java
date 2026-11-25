@@ -93,6 +93,12 @@ public class ServicioAgenda {
 
     @Transactional(isolation = Isolation.READ_COMMITTED)
     public TurnoRegistrado reprogramar(Identidad solicitante, SolicitudReprogramacion solicitud) {
+        return reprogramar(solicitante, solicitud, MAXIMO_PERSISTIBLE);
+    }
+
+    /** Permite al llamador acotar el fin de un movimiento efectivo sin cambiar el rango del servicio. */
+    @Transactional(isolation = Isolation.READ_COMMITTED)
+    public TurnoRegistrado reprogramar(Identidad solicitante, SolicitudReprogramacion solicitud, Instant finMaximo) {
         autorizacion.exigir(solicitante, Permiso.TURNO_REPROGRAMAR);
         validarReprogramacion(solicitud);
         if (solicitante.rol() == Rol.ODONTOLOGO && !solicitud.profesionalId().equals(solicitante.profesionalRef())) {
@@ -124,6 +130,9 @@ public class ServicioAgenda {
         var dominio = solicitudDominio(actual.pacienteId(), actual.prestacionId(), destino,
                 inicio, Duration.ofMinutes(actual.duracionMinutos()), null);
         var movimiento = validarDestino(destino, dominio, intervalo, actual.id());
+        if (movimiento.fin().isAfter(finMaximo)) {
+            throw new IllegalArgumentException("La duración excede el rango de fechas admitido");
+        }
         return vista(ediciones.mover(actual.id(), actual.version(), movimiento)
                 .orElseThrow(VersionTurnoDesactualizadaException::new));
     }

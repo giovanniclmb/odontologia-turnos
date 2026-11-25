@@ -12,7 +12,7 @@ final class Solicitudes {
     private static final Instant MINIMO = Instant.parse("0001-01-01T00:00:00Z");
     // El último año se reserva para que ningún fin calculado exceda las cuatro cifras que admite el contrato.
     private static final Instant MAXIMO = Instant.parse("9998-12-31T23:59:59Z");
-    private static final Instant MAXIMO_FIN = Instant.parse("9999-12-31T23:59:59Z");
+    static final Instant MAXIMO_FIN = Instant.parse("9999-12-31T23:59:59Z");
     private static final Duration PERIODO_MAXIMO = Duration.ofDays(7);
 
     private Solicitudes() {}
