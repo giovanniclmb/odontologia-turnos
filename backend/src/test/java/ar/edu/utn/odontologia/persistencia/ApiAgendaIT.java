@@ -63,6 +63,113 @@ class ApiAgendaIT {
     }
 
     @Test
+    void pendientesExponeIdentificacionMinimaDeTurnosFuturos() throws Exception {
+        var creado = crearTurno(alta(fixture.paciente, nuevoProfesional(), nuevoSillon(), nuevaPrestacion(30),
+                "2091-01-01T12:00:00Z"));
+        var pendientes = ok(request("GET", "/agenda/turnos/pendientes", tokenRecepcion, null));
+        var turno = porId(pendientes, UUID.fromString(creado.get("id").asString()));
+        assertEquals("Ana", turno.get("pacienteNombre").asString());
+        assertEquals("Ejemplo", turno.get("pacienteApellido").asString());
+        assertEquals(Set.of("id", "pacienteNombre", "pacienteApellido", "profesionalId", "sillonId", "prestacionId",
+                "inicio", "fin", "duracionMinutos", "estado", "version"), campos(turno));
+    }
+
+    @Test
+    void pendientesRespetaPermisosPertenenciaYOrden() throws Exception {
+        UUID prestacion = nuevaPrestacion(30);
+        var tarde = crearTurno(alta(fixture.paciente, nuevoProfesional(), nuevoSillon(), prestacion,
+                "2092-01-01T15:00:00Z"));
+        var temprano = crearTurno(alta(fixture.paciente, nuevoProfesional(), nuevoSillon(), prestacion,
+                "2092-01-01T12:00:00Z"));
+        var confirmado = crearTurno(alta(fixture.paciente, nuevoProfesional(), nuevoSillon(), prestacion,
+                "2092-01-01T13:00:00Z"));
+        var cancelado = crearTurno(alta(fixture.paciente, nuevoProfesional(), nuevoSillon(), prestacion,
+                "2092-01-01T14:00:00Z"));
+        var iniciado = crearTurno(alta(fixture.paciente, nuevoProfesional(), nuevoSillon(), prestacion,
+                "2092-01-01T16:00:00Z"));
+        var servicio = fixture.context.getBean(ServicioAgenda.class);
+        servicio.confirmar(recepcion, UUID.fromString(confirmado.get("id").asString()), confirmado.get("version").asString());
+        servicio.cancelar(recepcion, new ServicioAgenda.SolicitudCancelacion(
+                UUID.fromString(cancelado.get("id").asString()), cancelado.get("version").asString()));
+        jdbc.update("update odontologia.turno set inicio = ?, fin = ? where id = ?",
+                java.sql.Timestamp.from(Instant.parse("2020-01-01T12:00:00Z")),
+                java.sql.Timestamp.from(Instant.parse("2020-01-01T12:30:00Z")),
+                UUID.fromString(iniciado.get("id").asString()));
+
+        var ids = Set.of(tarde.get("id").asString(), temprano.get("id").asString(), confirmado.get("id").asString(),
+                cancelado.get("id").asString(), iniciado.get("id").asString());
+        var encontrados = new java.util.ArrayList<String>();
+        for (var turno : ok(request("GET", "/agenda/turnos/pendientes", tokenRecepcion, null))) {
+            String id = turno.get("id").asString();
+            if (ids.contains(id)) encontrados.add(id);
+        }
+        assertEquals(List.of(temprano.get("id").asString(), tarde.get("id").asString()), encontrados);
+        error(request("GET", "/agenda/turnos/pendientes", tokenOdontologia, null), 403, "autorizacion_denegada");
+        error(request("GET", "/agenda/turnos/pendientes", null, null), 401, "no_autenticado");
+    }
+
+    @Test
+    void confirmacionHttpRegistraElTurnoYDevuelveNuevaVersion() throws Exception {
+        var turno = crearTurno(alta(fixture.paciente, nuevoProfesional(), nuevoSillon(), nuevaPrestacion(30),
+                "2093-01-01T12:00:00Z"));
+        var respuesta = ok(request("POST", rutaTurno(turno.get("id").asString(), "confirmacion"), tokenRecepcion,
+                Map.of("versionEsperada", turno.get("version").asString())));
+        assertEquals("CONFIRMADO", respuesta.get("estado").asString());
+        assertNotEquals(turno.get("version").asString(), respuesta.get("version").asString());
+        for (String campo : List.of("id", "profesionalId", "sillonId", "prestacionId", "inicio", "fin", "duracionMinutos")) {
+            assertEquals(turno.get(campo), respuesta.get(campo));
+        }
+        assertEquals(Set.of("id", "profesionalId", "sillonId", "prestacionId", "inicio", "fin",
+                "duracionMinutos", "estado", "version"), campos(respuesta));
+    }
+
+    @Test
+    void confirmacionHttpRechazaPermisosEntradasYVersionAnterior() throws Exception {
+        var turno = crearTurno(alta(fixture.paciente, nuevoProfesional(), nuevoSillon(), nuevaPrestacion(30),
+                "2094-01-01T12:00:00Z"));
+        String ruta = rutaTurno(turno.get("id").asString(), "confirmacion");
+        var version = turno.get("version").asString();
+        error(request("POST", ruta, null, Map.of("versionEsperada", version)), 401, "no_autenticado");
+        error(request("POST", ruta, tokenOdontologia, Map.of("versionEsperada", version)), 403, "autorizacion_denegada");
+        for (String cuerpo : List.of("{}", "{\"versionEsperada\":null}", "{\"versionEsperada\":1}",
+                "{\"versionEsperada\":\"\"}", "null", "", "{mal")) {
+            error(enviar("POST", ruta, tokenRecepcion, cuerpo), 400, "solicitud_invalida");
+        }
+        error(request("POST", rutaTurno(UUID.randomUUID().toString(), "confirmacion"), tokenRecepcion,
+                Map.of("versionEsperada", version)), 404, "solicitud_invalida");
+        error(request("POST", ruta, tokenRecepcion, Map.of("versionEsperada", "version-anterior")),
+                409, "version_turno_desactualizada");
+        assertEquals("CONFIRMADO", ok(request("POST", ruta, tokenRecepcion,
+                Map.of("versionEsperada", version))).get("estado").asString());
+    }
+
+    @Test
+    void confirmacionHttpRechazaTurnosNoElegibles() throws Exception {
+        UUID prestacion = nuevaPrestacion(30);
+        var confirmado = crearTurno(alta(fixture.paciente, nuevoProfesional(), nuevoSillon(), prestacion,
+                "2095-01-01T12:00:00Z"));
+        var cancelado = crearTurno(alta(fixture.paciente, nuevoProfesional(), nuevoSillon(), prestacion,
+                "2095-01-01T13:00:00Z"));
+        var iniciado = crearTurno(alta(fixture.paciente, nuevoProfesional(), nuevoSillon(), prestacion,
+                "2095-01-01T14:00:00Z"));
+        var servicio = fixture.context.getBean(ServicioAgenda.class);
+        var confirmadoActual = servicio.confirmar(recepcion, UUID.fromString(confirmado.get("id").asString()),
+                confirmado.get("version").asString());
+        var canceladoActual = servicio.cancelar(recepcion, new ServicioAgenda.SolicitudCancelacion(
+                UUID.fromString(cancelado.get("id").asString()), cancelado.get("version").asString()));
+        jdbc.update("update odontologia.turno set inicio = ?, fin = ? where id = ?",
+                java.sql.Timestamp.from(Instant.parse("2020-01-02T12:00:00Z")),
+                java.sql.Timestamp.from(Instant.parse("2020-01-02T12:30:00Z")),
+                UUID.fromString(iniciado.get("id").asString()));
+        for (var caso : List.of(Map.entry(confirmadoActual.id().toString(), confirmadoActual.version()),
+                Map.entry(canceladoActual.id().toString(), canceladoActual.version()),
+                Map.entry(iniciado.get("id").asString(), iniciado.get("version").asString()))) {
+            error(request("POST", rutaTurno(caso.getKey(), "confirmacion"), tokenRecepcion,
+                    Map.of("versionEsperada", caso.getValue())), 400, "solicitud_invalida");
+        }
+    }
+
+    @Test
     void ningunaOperacionNuevaRespondeSinIdentidad() throws Exception {
         String sillon = nuevoSillon().toString();
         String periodo = "desde=2090-01-01T00:00:00Z&hasta=2090-01-02T00:00:00Z";

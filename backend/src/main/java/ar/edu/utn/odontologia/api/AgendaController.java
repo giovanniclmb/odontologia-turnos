@@ -26,6 +26,7 @@ public class AgendaController {
                                     String inicio, BigDecimal duracionAjustadaMinutos) {}
     public record ReprogramarTurnoRequest(JsonNode versionEsperada, String inicio, UUID profesionalId, UUID sillonId) {}
     public record CancelarTurnoRequest(JsonNode versionEsperada) {}
+    public record ConfirmarTurnoRequest(JsonNode versionEsperada) {}
     public record TurnoResponse(UUID id, UUID profesionalId, UUID sillonId, UUID prestacionId, Instant inicio,
                                 Instant fin, int duracionMinutos, EstadoTurno estado, String version) {}
     public record TurnoAgendaResponse(UUID id, String pacienteNombre, String pacienteApellido, UUID profesionalId,
@@ -56,6 +57,12 @@ public class AgendaController {
         return mapear(agenda.crear(identidad, solicitudDeAlta(cuerpo)));
     }
 
+    @GetMapping("/turnos/pendientes")
+    public List<TurnoAgendaResponse> pendientes(HttpServletRequest request) {
+        return consulta.consultarPendientes(Solicitudes.identidad(request)).stream()
+                .map(AgendaController::mapear).toList();
+    }
+
     @PostMapping("/turnos/{turnoId}/reprogramacion")
     public TurnoResponse reprogramar(@PathVariable UUID turnoId, @RequestBody ReprogramarTurnoRequest cuerpo,
                                     HttpServletRequest request) {
@@ -71,6 +78,13 @@ public class AgendaController {
         var identidad = Solicitudes.identidad(request);
         var solicitud = new ServicioAgenda.SolicitudCancelacion(turnoId, versionOpaca(cuerpo.versionEsperada()));
         return mapear(agenda.cancelar(identidad, solicitud));
+    }
+
+    @PostMapping("/turnos/{turnoId}/confirmacion")
+    public TurnoResponse confirmar(@PathVariable UUID turnoId, @RequestBody ConfirmarTurnoRequest cuerpo,
+                                   HttpServletRequest request) {
+        var identidad = Solicitudes.identidad(request);
+        return mapear(agenda.confirmar(identidad, turnoId, versionOpaca(cuerpo.versionEsperada())));
     }
 
     private static String versionOpaca(JsonNode version) {
