@@ -484,7 +484,7 @@ La política visual sigue diferida: resolverla antes de Apply y cumplir las apro
   - [08 Arquitectura propuesta](knowledge-base/08_arquitectura_propuesta.md) §Operación y diseño visual
 
 ### [C-12] `interfaz-reprogramacion-y-cancelacion`
-- **Estado**: `[x]` implementado, verificado y archivado en OpenSpec el 25/11/2026. Integración preparada en el PR #45; pendiente de revisión e integración a `main`. [Verificación](openspec/changes/archive/2026-11-25-interfaz-reprogramacion-y-cancelacion/verify.md).
+- **Estado**: `[x]` implementado, verificado y archivado en OpenSpec el 25/11/2026. Verificación combinada con C-18 completada; revisión e integración registradas en el [PR #45](https://github.com/giovanniclmb/odontologia-turnos/pull/45). [Verificación](openspec/changes/archive/2026-11-25-interfaz-reprogramacion-y-cancelacion/verify.md).
 - **Responsable**: Luciano
 - **Scope**: Acciones de reorganización de una reserva desde la agenda existente.
   - Resolver el gate visual y consumir C-07/C-08 para US-006 y US-007, sin redefinir reglas o transiciones.
