@@ -16,6 +16,7 @@ public class ServicioAutorizacion {
                     Permiso.TURNO_CANCELAR,
                     Permiso.AGENDA_SILLON_CONSULTAR,
                     Permiso.BLOQUEO_CREAR,
+                    Permiso.BLOQUEO_CONSULTAR,
                     Permiso.FICHA_LEER,
                     Permiso.CONFIRMACION_REGISTRAR,
                     Permiso.PENDIENTES_CONSULTAR,
@@ -28,6 +29,7 @@ public class ServicioAutorizacion {
                     Permiso.TURNO_REPROGRAMAR,
                     Permiso.TURNO_CANCELAR,
                     Permiso.AGENDA_SILLON_CONSULTAR,
+                    Permiso.BLOQUEO_CONSULTAR,
                     Permiso.FICHA_LEER,
                     Permiso.FICHA_EDITAR,
                     Permiso.PACIENTE_DATOS_ADMIN));
