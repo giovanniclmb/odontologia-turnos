@@ -28,6 +28,16 @@ Alcance: correcciones locales del transporte C-17 al integrar PR #37 con C-11. N
 - La conexión fallida a `127.0.0.1:1` que aparece en el log pertenece a una prueba que confirma que el arranque falla cuando se configura deliberadamente una base inválida; la prueba y la suite terminaron en verde.
 - `git diff --check`: sin errores. No se ejecutó `npm test`: no se modificaron frontend ni contratos frontend/backend.
 
-## Pendiente que conserva C-17 incompleto
+## Prueba real autorizada: ejecución y confirmaciones posteriores
 
-La prueba real autorizada 6.1 no se ejecutó. No se recibieron credenciales ni destinatarios de prueba autorizados y no se envió ningún email. Por decisión del usuario, se integrará el código verificado mientras C-17 y el issue #18 permanecen abiertos hasta que el equipo autorice y aporte esa evidencia. Las pruebas HTTP locales no sustituyen el envío real.
+El 24-11-2026 a las 23:36:45 (America/Mendoza) se ejecutó una única prueba real autorizada mediante `CorreoRealManual`: Maven salió con código 0, una prueba ejecutada, sin fallos/errores/omisiones; el proveedor respondió 2xx y la prueba confirmó una fila `sent` con un intento en PostgreSQL temporal. Esto acredita la aceptación del API, no la entrega final.
+
+El adaptador no conserva el `id` JSON del proveedor; no se registró un ID. Falta comprobar el evento de entrega en el panel de Resend y que el mensaje llegó al buzón destinatario. Hasta documentar esa constancia, C-17 y el issue #18 permanecen abiertos e incompletos. No repetir el envío ante un resultado incierto.
+
+### Confirmación posterior del destinatario
+
+El 24-11-2026 a las 23:40:19 (America/Mendoza), el usuario confirmó que el mensaje llegó a su buzón. Se registra como confirmación del destinatario; no se inspeccionó el panel de Resend ni se obtuvo ID/estado del proveedor. Por tanto, no se afirma que el evento del panel sea `delivered`; C-17 y el issue #18 siguen abiertos hasta que se documente esa constancia del proveedor.
+
+### Verificación final del proveedor
+
+En una revisión posterior del panel Emails de Resend, el estado del mensaje apareció como `Delivered`, con ID de proveedor `01a21090-09ec-7520-8d10-61817a35d31b`. Esto, junto con la confirmación del usuario de recepción en su buzón, completa localmente la evidencia de 6.1. Las notas previas de estado pendiente reflejan el momento en que se escribieron; esta verificación las actualiza. El adaptador sigue sin persistir el ID del proveedor. El issue #18 remoto no se modificó.
