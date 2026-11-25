@@ -500,7 +500,7 @@ La política visual sigue diferida: resolverla antes de Apply y cumplir las apro
   - [08 Arquitectura propuesta](knowledge-base/08_arquitectura_propuesta.md) §Operación y diseño visual
 
 ### [C-13] `interfaz-confirmaciones`
-- **Estado**: `[ ]` pendiente
+- **Estado**: `[x]` implementado, verificado y archivado en OpenSpec el 25/11/2026. Pendiente de integración. [Evidencia de navegador](openspec/changes/archive/2026-11-25-interfaz-confirmaciones/evidence/qa-navegador.md) · [Verificación de backend](openspec/changes/archive/2026-11-25-interfaz-confirmaciones/evidence/backend.md) · [Verificación de frontend](openspec/changes/archive/2026-11-25-interfaz-confirmaciones/evidence/frontend.md).
 - **Responsable**: Luciano
 - **Scope**: Operación visual del seguimiento manual por recepción.
   - Resolver el gate visual e incorporar listado y acción de confirmación de US-008 consumiendo C-09 dentro de la agenda de C-10.

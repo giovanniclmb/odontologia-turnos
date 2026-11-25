@@ -1,0 +1,12 @@
+.mockup-nav { display: flex; flex-wrap: wrap; gap: .6rem; margin-bottom: 1.5rem; padding: .75rem; border: 1px dashed #64748b; font-size: .875rem; }
+.mockup-nav span { font-weight: 700; }
+.card-header { gap: 1rem; flex-wrap: wrap; }
+.seguimiento-lista { padding: 0; margin: 0; list-style: none; }
+.seguimiento-turno { display: grid; grid-template-columns: minmax(8rem, 1fr) minmax(12rem, 2fr) auto; align-items: center; gap: 1rem; padding: 1.1rem 0; border-top: 1px solid #d8e1e5; }
+.seguimiento-turno p { margin: .2rem 0 0; }
+.seguimiento-fecha { font-weight: 700; }
+.seguimiento-detalle { color: #455a64; }
+.seguimiento-mensaje { margin: 1rem 0; padding: 1rem; border-left: 4px solid #ba6a18; background: #fff7e7; }
+.seguimiento-mensaje.exito { border-color: #14816c; background: #e8f6f1; }
+.seguimiento-vacio { padding: 1.5rem 0; }
+@media (max-width: 700px) { .seguimiento-turno { grid-template-columns: 1fr; gap: .5rem; } .seguimiento-turno .btn { justify-self: start; } }
