@@ -34,7 +34,7 @@ Sin defectos bloqueantes en producción. Hallazgos y resolución:
 | El apagado en pruebas dependía del perfil de envío real | Movido a la configuración base de failsafe; comprobado en el POM efectivo con y sin `-Denvio.real=true` |
 | La prueba de activación no demostraba que la revisión funcionara | `CierreRecordatorioIT` exige un envío al arrancar |
 | Dos inicios del mismo segundo compartían clave | El tipo usa el inicio completo; prueba con fallo observado |
-| El tiempo de espera podía no cubrir el cuerpo de la respuesta | Confirmado; defecto previo de C-17, fuera de este change |
+| El tiempo de espera podía no cubrir el cuerpo de la respuesta | Confirmado; defecto previo de C-17, corregido aparte en el [PR #50](https://github.com/giovanniclmb/odontologia-turnos/pull/50), integrado antes que este change |
 
 Se alteró temporalmente la implementación para comprobar que las pruebas nuevas detectan el valor por defecto encendido, la falta del aviso de cierre y la falta de truncado. La misma comprobación mostró que la espera de apagado del programador que se había agregado era redundante, porque Spring ya espera la tarea en curso, y se quitó. Las correcciones no tuvieron una segunda revisión independiente.
 
@@ -43,7 +43,6 @@ Se alteró temporalmente la implementación para comprobar que las pruebas nueva
 - Cada horario tiene un solo intento: un registro `failed` o `pending` impide repetirlo, también si faltaban credenciales o si el proceso se cortó.
 - Activar el envío manda en la primera revisión los recordatorios de todos los turnos de las próximas 24 horas.
 - Un cambio del turno durante los reintentos no detiene el mensaje en curso.
-- Sin el arreglo del transporte de C-17, una respuesta que no termina detiene la revisión hasta reiniciar.
 - La aplicación apagada durante todo el período deja el turno sin recordatorio.
 - Un turno anterior a la migración fijado con poca anticipación puede recibir un recordatorio.
 - La migración usa la versión 14; el change abierto de C-21 deberá numerar la suya a continuación.
