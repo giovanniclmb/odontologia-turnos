@@ -24,6 +24,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
@@ -46,12 +47,14 @@ public class ServicioAgenda {
     private final Agenda agenda;
     private final Clock reloj;
     private final ServicioCancelacionPorEnlace tokensCancelacion;
+    private final ApplicationEventPublisher eventos;
 
     public ServicioAgenda(ServicioAutorizacion autorizacion, PacienteReferencias pacientes,
                           PacienteProfesionales asignaciones, PrestacionReferencias prestaciones,
                           ServicioRecursosAgenda recursos, LocksRecursosAgenda locks, ConsultaBloqueos bloqueos,
                           TurnosPersistidos turnos, EdicionesTurnoPersistidas ediciones,
-                          Agenda agenda, Clock reloj, ServicioCancelacionPorEnlace tokensCancelacion) {
+                          Agenda agenda, Clock reloj, ServicioCancelacionPorEnlace tokensCancelacion,
+                          ApplicationEventPublisher eventos) {
         this.autorizacion = autorizacion;
         this.pacientes = pacientes;
         this.asignaciones = asignaciones;
@@ -64,6 +67,7 @@ public class ServicioAgenda {
         this.agenda = agenda;
         this.reloj = reloj;
         this.tokensCancelacion = tokensCancelacion;
+        this.eventos = eventos;
     }
 
     @Transactional(isolation = Isolation.READ_COMMITTED)
@@ -91,7 +95,7 @@ public class ServicioAgenda {
                 inicio, referencia, ajuste);
         var turno = validarDestino(seleccion, dominio, intervalo, null);
         var persistido = turnos.save(new TurnoPersistido(turno));
-        tokensCancelacion.emitir(persistido.id(), persistido.datos().version(), persistido.inicio(), reloj.instant());
+        programar(persistido.datos(), TurnoProgramado.Motivo.ALTA, reloj.instant());
         return vista(persistido.datos());
     }
 
@@ -140,7 +144,7 @@ public class ServicioAgenda {
         var movido = ediciones.mover(actual.id(), actual.version(), movimiento)
                 .orElseThrow(VersionTurnoDesactualizadaException::new);
         // La reprogramacion invalida el token previo y emite uno nuevo solo si el nuevo inicio cumple la ventana.
-        tokensCancelacion.emitir(movido.id(), movido.version(), movido.inicio(), ahora);
+        programar(movido, TurnoProgramado.Motivo.REPROGRAMACION, ahora);
         return vista(movido);
     }
 
@@ -225,6 +229,12 @@ public class ServicioAgenda {
                 EstadoTurno.CONFIRMADO).orElseThrow(() -> new VersionTurnoDesactualizadaException("confirmarlo"));
         tokensCancelacion.conservarTrasConfirmacion(confirmado.id(), actual.version(), confirmado.version());
         return vista(confirmado);
+    }
+
+    /** Emite el enlace si la ventana lo permite y avisa el turno a quienes escuchen después del commit. */
+    private void programar(TurnoLeido turno, TurnoProgramado.Motivo motivo, Instant ahora) {
+        var token = tokensCancelacion.emitir(turno.id(), turno.version(), turno.inicio(), ahora);
+        eventos.publishEvent(new TurnoProgramado(turno.id(), turno.version(), turno.inicio(), motivo, token));
     }
 
     private static boolean estadoEditable(Identidad solicitante, EstadoTurno estado) {

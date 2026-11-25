@@ -77,4 +77,23 @@
       </plugin>
     </plugins>
   </build>
+  <profiles>
+    <!-- Las pruebas de integración no usan credenciales ni destinatarios del entorno. Solo las pruebas manuales
+         de envío real desactivan este aislamiento, con -Denvio.real=true. -->
+    <profile>
+      <id>email-aislado-en-pruebas</id>
+      <activation><property><name>!envio.real</name></property></activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-failsafe-plugin</artifactId>
+            <configuration>
+              <environmentVariables><RESEND_API_KEY></RESEND_API_KEY><EMAIL_FROM></EMAIL_FROM><EMAIL_TEST_ALLOWLIST></EMAIL_TEST_ALLOWLIST></environmentVariables>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 </project>

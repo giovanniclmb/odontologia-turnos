@@ -39,6 +39,7 @@ spring:
 email:
   resend-api-key: ${RESEND_API_KEY:}
   from: ${EMAIL_FROM:}
+  cancelacion-url-base: ${EMAIL_CANCELACION_URL_BASE:}
   test-allowlist: ${EMAIL_TEST_ALLOWLIST:}
   max-retries: ${EMAIL_MAX_RETRIES:2}
   timeout: ${EMAIL_TIMEOUT:10s}

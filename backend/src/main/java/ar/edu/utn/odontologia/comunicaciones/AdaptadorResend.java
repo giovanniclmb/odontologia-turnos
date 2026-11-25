@@ -183,12 +183,8 @@ public class AdaptadorResend implements CorreoSalida {
         if (status >= 200 && status < 300) {
             return new HttpResultado(true, null);
         }
-        String cuerpo = response.body();
-        String motivo = "HTTP " + status;
-        if (cuerpo != null && !cuerpo.isBlank()) {
-            motivo = motivo + ": " + truncar(saneadoTexto(cuerpo));
-        }
-        return new HttpResultado(false, motivo);
+        // La respuesta del proveedor no se registra: puede repetir el mensaje y su enlace.
+        return new HttpResultado(false, "HTTP " + status);
     }
 
     private String construirJson(SolicitudEnvio s) {
@@ -217,19 +213,9 @@ public class AdaptadorResend implements CorreoSalida {
                 .replace("\n", "\\n").replace("\r", "\\r").replace("\t", "\\t");
     }
 
+    /** Solo los mensajes propios; de cualquier otra falla se informa el tipo, sin datos del envío. */
     private static String saneado(Exception e) {
-        String msg = e.getMessage();
-        if (msg == null || msg.isBlank()) msg = e.getClass().getSimpleName();
-        return truncar(msg);
-    }
-
-    private static String saneadoTexto(String s) {
-        return s == null ? "" : s;
-    }
-
-    private static String truncar(String s) {
-        if (s == null) return "";
-        return s.length() > 300 ? s.substring(0, 300) + "..." : s;
+        return e instanceof PersistenciaEmailException ? e.getMessage() : e.getClass().getSimpleName();
     }
 
     private static void dormir(long ms) {

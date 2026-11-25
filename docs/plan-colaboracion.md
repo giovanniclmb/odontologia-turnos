@@ -45,10 +45,12 @@ Giovanni aprobó expresamente este reparto el 19/11/2026: «El reparto de change
 
 | Integrante | Enfoque | Changes asignados |
 | --- | --- | --- |
-| Giovanni | Base, núcleo de agenda e integración | C-01, C-02, C-06, C-07, C-08, C-14, C-25 |
+| Giovanni | Base, núcleo de agenda, email de alta, recordatorios e integración | C-01, C-02, C-06, C-07, C-08, C-14, C-19, C-20, C-25 |
 | Sofia | Pacientes, cuenta y lista de espera | C-04, C-09, C-16, C-21, C-22, C-24 |
 | Luciano | Recursos, bloqueos e interfaces de agenda | C-05, C-10, C-12, C-13, C-15, C-23 |
-| Fabi | Acceso interno, email e interfaz de pacientes | C-03, C-11, C-17, C-18, C-19, C-20 |
+| Fabi | Acceso interno, transporte de email, cancelación por enlace e interfaz de pacientes | C-03, C-11, C-17, C-18 |
+
+Revisión aprobada el 25/11/2026: por pedido expreso de Giovanni, C-19 y C-20 pasan de Fabi a Giovanni. Los demás responsables y las dependencias se conservan.
 
 Los cruces entre áreas se coordinan mediante contratos. C-03, C-04, C-16 y C-18 conservan su gobernanza CRITICO y el responsable indicado en esta tabla. Giovanni mantiene la base y la lógica central de agenda; cualquier cambio de reparto o prioridad se acuerda expresamente.
 
@@ -66,9 +68,11 @@ Cada fila supone que los changes de las filas anteriores ya se integraron. Son u
 | 6 | C-06 | C-21 | — | — |
 | 7 | C-08 | C-09 | C-10 | C-17 |
 | 8 | C-07 | C-22 | C-13 | C-18 |
-| 9 | — | C-24 | C-12 | C-19 |
-| 10 | C-25 | — | C-23 | C-20 |
+| 9 | C-19 | C-24 | C-12 | — |
+| 10 | C-25 y C-20 | — | C-23 | — |
 | 11 | C-14 | — | — | — |
+
+C-25 y C-20 comparten responsable tras la reasignación del 25/11/2026. Su secuencia de ejecución queda por coordinar; esta referencia no presume trabajo paralelo de Giovanni en ambos changes.
 
 El reparto aprobado cubre los 25 changes una vez y respeta sus precedencias. CHANGES.md se concilia con los cuatro responsables y estas once ondas orientativas; no son una estimación en días. C-01 ya está completado.
 
