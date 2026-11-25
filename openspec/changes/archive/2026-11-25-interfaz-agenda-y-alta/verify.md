@@ -89,3 +89,5 @@ El 25/11/2026 el usuario pidió sumar a este PR las correcciones del `401` sin c
 | `78e647c` | Una falla interna al resolver el token responde `500 error_interno` con un identificador de correlación, sin detalles internos |
 
 Sobre el árbol combinado con `ba9b2a2`, `mvn -f backend/pom.xml clean verify` terminó con 129 pruebas unitarias y 219 de integración, sin fallos, errores ni omisiones. No cambian el código de la interfaz, las especificaciones ni el esquema. Esa ejecución no incluye una comprobación en navegador de la sesión vencida.
+
+En otra sesión de trabajo, sobre una combinación temporal de `ba9b2a2` con `78e647c`, se informó una comprobación en navegador: con el token inválido de una sesión anterior, las consultas recibieron un `401` legible y la agenda mostró «Su sesión venció. Cierre sesión y vuelva a ingresar.». En el mismo recorrido, recepción guardó el intervalo y creó un turno.
