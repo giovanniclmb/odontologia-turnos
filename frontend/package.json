@@ -1,8 +1,10 @@
 {
   "name": "odontologia-frontend",
   "private": true,
+  "type": "module",
   "scripts": {
-    "build": "tsc -p tsconfig.json"
+    "build": "tsc -p tsconfig.json",
+    "test": "npm run build && node --test tests/*.test.mjs"
   },
   "devDependencies": {
     "typescript": "^5.9.3"
