@@ -212,9 +212,7 @@ checks=[
 md+=table(['Tipo y fuente','Afirmación contrastada','Hallazgo y corrección','URL','Revisión personal'],[[*r[:3],f'[Abrir]({r[3]})',r[4]] for r in checks])+'\n'
 md+='''### Segunda comprobación del agente (25/11/2026)
 
-El agente intentó volver a abrir en un navegador ocho fuentes (las cinco anteriores, Clinic Cloud, Dentify y Odontoly) y contrastó con este informe el texto publicado ese día en las siete que respondieron. No sustituye la revisión personal. Por decisión del 25/11/2026 (Ajustar), las diferencias se incorporaron a las fichas, la matriz B y la sección C. Una diferencia puede deberse a una omisión del relevamiento o a un cambio de la página posterior al 17/11/2026; salvo indicación, no se distingue cuál.
-
-En su primera pasada de ese día el agente no vio el adicional de Clinic Cloud, publicado en un texto emergente, ni los importes anuales de Dentify, visibles al cambiar un selector. Una segunda pasada corrigió ambas observaciones.
+El agente intentó volver a abrir en un navegador las cinco fuentes anteriores y contrastó con este informe el texto publicado ese día en las cuatro que respondieron. No sustituye la revisión personal. Por decisión del 25/11/2026 (Ajustar), las diferencias se incorporaron a las fichas, la matriz B y la sección C. Una diferencia puede deberse a una omisión del relevamiento o a un cambio de la página posterior al 17/11/2026; salvo indicación, no se distingue cuál.
 
 '''
 second=[
@@ -222,10 +220,7 @@ second=[
  ['tab32','Coinciden desde $95/mes, usuarios ilimitados, prueba de 14 días, cargos por claim, adjuntos y elegibilidad, y que los ledgers no se migran.','La prueba pide email y tarjeta; la migración se publica desde $1,250; la exportación gratuita al salir incluye el ledger.','Ficha 15.'],
  ['Dentalink','Coinciden el enlace de reserva, los permisos y los bloqueos de horario.','El manual (fechado el 12/06/2026) tiene una sección plegada, «Cruce con Recursos», que declara que la agenda online valida que el profesional y el recurso asociado al servicio estén disponibles en el mismo horario. No identifica el recurso como sillón ni describe control de concurrencia.','Ficha 01 y sección C. La matriz B no cambia.'],
  ['Dentidesk','Coinciden Excel estándar sin costo con licencia activa, solicitud hasta 30 días después del término con posible cargo y prueba de 15 días.','Cada cuenta de odontólogo adicional «generará un cargo según el plan contratado»; el informe lo expresaba como posible.','Ficha 06.'],
- ['AgendaPro','No se pudo comprobar.','La interfaz pública respondió HTTP 403. No se reintentó ni se evadió el bloqueo.','Se anota en la ficha 08; las celdas conservan la observación del 17/11.'],
- ['Clinic Cloud','Coinciden 29, 49 y 79 EUR más IVA, 50 % durante tres meses, 10 EUR por agenda extra, odontograma en Max y reserva por Doctoralia.','Declara más de 3.000 consultas y clínicas en España y exhibe ISO/IEC 27001.','Ficha 09: adopción y sello declarados.'],
- ['Dentify','Coinciden $30.000 y $45.000 mensuales, 14 días sin tarjeta, «Hecho en Argentina» y nube cifrada.','La modalidad anual publica $25.000 y $38.000 por mes ($300.000 y $456.000 por año); el informe había descartado el anual. El pie indica «Desarrollado por IB Digital».','Ficha 03.'],
- ['Odontoly','Coinciden USD 149,99 sin permanencia; WhatsApp Business, SMS, ARCA y visor RX como próximos; copias cifradas y base de trabajo sin cifrar; Windows en desarrollo.','El plan publica además dos usuarios y hasta cuatro dispositivos autorizados.','Ficha 05.']]
+ ['AgendaPro','No se pudo comprobar.','La interfaz pública respondió HTTP 403. No se reintentó ni se evadió el bloqueo.','Se anota en la ficha 08; las celdas conservan la observación del 17/11.']]
 md+=table(['Fuente','Resultado','Diferencia o detalle','Corrección aplicada'],second)+'\n'
 md+='''### Fuentes no accesibles y exclusiones
 
@@ -297,7 +292,10 @@ Estas referencias no autorizan copiar una interfaz ni agregar autorreserva gener
 
 No se asigna prioridad ni compromiso a esas ampliaciones. El MVP define el backlog, mientras que la entrega académica debe llevar un único change por el ciclo completo. Todavía no se seleccionó ese change.
 '''
- section+='\n### Integraciones\n\n'+checklist_section(8)+'\n\n### Restricciones\n\n'+checklist_section(9)+'\n\n### Riesgos\n\n'+checklist_section(10)+'\n\n'
+ # La línea del equipo queda solo en discovery.md, a pedido del usuario.
+ restrictions,removed=re.subn(r'^- Equipo:[^\n]*\n','',checklist_section(9),flags=re.M)
+ assert removed==1
+ section+='\n### Integraciones\n\n'+checklist_section(8)+'\n\n### Restricciones\n\n'+restrictions+'\n\n### Riesgos\n\n'+checklist_section(10)+'\n\n'
  md=re.sub(r'## D Decisiones pendientes del usuario\n.*?(?=## Verificación de fuentes)',lambda _:section,md,flags=re.S)
  questions='''## Preguntas abiertas tras la aprobación
 

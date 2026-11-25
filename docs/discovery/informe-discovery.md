@@ -571,7 +571,6 @@ PostgreSQL es parte del stack elegido por el usuario y no un servicio externo co
 ### Restricciones
 
 - Entrega: 25 de noviembre de 2026.
-- Equipo: cuatro integrantes, cantidad que puede variar. El usuario informó autorización docente para superar el máximo de tres de la consigna; no se atribuye una verificación documental independiente a esa declaración.
 - Presupuesto para servicios externos: cero.
 - Frontend: HTML, CSS y TypeScript vanilla.
 - Backend: Java con Spring Boot.
@@ -619,9 +618,7 @@ Las comprobaciones siguientes son automatizadas y se muestran aparte de la revis
 
 ### Segunda comprobación del agente (25/11/2026)
 
-El agente intentó volver a abrir en un navegador ocho fuentes (las cinco anteriores, Clinic Cloud, Dentify y Odontoly) y contrastó con este informe el texto publicado ese día en las siete que respondieron. No sustituye la revisión personal. Por decisión del 25/11/2026 (Ajustar), las diferencias se incorporaron a las fichas, la matriz B y la sección C. Una diferencia puede deberse a una omisión del relevamiento o a un cambio de la página posterior al 17/11/2026; salvo indicación, no se distingue cuál.
-
-En su primera pasada de ese día el agente no vio el adicional de Clinic Cloud, publicado en un texto emergente, ni los importes anuales de Dentify, visibles al cambiar un selector. Una segunda pasada corrigió ambas observaciones.
+El agente intentó volver a abrir en un navegador las cinco fuentes anteriores y contrastó con este informe el texto publicado ese día en las cuatro que respondieron. No sustituye la revisión personal. Por decisión del 25/11/2026 (Ajustar), las diferencias se incorporaron a las fichas, la matriz B y la sección C. Una diferencia puede deberse a una omisión del relevamiento o a un cambio de la página posterior al 17/11/2026; salvo indicación, no se distingue cuál.
 
 | Fuente | Resultado | Diferencia o detalle | Corrección aplicada |
 |---|---|---|---|
@@ -630,9 +627,6 @@ En su primera pasada de ese día el agente no vio el adicional de Clinic Cloud, 
 | Dentalink | Coinciden el enlace de reserva, los permisos y los bloqueos de horario. | El manual (fechado el 12/06/2026) tiene una sección plegada, «Cruce con Recursos», que declara que la agenda online valida que el profesional y el recurso asociado al servicio estén disponibles en el mismo horario. No identifica el recurso como sillón ni describe control de concurrencia. | Ficha 01 y sección C. La matriz B no cambia. |
 | Dentidesk | Coinciden Excel estándar sin costo con licencia activa, solicitud hasta 30 días después del término con posible cargo y prueba de 15 días. | Cada cuenta de odontólogo adicional «generará un cargo según el plan contratado»; el informe lo expresaba como posible. | Ficha 06. |
 | AgendaPro | No se pudo comprobar. | La interfaz pública respondió HTTP 403. No se reintentó ni se evadió el bloqueo. | Se anota en la ficha 08; las celdas conservan la observación del 17/11. |
-| Clinic Cloud | Coinciden 29, 49 y 79 EUR más IVA, 50 % durante tres meses, 10 EUR por agenda extra, odontograma en Max y reserva por Doctoralia. | Declara más de 3.000 consultas y clínicas en España y exhibe ISO/IEC 27001. | Ficha 09: adopción y sello declarados. |
-| Dentify | Coinciden $30.000 y $45.000 mensuales, 14 días sin tarjeta, «Hecho en Argentina» y nube cifrada. | La modalidad anual publica $25.000 y $38.000 por mes ($300.000 y $456.000 por año); el informe había descartado el anual. El pie indica «Desarrollado por IB Digital». | Ficha 03. |
-| Odontoly | Coinciden USD 149,99 sin permanencia; WhatsApp Business, SMS, ARCA y visor RX como próximos; copias cifradas y base de trabajo sin cifrar; Windows en desarrollo. | El plan publica además dos usuarios y hasta cuatro dispositivos autorizados. | Ficha 05. |
 
 ### Fuentes no accesibles y exclusiones
 

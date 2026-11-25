@@ -6,7 +6,7 @@ La consigna pide que los integrantes **abran y comprueben personalmente** al men
 
 ## Segunda comprobación del agente (25/11/2026)
 
-Se intentó abrir las ocho fuentes que el relevamiento inicial (hecho con Codex) había listado; siete respondieron y AgendaPro devolvió HTTP 403. El texto publicado ese día se contrastó con el informe; el detalle por fuente está en su [sección correspondiente](../discovery/informe-discovery.md#segunda-comprobación-del-agente-25112026). No se crearon cuentas, no se enviaron formularios ni se copiaron reseñas o datos de pacientes.
+Se intentó abrir las ocho fuentes que el relevamiento inicial (hecho con Codex) había listado; siete respondieron y AgendaPro devolvió HTTP 403. El texto publicado ese día se contrastó con el informe; el informe detalla en su [sección correspondiente](../discovery/informe-discovery.md#segunda-comprobación-del-agente-25112026) las cinco que revisó el equipo, y las correcciones de las otras tres constan en la tabla siguiente. No se crearon cuentas, no se enviaron formularios ni se copiaron reseñas o datos de pacientes.
 
 ## Correcciones aplicadas
 
