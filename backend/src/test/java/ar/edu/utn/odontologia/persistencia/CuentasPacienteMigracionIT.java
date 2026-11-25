@@ -55,7 +55,7 @@ class CuentasPacienteMigracionIT {
     @Test
     void v10PermiteCuentaPendienteYProtegeEmailVinculoYPropiedad() throws Exception {
         try (var db = PostgresFixture.start()) {
-            assertEquals(13, migrador(db).load().migrate().migrationsExecuted);
+            assertEquals(14, migrador(db).load().migrate().migrationsExecuted);
             UUID pacienteA = UUID.randomUUID();
             UUID pacienteB = UUID.randomUUID();
             insertarPaciente(db, pacienteA, "PACIENTE-CUENTA-A", "compartido@example.invalid");

@@ -94,8 +94,9 @@ public class ServicioAgenda {
         var dominio = solicitudDominio(solicitud.pacienteId(), solicitud.prestacionId(), seleccion,
                 inicio, referencia, ajuste);
         var turno = validarDestino(seleccion, dominio, intervalo, null);
-        var persistido = turnos.save(new TurnoPersistido(turno));
-        programar(persistido.datos(), TurnoProgramado.Motivo.ALTA, reloj.instant());
+        var ahora = reloj.instant();
+        var persistido = turnos.save(new TurnoPersistido(turno, precisionPersistida(ahora)));
+        programar(persistido.datos(), TurnoProgramado.Motivo.ALTA, ahora);
         return vista(persistido.datos());
     }
 
@@ -141,7 +142,7 @@ public class ServicioAgenda {
         if (movimiento.fin().isAfter(finMaximo)) {
             throw new IllegalArgumentException("La duración excede el rango de fechas admitido");
         }
-        var movido = ediciones.mover(actual.id(), actual.version(), movimiento)
+        var movido = ediciones.mover(actual.id(), actual.version(), movimiento, precisionPersistida(ahora))
                 .orElseThrow(VersionTurnoDesactualizadaException::new);
         // La reprogramacion invalida el token previo y emite uno nuevo solo si el nuevo inicio cumple la ventana.
         programar(movido, TurnoProgramado.Motivo.REPROGRAMACION, ahora);
@@ -340,6 +341,11 @@ public class ServicioAgenda {
                 .filter(minutos -> minutos > 0)
                 .map(Duration::ofMinutes)
                 .orElseThrow(() -> new IllegalArgumentException("La prestación debe tener una duración configurada"));
+    }
+
+    /** Trunca como los inicios, para que el redondeo de la base no altere los bordes de las 24 horas. */
+    private static Instant precisionPersistida(Instant instante) {
+        return instante.truncatedTo(ChronoUnit.MICROS);
     }
 
     private static Instant normalizarInicio(Instant inicio) {
