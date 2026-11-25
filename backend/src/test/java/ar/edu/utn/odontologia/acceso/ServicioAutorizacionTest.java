@@ -18,6 +18,17 @@ class ServicioAutorizacionTest {
         }
     }
 
+    @Test void ambosRolesConsultanBloqueosPeroSoloRecepcionLosCrea() {
+        Identidad recepcion = new Identidad(UUID.randomUUID(), "recepcion-ficticia", Rol.RECEPCION, null);
+        Identidad odontologo = new Identidad(UUID.randomUUID(), "odontologo-ficticio", Rol.ODONTOLOGO, null);
+        Permiso consultar = Permiso.desdeCodigo("bloqueo:consultar");
+        assertTrue(authz.tienePermiso(recepcion, consultar));
+        assertTrue(authz.tienePermiso(odontologo, consultar));
+        assertFalse(authz.tienePermiso(null, consultar));
+        assertTrue(authz.tienePermiso(recepcion, Permiso.BLOQUEO_CREAR));
+        assertFalse(authz.tienePermiso(odontologo, Permiso.BLOQUEO_CREAR));
+    }
+
     @Test void permisoConcedido() {
         Identidad id = new Identidad(UUID.randomUUID(), "u", Rol.RECEPCION, null);
         assertTrue(authz.tienePermiso(id, Permiso.FICHA_LEER));

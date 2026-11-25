@@ -7,9 +7,9 @@
 
 ## 2. Lecturas con alcance (backend)
 
-- [ ] 2.1 Con TDD, agregar `bloqueo:consultar` a ambos roles; verificar en `ServicioAutorizacionTest` la matriz de alta y consulta de bloqueos.
-- [ ] 2.2 Con TDD, implementar la consulta autorizada de bloqueos y su recorte por rol; verificar cada escenario del delta de bloqueos con PostgreSQL real.
-- [ ] 2.3 Con TDD, agregar nombre y apellido a la lectura de agenda en una sola consulta; verificar con PostgreSQL real el paciente sin asignación, la exclusión de turnos ajenos y que `ServicioPacientes` siga denegando.
+- [x] 2.1 Con TDD, agregar `bloqueo:consultar` a ambos roles; verificar en `ServicioAutorizacionTest` la matriz de alta y consulta de bloqueos.
+- [x] 2.2 Con TDD, implementar la consulta autorizada de bloqueos y su recorte por rol; verificar cada escenario del delta de bloqueos con PostgreSQL real.
+- [x] 2.3 Con TDD, agregar nombre y apellido a la lectura de agenda en una sola consulta; verificar con PostgreSQL real el paciente sin asignación, la exclusión de turnos ajenos y que `ServicioPacientes` siga denegando.
 
 ## 3. Contrato HTTP
 

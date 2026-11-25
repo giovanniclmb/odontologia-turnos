@@ -6,6 +6,7 @@ public enum Permiso {
     TURNO_CANCELAR("turno:cancelar"),
     AGENDA_SILLON_CONSULTAR("agenda-sillon:consultar"),
     BLOQUEO_CREAR("bloqueo:crear"),
+    BLOQUEO_CONSULTAR("bloqueo:consultar"),
     FICHA_LEER("ficha:leer"),
     FICHA_EDITAR("ficha:editar"),
     CONFIRMACION_REGISTRAR("confirmacion:registrar"),
