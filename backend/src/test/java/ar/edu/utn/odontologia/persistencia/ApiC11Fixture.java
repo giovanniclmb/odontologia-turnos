@@ -4,6 +4,8 @@ import ar.edu.utn.odontologia.OdontologiaApplication;
 import ar.edu.utn.odontologia.acceso.*;
 import ar.edu.utn.odontologia.pacientes.*;
 import ar.edu.utn.odontologia.recursos.ServicioRecursosAgenda;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.UUID;
 import java.util.concurrent.CountDownLatch;
@@ -67,6 +69,8 @@ public final class ApiC11Fixture implements AutoCloseable {
             throw failure;
         }
     }
+
+    Connection conexionAdmin() throws SQLException { return db.adminConnection(); }
 
     @Override public void close() { try { context.close(); } finally { db.close(); } }
 
