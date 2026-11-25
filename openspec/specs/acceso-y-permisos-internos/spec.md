@@ -45,7 +45,7 @@ El sistema SHALL autenticar a un usuario interno a partir de su identificador y 
 - **THEN** el sistema rechaza la autenticación con el mismo error genérico
 
 ### Requirement: Catálogo de permisos por operación
-El sistema SHALL definir los siguientes permisos nombrados para operaciones del equipo: `turno:crear`, `turno:reprogramar`, `turno:cancelar`, `agenda-sillon:consultar`, `bloqueo:crear`, `bloqueo:consultar`, `ficha:leer`, `ficha:editar`, `confirmacion:registrar`, `pendientes:consultar`, `paciente:datos-admin`, `config:intervalo`, `config:recursos`, `usuario:crear/asignar` y `paciente:eliminar`. Cada recurso protegido SHALL verificar el permiso correspondiente antes de ejecutar la operación. El permiso `paciente:datos-admin` SHALL estar concedido a recepción y odontología, sujeto al alcance por registro definido para cada rol; `paciente:eliminar` SHALL permanecer denegado. Los permisos `pendientes:consultar` y `confirmacion:registrar` SHALL concederse exclusivamente a recepción. El permiso `bloqueo:consultar` SHALL concederse a recepción y odontología, con el alcance por rol de la consulta de bloqueos.
+El sistema SHALL definir los siguientes permisos nombrados para operaciones del equipo: `turno:crear`, `turno:reprogramar`, `turno:cancelar`, `agenda-sillon:consultar`, `bloqueo:crear`, `bloqueo:consultar`, `ficha:leer`, `ficha:editar`, `confirmacion:registrar`, `pendientes:consultar`, `paciente:datos-admin`, `config:intervalo`, `config:recursos`, `usuario:crear/asignar` y `paciente:eliminar`. Cada recurso protegido SHALL verificar el permiso correspondiente antes de ejecutar la operación.
 
 #### Scenario: Permiso concedido
 - **WHEN** una identidad con el permiso requerido solicita la operación protegida
@@ -67,6 +67,9 @@ El sistema SHALL definir los siguientes permisos nombrados para operaciones del 
 - **WHEN** una identidad de odontología consulta la configuración o los recursos, o intenta ejecutar alguna de las escrituras administrativas de C-05
 - **THEN** se permite la consulta y se deniegan la escritura, la creación de usuarios y la vinculación
 
+### Requirement: Permisos administrativos de pacientes
+El permiso `paciente:datos-admin` SHALL estar concedido a recepción y odontología, sujeto al alcance por registro definido para cada rol; `paciente:eliminar` SHALL permanecer denegado.
+
 #### Scenario: Gestión administrativa del paciente permitida
 - **WHEN** recepción o un odontólogo solicita crear o editar datos administrativos de un paciente dentro del alcance por registro de su rol
 - **THEN** el servicio permite la operación con `paciente:datos-admin`
@@ -79,9 +82,15 @@ El sistema SHALL definir los siguientes permisos nombrados para operaciones del 
 - **WHEN** una identidad de recepción u odontología solicita eliminar un paciente
 - **THEN** el sistema deniega la operación
 
+### Requirement: Permisos exclusivos de seguimiento manual
+Los permisos `pendientes:consultar` y `confirmacion:registrar` SHALL concederse exclusivamente a recepción.
+
 #### Scenario: Permisos de seguimiento manual
 - **WHEN** se evalúan los permisos de listado de pendientes y registro manual de confirmación
 - **THEN** recepción tiene ambos permisos y odontología carece de ambos
+
+### Requirement: Permisos de consulta y creación de bloqueos
+El permiso `bloqueo:consultar` SHALL concederse a recepción y odontología, con el alcance por rol de la consulta de bloqueos.
 
 #### Scenario: Permisos de bloqueos
 - **WHEN** se evalúan los permisos de alta y consulta de bloqueos
@@ -115,7 +124,7 @@ El sistema SHALL permitir que recepción lea la ficha clínica de cualquier paci
 - **THEN** el sistema rechaza la edición
 
 ### Requirement: Alcance por registro de pacientes y turnos
-El sistema SHALL otorgar a recepción lectura global de pacientes y turnos del sitio. El sistema SHALL otorgar a odontología acceso a datos administrativos y clínicos solo de pacientes asignados explícitamente a su profesional, y acceso a turnos solo cuando le correspondan según la vinculación profesional definida por contrato. Como única excepción, la agenda SHALL mostrar a odontología nombre y apellido del paciente de sus propios turnos aunque no tenga asignación activa. La asignación de pacientes SHALL ser administrada por recepción. El sistema SHALL NOT asumir acceso clínico global para ningún rol.
+El sistema SHALL otorgar a recepción lectura global de pacientes y turnos del sitio. El sistema SHALL otorgar a odontología acceso a datos administrativos y clínicos solo de pacientes asignados explícitamente a su profesional, y acceso a turnos solo cuando le correspondan según la vinculación profesional definida por contrato. La asignación de pacientes SHALL ser administrada por recepción. El sistema SHALL NOT asumir acceso clínico global para ningún rol.
 
 #### Scenario: Recepción consulta cualquier paciente
 - **WHEN** una identidad con rol `recepcion` consulta un paciente del sitio
@@ -132,6 +141,9 @@ El sistema SHALL otorgar a recepción lectura global de pacientes y turnos del s
 #### Scenario: Odontología no administra asignaciones
 - **WHEN** una identidad con rol `odontologo` intenta asignar o quitar un profesional de un paciente
 - **THEN** el sistema rechaza la operación
+
+### Requirement: Visibilidad mínima del paciente en turnos propios
+Como única excepción, la agenda SHALL mostrar a odontología nombre y apellido del paciente de sus propios turnos aunque no tenga asignación activa.
 
 #### Scenario: Nombre en un turno propio sin asignación activa
 - **WHEN** un odontólogo consulta en la agenda un turno de su profesional cuyo paciente ya no está asignado
