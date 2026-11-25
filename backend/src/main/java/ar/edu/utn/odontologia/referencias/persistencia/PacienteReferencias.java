@@ -1,5 +1,6 @@
 package ar.edu.utn.odontologia.referencias.persistencia;
-
+import jakarta.persistence.LockModeType;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
