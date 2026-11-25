@@ -41,3 +41,4 @@ email:
   from: ${EMAIL_FROM:}
   test-allowlist: ${EMAIL_TEST_ALLOWLIST:}
   max-retries: ${EMAIL_MAX_RETRIES:2}
+  timeout: ${EMAIL_TIMEOUT:10s}
