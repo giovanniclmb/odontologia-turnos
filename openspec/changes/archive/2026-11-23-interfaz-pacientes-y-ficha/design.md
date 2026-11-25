@@ -51,16 +51,16 @@ Ver proposal.md (Why/What). El backend ya contiene servicios y DTO para paciente
 
 ### Política visual
 
-- **Visual policy: system-and-mockups (resuelta 2026-11-23).** Fundación en `design-system/` (Revision 1, aprobada 2026-11-23). Mockups de C-11 creados en `mockups/` y pendientes de aprobación.
+- **Visual policy: system-and-mockups (resuelta 2026-11-23).** Fundación en `design-system/` (Revision 1, aprobada 2026-11-23). Mockups de C-11 creados en `mockups/` y aprobados el 2026-11-23, según el registro de UI Mockups.
 
 ## UI Mockups
 
 - Design system revision: 1
 - Decision: yes (2026-11-23)
-- Mockups: openspec/changes/interfaz-pacientes-y-ficha/mockups/
+- Mockups: openspec/changes/archive/2026-11-23-interfaz-pacientes-y-ficha/mockups/
 - Approval: approved (2026-11-23, by user)
 - Preview: rendered (2026-11-23, previews/)
-- Visual verify: passed (shell, 2026-11-24; interactive flows pending backend)
+- Visual verify: differences (minor, 2026-11-24; interactive verification completed; docs/evidencias/c11-correcciones/verify.md)
 
 ## Risks / Trade-offs
 

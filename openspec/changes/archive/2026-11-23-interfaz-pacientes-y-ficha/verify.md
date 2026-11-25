@@ -1,3 +1,5 @@
+> **Actualización del 24/11/2026:** el cierre histórico del shell era insuficiente para aceptar C-11. Las correcciones, pruebas reales de API, regresiones de HTML y capturas interactivas posteriores se documentan en [la verificación de correcciones](../../../../docs/evidencias/c11-correcciones/verify.md). El texto siguiente se conserva como evidencia histórica, no como prueba vigente de los flujos completos.
+
 # Verification — C-11 interfaz-pacientes-y-ficha
 
 Fecha: 2026-11-24

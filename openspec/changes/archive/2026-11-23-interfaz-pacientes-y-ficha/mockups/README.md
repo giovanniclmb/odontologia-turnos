@@ -36,4 +36,4 @@ Se guardan en `previews/` con nombres `<pantalla>-mobile.png` y `<pantalla>-desk
 
 ## Aprobación
 
-Approval: pending (requiere revisión explícita del usuario).
+Approval: approved (2026-11-23, by user).

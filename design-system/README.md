@@ -14,8 +14,8 @@ Fundación visual portable para el proyecto. Define tokens, marca provisional, c
 
 - Modo durable: `system-and-mockups`.
 - En este modo, cada cambio visual requiere un sistema aprobado y un mockup por cambio antes de Apply.
-- Esta fundación **no está aprobada todavía**. No se crean mockups de C-11 hasta que el usuario apruebe esta revisión.
-- La política está registrada también en `.active-orchestrator-state.json` (`visual_design.mode = system-and-mockups`, `status = pending`).
+- Esta fundación fue aprobada por el usuario el 2026-11-23. C-11 reutiliza la revisión 1 y sus mockups aprobados.
+- La política está registrada también en `.active-orchestrator-state.json` (`visual_design.mode = system-and-mockups`, `status = approved`, `revision = 1`).
 
 ## Fuentes
 
@@ -24,8 +24,8 @@ Fundación visual portable para el proyecto. Define tokens, marca provisional, c
 - `knowledge-base/03_actores_y_roles.md` — recepción, odontólogos, pacientes y permisos.
 - `knowledge-base/06_funcionalidades.md` — US-001 a US-003 (primer cambio visual C-11).
 - `AGENTS.md` / `CLAUDE.md` — reglas duras (RA-01 strict TS, datos ficticios, presupuesto cero).
-- `openspec/changes/interfaz-pacientes-y-ficha/design.md` — política visual diferida y base frontend.
-- `CHANGES.md` — C-11 (interfaz-pacientes-y-ficha) como primer cambio visual pendiente.
+- `openspec/changes/archive/2026-11-23-interfaz-pacientes-y-ficha/design.md` — decisiones de C-11 y aprobación de sus mockups.
+- `CHANGES.md` — C-11 (interfaz-pacientes-y-ficha), primer cambio visual del proyecto.
 
 ## Brief de diseño
 
@@ -73,4 +73,4 @@ Fundación visual portable para el proyecto. Define tokens, marca provisional, c
 
 Approval: approved (2026-11-23, by user)
 
-Para aprobar, responder explícitamente. Al aprobar se actualizará `Approval: approved (<fecha>, por usuario)` y `visual_design.status: approved` en el estado. Un sistema usable puede aprobarse con elementos (TBD) visiblemente provisionales.
+La aprobación vigente corresponde a la revisión 1 (2026-11-23). Un cambio compartido de tokens o assets requiere aumentar la revisión y renovar la aprobación afectada. Los elementos (TBD) siguen siendo provisionales.
