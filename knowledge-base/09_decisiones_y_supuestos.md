@@ -125,3 +125,9 @@ Giovanni aprobó el diseño y el plan escrito de C-08 para Apply con TDD, trabaj
 El registro conserva sus datos y permanece visible como `CANCELADO`, sin ocupar profesional ni sillón después del commit. La transición incrementa una vez la versión; cualquier rechazo o reversión conserva el estado confirmado anterior. El turno devuelto identifica el período y recursos liberados. En una transacción exterior `READ COMMITTED`, esa liberación solo es efectiva al confirmar y el llamador debe entrar sin locks previos de agenda, respetando el orden global fila de turno → profesionales → sillones.
 
 La migración es nueva y consecutiva (V9), coordinada con el historial integrado; V7 y V8 no se editan. La aprobación de Apply no incorpora HTTP, UI, emails, eventos, cancelación por enlace ni avisos de lista. Después de verificar la implementación, Giovanni autorizó expresamente el archivo, la integración y el push el 24/11/2026. [Plan aprobado](../openspec/changes/archive/2026-11-24-cancelar-y-liberar-horario/tasks.md)
+
+## DD-16 — Sesión interna en cookie HttpOnly (25/11/2026)
+
+**Contexto**: la interfaz de C-11 guarda token de sesión e identidad en `localStorage`, contra la regla de seguridad y sin excepción documentada. **Decisión**: Giovanni eligió por menú una cookie `HttpOnly`, `Secure` y `SameSite=Strict` con token anti-CSRF propio. **Alternativas presentadas**: token solo en memoria, excepción documentada para `localStorage` y cookie con Spring Security.
+
+**Límite**: se aprobó preparar la propuesta, sin Apply. La deuda sigue abierta y la spec vigente mantiene el token en `Authorization` hasta implementar y archivar el change. [Propuesta](../openspec/changes/sesion-en-cookie-httponly/proposal.md)
