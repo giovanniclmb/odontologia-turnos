@@ -6,8 +6,6 @@ Integrantes: Giovanni Colombo, Sofia Martinez, Luciano Izquierdo Cafici y Fabian
 
 Fecha de entrega: 25 de noviembre de 2026. Consulta de fuentes y aprobación del Discovery: 17 de noviembre de 2026.
 
-Equipo de cuatro integrantes con autorización docente informada por el equipo.
-
 <!-- salto-de-pagina -->
 
 ## Resumen ejecutivo
@@ -618,13 +616,10 @@ Las comprobaciones siguientes son automatizadas y se muestran aparte de la revis
 | Ayuda: Dentalink | Reserva mediante enlace y configuración profesional | El manual explica enlace, permisos, bloques y profesionales habilitados. No prueba disponibilidad conjunta de sillón y profesional. Corregido el 25/11: ver la segunda comprobación. | [Abrir](https://ayuda.softwaredentalink.com/es/articles/9493139-configura-tu-agenda-online) | Sofia Martinez: sin diferencias |
 | Términos: Dentidesk | Exportación de datos | Licencia activa: Excel estándar sin costo; después del término: solicitud de exportación hasta 30 días corridos y posible cargo. Ese plazo no es la prueba gratuita, que dura 15 días. No se redujo todo a exportación gratuita. | [Abrir](https://app.dentidesk.com/terminos.php) | Fabiano Ramos: prueba de 15 días |
 | Interfaz pública: AgendaPro | Reserva y duración variable por servicio | Se observaron servicios con diferentes duraciones y botón Agendar; no se completó reserva ni se copiaron reseñas o datos de pacientes. | [Abrir](https://agendapro.com/site/ar/odontologiaor/239004) | Luciano Izquierdo Cafici: sin diferencias |
-| Precios: Clinic Cloud | La extracción inicial señalaba promoción de dos meses | La apertura posterior mostró 50% durante tres meses. Se priorizó la página abierta y se aclaró que Max incluye odontograma. | [Abrir](https://clinic-cloud.com/tarifas) | Sin revisión personal |
-| Sitio y FAQ: Dentify | País, cifrado y precio anual de extracción inicial | La portada actual declara Hecho en Argentina, nube cifrada y $30.000/$45.000 mensuales. Se retiró el anual no corroborado y no se inventó código de moneda. Corregido el 25/11: la modalidad anual sí está publicada. | [Abrir](https://www.dentify.com.ar/) | Sin revisión personal |
-| Producto: Odontoly | WhatsApp y ARCA podrían parecer disponibles por figurar en catálogo | El sitio los identifica como complementos próximos. También distingue backups cifrados de base de trabajo aún sin cifrado por la app. | [Abrir](https://odontoly.com/) | Sin revisión personal |
 
 ### Segunda comprobación del agente (25/11/2026)
 
-El agente intentó volver a abrir en un navegador las ocho fuentes anteriores y contrastó con este informe el texto publicado ese día en las siete que respondieron. No sustituye la revisión personal. Por decisión del 25/11/2026 (Ajustar), las diferencias se incorporaron a las fichas, la matriz B y la sección C. Una diferencia puede deberse a una omisión del relevamiento o a un cambio de la página posterior al 17/11/2026; salvo indicación, no se distingue cuál.
+El agente intentó volver a abrir en un navegador ocho fuentes (las cinco anteriores, Clinic Cloud, Dentify y Odontoly) y contrastó con este informe el texto publicado ese día en las siete que respondieron. No sustituye la revisión personal. Por decisión del 25/11/2026 (Ajustar), las diferencias se incorporaron a las fichas, la matriz B y la sección C. Una diferencia puede deberse a una omisión del relevamiento o a un cambio de la página posterior al 17/11/2026; salvo indicación, no se distingue cuál.
 
 En su primera pasada de ese día el agente no vio el adicional de Clinic Cloud, publicado en un texto emergente, ni los importes anuales de Dentify, visibles al cambiar un selector. Una segunda pasada corrigió ambas observaciones.
 

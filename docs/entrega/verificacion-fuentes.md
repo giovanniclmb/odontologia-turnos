@@ -40,8 +40,6 @@ Resultados transmitidos por Giovanni Colombo el 25/11/2026. No consta la fecha d
 | Términos de uso | [Dentidesk](https://app.dentidesk.com/terminos.php) | Fabiano Ramos | La prueba es de 15 días, no de 30; después empiezan los cargos | La ficha 06 ya indicaba 15 días. El agente reabrió los términos: 15 días de prueba (2.2 y 12.1) y 30 días corridos para pedir la exportación tras el término (7.6). Se aclaró la diferencia en el informe |
 | Interfaz pública | [AgendaPro](https://agendapro.com/site/ar/odontologiaor/239004) | Luciano Izquierdo Cafici | Sin diferencias, luego de simular una reserva en la app, que consideró bastante buena | Sin cambios en las celdas. Giovanni Colombo confirmó el 25/11 que Luciano detuvo la simulación antes de confirmar la reserva. El agente había recibido HTTP 403 ese día |
 
-Sin revisión personal: [Clinic Cloud](https://clinic-cloud.com/tarifas), [Dentify](https://www.dentify.com.ar/) y [Odontoly](https://odontoly.com/).
-
 ## tab32: importe observado
 
 El 25/11/2026 Giovanni Colombo confirmó que el importe cercano a $400 era **$427**. El agente había reabierto la [página de precios](https://tab32.com/pricing/): $427 es la estimación mensual de **Open Dental**, otro producto, en un comparador con valores iniciales de 15 turnos por día, 70 % de pacientes asegurados y 48 semanas al año. El mismo comparador estima $179 por mes para tab32, que anuncia su sistema desde $95. La página suma aparte cargos por uso y paquetes de agentes de IA. El agente tampoco localizó un plan de tab32 cercano a $400 en el inicio ni en otras diez páginas del sitio.
