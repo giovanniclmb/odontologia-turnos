@@ -2,7 +2,7 @@
 
 ## Why
 
-La interfaz guarda el token de sesión y la identidad en `localStorage` (`frontend/src/api/client.ts` y `frontend/src/auth/auth.ts`), legibles por cualquier script de la página, contra la regla de seguridad del proyecto y sin excepción documentada. La deuda se señaló en el diseño de C-10 (25/11/2026), que reutiliza el mecanismo de C-11 sin ampliarlo.
+La interfaz guarda el token de sesión y la identidad en `localStorage` (`frontend/src/api/client.ts` y `frontend/src/auth/auth.ts`), legibles por cualquier script de la página, contra la regla de seguridad del proyecto y sin excepción documentada. La deuda se señaló en el diseño de C-10 (25/11/2026), que reutilizó el mecanismo de C-11 sin ampliarlo y ya está integrado.
 
 El 25/11/2026 el usuario eligió resolverla con cookie `HttpOnly` y token anti-CSRF propio. Esa elección aprueba esta propuesta, no su implementación.
 
@@ -37,11 +37,11 @@ Ninguna.
 
 ## Impact
 
-- Backend: filtro de autenticación, `AuthController`, configuración CORS y pruebas HTTP que usan `Bearer` (incluidas las que agrega C-10).
-- Interfaz: cliente HTTP, módulo de autenticación, arranque de `main.ts` y sus pruebas.
+- Backend: filtro de autenticación, `AuthController`, configuración CORS y pruebas HTTP que usan `Bearer` (`ApiPacientesIT` y `ApiAgendaIT`).
+- Interfaz: cliente HTTP, módulo de autenticación, arranque y cierre en `main.ts`, mensajes de agenda y sus pruebas.
 - Sin dependencias nuevas, migraciones ni cambios de roles o permisos.
 - Contrato incompatible: backend e interfaz se publican juntos.
 - Restringe el despliegue futuro: interfaz y API deben compartir sitio, con HTTPS fuera de loopback.
-- Orden: Apply recién después de integrar C-10 (`feature/c-10-interfaz-agenda-y-alta`) y la corrección de CORS en el `401` por sesión vencida, que tocan los mismos archivos.
+- C-10 y las correcciones del `401`, que tocan los mismos archivos, ya están en `main` (c559fbb). Apply sigue requiriendo aprobación.
 - Hasta ese Apply la deuda sigue abierta; este change no documenta una excepción para el estado actual.
 - No incorpora sesión de pacientes (C-16, C-24), enlaces de cancelación, Spring Security, CSP ni despliegue.

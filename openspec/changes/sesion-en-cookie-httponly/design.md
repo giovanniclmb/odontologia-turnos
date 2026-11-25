@@ -2,12 +2,15 @@
 
 ## Context
 
-Ver [proposal.md](proposal.md). Estado en `main` (401f78f) y en la rama de C-10:
+Ver [proposal.md](proposal.md). Estado en `main` (c559fbb), que ya incluye C-10 y las correcciones del `401`:
 
 - `POST /auth/login` devuelve un token opaco aleatorio; PostgreSQL guarda su SHA-256 en `token_acceso`, con expiración configurable (`app.token.expiracion-horas`, 24) y revocación al cerrar sesión.
-- `TokenAutenticacionFilter` lee `Authorization: Bearer`; la autorización vive en los servicios. No se usa Spring Security, solo `spring-security-crypto`.
+- `TokenAutenticacionFilter` lee `Authorization: Bearer`. Un rechazo de autenticación responde `401 no_autenticado`; otra falla al resolver el token responde `500 error_interno` con `correlacion` y deja el detalle en el registro.
+- La autorización vive en los servicios. No se usa Spring Security, solo `spring-security-crypto`.
+- Hay escrituras por HTTP en pacientes, asignaciones, ficha, turnos, bloqueos, intervalo y cierre de sesión.
+- La interfaz decide al arrancar con la identidad y el token guardados; ante `no_autenticado`, la agenda pide cerrar sesión y volver a ingresar.
 - En desarrollo la interfaz se sirve en `http://localhost:5173` y la API en `http://localhost:8080`: orígenes distintos, mismo sitio. No hay HTTPS ni despliegue (PA-09).
-- CORS admite una lista de orígenes, sin credenciales.
+- `CorsConfig` registra un `CorsFilter` con máxima precedencia: lista de orígenes, cualquier encabezado, preflight vigente 30 minutos y sin credenciales.
 
 ## Goals / Non-Goals
 
@@ -35,7 +38,7 @@ Cookie `sesion`, con `HttpOnly`, `Secure`, `SameSite=Strict`, `Path=/`, sin `Dom
 
 ### Anti-CSRF derivado de la sesión
 
-`tokenCsrf = HMAC-SHA256(clave = token de sesión, mensaje = "csrf-v1")`, en hexadecimal. El filtro lo recalcula desde la cookie y lo compara en tiempo constante con `X-CSRF-Token` en todo método distinto de `GET`, `HEAD` y `OPTIONS`.
+`tokenCsrf = HMAC-SHA256(clave = token de sesión, mensaje = "csrf-v1")`, en hexadecimal. El filtro lo recalcula desde la cookie y lo compara en tiempo constante con `X-CSRF-Token` en todo método distinto de `GET`, `HEAD` y `OPTIONS`, antes de que el controlador valide la entrada. La regla es general, sin lista de rutas, para cubrir escrituras futuras.
 
 | Alternativa | Motivo para descartarla |
 | --- | --- |
@@ -51,31 +54,33 @@ El token derivado no necesita secreto de servidor, cambia con cada sesión y no 
 | Método y ruta | Cambio |
 | --- | --- |
 | `POST /auth/login` | `200 {usuarioId, nombreUsuario, rol, profesionalRef, tokenCsrf}` y `Set-Cookie`; sin `token` |
-| `GET /auth/sesion` | Nuevo. Mismo cuerpo; `401 no_autenticado` sin sesión |
+| `GET /auth/sesion` | Nuevo. Mismo cuerpo; `401 no_autenticado` sin sesión, con el mecanismo que usa C-10 |
 | `POST /auth/logout` | Exige `X-CSRF-Token` con sesión válida; `204` y cookie expirada. Sin cookie responde `204` |
 
 - Respuestas de login y sesión con `Cache-Control: no-store`.
 - El filtro no evalúa la cookie en el login, para que una cookie vieja no bloquee el ingreso. En el resto, una cookie inválida produce `401` y la expira.
-- El login no lleva token anti-CSRF porque aún no hay sesión: lo protegen el cuerpo JSON obligatorio, que fuerza preflight, y la lista de orígenes.
+- Una falla interna conserva el `500 error_interno` vigente y no expira la cookie: no prueba que la sesión sea inválida.
+- El login no lleva token anti-CSRF porque aún no hay sesión: lo protegen el cuerpo JSON obligatorio, que fuerza preflight, y el rechazo de orígenes no permitidos del `CorsFilter`.
 - Se conserva el formato `{codigo, mensaje}`; se agrega `403 csrf_invalido`.
 - No se mantiene `Bearer` en paralelo: obligaría a seguir devolviendo el token legible. El único cliente es la interfaz del repositorio.
 
 ### CORS
 
-`allowCredentials(true)`, orígenes exactos de `app.cors.allowed-origins` y encabezados `Accept`, `Content-Type` y `X-CSRF-Token`. Las respuestas `401` y `403` del filtro deben llevar las cabeceras CORS del origen permitido: se reutiliza la corrección en curso del `401`, sin duplicarla.
+Sobre el `CorsFilter` vigente: `allowCredentials(true)`, orígenes exactos de `app.cors.allowed-origins` y encabezados `Accept`, `Content-Type` y `X-CSRF-Token` en lugar de cualquiera. Su precedencia ya hace que `401`, `403` y `500` del filtro de token lleven las cabeceras del origen permitido; se conserva, junto con la vigencia del preflight. Spring rechaza combinar credenciales con `*` al atender la solicitud.
 
 ### Interfaz
 
 - `client.ts` usa `credentials: "include"` y mantiene `tokenCsrf` en memoria; `auth.ts` mantiene la identidad en memoria.
 - Al arrancar llama a `GET /auth/sesion`; `401` muestra el login y otro fallo muestra un error con reintento, sin simular sesión cerrada.
 - Las respuestas de login y sesión entran como `unknown` y se validan con funciones propias, como en C-10.
-- Ante `401` vuelve al login; ante `csrf_invalido` consulta la sesión y vuelve a renderizar, sin reenviar la escritura.
+- El cliente HTTP avisa la pérdida de sesión a un único punto de `main.ts`, que desmonta la navegación y la sección de agenda y muestra el login con «Su sesión venció. Vuelva a ingresar.». Reemplaza el pedido manual de `agenda/mensajes.ts`. No muestran ese aviso el arranque sin sesión, el rechazo de credenciales del login ni el cierre voluntario.
+- Ante `csrf_invalido` consulta la sesión, vuelve a renderizar con la identidad vigente e informa que el envío no se completó, sin reenviarlo.
 - Al arrancar elimina las claves `token` y `user` de `localStorage`.
-- El cierre fallido deja de ignorarse: con la cookie `HttpOnly`, la interfaz no puede cerrar la sesión por sí sola y mostrar el login sería engañoso en un equipo compartido.
+- El cierre fallido deja de ignorarse: con la cookie `HttpOnly`, la interfaz no puede cerrar la sesión por sí sola y mostrar el login sería engañoso en un equipo compartido. La navegación, que hoy se desmonta antes de llamar al cierre, se desmonta recién con el cierre confirmado.
 
 ## UI Mockups
 
-No agrega pantallas ni cambia el diseño: reutiliza login y mensajes existentes. Si la política visual vigente exige una decisión para el mensaje de cierre fallido o el error de arranque, se registra antes de Apply.
+No agrega pantallas ni cambia el diseño: reutiliza login y mensajes existentes. Si la política visual vigente exige una decisión para los avisos de sesión vencida, envío no completado o cierre fallido, o para el error de arranque, se registra antes de Apply.
 
 ## Risks / Trade-offs
 
