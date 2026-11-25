@@ -38,3 +38,9 @@ El asunto es «Tu turno en el consultorio». El registro temporal debe quedar `t
 ## Constancia
 
 Anotar fecha y hora, resultado de la prueba, estado observado en el panel y su identificador si está disponible, y la confirmación de recepción. No publicar dirección, cuerpo, enlace ni credenciales.
+
+## Resultado de la ejecución autorizada
+
+El 25/11/2026 a las 15:33 (America/Mendoza), con autorización expresa del usuario, la validación previa pasó y se ejecutó una vez `SEND_ONE_C19_TEST`: Maven terminó con código 0, 1 prueba sin fallos. La prueba exige que el registro temporal quede `turno-alta`, `sent`, con un intento, lo que indica una respuesta 2xx de Resend. En el registro de la ejecución no apareció la credencial ni la dirección.
+
+Pendiente: confirmación de recepción por el usuario y, si está disponible, estado e identificador del panel de Resend. La respuesta 2xx no prueba la entrega. No repetir el envío.

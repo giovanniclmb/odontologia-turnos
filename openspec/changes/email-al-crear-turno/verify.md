@@ -4,7 +4,7 @@ Fecha: 25/11/2026. Base: `main` en `5eaba41`, rama `feature/c-19-email-al-crear-
 
 ## Estado
 
-Implementado y verificado localmente con proveedor simulado. **La evidencia con envío real está pendiente de autorización expresa (tarea 4.3)**, por lo que el change no está completo ni archivado.
+Implementado y verificado localmente con proveedor simulado. El envío real autorizado fue aceptado por el proveedor; **falta confirmar la recepción (tarea 4.3)**, por lo que el change no está completo ni archivado.
 
 ## Fallo observado antes de implementar
 
@@ -30,13 +30,17 @@ Tras la revisión, las pruebas nuevas de representación en texto y de motivo en
 
 Al prepararlo se observó que el aislamiento de las integraciones agregado en este change vaciaba también la configuración de las pruebas manuales, incluida la de C-17. Ahora se desactiva solo con `-Denvio.real=true`; con esa opción las validaciones pasan y sin ella siguen aisladas. La suite completa posterior dio 151 unitarias y 292 de integración sin fallos. Este ajuste y la herramienta no pasaron por revisión independiente.
 
+## Envío real
+
+25/11/2026, 15:33 (America/Mendoza): un único envío autorizado por el recorrido completo, con turno ficticio. El registro quedó `sent` con un intento. Falta la confirmación de recepción. Detalle en el [procedimiento](../../../docs/evidencias/c19-envio-real/prueba-real-runbook.md).
+
 ## Revisión independiente
 
 Un agente sin el contexto de la implementación revisó en solo lectura, sin ejecutar Maven. En el código de producción no halló bloqueantes: sin fuga de token o datos, cruce entre pacientes, ciclos de bloqueos ni vía de envío real desde pruebas o demostraciones. Halló un bloqueante en una prueba: `EjecutorEmailTest` era intermitente, reproducido con una réplica fuera de Maven. Se corrigió junto con la redacción del README y el diseño, el motivo en el registro, la representación en texto del mensaje y la solicitud, dos pruebas débiles y `.env.example`.
 
 ## Pendientes
 
-- Envío real a una dirección de prueba autorizada y su evidencia, sin credenciales ni direcciones. El remitente de prueba de Resend solo entrega a la dirección de la cuenta.
+- Confirmación de recepción del envío real y, si está disponible, estado e identificador del panel de Resend.
 - La página de cancelación corresponde a C-23; hasta entonces el enlace no cancela desde el navegador.
 - Un aviso se pierde si el proceso cae, si la cola está llena o si el cierre supera la espera; un envío interrumpido puede quedar `pending`.
 - La vigencia se comprueba antes del primer intento; un cambio durante los reintentos no detiene el mensaje.
