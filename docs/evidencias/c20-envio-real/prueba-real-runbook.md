@@ -50,4 +50,4 @@ El 25/11/2026 a las 16:30 (America/Mendoza), con autorización expresa del usuar
 
 La aplicación que prepara el turno registró que no envió el email de alta por no tener `EMAIL_CANCELACION_URL_BASE`; es lo esperado, y esa aplicación además no tiene salida de correo.
 
-La confirmación de recepción está pendiente. No se registraron el estado ni el identificador del panel de Resend. No repetir el envío.
+El mismo día el usuario confirmó por menú que el correo llegó. No se registraron el estado ni el identificador del panel de Resend. No repetir el envío.

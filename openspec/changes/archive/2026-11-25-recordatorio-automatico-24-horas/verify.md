@@ -1,6 +1,6 @@
 # Verify
 
-Fecha: 25/11/2026. Java 25.0.4, PostgreSQL 18.7 (Testcontainers). Sin envíos reales: las pruebas usan un transporte falso o un servidor local.
+Fecha: 25/11/2026. Java 25.0.4, PostgreSQL 18.7 (Testcontainers). La suite automática no envía correos: usa un transporte falso o un servidor local.
 
 ## Resultado
 
@@ -12,6 +12,10 @@ Fecha: 25/11/2026. Java 25.0.4, PostgreSQL 18.7 (Testcontainers). Sin envíos re
 | `python3 -m unittest discover -s scripts/tests` | 9 pruebas, sin fallos |
 
 No se ejecutaron las pruebas del frontend: el change no lo modifica.
+
+## Envío real
+
+Con autorización expresa, el 25/11/2026 a las 16:30 se envió un único recordatorio a la dirección de prueba del equipo mediante la [prueba manual](../../../../docs/evidencias/c20-envio-real/prueba-real-runbook.md): la aplicación activada lo envió en su revisión inicial, quedó `sent` con un intento, una segunda revisión no lo repitió y el usuario confirmó la recepción.
 
 ## TDD
 
@@ -46,5 +50,4 @@ Se alteró temporalmente la implementación para comprobar que las pruebas nueva
 
 ## Pendiente
 
-- Envío real a una dirección de prueba del equipo, con autorización expresa (tarea 5.3). La [prueba manual](../../../docs/evidencias/c20-envio-real/prueba-real-runbook.md) está preparada: el ensayo con servidor local y la validación previa de la configuración pasaron, sin envíos.
-- Archivo en OpenSpec, publicación e integración.
+- Publicación e integración.

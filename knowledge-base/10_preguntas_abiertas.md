@@ -130,4 +130,4 @@ Estas decisiones cierran PA-05/06/07 únicamente para el alcance de C-04; no res
 - **PA-18 — programación:** el backend revisa cada minuto los turnos a 24 horas o menos; si estaba apagado, envía al volver mientras el turno no haya comenzado. El envío automático se activa por configuración y está apagado por defecto.
 - **PA-18 — cambios y altas cercanas:** reciben recordatorio los turnos pendientes y confirmados. Un horario creado o reprogramado con menos de 24 horas no lo recibe.
 - **PA-18 — contenido y fallos:** nombre, fecha y hora de Mendoza y la aclaración de que ya no puede cancelarse por enlace, al email de la ficha. Un fallo agotado solo se registra.
-- Las precisiones sobre cada punto constan en la [propuesta de C-20](../openspec/changes/recordatorio-automatico-24-horas/proposal.md), aprobada el 25/11/2026.
+- Las precisiones sobre cada punto constan en la [propuesta de C-20](../openspec/changes/archive/2026-11-25-recordatorio-automatico-24-horas/proposal.md), aprobada el 25/11/2026.

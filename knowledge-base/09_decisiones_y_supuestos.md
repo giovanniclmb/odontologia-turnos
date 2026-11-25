@@ -158,4 +158,4 @@ La migración es nueva y consecutiva (V9), coordinada con el historial integrado
 
 **Alternativas presentadas**: temporizador por turno o proceso externo; atraso limitado a 12 horas o sin recuperación; recordar también los horarios cercanos; reintentar más tarde; solo pendientes; pedir aviso al consultorio u omitir la cancelación; encendido por defecto.
 
-**Límite**: Giovanni aprobó la propuesta y su implementación el 25/11/2026, sin autorizar un envío real. [Change](../openspec/changes/recordatorio-automatico-24-horas/proposal.md)
+**Límite**: Giovanni aprobó la propuesta y su implementación el 25/11/2026. Autorizó además un único envío real de prueba el mismo día y confirmó su recepción. [Change](../openspec/changes/archive/2026-11-25-recordatorio-automatico-24-horas/proposal.md)

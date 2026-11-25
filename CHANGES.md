@@ -416,7 +416,7 @@ El 25/11/2026 Giovanni reasignó expresamente C-19 y C-20 de Fabi a sí mismo. S
   - [Preguntas abiertas](knowledge-base/10_preguntas_abiertas.md)
 
 ### [C-20] `recordatorio-automatico-24-horas`
-- **Estado**: `[ ]` implementado y verificado localmente el 25/11/2026, con revisión independiente atendida. Pendientes el envío real autorizado, el archivo en OpenSpec y la integración. [Verificación](openspec/changes/recordatorio-automatico-24-horas/verify.md) · [Issue #21](https://github.com/giovanniclmb/odontologia-turnos/issues/21).
+- **Estado**: `[x]` implementado, verificado y archivado en OpenSpec el 25/11/2026, con revisión independiente atendida y un envío real de prueba recibido. Pendiente de integración. [Verificación](openspec/changes/archive/2026-11-25-recordatorio-automatico-24-horas/verify.md) · [Issue #21](https://github.com/giovanniclmb/odontologia-turnos/issues/21).
 - **Responsable**: Giovanni
 - **Scope**: Recordatorio de US-012 y RN-EM-02, separado de confirmaciones manuales.
   - Resolver PA-18: programación y referencia horaria, reprogramaciones, cancelaciones, altas cercanas, fallos y duplicados. Acordar tecnología antes de implementar.
