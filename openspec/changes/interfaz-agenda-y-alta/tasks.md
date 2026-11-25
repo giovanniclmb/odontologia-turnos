@@ -22,10 +22,10 @@
 
 - [x] 4.1 Con TDD, implementar la conversión horaria de Mendoza y los límites de día y semana; verificar con `npm test` ejecutando también con otra zona en `TZ`.
 - [x] 4.2 Con TDD, implementar validadores de respuestas y estado en la URL; verificar respuestas mal formadas y parámetros inválidos.
-- [ ] 4.3 Implementar vista diaria y semanal con carga, vacío, error y reintento según los mockups; verificar con pruebas de render que los textos no se interpreten como HTML.
-- [ ] 4.4 Implementar alta de turno y alta de bloqueo según rol; verificar rechazo con datos conservados, envío único y catálogos vacíos.
-- [ ] 4.5 Implementar la sección Configuración solo para recepción; verificar sin configurar, cambio válido, valor inválido y ausencia para odontología.
-- [ ] 4.6 Actualizar `frontend/README.md`; verificar que sus pasos se ejecuten como están escritos.
+- [x] 4.3 Implementar vista diaria y semanal con carga, vacío, error y reintento según los mockups; verificar con pruebas de render que los textos no se interpreten como HTML.
+- [x] 4.4 Implementar alta de turno y alta de bloqueo según rol; verificar rechazo con datos conservados, envío único y catálogos vacíos.
+- [x] 4.5 Implementar la sección Configuración solo para recepción; verificar sin configurar, cambio válido, valor inválido y ausencia para odontología.
+- [x] 4.6 Actualizar `frontend/README.md`; verificar que sus pasos se ejecuten como están escritos.
 
 ## 5. Integración
 

@@ -165,3 +165,12 @@ Los instantes usan ISO 8601 con zona, entre los años 1 y 9999. Las consultas ac
 | `409 intervalo_sin_configurar` | Alta sin intervalo de sede |
 
 `ApiAgendaIT` verifica este contrato y `LecturasAgendaIT` el alcance de las lecturas, ambas sobre PostgreSQL real.
+
+Para recorrer la interfaz de agenda sin tocar la base de desarrollo, con el puerto 8080 libre, desde `backend/`:
+
+```sh
+mvn test-compile dependency:build-classpath -Dmdep.outputFile=target/demo-classpath
+java -cp "target/test-classes:target/classes:$(cat target/demo-classpath)" ar.edu.utn.odontologia.persistencia.ApiC10Demo
+```
+
+`ApiC10Demo` suma al fixture de C-11 los sillones `SIL-01` y `SIL-02`, las prestaciones `CONTROL` y `TRATAMIENTO` y un paciente sin asignación, todos ficticios. El intervalo queda sin configurar. Usa los mismos usuarios de prueba, nunca en una base persistente. Ctrl-C cierra la API y su contenedor.

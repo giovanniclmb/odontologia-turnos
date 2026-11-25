@@ -5,6 +5,10 @@ import { consultarFicha, actualizarAntecedentes, agregarNota, editarNota } from 
 import type { Paciente, Profesional, Ficha } from "./api/types.js";
 import { ApiError } from "./api/client.js";
 import { renderOpcionesProfesionales, renderProfesionalesAsignados } from "./dom/render-profesionales.js";
+import { apiAgenda } from "./agenda/api.js";
+import { escribirRuta, leerRuta, type Ruta } from "./agenda/ruta.js";
+import { crearSeccion } from "./agenda/seccion.js";
+import { fechaEnSede } from "./tiempo/mendoza.js";
 
 function el<T extends HTMLElement>(id: string): T {
   const node = document.getElementById(id);
@@ -74,15 +78,15 @@ async function renderApp(): Promise<void> {
         <div class="brand"><img src="../../design-system/assets/logo.svg" alt="Logo provisional"><strong data-brand-name></strong></div>
         <nav class="nav" aria-label="Secciones">
           <a href="#pacientes" id="nav-pacientes" aria-current="page">Pacientes</a>
-          <span aria-disabled="true">Agenda</span>
+          <a href="#agenda" id="nav-agenda">Agenda</a>
           <span aria-disabled="true">Ficha clínica</span>
           <span aria-disabled="true">Lista de espera</span>
-          <span aria-disabled="true">Configuración</span>
+          ${esRecepcion() ? `<a href="#configuracion" id="nav-configuracion">Configuración</a>` : ""}
         </nav>
       </aside>
       <div class="main">
       <header class="topbar">
-        <span class="topbar-title">Pacientes</span>
+        <span class="topbar-title" id="titulo-seccion">Pacientes</span>
         <div class="topbar-user">
         <span>${escape(user?.nombreUsuario ?? "")} (${escape(user?.rol ?? "")})</span>
         <button id="btn-logout" class="btn btn-secondary">Cerrar sesión</button>
@@ -128,18 +132,20 @@ async function renderApp(): Promise<void> {
         </div>
         <section class="card detail-card" id="detalle" hidden></section>
       </main>
+      <main class="content" id="seccion-agenda" hidden></main>
       </div>
     </div>
   `;
   aplicarNombreMarca();
+  const aplicarRuta = montarNavegacion();
   el<HTMLButtonElement>("btn-logout").addEventListener("click", async () => {
     await logout();
+    window.onhashchange = null;
+    history.replaceState(null, "", window.location.pathname);
+    document.title = "Odontología";
     renderLogin();
   });
-  el<HTMLAnchorElement>("nav-pacientes").addEventListener("click", (event) => {
-    event.preventDefault();
-    mostrarListado();
-  });
+  el<HTMLAnchorElement>("nav-pacientes").addEventListener("click", () => mostrarListado());
   el<HTMLButtonElement>("btn-nuevo-paciente").addEventListener("click", mostrarAlta);
   el<HTMLButtonElement>("btn-cancelar-alta").addEventListener("click", mostrarListado);
   const formBusqueda = el<HTMLFormElement>("form-busqueda");
@@ -168,7 +174,55 @@ async function renderApp(): Promise<void> {
       mostrarMensaje(mensaje, (error as Error).message, true);
     }
   });
+  aplicarRuta();
   await cargarListado();
+}
+
+const TITULOS: Record<Ruta["seccion"], string> = {
+  pacientes: "Pacientes",
+  agenda: "Agenda",
+  "agenda/nuevo": "Nuevo turno",
+  "agenda/bloqueo": "Bloquear período",
+  configuracion: "Configuración"
+};
+
+/** Muestra la sección indicada por el hash y devuelve la función que vuelve a aplicarlo. */
+function montarNavegacion(): () => void {
+  const user = currentUser();
+  const rol = user?.rol === "recepcion" ? "recepcion" : "odontologo";
+  const hoy = () => fechaEnSede(new Date());
+  const seccion = crearSeccion({
+    doc: document,
+    raiz: el<HTMLElement>("seccion-agenda"),
+    api: apiAgenda,
+    usuario: { rol, profesionalRef: user?.profesionalRef ?? null },
+    hoy,
+    navegar: (ruta) => {
+      const destino = escribirRuta(ruta);
+      if (window.location.hash === destino) aplicarRuta();
+      else window.location.hash = destino;
+    },
+    reemplazar: (ruta) => history.replaceState(null, "", escribirRuta(ruta)),
+    elementoActivo: () => document.activeElement?.id || null
+  });
+  function aplicarRuta(): void {
+    const ruta = leerRuta(window.location.hash, rol, hoy());
+    const enPacientes = ruta.seccion === "pacientes";
+    el<HTMLElement>("pacientes").hidden = !enPacientes;
+    el<HTMLElement>("seccion-agenda").hidden = enPacientes;
+    el<HTMLElement>("titulo-seccion").textContent = TITULOS[ruta.seccion];
+    document.title = `Odontología - ${TITULOS[ruta.seccion]}`;
+    const actual = ruta.seccion === "pacientes" || ruta.seccion === "configuracion" ? ruta.seccion : "agenda";
+    for (const nombre of ["pacientes", "agenda", "configuracion"]) {
+      const enlace = document.getElementById(`nav-${nombre}`);
+      if (nombre === actual) enlace?.setAttribute("aria-current", "page");
+      else enlace?.removeAttribute("aria-current");
+    }
+    if (ruta.seccion === "pacientes") seccion.cerrar();
+    else void seccion.mostrar(ruta);
+  }
+  window.onhashchange = aplicarRuta;
+  return aplicarRuta;
 }
 
 async function cargarListado(codigo?: string, texto?: string): Promise<void> {
