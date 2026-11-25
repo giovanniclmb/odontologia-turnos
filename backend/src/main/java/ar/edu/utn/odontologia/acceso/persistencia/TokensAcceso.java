@@ -11,4 +11,6 @@ public interface TokensAcceso extends Repository<TokenAcceso, UUID> {
     Optional<TokenAcceso> findById(UUID id);
 
     List<TokenAcceso> findByUsuarioId(UUID usuarioId);
+
+    Optional<TokenAcceso> findByHashToken(String hashToken);
 }

@@ -21,7 +21,7 @@ public class OdontologiaApplication {
         java.util.TimeZone.setDefault(java.util.TimeZone.getTimeZone("UTC"));
     }
     public static void main(String[] args) {
-        new SpringApplicationBuilder(OdontologiaApplication.class).web(WebApplicationType.NONE).run(args);
+        new SpringApplicationBuilder(OdontologiaApplication.class).web(WebApplicationType.SERVLET).run(args);
     }
 
     @Bean

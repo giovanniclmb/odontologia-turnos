@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pacientes — listado</title>
+  <link rel="stylesheet" href="../../../../../design-system/tokens.css" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar" aria-label="Navegación principal">
+      <div class="brand">
+        <img src="../../../../../design-system/assets/logo.svg" alt="Logo provisional (TBD)" />
+        <span class="brand-name" data-brand-name></span>
+      </div>
+      <nav class="nav" aria-label="Secciones">
+        <a href="#" aria-current="page">Pacientes</a>
+        <a href="#">Agenda</a>
+        <a href="#">Ficha clínica</a>
+        <a href="#">Lista de espera</a>
+        <a href="#">Configuración</a>
+      </nav>
+    </aside>
+
+    <div class="main">
+      <header class="topbar">
+        <span class="topbar-title">Pacientes</span>
+        <div style="display: flex; align-items: center; gap: var(--space-3);">
+          <div class="role-toggle" role="group" aria-label="Vista por rol">
+            <button type="button" class="is-active" data-role-btn="recepcion">Recepción</button>
+            <button type="button" data-role-btn="odontologo">Odontólogo</button>
+          </div>
+          <span style="font-size: var(--text-sm); color: var(--color-text-muted);">Usuario ficticio</span>
+        </div>
+      </header>
+
+      <main class="content">
+        <section class="page-header">
+          <div>
+            <h1>Pacientes</h1>
+            <p>Datos administrativos básicos. Sin contenido clínico. <span class="tbd">TBD: alcance por sede</span></p>
+          </div>
+          <a class="btn btn-primary" href="./paciente-alta.html">+ Nuevo paciente</a>
+        </section>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Búsqueda</div>
+          </div>
+          <form style="display: flex; gap: var(--space-3); flex-wrap: wrap;">
+            <input class="input" type="search" placeholder="Código exacto o nombre/apellido parcial…" style="flex: 1; min-width: 16rem;" aria-label="Buscar pacientes" />
+            <button type="submit" class="btn btn-secondary">Buscar</button>
+            <button type="button" class="btn btn-ghost">Limpiar</button>
+          </form>
+        </div>
+
+        <!-- Recepción view -->
+        <section class="view is-active" data-view="recepcion">
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <div class="card-title">Listado — Recepción (todos los del sitio)</div>
+                <div class="card-subtitle">Incluye pacientes con y sin asignación.</div>
+              </div>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Código</th><th>Nombre</th><th>Apellido</th><th>Email</th><th>Profesionales</th><th>Estado</th><th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="cell-code">P-001</td><td>Ana</td><td>García (ficticio)</td><td>ana.ejemplo@correo.test</td><td>Dr. Ejemplo</td>
+                    <td><span class="badge badge-success">Activo</span></td>
+                    <td><a class="btn btn-ghost btn-sm" href="./paciente-detalle.html">Ver detalle</a></td>
+                  </tr>
+                  <tr>
+                    <td class="cell-code">P-002</td><td>Bruno</td><td>López (ficticio)</td><td>bruno.ejemplo@correo.test</td><td>—</td>
+                    <td><span class="badge badge-warning">Sin asignar</span></td>
+                    <td><a class="btn btn-ghost btn-sm" href="./paciente-detalle.html">Ver detalle</a></td>
+                  </tr>
+                  <tr>
+                    <td class="cell-code">P-003</td><td>Carla</td><td>Martínez (ficticio)</td><td>carla.ejemplo@correo.test</td><td>Dra. Ejemplo B</td>
+                    <td><span class="badge badge-neutral">Inactivo</span></td>
+                    <td><a class="btn btn-ghost btn-sm" href="./paciente-detalle.html">Ver detalle</a></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- Odontólogo view -->
+        <section class="view" data-view="odontologo">
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <div class="card-title">Listado — Odontólogo (solo asignados)</div>
+                <div class="card-subtitle">Pacientes asignados a su profesional.</div>
+              </div>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Código</th><th>Nombre</th><th>Apellido</th><th>Email</th><th>Profesionales</th><th>Estado</th><th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="cell-code">P-001</td><td>Ana</td><td>García (ficticio)</td><td>ana.ejemplo@correo.test</td><td>Dr. Ejemplo</td>
+                    <td><span class="badge badge-success">Activo</span></td>
+                    <td><a class="btn btn-ghost btn-sm" href="./paciente-detalle.html">Ver detalle</a></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- Empty state -->
+        <section class="card">
+          <div class="empty">
+            <div class="empty-icon" aria-hidden="true">∅</div>
+            <div class="empty-title">Sin resultados</div>
+            <div class="empty-text">No se encontraron pacientes con ese criterio. Pruebe otra búsqueda o cree un paciente.</div>
+            <div style="margin-top: var(--space-4);">
+              <a class="btn btn-primary" href="./paciente-alta.html">Nuevo paciente</a>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var btns = document.querySelectorAll("[data-role-btn]");
+      btns.forEach(function (b) {
+        b.addEventListener("click", function () {
+          var role = b.getAttribute("data-role-btn");
+          btns.forEach(function (x) { x.classList.remove("is-active"); });
+          b.classList.add("is-active");
+          document.querySelectorAll("[data-view]").forEach(function (v) {
+            v.classList.toggle("is-active", v.getAttribute("data-view") === role);
+          });
+        });
+      });
+    })();
+  </script>
+  <script src="../../../../../design-system/brand.js" defer></script>
+</body>
+</html>

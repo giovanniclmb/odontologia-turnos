@@ -114,7 +114,7 @@ class AccesoPersistenciaIT {
         var environment = new StandardEnvironment();
         environment.getPropertySources().remove(StandardEnvironment.SYSTEM_ENVIRONMENT_PROPERTY_SOURCE_NAME);
         environment.getPropertySources().remove(StandardEnvironment.SYSTEM_PROPERTIES_PROPERTY_SOURCE_NAME);
-        return new SpringApplicationBuilder(JpaConfiguration.class).web(WebApplicationType.NONE).environment(environment)
+        return new SpringApplicationBuilder(JpaConfiguration.class).web(WebApplicationType.NONE).properties("spring.main.web-application-type=none").environment(environment)
                 .initializers(c -> c.getEnvironment().getPropertySources().addFirst(new MapPropertySource("postgresTemporal", props)))
                 .run("--spring.config.location=classpath:/application.yaml");
     }

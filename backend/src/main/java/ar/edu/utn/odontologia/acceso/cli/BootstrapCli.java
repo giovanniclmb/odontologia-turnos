@@ -32,7 +32,7 @@ public final class BootstrapCli {
 
         try (ConfigurableApplicationContext contexto = new SpringApplicationBuilder(OdontologiaApplication.class)
                 .web(WebApplicationType.NONE)
-                .run(args)) {
+                .run(concatenar(args, "--spring.main.web-application-type=none"))) {
             ServicioBootstrap bootstrap = contexto.getBean(ServicioBootstrap.class);
             DatosBootstrap datos = new DatosBootstrap(nombreUsuario.trim(), contrasena, rol,
                     new DatosPersonales(null, nombreUsuario.trim(), null), null);
@@ -40,6 +40,15 @@ public final class BootstrapCli {
             System.out.println("Bootstrap creado: usuario=" + usuario.getNombreUsuario() + " id=" + usuario.getId()
                     + " rol=" + usuario.getRol().codigo());
         }
+    }
+
+    private static String[] concatenar(String[] args, String extra) {
+        String[] resultado = new String[(args == null ? 0 : args.length) + 1];
+        if (args != null) {
+            System.arraycopy(args, 0, resultado, 0, args.length);
+        }
+        resultado[resultado.length - 1] = extra;
+        return resultado;
     }
 
     private static String variable(String nombre) {
