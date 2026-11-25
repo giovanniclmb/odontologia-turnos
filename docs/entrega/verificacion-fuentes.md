@@ -2,7 +2,7 @@
 
 La consigna pide que los integrantes **abran y comprueben personalmente** al menos cinco fuentes citadas, de distintos tipos, y anoten si lo que afirma el informe está en esa URL.
 
-**Estado: 0 fuentes verificadas personalmente.** Lo que sigue incluye una segunda comprobación hecha por el agente, que no reemplaza esa tarea ni debe presentarse como revisión del equipo. Para el video se pueden exponer las diferencias aclarando quién las encontró y qué comprobó cada integrante.
+**Estado: 5 fuentes revisadas por cuatro integrantes**, según los resultados que Giovanni Colombo transmitió el 25/11/2026 ([planilla](#planilla-personal)). Quedan dos [puntos a confirmar](#puntos-a-confirmar). La segunda comprobación del agente se registra aparte: no reemplaza esa revisión ni debe presentarse como trabajo del equipo. Para el video se pueden exponer las diferencias aclarando quién las encontró y qué comprobó cada integrante.
 
 ## Segunda comprobación del agente (25/11/2026)
 
@@ -10,7 +10,7 @@ Se intentó abrir las ocho fuentes que el relevamiento inicial (hecho con Codex)
 
 ## Correcciones aplicadas
 
-El 25/11/2026, ante la pregunta de si corregir en el informe las diferencias halladas, la respuesta fue «Sí, corregilas». Se aplicaron en las fichas, la matriz B, la sección C y la sección de verificación del informe. Quien revise personalmente puede confirmarlas o volver a ajustarlas.
+El 25/11/2026, ante la pregunta de si corregir en el informe las diferencias halladas, la respuesta fue «Sí, corregilas». Se aplicaron en las fichas, la matriz B, la sección C y la sección de verificación del informe. Se aplicaron antes de la revisión personal y no consta que esta haya confirmado cada una.
 
 | N.º | Fuente | Decía el informe | Se observó | Corrección |
 | --- | --- | --- | --- | --- |
@@ -30,17 +30,21 @@ No consta si cada diferencia existía el 17/11/2026 o apareció después. En Den
 
 ## Planilla personal
 
-Completar solo después de abrir la URL. Alcanzan cinco filas de tipos distintos. En «Hallazgo» anotar qué se vio; en «Corrección», qué se cambió en el informe o por qué no se cambió.
+Resultados transmitidos por Giovanni Colombo el 25/11/2026. No consta la fecha de cada apertura. «Hallazgo» recoge lo informado por quien revisó; «Corrección y contraste», lo que se cambió y lo que comprobó después el agente. Son cinco tipos de fuente distintos.
 
-| Tipo | Fuente y URL | Qué buscar | Integrante | Fecha | Hallazgo | Corrección |
-| --- | --- | --- | --- | --- | --- | --- |
-| Sitio oficial | [DentApp](https://www.dentapp.ar/software-odontologico-argentina) y [sus planes](https://www.dentapp.ar/) | Proveedor, integraciones, precios, prueba y backups | | | | |
-| Página de precios | [tab32](https://tab32.com/pricing/) | Importe, prueba y cargos por uso | | | | |
-| Centro de ayuda | [Dentalink](https://ayuda.softwaredentalink.com/es/articles/9493139-configura-tu-agenda-online) | Desplegar «Cruce con Recursos» | | | | |
-| Términos de uso | [Dentidesk](https://app.dentidesk.com/terminos.php) | Puntos 2.2, 2.4, 2.8 y 7.5 a 7.6 | | | | |
-| Interfaz pública | [AgendaPro](https://agendapro.com/site/ar/odontologiaor/239004) | Servicios y duraciones; anotar si responde 403 | | | | |
-| Página de precios | [Clinic Cloud](https://clinic-cloud.com/tarifas) | Importes, descuento, odontograma y el texto emergente de «Agendas» | | | | |
-| Sitio y preguntas frecuentes | [Dentify](https://www.dentify.com.ar/) | País, cifrado e importes; elegir «Anual» | | | | |
-| Producto | [Odontoly](https://odontoly.com/) | Complementos «próximamente» y alcance del cifrado | | | | |
+| Tipo | Fuente y URL | Integrante | Hallazgo | Corrección y contraste |
+| --- | --- | --- | --- | --- |
+| Sitio oficial | [DentApp](https://www.dentapp.ar/software-odontologico-argentina) | Giovanni Colombo | Sin diferencias | Sin cambios |
+| Página de precios | [tab32](https://tab32.com/pricing/) | Giovanni Colombo | Diferencias de precio según el servicio; para el servicio dental, un precio más alto, cercano a $400 | Se agregaron a la ficha 15 los cargos por servicio. El importe base no cambia ([punto a confirmar](#puntos-a-confirmar)) |
+| Centro de ayuda | [Dentalink](https://ayuda.softwaredentalink.com/es/articles/9493139-configura-tu-agenda-online) | Sofia Martinez | Sin diferencias con los datos obtenidos | Sin cambios |
+| Términos de uso | [Dentidesk](https://app.dentidesk.com/terminos.php) | Fabiano Ramos | La prueba es de 15 días, no de 30; después empiezan los cargos | La ficha 06 ya indicaba 15 días. El agente reabrió los términos: 15 días de prueba (2.2 y 12.1) y 30 días corridos para pedir la exportación tras el término (7.6). Se aclaró la diferencia en el informe |
+| Interfaz pública | [AgendaPro](https://agendapro.com/site/ar/odontologiaor/239004) | Luciano Izquierdo Cafici | Sin diferencias, luego de simular una reserva en la app, que consideró bastante buena | Sin cambios en las celdas. El agente había recibido HTTP 403 ese día |
 
-Al completar las filas, actualizar la sección «Verificación de fuentes» desde [compilar_investigacion.py](../discovery/compilar_investigacion.py), regenerar el PDF y revisarlo. Los cambios hechos solo en el Markdown se pierden al volver a generarlo.
+Sin revisión personal: [Clinic Cloud](https://clinic-cloud.com/tarifas), [Dentify](https://www.dentify.com.ar/) y [Odontoly](https://odontoly.com/).
+
+## Puntos a confirmar
+
+1. **tab32, importe cercano a $400.** El 25/11/2026 el agente reabrió la [página de precios](https://tab32.com/pricing/) y recorrió otras diez páginas del sitio, además del inicio, sin localizar un plan de tab32 cercano a ese valor. La página de precios anuncia el sistema desde $95 por mes. Las cifras próximas que muestra son $427, estimación mensual de **Open Dental** en un comparador, y $349, paquete mensual de agentes de IA que se agrega aparte. En otras páginas, los rangos de $300 a $600 son costos atribuidos a otros sistemas. Falta que quien revisó indique qué importe vio; hasta entonces el informe lo registra como diferencia sin confirmar.
+2. **AgendaPro, alcance de la simulación.** Falta precisar que la reserva no se confirmó ni se enviaron datos, porque el informe declara que no se contactó a proveedores.
+
+Los cambios al informe se hacen desde [compilar_investigacion.py](../discovery/compilar_investigacion.py) y [competidores.json](../discovery/competidores.json), regenerando el PDF. Los cambios hechos solo en el Markdown se pierden al volver a generarlo.

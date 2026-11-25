@@ -45,7 +45,7 @@ Este apartado describe el corte de la consolidación (19/11/2026). Después, var
 
 Al consolidar, el proveedor gratuito, registro de cuentas, enlaces, tratamiento de plazos y fallos, desbloqueos y compatibilidad de huecos seguían pendientes (PA-15 a PA-21). El intervalo es global y configurable, pero sus minutos iniciales no están definidos. Tampoco se fijaron estados, campos, cantidades de recursos, versiones, autenticación ni reparto nominal. La arquitectura y el modelo físico no se cierran por inferencia.
 
-La revisión personal de al menos cinco fuentes sigue pendiente al 25/11/2026. Las comprobaciones automatizadas del agente no la sustituyen. La excepción de cuatro integrantes es una autorización docente informada por el usuario, sin verificación documental independiente.
+La revisión personal de cinco fuentes se registró el 25/11/2026, con [dos datos a confirmar](../docs/entrega/verificacion-fuentes.md#puntos-a-confirmar). Las comprobaciones automatizadas del agente no forman parte de ella. La excepción de cuatro integrantes es una autorización docente informada por el usuario, sin verificación documental independiente.
 
 ## Estado de esta entrega
 

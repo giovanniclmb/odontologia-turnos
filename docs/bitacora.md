@@ -187,3 +187,7 @@ Trabajo en la rama `docs/entrega-academica`, con commits locales y sin push. El 
 ## Corrección del informe tras la segunda comprobación de fuentes
 
 25/11/2026. Ante la pregunta de si corregir en el informe las diferencias halladas, la respuesta fue «Sí, corregilas» (Ajustar). Antes de aplicarlas, el agente repitió dos comprobaciones y detectó que su primera pasada había informado mal el adicional por agenda de Clinic Cloud y los importes anuales de Dentify. Se actualizaron fichas, cuatro celdas de DentApp en la matriz B (total de 1,275 a 1,475), la sección C, el resumen de fuentes y el PDF. La revisión personal sigue pendiente. [Detalle](entrega/verificacion-fuentes.md#correcciones-aplicadas).
+
+## Revisión personal de fuentes
+
+25/11/2026. Giovanni Colombo transmitió los resultados de cinco fuentes: DentApp y tab32 a su cargo, Dentalink de Sofia Martinez, Dentidesk de Fabiano Ramos y AgendaPro de Luciano Izquierdo Cafici. Se incorporaron al informe y al PDF, con los cargos por servicio de tab32 y la distinción en Dentidesk entre 15 días de prueba y 30 días para pedir la exportación. El agente no localizó en tab32 un plan cercano a $400; ese dato y el alcance de la simulación en AgendaPro quedan a confirmar. [Planilla](entrega/verificacion-fuentes.md#planilla-personal).

@@ -3,7 +3,7 @@
 ## Inconsistencias y límites de la evidencia
 
 - **IN-01 · Tamaño del equipo.** La consigna fija un máximo general de tres integrantes. El usuario informó una excepción docente para el equipo de cuatro, cuya composición puede variar. La declaración está registrada en Discovery. Su respaldo para la entrega, si lo requiere la cátedra, se considera en PA-10. [Discovery, sección 9](../docs/discovery/discovery.md)
-- **IN-02 · Precios y planes de competidores.** En tab32, Clinic Cloud y Dentify, la apertura de fuentes oficiales corrigió cifras o condiciones de extracciones previas. El 25/11/2026 una segunda comprobación del agente actualizó o anotó fichas de ocho proveedores y cuatro celdas de la matriz; la revisión personal sigue pendiente. El informe conserva los valores observados y fechados, sujetos a corroboración en PA-12. [Informe, verificación de fuentes](../docs/discovery/informe-discovery.md#verificación-de-fuentes)
+- **IN-02 · Precios y planes de competidores.** En tab32, Clinic Cloud y Dentify, la apertura de fuentes oficiales corrigió cifras o condiciones de extracciones previas. El 25/11/2026 una segunda comprobación del agente actualizó o anotó fichas de ocho proveedores y cuatro celdas de la matriz; ese día se registró además la revisión personal de cinco fuentes. El informe conserva los valores observados y fechados, sujetos a corroboración en PA-12. [Informe, verificación de fuentes](../docs/discovery/informe-discovery.md#verificación-de-fuentes)
 - El valor inicial del intervalo figura como `null` en las decisiones y en el estado de Discovery. Ese registro expresa la falta de un valor acordado. La pregunta sigue en PA-01. [Decisiones aprobadas](../docs/discovery/decisiones-aprobadas.json) · [Estado de Discovery](../.active-orchestrator-state.json)
 
 ## Preguntas priorizadas
@@ -22,7 +22,7 @@ La columna de consulta identifica a quién le correspondería resolver cada preg
 | PA-08 | Media | ¿Cuántos profesionales y sillones tendrá el consultorio de referencia y con qué datos ficticios iniciales se probará? | Configuración y escenarios de agenda | Usuario y equipo |
 | PA-09 | Media | ¿Qué versiones concretas de Java, Spring Boot, PostgreSQL y herramientas de frontend se usarán? ¿Cómo se ejecutará el sistema y dónde se alojará PostgreSQL? | Entorno y puesta en marcha | Equipo técnico |
 | PA-10 | Alta | Equipo y reparto confirmados: Giovanni, Sofia, Luciano y Fabi; asignación de 25 changes aprobada. ¿Cómo se organizarán la defensa y el respaldo de la excepción docente si la cátedra lo requiere? | Coordinación de la entrega | Integrantes y cátedra |
-| PA-11 | Alta | ¿Qué integrantes revisarán personalmente al menos cinco fuentes y dónde quedarán registrados sus hallazgos? | Evidencia exigida por la consigna | Integrantes |
+| PA-11 | Resuelta | Giovanni, Sofia, Fabi y Luciano revisaron cinco fuentes; los hallazgos se registraron el 25/11/2026 en el informe y en docs/entrega. | Evidencia exigida por la consigna | Integrantes |
 | PA-12 | Media | ¿Qué fuentes o demos permitirán comprobar ARCA operativa, WhatsApp Business API efectiva, disponibilidad conjunta bajo concurrencia y alcance de la exportación clínica, además de precios y condiciones? | Contraste competitivo posterior | Integrantes |
 | PA-13 | Resuelta | Giovanni eligió C-01 y aprobó su propuesta y Apply el 19/11/2026. La implementación y Verify no sustituyen Archive ni la evidencia humana. | Alcance de la entrega del 25/11/2026 | Decisión expresa del usuario |
 | PA-14 | Media | ¿Qué prestaciones se necesitan para comenzar y cómo se registrará y mantendrá su duración de referencia? | Configuración y alta de turnos | Usuario y equipo |
@@ -43,7 +43,7 @@ La columna de consulta identifica a quién le correspondería resolver cada preg
 
 ## Investigación pendiente
 
-La revisión personal de al menos cinco fuentes sigue pendiente. El informe registra fuentes candidatas y comprobaciones del agente. Cada revisión personal debe quedar asociada al integrante y a su hallazgo. [Informe, verificación de fuentes](../docs/discovery/informe-discovery.md#verificación-de-fuentes)
+La revisión personal de cinco fuentes se registró el 25/11/2026, cada una asociada a su integrante y hallazgo, y aparte de las comprobaciones del agente. Quedan a confirmar el importe observado en tab32 y el alcance de la simulación en AgendaPro. [Planilla y puntos a confirmar](../docs/entrega/verificacion-fuentes.md#planilla-personal) · [Informe, verificación de fuentes](../docs/discovery/informe-discovery.md#verificación-de-fuentes)
 
 Para PA-12, «No evidenciado» describe el alcance de las fuentes revisadas para cada proveedor. La integración fiscal local, el uso efectivo de WhatsApp Business API, la concurrencia y la exportación clínica completa requieren evidencia específica. Hay condiciones documentadas que cubren partes del problema, como el Excel estándar y las condiciones de cierre de Dentidesk. La selección para contraste posterior comprende Dentalink, DentApp, Dentify, Dentidesk y AgendaPro. [Informe de Discovery](../docs/discovery/informe-discovery.md) · [Fichas de competidores](../docs/discovery/competidores.json)
 
