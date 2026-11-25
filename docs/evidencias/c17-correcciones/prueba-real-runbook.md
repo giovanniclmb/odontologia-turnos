@@ -23,10 +23,12 @@ mvn -q test-compile
 Solo después de confirmar los requisitos anteriores, ejecutar el test manual por selección explícita:
 
 ```sh
-mvn test-compile failsafe:integration-test failsafe:verify -Dit.test=CorreoRealManual
+mvn test-compile failsafe:integration-test failsafe:verify -Dit.test=CorreoRealManual -Denvio.real=true
 ```
 
-El archivo `CorreoRealManual.java` no coincide con los patrones automáticos de Surefire/Failsafe. La suite CI no lo descubre. Para comprobar únicamente las guardas sin credenciales ni email, seleccionar explícitamente el test con `C17_REAL_EMAIL_CONFIRM=PREFLIGHT_ONLY mvn test-compile failsafe:integration-test failsafe:verify -Dit.test=CorreoRealManual`; esta modalidad valida datos sintéticos y termina antes de crear PostgreSQL o contactar al proveedor. Para el envío real, la selección explícita, `C17_REAL_EMAIL_CONFIRM=SEND_ONE_C17_TEST` y las demás confirmaciones locales son necesarias. El test crea y cierra su propio `PostgresFixture` de Testcontainers solo en la modalidad de envío.
+Desde C-19 las pruebas de integración vacían la configuración de email del entorno; `-Denvio.real=true` desactiva ese aislamiento y solo debe usarse en las pruebas manuales.
+
+El archivo `CorreoRealManual.java` no coincide con los patrones automáticos de Surefire/Failsafe. La suite CI no lo descubre. Para comprobar únicamente las guardas sin credenciales ni email, seleccionar explícitamente el test con `C17_REAL_EMAIL_CONFIRM=PREFLIGHT_ONLY mvn test-compile failsafe:integration-test failsafe:verify -Dit.test=CorreoRealManual -Denvio.real=true`; esta modalidad valida datos sintéticos y termina antes de crear PostgreSQL o contactar al proveedor. Para el envío real, la selección explícita, `C17_REAL_EMAIL_CONFIRM=SEND_ONE_C17_TEST` y las demás confirmaciones locales son necesarias. El test crea y cierra su propio `PostgresFixture` de Testcontainers solo en la modalidad de envío.
 
 El asunto es `Prueba real de transporte C-17`; el cuerpo solo describe la comprobación e indica que no contiene datos clínicos o personales. El registro PostgreSQL debe terminar en `sent`, con un intento. Si la API rechaza el mensaje, hay timeout o falla una persistencia, **no volver a ejecutar** hasta revisar el panel de Resend. Un timeout puede dejar incierta la aceptación externa.
 
