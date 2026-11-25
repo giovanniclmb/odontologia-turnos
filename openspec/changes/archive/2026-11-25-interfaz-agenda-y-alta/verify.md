@@ -11,7 +11,8 @@ Fecha: 25/11/2026. Rama `feature/c-10-interfaz-agenda-y-alta`.
 | `mvn -f backend/pom.xml clean verify` | 129 unitarias y 216 de integración, sin fallos, errores ni omisiones; PostgreSQL 18.7 con Testcontainers |
 | `npm test` en `frontend/` | 65 pruebas, sin fallos. Antes de las correcciones de la revisión, las 53 de entonces se repitieron con `TZ=Asia/Tokyo` y `TZ=Europe/Madrid` |
 | `python3 -m unittest discover -s scripts/tests` | 9 pruebas correctas |
-| `openspec validate interfaz-agenda-y-alta --strict` | Válido |
+| `openspec validate interfaz-agenda-y-alta --strict` | Válido antes de archivar |
+| `openspec archive` y `openspec validate --specs` | Archivado como `2026-11-25-interfaz-agenda-y-alta`; 11 de 11 especificaciones válidas. Con `--strict` quedan dos avisos de longitud en `acceso-y-permisos-internos`; el de alcance por registro surge de la excepción agregada |
 
 TDD: las pruebas nuevas se observaron fallar antes de implementar, contra esqueletos o rutas inexistentes (permiso desconocido; 7 de lecturas; 11 de HTTP; 20 de lógica, 23 de vistas y 3 del controlador de sección en el frontend). Algunas pruebas negativas ya pasaban contra el esqueleto porque este no hacía nada; quedan como regresión.
 

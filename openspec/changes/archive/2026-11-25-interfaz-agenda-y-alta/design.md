@@ -61,7 +61,7 @@ El caso sin configurar usa una excepción propia que extiende `IllegalStateExcep
 
 - Design system revision: 1
 - Decision: yes (2026-11-25, por la política `system-and-mockups`)
-- Mockups: openspec/changes/interfaz-agenda-y-alta/mockups/
+- Mockups: openspec/changes/archive/2026-11-25-interfaz-agenda-y-alta/mockups/
 - Approval: approved (2026-11-25, by user: mockups y plan)
 - Preview: rendered (2026-11-25, previews/)
 - Visual verify: differences (minor, 2026-11-25; ver verify.md y mockups/verify/)
