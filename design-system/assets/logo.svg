@@ -1,6 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="160" height="48" viewBox="0 0 160 48" role="img" aria-label="Logo provisional (TBD)">
-  <title>Logo provisional (TBD)</title>
-  <rect x="1" y="1" width="158" height="46" rx="8" fill="#f8fafc" stroke="#94a3b8" stroke-width="2" stroke-dasharray="6 4" />
-  <text x="80" y="22" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="13" font-weight="600" fill="#475569">LOGO</text>
-  <text x="80" y="38" text-anchor="middle" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="10" font-weight="500" fill="#b45309">(TBD) provisional</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" role="img" aria-label="sonrisa.app">
+  <title>sonrisa.app</title>
+  <!-- Usa el color primario fijo: como imagen, el SVG no hereda los tokens. -->
+  <rect width="48" height="48" rx="12" fill="#0f766e" />
+  <path fill="#ffffff" d="M16.5 9.5C19.5 9.5 21.2 11.5 24 11.5C26.8 11.5 28.5 9.5 31.5 9.5C35.9 9.5 38.5 13.1 38.5 17.6C38.5 21.4 36.8 23.5 35.8 26.6C34.9 29.4 34.8 32 34 34.9C33.3 37.4 32.3 39 30.6 39C28.7 39 28.2 36.5 27.6 33.8C27 31.1 26.2 29 24 29C21.8 29 21 31.1 20.4 33.8C19.8 36.5 19.3 39 17.4 39C15.7 39 14.7 37.4 14 34.9C13.2 32 13.1 29.4 12.2 26.6C11.2 23.5 9.5 21.4 9.5 17.6C9.5 13.1 12.1 9.5 16.5 9.5Z" />
+  <path fill="none" stroke="#0f766e" stroke-width="2.4" stroke-linecap="round" d="M18.5 19.5C21.6 23.4 26.4 23.4 29.5 19.5" />
 </svg>

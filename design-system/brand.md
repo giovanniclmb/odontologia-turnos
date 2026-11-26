@@ -2,10 +2,9 @@
 
 ## Nombre
 
-- **Nombre comercial:** (TBD) no definido.
+- **Nombre de la aplicación:** sonrisa.app, en minúsculas. Definido por el usuario el 25/11/2026.
 - **Descriptor del producto:** Sistema de turnos odontológicos.
-- **Nombre de trabajo provisional en la UI:** "Consultorio odontológico (nombre por definir)" (configurable en `brand.js`).
-- Fuente: no existe un nombre comercial aprobado en KB ni Discovery; se mantiene como (TBD) según regla de no inventar hechos de marca.
+- Se configura en la constante `BRAND_NAME` de `brand.js`.
 
 ## Tono visual
 
@@ -16,10 +15,10 @@
 
 ## Logo
 
-- Archivo estable: `assets/logo.svg`.
-- Estado: **placeholder provisional**, visiblemente marcado como "LOGO (TBD)".
-- Reemplazo: sustituir el archivo manteniendo la ruta. Si el logo real tiene proporción distinta, ajustar el contenedor en `components.html` y documentar en `README.md`.
-- No usar el placeholder como si fuera marca aprobada.
+- Archivo estable: `assets/logo.svg`, también usado como icono de la pestaña.
+- Icono cuadrado: una muela blanca con una sonrisa sobre el color primario (`#0f766e`), pedido por el usuario el 25/11/2026 como diseño simple y minimalista.
+- Proporción 1:1; legible desde 16 px. Acompañado por el nombre, la imagen usa texto alternativo vacío.
+- El color está escrito en el SVG: si cambia `--color-primary`, actualizarlo también ahí.
 
 ## Imaginería
 

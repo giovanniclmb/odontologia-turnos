@@ -24,7 +24,6 @@ Seguimiento de lo que pide la [consigna](<../desarrollo-active-stack%20Global%20
 - Queda activo, sin aplicar, el change [`sesion-en-cookie-httponly`](../../openspec/changes/sesion-en-cookie-httponly/proposal.md), ajeno al change académico.
 - **Deuda de seguridad conocida:** la interfaz guarda el token de sesión en `localStorage` ([DD-16](../../knowledge-base/09_decisiones_y_supuestos.md#dd-16--sesión-interna-en-cookie-httponly-25112026)).
 - El informe declara en «Alcance y método» los datos que no se relevaron de forma sistemática y que no se consultaron videos, marketplaces ni reseñas verificadas.
-- El nombre comercial y el logo son provisionales.
 - El backlog no está completo: C-14 y C-22 a C-25 siguen pendientes. La consigna exige un solo change.
 
 ## Documentos

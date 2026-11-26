@@ -117,7 +117,7 @@ Usa datos ficticios y una base temporal, sin tocar la de desarrollo. Requiere Do
 
 Ctrl-C en cada terminal detiene los servicios; los datos de la demostración se pierden. Después de actualizar el código, detenerlos y repetir desde el primer paso.
 
-El nombre comercial y el logo no están definidos: la interfaz muestra un [nombre y logo provisionales](design-system/brand.md). Para trabajar con una base persistente, ver [desarrollo local](backend/README.md#desarrollo-local).
+La aplicación se llama **sonrisa.app** y usa un [icono propio](design-system/brand.md). Para trabajar con una base persistente, ver [desarrollo local](backend/README.md#desarrollo-local).
 
 ## Documentación
 

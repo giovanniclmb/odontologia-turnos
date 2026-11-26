@@ -1,6 +1,5 @@
-// Nombre de trabajo provisional del consultorio.
-// Reemplazar esta constante cuando se defina el nombre comercial real.
-const BRAND_NAME = "Consultorio odontológico (nombre por definir)";
+// Nombre de la aplicación (ver brand.md).
+const BRAND_NAME = "sonrisa.app";
 
 function applyBrandName() {
   document.querySelectorAll("[data-brand-name]").forEach(function (element) {
