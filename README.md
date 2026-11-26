@@ -139,4 +139,4 @@ El equipo está integrado por Giovanni (líder y propietario del repositorio), S
 
 Se permiten compilación, pruebas y commits autónomos dentro del alcance autorizado. Cada commit debe cubrir una tarea específica y tener un mensaje que explique el cambio y su propósito. **El push requiere un pedido explícito del usuario.**
 
-Los integrantes [revisaron cinco fuentes](docs/entrega/verificacion-fuentes.md#planilla-personal), registradas el 25/11/2026. La reflexión escrita, el video de defensa y las capturas de instalación son trabajo de los integrantes y siguen pendientes. Las verificaciones del agente no los sustituyen.
+Los integrantes [revisaron cinco fuentes](docs/entrega/verificacion-fuentes.md#planilla-personal), registradas el 25/11/2026. La [captura de instalación](docs/evidencias/captura-instalador.png) está incorporada. La reflexión escrita y el video de defensa son trabajo de los integrantes y siguen pendientes. Las verificaciones del agente no los sustituyen.

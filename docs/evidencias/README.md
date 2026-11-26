@@ -20,4 +20,4 @@ El [registro de skills](../../.atl/skill-registry.md) se versiona desde el 25/11
 
 ## Pendientes
 
-La revisión personal de cinco fuentes y las capturas que deban tomar los integrantes continúan pendientes hasta que aporten evidencia real. Los logs de instalación y las comprobaciones automatizadas no sustituyen esas acciones ni la reflexión personal.
+El 25/11/2026 se incorporaron la [captura de instalación y harnesses](captura-instalador.png), que muestra las salidas de `mostrar-evidencia.sh`, y la [revisión personal de cinco fuentes](../entrega/verificacion-fuentes.md#planilla-personal). La reflexión continúa pendiente. Los logs de instalación y las comprobaciones automatizadas no sustituyen las acciones de los integrantes.

@@ -27,6 +27,12 @@ Recopilación de lo que consta en el [estado de la fundación](../../.active-orc
 | Apply | «El usuario aprobó la propuesta y su aplicación explícitamente» | [Diseño](../../openspec/changes/archive/2026-11-19-crear-turno-sin-solapamientos-dominio/design.md) |
 | Verify y Archive | 55 pruebas en verde; archivo pedido por el usuario | [Verify](../../openspec/changes/archive/2026-11-19-crear-turno-sin-solapamientos-dominio/evidence/verify.md) y bitácora |
 
+### Relato confirmado de C-01
+
+El agente redactó este texto a partir de los registros y Giovanni lo confirmó el 25/11/2026. No es un registro tomado el 19/11 y no reemplaza la reflexión, que los integrantes escriben con sus palabras.
+
+> El alcance de C-01 se definió el 19/11, antes de redactar la propuesta. Elegí el change; confirmé que se admite exactamente el intervalo mínimo, antes y después, para profesional y sillón; limité el dominio a recibir el intervalo y las reservas que ocupan recursos, sin definir estados ni minutos iniciales; y elegí Java 25 en lugar de Java 21, con Maven y JUnit. Después aprobé la propuesta y su implementación, sin cambios en la propuesta ni en la especificación.
+
 ## Correcciones registradas en otros changes
 
 No pertenecen al change académico. Sirven si se quiere mostrar una corrección posterior a una revisión, diciendo a qué change corresponde.

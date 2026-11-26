@@ -20,7 +20,7 @@ Estados: **Cubierto** (hay evidencia), **Parcial**, **Pendiente**. En «Quién»
 | --- | --- | --- | --- | --- |
 | 0. Herramientas y agente | [Preparación del entorno](../preparacion-entorno.md) | Parcial | Se fundó con Codex; la consigna nombra OpenCode o Claude Code. Declararlo | Equipo |
 | 0. Active Stack Full | [Registro de instalación](../evidencias/active-stack-codex-full.log), con compilación local parcheada | Cubierto | — | — |
-| 0. Capturas del instalador y los harnesses | [Comandos](README.md#pendiente-del-equipo) | Pendiente | Dos capturas | Equipo |
+| 0. Capturas del instalador y los harnesses | [Captura](../evidencias/captura-instalador.png) con ambas salidas, tomadas del registro de instalación | Cubierto | — | — |
 | 0. Repositorio nuevo | [Bitácora](../bitacora.md) | Cubierto | — | — |
 | 1. `active-orchestrator` y `openspec init` | [Estado](../../.active-orchestrator-state.json) y [log](../evidencias/openspec-init-retry.log) | Cubierto | — | — |
 | Inspección por etapa, con decisión y motivo | [Recopilación](inspecciones.md) | Parcial | Casi ningún motivo quedó escrito | Equipo |
@@ -33,7 +33,7 @@ Estados: **Cubierto** (hay evidencia), **Parcial**, **Pendiente**. En «Quién»
 | 5. `AGENTS.md` y `CLAUDE.md` con regla de dominio | [AGENTS](../../AGENTS.md) y [CLAUDE](../../CLAUDE.md), idénticos | Cubierto | Quedan frases anteriores a decisiones posteriores (ver abajo) | Equipo decide |
 | 6. Elección justificada | [proposal.md](../../openspec/changes/archive/2026-11-19-crear-turno-sin-solapamientos-dominio/proposal.md), «Why» | Cubierto | — | — |
 | 6. Explore guardado | Contexto del [diseño](../../openspec/changes/archive/2026-11-19-crear-turno-sin-solapamientos-dominio/design.md) y [Engram](engram.md) | Parcial | No hay artefacto propio; no se crea uno retroactivo | Equipo lo declara |
-| 6. Propose revisado, con tres o más escenarios | [Spec](../../openspec/specs/disponibilidad-de-turnos/spec.md): 7 requisitos y 17 escenarios WHEN/THEN | Parcial | Los escenarios están; no consta un «Ajustar» en la [revisión](inspecciones.md#change-académico-c-01) | Equipo |
+| 6. Propose revisado, con tres o más escenarios | [Spec](../../openspec/specs/disponibilidad-de-turnos/spec.md): 7 requisitos y 17 escenarios WHEN/THEN | Parcial | Los escenarios están. El [relato confirmado](inspecciones.md#relato-confirmado-de-c-01) indica que no hubo cambios en propuesta ni especificación; la consigna pide mostrar la corrección con «Ajustar» | Equipo lo declara |
 | 6. Apply fiel y tests por escenario | [Trazabilidad](../../openspec/changes/archive/2026-11-19-crear-turno-sin-solapamientos-dominio/evidence/trazabilidad.md) y logs RED/GREEN | Cubierto | — | — |
 | 6. Verify en verde | [Verify del 19/11](../../openspec/changes/archive/2026-11-19-crear-turno-sin-solapamientos-dominio/evidence/verify.md) y [corrida del 25/11](verificacion-clon-limpio.md) | Cubierto | — | — |
 | 6. Archive y estado actualizado | [Change archivado](../../openspec/changes/archive/2026-11-19-crear-turno-sin-solapamientos-dominio/proposal.md) | Cubierto | Hay otro change activo, sin aplicar | Declararlo |
