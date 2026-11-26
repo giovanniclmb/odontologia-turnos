@@ -24,7 +24,7 @@ Estados: **Cubierto** (hay evidencia), **Parcial**, **Pendiente**. En «Quién»
 | 0. Repositorio nuevo | [Bitácora](../bitacora.md) | Cubierto | — | — |
 | 1. `active-orchestrator` y `openspec init` | [Estado](../../.active-orchestrator-state.json) y [log](../evidencias/openspec-init-retry.log) | Cubierto | — | — |
 | Inspección por etapa, con decisión y motivo | [Recopilación](inspecciones.md) | Parcial | Casi ningún motivo quedó escrito | Equipo |
-| 2. Informe con A–D, 15 sistemas, URL, fecha y «No evidenciado» | [Informe](../discovery/informe-discovery.md): 15 sistemas, 38 referencias; [correcciones del 25/11](verificacion-fuentes.md#correcciones-aplicadas) aplicadas | Cubierto | — | — |
+| 2. Informe con A–D, 15 sistemas, URL, fecha y «No evidenciado» | [Informe](../discovery/informe-discovery.md): 15 sistemas, 38 referencias; [correcciones del 25/11](verificacion-fuentes.md#correcciones-aplicadas) aplicadas | Parcial | Hay datos de la consigna de investigación sin relevar de forma sistemática, declarados en «Alcance y método»; la sección D no explica por qué quedaron fuera sistemas con mayor puntaje | Equipo decide |
 | 2. Checklist de once puntos | [discovery.md](../discovery/discovery.md) | Cubierto | — | — |
 | 3. Diez documentos de KB, reglas de agenda y preguntas | [Índice](../../knowledge-base/README.md) | Cubierto | — | — |
 | 4. Roadmap alineado con el MVP | [CHANGES](../../CHANGES.md) | Cubierto | Estados corregidos en esta rama | — |
@@ -50,7 +50,7 @@ Estados: **Cubierto** (hay evidencia), **Parcial**, **Pendiente**. En «Quién»
 | Sin secretos | Búsqueda por patrones de claves en archivos e historial de `main`, sin hallazgos; de los archivos `.env` solo figura `.env.example` | Cubierto con alcance limitado | No equivale a una auditoría | — |
 | PDF: portada | [PDF](../discovery/informe-discovery.pdf), página 1 | Cubierto | — | — |
 | PDF: resumen ejecutivo de una página como máximo | Página 2 | Cubierto | Describe el corte del 19/11, y lo dice | — |
-| PDF: tabla A, matriz B con nota y análisis C | Secciones A a C, con las correcciones del 25/11 | Cubierto | — | — |
+| PDF: tabla A, matriz B con nota y análisis C | Sección A con funciones principales, matriz B y análisis C en las cuatro subsecciones, con cifras de la matriz | Cubierto | — | — |
 | PDF: D con cinco competidores, tres referencias y MVP en tres listas | Sección D | Cubierto | — | — |
 | PDF: verificación personal de fuentes | [Planilla](verificacion-fuentes.md#planilla-personal) e informe: cinco fuentes de cinco tipos, cuatro integrantes | Cubierto | — | — |
 | PDF: referencias completas | Sección final | Cubierto | — | — |

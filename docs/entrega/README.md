@@ -29,6 +29,8 @@ bash docs/evidencias/mostrar-evidencia.sh harnesses
 - La propuesta de C-01 y su implementación entraron en el mismo commit (`fe41275`). La fundación del 17/11 se versionó a partir del 19/11.
 - Queda activo, sin aplicar, el change [`sesion-en-cookie-httponly`](../../openspec/changes/sesion-en-cookie-httponly/proposal.md), ajeno al change académico.
 - **Deuda de seguridad conocida:** la interfaz guarda el token de sesión en `localStorage` ([DD-16](../../knowledge-base/09_decisiones_y_supuestos.md#dd-16--sesión-interna-en-cookie-httponly-25112026)).
+- El informe declara en «Alcance y método» los datos que no se relevaron de forma sistemática y que no se consultaron videos, marketplaces ni reseñas verificadas.
+- La sección D no explica por qué quedaron fuera de los cinco competidores para demo sistemas con mayor puntaje, como Open Dental: esa razón la tiene que dar el equipo.
 - El nombre comercial y el logo son provisionales.
 - El backlog no está completo: C-13, C-14 y C-22 a C-25 siguen pendientes. La consigna exige un solo change.
 
