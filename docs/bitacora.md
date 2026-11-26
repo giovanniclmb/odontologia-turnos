@@ -209,3 +209,5 @@ Trabajo en la rama `docs/entrega-academica`, con commits locales y sin push. El 
 ## Reflexión escrita
 
 25/11/2026. Se incorporó [la reflexión](entrega/reflexion.md) tal como quedó guardada, por pedido expreso de subirla sin cambios.
+
+25/11/2026. Giovanni indicó que la redacción de la reflexión ya había quedado confirmada por el equipo. Se actualizó su estado en el cotejo y en los pendientes.

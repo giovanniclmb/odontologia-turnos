@@ -55,7 +55,7 @@ Estados: **Cubierto** (hay evidencia), **Parcial**, **Pendiente**. En «Quién»
 | PDF: verificación personal de fuentes | [Planilla](verificacion-fuentes.md#planilla-personal) e informe: cinco fuentes de cinco tipos, cuatro integrantes | Cubierto | — | — |
 | PDF: referencias completas | Sección final | Cubierto | — | — |
 | Video de 8 a 12 minutos | — | **Pendiente** | Grabación | Equipo |
-| Reflexión de 1 a 2 páginas | [reflexion.md](reflexion.md): cinco preguntas y declaración de uso de IA | Parcial | Confirmar que la redacción es propia | Equipo |
+| Reflexión de 1 a 2 páginas | [reflexion.md](reflexion.md): cinco preguntas y declaración de uso de IA; redacción confirmada por el equipo según informó Giovanni | Cubierto | — | — |
 
 ## Consideraciones
 
