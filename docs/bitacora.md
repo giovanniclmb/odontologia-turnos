@@ -199,3 +199,5 @@ Trabajo en la rama `docs/entrega-academica`, con commits locales y sin push. El 
 ## Revisión de completitud del informe
 
 25/11/2026. Tras revisar qué faltaba en el informe, se pidió aplicar las correcciones que no requerían investigar de nuevo («Sí, hacelas», Ajustar). Se agregó en la sección A una tabla de funciones principales; la sección C pasó a las cuatro subsecciones de la consigna con cifras de la matriz; la verificación de fuentes incorporó qué afirmaba el informe; se declararon los datos no relevados y se ajustó la redacción. No cambiaron fichas ni puntajes.
+
+25/11/2026. Ante la pregunta de si Open Dental había quedado fuera de los competidores para demo por priorizar sistemas cercanos al mercado argentino, la respuesta fue «Sí, ese fue». Se agregó el criterio a la sección D, aclarando que no quedó registrado al elegir. La selección no cambió.

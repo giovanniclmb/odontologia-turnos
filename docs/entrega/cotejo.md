@@ -24,7 +24,7 @@ Estados: **Cubierto** (hay evidencia), **Parcial**, **Pendiente**. En «Quién»
 | 0. Repositorio nuevo | [Bitácora](../bitacora.md) | Cubierto | — | — |
 | 1. `active-orchestrator` y `openspec init` | [Estado](../../.active-orchestrator-state.json) y [log](../evidencias/openspec-init-retry.log) | Cubierto | — | — |
 | Inspección por etapa, con decisión y motivo | [Recopilación](inspecciones.md) | Parcial | Casi ningún motivo quedó escrito | Equipo |
-| 2. Informe con A–D, 15 sistemas, URL, fecha y «No evidenciado» | [Informe](../discovery/informe-discovery.md): 15 sistemas, 38 referencias; [correcciones del 25/11](verificacion-fuentes.md#correcciones-aplicadas) aplicadas | Parcial | Hay datos de la consigna de investigación sin relevar de forma sistemática, declarados en «Alcance y método»; la sección D no explica por qué quedaron fuera sistemas con mayor puntaje | Equipo decide |
+| 2. Informe con A–D, 15 sistemas, URL, fecha y «No evidenciado» | [Informe](../discovery/informe-discovery.md): 15 sistemas, 38 referencias; [correcciones del 25/11](verificacion-fuentes.md#correcciones-aplicadas) aplicadas | Parcial | Hay datos de la consigna de investigación sin relevar de forma sistemática, declarados en «Alcance y método» | Equipo decide |
 | 2. Checklist de once puntos | [discovery.md](../discovery/discovery.md) | Cubierto | — | — |
 | 3. Diez documentos de KB, reglas de agenda y preguntas | [Índice](../../knowledge-base/README.md) | Cubierto | — | — |
 | 4. Roadmap alineado con el MVP | [CHANGES](../../CHANGES.md) | Cubierto | Estados corregidos en esta rama | — |
