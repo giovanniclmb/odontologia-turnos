@@ -1,5 +1,5 @@
 {
-  "method": "Cobertura provisional de evidencia; D=1 C=0.5 N=0, cinco criterios por dimensión",
+  "method": "Cobertura de evidencia; D=1 C=0.5 N=0, cinco criterios por dimensión",
   "weights": {
     "T": 25,
     "C": 20,

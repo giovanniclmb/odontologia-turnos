@@ -90,6 +90,8 @@ Se distingue **Documentado** (manual con procedimiento, interfaz pública o cond
 
 No se asume que WhatsApp para soporte, compartir un enlace, recordatorios semiautomáticos y WhatsApp Business API sean equivalentes. Tampoco se equiparan una solicitud pendiente y una reserva confirmada, imágenes almacenadas y radiología integrada, ni un reporte Excel y una exportación clínica completa.
 
+**Datos no relevados de forma sistemática.** La consigna de investigación pide además datos que no integran la matriz ni se relevaron de manera uniforme: duración variable, bloqueos y sobreturnos; chatbot y redes sociales; seguimiento de ausentes, recuperación de pacientes, controles periódicos y campañas; anamnesis; señas; sitio web, radiología y firma digital; sucursales, soporte y capacitación; privacidad y adecuación a la normativa argentina; plan gratuito; y una síntesis de fortalezas y diferenciales por sistema. Algunas fichas los mencionan. Cuando una ficha no dice nada sobre uno de ellos, no se relevó: no debe leerse como «No evidenciado» ni como ausencia. Las referencias tampoco incluyen videos oficiales, marketplaces ni reseñas verificadas.
+
 ## A Comparación de sistemas
 
 ### Identificación y pertinencia
@@ -102,6 +104,18 @@ md=intro+table(['Sistema','Proveedor','País evidenciado','Segmento','Modalidad'
 md+='''
 La oferta argentina encabeza la tabla. Dentidesk y Odonto.me aportan referencias en español; AgendaPro tiene oferta y reservas públicas en Argentina. Clinic Cloud y XDentalCloud son referencias de módulos y condiciones; Open Dental, Dentrix, Curve, CareStack y tab32 aportan patrones internacionales cuya comercialización y localización argentina no se presumen.
 
+'''
+md+='''### Funciones principales
+
+«Documentado» corresponde a funcionalidad comprobada en documentación, interfaz pública o condición textual; «Declarado», a afirmación comercial del proveedor. Los valores son los de la matriz B. Las fuentes se consultaron el 17/11/2026; las consultas posteriores constan en las referencias.
+
+'''
+def feature(p,group,name):
+ index=[g[0] for g in GROUPS].index(group)
+ return LABEL[p['criteria'][index][GROUPS[index][3].index(name)]]
+FEATURES=[('T','Reserva online'),('T','Recordatorios'),('T','Agenda por sillón/box'),('C','Historia clínica')]
+md+=table(['Sistema']+[n for _,n in FEATURES]+['Fuentes'],[[p['name']]+[feature(p,g,n) for g,n in FEATURES]+[' '.join(f'[F{i:02}.{j}]({url})' for j,(_,url) in enumerate(p['sources'],1))] for i,p in enumerate(PRODUCTS,1)])
+md+='''
 ### Fichas comparables y trazabilidad
 
 Las fuentes F01 a F15 se enumeran completas al final. Las fichas complementan las matrices; una capacidad pendiente de prueba no se convierte en requisito del producto que construiremos.
@@ -113,9 +127,9 @@ for i,p in enumerate(PRODUCTS,1):
  for key,title in [('agenda','Agenda y recursos'),('digital','Turnos digitales y automatización'),('clinical','Clínica'),('admin','Administración'),('integration','Integraciones'),('security','Seguridad y exportación'),('price','Modelo comercial'),('limits','Fortalezas y límites de la evidencia'),('adoption','Adopción')]:
   md+=f'- **{title}**: {p[key]}\n'
  md+='\n'
-md+='''## B Matriz provisional de puntuación
+md+='''## B Matriz de puntuación
 
-Se aplican los pesos de la consigna. Para que el cálculo sea auditable sin probar productos ni elegir un ganador, esta versión mide **cobertura de evidencia pública**, no calidad real, seguridad efectiva, relación precio/valor ni conveniencia de compra. La interpretación y cualquier ranking comercial deben revisarse con el usuario. Los resultados no eligen el MVP.
+Se aplican los pesos de la consigna. Para que el cálculo sea auditable sin probar productos ni elegir un ganador, esta versión mide **cobertura de evidencia pública**, no calidad real, seguridad efectiva, relación precio/valor ni conveniencia de compra. La interpretación y cualquier ranking comercial requieren revisión antes de usarse para decidir. Los resultados no eligen el MVP.
 
 Cada dimensión tiene cinco criterios. Por criterio: Documentado = 1 punto; Declarado = 0,5; No evidenciado = 0. La suma de cada dimensión va de 0 a 5. Una función futura no suma como disponible. La falta de evidencia reduce la puntuación sin afirmar que la función no existe. La columna de precio mide transparencia y condiciones de adopción, no asequibilidad comparada entre monedas.
 
@@ -140,31 +154,58 @@ La matriz anterior no sustituye una prueba de concurrencia. Al demostrar un prod
 
 ## C Análisis competitivo
 
-### Funcionalidades frecuentes en la muestra
+Las cifras indican en cuántos de los 15 sistemas figura cada función como Documentado o Declarado en la matriz B. Describen la evidencia pública de esta muestra: no son una estimación estadística del mercado argentino ni prueban que la función opere. Se excluye la dimensión de precio y adopción, que mide transparencia comercial.
 
-La mayoría de las ofertas dentales consultadas presenta agenda, historia y odontograma; varias añaden imágenes, presupuestos, caja y reportes. Dentalink, Dentidesk, XDentalCloud, Dentrix, CareStack y tab32 publican reserva o comunicación digital. Esto es un patrón descriptivo de la muestra, no una estimación estadística del mercado argentino.
+'''
+coverage=[]
+for index,(key,_,_,criteria) in enumerate(GROUPS):
+ if key=='E':continue
+ for position,name in enumerate(criteria):
+  marks=[(p['name'],p['criteria'][index][position]) for p in PRODUCTS]
+  coverage.append({'name':name,'documented':[n for n,m in marks if m=='D'],'declared':[n for n,m in marks if m=='C']})
+def total(f):return len(f['documented'])+len(f['declared'])
+STANDARD_MIN,RARE_MAX=10,4
+standard=sorted((f for f in coverage if total(f)>=STANDARD_MIN),key=total,reverse=True)
+rare=sorted((f for f in coverage if total(f)<=RARE_MAX),key=total)
+md+=f'''### Funcionalidades estándar de mercado
 
-### Diferencias observables
+Se consideran estándar en la muestra las funciones presentes en al menos {STANDARD_MIN} de los 15 sistemas. Predominan las declaraciones comerciales: la columna «Documentado» muestra cuántos casos tienen respaldo más allá de la afirmación. Ofrecer estas funciones no diferencia por sí solo a un producto.
 
-Odontoly declara operación local-first y revela límites de cifrado y acceso remoto; contrasta con las ofertas cloud de DentApp, Dentify, Dentidesk y Curve. DentApp publica Google Calendar y MercadoPago; Dentalink presenta obras sociales y operación clínica. Open Dental ofrece manuales detallados sobre operatorios y bloqueos. Dentidesk explicita condiciones de exportación y cierre. La relevancia de cada diferencia depende del consultorio que el usuario decida atender.
+'''
+md+=table(['Función','Sistemas (de 15)','Documentado'],[[f['name'],total(f),len(f['documented'])] for f in standard])
+md+=f'''
+### Funcionalidades diferenciadoras reales
+
+Se exige que la función sea poco frecuente ({RARE_MAX} sistemas o menos) y que al menos un caso esté documentado. Una afirmación comercial aislada no alcanza. La rareza refleja lo publicado en las fuentes y no prueba que los demás sistemas carezcan de la función.
+
+'''
+md+=table(['Función','Documentado en','Declarado en'],[[f['name'],', '.join(f['documented']),', '.join(f['declared']) or 'Ninguno'] for f in rare if f['documented']])
+md+='''
+Fuera de los criterios de la matriz, Dentalink documenta que su agenda online valida a la vez al profesional y al recurso asociado al servicio; Dentidesk explicita condiciones de exportación y cierre; Open Dental ofrece manuales detallados sobre operatorios y bloqueos, y Odontoly declara operación local-first con límites de cifrado y acceso remoto. La relevancia de cada diferencia depende del consultorio que se decida atender.
 
 Las promesas de IA, reducción de ausencias, mayor facturación o facilidad de uso siguen siendo afirmaciones comerciales hasta contar con demostraciones y mediciones comparables. No se atribuyen ahorros ni resultados clínicos a partir de testimonios.
 
-### Vacíos de evidencia para el mercado argentino
+'''
+md+=f'''### Vacíos frecuentes del mercado argentino
 
-En las páginas consultadas no suele estar descrita la transacción que evita simultáneamente la ocupación del profesional y del sillón. Dentalink documenta que su agenda online valida a la vez al profesional y al recurso asociado al servicio, sin identificar ese recurso como sillón ni describir el control de concurrencia. Tampoco hay evidencia suficiente para comparar de forma uniforme auditoría, exportación completa y restauración. Una integración fiscal extranjera no prueba ARCA; listar obras sociales no prueba comunicación electrónica con ellas. Estos son vacíos de información pública de esta muestra, no una afirmación de que ningún proveedor los resuelva.
+Funciones evidenciadas en {RARE_MAX} sistemas o menos. La muestra incluye ofertas internacionales y un valor bajo, incluso cero, expresa falta de información pública: no demuestra que ningún proveedor lo resuelva.
 
-Los precios mezclan profesional, usuario, sede, anualidad, extras, mensajes y migración. Las páginas de AgendaPro requieren distinguir categorías; Clinic Cloud requiere distinguir módulos. La moneda no identificada de Odonto.me y los importes equivalentes anuales de XDentalCloud impiden comparar automáticamente el costo total.
+'''
+md+=table(['Función','Sistemas (de 15)','Documentado'],[[f['name'],total(f),len(f['documented'])] for f in rare])
+md+='''
+En las páginas consultadas no suele estar descrita la transacción que evita simultáneamente la ocupación del profesional y del sillón. Una integración fiscal extranjera no prueba ARCA; listar obras sociales no prueba comunicación electrónica con ellas. Los precios mezclan profesional, usuario, sede, anualidad, extras, mensajes y migración: las páginas de AgendaPro requieren distinguir categorías, Clinic Cloud requiere distinguir módulos, y la moneda no identificada de Odonto.me y los importes equivalentes anuales de XDentalCloud impiden comparar automáticamente el costo total.
 
-### Oportunidades que deben validarse
+'''
+count={f['name']:total(f) for f in coverage}
+md+=f'''### Oportunidades de innovación
 
-- Evidenciar disponibilidad conjunta de profesional y sillón con reglas visibles y pruebas de concurrencia.
-- Mostrar al consultorio qué es solicitud, confirmación, cancelación y reprogramación, con trazabilidad de cambios.
-- Explicar costos de mensajes, integraciones y portabilidad antes de contratar.
-- Facilitar recuperación de cancelaciones o lista de espera, si las entrevistas confirman esa prioridad.
+- Evidenciar disponibilidad conjunta de profesional y sillón con reglas visibles y pruebas de concurrencia (agenda por sillón/box: {count['Agenda por sillón/box']} de 15).
+- Mostrar al consultorio qué es solicitud, confirmación, cancelación y reprogramación, con trazabilidad de cambios (cancelación: {count['Cancelación']}; reprogramación: {count['Reprogramación']}; auditoría: {count['Auditoría']}).
+- Explicar costos de mensajes, integraciones y portabilidad antes de contratar (exportación con alcance claro: {count['Exportación con alcance claro']}).
+- Facilitar la recuperación de cancelaciones mediante lista de espera, si las entrevistas confirman esa prioridad (lista de espera: {count['Lista de espera']}).
 - Limitar los datos solicitados en una reserva y separar permisos administrativos y clínicos.
 
-Estas son hipótesis de oportunidad; no tienen validación de demanda ni disposición a pagar. La selección de funciones en la sección D procede de decisiones explícitas del usuario y no constituye validación comercial de estas hipótesis.
+Estas son hipótesis de oportunidad; no tienen validación de demanda ni disposición a pagar. La selección de funciones en la sección D procede de decisiones expresas posteriores a la investigación y no constituye validación comercial de estas hipótesis.
 
 ## D Decisiones pendientes del usuario
 
@@ -188,16 +229,16 @@ No se eligió ninguna opción. La separación definitiva entre imprescindibles, 
 
 ### Revisión personal del equipo
 
-Cuatro integrantes revisaron cinco fuentes de distintos tipos. Giovanni Colombo transmitió los resultados el 25/11/2026; no consta la fecha de cada apertura. «Hallazgo» recoge lo informado por quien revisó. En «Corrección y contraste» se indica qué cambió y qué comprobó después el agente.
+Cuatro integrantes revisaron cinco fuentes de distintos tipos. Giovanni Colombo transmitió los resultados el 25/11/2026; no consta la fecha de cada apertura. «Qué afirmaba» resume lo contrastado; «Qué encontró» recoge lo informado por quien revisó, y «Corrección y contraste» indica qué cambió y qué comprobó después el agente.
 
 '''
 personal=[
- ['Giovanni Colombo','Sitio oficial: [DentApp](https://www.dentapp.ar/software-odontologico-argentina)','Sin diferencias.','Sin cambios.'],
- ['Giovanni Colombo','Precios: [tab32](https://tab32.com/pricing/)','Diferencias de precio según el servicio; para el servicio dental, un precio más alto, cercano a $400.','Ficha 15: se agregaron los cargos por servicio. Giovanni Colombo confirmó el 25/11 que el importe observado era $427. En el comparador de la página, esa cifra es el costo mensual estimado de Open Dental; para tab32 estima $179 y su precio publicado sigue desde $95. El precio base no cambia.'],
- ['Sofia Martinez','Centro de ayuda: [Dentalink](https://ayuda.softwaredentalink.com/es/articles/9493139-configura-tu-agenda-online)','Sin diferencias con los datos obtenidos.','Sin cambios.'],
- ['Fabiano Ramos','Términos de uso: [Dentidesk](https://app.dentidesk.com/terminos.php)','La prueba es de 15 días, no de 30; después empiezan los cargos.','La ficha 06 ya indicaba 15 días (punto 2.2). Los 30 días son el plazo para pedir la exportación tras el término (punto 7.6). Se aclaró la diferencia y se agregó que luego de la prueba se requiere suscripción.'],
- ['Luciano Izquierdo Cafici','Interfaz pública: [AgendaPro](https://agendapro.com/site/ar/odontologiaor/239004)','Sin diferencias, luego de simular una reserva en la app, que consideró bastante buena.','Sin cambios en las celdas. Giovanni Colombo confirmó que la simulación se detuvo antes de confirmar la reserva. El agente había recibido HTTP 403 ese día.']]
-md+=table(['Integrante','Tipo y fuente','Hallazgo','Corrección y contraste'],personal)+'\n'
+ ['Giovanni Colombo','Sitio oficial: [DentApp](https://www.dentapp.ar/software-odontologico-argentina)','Proveedor Codilium S.A.S., nube y publicación de Google Calendar y MercadoPago.','Sin diferencias.','Sin cambios.'],
+ ['Giovanni Colombo','Precios: [tab32](https://tab32.com/pricing/)','Precio desde $95 por mes, con cargos variables aparte.','Diferencias de precio según el servicio; para el servicio dental, un precio más alto, cercano a $400.','Ficha 15: se agregaron los cargos por servicio. Giovanni Colombo confirmó el 25/11 que el importe observado era $427. En el comparador de la página, esa cifra es el costo mensual estimado de Open Dental; para tab32 estima $179 y su precio publicado sigue desde $95. El precio base no cambia.'],
+ ['Sofia Martinez','Centro de ayuda: [Dentalink](https://ayuda.softwaredentalink.com/es/articles/9493139-configura-tu-agenda-online)','Enlace de reserva, permisos, bloques y profesionales habilitados; desde la corrección del 25/11, validación conjunta de profesional y recurso.','Sin diferencias con los datos obtenidos.','Sin cambios.'],
+ ['Fabiano Ramos','Términos de uso: [Dentidesk](https://app.dentidesk.com/terminos.php)','Excel estándar sin costo con licencia activa; tras el término, exportación solicitable hasta 30 días con posible cargo. Ficha 06: prueba de 15 días.','La prueba es de 15 días, no de 30; después empiezan los cargos.','La ficha 06 ya indicaba 15 días (punto 2.2). Los 30 días son el plazo para pedir la exportación tras el término (punto 7.6). Se aclaró la diferencia y se agregó que luego de la prueba se requiere suscripción.'],
+ ['Luciano Izquierdo Cafici','Interfaz pública: [AgendaPro](https://agendapro.com/site/ar/odontologiaor/239004)','Reserva pública con servicios de distinta duración y botón Agendar.','Sin diferencias, luego de simular una reserva en la app, que consideró bastante buena.','Sin cambios en las celdas. Giovanni Colombo confirmó que la simulación se detuvo antes de confirmar la reserva. El agente había recibido HTTP 403 ese día.']]
+md+=table(['Integrante','Tipo y fuente','Qué afirmaba el informe','Qué encontró','Corrección y contraste'],personal)+'\n'
 md+='''### Comprobaciones realizadas por el agente
 
 Las comprobaciones siguientes son automatizadas y se muestran aparte de la revisión personal, a la que **no sustituyen**.
@@ -307,8 +348,26 @@ El checklist completo de once puntos y las decisiones aprobadas están en discov
  reviewed='- Revisión personal de al menos cinco fuentes por integrantes.'
  assert reviewed in questions
  questions=questions.replace(reviewed,reviewed+' Informada el 25/11/2026.')
+ team='- Nombres de integrantes y reparto de trabajo.'
+ assert team in questions
+ questions=questions.replace(team,team+' Resuelto después del corte: los nombres constan en la portada y el reparto en el plan de colaboración.')
  md=re.sub(r'## Preguntas pendientes de la entrevista\n.*?(?=## Referencias completas)',lambda _:questions,md,flags=re.S)
+if approved.exists():
+ # Redacción del informe; discovery.md conserva el registro aprobado.
+ WORDING=[
+  ('el usuario aprobó el resumen','se aprobó el resumen'),
+  ('## D Recomendación y alcance aprobados por el usuario','## D Recomendación final y alcance aprobado'),
+  ('Las elecciones siguientes fueron realizadas por el usuario después de la investigación y aprobadas mediante menú.','Las elecciones siguientes se hicieron después de la investigación y se aprobaron mediante menú.'),
+  ('stack elegido por el usuario','stack elegido'),
+  ('La selección de estas tecnologías fue explícita del usuario;','La selección de estas tecnologías fue expresa;'),
+  ('Los riesgos que preocupan especialmente al usuario son','Las principales preocupaciones señaladas son'),
+  ('No estableció un orden entre esos dos riesgos.','No se estableció un orden entre ambas.'),
+  ('su confianza en llegar no constituye','la confianza en llegar no constituye'),
+  ('no un nuevo orden de preocupación elegido por el usuario.','sin cambiar las preocupaciones señaladas.')]
+ for old_text,new_text in WORDING:
+  assert md.count(old_text)==1,old_text
+  md=md.replace(old_text,new_text)
 (ROOT/'informe-discovery.md').write_text(md)
 (ROOT/'competidores.json').write_text(json.dumps(DATA,ensure_ascii=False,indent=2)+'\n')
-(ROOT/'matriz-puntuacion.json').write_text(json.dumps({'method':'Cobertura provisional de evidencia; D=1 C=0.5 N=0, cinco criterios por dimensión','weights':{g[0]:g[2] for g in GROUPS},'criteria':{g[0]:g[3] for g in GROUPS},'scores':[{'product':p['name'],**p['scores'],'weighted_total':p['weighted_total']} for p in PRODUCTS]},ensure_ascii=False,indent=2)+'\n')
+(ROOT/'matriz-puntuacion.json').write_text(json.dumps({'method':'Cobertura de evidencia; D=1 C=0.5 N=0, cinco criterios por dimensión','weights':{g[0]:g[2] for g in GROUPS},'criteria':{g[0]:g[3] for g in GROUPS},'scores':[{'product':p['name'],**p['scores'],'weighted_total':p['weighted_total']} for p in PRODUCTS]},ensure_ascii=False,indent=2)+'\n')
 print(f'Informe: {len(PRODUCTS)} productos, {sum(len(p["sources"]) for p in PRODUCTS)} referencias, {len(md.split())} palabras.')
