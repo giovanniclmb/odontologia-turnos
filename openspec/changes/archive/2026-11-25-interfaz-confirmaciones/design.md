@@ -27,7 +27,7 @@ Reusar el control de envío por turno de C-12, conservar la versión exacta y co
 ## UI Mockups
 
 - El usuario aprobó el plan y el mockup de C-13 el 25/11/2026 para continuar con Apply.
-- Política `system-and-mockups`, [sistema de diseño revisión 1](../../../design-system/README.md). El diseño de C-13 y sus mockups requieren aprobación explícita antes de Apply.
+- Política `system-and-mockups`, [sistema de diseño revisión 1](../../../../design-system/README.md). El diseño de C-13 y sus mockups requieren aprobación explícita antes de Apply.
 - El [prototipo de C-13](mockups/README.md) presenta listado, vacío, registro y recuperación con datos ficticios. Verificar 390 × 844 y 1440 × 900; la aprobación de C-12 no aprueba automáticamente C-13.
 
 ## Risks / Trade-offs

@@ -2,7 +2,7 @@
 
 Proyecto integrador de Desarrollo de Software de UTN: sistema de gestión de turnos para un consultorio de una sede con varios odontólogos.
 
-**Estado al 25/11/2026:** C-01 a C-12 y C-15 a C-21 están implementados, archivados en OpenSpec e integrados en `main`. Siguen pendientes C-13, C-14 y C-22 a C-25. No hay despliegue productivo. El detalle por item está en [CHANGES.md](CHANGES.md).
+**Estado al 25/11/2026:** C-01 a C-13 y C-15 a C-21 están implementados, archivados en OpenSpec e integrados en `main`. Siguen pendientes C-14 y C-22 a C-25. No hay despliegue productivo. El detalle por item está en [CHANGES.md](CHANGES.md).
 
 El change académico que recorre el ciclo completo es **C-01, crear un turno sin solapamientos**: [propuesta, diseño, tareas y evidencia](openspec/changes/archive/2026-11-19-crear-turno-sin-solapamientos-dominio/proposal.md) y [spec vigente](openspec/specs/disponibilidad-de-turnos/spec.md). La entrega y sus pendientes se siguen en [docs/entrega](docs/entrega/README.md).
 
@@ -16,7 +16,7 @@ El change académico que recorre el ciclo completo es **C-01, crear un turno sin
 | Reprogramación y cancelación por el equipo | Sí | Sí |
 | Intervalo de la sede | Sí | Sí, solo recepción |
 | Cancelación del paciente por enlace | Sí | Pendiente (C-23) |
-| Confirmaciones manuales | Pendiente; existe el servicio (C-09) | Pendiente (C-13) |
+| Confirmaciones manuales | Sí | Sí, solo recepción |
 | Cuenta del paciente y lista de espera | Pendiente; existen los servicios (C-16 y C-21) | Pendiente (C-24) |
 | Avisos de huecos y asignación | Pendiente (C-22) | Pendiente (C-25) |
 
