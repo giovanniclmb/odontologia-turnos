@@ -1,7 +1,7 @@
 /** Único punto de la agenda que conoce las rutas HTTP. */
 import { http } from "../api/client.js";
 import type { ApiAgenda } from "./contexto.js";
-import { leerBloqueos, leerIntervalo, leerPacientes, leerPrestaciones, leerRecursos, leerTurno, leerTurnos } from "./validadores.js";
+import { leerBloqueos, leerIntervalo, leerPacientes, leerPrestaciones, leerRecursos, leerTurno, leerTurnos, RespuestaInvalidaError } from "./validadores.js";
 import type { PacienteElegible } from "./tipos.js";
 
 const consulta = (parametros: Record<string, string>) => new URLSearchParams(parametros).toString();
@@ -24,6 +24,12 @@ export const apiAgenda: ApiAgenda = {
   establecerIntervalo: async (minutos) => leerIntervalo(await http.put<unknown>("/sede/intervalo", { minutos })),
   turnos: async (sillonId, desde, hasta) => leerTurnos(
     await http.get<unknown>(`/agenda/sillones/${encodeURIComponent(sillonId)}/turnos?${consulta({ desde, hasta })}`)),
+  pendientes: async () => leerTurnos(await http.get<unknown>("/agenda/turnos/pendientes")),
+  confirmarTurno: async (id, versionEsperada) => {
+    const turno = leerTurno(await http.post<unknown>(`/agenda/turnos/${encodeURIComponent(id)}/confirmacion`, { versionEsperada }));
+    if (turno.estado !== "CONFIRMADO" || turno.id !== id) throw new RespuestaInvalidaError("confirmación");
+    return turno;
+  },
   bloqueos: async (sillonId, desde, hasta) => leerBloqueos(
     await http.get<unknown>(`/agenda/bloqueos?${consulta({ sillonId, desde, hasta })}`)),
   crearTurno: async (solicitud) => {

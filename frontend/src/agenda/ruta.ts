@@ -2,7 +2,7 @@
 import { instanteDesdeSede, type Vista } from "../tiempo/mendoza.js";
 import type { Rol } from "./tipos.js";
 
-export type SeccionAgenda = "agenda" | "agenda/nuevo" | "agenda/bloqueo";
+export type SeccionAgenda = "agenda" | "agenda/nuevo" | "agenda/bloqueo" | "agenda/confirmaciones";
 
 export interface RutaAgenda {
   seccion: SeccionAgenda;
@@ -23,6 +23,7 @@ function seccionDe(nombre: string, rol: Rol): Ruta["seccion"] {
       return nombre;
     // La restricción es de presentación: el backend vuelve a autorizar cada operación.
     case "agenda/bloqueo":
+    case "agenda/confirmaciones":
       return recepcion ? nombre : "agenda";
     case "configuracion":
       return recepcion ? nombre : "agenda";

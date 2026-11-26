@@ -112,11 +112,14 @@ test("solo recepción ve la acción de bloquear y odontología recibe la aclarac
   const recepcion = contexto();
   await montarAgenda(recepcion, ruta());
   assert.ok(boton(recepcion.raiz, "Bloquear período"));
+  boton(recepcion.raiz, "Confirmaciones").emitir("click");
+  assert.equal(recepcion.navegaciones[0].seccion, "agenda/confirmaciones");
   boton(recepcion.raiz, "+ Nuevo turno").emitir("click");
-  assert.equal(recepcion.navegaciones[0].seccion, "agenda/nuevo");
+  assert.equal(recepcion.navegaciones[1].seccion, "agenda/nuevo");
   const odontologia = contexto({ rol: "odontologo", profesionalRef: "p1" });
   await montarAgenda(odontologia, ruta());
   assert.equal(boton(odontologia.raiz, "Bloquear período"), undefined);
+  assert.equal(boton(odontologia.raiz, "Confirmaciones"), undefined);
   assert.ok(odontologia.raiz.textContent.includes("Ve únicamente sus turnos."));
 });
 

@@ -25,7 +25,15 @@ public class ConsultaAgenda {
     @Transactional(readOnly = true)
     public List<TurnoAgenda> consultar(Identidad solicitante, UUID sillonId, Instant inicio, Instant fin) {
         // El alcance por rol se aplica primero: solo se resuelven nombres de turnos visibles.
-        var turnos = agenda.consultarAgendaSillon(solicitante, sillonId, inicio, fin);
+        return proyectar(agenda.consultarAgendaSillon(solicitante, sillonId, inicio, fin));
+    }
+
+    @Transactional(readOnly = true)
+    public List<TurnoAgenda> consultarPendientes(Identidad solicitante) {
+        return proyectar(agenda.consultarPendientes(solicitante));
+    }
+
+    private List<TurnoAgenda> proyectar(List<ServicioAgenda.TurnoRegistrado> turnos) {
         if (turnos.isEmpty()) {
             return List.of();
         }

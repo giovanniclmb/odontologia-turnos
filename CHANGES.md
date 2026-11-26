@@ -44,7 +44,7 @@ La tabla conserva las condiciones planteadas al preparar el roadmap. Las resoluc
 
 ## Árbol de dependencias
 
-Dependencias completas en la tabla y en cada ficha. Al 25/11/2026, C-01 a C-12 y C-15 a C-21 están implementados, archivados e integrados en main; siguen pendientes C-13, C-14 y C-22 a C-25. El estado de cada item consta en su ficha. Se conservan C-01 a C-14 y se añaden C-15 a C-25; el orden numérico no sustituye las dependencias.
+Dependencias completas en la tabla y en cada ficha. Al 25/11/2026, C-01 a C-13 y C-15 a C-21 están implementados, archivados e integrados en main; siguen pendientes C-14 y C-22 a C-25. El estado de cada item consta en su ficha. Se conservan C-01 a C-14 y se añaden C-15 a C-25; el orden numérico no sustituye las dependencias.
 
 ```text
 C-01
@@ -504,7 +504,7 @@ La política visual sigue diferida: resolverla antes de Apply y cumplir las apro
   - [08 Arquitectura propuesta](knowledge-base/08_arquitectura_propuesta.md) §Operación y diseño visual
 
 ### [C-13] `interfaz-confirmaciones`
-- **Estado**: `[ ]` pendiente
+- **Estado**: `[x]` implementado, verificado y archivado en OpenSpec el 25/11/2026; integración registrada en el [PR #54](https://github.com/giovanniclmb/odontologia-turnos/pull/54). [Correcciones de la revisión](openspec/changes/archive/2026-11-25-interfaz-confirmaciones/evidence/correcciones-revision.md) · [Evidencia de navegador](openspec/changes/archive/2026-11-25-interfaz-confirmaciones/evidence/qa-navegador.md) · [Verificación de backend](openspec/changes/archive/2026-11-25-interfaz-confirmaciones/evidence/backend.md) · [Verificación de frontend](openspec/changes/archive/2026-11-25-interfaz-confirmaciones/evidence/frontend.md).
 - **Responsable**: Luciano
 - **Scope**: Operación visual del seguimiento manual por recepción.
   - Resolver el gate visual e incorporar listado y acción de confirmación de US-008 consumiendo C-09 dentro de la agenda de C-10.

@@ -23,6 +23,9 @@ function cabecera(contexto: Contexto, ruta: RutaAgenda): HTMLElement {
   const { doc } = contexto;
   const acciones: HTMLButtonElement[] = [];
   if (contexto.usuario.rol === "recepcion") {
+    const pendientes = boton(doc, "Confirmaciones", "btn-secondary", () => contexto.navegar({ ...ruta, seccion: "agenda/confirmaciones" }));
+    pendientes.id = "agenda-confirmaciones";
+    acciones.push(pendientes);
     const bloquear = boton(doc, "Bloquear período", "btn-secondary", () => contexto.navegar({ ...ruta, seccion: "agenda/bloqueo" }));
     bloquear.id = "agenda-bloquear";
     acciones.push(bloquear);

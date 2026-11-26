@@ -33,6 +33,8 @@ export interface ApiAgenda {
   intervalo(): Promise<number | null>;
   establecerIntervalo(minutos: number): Promise<number | null>;
   turnos(sillonId: string, desde: string, hasta: string): Promise<TurnoAgenda[]>;
+  pendientes(): Promise<TurnoAgenda[]>;
+  confirmarTurno(turnoId: string, versionEsperada: string): Promise<TurnoActualizado>;
   bloqueos(sillonId: string, desde: string, hasta: string): Promise<Bloqueo[]>;
   crearTurno(solicitud: AltaTurno): Promise<void>;
   reprogramarTurno(turnoId: string, solicitud: ReprogramacionTurno): Promise<TurnoActualizado>;

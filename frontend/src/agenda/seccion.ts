@@ -2,6 +2,7 @@
 import { montarConfiguracion } from "../configuracion/vista.js";
 import { buscarElemento } from "../dom/nodo.js";
 import { alerta } from "./comunes.js";
+import { montarConfirmaciones } from "./confirmaciones.js";
 import type { Contexto } from "./contexto.js";
 import { montarAltaBloqueo } from "./formulario-bloqueo.js";
 import { montarAltaTurno } from "./formulario-turno.js";
@@ -25,6 +26,8 @@ function montar(contexto: Contexto, ruta: RutaDeSeccion, resultado?: ResultadoEd
       return montarAltaTurno(contexto, ruta);
     case "agenda/bloqueo":
       return montarAltaBloqueo(contexto, ruta);
+    case "agenda/confirmaciones":
+      return montarConfirmaciones(contexto, ruta);
     case "configuracion":
       return montarConfiguracion(contexto);
     default:
