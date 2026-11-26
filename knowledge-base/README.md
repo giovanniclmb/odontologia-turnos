@@ -51,4 +51,4 @@ La revisión personal de cinco fuentes se registró el 25/11/2026 en la [planill
 
 Diez documentos canónicos y este índice, generados por importación del Discovery aprobado. El contenido organiza hechos y conserva preguntas; no implica que los pendientes académicos o de especificación estén resueltos. La política visual permanece diferida y se conserva en el roadmap como condición previa al trabajo visual. La consolidación documental no inicia implementación ni envía emails.
 
-Al 25/11/2026 el sistema visual está aprobado ([design-system](../design-system/README.md), 23/11/2026), con nombre comercial y logo sin definir, y el estado de implementación consta en el [roadmap](../CHANGES.md).
+Al 25/11/2026 el sistema visual está aprobado ([design-system](../design-system/README.md), 23/11/2026), con el nombre sonrisa.app y su icono definidos el 25/11/2026, y el estado de implementación consta en el [roadmap](../CHANGES.md).

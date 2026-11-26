@@ -101,7 +101,7 @@ Con datos ficticios y una base temporal, sin tocar la de desarrollo:
 
 3. Abrir <http://localhost:5173/>. Para dar turnos, ingresar como recepción y establecer primero el intervalo en Configuración.
 
-El nombre comercial y el logo no están definidos: la interfaz muestra un [nombre y logo provisionales](design-system/brand.md). Para trabajar con una base persistente, ver [desarrollo local](backend/README.md#desarrollo-local).
+La aplicación se llama **sonrisa.app** y usa un [icono propio](design-system/brand.md). Para trabajar con una base persistente, ver [desarrollo local](backend/README.md#desarrollo-local).
 
 ## Documentación
 

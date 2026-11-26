@@ -211,3 +211,7 @@ Trabajo en la rama `docs/entrega-academica`, con commits locales y sin push. El 
 25/11/2026. Se incorporó [la reflexión](entrega/reflexion.md) tal como quedó guardada, por pedido expreso de subirla sin cambios.
 
 25/11/2026. Giovanni indicó que la redacción de la reflexión ya había quedado confirmada por el equipo. Se actualizó su estado en el cotejo y en los pendientes.
+
+## Nombre e icono de la aplicación
+
+25/11/2026. El usuario definió el nombre **sonrisa.app** y pidió un icono simple y minimalista en forma de muela. Se aplicaron en la interfaz, el título y el icono de la pestaña y el sistema de diseño. No cambiaron los tokens ni la lógica.
