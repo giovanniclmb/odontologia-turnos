@@ -41,7 +41,7 @@ function renderLogin(): void {
   root.innerHTML = `
     <section class="login-card card" aria-labelledby="login-title">
       <div class="brand login-brand">
-        <img src="../../design-system/assets/logo.svg" alt="Logo provisional" width="32" height="32">
+        <img src="../../design-system/assets/logo.svg" alt="" width="32" height="32">
         <div><strong data-brand-name></strong><small>Acceso al sistema</small></div>
       </div>
       <h1 id="login-title">Iniciar sesión</h1>
@@ -75,7 +75,7 @@ async function renderApp(): Promise<void> {
   root.innerHTML = `
     <div class="app-shell">
       <aside class="sidebar" aria-label="Navegación principal">
-        <div class="brand"><img src="../../design-system/assets/logo.svg" alt="Logo provisional"><strong data-brand-name></strong></div>
+        <div class="brand"><img src="../../design-system/assets/logo.svg" alt=""><strong data-brand-name></strong></div>
         <nav class="nav" aria-label="Secciones">
           <a href="#pacientes" id="nav-pacientes" aria-current="page">Pacientes</a>
           <a href="#agenda" id="nav-agenda">Agenda</a>
@@ -142,7 +142,7 @@ async function renderApp(): Promise<void> {
     navegacion.cerrar();
     await logout();
     history.replaceState(null, "", window.location.pathname);
-    document.title = "Odontología";
+    document.title = "sonrisa.app";
     renderLogin();
   });
   el<HTMLAnchorElement>("nav-pacientes").addEventListener("click", () => mostrarListado());
@@ -212,7 +212,7 @@ function montarNavegacion(): { aplicar(): void; cerrar(): void } {
     el<HTMLElement>("pacientes").hidden = !enPacientes;
     el<HTMLElement>("seccion-agenda").hidden = enPacientes;
     el<HTMLElement>("titulo-seccion").textContent = TITULOS[ruta.seccion];
-    document.title = `Odontología - ${TITULOS[ruta.seccion]}`;
+    document.title = `sonrisa.app - ${TITULOS[ruta.seccion]}`;
     const actual = ruta.seccion === "pacientes" || ruta.seccion === "configuracion" ? ruta.seccion : "agenda";
     for (const nombre of ["pacientes", "agenda", "configuracion"]) {
       const enlace = document.getElementById(`nav-${nombre}`);

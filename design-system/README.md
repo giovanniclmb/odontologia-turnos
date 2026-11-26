@@ -43,13 +43,13 @@ Fundación visual portable para el proyecto. Define tokens, marca provisional, c
 - `brand.js` — constante local del nombre y binding para `[data-brand-name]`.
 - `tokens.css` — variables de color, tipografía, espaciado, radios, sombras, foco y movimiento.
 - `components.html` — referencia de componentes y estados.
-- `assets/logo.svg` — logo provisional, visiblemente marcado como placeholder.
+- `assets/logo.svg` — icono de sonrisa.app.
 - `previews/` — capturas mobile (390×844) y desktop (1440×900).
 
 ## Decisiones abiertas (TBD)
 
-1. **Nombre comercial del consultorio** — no definido. Se usa el descriptor provisional "Consultorio odontológico (nombre por definir)".
-2. **Logo** — placeholder provisional; reemplazar por el logo real en `assets/logo.svg`.
+1. **Nombre** — resuelto el 25/11/2026: sonrisa.app.
+2. **Logo** — resuelto el 25/11/2026: icono de muela con sonrisa en `assets/logo.svg`. Las capturas de `previews/` son anteriores.
 3. **Imágenes/ilustraciones** — no definidas; se evitan fotos de pacientes.
 4. **Paleta final** — propuesta provisional (teal clínico + slate). Requiere aprobación o ajuste.
 5. **Tipografía** — pila de fuentes del sistema (sin fuentes remotas). Si se quiere una fuente específica, debe ser local/OSS y agregarse a `assets/`.
@@ -59,7 +59,7 @@ Fundación visual portable para el proyecto. Define tokens, marca provisional, c
 ## Instrucciones de reemplazo
 
 - **Nombre:** editar la constante `BRAND_NAME` en `brand.js`; se actualiza en todas las vistas que usen `[data-brand-name]`.
-- **Logo:** reemplazar `assets/logo.svg` manteniendo el mismo path y tamaño recomendado (160×48 o equivalente). Actualizar `brand.md` si cambia el estilo.
+- **Logo:** reemplazar `assets/logo.svg` manteniendo el mismo path y proporción 1:1 (48×48). Actualizar `brand.md` si cambia el estilo.
 - **Colores/tipografía/espaciado:** editar `tokens.css`. Al cambiar tokens compartidos, incrementar `Revision`, re-renderizar `components.html`, identificar mockups afectados y solicitar nueva aprobación.
 - **Componentes:** editar `components.html`; mantener importación de `tokens.css` y `brand.js`.
 

@@ -43,6 +43,6 @@ En día o semana, seleccione **Reprogramar** o **Cancelar turno** en un turno pe
 
 ## Interfaz y permisos
 
-La marca provisional y los tokens provienen de `design-system/`. Las acciones visibles dependen del rol devuelto por la API; el backend vuelve a validar cada operación. Recepción solo lee la ficha clínica y odontología edita según asignación y autoría. Los enlaces a módulos todavía no integrados permanecen deshabilitados.
+La marca y los tokens provienen de `design-system/`. Las acciones visibles dependen del rol devuelto por la API; el backend vuelve a validar cada operación. Recepción solo lee la ficha clínica y odontología edita según asignación y autoría. Los enlaces a módulos todavía no integrados permanecen deshabilitados.
 
 La regresión de HTML se ejecuta también en el job `frontend-verify` de CI. Las pruebas HTTP con PostgreSQL real pertenecen a `ApiPacientesIT`; las capturas y la comprobación interactiva se registran en [la evidencia de C-11](../docs/evidencias/c11-correcciones/verify.md).
