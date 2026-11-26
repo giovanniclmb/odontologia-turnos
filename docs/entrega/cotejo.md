@@ -12,7 +12,7 @@ Estados: **Cubierto** (hay evidencia), **Parcial**, **Pendiente**. En «Quién»
 | Líder conduce fundación y OPSX | [Bitácora](../bitacora.md) y [tareas de C-01](../../openspec/changes/archive/2026-11-19-crear-turno-sin-solapamientos-dominio/tasks.md) | Cubierto | — | — |
 | Ramas por integrante y líder a cargo de la rama principal | [CONTRIBUTING](../../CONTRIBUTING.md) y [CODEOWNERS](../../.github/CODEOWNERS); 28 PR integrados al revisar (Giovanni 17, Sofia 4, Fabi 4, Luciano 3) | Cubierto | — | — |
 | Secuencia y paralelismo del roadmap | [CHANGES](../../CHANGES.md) y [plan de colaboración](../plan-colaboracion.md) | Cubierto | — | — |
-| Participación demostrable | Commits propios en `main`, sin contar merges: Giovanni 82, Fabi 34, Sofia 8, Luciano 7 | Parcial | Reflexión y video | Equipo |
+| Participación demostrable | Commits propios en `main`, sin contar merges: Giovanni 82, Fabi 34, Sofia 8, Luciano 7 | Parcial | Video | Equipo |
 
 ## Etapas
 
@@ -55,7 +55,7 @@ Estados: **Cubierto** (hay evidencia), **Parcial**, **Pendiente**. En «Quién»
 | PDF: verificación personal de fuentes | [Planilla](verificacion-fuentes.md#planilla-personal) e informe: cinco fuentes de cinco tipos, cuatro integrantes | Cubierto | — | — |
 | PDF: referencias completas | Sección final | Cubierto | — | — |
 | Video de 8 a 12 minutos | — | **Pendiente** | Grabación | Equipo |
-| Reflexión de 1 a 2 páginas | — | **Pendiente** | Redacción propia y declaración de uso de IA | Equipo |
+| Reflexión de 1 a 2 páginas | [reflexion.md](reflexion.md): cinco preguntas y declaración de uso de IA | Parcial | Confirmar que la redacción es propia | Equipo |
 
 ## Consideraciones
 
@@ -63,7 +63,7 @@ Estados: **Cubierto** (hay evidencia), **Parcial**, **Pendiente**. En «Quién»
 | --- | --- |
 | Datos ficticios | Sin correos de dominios personales en archivos versionados; no se revisaron las imágenes una por una |
 | Sin contactar proveedores ni crear cuentas | Declarado en el informe; la comprobación del 25/11 tampoco lo hizo |
-| Uso de IA declarado en la reflexión | Pendiente |
+| Uso de IA declarado en la reflexión | Incluido en la [reflexión](reflexion.md) |
 | Un change completo antes que varios a medias | C-01 completo; el backlog restante no es exigido |
 
 ## Detectado y no modificado

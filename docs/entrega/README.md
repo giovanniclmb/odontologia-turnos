@@ -7,7 +7,7 @@ Seguimiento de lo que pide la [consigna](<../desarrollo-active-stack%20Global%20
 | Pendiente | Puntos de la rúbrica | Cómo cerrarlo | Estado |
 | --- | --- | --- | --- |
 | Video de defensa, 8 a 12 minutos | 10 | Todos hablan y muestran cámara al presentarse; pantalla trabajando. Orden: Discovery y MVP; KB, roadmap y `AGENTS.md`; revisión del Propose; Apply y Verify; Archive; consulta a Engram; conclusiones | Pendiente |
-| Reflexión escrita, 1 a 2 páginas | 5 | La redactan los integrantes, incluida la declaración de uso de IA y qué hizo cada uno | Pendiente |
+| Revisión final de la [reflexión](reflexion.md) | 5 | Confirmar entre los integrantes que la redacción es propia y que refleja lo que hizo cada uno | Texto incorporado; falta confirmar |
 | Respaldo de la excepción para trabajar de a cuatro | Modalidad | La consigna fija un máximo de tres; adjuntarlo si la cátedra lo pide (PA-10) | Pendiente |
 
 ## Ya reunido
@@ -43,6 +43,6 @@ Seguimiento de lo que pide la [consigna](<../desarrollo-active-stack%20Global%20
 - Informe de Discovery: [Markdown](../discovery/informe-discovery.md) y [PDF](../discovery/informe-discovery.pdf)
 - Change académico: [C-01 archivado](../../openspec/changes/archive/2026-11-19-crear-turno-sin-solapamientos-dominio/proposal.md)
 - Video: pendiente.
-- Reflexión: pendiente.
+- Reflexión: [texto incorporado](reflexion.md), con la revisión final pendiente.
 
 Estos documentos se publicaron mediante el [PR 55](https://github.com/giovanniclmb/odontologia-turnos/pull/55). El enlace público muestra el contenido de `main`: antes de entregar, confirmar que lo incluye.
