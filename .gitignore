@@ -26,3 +26,21 @@ docs/evidencias/ampliacion-paciente-antes-*/
 # Playwright MCP artefactos locales
 .playwright-mcp/
 docs/evidencias/active-orchestrator-state.pre-design-system.json
+
+# Configuración local de IDE y editores
+.idea/
+.vscode/
+*.iml
+.project
+.classpath
+.settings/
+*.swp
+Thumbs.db
+
+# Configuración local de asistentes
+.claude/
+
+# Logs; la evidencia de pruebas versionada es la excepción
+*.log
+!docs/evidencias/**/*.log
+!openspec/changes/**/evidence/**/*.log
