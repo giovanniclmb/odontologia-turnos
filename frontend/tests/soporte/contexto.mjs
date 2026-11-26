@@ -61,7 +61,7 @@ export const rechazo = (codigo, status = 409, mensaje = "detalle") => async () =
 };
 
 export function pendiente() {
-  let resolver;
-  const promesa = new Promise((resolve) => { resolver = resolve; });
-  return { promesa, resolver };
+  let resolver, rechazar;
+  const promesa = new Promise((resolve, reject) => { resolver = resolve; rechazar = reject; });
+  return { promesa, resolver, rechazar };
 }
