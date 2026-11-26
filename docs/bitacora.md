@@ -205,3 +205,9 @@ Trabajo en la rama `docs/entrega-academica`, con commits locales y sin push. El 
 ## Captura de la etapa 0 y relato de C-01
 
 25/11/2026. Giovanni dejó en `docs/evidencias/` una captura con las salidas de instalación y harnesses. El archivo estaba en formato TIFF con extensión `.png`; se versionó convertido a PNG, sin cambiar sus dimensiones. Giovanni confirmó además el [relato de la revisión de C-01](entrega/inspecciones.md#relato-confirmado-de-c-01).
+
+## Reflexión escrita
+
+25/11/2026. Se incorporó [la reflexión](entrega/reflexion.md) tal como quedó guardada, por pedido expreso de subirla sin cambios.
+
+25/11/2026. Giovanni indicó que la redacción de la reflexión ya había quedado confirmada por el equipo. Se actualizó su estado en el cotejo y en los pendientes.

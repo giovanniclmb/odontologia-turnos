@@ -20,4 +20,4 @@ El [registro de skills](../../.atl/skill-registry.md) se versiona desde el 25/11
 
 ## Pendientes
 
-El 25/11/2026 se incorporaron la [captura de instalación y harnesses](captura-instalador.png), que muestra las salidas de `mostrar-evidencia.sh`, y la [revisión personal de cinco fuentes](../entrega/verificacion-fuentes.md#planilla-personal). La reflexión continúa pendiente. Los logs de instalación y las comprobaciones automatizadas no sustituyen las acciones de los integrantes.
+El 25/11/2026 se incorporaron la [captura de instalación y harnesses](captura-instalador.png), que muestra las salidas de `mostrar-evidencia.sh`, y la [revisión personal de cinco fuentes](../entrega/verificacion-fuentes.md#planilla-personal). El texto de la [reflexión](../entrega/reflexion.md) se incorporó ese día. Los logs de instalación y las comprobaciones automatizadas no sustituyen las acciones de los integrantes.
