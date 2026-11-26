@@ -66,7 +66,7 @@ Solo el change académico (C-01, no necesita Docker):
 mvn -f backend/pom.xml test -Dtest=AgendaTest
 ```
 
-Backend completo, unitarias e integración:
+Backend completo, unitarias e integración. Requiere libre el puerto 8080, porque una prueba arranca ahí el JAR; si la aplicación de demostración está abierta, detenerla antes.
 
 ```sh
 ./scripts/check-docker.sh
@@ -90,16 +90,32 @@ Resultados observados y entorno: [verificación en un clon limpio](docs/entrega/
 
 ## Ver la aplicación en local
 
-Con datos ficticios y una base temporal, sin tocar la de desarrollo:
+Usa datos ficticios y una base temporal, sin tocar la de desarrollo. Requiere Docker iniciado y los puertos 8080 y 5173 libres. Los comandos son para macOS o Linux.
 
-1. Con el puerto 8080 libre, iniciar la API de demostración siguiendo [la sección C-10 del backend](backend/README.md#c-10--http-de-agenda-bloqueos-intervalo-y-catálogos). Ahí figuran el comando y los usuarios de prueba.
-2. Desde la raíz, servir la interfaz:
+1. Desde la raíz, compilar la interfaz:
+
+   ```sh
+   npm --prefix frontend ci
+   npm --prefix frontend run build
+   ```
+
+2. Desde la raíz, iniciar la API de demostración y dejar la terminal abierta. Está lista cuando imprime `C10_DEMO_URL`.
+
+   ```sh
+   cd backend
+   mvn test-compile dependency:build-classpath -Dmdep.outputFile=target/demo-classpath
+   java -cp "target/test-classes:target/classes:$(cat target/demo-classpath)" ar.edu.utn.odontologia.persistencia.ApiC10Demo
+   ```
+
+3. En otra terminal, desde la raíz, servir la interfaz:
 
    ```sh
    python3 -m http.server 5173 --bind 127.0.0.1
    ```
 
-3. Abrir <http://localhost:5173/>. Para dar turnos, ingresar como recepción y establecer primero el intervalo en Configuración.
+4. Abrir <http://localhost:5173/> e ingresar con los [usuarios de prueba](backend/README.md#c-11--verificación-http-y-entorno-temporal-para-la-interfaz). Para dar turnos, ingresar como recepción y establecer primero el intervalo en Configuración.
+
+Ctrl-C en cada terminal detiene los servicios; los datos de la demostración se pierden. Después de actualizar el código, detenerlos y repetir desde el primer paso.
 
 La aplicación se llama **sonrisa.app** y usa un [icono propio](design-system/brand.md). Para trabajar con una base persistente, ver [desarrollo local](backend/README.md#desarrollo-local).
 
@@ -139,4 +155,4 @@ El equipo está integrado por Giovanni (líder y propietario del repositorio), S
 
 Se permiten compilación, pruebas y commits autónomos dentro del alcance autorizado. Cada commit debe cubrir una tarea específica y tener un mensaje que explique el cambio y su propósito. **El push requiere un pedido explícito del usuario.**
 
-Los integrantes [revisaron cinco fuentes](docs/entrega/verificacion-fuentes.md#planilla-personal), registradas el 25/11/2026. La [captura de instalación](docs/evidencias/captura-instalador.png) está incorporada. La [reflexión escrita](docs/entrega/reflexion.md) está incorporada. La reflexión y el video de defensa son trabajo de los integrantes; el video sigue pendiente. Las verificaciones del agente no los sustituyen.
+Los integrantes [revisaron cinco fuentes](docs/entrega/verificacion-fuentes.md#planilla-personal), registradas el 25/11/2026. También están incorporadas la [captura de instalación](docs/evidencias/captura-instalador.png) y la [reflexión escrita](docs/entrega/reflexion.md). El video de defensa sigue pendiente. Las verificaciones del agente no reemplazan el trabajo de los integrantes.
