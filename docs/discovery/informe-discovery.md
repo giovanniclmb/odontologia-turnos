@@ -556,6 +556,8 @@ Las elecciones siguientes se hicieron después de la investigación y se aprobar
 | Dentidesk | Examinar separación de perfiles y condiciones de exportación documentadas. |
 | AgendaPro | Examinar claridad del recorrido público de reserva y condiciones por servicio; la autorreserva no se incorpora al MVP. |
 
+**Criterio de selección** (confirmado el 25/11/2026; no quedó registrado al elegir). La selección para demo priorizó la cercanía al mercado argentino y la oferta en español por sobre el puntaje, que mide evidencia pública y no conveniencia. Open Dental obtiene 2,350 por sus manuales, con 4,0 en turnos y 5,0 en clínica, pero 0 en administración e integraciones locales y sin disponibilidad argentina confirmada. También superan a algún sistema elegido XDentalCloud (1,750), tab32 (1,650), Clinic Cloud (1,600), Dentrix (1,600) y CareStack (1,550); las fuentes relevadas tampoco confirman su disponibilidad en Argentina.
+
 No se contactó a proveedores ni se crearon cuentas. Las demos siguen como trabajo posterior y no se presentan como realizadas; la revisión personal de fuentes figura en «Verificación de fuentes».
 
 ### Tres referencias de experiencia de usuario elegidas

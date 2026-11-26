@@ -317,6 +317,16 @@ Las elecciones siguientes fueron realizadas por el usuario después de la invest
   'Dentidesk':'Examinar separación de perfiles y condiciones de exportación documentadas.',
   'AgendaPro':'Examinar claridad del recorrido público de reserva y condiciones por servicio; la autorreserva no se incorpora al MVP.'}
  section+=table(['Competidor elegido','Objetivo de contraste'],[[n,rationales[n]] for n in decisions['demo_shortlist']])
+ # Criterio confirmado por el equipo el 25/11/2026; las cifras salen de la matriz.
+ scores={p['name']:p['weighted_total'] for p in PRODUCTS}
+ def decimal(value,places=3):return f'{value:.{places}f}'.replace('.',',')
+ chosen=decisions['demo_shortlist']
+ floor=min(scores[n] for n in chosen)
+ higher=sorted((n for n in scores if n not in chosen and n!='Open Dental' and scores[n]>floor),key=lambda n:-scores[n])
+ opendental=next(p['scores'] for p in PRODUCTS if p['name']=='Open Dental')
+ assert opendental['A']==0 and opendental['I']==0
+ others=', '.join(f'{n} ({decimal(scores[n])})' for n in higher[:-1])+f' y {higher[-1]} ({decimal(scores[higher[-1]])})'
+ section+=f"\n**Criterio de selección** (confirmado el 25/11/2026; no quedó registrado al elegir). La selección para demo priorizó la cercanía al mercado argentino y la oferta en español por sobre el puntaje, que mide evidencia pública y no conveniencia. Open Dental obtiene {decimal(scores['Open Dental'])} por sus manuales, con {decimal(opendental['T'],1)} en turnos y {decimal(opendental['C'],1)} en clínica, pero 0 en administración e integraciones locales y sin disponibilidad argentina confirmada. También superan a algún sistema elegido {others}; las fuentes relevadas tampoco confirman su disponibilidad en Argentina.\n"
  section+='\nNo se contactó a proveedores ni se crearon cuentas. Las demos siguen como trabajo posterior y no se presentan como realizadas; la revisión personal de fuentes figura en «Verificación de fuentes».\n\n### Tres referencias de experiencia de usuario elegidas\n\n'
  ux={'Dentalink':'Configuración y presentación de opciones de agenda en documentación oficial.','AgendaPro':'Interfaz pública con servicios, duraciones y condiciones de reserva.','Dentrix':'Flujo documentado de motivo, profesional y horario; artículo histórico acompañado por página vigente.'}
  section+=table(['Referencia','Qué estudiar'],[[n,ux[n]] for n in decisions['ux_references']])
