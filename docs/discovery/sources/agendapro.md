@@ -30,10 +30,10 @@ Plataforma online para agenda multisector; oferta para dentistas en argentina. N
 
 ## Diferenciadores
 
-Aspectos observables para contrastar: La reserva se observó sin completarla. No confundir confirmación de una interfaz con prueba de integridad del backend. Precio indexado antiguo descartado.
+Aspectos observables para contrastar: La reserva se observó sin completarla. No confundir confirmación de una interfaz con prueba de integridad del backend. Precio indexado antiguo descartado. El 25/11/2026 la interfaz de reserva respondió HTTP 403; el agente no pudo recomprobar la observación del 17/11. En la revisión personal informada ese día, Luciano Izquierdo Cafici no halló diferencias.
 
 ## Notas del investigador
 
 No evidenciado
 
-Fuentes consultadas: [F08.1 Oferta dental](https://agendapro.com/es/dental/software-odontologico); [F08.2 Planes Argentina](https://agendapro.com/ar/planes); [F08.3 Interfaz pública de reserva](https://agendapro.com/site/ar/odontologiaor/239004). Todas consultadas el 2026-11-17. Declaraciones comerciales no equivalen a una prueba independiente. Documentación e interfaz pública acreditan lo publicado, no el comportamiento de una instalación real. No se crearon cuentas ni se enviaron formularios.
+Fuentes consultadas: [F08.1 Oferta dental](https://agendapro.com/es/dental/software-odontologico); [F08.2 Planes Argentina](https://agendapro.com/ar/planes); [F08.3 Interfaz pública de reserva](https://agendapro.com/site/ar/odontologiaor/239004). Todas consultadas el 2026-11-17. Parte de ellas se volvió a revisar el 25/11/2026. Declaraciones comerciales no equivalen a una prueba independiente. Documentación e interfaz pública acreditan lo publicado, no el comportamiento de una instalación real. No se crearon cuentas ni se enviaron formularios.

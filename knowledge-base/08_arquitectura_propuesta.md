@@ -78,6 +78,8 @@ Presupuesto externo cero; email obligatorio mediante proveedor gratuito por defi
 
 La política visual permanece diferida desde el plan de fundación. Generar esta KB no aprueba una identidad, mockup o diseño de pantalla. Cuando corresponda trabajo visual, se resolverá esa política mediante el flujo ya instalado.
 
+**Actualización del 25/11/2026.** Los dos párrafos anteriores describen la fase de consolidación. Después se adoptaron Docker Compose, la integración continua y Resend como transporte de prueba ([09](09_decisiones_y_supuestos.md)), y el [sistema visual](../design-system/README.md) se aprobó el 23/11/2026. El hosting y el despliegue productivo siguen pendientes.
+
 ## Fuentes y navegación
 
 [Decisiones aprobadas](../docs/discovery/decisiones-aprobadas.json), `constraints`, `rules` y `open_questions`; [modelo conceptual](04_modelo_de_datos.md); PA-01 a PA-09 y PA-15 a PA-21 en [preguntas abiertas](10_preguntas_abiertas.md).

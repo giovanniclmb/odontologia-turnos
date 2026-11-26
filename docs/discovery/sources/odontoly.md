@@ -22,7 +22,7 @@ Consultorios odontológicos y equipos pequeños. Proveedor: Odontoly; entidad le
 
 ## Pricing
 
-Referencia publicada USD 149,99/mes sin permanencia; el sitio pide confirmar precio final, moneda e impuestos. No se evidenció prueba gratuita.
+Referencia publicada USD 149,99/mes sin permanencia; el sitio pide confirmar precio final, moneda e impuestos. No se evidenció prueba gratuita. El plan incluye dos usuarios y hasta cuatro dispositivos autorizados (consulta del 25/11/2026).
 
 ## Posicionamiento
 
@@ -36,4 +36,4 @@ Aspectos observables para contrastar: Mac Apple Silicon; Windows en desarrollo. 
 
 No evidenciado
 
-Fuentes consultadas: [F05.1 Producto, restricciones y precios](https://odontoly.com/). Todas consultadas el 2026-11-17. Declaraciones comerciales no equivalen a una prueba independiente. Documentación e interfaz pública acreditan lo publicado, no el comportamiento de una instalación real. No se crearon cuentas ni se enviaron formularios.
+Fuentes consultadas: [F05.1 Producto, restricciones y precios](https://odontoly.com/). Todas consultadas el 2026-11-17. Parte de ellas se volvió a revisar el 25/11/2026. Declaraciones comerciales no equivalen a una prueba independiente. Documentación e interfaz pública acreditan lo publicado, no el comportamiento de una instalación real. No se crearon cuentas ni se enviaron formularios.

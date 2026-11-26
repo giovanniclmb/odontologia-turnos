@@ -5,7 +5,9 @@
 node_modules/
 .engram/*.db
 .engram/*.db-*
-.atl/
+# De .atl solo se versiona el registro de skills que pide la consigna.
+.atl/*
+!.atl/skill-registry.md
 __pycache__/
 *.py[cod]
 .venv/

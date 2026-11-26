@@ -13,7 +13,7 @@ Consultorios y clínicas dentales con oferta argentina. Proveedor: Dentalink; en
 
 ## Features detectadas
 
-- Agenda: El manual documenta enlace de agenda, profesionales habilitados, bloques y permisos. Asignación simultánea de sillón y profesional: No evidenciado.
+- Agenda: El manual documenta enlace de agenda, profesionales habilitados, bloques y permisos. La sección «Cruce con Recursos» documenta cómo asociar recursos a un servicio y afirma que la agenda online valida que el profesional y el recurso estén disponibles en el mismo horario (consulta del 25/11/2026). Identificación de ese recurso como sillón y control de concurrencia: No evidenciado.
 - Paciente y automatización: Reserva por enlace documentada. Declara confirmaciones por WhatsApp/email, campañas y seguimiento de citas anuladas o ausentes. Compartir enlace por WhatsApp no demuestra WhatsApp Business API.
 - Clínica: Declara historia, odontograma, periodontograma, imágenes, firma y planes de tratamiento.
 - Administración: Declara caja, gastos, liquidación a odontólogos, KPI, reportes Excel y obras sociales.
@@ -36,4 +36,4 @@ Aspectos observables para contrastar: No se probó el producto. No confundir ges
 
 No evidenciado
 
-Fuentes consultadas: [F01.1 Sitio argentino](https://web-ar.softwaredentalink.com/); [F01.2 Manual de agenda online](https://ayuda.softwaredentalink.com/es/articles/9493139-configura-tu-agenda-online). Todas consultadas el 2026-11-17. Declaraciones comerciales no equivalen a una prueba independiente. Documentación e interfaz pública acreditan lo publicado, no el comportamiento de una instalación real. No se crearon cuentas ni se enviaron formularios.
+Fuentes consultadas: [F01.1 Sitio argentino](https://web-ar.softwaredentalink.com/); [F01.2 Manual de agenda online](https://ayuda.softwaredentalink.com/es/articles/9493139-configura-tu-agenda-online). Todas consultadas el 2026-11-17. Parte de ellas se volvió a revisar el 25/11/2026. Declaraciones comerciales no equivalen a una prueba independiente. Documentación e interfaz pública acreditan lo publicado, no el comportamiento de una instalación real. No se crearon cuentas ni se enviaron formularios.

@@ -18,7 +18,7 @@ Clínicas generales con módulo odontológico. Proveedor: Clinic Cloud; entidad 
 - Clínica: Historia clínica y odontograma en Max declarados; ayuda documenta presupuesto desde odontograma. Periodontograma: No evidenciado.
 - Administración: Caja, presupuestos, liquidaciones y reportes; facturación TicketBAI/VeriFactu, que no prueba facturación ARCA.
 - Integraciones: Doctoralia declarado. Mercado Pago, obras sociales argentinas, Google Calendar y API pública: No evidenciado.
-- Seguridad y portabilidad: Permisos por niveles declarados. Exportación, auditoría, cifrado y política de backup: No evidenciado en las fuentes examinadas.
+- Seguridad y portabilidad: Permisos por niveles declarados. La página de tarifas exhibe ISO/IEC 27001, sin certificado inspeccionado (consulta del 25/11/2026). Exportación, auditoría, cifrado y política de backup: No evidenciado en las fuentes examinadas.
 
 ## Pricing
 
@@ -34,6 +34,6 @@ Aspectos observables para contrastar: No comparar Mini como si incluyera odontog
 
 ## Notas del investigador
 
-No evidenciado
+Declara más de 3.000 consultas y clínicas en España (consulta del 25/11/2026); cifra comercial no verificada externamente.
 
-Fuentes consultadas: [F09.1 Tarifas y módulos](https://clinic-cloud.com/tarifas); [F09.2 Ayuda presupuesto y odontograma](https://clinic-cloud.com/faq/agenda-y-comunicaciones/presupuestos). Todas consultadas el 2026-11-17. Declaraciones comerciales no equivalen a una prueba independiente. Documentación e interfaz pública acreditan lo publicado, no el comportamiento de una instalación real. No se crearon cuentas ni se enviaron formularios.
+Fuentes consultadas: [F09.1 Tarifas y módulos](https://clinic-cloud.com/tarifas); [F09.2 Ayuda presupuesto y odontograma](https://clinic-cloud.com/faq/agenda-y-comunicaciones/presupuestos). Todas consultadas el 2026-11-17. Parte de ellas se volvió a revisar el 25/11/2026. Declaraciones comerciales no equivalen a una prueba independiente. Documentación e interfaz pública acreditan lo publicado, no el comportamiento de una instalación real. No se crearon cuentas ni se enviaron formularios.

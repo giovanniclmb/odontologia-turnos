@@ -177,3 +177,31 @@ Fecha: 19/11/2026. Giovanni aprobó el diseño y la preparación local de un wor
 ## Resolución de pendientes de C-03 — Issue #30
 
 20/11/2026. Giovanni autorizó resolver e integrar y aprobó el cambio propio de contraseña con ventana de cinco. Se aisló el CLI en un proceso con allowlist y se agregó V3 con historial/servicio transaccional, bloqueo por usuario y pruebas reales de ventana, reinicio, concurrencia, rollback y permisos. Se verificó el comando Maven literal con settings vacíos y modo offline. Resultado local: 78 unitarias, 82 IT, nueve pruebas Python y tres specs válidas. [Evidencia](evidencias/c03-pendientes/verify.md). Publicación, CI remoto e integración se verifican en PR #29; no se alteraron bases del equipo ni migraciones previas.
+
+## Preparación de la documentación de entrega
+
+25/11/2026. Se cotejó `main` (`6aa8796`) contra la consigna y el usuario respondió por menú: portada con nombre y apellido de los cuatro integrantes; versionar el registro de skills existente; actualizar README y estados, informe y PDF, y armar el paquete de entrega. Sobre las fuentes, pidió que el agente contrastara lo documentado antes y expusiera las diferencias. El resultado consta como comprobación del agente; la revisión personal de los integrantes sigue pendiente y no se completó ninguna fila en su nombre. Las diferencias no se aplicaron a fichas, matrices ni puntajes: requieren decisión del equipo.
+
+Trabajo en la rama `docs/entrega-academica`, con commits locales y sin push. El detalle está en [docs/entrega](entrega/README.md). Esta entrada no reconstruye las decisiones tomadas entre el 21 y el 25/11, que constan en OpenSpec y en la KB.
+
+## Corrección del informe tras la segunda comprobación de fuentes
+
+25/11/2026. Ante la pregunta de si corregir en el informe las diferencias halladas, la respuesta fue «Sí, corregilas» (Ajustar). Antes de aplicarlas, el agente repitió dos comprobaciones y detectó que su primera pasada había informado mal el adicional por agenda de Clinic Cloud y los importes anuales de Dentify. Se actualizaron fichas, cuatro celdas de DentApp en la matriz B (total de 1,275 a 1,475), la sección C, el resumen de fuentes y el PDF. La revisión personal sigue pendiente. [Detalle](entrega/verificacion-fuentes.md#correcciones-aplicadas).
+
+## Revisión personal de fuentes
+
+25/11/2026. Giovanni Colombo transmitió los resultados de cinco fuentes: DentApp y tab32 a su cargo, Dentalink de Sofia Martinez, Dentidesk de Fabiano Ramos y AgendaPro de Luciano Izquierdo Cafici. Se incorporaron al informe y al PDF, con los cargos por servicio de tab32 y la distinción en Dentidesk entre 15 días de prueba y 30 días para pedir la exportación. El agente no localizó en tab32 un plan cercano a $400; ese dato y el alcance de la simulación en AgendaPro quedan a confirmar. [Planilla](entrega/verificacion-fuentes.md#planilla-personal).
+
+25/11/2026. Giovanni Colombo confirmó que el importe observado en tab32 era $427. En la página corresponde al costo mensual estimado de Open Dental dentro de un comparador; el precio de tab32 en el informe no cambia. Sigue por confirmar el alcance de la simulación en AgendaPro. [Detalle](entrega/verificacion-fuentes.md#tab32-importe-observado).
+
+25/11/2026. Giovanni Colombo confirmó que Luciano Izquierdo Cafici detuvo la simulación en AgendaPro antes de confirmar la reserva. Con eso no quedan datos abiertos de la revisión de fuentes.
+
+## Revisión de completitud del informe
+
+25/11/2026. Tras revisar qué faltaba en el informe, se pidió aplicar las correcciones que no requerían investigar de nuevo («Sí, hacelas», Ajustar). Se agregó en la sección A una tabla de funciones principales; la sección C pasó a las cuatro subsecciones de la consigna con cifras de la matriz; la verificación de fuentes incorporó qué afirmaba el informe; se declararon los datos no relevados y se ajustó la redacción. No cambiaron fichas ni puntajes.
+
+25/11/2026. Ante la pregunta de si Open Dental había quedado fuera de los competidores para demo por priorizar sistemas cercanos al mercado argentino, la respuesta fue «Sí, ese fue». Se agregó el criterio a la sección D, aclarando que no quedó registrado al elegir. La selección no cambió.
+
+## Captura de la etapa 0 y relato de C-01
+
+25/11/2026. Giovanni dejó en `docs/evidencias/` una captura con las salidas de instalación y harnesses. El archivo estaba en formato TIFF con extensión `.png`; se versionó convertido a PNG, sin cambiar sus dimensiones. Giovanni confirmó además el [relato de la revisión de C-01](entrega/inspecciones.md#relato-confirmado-de-c-01).

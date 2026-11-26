@@ -11,7 +11,7 @@ Cliente de trabajo: Codex. `AGENTS.md` es la fuente principal de mantenimiento; 
 | Backend | Java 25 y Spring Boot 4.1.2 | Maven, JPA/Hibernate y Flyway aprobados en C-02 |
 | Base de datos | PostgreSQL | 18.7; Compose desarrollo y Testcontainers pruebas |
 
-C-01 y C-02 usan Java 25/Maven en backend/. C-02 incorpora Boot 4.1.2, JPA/Hibernate separado del dominio y Flyway; PostgreSQL 18.7 mediante Compose y pruebas Testcontainers. El backend sigue sin HTTP. Contratos de integración, autenticación, proveedor de email y despliegue productivo siguen pendientes. El frontend es vanilla; no incorporar React, Next.js o shadcn por disponer de sus skills. Presupuesto externo cero.
+C-01 y C-02 usan Java 25/Maven en backend/. C-02 incorpora Boot 4.1.2, JPA/Hibernate separado del dominio y Flyway; PostgreSQL 18.7 mediante Compose y pruebas Testcontainers. Desde C-11 el backend expone HTTP; las decisiones posteriores sobre contratos, autenticación y email constan en las KB 09 y 10. El despliegue productivo sigue pendiente. El frontend es vanilla; no incorporar React, Next.js o shadcn por disponer de sus skills. Presupuesto externo cero.
 
 ## Base de Conocimiento
 
@@ -46,7 +46,7 @@ Elegir solo las skills pertinentes al encargo, desde el [registro local](.atl/sk
 | Reviewer | Revisión enfocada de lógica, permisos y UI | `security-audit`, `web-design-guidelines`, `verification-before-completion` |
 | Integrator | Verificación y cierre | `verification-before-completion`, `openspec-sync-specs`, `openspec-archive-change` |
 
-Los compact rules se resuelven desde `.atl/skill-registry.md`, generado por skill-registry y no versionado; no se duplican aquí. Sus rutas globales son propias del entorno. Si falta el registro, verificar el inventario disponible antes de delegar; no asumir skills instaladas. Este mapeo conserva los roles globales y sus límites de disponibilidad, sin elegir modelos sustitutos ni activar una auditoría completa.
+Los compact rules se resuelven desde `.atl/skill-registry.md`, generado por skill-registry; no se duplican aquí. La copia versionada para la entrega corresponde al equipo donde se generó: sus rutas globales son propias de ese entorno y conviene regenerarlo localmente sin publicar esa regeneración salvo acuerdo. Si falta el registro, verificar el inventario disponible antes de delegar; no asumir skills instaladas. Este mapeo conserva los roles globales y sus límites de disponibilidad, sin elegir modelos sustitutos ni activar una auditoría completa.
 
 ## Roadmap de Changes
 

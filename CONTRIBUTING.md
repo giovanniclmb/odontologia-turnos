@@ -13,7 +13,7 @@ Los colaboradores deben aceptar la invitación antes de poder escribir. Una invi
 
 ## Preparar el entorno
 
-Clonar el repositorio, leer AGENTS.md, la KB, CHANGES.md y [el plan de colaboración](docs/plan-colaboracion.md). Instalar JDK 25 y Maven; [backend/README.md](backend/README.md) explica el módulo y sus límites. Regenerar localmente el registro de skills según las herramientas realmente disponibles; `.atl/` no se publica ni se copia como configuración global.
+Clonar el repositorio, leer AGENTS.md, la KB, CHANGES.md y [el plan de colaboración](docs/plan-colaboracion.md). Instalar JDK 25 y Maven; [backend/README.md](backend/README.md) explica el módulo y sus límites. Regenerar localmente el registro de skills según las herramientas realmente disponibles. [La copia versionada](.atl/skill-registry.md) documenta el entorno donde se generó y no se copia como configuración global; el resto de `.atl/` no se publica.
 
 Desde la raíz:
 

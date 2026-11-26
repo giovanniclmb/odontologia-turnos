@@ -22,7 +22,7 @@ Odontólogo independiente y clínica multiprofesional. Proveedor: Dentify; entid
 
 ## Pricing
 
-Página abierta: Básico $30.000/mes y Clínicas $45.000/mes; prueba 14 días sin tarjeta. Código de moneda e impuestos: No evidenciado explícitamente; no inferir ARS solo por el dominio. No usar como vigente el valor anual de $25.000 mencionado en otra extracción.
+Página abierta: en modalidad mensual, Básico $30.000/mes y Clínicas $45.000/mes; en modalidad anual, $25.000/mes ($300.000 por año) y $38.000/mes ($456.000 por año), anunciada con «2 meses gratis» (consulta del 25/11/2026). Prueba 14 días sin tarjeta. Código de moneda e impuestos: No evidenciado explícitamente; no inferir ARS solo por el dominio.
 
 ## Posicionamiento
 
@@ -30,10 +30,10 @@ SaaS en navegador para odontólogo independiente y clínica multiprofesional. No
 
 ## Diferenciadores
 
-Aspectos observables para contrastar: Hay una demostración ilustrada en la portada, sin prueba operativa. Se corrigió la ausencia de evidencia de país y cifrado al leer la portada actual.
+Aspectos observables para contrastar: Hay una demostración ilustrada en la portada, sin prueba operativa. Se corrigió la ausencia de evidencia de país y cifrado al leer la portada actual. El pie indica «Desarrollado por IB Digital», sin acreditar entidad legal.
 
 ## Notas del investigador
 
 No evidenciado
 
-Fuentes consultadas: [F03.1 Producto, FAQ y precios](https://www.dentify.com.ar/); [F03.2 Página de consultorio](https://www.dentify.com.ar/software-consultorio-odontologico). Todas consultadas el 2026-11-17. Declaraciones comerciales no equivalen a una prueba independiente. Documentación e interfaz pública acreditan lo publicado, no el comportamiento de una instalación real. No se crearon cuentas ni se enviaron formularios.
+Fuentes consultadas: [F03.1 Producto, FAQ y precios](https://www.dentify.com.ar/); [F03.2 Página de consultorio](https://www.dentify.com.ar/software-consultorio-odontologico). Todas consultadas el 2026-11-17. Parte de ellas se volvió a revisar el 25/11/2026. Declaraciones comerciales no equivalen a una prueba independiente. Documentación e interfaz pública acreditan lo publicado, no el comportamiento de una instalación real. No se crearon cuentas ni se enviaron formularios.
