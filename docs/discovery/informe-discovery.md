@@ -2,7 +2,11 @@
 
 Desarrollo de Software - Trabajo Global
 
-Fecha de consulta y aprobación: 17 de noviembre de 2026. Equipo de cuatro integrantes con autorización docente informada por el usuario; nombres pendientes.
+Integrantes: Giovanni Colombo, Sofia Martinez, Luciano Izquierdo Cafici y Fabiano Ramos.
+
+Fecha de entrega: 25 de noviembre de 2026. Consulta de fuentes y aprobación del Discovery: 17 de noviembre de 2026.
+
+<!-- salto-de-pagina -->
 
 ## Resumen ejecutivo
 
@@ -12,7 +16,7 @@ Agenda, ficha del paciente, odontograma y administración aparecen repetidamente
 
 Se encontraron precios indexados distintos de las aperturas actuales, promociones cambiantes, módulos dependientes del plan y prestaciones anunciadas como próximas. El relevamiento conserva estas limitaciones. No se realizó una auditoría técnica, prueba de carga, compra ni demo con cuenta.
 
-Tras la investigación y las preguntas por menú, el usuario aprobó el resumen de once puntos y su ampliación (revisión 2). El MVP incluye agenda de sillón diaria/semanal, bloqueos por recepción, ficha clínica sencilla, disponibilidad conjunta de profesional y sillón y confirmaciones manuales. El paciente cancela por enlace hasta 48 horas antes y gestiona con cuenta la lista de espera; recepción asigna los huecos. Se envía email al crear con enlace y recordatorio 24 horas antes, sin opción de cancelar cuando el plazo venció. Se requieren envíos reales a direcciones de prueba del equipo mediante proveedor gratuito aún por definir. El stack elegido es HTML/CSS/TypeScript vanilla, Java Spring Boot y PostgreSQL; entrega 25/11/2026 y presupuesto externo cero. El intervalo inicial, los detalles técnicos y la revisión personal de cinco fuentes siguen pendientes. Discovery, KB y roadmap son documentación de planificación: no se implementó código ni se seleccionó un change.
+Tras la investigación y las preguntas por menú, se aprobó el resumen de once puntos y su ampliación (revisión 2). El MVP incluye agenda de sillón diaria/semanal, bloqueos por recepción, ficha clínica sencilla, disponibilidad conjunta de profesional y sillón y confirmaciones manuales. El paciente cancela por enlace hasta 48 horas antes y gestiona con cuenta la lista de espera; recepción asigna los huecos. Se envía email al crear con enlace y recordatorio 24 horas antes, sin opción de cancelar cuando el plazo venció. Se requieren envíos reales a direcciones de prueba del equipo mediante proveedor gratuito aún por definir. El stack elegido es HTML/CSS/TypeScript vanilla, Java Spring Boot y PostgreSQL; entrega 25/11/2026 y presupuesto externo cero. A ese corte seguían pendientes el intervalo inicial, los detalles técnicos y la revisión personal de cinco fuentes. Este informe es un corte al cierre del Discovery (revisión 2, consolidada el 19/11/2026): a esa fecha no se había implementado código ni seleccionado un change. El estado posterior consta en README.md y CHANGES.md; la revisión personal y la segunda comprobación del agente, informadas el 25/11/2026, figuran en «Verificación de fuentes».
 
 ## Alcance y método
 
@@ -21,6 +25,8 @@ Se consultaron páginas puntuales, sin crawling masivo ni evasión de bloqueos. 
 Se distingue **Documentado** (manual con procedimiento, interfaz pública o condición textual verificable) de **Declarado** (afirmación comercial del proveedor). Ninguna etiqueta equivale a prueba operativa independiente o garantía de cumplimiento. El domicilio publicado no acredita por sí solo el origen histórico de la empresa; se marca la diferencia donde corresponde.
 
 No se asume que WhatsApp para soporte, compartir un enlace, recordatorios semiautomáticos y WhatsApp Business API sean equivalentes. Tampoco se equiparan una solicitud pendiente y una reserva confirmada, imágenes almacenadas y radiología integrada, ni un reporte Excel y una exportación clínica completa.
+
+**Datos no relevados de forma sistemática.** La consigna de investigación pide además datos que no integran la matriz ni se relevaron de manera uniforme: duración variable, bloqueos y sobreturnos; chatbot y redes sociales; seguimiento de ausentes, recuperación de pacientes, controles periódicos y campañas; anamnesis; señas; sitio web, radiología y firma digital; sucursales, soporte y capacitación; privacidad y adecuación a la normativa argentina; plan gratuito; y una síntesis de fortalezas y diferenciales por sistema. Algunas fichas los mencionan. Cuando una ficha no dice nada sobre uno de ellos, no se relevó: no debe leerse como «No evidenciado» ni como ausencia. Las referencias tampoco incluyen videos oficiales, marketplaces ni reseñas verificadas.
 
 ## A Comparación de sistemas
 
@@ -46,6 +52,28 @@ No se asume que WhatsApp para soporte, compartir un enlace, recordatorios semiau
 
 La oferta argentina encabeza la tabla. Dentidesk y Odonto.me aportan referencias en español; AgendaPro tiene oferta y reservas públicas en Argentina. Clinic Cloud y XDentalCloud son referencias de módulos y condiciones; Open Dental, Dentrix, Curve, CareStack y tab32 aportan patrones internacionales cuya comercialización y localización argentina no se presumen.
 
+### Funciones principales
+
+«Documentado» corresponde a funcionalidad comprobada en documentación, interfaz pública o condición textual; «Declarado», a afirmación comercial del proveedor. Los valores son los de la matriz B. Las fuentes se consultaron el 17/11/2026; las consultas posteriores constan en las referencias.
+
+| Sistema | Reserva online | Recordatorios | Agenda por sillón/box | Historia clínica | Fuentes |
+|---|---|---|---|---|---|
+| Dentalink | Documentado | Declarado | No evidenciado | Declarado | [F01.1](https://web-ar.softwaredentalink.com/) [F01.2](https://ayuda.softwaredentalink.com/es/articles/9493139-configura-tu-agenda-online) |
+| DentApp | No evidenciado | Declarado | No evidenciado | Declarado | [F02.1](https://www.dentapp.ar/software-odontologico-argentina) [F02.2](https://www.dentapp.ar/) |
+| Dentify | No evidenciado | No evidenciado | No evidenciado | Declarado | [F03.1](https://www.dentify.com.ar/) [F03.2](https://www.dentify.com.ar/software-consultorio-odontologico) |
+| OdontoApp | No evidenciado | Declarado | No evidenciado | Declarado | [F04.1](https://odontoapp.com.ar/) [F04.2](https://odontoapp.com.ar/privacidad) |
+| Odontoly | Declarado | No evidenciado | No evidenciado | Declarado | [F05.1](https://odontoly.com/) |
+| Dentidesk | Declarado | Declarado | No evidenciado | Declarado | [F06.1](https://www.dentidesk.cl/dentidesk/feature) [F06.2](https://app.dentidesk.com/terminos.php) [F06.3](https://dentidesk.freshdesk.com/support/solutions/articles/150000201446--c%C3%B3mo-agregar-doctores-y-personal-a-mi-cl%C3%ADnica-en-dentidesk-) |
+| Odonto.me | No evidenciado | Declarado | No evidenciado | Declarado | [F07.1](https://odonto.me/?locale=es) |
+| AgendaPro | Documentado | Declarado | No evidenciado | Declarado | [F08.1](https://agendapro.com/es/dental/software-odontologico) [F08.2](https://agendapro.com/ar/planes) [F08.3](https://agendapro.com/site/ar/odontologiaor/239004) |
+| Clinic Cloud | Declarado | Declarado | No evidenciado | Declarado | [F09.1](https://clinic-cloud.com/tarifas) [F09.2](https://clinic-cloud.com/faq/agenda-y-comunicaciones/presupuestos) |
+| XDentalCloud | Declarado | Declarado | Declarado | Declarado | [F10.1](https://xdentalcloud.com/) [F10.2](https://xdentalcloud.com/precios/) [F10.3](https://xdentalcloud.com/agenda-dental/) [F10.4](https://xdentalcloud.com/seguridad/) [F10.5](https://xdentalcloud.com/empresa/) |
+| Open Dental | Declarado | Declarado | Documentado | Documentado | [F11.1](https://www.opendental.com/manual/operatories.html) [F11.2](https://www.opendental.com/manual/blockouts.html) [F11.3](https://opendental.com/site/fees.html) [F11.4](https://www.opendental.com/manual/chart.html) [F11.5](https://www.opendental.com/site/contact.html) [F11.6](https://www.opendental.com/manual/appointments.html) |
+| Dentrix | Documentado | Declarado | Documentado | Declarado | [F12.1](https://www.dentrix.com/) [F12.2](https://www.dentrix.com/dental-solutions/marketing-and-patient-experience/dentrix-patient-engage-suite/) [F12.3](https://magazine.dentrix.com/online-booking-from-the-patients-perspective-2/) |
+| Curve Dental | Declarado | Declarado | No evidenciado | Declarado | [F13.1](https://www.curvedental.com/) |
+| CareStack | Documentado | Declarado | No evidenciado | Declarado | [F14.1](https://carestack.com/) [F14.2](https://carestack.com/dental-software/features/online-scheduling) |
+| tab32 | Declarado | Declarado | Declarado | Declarado | [F15.1](https://tab32.com/) [F15.2](https://tab32.com/pricing/) [F15.3](https://tab32.com/about/) |
+
 ### Fichas comparables y trazabilidad
 
 Las fuentes F01 a F15 se enumeran completas al final. Las fichas complementan las matrices; una capacidad pendiente de prueba no se convierte en requisito del producto que construiremos.
@@ -54,7 +82,7 @@ Las fuentes F01 a F15 se enumeran completas al final. Las fichas complementan la
 
 Fuentes: [F01.1 Sitio argentino](https://web-ar.softwaredentalink.com/); [F01.2 Manual de agenda online](https://ayuda.softwaredentalink.com/es/articles/9493139-configura-tu-agenda-online).
 
-- **Agenda y recursos**: El manual documenta enlace de agenda, profesionales habilitados, bloques y permisos. Asignación simultánea de sillón y profesional: No evidenciado.
+- **Agenda y recursos**: El manual documenta enlace de agenda, profesionales habilitados, bloques y permisos. La sección «Cruce con Recursos» documenta cómo asociar recursos a un servicio y afirma que la agenda online valida que el profesional y el recurso estén disponibles en el mismo horario (consulta del 25/11/2026). Identificación de ese recurso como sillón y control de concurrencia: No evidenciado.
 - **Turnos digitales y automatización**: Reserva por enlace documentada. Declara confirmaciones por WhatsApp/email, campañas y seguimiento de citas anuladas o ausentes. Compartir enlace por WhatsApp no demuestra WhatsApp Business API.
 - **Clínica**: Declara historia, odontograma, periodontograma, imágenes, firma y planes de tratamiento.
 - **Administración**: Declara caja, gastos, liquidación a odontólogos, KPI, reportes Excel y obras sociales.
@@ -69,12 +97,12 @@ Fuentes: [F01.1 Sitio argentino](https://web-ar.softwaredentalink.com/); [F01.2 
 Fuentes: [F02.1 Producto y país](https://www.dentapp.ar/software-odontologico-argentina); [F02.2 Funcionalidades y planes](https://www.dentapp.ar/).
 
 - **Agenda y recursos**: Declara agenda por profesional con Google Calendar y estados. Vistas, sillones, duración por prestación y bloqueo de solapamientos simultáneos: No evidenciado.
-- **Turnos digitales y automatización**: Declara recordatorios por WhatsApp; reserva autónoma, lista de espera y reprogramación por paciente: No evidenciado.
+- **Turnos digitales y automatización**: Declara recordatorios automáticos por correo en el plan Profesional y por WhatsApp desde Clínica Plus (consulta del 25/11/2026); reserva autónoma, lista de espera y reprogramación por paciente: No evidenciado.
 - **Clínica**: Declara historia, odontograma FDI, imágenes, recetas, consentimientos y presupuestos. Periodontograma: No evidenciado.
 - **Administración**: Declara caja, cobros, facturas, presupuestos y reportes. Integración fiscal ARCA: No evidenciado.
-- **Integraciones**: Declara Google Calendar, MercadoPago y RCTA. Inscripción ReNaPDiS declarada, sin contraste registral independiente.
-- **Seguridad y exportación**: Declara roles admin/doctor/secretaría y documentos cifrados. Exportación completa, auditoría y frecuencia de backup: No evidenciado.
-- **Modelo comercial**: Planes por cantidad de profesionales. Importe y condiciones de prueba: No evidenciado en el contenido corroborado.
+- **Integraciones**: Declara Google Calendar, MercadoPago y RCTA. El plan Empresarial menciona API y webhooks e integraciones a medida con obras sociales y prepagas (consulta del 25/11/2026); acceso público a la API: No evidenciado. Inscripción ReNaPDiS declarada, sin contraste registral independiente.
+- **Seguridad y exportación**: Declara roles admin/doctor/secretaría, documentos cifrados, cifrado en tránsito y en reposo y backups diarios (consulta del 25/11/2026). Exportación completa y auditoría: No evidenciado.
+- **Modelo comercial**: Publica por mes, con IVA 21 % incluido: Profesional $24.900 (1 profesional), Clínica Plus $54.900 (hasta 5) y Clínica Pro $74.900 (hasta 10); Empresarial a medida. 30 días de prueba sin cargo (consulta del 25/11/2026). Código de moneda: No evidenciado explícitamente.
 - **Fortalezas y límites de la evidencia**: El soporte por WhatsApp y un recordatorio automático son capacidades diferentes. No se validó habilitación normativa ni receta electrónica real.
 - **Adopción**: No evidenciado
 
@@ -88,8 +116,8 @@ Fuentes: [F03.1 Producto, FAQ y precios](https://www.dentify.com.ar/); [F03.2 P�
 - **Administración**: Declara ingresos, cobros, egresos, balances y obras sociales. Emisión fiscal integrada: No evidenciado.
 - **Integraciones**: Obras sociales declaradas; Mercado Pago, Google Calendar, ARCA y API: No evidenciado.
 - **Seguridad y exportación**: FAQ declara nube cifrada y acceso de profesionales invitados. Exportación integral, auditoría y política de backup verificable: No evidenciado.
-- **Modelo comercial**: Página abierta: Básico $30.000/mes y Clínicas $45.000/mes; prueba 14 días sin tarjeta. Código de moneda e impuestos: No evidenciado explícitamente; no inferir ARS solo por el dominio. No usar como vigente el valor anual de $25.000 mencionado en otra extracción.
-- **Fortalezas y límites de la evidencia**: Hay una demostración ilustrada en la portada, sin prueba operativa. Se corrigió la ausencia de evidencia de país y cifrado al leer la portada actual.
+- **Modelo comercial**: Página abierta: en modalidad mensual, Básico $30.000/mes y Clínicas $45.000/mes; en modalidad anual, $25.000/mes ($300.000 por año) y $38.000/mes ($456.000 por año), anunciada con «2 meses gratis» (consulta del 25/11/2026). Prueba 14 días sin tarjeta. Código de moneda e impuestos: No evidenciado explícitamente; no inferir ARS solo por el dominio.
+- **Fortalezas y límites de la evidencia**: Hay una demostración ilustrada en la portada, sin prueba operativa. Se corrigió la ausencia de evidencia de país y cifrado al leer la portada actual. El pie indica «Desarrollado por IB Digital», sin acreditar entidad legal.
 - **Adopción**: No evidenciado
 
 ### 04 OdontoApp
@@ -116,7 +144,7 @@ Fuentes: [F05.1 Producto, restricciones y precios](https://odontoly.com/).
 - **Administración**: Declara caja, deudas y pagos ARS/USD con cotización manual. ARCA y cobros automatizados figuran próximos.
 - **Integraciones**: Mercado Pago, Google Calendar y API: No evidenciado. WhatsApp Business y ARCA son anuncios futuros.
 - **Seguridad y exportación**: Declara cuentas/permisos y copias completas cifradas. Aclara que la base de trabajo aún no está cifrada por la app. Auditoría y exportación interoperable: No evidenciado.
-- **Modelo comercial**: Referencia publicada USD 149,99/mes sin permanencia; el sitio pide confirmar precio final, moneda e impuestos. No se evidenció prueba gratuita.
+- **Modelo comercial**: Referencia publicada USD 149,99/mes sin permanencia; el sitio pide confirmar precio final, moneda e impuestos. No se evidenció prueba gratuita. El plan incluye dos usuarios y hasta cuatro dispositivos autorizados (consulta del 25/11/2026).
 - **Fortalezas y límites de la evidencia**: Mac Apple Silicon; Windows en desarrollo. Seguir durante un corte exige sesión y autorización vigentes; el acceso remoto requiere equipo principal encendido. No asumir operación offline absoluta.
 - **Adopción**: No evidenciado
 
@@ -129,8 +157,8 @@ Fuentes: [F06.1 Características](https://www.dentidesk.cl/dentidesk/feature); [
 - **Clínica**: Declara historia/anamnesis, odontograma, fichas de periodoncia e imágenes; ficha periodontal no demuestra un periodontograma gráfico.
 - **Administración**: Declara presupuestos por pieza, egresos, inventario, liquidaciones y reportes. Facturación argentina y obras sociales: No evidenciado.
 - **Integraciones**: Integraciones argentinas, WhatsApp API, Google Calendar y API pública: No evidenciado.
-- **Seguridad y exportación**: Ayuda documenta permisos. Términos contemplan Excel estándar sin costo con licencia activa; tras el término, solicitud hasta 30 días y posible cargo. No demuestra exportación de todos los archivos clínicos.
-- **Modelo comercial**: Precio: No evidenciado. Prueba 15 días y posible cargo por odontólogo adicional en términos. Otros formatos de extracción pueden tener costo.
+- **Seguridad y exportación**: Ayuda documenta permisos. Términos contemplan Excel estándar sin costo con licencia activa; tras el término, solicitud de exportación hasta 30 días corridos y posible cargo. No demuestra exportación de todos los archivos clínicos.
+- **Modelo comercial**: Precio: No evidenciado. Prueba de 15 días y, al finalizar, suscripción según el plan elegido; los términos indican que cada cuenta de odontólogo adicional generará un cargo según el plan contratado. Otros formatos de extracción pueden tener costo.
 - **Fortalezas y límites de la evidencia**: No confundir gratuidad de exportación con licencia activa con extracción posterior al cierre. No atribuir usuarios de la plataforma U-DESK al producto dental.
 - **Adopción**: No evidenciado
 
@@ -159,7 +187,7 @@ Fuentes: [F08.1 Oferta dental](https://agendapro.com/es/dental/software-odontolo
 - **Integraciones**: Mercado Pago y API con cargo US$200/mes declarados. WhatsApp tiene cupos/costos Meta y condiciones de categoría. ARCA operativa: No evidenciado.
 - **Seguridad y exportación**: Seguridad específica, auditoría y exportación integral: No evidenciado en las páginas examinadas.
 - **Modelo comercial**: La página abierta muestra precios de Belleza/Barbería en ARS con IVA. Tarifa aplicable a odontología: No evidenciado; no usar $7.900 o $15.900 como precio de Salud. API US$200/mes es un adicional, no la suscripción dental.
-- **Fortalezas y límites de la evidencia**: La reserva se observó sin completarla. No confundir confirmación de una interfaz con prueba de integridad del backend. Precio indexado antiguo descartado.
+- **Fortalezas y límites de la evidencia**: La reserva se observó sin completarla. No confundir confirmación de una interfaz con prueba de integridad del backend. Precio indexado antiguo descartado. El 25/11/2026 la interfaz de reserva respondió HTTP 403; el agente no pudo recomprobar la observación del 17/11. En la revisión personal informada ese día, Luciano Izquierdo Cafici no halló diferencias.
 - **Adopción**: No evidenciado
 
 ### 09 Clinic Cloud
@@ -171,10 +199,10 @@ Fuentes: [F09.1 Tarifas y módulos](https://clinic-cloud.com/tarifas); [F09.2 Ay
 - **Clínica**: Historia clínica y odontograma en Max declarados; ayuda documenta presupuesto desde odontograma. Periodontograma: No evidenciado.
 - **Administración**: Caja, presupuestos, liquidaciones y reportes; facturación TicketBAI/VeriFactu, que no prueba facturación ARCA.
 - **Integraciones**: Doctoralia declarado. Mercado Pago, obras sociales argentinas, Google Calendar y API pública: No evidenciado.
-- **Seguridad y exportación**: Permisos por niveles declarados. Exportación, auditoría, cifrado y política de backup: No evidenciado en las fuentes examinadas.
+- **Seguridad y exportación**: Permisos por niveles declarados. La página de tarifas exhibe ISO/IEC 27001, sin certificado inspeccionado (consulta del 25/11/2026). Exportación, auditoría, cifrado y política de backup: No evidenciado en las fuentes examinadas.
 - **Modelo comercial**: Mini 29, Pro 49 y Max 79 EUR/mes + IVA; Enterprise a convenir. Odontograma en Max. Apertura actual muestra 50% de descuento durante 3 meses, no 2. Agendas adicionales +10 EUR según límite del plan.
 - **Fortalezas y límites de la evidencia**: No comparar Mini como si incluyera odontograma. Precios y promoción están sujetos a contratación; no se abrió cuenta ni aceptó términos.
-- **Adopción**: No evidenciado
+- **Adopción**: Declara más de 3.000 consultas y clínicas en España (consulta del 25/11/2026); cifra comercial no verificada externamente.
 
 ### 10 XDentalCloud
 
@@ -255,23 +283,25 @@ Fuentes: [F15.1 Producto](https://tab32.com/); [F15.2 Tarifa vigente abierta](ht
 - **Clínica**: Declara odontograma, imágenes, perio y planes de tratamiento.
 - **Administración**: Declara facturación, claims, pagos y reportes. ARCA/obras sociales argentinas: No evidenciado.
 - **Integraciones**: API para Summit declarada; no se validó acceso público. WhatsApp, Google Calendar y Mercado Pago: No evidenciado.
-- **Seguridad y exportación**: Declara Google Cloud, cifrado, backups automáticos, HIPAA/SOC2 y una exportación gratuita al salir. No se auditó cumplimiento.
-- **Modelo comercial**: Página abierta vigente: desde $95/mes, usuarios/profesionales ilimitados; prueba 14 días. Sitio empresarial identifica dólares en cargos, pero moneda contractual argentina no confirmada. Claims $0,25, adjuntos $0,50 por claim, elegibilidad $0,75; otros cargos y migración separados. Snippet $125 descartado.
+- **Seguridad y exportación**: Declara Google Cloud, cifrado, backups automáticos, HIPAA/SOC2 y una exportación gratuita al salir que incluye el ledger. No se auditó cumplimiento.
+- **Modelo comercial**: Página abierta vigente: desde $95/mes, usuarios/profesionales ilimitados; prueba 14 días, que pide email y tarjeta (consulta del 25/11/2026). Sitio empresarial identifica dólares en cargos, pero moneda contractual argentina no confirmada. Claims $0,25, adjuntos $0,50 por claim, elegibilidad $0,75; migración publicada desde $1,250 y otros cargos separados. La misma página cobra aparte por servicio: voz $0,20 por minuto, asistente de IA por tokens, registro de pagos 1,25 % y agentes de IA a $25 por mes cada uno, $325 los catorce o $349 con agentes propios; mensajes y llamadas $0,05 (consulta del 25/11/2026). Snippet $125 descartado.
 - **Fortalezas y límites de la evidencia**: La búsqueda indexada y apertura mostraron planes distintos; se priorizó apertura. Ledger no se migra según FAQ; no confundir migración con exportación. Producto orientado a EE.UU.; disponibilidad argentina sin confirmar.
 - **Adopción**: No evidenciado
 
-## B Matriz provisional de puntuación
+## B Matriz de puntuación
 
-Se aplican los pesos de la consigna. Para que el cálculo sea auditable sin probar productos ni elegir un ganador, esta versión mide **cobertura de evidencia pública**, no calidad real, seguridad efectiva, relación precio/valor ni conveniencia de compra. La interpretación y cualquier ranking comercial deben revisarse con el usuario. Los resultados no eligen el MVP.
+Se aplican los pesos de la consigna. Para que el cálculo sea auditable sin probar productos ni elegir un ganador, esta versión mide **cobertura de evidencia pública**, no calidad real, seguridad efectiva, relación precio/valor ni conveniencia de compra. La interpretación y cualquier ranking comercial requieren revisión antes de usarse para decidir. Los resultados no eligen el MVP.
 
 Cada dimensión tiene cinco criterios. Por criterio: Documentado = 1 punto; Declarado = 0,5; No evidenciado = 0. La suma de cada dimensión va de 0 a 5. Una función futura no suma como disponible. La falta de evidencia reduce la puntuación sin afirmar que la función no existe. La columna de precio mide transparencia y condiciones de adopción, no asequibilidad comparada entre monedas.
 
 Total ponderado = T × 0,25 + C × 0,20 + I × 0,15 + A × 0,15 + P × 0,10 + S × 0,10 + E × 0,05. Se calcula sin redondear los componentes y se muestran tres decimales. Las matrices detalladas de criterios explican cada componente. No mezclar planes o países para concluir que todo está incluido en una misma tarifa.
 
+Tras la segunda comprobación del 25/11/2026 cambiaron cuatro celdas de DentApp (respaldos, tarifa publicada, unidad de cobro y prueba), y su total pasó de 1,275 a 1,475. La validación de recursos documentada por Dentalink no suma en «Agenda por sillón/box» porque el manual no identifica el recurso como sillón.
+
 | Sistema | T 25% | C 20% | I 15% | A 15% | P 10% | S 10% | E 5% | Total /5 |
 |---|---|---|---|---|---|---|---|---|
 | Dentalink | 2.5 | 2.5 | 0.5 | 2.0 | 1.5 | 1.5 | 0.0 | 1.800 |
-| DentApp | 1.0 | 2.0 | 1.5 | 2.0 | 0.0 | 1.0 | 0.0 | 1.275 |
+| DentApp | 1.0 | 2.0 | 1.5 | 2.0 | 0.0 | 1.5 | 3.0 | 1.475 |
 | Dentify | 1.0 | 1.5 | 0.0 | 2.0 | 0.0 | 1.0 | 3.0 | 1.100 |
 | OdontoApp | 0.5 | 1.5 | 0.5 | 0.5 | 0.0 | 1.0 | 0.0 | 0.675 |
 | Odontoly | 0.5 | 1.5 | 0.0 | 1.0 | 0.5 | 1.0 | 3.0 | 0.875 |
@@ -403,7 +433,7 @@ Peso: 10 %. Las fuentes de cada fila son las mismas referencias F del producto c
 | Sistema | Roles/permisos | Auditoría | Respaldos | Cifrado con alcance claro | Exportación con alcance claro |
 |---|---|---|---|---|---|
 | Dentalink | Documentado | No evidenciado | No evidenciado | No evidenciado | Declarado |
-| DentApp | Declarado | No evidenciado | No evidenciado | Declarado | No evidenciado |
+| DentApp | Declarado | No evidenciado | Declarado | Declarado | No evidenciado |
 | Dentify | Declarado | No evidenciado | No evidenciado | Declarado | No evidenciado |
 | OdontoApp | Declarado | No evidenciado | No evidenciado | Declarado | No evidenciado |
 | Odontoly | Declarado | No evidenciado | Declarado | No evidenciado | No evidenciado |
@@ -425,7 +455,7 @@ Peso: 5 %. Las fuentes de cada fila son las mismas referencias F del producto co
 | Sistema | Tarifa aplicable publicada | Moneda identificada | Unidad de cobro | Prueba accesible declarada | Extras identificados |
 |---|---|---|---|---|---|
 | Dentalink | No evidenciado | No evidenciado | No evidenciado | No evidenciado | No evidenciado |
-| DentApp | No evidenciado | No evidenciado | No evidenciado | No evidenciado | No evidenciado |
+| DentApp | Documentado | No evidenciado | Documentado | Documentado | No evidenciado |
 | Dentify | Documentado | No evidenciado | Documentado | Documentado | No evidenciado |
 | OdontoApp | No evidenciado | No evidenciado | No evidenciado | No evidenciado | No evidenciado |
 | Odontoly | Documentado | Documentado | Documentado | No evidenciado | No evidenciado |
@@ -446,35 +476,75 @@ La matriz anterior no sustituye una prueba de concurrencia. Al demostrar un prod
 
 ## C Análisis competitivo
 
-### Funcionalidades frecuentes en la muestra
+Las cifras indican en cuántos de los 15 sistemas figura cada función como Documentado o Declarado en la matriz B. Describen la evidencia pública de esta muestra: no son una estimación estadística del mercado argentino ni prueban que la función opere. Se excluye la dimensión de precio y adopción, que mide transparencia comercial.
 
-La mayoría de las ofertas dentales consultadas presenta agenda, historia y odontograma; varias añaden imágenes, presupuestos, caja y reportes. Dentalink, Dentidesk, XDentalCloud, Dentrix, CareStack y tab32 publican reserva o comunicación digital. Esto es un patrón descriptivo de la muestra, no una estimación estadística del mercado argentino.
+### Funcionalidades estándar de mercado
 
-### Diferencias observables
+Se consideran estándar en la muestra las funciones presentes en al menos 10 de los 15 sistemas. Predominan las declaraciones comerciales: la columna «Documentado» muestra cuántos casos tienen respaldo más allá de la afirmación. Ofrecer estas funciones no diferencia por sí solo a un producto.
 
-Odontoly declara operación local-first y revela límites de cifrado y acceso remoto; contrasta con las ofertas cloud de DentApp, Dentify, Dentidesk y Curve. DentApp publica Google Calendar y MercadoPago; Dentalink presenta obras sociales y operación clínica. Open Dental ofrece manuales detallados sobre operatorios y bloqueos. Dentidesk explicita condiciones de exportación y cierre. La relevancia de cada diferencia depende del consultorio que el usuario decida atender.
+| Función | Sistemas (de 15) | Documentado |
+|---|---|---|
+| Historia clínica | 15 | 1 |
+| Odontograma | 14 | 2 |
+| Imágenes | 14 | 1 |
+| Recordatorios | 13 | 0 |
+| Cobros | 13 | 0 |
+| Reserva online | 11 | 4 |
+| Reportes | 11 | 0 |
+| Reserva autónoma | 11 | 4 |
+| Agenda por profesional | 10 | 4 |
+| Roles/permisos | 10 | 3 |
+
+### Funcionalidades diferenciadoras reales
+
+Se exige que la función sea poco frecuente (4 sistemas o menos) y que al menos un caso esté documentado. Una afirmación comercial aislada no alcanza. La rareza refleja lo publicado en las fuentes y no prueba que los demás sistemas carezcan de la función.
+
+| Función | Documentado en | Declarado en |
+|---|---|---|
+| Vista diaria/semanal | Open Dental | Dentify |
+| Cancelación | AgendaPro | Dentidesk |
+| Exportación con alcance claro | Dentidesk | Dentalink, tab32 |
+| Agenda por sillón/box | Open Dental, Dentrix | XDentalCloud, tab32 |
+
+Fuera de los criterios de la matriz, Dentalink documenta que su agenda online valida a la vez al profesional y al recurso asociado al servicio; Dentidesk explicita condiciones de exportación y cierre; Open Dental ofrece manuales detallados sobre operatorios y bloqueos, y Odontoly declara operación local-first con límites de cifrado y acceso remoto. La relevancia de cada diferencia depende del consultorio que se decida atender.
 
 Las promesas de IA, reducción de ausencias, mayor facturación o facilidad de uso siguen siendo afirmaciones comerciales hasta contar con demostraciones y mediciones comparables. No se atribuyen ahorros ni resultados clínicos a partir de testimonios.
 
-### Vacíos de evidencia para el mercado argentino
+### Vacíos frecuentes del mercado argentino
 
-En las páginas consultadas no suele estar descrita la transacción que evita simultáneamente la ocupación del profesional y del sillón. Tampoco hay evidencia suficiente para comparar de forma uniforme auditoría, exportación completa y restauración. Una integración fiscal extranjera no prueba ARCA; listar obras sociales no prueba comunicación electrónica con ellas. Estos son vacíos de información pública de esta muestra, no una afirmación de que ningún proveedor los resuelva.
+Funciones evidenciadas en 4 sistemas o menos. La muestra incluye ofertas internacionales y un valor bajo, incluso cero, expresa falta de información pública: no demuestra que ningún proveedor lo resuelva.
 
-Los precios mezclan profesional, usuario, sede, anualidad, extras, mensajes y migración. Las páginas de AgendaPro requieren distinguir categorías; Clinic Cloud requiere distinguir módulos. La moneda no identificada de Odonto.me y los importes equivalentes anuales de XDentalCloud impiden comparar automáticamente el costo total.
+| Función | Sistemas (de 15) | Documentado |
+|---|---|---|
+| ARCA operativa | 0 | 0 |
+| Auditoría | 0 | 0 |
+| Reprogramación | 1 | 0 |
+| Lista de espera | 1 | 0 |
+| Vista diaria/semanal | 2 | 1 |
+| Google Calendar | 2 | 0 |
+| API pública | 2 | 0 |
+| Obras sociales argentinas | 2 | 0 |
+| Cancelación | 2 | 1 |
+| Mercado Pago | 3 | 0 |
+| Exportación con alcance claro | 3 | 1 |
+| Agenda por sillón/box | 4 | 2 |
+| WhatsApp clínico | 4 | 0 |
 
-### Oportunidades que deben validarse
+En las páginas consultadas no suele estar descrita la transacción que evita simultáneamente la ocupación del profesional y del sillón. Una integración fiscal extranjera no prueba ARCA; listar obras sociales no prueba comunicación electrónica con ellas. Los precios mezclan profesional, usuario, sede, anualidad, extras, mensajes y migración: las páginas de AgendaPro requieren distinguir categorías, Clinic Cloud requiere distinguir módulos, y la moneda no identificada de Odonto.me y los importes equivalentes anuales de XDentalCloud impiden comparar automáticamente el costo total.
 
-- Evidenciar disponibilidad conjunta de profesional y sillón con reglas visibles y pruebas de concurrencia.
-- Mostrar al consultorio qué es solicitud, confirmación, cancelación y reprogramación, con trazabilidad de cambios.
-- Explicar costos de mensajes, integraciones y portabilidad antes de contratar.
-- Facilitar recuperación de cancelaciones o lista de espera, si las entrevistas confirman esa prioridad.
+### Oportunidades de innovación
+
+- Evidenciar disponibilidad conjunta de profesional y sillón con reglas visibles y pruebas de concurrencia (agenda por sillón/box: 4 de 15).
+- Mostrar al consultorio qué es solicitud, confirmación, cancelación y reprogramación, con trazabilidad de cambios (cancelación: 2; reprogramación: 1; auditoría: 0).
+- Explicar costos de mensajes, integraciones y portabilidad antes de contratar (exportación con alcance claro: 3).
+- Facilitar la recuperación de cancelaciones mediante lista de espera, si las entrevistas confirman esa prioridad (lista de espera: 1).
 - Limitar los datos solicitados en una reserva y separar permisos administrativos y clínicos.
 
-Estas son hipótesis de oportunidad; no tienen validación de demanda ni disposición a pagar. La selección de funciones en la sección D procede de decisiones explícitas del usuario y no constituye validación comercial de estas hipótesis.
+Estas son hipótesis de oportunidad; no tienen validación de demanda ni disposición a pagar. La selección de funciones en la sección D procede de decisiones expresas posteriores a la investigación y no constituye validación comercial de estas hipótesis.
 
-## D Recomendación y alcance aprobados por el usuario
+## D Recomendación final y alcance aprobado
 
-Las elecciones siguientes fueron realizadas por el usuario después de la investigación y aprobadas mediante menú. Son decisiones del proyecto, no una recomendación de compra ni una clasificación de calidad de los proveedores.
+Las elecciones siguientes se hicieron después de la investigación y se aprobaron mediante menú. Son decisiones del proyecto, no una recomendación de compra ni una clasificación de calidad de los proveedores.
 
 ### Cinco competidores seleccionados para análisis o demo posterior
 
@@ -486,7 +556,9 @@ Las elecciones siguientes fueron realizadas por el usuario después de la invest
 | Dentidesk | Examinar separación de perfiles y condiciones de exportación documentadas. |
 | AgendaPro | Examinar claridad del recorrido público de reserva y condiciones por servicio; la autorreserva no se incorpora al MVP. |
 
-No se contactó a proveedores ni se crearon cuentas. Las demos y comprobaciones personales siguen como trabajo posterior; no se presentan como realizadas.
+**Criterio de selección** (confirmado el 25/11/2026; no quedó registrado al elegir). La selección para demo priorizó la cercanía al mercado argentino y la oferta en español por sobre el puntaje, que mide evidencia pública y no conveniencia. Open Dental obtiene 2,350 por sus manuales, con 4,0 en turnos y 5,0 en clínica, pero 0 en administración e integraciones locales y sin disponibilidad argentina confirmada. También superan a algún sistema elegido XDentalCloud (1,750), tab32 (1,650), Clinic Cloud (1,600), Dentrix (1,600) y CareStack (1,550); las fuentes relevadas tampoco confirman su disponibilidad en Argentina.
+
+No se contactó a proveedores ni se crearon cuentas. Las demos siguen como trabajo posterior y no se presentan como realizadas; la revisión personal de fuentes figura en «Verificación de fuentes».
 
 ### Tres referencias de experiencia de usuario elegidas
 
@@ -537,7 +609,13 @@ El valor inicial del intervalo, los estados exactos y el comportamiento preciso 
 
 ### Diferenciadores buscados dentro del alcance aprobado
 
-Se priorizan reglas verificables sobre profesional y sillón, intervalo configurable y separación entre lectura administrativa y edición clínica. Son objetivos de calidad, no exclusividad comercial demostrada. La reducción de ausencias y huecos mediante emails y lista de espera todavía requiere medición.
+Se priorizan:
+
+- Reglas verificables sobre profesional y sillón.
+- Intervalo configurable común para la sede.
+- Separación entre lectura administrativa y edición clínica.
+
+Son objetivos de calidad, no exclusividad comercial demostrada. La reducción de ausencias y huecos mediante emails y lista de espera todavía requiere medición.
 
 ### Funcionalidades para etapas posteriores
 
@@ -554,12 +632,11 @@ No se asigna prioridad ni compromiso a esas ampliaciones. El MVP define el backl
 
 El email es una integración obligatoria del MVP revisado: deben demostrarse envíos reales a direcciones de prueba del equipo con una opción gratuita aún por definir. No se elige proveedor ni se envían correos durante esta consolidación. El seguimiento manual de confirmaciones se conserva junto a los emails automáticos; no implica WhatsApp. Google Calendar, pagos y servicios fiscales no se incorporan por defecto.
 
-PostgreSQL es parte del stack elegido por el usuario y no un servicio externo contratado. La ubicación y el modo de ejecución de la base de datos siguen sin decidirse.
+PostgreSQL es parte del stack elegido y no un servicio externo contratado. La ubicación y el modo de ejecución de la base de datos siguen sin decidirse.
 
 ### Restricciones
 
 - Entrega: 25 de noviembre de 2026.
-- Equipo: cuatro integrantes, cantidad que puede variar. El usuario informó autorización docente para superar el máximo de tres de la consigna; no se atribuye una verificación documental independiente a esa declaración.
 - Presupuesto para servicios externos: cero.
 - Frontend: HTML, CSS y TypeScript vanilla.
 - Backend: Java con Spring Boot.
@@ -567,34 +644,55 @@ PostgreSQL es parte del stack elegido por el usuario y no un servicio externo co
 - Todos los ejemplos, pruebas y capturas deben usar datos clínicos ficticios, como exige la consigna. Para la demostración de email se usarán direcciones de prueba indicadas por el equipo.
 - El trabajo académico requiere un único change completo, especificado, probado y archivado; no una implementación apresurada de todo el MVP.
 
-Las versiones concretas, el despliegue y el reparto nominal de tareas no están definidos. La selección de estas tecnologías fue explícita del usuario; no se presenta como conclusión obligada del análisis competitivo.
+Las versiones concretas, el despliegue y el reparto nominal de tareas no están definidos. La selección de estas tecnologías fue expresa; no se presenta como conclusión obligada del análisis competitivo.
 
 ### Riesgos
 
-Los riesgos que preocupan especialmente al usuario son el manejo incorrecto de datos clínicos/permisos y los errores de solapamiento o reprogramación. No estableció un orden entre esos dos riesgos. El plazo también preocupa, aunque menos; su confianza en llegar no constituye una garantía de ejecución.
+Las principales preocupaciones señaladas son el manejo incorrecto de datos clínicos/permisos y los errores de solapamiento o reprogramación. No se estableció un orden entre ambas. El plazo también preocupa, aunque menos; la confianza en llegar no constituye una garantía de ejecución.
 
 El control de agenda necesita escenarios verificables sobre ambos recursos y el intervalo. La separación de permisos necesita comprobar que recepción no pueda modificar información clínica. La efectividad del seguimiento manual para reducir inasistencias todavía no fue medida con usuarios reales.
 
-La ampliación añade riesgos técnicos de acceso indebido por cuenta/enlace, emails fallidos o duplicados, límites del proveedor gratuito y avisos de huecos ya ocupados. Son riesgos identificados, no un nuevo orden de preocupación elegido por el usuario.
+La ampliación añade riesgos técnicos de acceso indebido por cuenta/enlace, emails fallidos o duplicados, límites del proveedor gratuito y avisos de huecos ya ocupados. Son riesgos identificados, sin cambiar las preocupaciones señaladas.
 
 Persisten límites de investigación: declaraciones comerciales no auditadas, precios y planes cambiantes y condiciones de portabilidad incompletas. Las capacidades no evidenciadas de los competidores siguen como preguntas, no se convierten en supuestas ausencias.
 
 ## Verificación de fuentes
 
+### Revisión personal del equipo
+
+Cuatro integrantes revisaron cinco fuentes de distintos tipos. Giovanni Colombo transmitió los resultados el 25/11/2026; no consta la fecha de cada apertura. «Qué afirmaba» resume lo contrastado; «Qué encontró» recoge lo informado por quien revisó, y «Corrección y contraste» indica qué cambió y qué comprobó después el agente.
+
+| Integrante | Tipo y fuente | Qué afirmaba el informe | Qué encontró | Corrección y contraste |
+|---|---|---|---|---|
+| Giovanni Colombo | Sitio oficial: [DentApp](https://www.dentapp.ar/software-odontologico-argentina) | Proveedor Codilium S.A.S., nube y publicación de Google Calendar y MercadoPago. | Sin diferencias. | Sin cambios. |
+| Giovanni Colombo | Precios: [tab32](https://tab32.com/pricing/) | Precio desde $95 por mes, con cargos variables aparte. | Diferencias de precio según el servicio; para el servicio dental, un precio más alto, cercano a $400. | Ficha 15: se agregaron los cargos por servicio. Giovanni Colombo confirmó el 25/11 que el importe observado era $427. En el comparador de la página, esa cifra es el costo mensual estimado de Open Dental; para tab32 estima $179 y su precio publicado sigue desde $95. El precio base no cambia. |
+| Sofia Martinez | Centro de ayuda: [Dentalink](https://ayuda.softwaredentalink.com/es/articles/9493139-configura-tu-agenda-online) | Enlace de reserva, permisos, bloques y profesionales habilitados; desde la corrección del 25/11, validación conjunta de profesional y recurso. | Sin diferencias con los datos obtenidos. | Sin cambios. |
+| Fabiano Ramos | Términos de uso: [Dentidesk](https://app.dentidesk.com/terminos.php) | Excel estándar sin costo con licencia activa; tras el término, exportación solicitable hasta 30 días con posible cargo. Ficha 06: prueba de 15 días. | La prueba es de 15 días, no de 30; después empiezan los cargos. | La ficha 06 ya indicaba 15 días (punto 2.2). Los 30 días son el plazo para pedir la exportación tras el término (punto 7.6). Se aclaró la diferencia y se agregó que luego de la prueba se requiere suscripción. |
+| Luciano Izquierdo Cafici | Interfaz pública: [AgendaPro](https://agendapro.com/site/ar/odontologiaor/239004) | Reserva pública con servicios de distinta duración y botón Agendar. | Sin diferencias, luego de simular una reserva en la app, que consideró bastante buena. | Sin cambios en las celdas. Giovanni Colombo confirmó que la simulación se detuvo antes de confirmar la reserva. El agente había recibido HTTP 403 ese día. |
+
 ### Comprobaciones realizadas por el agente
 
-La consigna exige que los integrantes comprueben personalmente al menos cinco fuentes. Las comprobaciones siguientes son automatizadas por el agente y **no sustituyen esa revisión humana**. La columna de revisión personal queda pendiente; no se atribuye trabajo no realizado a los integrantes.
+Las comprobaciones siguientes son automatizadas y se muestran aparte de la revisión personal, a la que **no sustituyen**.
 
 | Tipo y fuente | Afirmación contrastada | Hallazgo y corrección | URL | Revisión personal |
 |---|---|---|---|---|
-| Sitio oficial: DentApp | Proveedor argentino, nube e integraciones locales | La página específica identifica Codilium S.A.S. y publica Google Calendar/MercadoPago. No se verificó inscripción registral. | [Abrir](https://www.dentapp.ar/software-odontologico-argentina) | Pendiente del integrante |
-| Precios: tab32 | El buscador mostraba $125/mes | La apertura vigente mostró desde $95/mes; se descartó el precio indexado anterior y se registraron cargos variables. | [Abrir](https://tab32.com/pricing/) | Pendiente del integrante |
-| Ayuda: Dentalink | Reserva mediante enlace y configuración profesional | El manual explica enlace, permisos, bloques y profesionales habilitados. No prueba disponibilidad conjunta de sillón y profesional. | [Abrir](https://ayuda.softwaredentalink.com/es/articles/9493139-configura-tu-agenda-online) | Pendiente del integrante |
-| Términos: Dentidesk | Exportación de datos | Licencia activa: Excel estándar sin costo; después del término: hasta 30 días y posible cargo. No se redujo todo a exportación gratuita. | [Abrir](https://app.dentidesk.com/terminos.php) | Pendiente del integrante |
-| Interfaz pública: AgendaPro | Reserva y duración variable por servicio | Se observaron servicios con diferentes duraciones y botón Agendar; no se completó reserva ni se copiaron reseñas o datos de pacientes. | [Abrir](https://agendapro.com/site/ar/odontologiaor/239004) | Pendiente del integrante |
-| Precios: Clinic Cloud | La extracción inicial señalaba promoción de dos meses | La apertura posterior mostró 50% durante tres meses. Se priorizó la página abierta y se aclaró que Max incluye odontograma. | [Abrir](https://clinic-cloud.com/tarifas) | Pendiente del integrante |
-| Sitio y FAQ: Dentify | País, cifrado y precio anual de extracción inicial | La portada actual declara Hecho en Argentina, nube cifrada y $30.000/$45.000 mensuales. Se retiró el anual no corroborado y no se inventó código de moneda. | [Abrir](https://www.dentify.com.ar/) | Pendiente del integrante |
-| Producto: Odontoly | WhatsApp y ARCA podrían parecer disponibles por figurar en catálogo | El sitio los identifica como complementos próximos. También distingue backups cifrados de base de trabajo aún sin cifrado por la app. | [Abrir](https://odontoly.com/) | Pendiente del integrante |
+| Sitio oficial: DentApp | Proveedor argentino, nube e integraciones locales | La página específica identifica Codilium S.A.S. y publica Google Calendar/MercadoPago. No se verificó inscripción registral. | [Abrir](https://www.dentapp.ar/software-odontologico-argentina) | Giovanni Colombo: sin diferencias |
+| Precios: tab32 | El buscador mostraba $125/mes | La apertura vigente mostró desde $95/mes; se descartó el precio indexado anterior y se registraron cargos variables. | [Abrir](https://tab32.com/pricing/) | Giovanni Colombo: diferencia de precio |
+| Ayuda: Dentalink | Reserva mediante enlace y configuración profesional | El manual explica enlace, permisos, bloques y profesionales habilitados. No prueba disponibilidad conjunta de sillón y profesional. Corregido el 25/11: ver la segunda comprobación. | [Abrir](https://ayuda.softwaredentalink.com/es/articles/9493139-configura-tu-agenda-online) | Sofia Martinez: sin diferencias |
+| Términos: Dentidesk | Exportación de datos | Licencia activa: Excel estándar sin costo; después del término: solicitud de exportación hasta 30 días corridos y posible cargo. Ese plazo no es la prueba gratuita, que dura 15 días. No se redujo todo a exportación gratuita. | [Abrir](https://app.dentidesk.com/terminos.php) | Fabiano Ramos: prueba de 15 días |
+| Interfaz pública: AgendaPro | Reserva y duración variable por servicio | Se observaron servicios con diferentes duraciones y botón Agendar; no se completó reserva ni se copiaron reseñas o datos de pacientes. | [Abrir](https://agendapro.com/site/ar/odontologiaor/239004) | Luciano Izquierdo Cafici: sin diferencias |
+
+### Segunda comprobación del agente (25/11/2026)
+
+El agente intentó volver a abrir en un navegador las cinco fuentes anteriores y contrastó con este informe el texto publicado ese día en las cuatro que respondieron. No sustituye la revisión personal. Por decisión del 25/11/2026 (Ajustar), las diferencias se incorporaron a las fichas, la matriz B y la sección C. Una diferencia puede deberse a una omisión del relevamiento o a un cambio de la página posterior al 17/11/2026; salvo indicación, no se distingue cuál.
+
+| Fuente | Resultado | Diferencia o detalle | Corrección aplicada |
+|---|---|---|---|
+| DentApp | Coinciden Codilium S.A.S., nube, Google Calendar, MercadoPago, roles y ReNaPDiS declarado. | Publica 30 días de prueba y precios mensuales con IVA ($24.900, $54.900 y $74.900; Empresarial a medida), recordatorios según plan, API y webhooks en Empresarial y «backups diarios». | Ficha 02 y cuatro celdas de la matriz B. |
+| tab32 | Coinciden desde $95/mes, usuarios ilimitados, prueba de 14 días, cargos por claim, adjuntos y elegibilidad, y que los ledgers no se migran. | La prueba pide email y tarjeta; la migración se publica desde $1,250; la exportación gratuita al salir incluye el ledger. | Ficha 15. |
+| Dentalink | Coinciden el enlace de reserva, los permisos y los bloqueos de horario. | El manual (fechado el 12/06/2026) tiene una sección plegada, «Cruce con Recursos», que declara que la agenda online valida que el profesional y el recurso asociado al servicio estén disponibles en el mismo horario. No identifica el recurso como sillón ni describe control de concurrencia. | Ficha 01 y sección C. La matriz B no cambia. |
+| Dentidesk | Coinciden Excel estándar sin costo con licencia activa, solicitud hasta 30 días después del término con posible cargo y prueba de 15 días. | Cada cuenta de odontólogo adicional «generará un cargo según el plan contratado»; el informe lo expresaba como posible. | Ficha 06. |
+| AgendaPro | No se pudo comprobar. | La interfaz pública respondió HTTP 403. No se reintentó ni se evadió el bloqueo. | Se anota en la ficha 08; las celdas conservan la observación del 17/11. |
 
 ### Fuentes no accesibles y exclusiones
 
@@ -611,9 +709,9 @@ El checklist completo de once puntos y las decisiones aprobadas están en discov
 - Estados exactos del turno y transiciones.
 - Campos mínimos de paciente y ficha clínica.
 - Comportamiento exacto ante una reprogramación fallida.
-- Nombres de integrantes y reparto de trabajo.
+- Nombres de integrantes y reparto de trabajo. Resuelto después del corte: los nombres constan en la portada y el reparto en el plan de colaboración.
 - Versiones concretas de Java, Spring Boot, PostgreSQL y herramientas de frontend.
-- Revisión personal de al menos cinco fuentes por integrantes.
+- Revisión personal de al menos cinco fuentes por integrantes. Informada el 25/11/2026.
 - Proveedor gratuito de email, límites y configuración de direcciones de prueba.
 - Registro y vinculación de la cuenta con el paciente y permisos sobre datos propios.
 - Seguridad, vigencia y uso de enlaces; tratamiento exacto del límite de 48 horas.
@@ -622,29 +720,29 @@ El checklist completo de once puntos y las decisiones aprobadas están en discov
 - Gestión de desbloqueos y límites temporales de bloqueos.
 - Compatibilidad exacta de huecos con duración, recursos, intervalo y preferencias; disponibilidad al asignar y comunicación si ya fue ocupado.
 
-Discovery, KB y roadmap se consolidan con la revisión 2 aprobada. El primer change todavía no fue elegido y no se inició implementación, se seleccionó proveedor o se enviaron emails. La revisión personal de al menos cinco fuentes sigue pendiente y debe registrarse con hallazgos reales de los integrantes.
+Discovery, KB y roadmap se consolidan con la revisión 2 aprobada. El primer change todavía no fue elegido y no se inició implementación, se seleccionó proveedor o se enviaron emails. La revisión personal de cinco fuentes, pendiente al consolidar, se informó el 25/11/2026 y figura en «Verificación de fuentes».
 
 ## Referencias completas
 
-Todas las referencias siguientes fueron consultadas el 2026-11-17. Las rutas enlazadas son fuentes primarias abiertas; las limitaciones se describen en sus fichas. Las capacidades comerciales y las condiciones pueden cambiar.
+Todas las referencias siguientes fueron consultadas el 2026-11-17; las que indican una nueva consulta se volvieron a abrir, o se intentó abrirlas, en esa segunda fecha. Las rutas enlazadas son fuentes primarias abiertas; las limitaciones se describen en sus fichas. Las capacidades comerciales y las condiciones pueden cambiar.
 
 - **F01.1 - Dentalink: Sitio argentino**. [https://web-ar.softwaredentalink.com/](https://web-ar.softwaredentalink.com/). Consulta: 2026-11-17.
-- **F01.2 - Dentalink: Manual de agenda online**. [https://ayuda.softwaredentalink.com/es/articles/9493139-configura-tu-agenda-online](https://ayuda.softwaredentalink.com/es/articles/9493139-configura-tu-agenda-online). Consulta: 2026-11-17.
-- **F02.1 - DentApp: Producto y país**. [https://www.dentapp.ar/software-odontologico-argentina](https://www.dentapp.ar/software-odontologico-argentina). Consulta: 2026-11-17.
-- **F02.2 - DentApp: Funcionalidades y planes**. [https://www.dentapp.ar/](https://www.dentapp.ar/). Consulta: 2026-11-17.
-- **F03.1 - Dentify: Producto, FAQ y precios**. [https://www.dentify.com.ar/](https://www.dentify.com.ar/). Consulta: 2026-11-17.
+- **F01.2 - Dentalink: Manual de agenda online**. [https://ayuda.softwaredentalink.com/es/articles/9493139-configura-tu-agenda-online](https://ayuda.softwaredentalink.com/es/articles/9493139-configura-tu-agenda-online). Consulta: 2026-11-17. Nueva consulta: 2026-11-25.
+- **F02.1 - DentApp: Producto y país**. [https://www.dentapp.ar/software-odontologico-argentina](https://www.dentapp.ar/software-odontologico-argentina). Consulta: 2026-11-17. Nueva consulta: 2026-11-25.
+- **F02.2 - DentApp: Funcionalidades y planes**. [https://www.dentapp.ar/](https://www.dentapp.ar/). Consulta: 2026-11-17. Nueva consulta: 2026-11-25.
+- **F03.1 - Dentify: Producto, FAQ y precios**. [https://www.dentify.com.ar/](https://www.dentify.com.ar/). Consulta: 2026-11-17. Nueva consulta: 2026-11-25.
 - **F03.2 - Dentify: Página de consultorio**. [https://www.dentify.com.ar/software-consultorio-odontologico](https://www.dentify.com.ar/software-consultorio-odontologico). Consulta: 2026-11-17.
 - **F04.1 - OdontoApp: Portada parcial**. [https://odontoapp.com.ar/](https://odontoapp.com.ar/). Consulta: 2026-11-17.
 - **F04.2 - OdontoApp: Política de privacidad**. [https://odontoapp.com.ar/privacidad](https://odontoapp.com.ar/privacidad). Consulta: 2026-11-17.
-- **F05.1 - Odontoly: Producto, restricciones y precios**. [https://odontoly.com/](https://odontoly.com/). Consulta: 2026-11-17.
+- **F05.1 - Odontoly: Producto, restricciones y precios**. [https://odontoly.com/](https://odontoly.com/). Consulta: 2026-11-17. Nueva consulta: 2026-11-25.
 - **F06.1 - Dentidesk: Características**. [https://www.dentidesk.cl/dentidesk/feature](https://www.dentidesk.cl/dentidesk/feature). Consulta: 2026-11-17.
-- **F06.2 - Dentidesk: Términos de uso**. [https://app.dentidesk.com/terminos.php](https://app.dentidesk.com/terminos.php). Consulta: 2026-11-17.
+- **F06.2 - Dentidesk: Términos de uso**. [https://app.dentidesk.com/terminos.php](https://app.dentidesk.com/terminos.php). Consulta: 2026-11-17. Nueva consulta: 2026-11-25.
 - **F06.3 - Dentidesk: Ayuda roles y profesionales**. [https://dentidesk.freshdesk.com/support/solutions/articles/150000201446--c%C3%B3mo-agregar-doctores-y-personal-a-mi-cl%C3%ADnica-en-dentidesk-](https://dentidesk.freshdesk.com/support/solutions/articles/150000201446--c%C3%B3mo-agregar-doctores-y-personal-a-mi-cl%C3%ADnica-en-dentidesk-). Consulta: 2026-11-17.
 - **F07.1 - Odonto.me: Producto y planes**. [https://odonto.me/?locale=es](https://odonto.me/?locale=es). Consulta: 2026-11-17.
 - **F08.1 - AgendaPro: Oferta dental**. [https://agendapro.com/es/dental/software-odontologico](https://agendapro.com/es/dental/software-odontologico). Consulta: 2026-11-17.
 - **F08.2 - AgendaPro: Planes Argentina**. [https://agendapro.com/ar/planes](https://agendapro.com/ar/planes). Consulta: 2026-11-17.
-- **F08.3 - AgendaPro: Interfaz pública de reserva**. [https://agendapro.com/site/ar/odontologiaor/239004](https://agendapro.com/site/ar/odontologiaor/239004). Consulta: 2026-11-17.
-- **F09.1 - Clinic Cloud: Tarifas y módulos**. [https://clinic-cloud.com/tarifas](https://clinic-cloud.com/tarifas). Consulta: 2026-11-17.
+- **F08.3 - AgendaPro: Interfaz pública de reserva**. [https://agendapro.com/site/ar/odontologiaor/239004](https://agendapro.com/site/ar/odontologiaor/239004). Consulta: 2026-11-17. Nueva consulta: 2026-11-25 (respondió HTTP 403).
+- **F09.1 - Clinic Cloud: Tarifas y módulos**. [https://clinic-cloud.com/tarifas](https://clinic-cloud.com/tarifas). Consulta: 2026-11-17. Nueva consulta: 2026-11-25.
 - **F09.2 - Clinic Cloud: Ayuda presupuesto y odontograma**. [https://clinic-cloud.com/faq/agenda-y-comunicaciones/presupuestos](https://clinic-cloud.com/faq/agenda-y-comunicaciones/presupuestos). Consulta: 2026-11-17.
 - **F10.1 - XDentalCloud: Producto**. [https://xdentalcloud.com/](https://xdentalcloud.com/). Consulta: 2026-11-17.
 - **F10.2 - XDentalCloud: Precios**. [https://xdentalcloud.com/precios/](https://xdentalcloud.com/precios/). Consulta: 2026-11-17.
@@ -664,5 +762,5 @@ Todas las referencias siguientes fueron consultadas el 2026-11-17. Las rutas enl
 - **F14.1 - CareStack: Plataforma y certificaciones declaradas**. [https://carestack.com/](https://carestack.com/). Consulta: 2026-11-17.
 - **F14.2 - CareStack: Reserva online**. [https://carestack.com/dental-software/features/online-scheduling](https://carestack.com/dental-software/features/online-scheduling). Consulta: 2026-11-17.
 - **F15.1 - tab32: Producto**. [https://tab32.com/](https://tab32.com/). Consulta: 2026-11-17.
-- **F15.2 - tab32: Tarifa vigente abierta**. [https://tab32.com/pricing/](https://tab32.com/pricing/). Consulta: 2026-11-17.
+- **F15.2 - tab32: Tarifa vigente abierta**. [https://tab32.com/pricing/](https://tab32.com/pricing/). Consulta: 2026-11-17. Nueva consulta: 2026-11-25.
 - **F15.3 - tab32: Empresa y seguridad declarada**. [https://tab32.com/about/](https://tab32.com/about/). Consulta: 2026-11-17.

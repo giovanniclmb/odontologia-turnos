@@ -1,5 +1,5 @@
 {
-  "method": "Cobertura provisional de evidencia; D=1 C=0.5 N=0, cinco criterios por dimensión",
+  "method": "Cobertura de evidencia; D=1 C=0.5 N=0, cinco criterios por dimensión",
   "weights": {
     "T": 25,
     "C": 20,
@@ -79,9 +79,9 @@
       "I": 1.5,
       "A": 2.0,
       "P": 0,
-      "S": 1.0,
-      "E": 0,
-      "weighted_total": 1.275
+      "S": 1.5,
+      "E": 3,
+      "weighted_total": 1.475
     },
     {
       "product": "Dentify",

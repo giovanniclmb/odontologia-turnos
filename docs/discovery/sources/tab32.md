@@ -18,11 +18,11 @@ Alpine para práctica individual; Summit para grupos. Proveedor: tab32; entidad 
 - Clínica: Declara odontograma, imágenes, perio y planes de tratamiento.
 - Administración: Declara facturación, claims, pagos y reportes. ARCA/obras sociales argentinas: No evidenciado.
 - Integraciones: API para Summit declarada; no se validó acceso público. WhatsApp, Google Calendar y Mercado Pago: No evidenciado.
-- Seguridad y portabilidad: Declara Google Cloud, cifrado, backups automáticos, HIPAA/SOC2 y una exportación gratuita al salir. No se auditó cumplimiento.
+- Seguridad y portabilidad: Declara Google Cloud, cifrado, backups automáticos, HIPAA/SOC2 y una exportación gratuita al salir que incluye el ledger. No se auditó cumplimiento.
 
 ## Pricing
 
-Página abierta vigente: desde $95/mes, usuarios/profesionales ilimitados; prueba 14 días. Sitio empresarial identifica dólares en cargos, pero moneda contractual argentina no confirmada. Claims $0,25, adjuntos $0,50 por claim, elegibilidad $0,75; otros cargos y migración separados. Snippet $125 descartado.
+Página abierta vigente: desde $95/mes, usuarios/profesionales ilimitados; prueba 14 días, que pide email y tarjeta (consulta del 25/11/2026). Sitio empresarial identifica dólares en cargos, pero moneda contractual argentina no confirmada. Claims $0,25, adjuntos $0,50 por claim, elegibilidad $0,75; migración publicada desde $1,250 y otros cargos separados. La misma página cobra aparte por servicio: voz $0,20 por minuto, asistente de IA por tokens, registro de pagos 1,25 % y agentes de IA a $25 por mes cada uno, $325 los catorce o $349 con agentes propios; mensajes y llamadas $0,05 (consulta del 25/11/2026). Snippet $125 descartado.
 
 ## Posicionamiento
 
@@ -36,4 +36,4 @@ Aspectos observables para contrastar: La búsqueda indexada y apertura mostraron
 
 No evidenciado
 
-Fuentes consultadas: [F15.1 Producto](https://tab32.com/); [F15.2 Tarifa vigente abierta](https://tab32.com/pricing/); [F15.3 Empresa y seguridad declarada](https://tab32.com/about/). Todas consultadas el 2026-11-17. Declaraciones comerciales no equivalen a una prueba independiente. Documentación e interfaz pública acreditan lo publicado, no el comportamiento de una instalación real. No se crearon cuentas ni se enviaron formularios.
+Fuentes consultadas: [F15.1 Producto](https://tab32.com/); [F15.2 Tarifa vigente abierta](https://tab32.com/pricing/); [F15.3 Empresa y seguridad declarada](https://tab32.com/about/). Todas consultadas el 2026-11-17. Parte de ellas se volvió a revisar el 25/11/2026. Declaraciones comerciales no equivalen a una prueba independiente. Documentación e interfaz pública acreditan lo publicado, no el comportamiento de una instalación real. No se crearon cuentas ni se enviaron formularios.
